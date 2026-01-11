@@ -730,3 +730,39 @@ details p {
         font-size: 0.85rem;
     }
 }
+
+/* =========================
+   CODE BADGES & STATUS
+   ========================= */
+
+code {
+    background: #2a2a2a;
+    color: #c44;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+    font-size: 0.9em;
+    user-select: all;
+}
+
+.status-active {
+    background: rgba(68, 204, 102, 0.15);
+    color: #4c4;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-expired {
+    background: rgba(204, 68, 68, 0.15);
+    color: #c44;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
