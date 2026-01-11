@@ -1,0 +1,11 @@
+# Last Z: Survival Shooter Guides
+# https://yoursite.github.io/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://yoursite.github.io/sitemap.xml
+
+# Crawl-delay for polite crawling (optional)
+Crawl-delay: 1

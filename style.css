@@ -1,0 +1,732 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    line-height: 1.75;
+    min-height: 100vh;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hero секция */
+.hero {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    border-bottom: 2px solid #c44;
+}
+
+/* Логотип */
+.logo {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: #999;
+}
+
+/* Секция с карточками */
+.sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Карточки-ссылки */
+.card {
+    display: block;
+    background: #252525;
+    border: 1px solid #333;
+    border-left: 4px solid #c44;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.card:hover {
+    background: #2a2a2a;
+    transform: translateX(5px);
+}
+
+/* Иконки карточек */
+.card-icon {
+    width: 36px;
+    height: 36px;
+    color: #c44;
+    margin-bottom: 12px;
+}
+
+.card h2 {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #888;
+}
+
+/* =========================
+   GUIDE PAGE STYLES
+   ========================= */
+
+/* Breadcrumb navigation */
+.breadcrumb {
+    padding: 12px 20px;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.85rem;
+}
+
+.breadcrumb a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.breadcrumb a:hover {
+    color: #c44;
+}
+
+.breadcrumb span {
+    color: #666;
+}
+
+/* Guide article */
+.guide {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+.guide-header {
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.guide-header h1 {
+    font-size: 1.75rem;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.guide-meta {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Quick Answer box - main page anchor */
+.quick-answer {
+    background: linear-gradient(135deg, #2a2a2a 0%, #252525 100%);
+    border-left: 4px solid #c44;
+    border-radius: 0 8px 8px 0;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.quick-answer h2 {
+    font-size: 0.75rem;
+    color: #c44;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+.quick-answer p {
+    font-size: 1.1rem;
+    color: #f0f0f0;
+    line-height: 1.7;
+}
+
+.quick-answer strong {
+    color: #fff;
+}
+
+/* Guide content sections */
+.guide-content h2 {
+    font-size: 1.35rem;
+    color: #fff;
+    margin-bottom: 16px;
+    margin-top: 32px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.guide-content h2:first-child {
+    margin-top: 0;
+}
+
+.step {
+    margin-bottom: 24px;
+    padding-top: 8px;
+}
+
+.step h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.step p {
+    color: #c0c0c0;
+    line-height: 1.7;
+}
+
+/* Tips section */
+.tips-section {
+    margin-top: 40px;
+    padding-top: 24px;
+}
+
+.tips-section h2 {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.tips-list {
+    list-style: none;
+}
+
+.tips-list li {
+    padding: 10px 0 10px 20px;
+    position: relative;
+    color: #c0c0c0;
+    line-height: 1.6;
+}
+
+.tips-list li + li {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tips-list li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: #c44;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+/* FAQ section */
+.faq-section {
+    margin-top: 40px;
+    padding-top: 24px;
+}
+
+.faq-section h2 {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+}
+
+.faq-item + .faq-item {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 16px;
+}
+
+.faq-item h3 {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.faq-item p {
+    color: #a0a0a0;
+    line-height: 1.7;
+}
+
+/* Related guides */
+.related-guides {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.related-guides h2 {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.related-grid {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.related-card {
+    background: transparent;
+    border: 1px solid #3a3a3a;
+    border-radius: 6px;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #c0c0c0;
+    font-size: 0.9rem;
+    transition: all 0.15s ease;
+}
+
+.related-card:hover {
+    background: #2a2a2a;
+    border-color: #c44;
+    color: #fff;
+}
+
+/* Footer */
+footer, .site-footer {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+footer a, .site-footer a {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.15s;
+}
+
+footer a:hover, .site-footer a:hover {
+    color: #c44;
+}
+
+/* =========================
+   DATA TABLES
+   ========================= */
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.data-table th {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.data-table td {
+    color: #b0b0b0;
+    line-height: 1.5;
+}
+
+/* Tier table specific */
+.tier-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.tier-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    vertical-align: top;
+}
+
+.tier-table td:first-child {
+    width: 100px;
+    color: #c44;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tier-table td:last-child {
+    color: #b0b0b0;
+}
+
+/* =========================
+   HIGHLIGHT BOX
+   ========================= */
+
+.highlight-box {
+    background: rgba(204, 68, 68, 0.08);
+    border-left: 3px solid #c44;
+    border-radius: 0 6px 6px 0;
+    padding: 20px 20px 20px 24px;
+    margin: 24px 0;
+}
+
+.highlight-box ul {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.highlight-box li {
+    color: #d0d0d0;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.highlight-box li:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================
+   DETAILS/SUMMARY FAQ
+   ========================= */
+
+details {
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+details summary {
+    cursor: pointer;
+    padding: 14px 0;
+    font-weight: 600;
+    color: #e0e0e0;
+    list-style: none;
+    transition: color 0.15s;
+}
+
+details summary:hover {
+    color: #fff;
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details summary::before {
+    content: "› ";
+    color: #c44;
+    font-size: 1.1em;
+}
+
+details[open] summary::before {
+    content: "‹ ";
+}
+
+details p {
+    padding: 0 0 16px 16px;
+    color: #a0a0a0;
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* =========================
+   VIDEO SOURCES
+   ========================= */
+
+.video-source {
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.video-source p {
+    margin: 0;
+    color: #888;
+}
+
+.video-source a {
+    color: #c44;
+    text-decoration: none;
+}
+
+.video-source a:hover {
+    text-decoration: underline;
+}
+
+.video-sources {
+    margin-top: 40px;
+    padding-top: 24px;
+}
+
+.video-sources h2 {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.video-sources ul {
+    list-style: none;
+    padding: 0;
+}
+
+.video-sources li {
+    padding: 8px 0;
+}
+
+.video-sources li + li {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.video-sources a {
+    color: #c44;
+    text-decoration: none;
+}
+
+.video-sources a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   ARTICLE CONTENT
+   ========================= */
+
+.guide-content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+.guide-content h1 {
+    font-size: 1.75rem;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.guide-content > h2 {
+    font-size: 1.35rem;
+    color: #fff;
+    margin: 36px 0 16px 0;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.guide-content h3 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin: 24px 0 10px 0;
+    font-weight: 600;
+}
+
+.guide-content p {
+    color: #c0c0c0;
+    margin-bottom: 16px;
+    line-height: 1.7;
+}
+
+.guide-content ul, .guide-content ol {
+    color: #b0b0b0;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.guide-content li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.guide-content section {
+    margin-bottom: 24px;
+}
+
+.guide-content section + section {
+    padding-top: 8px;
+}
+
+/* Related guides - list format */
+.related-guides ul {
+    list-style: none;
+    padding: 0;
+}
+
+.related-guides li {
+    padding: 8px 0;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.related-guides a {
+    color: #c44;
+    text-decoration: none;
+}
+
+.related-guides a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   MOBILE-FIRST RESPONSIVE
+   ========================= */
+
+@media (max-width: 600px) {
+    body {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .hero {
+        padding: 32px 16px;
+    }
+
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .sections {
+        padding: 20px 16px;
+        gap: 16px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .guide, .guide-content {
+        padding: 24px 16px;
+    }
+
+    .guide-header {
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+    }
+
+    .guide-header h1, .guide-content h1 {
+        font-size: 1.4rem;
+        line-height: 1.3;
+    }
+
+    .guide-content h2 {
+        font-size: 1.2rem;
+        margin-top: 28px;
+        margin-bottom: 14px;
+    }
+
+    .step {
+        margin-bottom: 20px;
+    }
+
+    .step h3 {
+        font-size: 1.05rem;
+    }
+
+    .related-grid {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .related-card {
+        text-align: left;
+        padding: 14px 16px;
+    }
+
+    .highlight-box {
+        padding: 16px;
+        margin: 16px 0;
+    }
+
+    .tips-list li {
+        padding: 12px 0 12px 24px;
+    }
+
+    .faq-item {
+        margin-bottom: 16px;
+    }
+
+    /* Quick Answer mobile */
+    .quick-answer {
+        padding: 20px 16px;
+        margin-bottom: 24px;
+        border-radius: 0 6px 6px 0;
+    }
+
+    .quick-answer p {
+        font-size: 1.05rem;
+    }
+
+    /* Mobile tables - stacked layout */
+    .data-table {
+        font-size: 0.9rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 10px 12px;
+    }
+
+    .data-table thead {
+        display: none;
+    }
+
+    .data-table tr {
+        display: block;
+        margin-bottom: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 6px;
+        padding: 4px 0;
+    }
+
+    .data-table td {
+        display: block;
+        padding: 8px 12px;
+        border-bottom: none;
+    }
+
+    .data-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.75rem;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+    }
+
+    /* Tier table mobile */
+    .tier-table td {
+        padding: 8px 10px;
+    }
+
+    .tier-table td:first-child {
+        width: 80px;
+        font-size: 0.85rem;
+    }
+}
