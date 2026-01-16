@@ -16,13 +16,25 @@
     <meta name="keywords" content="Last Z tips and tricks, Last Z secrets, Last Z pro tips, Last Z beginner guide, Last Z F2P tips, Last Z efficiency, Last Z best practices">
     <link rel="canonical" href="https://lastzguides.com/tips.html">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="search.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
 
+    <!-- Open Graph -->
     <meta property="og:title" content="Last Z Tips & Tricks — 25+ Life-Changing Pro Secrets">
     <meta property="og:description" content="Pro secrets and hidden tricks from experienced players. HQ strategy, hero development, alliance tips, and daily routines.">
     <meta property="og:type" content="article">
+    <meta property="og:url" content="https://lastzguides.com/tips.html">
     <meta property="og:image" content="https://lastzguides.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Last Z Guides">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Last Z Tips & Tricks — 25+ Life-Changing Pro Secrets">
+    <meta name="twitter:description" content="Pro secrets and hidden tricks from experienced players. HQ strategy, hero development, alliance tips, and daily routines.">
+    <meta name="twitter:image" content="https://lastzguides.com/og-image.png">
 
     <!-- Schema.org: VideoObject -->
     <script type="application/ld+json">
@@ -105,8 +117,21 @@
     </script>
 </head>
 <body>
+    <header class="site-header">
+        <a href="/" class="logo-link">
+            <span>Last Z Guides</span>
+        </a>
+        <button class="search-trigger" aria-label="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <span>Search...</span>
+            <kbd><span>⌘</span>K</kbd>
+        </button>
+    </header>
+
     <nav class="breadcrumb">
-        <a href="index.html">Home</a> &rsaquo; <span>Tips & Tricks</span>
+        <a href="/">Home</a> &rsaquo; <span>Tips & Tricks</span>
     </nav>
 
     <article class="guide">
@@ -487,7 +512,8 @@
     </article>
 
     <footer class="site-footer">
-        <a href="index.html">&larr; Back to All Guides</a>
+        <a href="/">&larr; Back to All Guides</a>
     </footer>
+    <script src="search.js"></script>
 </body>
 </html>
