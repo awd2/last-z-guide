@@ -4,7 +4,7 @@
     "title": "Heroes Tier List",
     "category": "Heroes",
     "description": "Best heroes ranked by faction — formation strategy, troop alignment",
-    "keywords": ["heroes", "tier list", "best heroes", "Queenie", "Liliana", "Selena", "Yu Chan", "Amber", "Licia", "Scarlett", "Isabella", "Giselle", "Nina", "Elena", "Athena", "Sophia", "Katrina", "Alma", "Sakura", "Dodomeki", "Mei", "faction", "Wings of Dawn", "Blood Rose", "Guard of Order", "S-tier", "A-tier", "formation", "troop buffs", "shooter", "assaulter", "rider", "character", "best character"]
+    "keywords": ["heroes", "tier list", "best heroes", "Yu Chan", "Licia", "Bella", "Selena", "Oliveira", "Sophia", "Katrina", "Ava", "Vivian", "Miranda", "Audrey", "Giselle", "Queenie", "Liliana", "Alma", "Nyx", "Scarlett", "Laura", "Amelia", "Christina", "Fiona", "Isabella", "Angelina", "Natalie", "Amber", "Dodemeki", "Harleyena", "Sakura", "Evelyn", "Mia", "Chinatsu", "Maria", "Elizabeth", "Leah", "William", "Athena", "faction", "Wings of Dawn", "Blood Rose", "Guard of Order", "S-tier", "A-tier", "formation", "troop buffs", "shooter", "assaulter", "rider", "character"]
   },
   {
     "url": "formations.html",
@@ -124,5 +124,19 @@
     "category": "Events",
     "description": "Badge farming — 90% discount strategy, ticket saving, F2P optimized",
     "keywords": ["Lucky Discounter", "badges", "90% discount", "discount", "tickets", "F2P", "farming", "event", "cheap", "sale"]
+  },
+  {
+    "url": "daily.html",
+    "title": "Daily Checklist",
+    "category": "Routine",
+    "description": "What to do every day — trucks, bounty, Furylord, arena, radar events, daily tasks",
+    "keywords": ["daily", "checklist", "routine", "every day", "trucks", "bounty", "plunder", "Furylord", "mines", "arena", "radar", "daily tasks", "Full Preparedness", "Idle Reward", "Danger Lurks", "Hot Events", "refugees", "purchases", "Alliance Duel"]
+  },
+  {
+    "url": "tyrant.html",
+    "title": "Tyrant Rally Guide",
+    "category": "Events",
+    "description": "Maximum damage strategy — 7-8 member rallies, engage offline, Steel farming",
+    "keywords": ["Tyrant", "rally", "Steel", "steel farming", "7 member", "8 member", "engage offline", "alliance event", "damage", "rewards", "HQ31", "HQ35", "boss", "raid"]
   }
 ]
