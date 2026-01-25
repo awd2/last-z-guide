@@ -276,10 +276,26 @@
     }
 
     .quick-answer--modern .qa-list {
+        gap: 10px;
     }
 
     .quick-answer--modern .qa-item {
-        column-gap: 10px;
+        grid-template-columns: 1.2rem 1fr;
+        column-gap: 4px;
+    }
+
+    .quick-answer--modern .qa-line {
+        line-height: 1.5;
+    }
+
+    .quick-answer--modern .qa-sep {
+        margin: 0 0.15em;
+        font-size: 0;
+    }
+
+    .quick-answer--modern .qa-sep::before {
+        content: "·";
+        font-size: 1rem;
     }
 
     .quick-answer--modern .qa-callout {
