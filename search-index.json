@@ -4,161 +4,539 @@
     "title": "Heroes Tier List",
     "category": "Heroes",
     "description": "Best heroes ranked by faction — formation strategy, troop alignment",
-    "keywords": ["heroes", "tier list", "best heroes", "Yu Chan", "Licia", "Bella", "Selena", "Oliveira", "Sophia", "Katrina", "Ava", "Vivian", "Miranda", "Audrey", "Giselle", "Queenie", "Liliana", "Alma", "Nyx", "Scarlett", "Laura", "Amelia", "Christina", "Fiona", "Isabella", "Angelina", "Natalie", "Amber", "Dodemeki", "Harleyena", "Sakura", "Evelyn", "Mia", "Chinatsu", "Maria", "Elizabeth", "Leah", "William", "Athena", "faction", "Wings of Dawn", "Blood Rose", "Guard of Order", "S-tier", "A-tier", "formation", "troop buffs", "shooter", "assaulter", "rider", "character"]
+    "keywords": [
+      "heroes",
+      "tier list",
+      "best heroes",
+      "Yu Chan",
+      "Licia",
+      "Bella",
+      "Selena",
+      "Oliveira",
+      "Sophia",
+      "Katrina",
+      "Ava",
+      "Vivian",
+      "Miranda",
+      "Audrey",
+      "Giselle",
+      "Queenie",
+      "Liliana",
+      "Alma",
+      "Nyx",
+      "Scarlett",
+      "Laura",
+      "Amelia",
+      "Christina",
+      "Fiona",
+      "Isabella",
+      "Angelina",
+      "Natalie",
+      "Amber",
+      "Dodemeki",
+      "Harleyena",
+      "Sakura",
+      "Evelyn",
+      "Mia",
+      "Chinatsu",
+      "Maria",
+      "Elizabeth",
+      "Leah",
+      "William",
+      "Athena",
+      "faction",
+      "Wings of Dawn",
+      "Blood Rose",
+      "Guard of Order",
+      "S-tier",
+      "A-tier",
+      "formation",
+      "troop buffs",
+      "shooter",
+      "assaulter",
+      "rider",
+      "character"
+    ]
   },
   {
     "url": "formations.html",
     "title": "Best Formations",
     "category": "Strategy",
     "description": "Faction combos, hero placement, 3+2 meta builds for PvP and PvE",
-    "keywords": ["formation", "faction combo", "3+2", "hero placement", "counter", "Wings of Dawn", "Blood Rose", "Guard of Order", "synergy", "troop type", "commander slot", "meta", "team comp", "lineup", "squad"]
+    "keywords": [
+      "formation",
+      "faction combo",
+      "3+2",
+      "hero placement",
+      "counter",
+      "Wings of Dawn",
+      "Blood Rose",
+      "Guard of Order",
+      "synergy",
+      "troop type",
+      "commander slot",
+      "meta",
+      "team comp",
+      "lineup",
+      "squad"
+    ]
   },
   {
     "url": "research.html",
     "title": "Research Priority",
     "category": "Progression",
     "description": "What to research first — Hero Training, UST, Peace Shield, Military Strategies",
-    "keywords": ["research", "priority", "UST", "Peace Shield", "Hero Training", "badges", "T10", "T9", "T8", "Urgent Rescue", "laboratory", "tech", "lab", "science", "upgrade"]
+    "keywords": [
+      "research",
+      "priority",
+      "UST",
+      "Peace Shield",
+      "Hero Training",
+      "badges",
+      "T10",
+      "T9",
+      "T8",
+      "Urgent Rescue",
+      "laboratory",
+      "tech",
+      "lab",
+      "science",
+      "upgrade"
+    ]
   },
   {
     "url": "field-research.html",
     "title": "Field Research Guide",
     "category": "Progression",
     "description": "Full badge cost breakdown — 594k badges total, all 14 nodes, Recharge Shield, unlock requirements",
-    "keywords": ["Field Research", "field research cost", "badges", "Recharge Shield", "infield troop attack", "troop HP", "Siege to Seize", "Camo Coding", "Field Training", "594000", "unlock", "research tree", "Shooter Training", "Assaulter Training", "Rider Training"]
+    "keywords": [
+      "Field Research",
+      "field research cost",
+      "badges",
+      "Recharge Shield",
+      "infield troop attack",
+      "troop HP",
+      "Siege to Seize",
+      "Camo Coding",
+      "Field Training",
+      "594000",
+      "unlock",
+      "research tree",
+      "Shooter Training",
+      "Assaulter Training",
+      "Rider Training"
+    ]
   },
   {
     "url": "alliance-duel.html",
     "title": "Alliance Duel Guide",
     "category": "Events",
     "description": "Day-by-day F2P strategy, Alliance Recognition research, Full Preparedness sync",
-    "keywords": ["Alliance Duel", "AD", "day by day", "F2P", "Alliance Recognition", "AR", "badges", "Full Preparedness", "speed-ups", "speedups", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "points", "rewards"]
+    "keywords": [
+      "Alliance Duel",
+      "AD",
+      "day by day",
+      "F2P",
+      "Alliance Recognition",
+      "AR",
+      "badges",
+      "Full Preparedness",
+      "speed-ups",
+      "speedups",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "points",
+      "rewards"
+    ]
   },
   {
     "url": "events.html",
     "title": "Daily Events Schedule",
     "category": "Events",
     "description": "F2P schedule — what to save, when to spend, daily rotation",
-    "keywords": ["events", "daily", "schedule", "Furylord", "Fury Lord", "Zombie Siege", "Tyrant", "Canyon Clash", "SVS", "rotation", "calendar", "weekly", "what day"]
+    "keywords": [
+      "events",
+      "daily",
+      "schedule",
+      "Furylord",
+      "Fury Lord",
+      "Zombie Siege",
+      "Tyrant",
+      "Canyon Clash",
+      "SVS",
+      "rotation",
+      "calendar",
+      "weekly",
+      "what day"
+    ]
   },
   {
     "url": "pvp.html",
     "title": "PvP Guide",
     "category": "Combat",
     "description": "Faction counters, Canyon Clash, SVS, scouting, hospital strategy",
-    "keywords": ["PvP", "PvE", "faction counter", "Canyon Clash", "SVS", "State vs State", "scouting", "hospital", "NAP", "rally", "combat", "attack", "defense", "war", "battle", "fight"]
+    "keywords": [
+      "PvP",
+      "PvE",
+      "faction counter",
+      "Canyon Clash",
+      "SVS",
+      "State vs State",
+      "scouting",
+      "hospital",
+      "NAP",
+      "rally",
+      "combat",
+      "attack",
+      "defense",
+      "war",
+      "battle",
+      "fight"
+    ]
   },
   {
     "url": "hq.html",
     "title": "HQ Upgrade Guide",
     "category": "Progression",
     "description": "Levels 1-35, Steel resource, Sophia strategy, building requirements",
-    "keywords": ["HQ", "headquarters", "upgrade", "steel", "Sophia", "level 35", "level 30", "hero level cap", "construction", "builder", "base", "town", "city", "building"]
+    "keywords": [
+      "HQ",
+      "headquarters",
+      "upgrade",
+      "steel",
+      "Sophia",
+      "level 35",
+      "level 30",
+      "hero level cap",
+      "construction",
+      "builder",
+      "base",
+      "town",
+      "city",
+      "building"
+    ]
   },
   {
     "url": "power-guide.html",
     "title": "Power Guide",
     "category": "Progression",
     "description": "Increase CP 2-4x faster — all 5 power types explained",
-    "keywords": ["power", "CP", "combat power", "hero power", "troop power", "tech power", "modified vehicle", "increase power", "stronger", "strength", "might"]
+    "keywords": [
+      "power",
+      "CP",
+      "combat power",
+      "hero power",
+      "troop power",
+      "tech power",
+      "modified vehicle",
+      "increase power",
+      "stronger",
+      "strength",
+      "might"
+    ]
   },
   {
     "url": "formation-power.html",
     "title": "Formation Power",
     "category": "Strategy",
     "description": "5 same faction rule, Hall of Honor, march capacity, siege buildings",
-    "keywords": ["formation power", "faction bonus", "Hall of Honor", "HoH", "march capacity", "siege", "troop HP", "all troops buff", "100M", "million power"]
+    "keywords": [
+      "formation power",
+      "faction bonus",
+      "Hall of Honor",
+      "HoH",
+      "march capacity",
+      "siege",
+      "troop HP",
+      "all troops buff",
+      "100M",
+      "million power"
+    ]
   },
   {
     "url": "gear.html",
     "title": "Gear Guide",
     "category": "Equipment",
     "description": "Best equipment, how to enhance, Power Cores, upgrade priority",
-    "keywords": ["gear", "equipment", "orange gear", "Power Cores", "cores", "enhance", "Merit Shop", "exclusive equipment", "alloys", "armor", "weapon", "accessory", "mythic"]
+    "keywords": [
+      "gear",
+      "equipment",
+      "orange gear",
+      "Power Cores",
+      "cores",
+      "enhance",
+      "Merit Shop",
+      "exclusive equipment",
+      "alloys",
+      "armor",
+      "weapon",
+      "accessory",
+      "mythic"
+    ]
   },
   {
     "url": "resources.html",
     "title": "Resources Guide",
     "category": "Economy",
     "description": "How to farm fast, gathering strategy, Steel, diamonds, farm accounts",
-    "keywords": ["resources", "food", "wood", "electricity", "steel", "diamonds", "gold", "gathering", "farm account", "chest", "bounty", "money", "currency", "free"]
+    "keywords": [
+      "resources",
+      "food",
+      "wood",
+      "electricity",
+      "steel",
+      "diamonds",
+      "gold",
+      "gathering",
+      "farm account",
+      "chest",
+      "bounty",
+      "money",
+      "currency",
+      "free"
+    ]
   },
   {
     "url": "tips.html",
     "title": "Tips & Tricks",
     "category": "Tips",
     "description": "25+ life-changing tips — buildings, heroes, alliances, efficiency",
-    "keywords": ["tips", "tricks", "secrets", "mistakes", "F2P", "efficiency", "builder", "alliance", "daily tasks", "advice", "help", "guide", "hack", "cheat"]
+    "keywords": [
+      "tips",
+      "tricks",
+      "secrets",
+      "mistakes",
+      "F2P",
+      "efficiency",
+      "builder",
+      "alliance",
+      "daily tasks",
+      "advice",
+      "help",
+      "guide",
+      "hack",
+      "cheat"
+    ]
   },
   {
     "url": "tech.html",
     "title": "Tech Deep Dive",
     "category": "Strategy",
     "description": "Expert discussion — AR, Trap Accounts, HP stacking strategies",
-    "keywords": ["tech", "AR", "Alliance Recognition", "trap account", "HP stacking", "expert", "advanced", "research tree", "pro", "endgame"]
+    "keywords": [
+      "tech",
+      "AR",
+      "Alliance Recognition",
+      "trap account",
+      "HP stacking",
+      "expert",
+      "advanced",
+      "research tree",
+      "pro",
+      "endgame"
+    ]
   },
   {
     "url": "codes.html",
     "title": "Redeem Codes",
     "category": "Rewards",
     "description": "Free diamonds, speedups & resources — updated January 2026",
-    "keywords": ["codes", "redeem", "gift code", "free diamonds", "UID", "Gift Center", "rewards", "promo", "coupon", "free stuff"]
+    "keywords": [
+      "codes",
+      "redeem",
+      "gift code",
+      "free diamonds",
+      "UID",
+      "Gift Center",
+      "rewards",
+      "promo",
+      "coupon",
+      "free stuff"
+    ]
   },
   {
     "url": "start.html",
     "title": "Getting Started",
     "category": "Beginner",
     "description": "First steps for new players — beginner guide",
-    "keywords": ["beginner", "new player", "start", "first steps", "tutorial", "basics", "noob", "newbie", "how to play", "guide"]
+    "keywords": [
+      "beginner",
+      "new player",
+      "start",
+      "first steps",
+      "tutorial",
+      "basics",
+      "noob",
+      "newbie",
+      "how to play",
+      "guide"
+    ]
   },
   {
     "url": "leveling.html",
     "title": "Leveling Up Fast",
     "category": "Progression",
     "description": "Progression strategies — daily tasks, campaign, efficiency tips",
-    "keywords": ["leveling", "level up", "fast", "progression", "XP", "experience", "campaign", "daily tasks", "Command Center", "grow", "progress"]
+    "keywords": [
+      "leveling",
+      "level up",
+      "fast",
+      "progression",
+      "XP",
+      "experience",
+      "campaign",
+      "daily tasks",
+      "Command Center",
+      "grow",
+      "progress"
+    ]
   },
   {
     "url": "gacha-go.html",
     "title": "Gacha Go Event",
     "category": "Events",
     "description": "Golden Wrenches farming — key strategy, diamond efficiency, Hercules path",
-    "keywords": ["Gacha Go", "golden wrench", "wrenches", "diamonds", "Hercules", "key", "keys", "event", "vehicle modification", "vehicle", "car"]
+    "keywords": [
+      "Gacha Go",
+      "golden wrench",
+      "wrenches",
+      "diamonds",
+      "Hercules",
+      "key",
+      "keys",
+      "event",
+      "vehicle modification",
+      "vehicle",
+      "car"
+    ]
   },
   {
     "url": "lucky-discounter.html",
     "title": "Lucky Discounter",
     "category": "Events",
     "description": "Badge farming — 90% discount strategy, ticket saving, F2P optimized",
-    "keywords": ["Lucky Discounter", "badges", "90% discount", "discount", "tickets", "F2P", "farming", "event", "cheap", "sale"]
+    "keywords": [
+      "Lucky Discounter",
+      "badges",
+      "90% discount",
+      "discount",
+      "tickets",
+      "F2P",
+      "farming",
+      "event",
+      "cheap",
+      "sale"
+    ]
   },
   {
     "url": "daily.html",
     "title": "Daily Checklist",
     "category": "Routine",
     "description": "What to do every day — trucks, bounty, Furylord, arena, radar events, daily tasks",
-    "keywords": ["daily", "checklist", "routine", "every day", "trucks", "bounty", "plunder", "Furylord", "mines", "arena", "radar", "daily tasks", "Full Preparedness", "Idle Reward", "Danger Lurks", "Hot Events", "refugees", "purchases", "Alliance Duel"]
+    "keywords": [
+      "daily",
+      "checklist",
+      "routine",
+      "every day",
+      "trucks",
+      "bounty",
+      "plunder",
+      "Furylord",
+      "mines",
+      "arena",
+      "radar",
+      "daily tasks",
+      "Full Preparedness",
+      "Idle Reward",
+      "Danger Lurks",
+      "Hot Events",
+      "refugees",
+      "purchases",
+      "Alliance Duel"
+    ]
   },
   {
     "url": "tyrant.html",
     "title": "Tyrant Rally Guide",
     "category": "Events",
     "description": "Maximum damage strategy — 7-8 member rallies, engage offline, Steel farming",
-    "keywords": ["Tyrant", "rally", "Steel", "steel farming", "7 member", "8 member", "engage offline", "alliance event", "damage", "rewards", "HQ31", "HQ35", "boss", "raid"]
+    "keywords": [
+      "Tyrant",
+      "rally",
+      "Steel",
+      "steel farming",
+      "7 member",
+      "8 member",
+      "engage offline",
+      "alliance event",
+      "damage",
+      "rewards",
+      "HQ31",
+      "HQ35",
+      "boss",
+      "raid"
+    ]
   },
   {
     "url": "zombie-siege.html",
     "title": "Zombie Siege Guide",
     "category": "Events",
     "description": "Waves, scheduling rules, prep checklist, and reward timing for Zombie Siege",
-    "keywords": ["Zombie Siege", "zombie siege", "Last Z", "waves", "schedule", "Monday", "Tuesday", "War Frenzy", "wrenches", "alliance event", "rewards", "defense"]
+    "keywords": [
+      "Zombie Siege",
+      "zombie siege",
+      "Last Z",
+      "waves",
+      "schedule",
+      "Monday",
+      "Tuesday",
+      "War Frenzy",
+      "wrenches",
+      "alliance event",
+      "rewards",
+      "defense"
+    ]
   },
   {
     "url": "furylord.html",
     "title": "Furylord Guide",
     "category": "Events",
     "description": "Spawn times, attack rules, scoring, and achievement tips for Furylord",
-    "keywords": ["Furylord", "Fury Lord", "Last Z", "spawn times", "War Frenzy", "highest hit", "bonus faction", "achievements", "world boss", "Duel League", "State Ruler"]
+    "keywords": [
+      "Furylord",
+      "Fury Lord",
+      "Last Z",
+      "spawn times",
+      "War Frenzy",
+      "highest hit",
+      "bonus faction",
+      "achievements",
+      "world boss",
+      "Duel League",
+      "State Ruler"
+    ]
+  },
+  {
+    "url": "vehicle-modification-cost.html",
+    "title": "Vehicle Modification Costs",
+    "category": "Progression",
+    "description": "Levels 0–240, wrench totals, cumulative costs, milestone unlocks",
+    "keywords": [
+      "vehicle modification",
+      "wrenches",
+      "wrench totals",
+      "cumulative total",
+      "Expert Modifier",
+      "Hercules",
+      "Destroyer",
+      "Destroyer EX",
+      "Cheetah Armored Vehicle",
+      "blueprints",
+      "upgrade costs"
+    ]
   }
-
 ]
