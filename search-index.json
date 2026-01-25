@@ -145,5 +145,20 @@
     "category": "Events",
     "description": "Maximum damage strategy — 7-8 member rallies, engage offline, Steel farming",
     "keywords": ["Tyrant", "rally", "Steel", "steel farming", "7 member", "8 member", "engage offline", "alliance event", "damage", "rewards", "HQ31", "HQ35", "boss", "raid"]
+  },
+  {
+    "url": "zombie-siege.html",
+    "title": "Zombie Siege Guide",
+    "category": "Events",
+    "description": "Waves, scheduling rules, prep checklist, and reward timing for Zombie Siege",
+    "keywords": ["Zombie Siege", "zombie siege", "Last Z", "waves", "schedule", "Monday", "Tuesday", "War Frenzy", "wrenches", "alliance event", "rewards", "defense"]
+  },
+  {
+    "url": "furylord.html",
+    "title": "Furylord Guide",
+    "category": "Events",
+    "description": "Spawn times, attack rules, scoring, and achievement tips for Furylord",
+    "keywords": ["Furylord", "Fury Lord", "Last Z", "spawn times", "War Frenzy", "highest hit", "bonus faction", "achievements", "world boss", "Duel League", "State Ruler"]
   }
+
 ]

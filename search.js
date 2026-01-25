@@ -14,7 +14,8 @@
     let isOpen = false;
 
     // DOM Elements (will be created)
-    let overlay, modal, input, resultsContainer;
+    let overlay, modal, input, resultsContainer, clearBtn, closeBtn, cancelBtn;
+    let lastFocused = null;
 
     // Fuse.js options for fuzzy search
     const fuseOptions = {
@@ -114,17 +115,26 @@
                     placeholder="Search guides..."
                     autocomplete="off"
                     aria-label="Search"
+                    aria-controls="search-results-listbox"
+                    aria-expanded="true"
                 >
+                <button class="search-clear" type="button" aria-label="Clear search" title="Clear">
+                    ×
+                </button>
+                <button class="search-close" type="button" aria-label="Close search" title="Close">
+                    ×
+                </button>
                 <div class="search-shortcut">
                     <kbd>esc</kbd>
                 </div>
             </div>
-            <div class="search-results" role="listbox"></div>
+            <div class="search-results" role="listbox" id="search-results-listbox" aria-live="polite"></div>
             <div class="search-footer">
                 <span class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
                 <span class="search-hint"><kbd>↵</kbd> select</span>
                 <span class="search-hint"><kbd>esc</kbd> close</span>
             </div>
+            <button class="search-cancel" type="button">Cancel</button>
         `;
 
         // Add to DOM
@@ -134,6 +144,9 @@
         // Get references
         input = modal.querySelector('.search-input');
         resultsContainer = modal.querySelector('.search-results');
+        clearBtn = modal.querySelector('.search-clear');
+        closeBtn = modal.querySelector('.search-close');
+        cancelBtn = modal.querySelector('.search-cancel');
 
         // Show initial state
         showEmptyState();
@@ -171,10 +184,27 @@
         // Input handling
         input.addEventListener('input', handleInput);
         input.addEventListener('keydown', handleKeyNavigation);
+        input.addEventListener('input', toggleClearButton);
+
+        // Clear and close buttons
+        clearBtn.addEventListener('click', () => {
+            input.value = '';
+            toggleClearButton();
+            showTopResults();
+            input.focus();
+        });
+        closeBtn.addEventListener('click', closeSearch);
+        cancelBtn.addEventListener('click', closeSearch);
 
         // Search trigger buttons
         document.querySelectorAll('.search-trigger').forEach(btn => {
             btn.addEventListener('click', openSearch);
+        });
+
+        // Focus trap inside modal
+        modal.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+            trapFocus(e);
         });
     }
 
@@ -191,12 +221,14 @@
      */
     function openSearch() {
         isOpen = true;
+        lastFocused = document.activeElement;
         overlay.classList.add('active');
         modal.classList.add('active');
         input.value = '';
         input.focus();
         selectedIndex = 0;
-        showEmptyState();
+        toggleClearButton();
+        showTopResults();
         document.body.style.overflow = 'hidden';
     }
 
@@ -208,6 +240,9 @@
         overlay.classList.remove('active');
         modal.classList.remove('active');
         document.body.style.overflow = '';
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+            lastFocused.focus();
+        }
     }
 
     /**
@@ -217,12 +252,13 @@
         const query = e.target.value.trim();
 
         if (!query) {
-            showEmptyState();
+            showTopResults();
             return;
         }
 
         // Perform search
-        results = fuse.search(query, { limit: 8 });
+        results = fuse.search(query, { limit: 20 });
+        results = prioritizeExactTitle(query, results).slice(0, 8);
         selectedIndex = 0;
 
         if (results.length === 0) {
@@ -274,6 +310,50 @@
     }
 
     /**
+     * Show top results when no query
+     */
+    function showTopResults() {
+        const top = searchIndex.slice(0, 6).map(item => ({ item, matches: [] }));
+        if (top.length === 0) {
+            showEmptyState();
+            return;
+        }
+        results = top;
+        selectedIndex = 0;
+        resultsContainer.innerHTML = `
+            <div class="search-section-title">Top guides</div>
+            ${results.map((result, index) => {
+                const item = result.item;
+                const isSelected = index === selectedIndex;
+                return `
+                    <a href="${item.url}"
+                       class="search-result ${isSelected ? 'selected' : ''}"
+                       role="option"
+                       aria-selected="${isSelected}"
+                       id="search-result-${index}"
+                       data-index="${index}">
+                        <div class="search-result-header">
+                            <span class="search-result-icon">${icons.document}</span>
+                            <span class="search-result-title">${escapeHtml(item.title)}</span>
+                            <span class="search-result-category">${escapeHtml(item.category || '')}</span>
+                        </div>
+                        <div class="search-result-description">${escapeHtml(item.description || '')}</div>
+                    </a>
+                `;
+            }).join('')}
+        `;
+
+        resultsContainer.querySelectorAll('.search-result').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                selectedIndex = parseInt(el.dataset.index, 10);
+                updateSelection();
+            });
+        });
+
+        updateSelection();
+    }
+
+    /**
      * Show no results message
      */
     function showNoResults(query) {
@@ -301,6 +381,7 @@
                    class="search-result ${isSelected ? 'selected' : ''}"
                    role="option"
                    aria-selected="${isSelected}"
+                   id="search-result-${index}"
                    data-index="${index}">
                     <div class="search-result-header">
                         <span class="search-result-icon">${icons.document}</span>
@@ -333,6 +414,12 @@
             el.classList.toggle('selected', index === selectedIndex);
             el.setAttribute('aria-selected', index === selectedIndex);
         });
+        const active = resultsContainer.querySelector('.search-result.selected');
+        if (active) {
+            input.setAttribute('aria-activedescendant', active.id);
+        } else {
+            input.removeAttribute('aria-activedescendant');
+        }
 
         // Scroll into view if needed
         const selected = resultsContainer.querySelector('.search-result.selected');
@@ -379,6 +466,53 @@
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    /**
+     * Toggle clear button visibility
+     */
+    function toggleClearButton() {
+        if (input.value.trim().length > 0) {
+            clearBtn.classList.add('visible');
+        } else {
+            clearBtn.classList.remove('visible');
+        }
+    }
+
+    /**
+     * Prioritize exact title matches
+     */
+    function prioritizeExactTitle(query, resultList) {
+        const q = query.toLowerCase();
+        const exact = [];
+        const rest = [];
+        resultList.forEach(res => {
+            const title = (res.item.title || '').toLowerCase();
+            if (title === q || title.includes(q)) {
+                exact.push(res);
+            } else {
+                rest.push(res);
+            }
+        });
+        return exact.concat(rest);
+    }
+
+    /**
+     * Trap focus inside modal
+     */
+    function trapFocus(e) {
+        const focusable = Array.from(modal.querySelectorAll('button, input, a, [tabindex]:not([tabindex=\"-1\"])'))
+            .filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
     }
 
     // Initialize when DOM is ready

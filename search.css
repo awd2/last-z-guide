@@ -129,6 +129,7 @@
     padding: 16px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     gap: 12px;
+    position: relative;
 }
 
 .search-input-wrapper svg {
@@ -167,6 +168,66 @@
     padding: 2px 6px;
     font-family: inherit;
     font-size: 0.7rem;
+}
+
+.search-clear,
+.search-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    color: #888;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.search-clear {
+    margin-left: auto;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.search-clear.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.search-close {
+    display: none;
+    margin-left: 6px;
+}
+
+.search-clear:hover,
+.search-close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #aaa;
+}
+
+.search-cancel {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    margin: 8px 16px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    color: #ccc;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.search-cancel:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Results area */
@@ -332,10 +393,20 @@
 /* Mobile responsive */
 @media (max-width: 600px) {
     .search-modal {
-        top: 5%;
-        width: 95%;
-        max-height: 85vh;
-        border-radius: 12px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: none;
+        height: 100vh;
+        max-height: none;
+        border-radius: 0;
+        transform: none;
+    }
+
+    .search-modal.active {
+        transform: none;
     }
 
     .search-trigger {
@@ -352,6 +423,7 @@
 
     .search-input-wrapper {
         padding: 14px 16px;
+        padding-right: 52px;
     }
 
     .search-input {
@@ -360,6 +432,18 @@
 
     .search-input-wrapper .search-shortcut {
         display: none;
+    }
+
+    .search-close {
+        display: inline-flex;
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        margin-left: 0;
+    }
+
+    .search-clear {
+        margin-right: 28px;
     }
 
     .search-result {
@@ -377,6 +461,10 @@
 
     .site-header {
         padding: 10px 16px;
+    }
+
+    .search-cancel {
+        display: inline-flex;
     }
 }
 
