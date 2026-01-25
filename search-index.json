@@ -21,8 +21,6 @@
     "keywords": ["research", "priority", "UST", "Peace Shield", "Hero Training", "badges", "T10", "T9", "T8", "Urgent Rescue", "laboratory", "tech", "lab", "science", "upgrade"]
   },
   {
-<<<<<<< HEAD
-=======
     "url": "field-research.html",
     "title": "Field Research Guide",
     "category": "Progression",
@@ -30,7 +28,6 @@
     "keywords": ["Field Research", "field research cost", "badges", "Recharge Shield", "infield troop attack", "troop HP", "Siege to Seize", "Camo Coding", "Field Training", "594000", "unlock", "research tree", "Shooter Training", "Assaulter Training", "Rider Training"]
   },
   {
->>>>>>> 1fc1b81 (Refine quick answer styles)
     "url": "alliance-duel.html",
     "title": "Alliance Duel Guide",
     "category": "Events",

@@ -82,9 +82,7 @@ body {
     color: #888;
 }
 
-/* =========================
-   GUIDE PAGE STYLES
-   ========================= */
+   /* GUIDE PAGE STYLES */
 
 /* Breadcrumb navigation */
 .breadcrumb {
@@ -311,9 +309,7 @@ footer a:hover, .site-footer a:hover {
     color: #c44;
 }
 
-/* =========================
-   DATA TABLES
-   ========================= */
+   /* DATA TABLES */
 
 .data-table {
     width: 100%;
@@ -371,9 +367,7 @@ footer a:hover, .site-footer a:hover {
     color: #b0b0b0;
 }
 
-/* =========================
-   HIGHLIGHT BOX
-   ========================= */
+   /* HIGHLIGHT BOX */
 
 .highlight-box {
     background: rgba(204, 68, 68, 0.08);
@@ -398,9 +392,7 @@ footer a:hover, .site-footer a:hover {
     margin-bottom: 0;
 }
 
-/* =========================
    DETAILS/SUMMARY FAQ
-   ========================= */
 
 details {
     margin-bottom: 12px;
@@ -441,9 +433,7 @@ details p {
     line-height: 1.7;
 }
 
-/* =========================
-   VIDEO SOURCES
-   ========================= */
+   /* VIDEO SOURCES */
 
 .video-source {
     margin-bottom: 24px;
@@ -501,9 +491,7 @@ details p {
     text-decoration: underline;
 }
 
-/* =========================
-   ARTICLE CONTENT
-   ========================= */
+   /* ARTICLE CONTENT */
 
 .guide-content {
     max-width: 760px;
@@ -580,9 +568,7 @@ details p {
     text-decoration: underline;
 }
 
-/* =========================
-   MOBILE-FIRST RESPONSIVE
-   ========================= */
+   /* MOBILE-FIRST RESPONSIVE */
 
 @media (max-width: 600px) {
     body {
@@ -707,9 +693,7 @@ details p {
     }
 }
 
-/* =========================
-   CODE BADGES & STATUS
-   ========================= */
+   /* CODE BADGES & STATUS */
 
 code {
     background: #2a2a2a;

@@ -225,9 +225,7 @@
     border-color: #c44;
 }
 
-/* =========================
    RESPONSIVE - Desktop (>=900px)
-   ========================= */
 @media (min-width: 900px) {
     .quick-answer--modern {
         padding: 24px 28px;
@@ -258,9 +256,7 @@
     }
 }
 
-/* =========================
    RESPONSIVE - Mobile (<600px)
-   ========================= */
 @media (max-width: 599px) {
     .quick-answer--modern {
         padding: 16px;
