@@ -40,6 +40,10 @@
     width: 100%;
 }
 
+.data-table-card + .info-card {
+    margin-top: 18px;
+}
+
 .table-header {
     display: flex;
     align-items: center;
@@ -256,6 +260,10 @@
     border-radius: 14px;
     padding: 16px;
     width: 100%;
+}
+
+.table-followup {
+    margin-top: 18px;
 }
 
 .panel-title {

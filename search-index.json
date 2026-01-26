@@ -538,5 +538,26 @@
       "blueprints",
       "upgrade costs"
     ]
+  },
+  {
+    "url": "hq-construction-cost.html",
+    "title": "HQ Construction Costs",
+    "category": "Progression",
+    "description": "HQ levels, hero caps, resource costs, requirements, and build times",
+    "keywords": [
+      "HQ construction cost",
+      "HQ upgrade cost",
+      "HQ 30 cost",
+      "HQ 35 cost",
+      "headquarters",
+      "hero level cap",
+      "building requirements",
+      "wood",
+      "food",
+      "zent",
+      "steel",
+      "construction time",
+      "Last Z"
+    ]
   }
 ]

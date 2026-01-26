@@ -41,9 +41,78 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-    padding: 40px 20px;
+    padding: 24px 20px 32px;
     max-width: 1000px;
     margin: 0 auto;
+}
+
+.home-nav {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 16px 20px 0;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.home-nav a {
+    text-decoration: none;
+    color: #cfcfcf;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.home-nav a:hover {
+    color: #fff;
+    border-color: rgba(196, 68, 68, 0.7);
+    background: rgba(196, 68, 68, 0.12);
+}
+
+.home {
+    padding-bottom: 40px;
+}
+
+.home-group {
+    margin-top: 18px;
+    scroll-margin-top: 80px;
+}
+
+.home-group:first-of-type {
+    margin-top: 12px;
+}
+
+.group-title {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.home-group .sections {
+    padding-top: 16px;
+}
+
+@media (max-width: 700px) {
+    .home-nav {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scrollbar-width: thin;
+    }
+
+    .home-nav a {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
 }
 
 /* Карточки-ссылки */
