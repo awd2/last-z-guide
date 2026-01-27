@@ -12,6 +12,7 @@
     let selectedIndex = 0;
     let results = [];
     let isOpen = false;
+    let lastTrackedQuery = '';
 
     // DOM Elements (will be created)
     let overlay, modal, input, resultsContainer, clearBtn, closeBtn, cancelBtn;
@@ -230,6 +231,7 @@
         toggleClearButton();
         showTopResults();
         document.body.style.overflow = 'hidden';
+        trackSearch('search_open');
     }
 
     /**
@@ -252,6 +254,7 @@
         const query = e.target.value.trim();
 
         if (!query) {
+            lastTrackedQuery = '';
             showTopResults();
             return;
         }
@@ -266,6 +269,8 @@
         } else {
             renderResults();
         }
+
+        trackSearchQuery(query, results.length);
     }
 
     /**
@@ -331,7 +336,9 @@
                        role="option"
                        aria-selected="${isSelected}"
                        id="search-result-${index}"
-                       data-index="${index}">
+                       data-index="${index}"
+                       data-url="${item.url}"
+                       data-title="${escapeHtml(item.title)}">
                         <div class="search-result-header">
                             <span class="search-result-icon">${icons.document}</span>
                             <span class="search-result-title">${escapeHtml(item.title)}</span>
@@ -344,6 +351,9 @@
         `;
 
         resultsContainer.querySelectorAll('.search-result').forEach(el => {
+            el.addEventListener('click', () => {
+                trackSearchResultClick(el);
+            });
             el.addEventListener('mouseenter', () => {
                 selectedIndex = parseInt(el.dataset.index, 10);
                 updateSelection();
@@ -362,6 +372,9 @@
                 <p>No results for "${escapeHtml(query)}"</p>
             </div>
         `;
+        trackSearch('search_empty', {
+            search_term: query
+        });
     }
 
     /**
@@ -382,7 +395,9 @@
                    role="option"
                    aria-selected="${isSelected}"
                    id="search-result-${index}"
-                   data-index="${index}">
+                   data-index="${index}"
+                   data-url="${item.url}"
+                   data-title="${escapeHtml(item.title)}">
                     <div class="search-result-header">
                         <span class="search-result-icon">${icons.document}</span>
                         <span class="search-result-title">${title}</span>
@@ -396,7 +411,7 @@
         // Add click handlers to results
         resultsContainer.querySelectorAll('.search-result').forEach(el => {
             el.addEventListener('click', (e) => {
-                // Let the link navigate naturally
+                trackSearchResultClick(el);
             });
 
             el.addEventListener('mouseenter', (e) => {
@@ -432,6 +447,13 @@
      * Navigate to selected result
      */
     function navigateToResult(item) {
+        trackSearch('search_result_click', {
+            search_term: input.value.trim(),
+            result_url: item.url,
+            result_title: item.title,
+            result_rank: selectedIndex + 1,
+            results_count: results.length
+        });
         closeSearch();
         window.location.href = item.url;
     }
@@ -513,6 +535,32 @@
             e.preventDefault();
             first.focus();
         }
+    }
+
+    function trackSearch(type, payload) {
+        if (!window.analytics || typeof window.analytics.trackSearch !== 'function') return;
+        window.analytics.trackSearch(type, payload);
+    }
+
+    function trackSearchQuery(query, count) {
+        if (!query || query === lastTrackedQuery) return;
+        lastTrackedQuery = query;
+        trackSearch('search_query', {
+            search_term: query,
+            results_count: count
+        });
+    }
+
+    function trackSearchResultClick(el) {
+        const term = input.value.trim();
+        const rank = parseInt(el.dataset.index || '0', 10) + 1;
+        trackSearch('search_result_click', {
+            search_term: term,
+            result_url: el.dataset.url || '',
+            result_title: el.dataset.title || '',
+            result_rank: rank,
+            results_count: results.length
+        });
     }
 
     // Initialize when DOM is ready
