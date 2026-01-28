@@ -51,12 +51,7 @@
         "@type": "WebSite",
         "name": "Last Z: Survival Shooter Guides",
         "description": "Complete guides and tips for Last Z: Survival Shooter mobile game",
-        "url": "https://lastzguides.com/",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://lastzguides.com/?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
+        "url": "https://lastzguides.com/"
     }
     </script>
     <script type="application/ld+json">
@@ -71,6 +66,19 @@
     </script>
 </head>
 <body>
+    <script>
+        (function() {
+            const path = window.location.pathname;
+            if (path.endsWith('/index.html')) {
+                window.location.replace('/');
+                return;
+            }
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('q')) {
+                window.location.replace('/');
+            }
+        })();
+    </script>
     <header class="site-header">
         <a href="/" class="logo-link">
             <span>Last Z Guides</span>
@@ -137,6 +145,13 @@
                     <h2>HQ Construction Costs</h2>
                     <p>Complete HQ cost table — resources, hero caps, requirements, time</p>
                 </a>
+                <a href="emergency-hospital-cost.html" class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12h18"/><path d="M12 3v18"/><rect x="4" y="4" width="16" height="16" rx="2"/>
+                    </svg>
+                    <h2>Emergency Hospital Costs</h2>
+                    <p>Hospital upgrade costs — capacity and power by level</p>
+                </a>
                 <a href="power-guide.html" class="card">
                     <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
@@ -170,6 +185,13 @@
                     </svg>
                     <h2>Field Research</h2>
                     <p>Full badge cost breakdown — 594k badges, Recharge Shield, unlock requirements</p>
+                </a>
+                <a href="alliance-recognition-cost.html" class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14"/><path d="M12 5v14"/><circle cx="12" cy="12" r="9"/>
+                    </svg>
+                    <h2>Alliance Recognition Costs</h2>
+                    <p>Badge cost table — Event King, Event Expert, rewards nodes</p>
                 </a>
                 <a href="tech.html" class="card">
                     <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

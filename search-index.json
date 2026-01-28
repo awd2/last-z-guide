@@ -559,5 +559,38 @@
       "construction time",
       "Last Z"
     ]
+  },
+  {
+    "url": "emergency-hospital-cost.html",
+    "title": "Emergency Hospital Costs",
+    "category": "Progression",
+    "description": "Emergency Hospital resource costs, capacity increases, and power by level",
+    "keywords": [
+      "emergency hospital cost",
+      "hospital upgrade",
+      "hospital capacity",
+      "injured troops",
+      "healing capacity",
+      "wood",
+      "zents",
+      "food",
+      "Last Z"
+    ]
+  },
+  {
+    "url": "alliance-recognition-cost.html",
+    "title": "Alliance Recognition Costs",
+    "category": "Research",
+    "description": "Alliance Recognition badge costs by item and level",
+    "keywords": [
+      "alliance recognition cost",
+      "alliance recognition badges",
+      "alliance duel research",
+      "event king",
+      "event expert",
+      "premium rewards",
+      "super rewards",
+      "Last Z"
+    ]
   }
 ]
