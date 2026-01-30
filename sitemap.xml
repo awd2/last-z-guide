@@ -2,7 +2,7 @@
 <ns0:urlset xmlns:ns0="http://www.sitemaps.org/schemas/sitemap/0.9">
     <ns0:url>
         <ns0:loc>https://lastzguides.com/</ns0:loc>
-        <ns0:lastmod>2026-01-11</ns0:lastmod>
+        <ns0:lastmod>2026-01-30</ns0:lastmod>
         <ns0:changefreq>weekly</ns0:changefreq>
         <ns0:priority>1.0</ns0:priority>
     </ns0:url>
@@ -68,7 +68,7 @@
     </ns0:url>
     <ns0:url>
         <ns0:loc>https://lastzguides.com/hq.html</ns0:loc>
-        <ns0:lastmod>2026-01-11</ns0:lastmod>
+        <ns0:lastmod>2026-01-30</ns0:lastmod>
         <ns0:changefreq>monthly</ns0:changefreq>
         <ns0:priority>0.8</ns0:priority>
     </ns0:url>
@@ -110,7 +110,13 @@
     </ns0:url>
     <ns0:url>
         <ns0:loc>https://lastzguides.com/resources.html</ns0:loc>
-        <ns0:lastmod>2026-01-13</ns0:lastmod>
+        <ns0:lastmod>2026-01-30</ns0:lastmod>
+        <ns0:changefreq>monthly</ns0:changefreq>
+        <ns0:priority>0.8</ns0:priority>
+    </ns0:url>
+    <ns0:url>
+        <ns0:loc>https://lastzguides.com/steel.html</ns0:loc>
+        <ns0:lastmod>2026-01-30</ns0:lastmod>
         <ns0:changefreq>monthly</ns0:changefreq>
         <ns0:priority>0.8</ns0:priority>
     </ns0:url>
@@ -122,7 +128,7 @@
     </ns0:url>
     <ns0:url>
         <ns0:loc>https://lastzguides.com/tyrant.html</ns0:loc>
-        <ns0:lastmod>2026-01-17</ns0:lastmod>
+        <ns0:lastmod>2026-01-30</ns0:lastmod>
         <ns0:changefreq>monthly</ns0:changefreq>
         <ns0:priority>0.8</ns0:priority>
     </ns0:url>
