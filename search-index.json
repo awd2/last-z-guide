@@ -651,5 +651,38 @@
       "valor medal",
       "Last Z"
     ]
+  },
+  {
+    "url": "refugees.html",
+    "title": "Refugees Guide",
+    "category": "Progression",
+    "description": "Refugee priority tiers, ticket sources, and diplomat strategy for alliance help",
+    "keywords": [
+      "refugees",
+      "refugee tickets",
+      "diplomat",
+      "alliance help",
+      "club",
+      "dispatch",
+      "talent hub",
+      "refugee fragments",
+      "Last Z"
+    ]
+  },
+  {
+    "url": "farm-account.html",
+    "title": "Farm Account Guide",
+    "category": "Economy",
+    "description": "Farm account setup, Season 2 timing, and resource support for your main HQ",
+    "keywords": [
+      "farm account",
+      "farm alt",
+      "season 2",
+      "character management",
+      "create new character",
+      "resources",
+      "Headquarters",
+      "Last Z"
+    ]
   }
 ]
