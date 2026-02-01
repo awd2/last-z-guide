@@ -40,7 +40,8 @@
 
     <!-- Article dates for SEO -->
     <meta property="article:published_time" content="2026-01-01">
-    <meta property="article:modified_time" content="2026-01-25">
+    <meta property="article:modified_time" content="2026-02-01">
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Last Z Tech Guide — Expert Discussion for F2P Players">
@@ -64,60 +65,83 @@
             "name": "Last Z Guides"
         },
         "datePublished": "2026-01-01",
-        "dateModified": "2026-01-23"
+        "dateModified": "2026-02-01",
+
     }
     </script>
 
     <!-- Schema.org: FAQPage -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "author": {"@type": "Organization", "name": "Last Z Guides"},
-        "publisher": {"@type": "Organization", "name": "Last Z Guides"},
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Should I do Alliance Recognition (AR) first in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "No, unless you're a passive player carried by your alliance. AR is extremely expensive (20k+ badges for last tier). Get the 9 chests and move to combat trees. You can use half those badges to be twice as strong in combat."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Should I max Hero Training in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "No. Get Hero Training to Cockpit and stop. The extra attack after Cockpit is nice but not necessary — the badges are better spent elsewhere. Cockpit is the key unlock."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "What is the best tech path for F2P in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Elite Troops → Hero Training (to Cockpit) → Military Strategies → Peace Shield (to Urgent Rescue) → Siege to Seize. This path maximizes combat power while being badge-efficient."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Is Fully Armed Alliance worth it in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "It's a luxury, not a priority. Annihilation 20/20 and Move Out (+500 troops) are nice but not necessary. Unless you're a whale past T10s, skip it for now."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Peace Shield or Siege to Seize first in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Get Peace Shield to Urgent Rescue first (essential -20% unit losses), then do Siege to Seize. Both have Recharge Shield for HP boost — get both to level 10 for massive HP gains."
-                }
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "author": {
+        "@type": "Organization",
+        "name": "Last Z Guides"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Last Z Guides"
+    },
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Should I do Alliance Recognition (AR) first?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No, unless you're passive and carried by alliance. Get 9 chests and move to combat trees. AR sets you back 2-3 months in power."
             }
-        ]
-    }
+        },
+        {
+            "@type": "Question",
+            "name": "Should I max Hero Training?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Get to Cockpit and stop. Extra attack after Cockpit is not worth the badges."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What's the best tech path for F2P?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Elite Troops → Hero Training (Cockpit) → Military Strategies → Peace Shield (Urgent Rescue) → Siege to Seize. Focus on HP stacking."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is Fully Armed Alliance worth it?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It's a luxury. Annihilation and Move Out are nice but not necessary. Skip unless you're a whale past T10s."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Peace Shield or Siege to Seize first?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Peace Shield to Urgent Rescue first (essential). Then Siege to Seize. Get Recharge Shield to 10 on both for massive HP gains."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What HQ level should I stop at?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HQ27 with T9 troops is the sweet spot for trap accounts. HQ level alone doesn't matter — tech and heroes do."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What should F2P players buy?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Extra Lab (must buy), Extra Builder, License Store items up to Lab #2. Skip Zent Plunder ($50 not worth it)."
+            }
+        }
+    ]
+}
     </script>
 
     <!-- Schema.org: VideoObject -->
@@ -159,6 +183,7 @@
 <body>
     <header class="site-header">
         <a href="/" class="logo-link">
+            <img decoding="async" class="site-logo" src="favicon-32.png" alt="Last Z Guides" width="18" height="18">
             <span>Last Z Guides</span>
         </a>
         <button class="search-trigger" aria-label="Search">
@@ -168,6 +193,14 @@
             <span>Search...</span>
             <kbd><span>⌘</span>K</kbd>
         </button>
+        <nav class="home-nav site-nav" aria-label="Guide categories">
+            <a href="/#progression">Progression</a>
+            <a href="/#research-tech" class="is-active">Research</a>
+            <a href="/#heroes-gear">Heroes</a>
+            <a href="/#pvp-formations">PvP</a>
+            <a href="/#events-competitive">Events</a>
+            <a href="/#economy-f2p">Economy</a>
+        </nav>
     </header>
 
     <nav class="breadcrumb">
@@ -177,8 +210,8 @@
     <article class="guide">
         <header class="guide-header">
             <h1>Last Z Tech Guide — Expert Discussion for F2P & Low Spenders</h1>
-            <p class="guide-meta">Expert Discussion &bull; Updated <time datetime="2026-01-23">January 23, 2026</time> &bull; 12 min read</p>
-            <p class="guide-verified">Last verified: January 30, 2026 (in-game checks + community sources)</p>
+            <p class="guide-meta">Expert Discussion &bull; Updated <time datetime="2026-02-01">February 1, 2026</time> &bull; 12 min read</p>
+            <p class="guide-author">By <a href="about.html">Last Z Guides</a></p>
         </header>
 
         <section class="quick-answer quick-answer--modern" aria-label="Quick Answer">
@@ -515,12 +548,16 @@
     </article>
 
     <footer class="site-footer">
-        <a href="/">&larr; Back to All Guides</a>
-        <p style="margin-top: 15px; color: #666; font-size: 0.85rem;">
-            Source: <a href="https://youtu.be/5WcQutYM90w" target="_blank" rel="noopener">Last Z Tech TED Talk</a> — Discussion by Master Asia, Demon Ascends & Community
-        </p>
+        <a href="/">All Guides</a>
+        <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="disclosure.html">Disclosure</a>
+        </div>
     </footer>
     <script src="analytics.js" defer></script>
-    <script src="search.js" defer></script>
+    <script src="search-loader.js" defer></script>
 </body>
 </html>

@@ -44,9 +44,13 @@
 
 /* Header with search */
 .site-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "logo search"
+        "nav nav";
     align-items: center;
+    gap: 14px 16px;
     padding: 12px 20px;
     background: rgba(26, 26, 26, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -57,7 +61,15 @@
     -webkit-backdrop-filter: blur(10px);
 }
 
+.site-header--home {
+    grid-template-areas: "logo search";
+    grid-template-columns: 1fr auto;
+    gap: 10px 16px;
+    padding-bottom: 10px;
+}
+
 .site-header .logo-link {
+    grid-area: logo;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -70,6 +82,33 @@
 .site-header .logo-link img {
     height: 28px;
     width: auto;
+}
+
+.search-trigger {
+    grid-area: search;
+}
+
+.site-nav {
+    grid-area: nav;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.site-nav a {
+    font-size: 0.78rem;
+    padding: 6px 2px;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+}
+
+.site-nav a.is-active {
+    color: #fff;
+    border-color: rgba(196, 68, 68, 0.9);
 }
 
 /* Overlay backdrop */
@@ -461,6 +500,37 @@
 
     .site-header {
         padding: 10px 16px;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "logo search"
+            "nav nav";
+    }
+
+    .site-header--home {
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "logo search";
+    }
+
+    .site-nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .site-nav a {
+        font-size: 0.74rem;
+        padding: 6px 2px;
+    }
+
+    .search-trigger {
+        width: auto;
+        min-width: 0;
+        padding: 8px;
+    }
+
+    .search-trigger svg {
+        margin: 0;
     }
 
     .search-cancel {
@@ -489,3 +559,16 @@
 .search-result:nth-child(3) { animation-delay: 60ms; }
 .search-result:nth-child(4) { animation-delay: 90ms; }
 .search-result:nth-child(5) { animation-delay: 120ms; }
+
+.site-nav a:hover {
+    color: #fff;
+    border-color: rgba(196, 68, 68, 0.7);
+}
+
+.site-logo {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+    opacity: 0.9;
+}

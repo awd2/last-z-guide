@@ -29,6 +29,8 @@
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
     align-items: start;
+    content-visibility: auto;
+    contain-intrinsic-size: 1200px;
 }
 
 .data-table-card {
@@ -38,6 +40,8 @@
     border-radius: 14px;
     overflow: hidden;
     width: 100%;
+    content-visibility: auto;
+    contain-intrinsic-size: 800px;
 }
 
 .data-table-card + .info-card {
@@ -286,6 +290,11 @@
     border-radius: 14px;
     padding: 16px;
     width: 100%;
+}
+
+.info-card {
+    content-visibility: auto;
+    contain-intrinsic-size: 400px;
 }
 
 .table-followup {

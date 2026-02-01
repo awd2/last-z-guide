@@ -40,7 +40,7 @@
 
     <!-- Article dates for SEO -->
     <meta property="article:published_time" content="2026-01-30">
-    <meta property="article:modified_time" content="2026-01-30">
+    <meta property="article:modified_time" content="2026-02-01">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -64,7 +64,8 @@
             "name": "Last Z Guides"
         },
         "datePublished": "2026-01-30",
-        "dateModified": "2026-01-30"
+        "dateModified": "2026-02-01",
+
     }
     </script>
 
@@ -100,46 +101,52 @@
 
     <!-- Schema.org: FAQPage -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "author": {"@type": "Organization", "name": "Last Z Guides"},
-        "publisher": {"@type": "Organization", "name": "Last Z Guides"},
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "When is Canyon Clash in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Canyon Clash follows a weekly flow: voting (Mon/Tue), registration (Wed), matchmaking (Thu), and combat day (Fri). Check Event Center for the exact time in Apocalypse Time."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "What time is Canyon Clash?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "The combat time is set during voting/registration and shown in Event Center. Use Apocalypse Time (server time) to plan."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Who can register for Canyon Clash?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Alliance Leader or R4 can register the alliance. Your alliance must be in the top 20 by power, have 40+ members, and players must be in the alliance for 24+ hours before joining."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How long does Canyon Clash last?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "The battle lasts 1 hour, with 10 minutes of prep and 40 minutes of combat."
-                }
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "author": {
+        "@type": "Organization",
+        "name": "Last Z Guides"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Last Z Guides"
+    },
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "When is Canyon Clash?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Weekly flow: voting (Mon/Tue), registration (Wed), matchmaking (Thu), combat day (Fri). Check Event Center for the exact time in Apocalypse Time."
             }
-        ]
-    }
+        },
+        {
+            "@type": "Question",
+            "name": "What time is Canyon Clash?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The combat time is set during voting/registration and displayed in Event Center. Use Apocalypse Time (server time) to plan."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Who can register for Canyon Clash?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Alliance Leader or R4 can register. Your alliance must be top 20 by power with at least 40 members, and players must be in the alliance 24+ hours."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How long does Canyon Clash last?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The battle lasts 1 hour, with 10 minutes of prep and 40 minutes of combat."
+            }
+        }
+    ]
+}
     </script>
 
     <!-- Schema.org: BreadcrumbList -->
@@ -167,6 +174,7 @@
 <body>
     <header class="site-header">
         <a href="/" class="logo-link">
+            <img decoding="async" class="site-logo" src="favicon-32.png" alt="Last Z Guides" width="18" height="18">
             <span>Last Z Guides</span>
         </a>
         <button class="search-trigger" aria-label="Search">
@@ -176,6 +184,14 @@
             <span>Search...</span>
             <kbd><span>⌘</span>K</kbd>
         </button>
+        <nav class="home-nav site-nav" aria-label="Guide categories">
+            <a href="/#progression">Progression</a>
+            <a href="/#research-tech">Research</a>
+            <a href="/#heroes-gear">Heroes</a>
+            <a href="/#pvp-formations">PvP</a>
+            <a href="/#events-competitive" class="is-active">Events</a>
+            <a href="/#economy-f2p">Economy</a>
+        </nav>
     </header>
 
     <nav class="breadcrumb">
@@ -185,8 +201,9 @@
     <article class="guide">
         <header class="guide-header">
             <h1>Last Z Canyon Clash Guide - Schedule, Rules, Rewards</h1>
-            <p class="guide-meta">Alliance PvP Event &bull; Updated <time datetime="2026-01-30">January 30, 2026</time> &bull; 7 min read</p>
-            <p class="guide-verified">Last verified: January 30, 2026 (in-game checks + community sources)</p>
+            <p class="guide-meta">Alliance <a href="pvp.html">PvP</a> Event &bull; Updated <time datetime="2026-02-01">February 1, 2026</time> &bull; 7 min read</p>
+        
+            <p class="guide-author">By <a href="about.html">Last Z Guides</a></p>
         </header>
 
         <section class="video-source">
@@ -354,8 +371,7 @@
         <section class="disclaimer">
             <p>Game mechanics and numbers may change with updates. This guide was last validated in January 2026.</p>
         </section>
-
-        <section class="related-guides">
+<section class="related-guides">
             <h2>Related Guides</h2>
             <div class="related-grid">
                 <a href="pvp.html" class="related-card">PvP Guide</a>
@@ -366,10 +382,17 @@
         </section>
     </article>
 
-    <footer>
-        <a href="/">&larr; Back to all guides</a>
+    <footer class="site-footer">
+        <a href="/">All Guides</a>
+        <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="disclosure.html">Disclosure</a>
+        </div>
     </footer>
     <script src="analytics.js" defer></script>
-    <script src="search.js" defer></script>
+    <script src="search-loader.js" defer></script>
 </body>
 </html>

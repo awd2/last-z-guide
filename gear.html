@@ -39,7 +39,8 @@
     <meta property="og:site_name" content="Last Z Guides">
     <!-- Article dates for SEO -->
     <meta property="article:published_time" content="2026-01-01">
-    <meta property="article:modified_time" content="2026-01-25">
+    <meta property="article:modified_time" content="2026-02-01">
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Last Z Gear Guide — Best Equipment & How to Enhance">
@@ -62,7 +63,8 @@
             "name": "Last Z Guides"
         },
         "datePublished": "2026-01-01",
-        "dateModified": "2026-01-23"
+        "dateModified": "2026-02-01",
+
     }
     </script>
     <script type="application/ld+json">
@@ -149,6 +151,7 @@
 <body>
     <header class="site-header">
         <a href="/" class="logo-link">
+            <img decoding="async" class="site-logo" src="favicon-32.png" alt="Last Z Guides" width="18" height="18">
             <span>Last Z Guides</span>
         </a>
         <button class="search-trigger" aria-label="Search">
@@ -158,6 +161,14 @@
             <span>Search...</span>
             <kbd><span>⌘</span>K</kbd>
         </button>
+        <nav class="home-nav site-nav" aria-label="Guide categories">
+            <a href="/#progression">Progression</a>
+            <a href="/#research-tech">Research</a>
+            <a href="/#heroes-gear" class="is-active">Heroes</a>
+            <a href="/#pvp-formations">PvP</a>
+            <a href="/#events-competitive">Events</a>
+            <a href="/#economy-f2p">Economy</a>
+        </nav>
     </header>
 
     <nav class="breadcrumb">
@@ -167,8 +178,9 @@
     <article class="guide-content">
         <header class="guide-header">
             <h1>Last Z Gear Guide — Best Equipment & How to Enhance</h1>
-            <p class="guide-meta">Equipment Guide &bull; Updated <time datetime="2026-01-23">January 23, 2026</time> &bull; 8 min read</p>
-            <p class="guide-verified">Last verified: January 30, 2026 (in-game checks + community sources)</p>
+            <p class="guide-meta">Equipment Guide &bull; Updated <time datetime="2026-02-01">February 1, 2026</time> &bull; 8 min read</p>
+        
+            <p class="guide-author">By <a href="about.html">Last Z Guides</a></p>
         </header>
 
         <section class="quick-answer quick-answer--modern" aria-label="Quick Answer">
@@ -315,7 +327,7 @@
 
             <p><small>*Orange base cap is 50. Each hexagon adds +5 (max 75 at 5 hexagons). Mythic transformation adds +25 (max 100).</small></p>
 
-            <p><strong>Critical rule:</strong> NEVER spend Enhancement Alloy or Power Cores on purple, blue, or green gear. Purple gear maxes at level 30 with NO promotion — complete waste of resources. Convert all non-orange gear to alloy immediately.</p>
+            <p><strong>Critical rule:</strong> NEVER spend Enhancement Alloy or Power Cores on purple, blue, or green gear. Purple gear maxes at level 30 with NO promotion — complete waste of <a href="resources.html">resources</a>. Convert all non-orange gear to alloy immediately.</p>
         </section>
 
         <section>
@@ -691,8 +703,7 @@
         <section class="disclaimer">
             <p>Game mechanics and numbers may change with updates. This guide was last validated in January 2026.</p>
         </section>
-
-        <section class="related-guides">
+<section class="related-guides">
             <h2>Related Guides</h2>
             <div class="related-grid">
                 <a href="vehicle-modification-cost.html" class="related-card">Vehicle Modification Costs</a>
@@ -703,10 +714,17 @@
         </section>
     </article>
 
-    <footer>
-        <a href="/">&larr; Back to all guides</a>
+    <footer class="site-footer">
+        <a href="/">All Guides</a>
+        <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="disclosure.html">Disclosure</a>
+        </div>
     </footer>
     <script src="analytics.js" defer></script>
-    <script src="search.js" defer></script>
+    <script src="search-loader.js" defer></script>
 </body>
 </html>

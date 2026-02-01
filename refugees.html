@@ -64,52 +64,59 @@
             "name": "Last Z Guides"
         },
         "datePublished": "2026-02-01",
-        "dateModified": "2026-02-01"
+        "dateModified": "2026-02-01",
+
     }
     </script>
 
     <!-- Schema.org: FAQPage -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "author": {"@type": "Organization", "name": "Last Z Guides"},
-        "publisher": {"@type": "Organization", "name": "Last Z Guides"},
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Which refugees should I prioritize in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Community priority tiers: 1) Diplomats, 2) Officer / Nurse / Scientist / Butler, 3) Rider / Assaulter / Shooter Instructors, 4) Metallurgist. Use 500-ticket summons and free refreshes to chase priority refugees."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Should I spend 2000 or 5000 tickets on refugees?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Generally no. The most efficient strategy is 500-ticket summons + free refresh. Only spend 2000/5000 if you are chasing a top-priority refugee like a high-rarity Diplomat, Scientist, or Butler."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "What do Diplomats do in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Diplomats are assigned to the Alliance Center and increase alliance help cap. In-game lists also show help duration bonuses, which speeds construction, research, and healing via alliance help."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How do I get refugee tickets?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Main sources: Fury Lord rewards, daily mail, Glory Shop weekly tickets (when available), and packs. Always check your shop rotation and Event Center for availability."
-                }
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "author": {
+        "@type": "Organization",
+        "name": "Last Z Guides"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Last Z Guides"
+    },
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Which refugees should I prioritize?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Community priority: Tier 1 Diplomats. Tier 2 Officer, Nurse, Scientist, Butler. Tier 3 Instructors. Tier 4 Metallurgist."
             }
-        ]
-    }
+        },
+        {
+            "@type": "Question",
+            "name": "Should I spend 2000/5000 tickets on refugees?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Only if you are chasing a top-tier refugee (high-rarity Diplomat, Butler, Scientist). Most community strategies prefer 500-ticket summons + free refresh unless the roll is elite."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What do Diplomats do?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Diplomats are assigned to the Alliance Center and increase alliance help cap. In-game lists also show help duration bonuses, which speeds construction, research, and healing through alliance help."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I get refugee tickets?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Main sources are Fury Lord rewards, Glory Shop weekly tickets (when available), and packs."
+            }
+        }
+    ]
+}
     </script>
 
     <!-- Schema.org: BreadcrumbList -->
@@ -137,6 +144,7 @@
 <body>
     <header class="site-header">
         <a href="/" class="logo-link">
+            <img decoding="async" class="site-logo" src="favicon-32.png" alt="Last Z Guides" width="18" height="18">
             <span>Last Z Guides</span>
         </a>
         <button class="search-trigger" aria-label="Search">
@@ -146,6 +154,14 @@
             <span>Search...</span>
             <kbd><span>⌘</span>K</kbd>
         </button>
+        <nav class="home-nav site-nav" aria-label="Guide categories">
+            <a href="/#progression">Progression</a>
+            <a href="/#research-tech">Research</a>
+            <a href="/#heroes-gear">Heroes</a>
+            <a href="/#pvp-formations">PvP</a>
+            <a href="/#events-competitive">Events</a>
+            <a href="/#economy-f2p" class="is-active">Economy</a>
+        </nav>
     </header>
 
     <nav class="breadcrumb">
@@ -156,7 +172,8 @@
         <header class="guide-header">
             <h1>Last Z Refugees Guide - Priority, Tickets, Diplomats</h1>
             <p class="guide-meta">Progression Guide &bull; Updated <time datetime="2026-02-01">February 1, 2026</time> &bull; 7 min read</p>
-            <p class="guide-verified">Last verified: February 1, 2026 (in-game checks + community sources)</p>
+        
+            <p class="guide-author">By <a href="about.html">Last Z Guides</a></p>
         </header>
 
         <section class="quick-answer quick-answer--modern" aria-label="Quick Answer">
@@ -247,13 +264,13 @@
             <div class="info-media">
                 <figure class="info-figure">
                     <button class="lightbox-trigger" data-full="refugee-assets/diplomat-1.jpg" aria-label="Open diplomat image in full size">
-                        <img src="refugee-assets/diplomat-1.jpg" alt="Diplomat refugees with help cap and help duration bonuses" loading="lazy">
+                        <img decoding="async" src="refugee-assets/diplomat-1.jpg" alt="Diplomat refugees with help cap and help duration bonuses" loading="lazy">
                     </button>
                     <figcaption>Diplomat bonuses scale with rarity.</figcaption>
                 </figure>
                 <figure class="info-figure">
                     <button class="lightbox-trigger" data-full="refugee-assets/diplomat-2.jpg" aria-label="Open diplomat image in full size">
-                        <img src="refugee-assets/diplomat-2.jpg" alt="Diplomat refugee list showing alliance help bonuses" loading="lazy">
+                        <img decoding="async" src="refugee-assets/diplomat-2.jpg" alt="Diplomat refugee list showing alliance help bonuses" loading="lazy">
                     </button>
                     <figcaption>Diplomats increase help cap and help duration.</figcaption>
                 </figure>
@@ -325,8 +342,7 @@
         <section class="disclaimer">
             <p>Game mechanics and numbers may change with updates. This guide was last validated in February 2026.</p>
         </section>
-
-        <section class="related-guides">
+<section class="related-guides">
             <h2>Related Guides</h2>
             <div class="related-grid">
                 <a href="f2p.html" class="related-card">F2P Diamond Guide</a>
@@ -337,15 +353,22 @@
         </section>
     </article>
 
-    <footer>
-        <a href="/">&larr; Back to all guides</a>
+    <footer class="site-footer">
+        <a href="/">All Guides</a>
+        <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="disclosure.html">Disclosure</a>
+        </div>
     </footer>
     <div class="lightbox-overlay" role="dialog" aria-modal="true" aria-hidden="true">
         <button class="lightbox-close" aria-label="Close image">×</button>
-        <img class="lightbox-image" alt="">
+        <img loading="lazy" decoding="async" class="lightbox-image" alt="">
     </div>
     <script src="analytics.js" defer></script>
-    <script src="search.js" defer></script>
+    <script src="search-loader.js" defer></script>
     <script>
         (function () {
             const overlay = document.querySelector('.lightbox-overlay');

@@ -39,7 +39,7 @@
     <meta property="og:site_name" content="Last Z Guides">
     <!-- Article dates for SEO -->
     <meta property="article:published_time" content="2026-01-01">
-    <meta property="article:modified_time" content="2026-01-23">
+    <meta property="article:modified_time" content="2026-02-01">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -63,7 +63,8 @@
             "name": "Last Z Guides"
         },
         "datePublished": "2026-01-01",
-        "dateModified": "2026-01-23"
+        "dateModified": "2026-02-01",
+
     }
     </script>
 
@@ -139,54 +140,68 @@
 
     <!-- Schema.org: FAQPage -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "author": {"@type": "Organization", "name": "Last Z Guides"},
-        "publisher": {"@type": "Organization", "name": "Last Z Guides"},
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "What gives the most formation power in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Troop HP research gives the most formation power - 1% HP = ~150-160k power. The 'Recharge Shield' research in Field Research tree can add 7.5+ million combat power when maxed. Using 5 heroes of same faction also adds massive bonuses (+10-15% attack/defense)."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How do I increase arena power in Last Z (why is it different from map power)?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Arena power doesn't include siege building bonuses. Map/rally power includes buffs from Strategy Clubrack, Military Fortress, and Defensive Base. This can add 6+ million power difference. Modified vehicle skills are also calculated differently."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "What is Hall of Honor in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Hall of Honor unlocks when you upgrade faction buildings (Toxic Fog Garden, Dawn Tower, Steel Factory) to level 20. Maxed heroes (level 150, 5-star) appear here. Upgrading them gives permanent buffs like hero attack, defense, and troop capacity to ALL heroes of that faction."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How do I increase march capacity in Last Z?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "March capacity comes from: hero levels (350 per hero at 150), hero stars (150 per hero at 5-star), hero skills (Licia +7.5%, Oliveira +10%), technologies (+20-500), and faction building upgrades (+5 troops per level after 27). Total can reach 3,500+ troops per hero."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Should I use 5 heroes of the same faction?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "YES - this is the #1 formation power tip. Using 5 same-faction heroes activates massive bonuses: +10% troop HP (Katrina), +15% attack (faction bonus), +10% attack/defense (other heroes). Removing just 1 hero can drop power from 72M to 31M."
-                }
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "author": {
+        "@type": "Organization",
+        "name": "Last Z Guides"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Last Z Guides"
+    },
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What gives the most formation power?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Troop HP research (Recharge Shield) gives ~150k power per 1%. Using 5 same-faction heroes activates massive bonuses worth 40M+ power. Hall of Honor upgrades and siege buildings add millions more."
             }
-        ]
-    }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I increase arena power (and why is it different from map power)?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Arena doesn't include siege building bonuses. Map power includes Strategy Clubrack, Military Fortress, and Defensive Base buffs — 6+ million power difference."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is Hall of Honor?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Unlocks at faction building level 20. Maxed heroes (level 150, 5-star) appear here. Upgrading them gives permanent buffs (hero attack, defense, troop capacity) to ALL heroes of that faction."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I increase march capacity?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hero levels (+350), hero stars (+150), hero skills (Licia +7.5%, Oliveira +10%), technologies (+20-500), and faction buildings (+5 troops per level after 27). Can reach 3,500+ troops per hero."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Should I use 5 heroes of the same faction?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely YES. Removing 1 hero can drop power from 72M to 31M. Faction bonuses (+10% HP, +15% attack, etc.) are the biggest power multipliers in the game."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "When does Fully Armed Alliance troop bonus apply?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The +500 troop size bonus only applies during Enemy Buster day. On normal days, you won't see this bonus in your march capacity."
+            }
+        }
+    ]
+}
     </script>
 
     <!-- Schema.org: BreadcrumbList -->
@@ -214,6 +229,7 @@
 <body>
     <header class="site-header">
         <a href="/" class="logo-link">
+            <img decoding="async" class="site-logo" src="favicon-32.png" alt="Last Z Guides" width="18" height="18">
             <span>Last Z Guides</span>
         </a>
         <button class="search-trigger" aria-label="Search">
@@ -223,6 +239,14 @@
             <span>Search...</span>
             <kbd><span>⌘</span>K</kbd>
         </button>
+        <nav class="home-nav site-nav" aria-label="Guide categories">
+            <a href="/#progression">Progression</a>
+            <a href="/#research-tech">Research</a>
+            <a href="/#heroes-gear">Heroes</a>
+            <a href="/#pvp-formations">PvP</a>
+            <a href="/#events-competitive">Events</a>
+            <a href="/#economy-f2p">Economy</a>
+        </nav>
     </header>
 
     <nav class="breadcrumb">
@@ -232,8 +256,8 @@
     <article class="guide">
         <header class="guide-header">
             <h1>Last Z Formation Power Guide — How to Reach 100M+ Power</h1>
-            <p class="guide-meta">Formation Guide &bull; Updated <time datetime="2026-01-23">January 23, 2026</time> &bull; 18 min read</p>
-            <p class="guide-verified">Last verified: January 30, 2026 (in-game checks + community sources)</p>
+            <p class="guide-meta">Formation Guide &bull; Updated <time datetime="2026-02-01">February 1, 2026</time> &bull; 18 min read</p>
+            <p class="guide-author">By <a href="about.html">Last Z Guides</a></p>
         </header>
         <section class="video-source">
             <p>Based on videos: <a href="https://www.youtube.com/watch?v=J1zez2ZND4s" target="_blank" rel="noopener">120M Formation Power</a>, <a href="https://www.youtube.com/watch?v=Ys4i8K-7bK4" target="_blank" rel="noopener">Power 4x Faster</a>, <a href="https://www.youtube.com/watch?v=eqteKv0EQcw" target="_blank" rel="noopener">Health & Formation</a>, and <a href="https://www.youtube.com/watch?v=I-VWzVYaYIE" target="_blank" rel="noopener">Hall of Honor</a>.</p>
@@ -695,9 +719,16 @@
     </article>
 
     <footer class="site-footer">
-        <a href="/">&larr; Back to All Guides</a>
+        <a href="/">All Guides</a>
+        <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="disclosure.html">Disclosure</a>
+        </div>
     </footer>
     <script src="analytics.js" defer></script>
-    <script src="search.js" defer></script>
+    <script src="search-loader.js" defer></script>
 </body>
 </html>

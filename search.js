@@ -55,6 +55,7 @@
 
             // Bind events
             bindEvents();
+            buildTOC();
 
             console.log('Search initialized successfully');
         } catch (error) {
@@ -561,6 +562,66 @@
             result_rank: rank,
             results_count: results.length
         });
+    }
+
+    function buildTOC() {
+        const article = document.querySelector('article.guide');
+        if (!article) return;
+
+        const header = article.querySelector('.guide-header');
+        if (!header) return;
+
+        const contentRoot = article.querySelector('.guide-content') || article;
+        const headings = Array.from(contentRoot.querySelectorAll('h2, h3'))
+            .filter((heading) => !heading.closest('.faq-section') && !heading.closest('.related-guides'));
+
+        if (headings.length < 3) return;
+
+        const usedIds = new Set();
+        const items = headings.map((heading) => {
+            let id = heading.getAttribute('id');
+            if (!id) {
+                id = heading.textContent.trim().toLowerCase()
+                    .replace(/[^a-z0-9\\s-]/g, '')
+                    .replace(/\\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .replace(/^-|-$/g, '');
+            }
+            let uniqueId = id || 'section';
+            let counter = 2;
+            while (usedIds.has(uniqueId)) {
+                uniqueId = `${id}-${counter}`;
+                counter += 1;
+            }
+            usedIds.add(uniqueId);
+            heading.setAttribute('id', uniqueId);
+            return { id: uniqueId, text: heading.textContent.trim(), level: heading.tagName.toLowerCase() };
+        });
+
+        const toc = document.createElement('nav');
+        toc.className = 'toc';
+        toc.setAttribute('aria-label', 'On this page');
+
+        const title = document.createElement('div');
+        title.className = 'toc-title';
+        title.textContent = 'On this page';
+        toc.appendChild(title);
+
+        const list = document.createElement('ul');
+        list.className = 'toc-list';
+
+        items.forEach((item) => {
+            const li = document.createElement('li');
+            li.className = item.level === 'h3' ? 'toc-item toc-item--nested' : 'toc-item';
+            const link = document.createElement('a');
+            link.href = `#${item.id}`;
+            link.textContent = item.text;
+            li.appendChild(link);
+            list.appendChild(li);
+        });
+
+        toc.appendChild(list);
+        header.insertAdjacentElement('afterend', toc);
     }
 
     // Initialize when DOM is ready
