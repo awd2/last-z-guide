@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYBSRQ1QFP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-PYBSRQ1QFP');
-    </script>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
@@ -17,9 +9,12 @@
     <meta name="description" content="Refugee priority tiers, 500-ticket refresh strategy, and diplomat focus for alliance help. Step-by-step guide. Updated Feb 2026.">
     <meta name="keywords" content="Last Z refugees, Last Z refugee guide, Last Z diplomat, Last Z refugee tickets, Last Z refugee priority, alliance help duration, alliance help cap, refugee refresh, refugee club, refugee dispatch">
     <link rel="canonical" href="https://lastzguides.com/refugees.html">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="quick-answer.css">
-    <link rel="stylesheet" href="search.css">
+    <link rel="preload" as="style" href="style.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    <link rel="preload" as="style" href="quick-answer.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="quick-answer.css"></noscript>
+    <link rel="preload" as="style" href="search.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="search.css"></noscript>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="icon" href="favicon.ico" sizes="any">
@@ -262,13 +257,21 @@
             <div class="info-media">
                 <figure class="info-figure">
                     <button class="lightbox-trigger" data-full="refugee-assets/diplomat-1.jpg" aria-label="Open diplomat image in full size">
-                        <img decoding="async" src="refugee-assets/diplomat-1.jpg" alt="Diplomat refugees with help cap and help duration bonuses" loading="lazy">
+                        <picture>
+    <source type="image/avif" srcset="refugee-assets/diplomat-1.avif" sizes="(max-width: 600px) 100vw, 320px">
+    <source type="image/webp" srcset="refugee-assets/diplomat-1.webp" sizes="(max-width: 600px) 100vw, 320px">
+    <img srcset="refugee-assets/diplomat-1.jpg 1x" sizes="(max-width: 600px) 100vw, 320px" decoding="async" src="refugee-assets/diplomat-1.jpg" alt="Diplomat refugees with help cap and help duration bonuses" loading="lazy">
+</picture>
                     </button>
                     <figcaption>Diplomat bonuses scale with rarity.</figcaption>
                 </figure>
                 <figure class="info-figure">
                     <button class="lightbox-trigger" data-full="refugee-assets/diplomat-2.jpg" aria-label="Open diplomat image in full size">
-                        <img decoding="async" src="refugee-assets/diplomat-2.jpg" alt="Diplomat refugee list showing alliance help bonuses" loading="lazy">
+                        <picture>
+    <source type="image/avif" srcset="refugee-assets/diplomat-2.avif" sizes="(max-width: 600px) 100vw, 320px">
+    <source type="image/webp" srcset="refugee-assets/diplomat-2.webp" sizes="(max-width: 600px) 100vw, 320px">
+    <img srcset="refugee-assets/diplomat-2.jpg 1x" sizes="(max-width: 600px) 100vw, 320px" decoding="async" src="refugee-assets/diplomat-2.jpg" alt="Diplomat refugee list showing alliance help bonuses" loading="lazy">
+</picture>
                     </button>
                     <figcaption>Diplomats increase help cap and help duration.</figcaption>
                 </figure>

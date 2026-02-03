@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYBSRQ1QFP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-PYBSRQ1QFP');
-    </script>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
@@ -17,9 +9,12 @@
     <meta name="description" content="Cost table for levels 0–240: wrenches per sub‑level, totals, and milestone unlocks.">
     <meta name="keywords" content="Last Z vehicle modification cost, Last Z wrench totals, Last Z vehicle upgrade table, Last Z blueprints, Last Z Expert Modifier, Last Z Hercules unlock, Cheetah Armored Vehicle, Destroyer, Destroyer EX, cumulative total, modification rating">
     <link rel="canonical" href="https://lastzguides.com/vehicle-modification-cost.html">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="search.css">
-    <link rel="stylesheet" href="vehicle-table.css">
+    <link rel="preload" as="style" href="style.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    <link rel="preload" as="style" href="search.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="search.css"></noscript>
+    <link rel="preload" as="style" href="vehicle-table.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="vehicle-table.css"></noscript>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="icon" href="favicon.ico" sizes="any">
@@ -211,7 +206,11 @@
             <div class="data-main">
                 <div class="data-table-card">
                     <div class="table-header">
-                        <img height="28" width="28" decoding="async" src="vehicle-assets/wrench.png" alt="Wrench" class="table-icon">
+                        <picture>
+    <source type="image/avif" srcset="vehicle-assets/wrench.avif" sizes="(max-width: 600px) 24px, 28px">
+    <source type="image/webp" srcset="vehicle-assets/wrench.webp" sizes="(max-width: 600px) 24px, 28px">
+    <img srcset="vehicle-assets/wrench.png 1x" sizes="(max-width: 600px) 24px, 28px" height="28" width="28" decoding="async" src="vehicle-assets/wrench.png" alt="Wrench" class="table-icon">
+</picture>
                         <div>
                             <div class="table-title">Vehicle Modification Costs</div>
                             <div class="table-subtitle">Levels 0–240 • 49 rows</div>
@@ -350,7 +349,11 @@
                     <div class="panel-title">Vehicle Milestones</div>
                     <div class="vehicle-grid">
                         <div class="vehicle-card">
-                            <img loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/conqueror.png" alt="Conqueror vehicle">
+                            <picture>
+    <source type="image/avif" srcset="vehicle-assets/conqueror.avif" sizes="(max-width: 600px) 56px, 72px">
+    <source type="image/webp" srcset="vehicle-assets/conqueror.webp" sizes="(max-width: 600px) 56px, 72px">
+    <img srcset="vehicle-assets/conqueror.png 1x" sizes="(max-width: 600px) 56px, 72px" loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/conqueror.png" alt="Conqueror vehicle">
+</picture>
                             <div class="vehicle-name">Conqueror</div>
                             <div class="vehicle-meta">Unlock at level 0</div>
                             <div class="vehicle-cost-block">
@@ -359,7 +362,11 @@
                             </div>
                         </div>
                         <div class="vehicle-card">
-                            <img loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/cheetah-armored.png" alt="Cheetah Armored Vehicle">
+                            <picture>
+    <source type="image/avif" srcset="vehicle-assets/cheetah-armored.avif" sizes="(max-width: 600px) 56px, 72px">
+    <source type="image/webp" srcset="vehicle-assets/cheetah-armored.webp" sizes="(max-width: 600px) 56px, 72px">
+    <img srcset="vehicle-assets/cheetah-armored.png 1x" sizes="(max-width: 600px) 56px, 72px" loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/cheetah-armored.png" alt="Cheetah Armored Vehicle">
+</picture>
                             <div class="vehicle-name">Cheetah Armored Vehicle</div>
                             <div class="vehicle-meta">Unlock at level 45</div>
                             <div class="vehicle-cost-block">
@@ -368,7 +375,11 @@
                             </div>
                         </div>
                         <div class="vehicle-card">
-                            <img loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/hercules.png" alt="Hercules vehicle">
+                            <picture>
+    <source type="image/avif" srcset="vehicle-assets/hercules.avif" sizes="(max-width: 600px) 56px, 72px">
+    <source type="image/webp" srcset="vehicle-assets/hercules.webp" sizes="(max-width: 600px) 56px, 72px">
+    <img srcset="vehicle-assets/hercules.png 1x" sizes="(max-width: 600px) 56px, 72px" loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/hercules.png" alt="Hercules vehicle">
+</picture>
                             <div class="vehicle-name">Hercules</div>
                             <div class="vehicle-meta">Unlock at level 95</div>
                             <div class="vehicle-cost-block">
@@ -377,7 +388,11 @@
                             </div>
                         </div>
                         <div class="vehicle-card">
-                            <img loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/destroyer.png" alt="Destroyer vehicle">
+                            <picture>
+    <source type="image/avif" srcset="vehicle-assets/destroyer.avif" sizes="(max-width: 600px) 56px, 72px">
+    <source type="image/webp" srcset="vehicle-assets/destroyer.webp" sizes="(max-width: 600px) 56px, 72px">
+    <img srcset="vehicle-assets/destroyer.png 1x" sizes="(max-width: 600px) 56px, 72px" loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/destroyer.png" alt="Destroyer vehicle">
+</picture>
                             <div class="vehicle-name">Destroyer</div>
                             <div class="vehicle-meta">Unlock at level 145</div>
                             <div class="vehicle-cost-block">
@@ -386,7 +401,11 @@
                             </div>
                         </div>
                         <div class="vehicle-card">
-                            <img loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/destroyer-ex.png" alt="Destroyer EX vehicle">
+                            <picture>
+    <source type="image/avif" srcset="vehicle-assets/destroyer-ex.avif" sizes="(max-width: 600px) 56px, 72px">
+    <source type="image/webp" srcset="vehicle-assets/destroyer-ex.webp" sizes="(max-width: 600px) 56px, 72px">
+    <img srcset="vehicle-assets/destroyer-ex.png 1x" sizes="(max-width: 600px) 56px, 72px" loading="lazy" height="54" width="72" decoding="async" class="vehicle-icon" src="vehicle-assets/destroyer-ex.png" alt="Destroyer EX vehicle">
+</picture>
                             <div class="vehicle-name">Destroyer EX</div>
                             <div class="vehicle-meta">Unlock at level 195</div>
                             <div class="vehicle-cost-block">
@@ -404,11 +423,19 @@
                     </ol>
                     <div class="info-media">
                         <figure class="info-figure">
-                            <img height="170" width="320" loading="lazy" decoding="async" src="vehicle-assets/expert-modifier-elite.jpg" alt="Elite modifier activation prompt">
+                            <picture>
+    <source type="image/avif" srcset="vehicle-assets/expert-modifier-elite.avif" sizes="(max-width: 600px) 100vw, 320px">
+    <source type="image/webp" srcset="vehicle-assets/expert-modifier-elite.webp" sizes="(max-width: 600px) 100vw, 320px">
+    <img srcset="vehicle-assets/expert-modifier-elite.jpg 1x" sizes="(max-width: 600px) 100vw, 320px" height="170" width="320" loading="lazy" decoding="async" src="vehicle-assets/expert-modifier-elite.jpg" alt="Elite modifier activation prompt">
+</picture>
                             <figcaption>Elite modifier activation</figcaption>
                         </figure>
                         <figure class="info-figure">
-                            <img height="170" width="320" loading="lazy" decoding="async" src="vehicle-assets/expert-modifier-active.jpg" alt="Expert modifier active timer">
+                            <picture>
+    <source type="image/avif" srcset="vehicle-assets/expert-modifier-active.avif" sizes="(max-width: 600px) 100vw, 320px">
+    <source type="image/webp" srcset="vehicle-assets/expert-modifier-active.webp" sizes="(max-width: 600px) 100vw, 320px">
+    <img srcset="vehicle-assets/expert-modifier-active.jpg 1x" sizes="(max-width: 600px) 100vw, 320px" height="170" width="320" loading="lazy" decoding="async" src="vehicle-assets/expert-modifier-active.jpg" alt="Expert modifier active timer">
+</picture>
                             <figcaption>Expert modifier active timer</figcaption>
                         </figure>
                     </div>
@@ -421,11 +448,19 @@
                     </ol>
                     <div class="info-media">
                         <figure class="info-figure">
-                            <img height="170" width="320" loading="lazy" decoding="async" src="vehicle-assets/advanced-mod-license.jpg" alt="Advanced Mod License card">
+                            <picture>
+    <source type="image/avif" srcset="vehicle-assets/advanced-mod-license.avif" sizes="(max-width: 600px) 100vw, 320px">
+    <source type="image/webp" srcset="vehicle-assets/advanced-mod-license.webp" sizes="(max-width: 600px) 100vw, 320px">
+    <img srcset="vehicle-assets/advanced-mod-license.jpg 1x" sizes="(max-width: 600px) 100vw, 320px" height="170" width="320" loading="lazy" decoding="async" src="vehicle-assets/advanced-mod-license.jpg" alt="Advanced Mod License card">
+</picture>
                             <figcaption>Advanced Mod License</figcaption>
                         </figure>
                         <figure class="info-figure">
-                            <img height="170" width="320" loading="lazy" decoding="async" src="vehicle-assets/mia-hero.jpg" alt="Mia hero upgrade screen">
+                            <picture>
+    <source type="image/avif" srcset="vehicle-assets/mia-hero.avif" sizes="(max-width: 600px) 100vw, 320px">
+    <source type="image/webp" srcset="vehicle-assets/mia-hero.webp" sizes="(max-width: 600px) 100vw, 320px">
+    <img srcset="vehicle-assets/mia-hero.jpg 1x" sizes="(max-width: 600px) 100vw, 320px" height="170" width="320" loading="lazy" decoding="async" src="vehicle-assets/mia-hero.jpg" alt="Mia hero upgrade screen">
+</picture>
                             <figcaption>Mia 3rd Skill</figcaption>
                         </figure>
                     </div>

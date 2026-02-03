@@ -8,6 +8,37 @@
     const MEASUREMENT_ID = 'G-PYBSRQ1QFP';
     const tableDepthMarks = new Map();
 
+    function loadGA() {
+        if (window.gtag || window.__gaLoading) return;
+        window.__gaLoading = true;
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} 
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', MEASUREMENT_ID);
+
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
+        document.head.appendChild(script);
+    }
+
+    function scheduleGALoad() {
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadGA, { timeout: 2000 });
+        } else {
+            setTimeout(loadGA, 2000);
+        }
+    }
+
+    function loadGAOnInteraction() {
+        loadGA();
+        window.removeEventListener('scroll', loadGAOnInteraction, { passive: true });
+        window.removeEventListener('pointerdown', loadGAOnInteraction, { passive: true });
+        window.removeEventListener('keydown', loadGAOnInteraction);
+    }
+
+
     function canTrack() {
         return typeof window.gtag === 'function';
     }
@@ -174,6 +205,10 @@
     };
 
     function init() {
+        scheduleGALoad();
+        window.addEventListener(\'scroll\', loadGAOnInteraction, { passive: true });
+        window.addEventListener(\'pointerdown\', loadGAOnInteraction, { passive: true });
+        window.addEventListener(\'keydown\', loadGAOnInteraction);
         attachHomeTracking();
         attachGuideTracking();
         attachTableTracking();
