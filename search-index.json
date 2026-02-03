@@ -1,9 +1,350 @@
 [
   {
+    "url": "alliance-duel.html",
+    "title": "Alliance Duel Guide",
+    "category": "Events",
+    "description": "Day-by-day F2P strategy, Alliance Recognition research, Full Preparedness sync",
+    "keywords": [
+      "Alliance Duel",
+      "AD",
+      "day by day",
+      "F2P",
+      "Alliance Recognition",
+      "AR",
+      "badges",
+      "Full Preparedness",
+      "speed-ups",
+      "speedups",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "points",
+      "rewards"
+    ]
+  },
+  {
+    "url": "alliance-duel-rewards.html",
+    "title": "Alliance Duel Rewards",
+    "category": "Events",
+    "description": "Chest thresholds, daily totals, and weekly totals for Alliance Duel",
+    "keywords": [
+      "alliance duel rewards",
+      "alliance duel chests",
+      "chest thresholds",
+      "daily totals",
+      "weekly totals",
+      "badges",
+      "valor medal",
+      "Last Z"
+    ]
+  },
+  {
+    "url": "alliance-recognition-cost.html",
+    "title": "Alliance Recognition Costs",
+    "category": "Research",
+    "description": "Alliance Recognition badge costs by item and level",
+    "keywords": [
+      "alliance recognition cost",
+      "alliance recognition badges",
+      "alliance duel research",
+      "event king",
+      "event expert",
+      "premium rewards",
+      "super rewards",
+      "Last Z"
+    ]
+  },
+  {
+    "url": "formations.html",
+    "title": "Best Formations",
+    "category": "Strategy",
+    "description": "Faction combos, hero placement, 3+2 meta builds for PvP and PvE",
+    "keywords": [
+      "formation",
+      "faction combo",
+      "3+2",
+      "hero placement",
+      "counter",
+      "Wings of Dawn",
+      "Blood Rose",
+      "Guard of Order",
+      "synergy",
+      "troop type",
+      "commander slot",
+      "meta",
+      "team comp",
+      "lineup",
+      "squad"
+    ]
+  },
+  {
+    "url": "canyon-clash.html",
+    "title": "Canyon Clash Guide",
+    "category": "Events",
+    "description": "Weekly schedule, eligibility, battle phases, and rewards",
+    "keywords": [
+      "canyon clash",
+      "canyon clash schedule",
+      "canyon clash time",
+      "apocalypse time",
+      "energy cells",
+      "canyon captain",
+      "alliance pvp",
+      "registration",
+      "matchmaking",
+      "Last Z"
+    ]
+  },
+  {
+    "url": "daily.html",
+    "title": "Daily Checklist",
+    "category": "Routine",
+    "description": "What to do every day \u2014 trucks, bounty, Furylord, arena, radar events, daily tasks",
+    "keywords": [
+      "daily",
+      "checklist",
+      "routine",
+      "every day",
+      "trucks",
+      "bounty",
+      "plunder",
+      "Furylord",
+      "mines",
+      "arena",
+      "radar",
+      "daily tasks",
+      "Full Preparedness",
+      "Idle Reward",
+      "Danger Lurks",
+      "Hot Events",
+      "refugees",
+      "purchases",
+      "Alliance Duel"
+    ]
+  },
+  {
+    "url": "events.html",
+    "title": "Daily Events Schedule",
+    "category": "Events",
+    "description": "F2P schedule \u2014 what to save, when to spend, daily rotation",
+    "keywords": [
+      "events",
+      "daily",
+      "schedule",
+      "Furylord",
+      "Fury Lord",
+      "Zombie Siege",
+      "Tyrant",
+      "Canyon Clash",
+      "SVS",
+      "rotation",
+      "calendar",
+      "weekly",
+      "what day"
+    ]
+  },
+  {
+    "url": "emergency-hospital-cost.html",
+    "title": "Emergency Hospital Costs",
+    "category": "Progression",
+    "description": "Emergency Hospital resource costs, capacity increases, and power by level",
+    "keywords": [
+      "emergency hospital cost",
+      "hospital upgrade",
+      "hospital capacity",
+      "injured troops",
+      "healing capacity",
+      "wood",
+      "zents",
+      "food",
+      "Last Z"
+    ]
+  },
+  {
+    "url": "farm-account.html",
+    "title": "Farm Account Guide",
+    "category": "Economy",
+    "description": "Farm account setup, Season 2 timing, and resource support for your main HQ",
+    "keywords": [
+      "farm account",
+      "farm alt",
+      "season 2",
+      "character management",
+      "create new character",
+      "resources",
+      "Headquarters",
+      "Last Z"
+    ]
+  },
+  {
+    "url": "field-research.html",
+    "title": "Field Research Guide",
+    "category": "Progression",
+    "description": "Full badge cost breakdown \u2014 594k badges total, all 14 nodes, Recharge Shield, unlock requirements",
+    "keywords": [
+      "Field Research",
+      "field research cost",
+      "badges",
+      "Recharge Shield",
+      "infield troop attack",
+      "troop HP",
+      "Siege to Seize",
+      "Camo Coding",
+      "Field Training",
+      "594000",
+      "unlock",
+      "research tree",
+      "Shooter Training",
+      "Assaulter Training",
+      "Rider Training"
+    ]
+  },
+  {
+    "url": "formation-power.html",
+    "title": "Formation Power",
+    "category": "Strategy",
+    "description": "5 same faction rule, Hall of Honor, march capacity, siege buildings",
+    "keywords": [
+      "formation power",
+      "faction bonus",
+      "Hall of Honor",
+      "HoH",
+      "march capacity",
+      "siege",
+      "troop HP",
+      "all troops buff",
+      "100M",
+      "million power"
+    ]
+  },
+  {
+    "url": "furylord.html",
+    "title": "Furylord Guide",
+    "category": "Events",
+    "description": "Spawn times, attack rules, scoring, and achievement tips for Furylord",
+    "keywords": [
+      "Furylord",
+      "Fury Lord",
+      "Last Z",
+      "spawn times",
+      "War Frenzy",
+      "highest hit",
+      "bonus faction",
+      "achievements",
+      "world boss",
+      "Duel League",
+      "State Ruler"
+    ]
+  },
+  {
+    "url": "gacha-go.html",
+    "title": "Gacha Go Event",
+    "category": "Events",
+    "description": "Golden Wrenches farming \u2014 key strategy, diamond efficiency, Hercules path",
+    "keywords": [
+      "Gacha Go",
+      "golden wrench",
+      "wrenches",
+      "diamonds",
+      "Hercules",
+      "key",
+      "keys",
+      "event",
+      "vehicle modification",
+      "vehicle",
+      "car"
+    ]
+  },
+  {
+    "url": "gear.html",
+    "title": "Gear Guide",
+    "category": "Equipment",
+    "description": "Best equipment, how to enhance, Power Cores, upgrade priority",
+    "keywords": [
+      "gear",
+      "equipment",
+      "orange gear",
+      "Power Cores",
+      "cores",
+      "enhance",
+      "Merit Shop",
+      "exclusive equipment",
+      "alloys",
+      "armor",
+      "weapon",
+      "accessory",
+      "mythic"
+    ]
+  },
+  {
+    "url": "start.html",
+    "title": "Getting Started",
+    "category": "Beginner",
+    "description": "First steps for new players \u2014 beginner guide",
+    "keywords": [
+      "beginner",
+      "new player",
+      "start",
+      "first steps",
+      "tutorial",
+      "basics",
+      "noob",
+      "newbie",
+      "how to play",
+      "guide"
+    ]
+  },
+  {
+    "url": "hq-construction-cost.html",
+    "title": "HQ Construction Costs",
+    "category": "Progression",
+    "description": "HQ levels, hero caps, resource costs, requirements, and build times",
+    "keywords": [
+      "HQ construction cost",
+      "HQ upgrade cost",
+      "HQ 30 cost",
+      "HQ 35 cost",
+      "headquarters",
+      "hero level cap",
+      "building requirements",
+      "wood",
+      "food",
+      "zent",
+      "steel",
+      "construction time",
+      "Last Z"
+    ]
+  },
+  {
+    "url": "hq.html",
+    "title": "HQ Upgrade Guide",
+    "category": "Progression",
+    "description": "Levels 1-35, Steel resource, Sophia strategy, building requirements",
+    "keywords": [
+      "HQ",
+      "headquarters",
+      "upgrade",
+      "steel",
+      "Sophia",
+      "level 35",
+      "level 30",
+      "hero level cap",
+      "construction",
+      "builder",
+      "base",
+      "town",
+      "city",
+      "building"
+    ]
+  },
+  {
     "url": "heroes.html",
     "title": "Heroes Tier List",
     "category": "Heroes",
-    "description": "Best heroes ranked by faction — formation strategy, troop alignment",
+    "description": "Best heroes ranked by faction \u2014 formation strategy, troop alignment",
     "keywords": [
       "heroes",
       "tier list",
@@ -59,119 +400,59 @@
     ]
   },
   {
-    "url": "formations.html",
-    "title": "Best Formations",
-    "category": "Strategy",
-    "description": "Faction combos, hero placement, 3+2 meta builds for PvP and PvE",
-    "keywords": [
-      "formation",
-      "faction combo",
-      "3+2",
-      "hero placement",
-      "counter",
-      "Wings of Dawn",
-      "Blood Rose",
-      "Guard of Order",
-      "synergy",
-      "troop type",
-      "commander slot",
-      "meta",
-      "team comp",
-      "lineup",
-      "squad"
-    ]
-  },
-  {
-    "url": "research.html",
-    "title": "Research Priority",
+    "url": "leveling.html",
+    "title": "Leveling Up Fast",
     "category": "Progression",
-    "description": "What to research first — Hero Training, UST, Peace Shield, Military Strategies",
+    "description": "Progression strategies \u2014 daily tasks, campaign, efficiency tips",
     "keywords": [
-      "research",
-      "priority",
-      "UST",
-      "Peace Shield",
-      "Hero Training",
-      "badges",
-      "T10",
-      "T9",
-      "T8",
-      "Urgent Rescue",
-      "laboratory",
-      "tech",
-      "lab",
-      "science",
-      "upgrade"
+      "leveling",
+      "level up",
+      "fast",
+      "progression",
+      "XP",
+      "experience",
+      "campaign",
+      "daily tasks",
+      "Command Center",
+      "grow",
+      "progress"
     ]
   },
   {
-    "url": "field-research.html",
-    "title": "Field Research Guide",
-    "category": "Progression",
-    "description": "Full badge cost breakdown — 594k badges total, all 14 nodes, Recharge Shield, unlock requirements",
-    "keywords": [
-      "Field Research",
-      "field research cost",
-      "badges",
-      "Recharge Shield",
-      "infield troop attack",
-      "troop HP",
-      "Siege to Seize",
-      "Camo Coding",
-      "Field Training",
-      "594000",
-      "unlock",
-      "research tree",
-      "Shooter Training",
-      "Assaulter Training",
-      "Rider Training"
-    ]
-  },
-  {
-    "url": "alliance-duel.html",
-    "title": "Alliance Duel Guide",
+    "url": "lucky-discounter.html",
+    "title": "Lucky Discounter",
     "category": "Events",
-    "description": "Day-by-day F2P strategy, Alliance Recognition research, Full Preparedness sync",
+    "description": "Badge farming \u2014 90% discount strategy, ticket saving, F2P optimized",
     "keywords": [
-      "Alliance Duel",
-      "AD",
-      "day by day",
+      "Lucky Discounter",
+      "badges",
+      "90% discount",
+      "discount",
+      "tickets",
       "F2P",
-      "Alliance Recognition",
-      "AR",
-      "badges",
-      "Full Preparedness",
-      "speed-ups",
-      "speedups",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "points",
-      "rewards"
+      "farming",
+      "event",
+      "cheap",
+      "sale"
     ]
   },
   {
-    "url": "events.html",
-    "title": "Daily Events Schedule",
-    "category": "Events",
-    "description": "F2P schedule — what to save, when to spend, daily rotation",
+    "url": "power-guide.html",
+    "title": "Power Guide",
+    "category": "Progression",
+    "description": "Increase CP 2-4x faster \u2014 all 5 power types explained",
     "keywords": [
-      "events",
-      "daily",
-      "schedule",
-      "Furylord",
-      "Fury Lord",
-      "Zombie Siege",
-      "Tyrant",
-      "Canyon Clash",
-      "SVS",
-      "rotation",
-      "calendar",
-      "weekly",
-      "what day"
+      "power",
+      "CP",
+      "combat power",
+      "hero power",
+      "troop power",
+      "tech power",
+      "modified vehicle",
+      "increase power",
+      "stronger",
+      "strength",
+      "might"
     ]
   },
   {
@@ -199,83 +480,61 @@
     ]
   },
   {
-    "url": "hq.html",
-    "title": "HQ Upgrade Guide",
+    "url": "codes.html",
+    "title": "Redeem Codes",
+    "category": "Rewards",
+    "description": "Free diamonds, speedups & resources \u2014 updated January 2026",
+    "keywords": [
+      "codes",
+      "redeem",
+      "gift code",
+      "free diamonds",
+      "UID",
+      "Gift Center",
+      "rewards",
+      "promo",
+      "coupon",
+      "free stuff"
+    ]
+  },
+  {
+    "url": "refugees.html",
+    "title": "Refugees Guide",
     "category": "Progression",
-    "description": "Levels 1-35, Steel resource, Sophia strategy, building requirements",
+    "description": "Refugee priority tiers, ticket sources, and diplomat strategy for alliance help",
     "keywords": [
-      "HQ",
-      "headquarters",
-      "upgrade",
-      "steel",
-      "Sophia",
-      "level 35",
-      "level 30",
-      "hero level cap",
-      "construction",
-      "builder",
-      "base",
-      "town",
-      "city",
-      "building"
+      "refugees",
+      "refugee tickets",
+      "diplomat",
+      "alliance help",
+      "club",
+      "dispatch",
+      "talent hub",
+      "refugee fragments",
+      "Last Z"
     ]
   },
   {
-    "url": "power-guide.html",
-    "title": "Power Guide",
+    "url": "research.html",
+    "title": "Research Priority",
     "category": "Progression",
-    "description": "Increase CP 2-4x faster — all 5 power types explained",
+    "description": "What to research first \u2014 Hero Training, UST, Peace Shield, Military Strategies",
     "keywords": [
-      "power",
-      "CP",
-      "combat power",
-      "hero power",
-      "troop power",
-      "tech power",
-      "modified vehicle",
-      "increase power",
-      "stronger",
-      "strength",
-      "might"
-    ]
-  },
-  {
-    "url": "formation-power.html",
-    "title": "Formation Power",
-    "category": "Strategy",
-    "description": "5 same faction rule, Hall of Honor, march capacity, siege buildings",
-    "keywords": [
-      "formation power",
-      "faction bonus",
-      "Hall of Honor",
-      "HoH",
-      "march capacity",
-      "siege",
-      "troop HP",
-      "all troops buff",
-      "100M",
-      "million power"
-    ]
-  },
-  {
-    "url": "gear.html",
-    "title": "Gear Guide",
-    "category": "Equipment",
-    "description": "Best equipment, how to enhance, Power Cores, upgrade priority",
-    "keywords": [
-      "gear",
-      "equipment",
-      "orange gear",
-      "Power Cores",
-      "cores",
-      "enhance",
-      "Merit Shop",
-      "exclusive equipment",
-      "alloys",
-      "armor",
-      "weapon",
-      "accessory",
-      "mythic"
+      "research",
+      "priority",
+      "UST",
+      "Peace Shield",
+      "Hero Training",
+      "badges",
+      "T10",
+      "T9",
+      "T8",
+      "Urgent Rescue",
+      "laboratory",
+      "tech",
+      "lab",
+      "science",
+      "upgrade"
     ]
   },
   {
@@ -301,10 +560,27 @@
     ]
   },
   {
+    "url": "shooter-stages.html",
+    "title": "Shooter Stages",
+    "category": "Progression",
+    "description": "Dodge & shoot stages \u2014 barrels, gates, XP crates, rewards",
+    "keywords": [
+      "shooter stages",
+      "dodge and shoot",
+      "stage guide",
+      "barrels",
+      "gates",
+      "xp crates",
+      "stage rewards",
+      "progression",
+      "last z"
+    ]
+  },
+  {
     "url": "steel.html",
     "title": "Steel Guide",
     "category": "Economy",
-    "description": "Best Steel sources — Tyrant, nodes, and HQ31-35 usage",
+    "description": "Best Steel sources \u2014 Tyrant, nodes, and HQ31-35 usage",
     "keywords": [
       "steel",
       "steel guide",
@@ -326,10 +602,28 @@
     ]
   },
   {
+    "url": "tech.html",
+    "title": "Tech Deep Dive",
+    "category": "Strategy",
+    "description": "Expert discussion \u2014 AR, Trap Accounts, HP stacking strategies",
+    "keywords": [
+      "tech",
+      "AR",
+      "Alliance Recognition",
+      "trap account",
+      "HP stacking",
+      "expert",
+      "advanced",
+      "research tree",
+      "pro",
+      "endgame"
+    ]
+  },
+  {
     "url": "tips.html",
     "title": "Tips & Tricks",
     "category": "Tips",
-    "description": "25+ life-changing tips — buildings, heroes, alliances, efficiency",
+    "description": "25+ life-changing tips \u2014 buildings, heroes, alliances, efficiency",
     "keywords": [
       "tips",
       "tricks",
@@ -348,147 +642,10 @@
     ]
   },
   {
-    "url": "tech.html",
-    "title": "Tech Deep Dive",
-    "category": "Strategy",
-    "description": "Expert discussion — AR, Trap Accounts, HP stacking strategies",
-    "keywords": [
-      "tech",
-      "AR",
-      "Alliance Recognition",
-      "trap account",
-      "HP stacking",
-      "expert",
-      "advanced",
-      "research tree",
-      "pro",
-      "endgame"
-    ]
-  },
-  {
-    "url": "codes.html",
-    "title": "Redeem Codes",
-    "category": "Rewards",
-    "description": "Free diamonds, speedups & resources — updated January 2026",
-    "keywords": [
-      "codes",
-      "redeem",
-      "gift code",
-      "free diamonds",
-      "UID",
-      "Gift Center",
-      "rewards",
-      "promo",
-      "coupon",
-      "free stuff"
-    ]
-  },
-  {
-    "url": "start.html",
-    "title": "Getting Started",
-    "category": "Beginner",
-    "description": "First steps for new players — beginner guide",
-    "keywords": [
-      "beginner",
-      "new player",
-      "start",
-      "first steps",
-      "tutorial",
-      "basics",
-      "noob",
-      "newbie",
-      "how to play",
-      "guide"
-    ]
-  },
-  {
-    "url": "leveling.html",
-    "title": "Leveling Up Fast",
-    "category": "Progression",
-    "description": "Progression strategies — daily tasks, campaign, efficiency tips",
-    "keywords": [
-      "leveling",
-      "level up",
-      "fast",
-      "progression",
-      "XP",
-      "experience",
-      "campaign",
-      "daily tasks",
-      "Command Center",
-      "grow",
-      "progress"
-    ]
-  },
-  {
-    "url": "gacha-go.html",
-    "title": "Gacha Go Event",
-    "category": "Events",
-    "description": "Golden Wrenches farming — key strategy, diamond efficiency, Hercules path",
-    "keywords": [
-      "Gacha Go",
-      "golden wrench",
-      "wrenches",
-      "diamonds",
-      "Hercules",
-      "key",
-      "keys",
-      "event",
-      "vehicle modification",
-      "vehicle",
-      "car"
-    ]
-  },
-  {
-    "url": "lucky-discounter.html",
-    "title": "Lucky Discounter",
-    "category": "Events",
-    "description": "Badge farming — 90% discount strategy, ticket saving, F2P optimized",
-    "keywords": [
-      "Lucky Discounter",
-      "badges",
-      "90% discount",
-      "discount",
-      "tickets",
-      "F2P",
-      "farming",
-      "event",
-      "cheap",
-      "sale"
-    ]
-  },
-  {
-    "url": "daily.html",
-    "title": "Daily Checklist",
-    "category": "Routine",
-    "description": "What to do every day — trucks, bounty, Furylord, arena, radar events, daily tasks",
-    "keywords": [
-      "daily",
-      "checklist",
-      "routine",
-      "every day",
-      "trucks",
-      "bounty",
-      "plunder",
-      "Furylord",
-      "mines",
-      "arena",
-      "radar",
-      "daily tasks",
-      "Full Preparedness",
-      "Idle Reward",
-      "Danger Lurks",
-      "Hot Events",
-      "refugees",
-      "purchases",
-      "Alliance Duel"
-    ]
-  },
-  {
     "url": "tyrant.html",
     "title": "Tyrant Rally Guide",
     "category": "Events",
-    "description": "Maximum damage strategy — 7-8 member rallies, engage offline, Steel farming",
+    "description": "Maximum damage strategy \u2014 7-8 member rallies, engage offline, Steel farming",
     "keywords": [
       "Tyrant",
       "rally",
@@ -504,6 +661,25 @@
       "HQ35",
       "boss",
       "raid"
+    ]
+  },
+  {
+    "url": "vehicle-modification-cost.html",
+    "title": "Vehicle Modification Costs",
+    "category": "Progression",
+    "description": "Levels 0\u2013240, wrench totals, cumulative costs, milestone unlocks",
+    "keywords": [
+      "vehicle modification",
+      "wrenches",
+      "wrench totals",
+      "cumulative total",
+      "Expert Modifier",
+      "Hercules",
+      "Destroyer",
+      "Destroyer EX",
+      "Cheetah Armored Vehicle",
+      "blueprints",
+      "upgrade costs"
     ]
   },
   {
@@ -524,165 +700,6 @@
       "alliance event",
       "rewards",
       "defense"
-    ]
-  },
-  {
-    "url": "furylord.html",
-    "title": "Furylord Guide",
-    "category": "Events",
-    "description": "Spawn times, attack rules, scoring, and achievement tips for Furylord",
-    "keywords": [
-      "Furylord",
-      "Fury Lord",
-      "Last Z",
-      "spawn times",
-      "War Frenzy",
-      "highest hit",
-      "bonus faction",
-      "achievements",
-      "world boss",
-      "Duel League",
-      "State Ruler"
-    ]
-  },
-  {
-    "url": "vehicle-modification-cost.html",
-    "title": "Vehicle Modification Costs",
-    "category": "Progression",
-    "description": "Levels 0–240, wrench totals, cumulative costs, milestone unlocks",
-    "keywords": [
-      "vehicle modification",
-      "wrenches",
-      "wrench totals",
-      "cumulative total",
-      "Expert Modifier",
-      "Hercules",
-      "Destroyer",
-      "Destroyer EX",
-      "Cheetah Armored Vehicle",
-      "blueprints",
-      "upgrade costs"
-    ]
-  },
-  {
-    "url": "hq-construction-cost.html",
-    "title": "HQ Construction Costs",
-    "category": "Progression",
-    "description": "HQ levels, hero caps, resource costs, requirements, and build times",
-    "keywords": [
-      "HQ construction cost",
-      "HQ upgrade cost",
-      "HQ 30 cost",
-      "HQ 35 cost",
-      "headquarters",
-      "hero level cap",
-      "building requirements",
-      "wood",
-      "food",
-      "zent",
-      "steel",
-      "construction time",
-      "Last Z"
-    ]
-  },
-  {
-    "url": "emergency-hospital-cost.html",
-    "title": "Emergency Hospital Costs",
-    "category": "Progression",
-    "description": "Emergency Hospital resource costs, capacity increases, and power by level",
-    "keywords": [
-      "emergency hospital cost",
-      "hospital upgrade",
-      "hospital capacity",
-      "injured troops",
-      "healing capacity",
-      "wood",
-      "zents",
-      "food",
-      "Last Z"
-    ]
-  },
-  {
-    "url": "alliance-recognition-cost.html",
-    "title": "Alliance Recognition Costs",
-    "category": "Research",
-    "description": "Alliance Recognition badge costs by item and level",
-    "keywords": [
-      "alliance recognition cost",
-      "alliance recognition badges",
-      "alliance duel research",
-      "event king",
-      "event expert",
-      "premium rewards",
-      "super rewards",
-      "Last Z"
-    ]
-  },
-  {
-    "url": "canyon-clash.html",
-    "title": "Canyon Clash Guide",
-    "category": "Events",
-    "description": "Weekly schedule, eligibility, battle phases, and rewards",
-    "keywords": [
-      "canyon clash",
-      "canyon clash schedule",
-      "canyon clash time",
-      "apocalypse time",
-      "energy cells",
-      "canyon captain",
-      "alliance pvp",
-      "registration",
-      "matchmaking",
-      "Last Z"
-    ]
-  },
-  {
-    "url": "alliance-duel-rewards.html",
-    "title": "Alliance Duel Rewards",
-    "category": "Events",
-    "description": "Chest thresholds, daily totals, and weekly totals for Alliance Duel",
-    "keywords": [
-      "alliance duel rewards",
-      "alliance duel chests",
-      "chest thresholds",
-      "daily totals",
-      "weekly totals",
-      "badges",
-      "valor medal",
-      "Last Z"
-    ]
-  },
-  {
-    "url": "refugees.html",
-    "title": "Refugees Guide",
-    "category": "Progression",
-    "description": "Refugee priority tiers, ticket sources, and diplomat strategy for alliance help",
-    "keywords": [
-      "refugees",
-      "refugee tickets",
-      "diplomat",
-      "alliance help",
-      "club",
-      "dispatch",
-      "talent hub",
-      "refugee fragments",
-      "Last Z"
-    ]
-  },
-  {
-    "url": "farm-account.html",
-    "title": "Farm Account Guide",
-    "category": "Economy",
-    "description": "Farm account setup, Season 2 timing, and resource support for your main HQ",
-    "keywords": [
-      "farm account",
-      "farm alt",
-      "season 2",
-      "character management",
-      "create new character",
-      "resources",
-      "Headquarters",
-      "Last Z"
     ]
   }
 ]
