@@ -57,6 +57,11 @@
             bindEvents();
             buildTOC();
 
+            if (window.__openSearchOnLoad) {
+                window.__openSearchOnLoad = false;
+                openSearch();
+            }
+
             console.log('Search initialized successfully');
         } catch (error) {
             console.error('Failed to initialize search:', error);
@@ -565,6 +570,7 @@
     }
 
     function buildTOC() {
+        if (document.querySelector('.toc')) return;
         const article = document.querySelector('article.guide');
         if (!article) return;
 
@@ -575,7 +581,13 @@
         const headings = Array.from(contentRoot.querySelectorAll('h2, h3'))
             .filter((heading) => !heading.closest('.faq-section') && !heading.closest('.related-guides'));
 
-        if (headings.length < 3) return;
+        if (headings.length < 3) {
+            const emptyPlaceholder = header.parentElement && header.parentElement.querySelector('.toc-placeholder');
+            if (emptyPlaceholder) {
+                emptyPlaceholder.remove();
+            }
+            return;
+        }
 
         const usedIds = new Set();
         const items = headings.map((heading) => {
@@ -597,6 +609,14 @@
             heading.setAttribute('id', uniqueId);
             return { id: uniqueId, text: heading.textContent.trim(), level: heading.tagName.toLowerCase() };
         });
+
+        if (items.length === 0) {
+            const emptyPlaceholder = header.parentElement && header.parentElement.querySelector('.toc-placeholder');
+            if (emptyPlaceholder) {
+                emptyPlaceholder.remove();
+            }
+            return;
+        }
 
         const toc = document.createElement('nav');
         toc.className = 'toc';
@@ -621,7 +641,13 @@
         });
 
         toc.appendChild(list);
-        header.insertAdjacentElement('afterend', toc);
+
+        const placeholder = header.parentElement && header.parentElement.querySelector('.toc-placeholder');
+        if (placeholder) {
+            placeholder.appendChild(toc);
+        } else {
+            header.insertAdjacentElement('afterend', toc);
+        }
     }
 
     // Initialize when DOM is ready

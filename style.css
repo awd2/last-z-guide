@@ -197,17 +197,20 @@ body {
 }
 
 .breadcrumb a {
-    color: #888;
-    text-decoration: none;
+    color: #cfcfcf;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.35);
+    text-underline-offset: 2px;
     transition: color 0.15s;
 }
 
 .breadcrumb a:hover {
-    color: #c44;
+    color: #fff;
+    text-decoration-color: rgba(196, 68, 68, 0.9);
 }
 
 .breadcrumb span {
-    color: #5f5f5f;
+    color: #7a7a7a;
 }
 
 /* Guide article */
@@ -266,6 +269,10 @@ body {
 .guide h2,
 .guide h3 {
     scroll-margin-top: 92px;
+}
+
+.toc-placeholder {
+    min-height: 120px;
 }
 
 .toc {
@@ -562,7 +569,7 @@ body {
     border-radius: 6px;
     padding: 10px 16px;
     text-decoration: none;
-    color: #c0c0c0;
+    color: #e0e0e0;
     font-size: 0.9rem;
     transition: all 0.15s ease;
 }
