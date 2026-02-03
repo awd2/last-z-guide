@@ -272,6 +272,10 @@ body {
 }
 
 .toc-placeholder {
+    min-height: 0;
+}
+
+.toc-placeholder.toc-placeholder--filled {
     min-height: 120px;
 }
 
@@ -382,7 +386,8 @@ body {
     cursor: pointer;
 }
 
-.guide a:not(.related-card) {
+.guide a:not(.related-card),
+.guide-content a:not(.related-card) {
     color: #9ad9ff;
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -391,11 +396,13 @@ body {
     transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
-.guide a:not(.related-card):visited {
+.guide a:not(.related-card):visited,
+.guide-content a:not(.related-card):visited {
     color: #7fbfe8;
 }
 
-.guide a:not(.related-card):hover {
+.guide a:not(.related-card):hover,
+.guide-content a:not(.related-card):hover {
     color: #cfeeff;
     text-decoration-color: #cfeeff;
 }

@@ -571,7 +571,7 @@
 
     function buildTOC() {
         if (document.querySelector('.toc')) return;
-        const article = document.querySelector('article.guide');
+        const article = document.querySelector('article.guide, article.guide-content');
         if (!article) return;
 
         const header = article.querySelector('.guide-header');
@@ -644,6 +644,7 @@
 
         const placeholder = header.parentElement && header.parentElement.querySelector('.toc-placeholder');
         if (placeholder) {
+            placeholder.classList.add('toc-placeholder--filled');
             placeholder.appendChild(toc);
         } else {
             header.insertAdjacentElement('afterend', toc);
