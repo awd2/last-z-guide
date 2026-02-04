@@ -24,11 +24,9 @@
     }
 
     function scheduleGALoad() {
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(loadGA, { timeout: 2000 });
-        } else {
-            setTimeout(loadGA, 2000);
-        }
+        // Load GA shortly after DOM is ready to preserve realtime,
+        // while still avoiding head-blocking.
+        setTimeout(loadGA, 200);
     }
 
     function loadGAOnInteraction() {
@@ -220,4 +218,3 @@
         init();
     }
 })();
-
