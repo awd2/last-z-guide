@@ -2,7 +2,7 @@ name: IndexNow Ping
 
 on:
   workflow_run:
-    workflows: ["pages-build-deployment"]
+    workflows: ["pages build and deployment"]
     types: [completed]
 
 jobs:
@@ -25,7 +25,7 @@ tree = ET.parse('sitemap.xml')
 urls = [loc.text for loc in tree.findall('.//sm:loc', ns)]
 print('[' + ','.join(f'"{u}"' for u in urls) + ']')
 PY
-)
+          )
           payload=$(jq -n \
             --arg host "lastzguides.com" \
             --arg key "$KEY" \
