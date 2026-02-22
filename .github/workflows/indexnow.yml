@@ -1,0 +1,36 @@
+name: IndexNow Ping
+
+on:
+  workflow_run:
+    workflows: ["pages-build-deployment"]
+    types: [completed]
+
+jobs:
+  ping:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download sitemap
+        run: curl -sS https://lastzguides.com/sitemap.xml -o sitemap.xml
+
+      - name: Build URL list and send to IndexNow
+        env:
+          KEY: dd8b3d12471744c4ad67e9dc368f04cd
+          KEY_LOC: https://lastzguides.com/dd8b3d12471744c4ad67e9dc368f04cd.txt
+        run: |
+          URLS=$(python - <<'PY'
+import xml.etree.ElementTree as ET
+ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+tree = ET.parse('sitemap.xml')
+urls = [loc.text for loc in tree.findall('.//sm:loc', ns)]
+print('[' + ','.join(f'"{u}"' for u in urls) + ']')
+PY
+)
+          payload=$(jq -n \
+            --arg host "lastzguides.com" \
+            --arg key "$KEY" \
+            --arg keyLocation "$KEY_LOC" \
+            --argjson urlList "$URLS" \
+            '{host:$host,key:$key,keyLocation:$keyLocation,urlList:$urlList}')
+          curl -sS -H "Content-Type: application/json; charset=utf-8" \
+            -d "$payload" https://api.indexnow.org/IndexNow
