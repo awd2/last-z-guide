@@ -18,14 +18,7 @@ jobs:
           KEY: dd8b3d12471744c4ad67e9dc368f04cd
           KEY_LOC: https://lastzguides.com/dd8b3d12471744c4ad67e9dc368f04cd.txt
         run: |
-          URLS=$(python - <<'PY'
-import xml.etree.ElementTree as ET
-ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
-tree = ET.parse('sitemap.xml')
-urls = [loc.text for loc in tree.findall('.//sm:loc', ns)]
-print('[' + ','.join(f'"{u}"' for u in urls) + ']')
-PY
-          )
+          URLS=$(python -c 'import xml.etree.ElementTree as ET; ns={"sm":"http://www.sitemaps.org/schemas/sitemap/0.9"}; tree=ET.parse("sitemap.xml"); urls=[loc.text for loc in tree.findall(".//sm:loc", ns)]; print("[" + ",".join([f"\\"{u}\\"" for u in urls]) + "]")')
           payload=$(jq -n \
             --arg host "lastzguides.com" \
             --arg key "$KEY" \
