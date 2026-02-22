@@ -1,13 +1,11 @@
 name: IndexNow Ping
 
 on:
-  workflow_run:
-    workflows: ["pages build and deployment"]
-    types: [completed]
+  page_build:
+  workflow_dispatch:
 
 jobs:
   ping:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Download sitemap
@@ -25,5 +23,8 @@ jobs:
             --arg keyLocation "$KEY_LOC" \
             --argjson urlList "$URLS" \
             '{host:$host,key:$key,keyLocation:$keyLocation,urlList:$urlList}')
-          curl -sS -H "Content-Type: application/json; charset=utf-8" \
-            -d "$payload" https://api.indexnow.org/IndexNow
+          http_code=$(curl -sS -o indexnow-response.json -w "%{http_code}" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$payload" https://api.indexnow.org/IndexNow)
+          echo "IndexNow HTTP $http_code"
+          cat indexnow-response.json || true
