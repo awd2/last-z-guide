@@ -7,27 +7,23 @@ feed: "https://old.reddit.com/r/LastZShooterRun/new/.rss"
 
 ## New posts
 
-### [Season 1 to Season 2 Questions](https://old.reddit.com/r/LastZShooterRun/comments/1rcijld/season_1_to_season_2_questions/)
-- **Author:** /u/coffeefordepression
-- **Date:** Feb 23, 2026, 14:14 UTC
+### [Rotating capital?](https://old.reddit.com/r/LastZShooterRun/comments/1rca0rm/rotating_capital/)
+- **Author:** /u/zestynutsacc
+- **Date:** Feb 23, 2026, 06:28 UTC
 
-### [Last Z: 5 Mistakes That Are Killing Your Server Right Now](https://old.reddit.com/r/LastZShooterRun/comments/1rcf3fc/last_z_5_mistakes_that_are_killing_your_server/)
-- **Author:** /u/LastZgaming_Luna
-- **Date:** Feb 23, 2026, 11:34 UTC
+### [Lucky roses this week?](https://old.reddit.com/r/LastZShooterRun/comments/1rc7o5x/lucky_roses_this_week/)
+- **Author:** /u/Character_Test9550
+- **Date:** Feb 23, 2026, 04:24 UTC
 
-### [Resource amounts for HQ30-35](https://old.reddit.com/r/LastZShooterRun/comments/1rcd6tk/resource_amounts_for_hq3035/)
-- **Author:** /u/korsk32
-- **Date:** Feb 23, 2026, 09:43 UTC
+### [When does migration start?](https://old.reddit.com/r/LastZShooterRun/comments/1rc6d7s/when_does_migration_start/)
+- **Author:** /u/Impossible-Belt-5557
+- **Date:** Feb 23, 2026, 03:19 UTC
 
-### [Regarding the Recent Events in Server 409](https://old.reddit.com/r/LastZShooterRun/comments/1rc69zq/regarding_the_recent_events_in_server_409/)
-- **Author:** /u/Lower_Rough1558
-- **Date:** Feb 23, 2026, 03:15 UTC
+### [Ross Buff?](https://old.reddit.com/r/LastZShooterRun/comments/1rc5uxs/ross_buff/)
+- **Author:** /u/jtime247
+- **Date:** Feb 23, 2026, 02:55 UTC
 
-### [What Happened to Server 409? A Serious Discussion About "Humoud"](https://old.reddit.com/r/LastZShooterRun/comments/1rc3pbw/what_happened_to_server_409_a_serious_discussion/)
-- **Author:** /u/Novel_Ordinary2357
-- **Date:** Feb 23, 2026, 01:15 UTC
-
-### [Season 2 Hunter yeti join up](https://old.reddit.com/r/LastZShooterRun/comments/1rbznzs/season_2_hunter_yeti_join_up/)
-- **Author:** /u/sure-cure1023
-- **Date:** Feb 22, 2026, 22:24 UTC
+### [Any tips going into S3?](https://old.reddit.com/r/LastZShooterRun/comments/1rc06jp/any_tips_going_into_s3/)
+- **Author:** /u/GeorgeTheMidget
+- **Date:** Feb 22, 2026, 22:45 UTC
 
