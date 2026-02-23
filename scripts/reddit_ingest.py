@@ -68,6 +68,21 @@ def extract_element_text(el: ET.Element | None) -> str:
     return "".join(el.itertext()).strip()
 
 
+def fetch_post_text_fallback(link: str) -> str:
+    if not link:
+        return ""
+    json_url = link.rstrip("/") + ".json"
+    try:
+        data = json.loads(fetch(json_url).decode("utf-8"))
+    except Exception:
+        return ""
+    try:
+        post = data[0]["data"]["children"][0]["data"]
+    except Exception:
+        return ""
+    return (post.get("selftext") or "").strip()
+
+
 def normalize_date(text: str) -> str:
     text = (text or "").strip()
     if not text:
@@ -126,6 +141,8 @@ def main():
             content = next((c.text for c in item if c.tag.endswith("encoded")), "") or ""
             if not content:
                 content = next((c.text for c in item if c.tag.endswith("description")), "") or ""
+            if not content and link:
+                content = fetch_post_text_fallback(link)
             if not link or link in seen:
                 continue
             new_items.append(
@@ -153,6 +170,8 @@ def main():
             pub = (pub_el.text or "").strip() if pub_el is not None else ""
             author = (author_el.text or "").strip() if author_el is not None else ""
             content = extract_element_text(content_el)
+            if not content and link:
+                content = fetch_post_text_fallback(link)
             if not link or link in seen:
                 continue
             new_items.append(
