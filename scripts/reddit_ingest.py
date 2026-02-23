@@ -5,17 +5,24 @@ import re
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from email.utils import parsedate_to_datetime
 
 FEEDS = [
     {
         "name": "Reddit",
+        "label": "Reddit",
         "url": "https://old.reddit.com/r/LastZShooterRun/new/.rss",
     },
     {
         "name": "Facebook",
+        "label": "Facebook (FetchRSS #1)",
         "url": "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYq6GGU414.rss",
+    },
+    {
+        "name": "Facebook",
+        "label": "Facebook (FetchRSS #2)",
+        "url": "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYsj5hi7kb.rss",
     },
 ]
 STATE_PATH = "data/state/reddit_lastz.json"
@@ -58,6 +65,7 @@ def strip_html(text: str) -> str:
     text = re.sub(r"<[^>]+>", " ", text)
     text = re.sub(r"\s+", " ", text).strip()
     text = re.split(r"\bsubmitted by\b", text, 1)[0].strip()
+    text = text.replace("(Feed generated with FetchRSS )", "").strip()
     return text
 
 
@@ -123,7 +131,25 @@ def normalize_date(text: str) -> str:
         return text
 
 
-def parse_feed(feed_name: str, feed_url: str, seen: set[str]):
+def parse_date_to_utc(text: str) -> datetime | None:
+    text = (text or "").strip()
+    if not text:
+        return None
+    try:
+        dt = parsedate_to_datetime(text)
+        if dt is not None:
+            return dt.astimezone(timezone.utc)
+    except (TypeError, ValueError):
+        pass
+    try:
+        iso = text.replace("Z", "+00:00")
+        dt = datetime.fromisoformat(iso)
+        return dt.astimezone(timezone.utc)
+    except ValueError:
+        return None
+
+
+def parse_feed(feed_name: str, feed_label: str, feed_url: str, seen: set[str]):
     xml_bytes = fetch(feed_url)
 
     # Parse RSS/Atom
@@ -134,6 +160,7 @@ def parse_feed(feed_name: str, feed_url: str, seen: set[str]):
     total_items = 0
     new_items = []
 
+    now = datetime.now(timezone.utc)
     if items:
         total_items = len(items)
         for item in items:
@@ -148,13 +175,17 @@ def parse_feed(feed_name: str, feed_url: str, seen: set[str]):
                 content = next((c.text for c in item if c.tag.endswith("description")), "") or ""
             if not link or link in seen:
                 continue
+            if feed_name == "Reddit":
+                pub_dt = parse_date_to_utc(pub)
+                if pub_dt is not None and pub_dt < (now - timedelta(hours=24)):
+                    continue
             if not content and link:
                 content = fetch_post_text_fallback(link)
             if not strip_html(content):
                 print(f"No text for {link}")
             new_items.append(
                 {
-                    "source": feed_name,
+                    "source": feed_label,
                     "title": title.strip(),
                     "link": link.strip(),
                     "pubDate": pub.strip(),
@@ -180,13 +211,17 @@ def parse_feed(feed_name: str, feed_url: str, seen: set[str]):
             content = extract_element_text(content_el)
             if not link or link in seen:
                 continue
+            if feed_name == "Reddit":
+                pub_dt = parse_date_to_utc(pub)
+                if pub_dt is not None and pub_dt < (now - timedelta(hours=24)):
+                    continue
             if not content and link:
                 content = fetch_post_text_fallback(link)
             if not strip_html(content):
                 print(f"No text for {link}")
             new_items.append(
                 {
-                    "source": feed_name,
+                    "source": feed_label,
                     "title": title,
                     "link": link,
                     "pubDate": pub,
@@ -212,10 +247,10 @@ def main():
     for feed in FEEDS:
         if debug_raw:
             today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-            raw_path = os.path.join(RAW_DIR, f"{safe_slug(feed['name'])}_{today}.rss")
+            raw_path = os.path.join(RAW_DIR, f"{safe_slug(feed['label'])}_{today}.rss")
             with open(raw_path, "wb") as f:
                 f.write(fetch(feed["url"]))
-        feed_total, feed_new = parse_feed(feed["name"], feed["url"], seen)
+        feed_total, feed_new = parse_feed(feed["name"], feed["label"], feed["url"], seen)
         total_items += feed_total
         new_items.extend(feed_new)
 
@@ -241,20 +276,30 @@ def main():
     lines.append("---\n")
     lines.append("## New posts\n")
 
+    sources_order = [feed["label"] for feed in FEEDS]
+    items_by_source: dict[str, list[dict]] = {s: [] for s in sources_order}
     for it in new_items:
-        full_text = strip_html(it.get("content", ""))
-        author = it.get("author") or ""
-        pub = normalize_date(it.get("pubDate") or "")
-        lines.append(f'### [{it["title"]}]({it["link"]})')
-        lines.append(f"- **Source:** {it.get('source', 'unknown')}")
-        if author:
-            lines.append(f"- **Author:** {author}")
-        if pub:
-            lines.append(f"- **Date:** {pub}")
-        if full_text:
-            lines.append(f"- **Text:** {full_text}")
+        items_by_source.setdefault(it.get("source", "unknown"), []).append(it)
+
+    for source in sources_order:
+        source_items = items_by_source.get(source, [])
+        lines.append(f"### {source}")
+        if not source_items:
+            lines.append("- (no new posts)")
+            lines.append("")
+            continue
+        for it in source_items:
+            full_text = strip_html(it.get("content", ""))
+            author = it.get("author") or ""
+            pub = normalize_date(it.get("pubDate") or "")
+            lines.append(f'- [{it["title"]}]({it["link"]})')
+            if author:
+                lines.append(f"  - **Author:** {author}")
+            if pub:
+                lines.append(f"  - **Date:** {pub}")
+            if full_text:
+                lines.append(f"  - **Text:** {full_text}")
         lines.append("")
-    lines.append("")
 
     with open(out_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
@@ -278,25 +323,36 @@ def main():
         preview_lines.append(f'    <li><a href="{feed["url"]}">{feed["url"]}</a></li>')
     preview_lines.append("  </ul>")
     preview_lines.append("  <h2>New posts</h2>")
-    preview_lines.append("  <ul>")
+
+    sources_order = [feed["label"] for feed in FEEDS]
+    items_by_source: dict[str, list[dict]] = {s: [] for s in sources_order}
     for it in new_items:
-        full_text = strip_html(it.get("content", ""))
-        author = it.get("author") or ""
-        pub = normalize_date(it.get("pubDate") or "")
-        title = html.escape(it["title"])
-        link = html.escape(it["link"])
-        preview_lines.append("    <li>")
-        preview_lines.append(f'      <a href="{link}">{title}</a>')
-        preview_lines.append(f'      <div><strong>Source:</strong> {html.escape(it.get("source", "unknown"))}</div>')
-        if author:
-            preview_lines.append(f'      <div><strong>Author:</strong> {html.escape(author)}</div>')
-        if pub:
-            preview_lines.append(f'      <div><strong>Date:</strong> {html.escape(pub)}</div>')
-        if full_text:
-            preview_lines.append(f'      <div><strong>Text:</strong> {html.escape(full_text)}</div>')
-        preview_lines.append("    </li>")
+        items_by_source.setdefault(it.get("source", "unknown"), []).append(it)
+
+    for source in sources_order:
+        source_items = items_by_source.get(source, [])
+        preview_lines.append(f"  <h3>{html.escape(source)}</h3>")
+        preview_lines.append("  <ul>")
+        if not source_items:
+            preview_lines.append("    <li>(no new posts)</li>")
+        else:
+            for it in source_items:
+                full_text = strip_html(it.get("content", ""))
+                author = it.get("author") or ""
+                pub = normalize_date(it.get("pubDate") or "")
+                title = html.escape(it["title"])
+                link = html.escape(it["link"])
+                preview_lines.append("    <li>")
+                preview_lines.append(f'      <a href="{link}">{title}</a>')
+                if author:
+                    preview_lines.append(f'      <div><strong>Author:</strong> {html.escape(author)}</div>')
+                if pub:
+                    preview_lines.append(f'      <div><strong>Date:</strong> {html.escape(pub)}</div>')
+                if full_text:
+                    preview_lines.append(f'      <div><strong>Text:</strong> {html.escape(full_text)}</div>')
+                preview_lines.append("    </li>")
+        preview_lines.append("  </ul>")
     preview_lines += [
-        "  </ul>",
         "</body>",
         "</html>",
     ]
