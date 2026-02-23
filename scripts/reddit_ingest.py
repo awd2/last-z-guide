@@ -45,9 +45,11 @@ def safe_slug(text: str) -> str:
 
 
 def strip_html(text: str) -> str:
-    text = re.sub(r"<[^>]+>", " ", text or "")
-    text = html.unescape(text)
-    return re.sub(r"\s+", " ", text).strip()
+    text = html.unescape(text or "")
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    text = re.split(r"\bsubmitted by\b", text, 1)[0].strip()
+    return text
 
 
 def make_preview(text: str, limit: int = 240) -> str:
