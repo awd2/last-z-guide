@@ -62,12 +62,14 @@ def main():
 
     # Try RSS first
     items = [el for el in root.iter() if el.tag.endswith("item")]
+    total_items = 0
 
     state = load_state()
     seen = set(state.get("seen", []))
 
     new_items = []
     if items:
+        total_items = len(items)
         for item in items:
             title = next((c.text for c in item if c.tag.endswith("title")), "") or ""
             link = next((c.text for c in item if c.tag.endswith("link")), "") or ""
@@ -78,7 +80,9 @@ def main():
     else:
         # Atom fallback
         ns = {"a": "http://www.w3.org/2005/Atom"}
-        for entry in root.findall(".//a:entry", ns):
+        atom_entries = root.findall(".//a:entry", ns)
+        total_items = len(atom_entries)
+        for entry in atom_entries:
             title_el = entry.find("a:title", ns)
             link_el = entry.find("a:link[@rel='alternate']", ns) or entry.find("a:link", ns)
             pub_el = entry.find("a:updated", ns) or entry.find("a:published", ns)
@@ -88,6 +92,8 @@ def main():
             if not link or link in seen:
                 continue
             new_items.append({"title": title, "link": link, "pubDate": pub})
+
+    print(f"Found {total_items} posts, new {len(new_items)}.")
 
     if not new_items:
         print("No new posts.")
