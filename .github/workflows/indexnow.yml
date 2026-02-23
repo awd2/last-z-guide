@@ -28,3 +28,11 @@ jobs:
             -d "$payload" https://api.indexnow.org/IndexNow)
           echo "IndexNow HTTP $http_code"
           cat indexnow-response.json || true
+
+      - name: Ping Google sitemap
+        run: |
+          SITEMAP_URL="https://lastzguides.com/sitemap.xml"
+          PING_URL="https://www.google.com/ping?sitemap=${SITEMAP_URL}"
+          http_code=$(curl -sS -o /dev/null -w "%{http_code}" "$PING_URL")
+          echo "Google sitemap ping HTTP $http_code"
+          test "$http_code" -eq 200
