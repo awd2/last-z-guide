@@ -54,23 +54,37 @@ def main():
     with open(raw_path, "wb") as f:
         f.write(xml_bytes)
 
-    # Parse RSS
+    # Parse RSS/Atom
     root = ET.fromstring(xml_bytes)
 
-    # RSS uses namespaces sometimes; handle common ones
+    # Try RSS first
     items = [el for el in root.iter() if el.tag.endswith("item")]
 
     state = load_state()
     seen = set(state.get("seen", []))
 
     new_items = []
-    for item in items:
-        title = next((c.text for c in item if c.tag.endswith("title")), "") or ""
-        link = next((c.text for c in item if c.tag.endswith("link")), "") or ""
-        pub = next((c.text for c in item if c.tag.endswith("pubDate")), "") or ""
-        if not link or link in seen:
-            continue
-        new_items.append({"title": title.strip(), "link": link.strip(), "pubDate": pub.strip()})
+    if items:
+        for item in items:
+            title = next((c.text for c in item if c.tag.endswith("title")), "") or ""
+            link = next((c.text for c in item if c.tag.endswith("link")), "") or ""
+            pub = next((c.text for c in item if c.tag.endswith("pubDate")), "") or ""
+            if not link or link in seen:
+                continue
+            new_items.append({"title": title.strip(), "link": link.strip(), "pubDate": pub.strip()})
+    else:
+        # Atom fallback
+        ns = {"a": "http://www.w3.org/2005/Atom"}
+        for entry in root.findall(".//a:entry", ns):
+            title_el = entry.find("a:title", ns)
+            link_el = entry.find("a:link[@rel='alternate']", ns) or entry.find("a:link", ns)
+            pub_el = entry.find("a:updated", ns) or entry.find("a:published", ns)
+            title = (title_el.text or "").strip() if title_el is not None else ""
+            link = (link_el.get("href") or "").strip() if link_el is not None else ""
+            pub = (pub_el.text or "").strip() if pub_el is not None else ""
+            if not link or link in seen:
+                continue
+            new_items.append({"title": title, "link": link, "pubDate": pub})
 
     if not new_items:
         print("No new posts.")
