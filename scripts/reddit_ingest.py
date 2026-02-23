@@ -8,7 +8,16 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 
-FEED_URL = "https://old.reddit.com/r/LastZShooterRun/new/.rss"
+FEEDS = [
+    {
+        "name": "Reddit",
+        "url": "https://old.reddit.com/r/LastZShooterRun/new/.rss",
+    },
+    {
+        "name": "Facebook",
+        "url": "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYq6GGU414.rss",
+    },
+]
 STATE_PATH = "data/state/reddit_lastz.json"
 RAW_DIR = "data/raw"
 OUT_DIR = "content/news"
@@ -78,9 +87,20 @@ def fetch_post_text_fallback(link: str) -> str:
         return ""
     try:
         post = data[0]["data"]["children"][0]["data"]
+        selftext = (post.get("selftext") or "").strip()
+        if selftext:
+            return selftext
+    except Exception:
+        pass
+    # HTML fallback (old reddit)
+    try:
+        html_text = fetch(link).decode("utf-8", errors="ignore")
     except Exception:
         return ""
-    return (post.get("selftext") or "").strip()
+    m = re.search(r'class="usertext-body"[^>]*>.*?<div class="md">(.*?)</div>', html_text, re.S)
+    if not m:
+        return ""
+    return strip_html(m.group(1))
 
 
 def normalize_date(text: str) -> str:
@@ -103,20 +123,8 @@ def normalize_date(text: str) -> str:
         return text
 
 
-def main():
-    debug_raw = os.getenv("DEBUG_RAW") == "1"
-    if debug_raw:
-        os.makedirs(RAW_DIR, exist_ok=True)
-    os.makedirs(OUT_DIR, exist_ok=True)
-
-    xml_bytes = fetch(FEED_URL)
-
-    # Save raw for debugging only when explicitly enabled
-    if debug_raw:
-        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        raw_path = os.path.join(RAW_DIR, f"reddit_lastz_{today}.rss")
-        with open(raw_path, "wb") as f:
-            f.write(xml_bytes)
+def parse_feed(feed_name: str, feed_url: str, seen: set[str]):
+    xml_bytes = fetch(feed_url)
 
     # Parse RSS/Atom
     root = ET.fromstring(xml_bytes)
@@ -124,11 +132,8 @@ def main():
     # Try RSS first
     items = [el for el in root.iter() if el.tag.endswith("item")]
     total_items = 0
-
-    state = load_state()
-    seen = set(state.get("seen", []))
-
     new_items = []
+
     if items:
         total_items = len(items)
         for item in items:
@@ -141,14 +146,15 @@ def main():
             content = next((c.text for c in item if c.tag.endswith("encoded")), "") or ""
             if not content:
                 content = next((c.text for c in item if c.tag.endswith("description")), "") or ""
+            if not link or link in seen:
+                continue
             if not content and link:
                 content = fetch_post_text_fallback(link)
             if not strip_html(content):
                 print(f"No text for {link}")
-            if not link or link in seen:
-                continue
             new_items.append(
                 {
+                    "source": feed_name,
                     "title": title.strip(),
                     "link": link.strip(),
                     "pubDate": pub.strip(),
@@ -172,14 +178,15 @@ def main():
             pub = (pub_el.text or "").strip() if pub_el is not None else ""
             author = (author_el.text or "").strip() if author_el is not None else ""
             content = extract_element_text(content_el)
+            if not link or link in seen:
+                continue
             if not content and link:
                 content = fetch_post_text_fallback(link)
             if not strip_html(content):
                 print(f"No text for {link}")
-            if not link or link in seen:
-                continue
             new_items.append(
                 {
+                    "source": feed_name,
                     "title": title,
                     "link": link,
                     "pubDate": pub,
@@ -187,6 +194,30 @@ def main():
                     "content": content,
                 }
             )
+
+    return total_items, new_items
+
+
+def main():
+    debug_raw = os.getenv("DEBUG_RAW") == "1"
+    if debug_raw:
+        os.makedirs(RAW_DIR, exist_ok=True)
+    os.makedirs(OUT_DIR, exist_ok=True)
+
+    state = load_state()
+    seen = set(state.get("seen", []))
+
+    new_items = []
+    total_items = 0
+    for feed in FEEDS:
+        if debug_raw:
+            today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+            raw_path = os.path.join(RAW_DIR, f"{safe_slug(feed['name'])}_{today}.rss")
+            with open(raw_path, "wb") as f:
+                f.write(fetch(feed["url"]))
+        feed_total, feed_new = parse_feed(feed["name"], feed["url"], seen)
+        total_items += feed_total
+        new_items.extend(feed_new)
 
     print(f"Found {total_items} posts, new {len(new_items)}.")
 
@@ -203,8 +234,10 @@ def main():
     lines.append("---")
     lines.append(f'title: "Reddit digest — LastZShooterRun ({local_date})"')
     lines.append(f"date: {local_date}")
-    lines.append("source: reddit")
-    lines.append(f'feed: "{FEED_URL}"')
+    lines.append("source: reddit+facebook")
+    lines.append("feeds:")
+    for feed in FEEDS:
+        lines.append(f'  - "{feed["url"]}"')
     lines.append("---\n")
     lines.append("## New posts\n")
 
@@ -213,6 +246,7 @@ def main():
         author = it.get("author") or ""
         pub = normalize_date(it.get("pubDate") or "")
         lines.append(f'### [{it["title"]}]({it["link"]})')
+        lines.append(f"- **Source:** {it.get('source', 'unknown')}")
         if author:
             lines.append(f"- **Author:** {author}")
         if pub:
@@ -237,10 +271,14 @@ def main():
         "</head>",
         "<body>",
         f"  <h1>Reddit digest — LastZShooterRun ({local_date})</h1>",
-        f"  <p>Feed: <a href=\"{FEED_URL}\">{FEED_URL}</a></p>",
-        "  <h2>New posts</h2>",
+        "  <p>Feeds:</p>",
         "  <ul>",
     ]
+    for feed in FEEDS:
+        preview_lines.append(f'    <li><a href="{feed["url"]}">{feed["url"]}</a></li>')
+    preview_lines.append("  </ul>")
+    preview_lines.append("  <h2>New posts</h2>")
+    preview_lines.append("  <ul>")
     for it in new_items:
         full_text = strip_html(it.get("content", ""))
         author = it.get("author") or ""
@@ -249,6 +287,7 @@ def main():
         link = html.escape(it["link"])
         preview_lines.append("    <li>")
         preview_lines.append(f'      <a href="{link}">{title}</a>')
+        preview_lines.append(f'      <div><strong>Source:</strong> {html.escape(it.get("source", "unknown"))}</div>')
         if author:
             preview_lines.append(f'      <div><strong>Author:</strong> {html.escape(author)}</div>')
         if pub:
