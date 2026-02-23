@@ -11,10 +11,102 @@ feeds:
 ## New posts
 
 ### Reddit
-- (no new posts)
+- [What am I missing? Joe to get fish hooks](https://old.reddit.com/r/LastZShooterRun/comments/1rcosz7/what_am_i_missing_joe_to_get_fish_hooks/)
+  - **Author:** /u/Trishlovesdolphins
+  - **Date:** Feb 23, 2026, 18:03 UTC
+- [Still no packages](https://old.reddit.com/r/LastZShooterRun/comments/1rcl6mu/still_no_packages/)
+  - **Author:** /u/AngryKhakis
+  - **Date:** Feb 23, 2026, 15:55 UTC
+- [Season 1 to Season 2 Questions](https://old.reddit.com/r/LastZShooterRun/comments/1rcijld/season_1_to_season_2_questions/)
+  - **Author:** /u/coffeefordepression
+  - **Date:** Feb 23, 2026, 14:14 UTC
+- [QUE HAGO CON LOS PECES?](https://old.reddit.com/r/LastZShooterRun/comments/1rchmwm/que_hago_con_los_peces/)
+  - **Author:** /u/DogJudy07
+  - **Date:** Feb 23, 2026, 13:37 UTC
+- [Last Z: 5 Mistakes That Are Killing Your Server Right Now](https://old.reddit.com/r/LastZShooterRun/comments/1rcf3fc/last_z_5_mistakes_that_are_killing_your_server/)
+  - **Author:** /u/LastZgaming_Luna
+  - **Date:** Feb 23, 2026, 11:34 UTC
+- [Green arrow](https://old.reddit.com/r/LastZShooterRun/comments/1rcew9t/green_arrow/)
+  - **Author:** /u/Best-Bumblebee552
+  - **Date:** Feb 23, 2026, 11:23 UTC
+- [Which is better overall (if spending) - Exterior modules OR Plugins?](https://old.reddit.com/r/LastZShooterRun/comments/1rceq9n/which_is_better_overall_if_spending_exterior/)
+  - **Author:** /u/fslateef
+  - **Date:** Feb 23, 2026, 11:14 UTC
+- [Resource amounts for HQ30-35](https://old.reddit.com/r/LastZShooterRun/comments/1rcd6tk/resource_amounts_for_hq3035/)
+  - **Author:** /u/korsk32
+  - **Date:** Feb 23, 2026, 09:43 UTC
+- [Any tea on 293?](https://old.reddit.com/r/LastZShooterRun/comments/1rccuhe/any_tea_on_293/)
+  - **Author:** /u/International_Hoe_
+  - **Date:** Feb 23, 2026, 09:21 UTC
+- [Your Last Z Command Center Just Leveled Up 🚀 Meet the New Dashboard 🎯](https://old.reddit.com/r/LastZShooterRun/comments/1rcbq4y/your_last_z_command_center_just_leveled_up_meet/)
+  - **Author:** /u/sidehustlewithai7
+  - **Date:** Feb 23, 2026, 08:11 UTC
+- [How to increase Hero power , I am the top player in a server but rank 6 in total hero power i want to know how can I increase my hero power.](https://old.reddit.com/r/LastZShooterRun/comments/1rcabz9/how_to_increase_hero_power_i_am_the_top_player_in/)
+  - **Author:** /u/knoxxyyyyYyTttt
+  - **Date:** Feb 23, 2026, 06:47 UTC
+- [Rotating capital?](https://old.reddit.com/r/LastZShooterRun/comments/1rca0rm/rotating_capital/)
+  - **Author:** /u/zestynutsacc
+  - **Date:** Feb 23, 2026, 06:28 UTC
+- [Season 2](https://old.reddit.com/r/LastZShooterRun/comments/1rc8cel/season_2/)
+  - **Author:** /u/Lopsided-Newt7732
+  - **Date:** Feb 23, 2026, 04:59 UTC
+- [Lucky roses this week?](https://old.reddit.com/r/LastZShooterRun/comments/1rc7o5x/lucky_roses_this_week/)
+  - **Author:** /u/Character_Test9550
+  - **Date:** Feb 23, 2026, 04:24 UTC
+- [Need helping logging into new account](https://old.reddit.com/r/LastZShooterRun/comments/1rc6fl6/need_helping_logging_into_new_account/)
+  - **Author:** /u/Drisdon
+  - **Date:** Feb 23, 2026, 03:22 UTC
+- [When does migration start?](https://old.reddit.com/r/LastZShooterRun/comments/1rc6d7s/when_does_migration_start/)
+  - **Author:** /u/Impossible-Belt-5557
+  - **Date:** Feb 23, 2026, 03:19 UTC
+- [Regarding the Recent Events in Server 409](https://old.reddit.com/r/LastZShooterRun/comments/1rc69zq/regarding_the_recent_events_in_server_409/)
+  - **Author:** /u/Lower_Rough1558
+  - **Date:** Feb 23, 2026, 03:15 UTC
+- [Ross Buff?](https://old.reddit.com/r/LastZShooterRun/comments/1rc5uxs/ross_buff/)
+  - **Author:** /u/jtime247
+  - **Date:** Feb 23, 2026, 02:55 UTC
+- [Hero Code Gone?](https://old.reddit.com/r/LastZShooterRun/comments/1rc5lay/hero_code_gone/)
+  - **Author:** /u/Hi_Tech_Hate
+  - **Date:** Feb 23, 2026, 02:42 UTC
+- [What Happened to Server 409? A Serious Discussion About "Humoud"](https://old.reddit.com/r/LastZShooterRun/comments/1rc3pbw/what_happened_to_server_409_a_serious_discussion/)
+  - **Author:** /u/Novel_Ordinary2357
+  - **Date:** Feb 23, 2026, 01:15 UTC
+- [Last Z Fully Armed Alliance – BIGGEST Trap in the Game 😱 (Save 50,000+ Badges)](https://old.reddit.com/r/LastZShooterRun/comments/1rc3nu8/last_z_fully_armed_alliance_biggest_trap_in_the/)
+  - **Author:** /u/DWDytchannel
+  - **Date:** Feb 23, 2026, 01:13 UTC
+- [Can you migrate to a state that you already have a character in?](https://old.reddit.com/r/LastZShooterRun/comments/1rc1mso/can_you_migrate_to_a_state_that_you_already_have/)
+  - **Author:** /u/YousernameOne
+  - **Date:** Feb 22, 2026, 23:45 UTC
+- [Hero’s formation advice](https://old.reddit.com/r/LastZShooterRun/comments/1rc0xdj/heros_formation_advice/)
+  - **Author:** /u/KindleJay
+  - **Date:** Feb 22, 2026, 23:16 UTC
+- [ISO strong account in servers 492+](https://old.reddit.com/r/LastZShooterRun/comments/1rc0dsb/iso_strong_account_in_servers_492/)
+  - **Author:** /u/Euphoric-Smoke9471
+  - **Date:** Feb 22, 2026, 22:54 UTC
+- [Any tips going into S3?](https://old.reddit.com/r/LastZShooterRun/comments/1rc06jp/any_tips_going_into_s3/)
+  - **Author:** /u/GeorgeTheMidget
+  - **Date:** Feb 22, 2026, 22:45 UTC
 
 ### Facebook (FetchRSS #1)
-- (no new posts)
+- [[Tough Choices]](https://www.facebook.com/122208818816561196/posts/122208771470561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Feb 23, 2026, 12:00 UTC
+  - **Text:** [Tough Choices] If you were stuck in a zombie apocalypse and could only choose one of the three options below, which would you go for? 🤔 A: A phone that never runs out of battery B: A gun with unlimited bullets C: A reliable, capable, and beautiful teammate Tell us your answer in the comments or let us know if you have other ideas! 💡 ====================== Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
+- [Last Z: Survival Shooter's cover photo](https://www.facebook.com/122208818816561196/posts/2054006002058800?substory_index=2054006002058800)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Feb 23, 2026, 03:28 UTC
+- [[Gold Bar Store Celebrations]](https://www.facebook.com/122208818816561196/posts/122208332876561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Feb 21, 2026, 12:00 UTC
+  - **Text:** [Gold Bar Store Celebrations] We've updated and optimized the Gold Bar store for Survivors! 🎇 To commemorate the improvements, we've prepared a small gift! 🎁 Redemption Code: GOLDBAR2026 Valid Dates: February 21st 00:00 - February 23rd 00:00 (Apocalyptic Time) Number of Redemption Codes: 200,000 How to redeem: - Visit https://last-z.com/ - Click on the "Top-Up Center" - Click the three lines at the top left corner - Select "Redeem Gift Code" - Enter your UID and the Gift Code Be sure to follow us on Facebook for details on codes and gifts in the future! ❤️‍🔥 ====================== Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGoldBarStore #CDKey
+- [[International Mother Language Day]](https://www.facebook.com/122208818816561196/posts/122208331172561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Feb 21, 2026, 02:00 UTC
+  - **Text:** [International Mother Language Day] Happy International Mother Language Day! 🤗 We are always grateful to Survivors all over the world for making the Last Z: Survival Shooter community such a vibrant one! 🎇 Thank you for your love and support! ====================== Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #InternationalMotherLanguageDay
+- [[Gold Bar Store Bundles]](https://www.facebook.com/122208818816561196/posts/122208325724561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Feb 20, 2026, 12:00 UTC
+  - **Text:** [Gold Bar Store Bundles] Survivors! New item bundles have been added to the Gold Bar store! 🎁 Click "Item Purchase" for good deals and item bundles that suit you best! ❤️‍🔥 🔗: https://store.last-z.com/#/order/facebook ====================== Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGoldBarStore
 
 ### Facebook (FetchRSS #2)
 - [Still no packages](https://www.reddit.com/r/LastZShooterRun/comments/1rcl6mu/still_no_packages/)
