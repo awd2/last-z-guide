@@ -43,16 +43,19 @@ def safe_slug(text: str) -> str:
 
 
 def main():
-    os.makedirs(RAW_DIR, exist_ok=True)
+    debug_raw = os.getenv("DEBUG_RAW") == "1"
+    if debug_raw:
+        os.makedirs(RAW_DIR, exist_ok=True)
     os.makedirs(OUT_DIR, exist_ok=True)
 
     xml_bytes = fetch(FEED_URL)
 
-    # Save raw for debugging
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    raw_path = os.path.join(RAW_DIR, f"reddit_lastz_{today}.rss")
-    with open(raw_path, "wb") as f:
-        f.write(xml_bytes)
+    # Save raw for debugging only when explicitly enabled
+    if debug_raw:
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        raw_path = os.path.join(RAW_DIR, f"reddit_lastz_{today}.rss")
+        with open(raw_path, "wb") as f:
+            f.write(xml_bytes)
 
     # Parse RSS/Atom
     root = ET.fromstring(xml_bytes)
