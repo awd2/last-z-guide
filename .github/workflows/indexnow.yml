@@ -29,6 +29,33 @@ jobs:
           echo "IndexNow HTTP $http_code"
           cat indexnow-response.json || true
 
-      - name: Note on Google sitemap ping deprecation
+      - name: Authenticate to Google (Search Console)
+        id: gsc_auth
+        uses: google-github-actions/auth@v3
+        with:
+          credentials_json: ${{ secrets.GSC_SA_KEY }}
+          token_format: "access_token"
+          access_token_scopes: "https://www.googleapis.com/auth/webmasters"
+
+      - name: Submit sitemap to GSC (domain property)
+        env:
+          ACCESS_TOKEN: ${{ steps.gsc_auth.outputs.access_token }}
         run: |
-          echo "Google sitemap ping endpoint is deprecated; rely on sitemap in robots.txt + GSC sitemap submission."
+          SITE_URL="sc-domain:lastzguides.com"
+          SITEMAP_URL="https://lastzguides.com/sitemap.xml"
+          enc_site=$(python - <<'PY'
+import urllib.parse
+print(urllib.parse.quote("sc-domain:lastzguides.com", safe=""))
+PY
+)
+          enc_sitemap=$(python - <<'PY'
+import urllib.parse
+print(urllib.parse.quote("https://lastzguides.com/sitemap.xml", safe=""))
+PY
+)
+          http_code=$(curl -sS -o gsc-response.json -w "%{http_code}" \
+            -H "Authorization: Bearer $ACCESS_TOKEN" \
+            -X PUT \
+            "https://www.googleapis.com/webmasters/v3/sites/${enc_site}/sitemaps/${enc_sitemap}")
+          echo "GSC sitemap submit HTTP $http_code"
+          cat gsc-response.json || true
