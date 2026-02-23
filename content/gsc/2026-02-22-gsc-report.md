@@ -160,3 +160,46 @@
 | https://lastzguides.com/og-image.png | 0 | 1 | 0.00% | 10.00 |
 | https://lastzguides.com/privacy.html | 0 | 10 | 0.00% | 4.70 |
 | https://lastzguides.com/terms.html | 0 | 4 | 0.00% | 7.50 |
+
+## Insights (auto)
+
+- CTR median for queries (impr ≥ 50): 8.70%
+
+### Low CTR, good positions (4–10)
+- last z farm account guide — 152 impr, 11 clicks, 7.24% CTR, pos 4.91
+- last z vs schedule — 114 impr, 5 clicks, 4.39% CTR, pos 6.87
+- last z advanced mod license — 110 impr, 8 clicks, 7.27% CTR, pos 4.55
+- last z season 4 heroes — 105 impr, 5 clicks, 4.76% CTR, pos 6.30
+- alliance recognition last z — 105 impr, 8 clicks, 7.62% CTR, pos 5.88
+- last z research tree — 101 impr, 6 clicks, 5.94% CTR, pos 7.55
+- peace shield research last z — 93 impr, 3 clicks, 3.23% CTR, pos 7.92
+- advanced mod license last z — 90 impr, 5 clicks, 5.56% CTR, pos 4.63
+- last z mythic equipment — 80 impr, 3 clicks, 3.75% CTR, pos 6.33
+- last z alliance recognition badges — 80 impr, 4 clicks, 5.00% CTR, pos 5.85
+- alliance duel last z — 70 impr, 2 clicks, 2.86% CTR, pos 6.86
+- urgent rescue last z — 69 impr, 6 clicks, 8.70% CTR, pos 4.43
+- last z event calendar — 58 impr, 5 clicks, 8.62% CTR, pos 6.24
+- last z alliance duel schedule — 54 impr, 3 clicks, 5.56% CTR, pos 7.57
+
+### High impressions, low clicks
+- (no items)
+
+### Quick wins (positions 11–20)
+- (no items)
+
+### Pages underperforming (high impressions, low CTR)
+- https://lastzguides.com/research.html — 8328 impr, 426 clicks, 5.12% CTR, pos 6.46
+- https://lastzguides.com/heroes.html — 7313 impr, 136 clicks, 1.86% CTR, pos 7.28
+- https://lastzguides.com/power-guide.html — 6045 impr, 54 clicks, 0.89% CTR, pos 7.29
+- https://lastzguides.com/alliance-duel.html — 6011 impr, 134 clicks, 2.23% CTR, pos 6.23
+- https://lastzguides.com/hq.html — 5102 impr, 182 clicks, 3.57% CTR, pos 7.45
+- https://lastzguides.com/lucky-discounter.html — 3638 impr, 296 clicks, 8.14% CTR, pos 4.74
+- https://lastzguides.com/codes.html — 3531 impr, 75 clicks, 2.12% CTR, pos 8.04
+- https://lastzguides.com/ — 3047 impr, 67 clicks, 2.20% CTR, pos 7.15
+- https://lastzguides.com/vehicle-modification-cost.html — 2953 impr, 173 clicks, 5.86% CTR, pos 4.91
+- https://lastzguides.com/tech.html — 2279 impr, 41 clicks, 1.80% CTR, pos 7.28
+- https://lastzguides.com/formations.html — 2081 impr, 49 clicks, 2.35% CTR, pos 7.36
+- https://lastzguides.com/alliance-recognition-cost.html — 1931 impr, 160 clicks, 8.29% CTR, pos 5.43
+- https://lastzguides.com/formation-power.html — 1917 impr, 30 clicks, 1.56% CTR, pos 6.88
+- https://lastzguides.com/gear.html — 1901 impr, 51 clicks, 2.68% CTR, pos 6.39
+- https://lastzguides.com/gacha-go.html — 1742 impr, 74 clicks, 4.25% CTR, pos 5.73
