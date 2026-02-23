@@ -57,6 +57,15 @@ def make_preview(text: str, limit: int = 240) -> str:
     return text[: limit - 1].rstrip() + "…"
 
 
+def extract_element_text(el: ET.Element | None) -> str:
+    if el is None:
+        return ""
+    text = el.text or ""
+    if text.strip():
+        return text
+    return "".join(el.itertext()).strip()
+
+
 def normalize_date(text: str) -> str:
     text = (text or "").strip()
     if not text:
@@ -141,7 +150,7 @@ def main():
             link = (link_el.get("href") or "").strip() if link_el is not None else ""
             pub = (pub_el.text or "").strip() if pub_el is not None else ""
             author = (author_el.text or "").strip() if author_el is not None else ""
-            content = (content_el.text or "").strip() if content_el is not None else ""
+            content = extract_element_text(content_el)
             if not link or link in seen:
                 continue
             new_items.append(
