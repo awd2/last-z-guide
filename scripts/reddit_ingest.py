@@ -1,5 +1,4 @@
 import html
-import json
 import os
 import re
 import sys
@@ -13,36 +12,24 @@ FEEDS = [
         "name": "Reddit",
         "label": "Reddit",
         "url": "https://old.reddit.com/r/LastZShooterRun/new/.rss",
+        "hours_back": 24,
     },
     {
         "name": "Facebook",
         "label": "Facebook (FetchRSS #1)",
         "url": "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYq6GGU414.rss",
+        "hours_back": None,
     },
     {
         "name": "Facebook",
         "label": "Facebook (FetchRSS #2)",
         "url": "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYsj5hi7kb.rss",
+        "hours_back": None,
     },
 ]
-STATE_PATH = "data/state/reddit_lastz.json"
 RAW_DIR = "data/raw"
 OUT_DIR = "content/news"
 PREVIEW_PATH = "news-preview.html"
-MAX_SEEN = 300
-
-
-def load_state():
-    if not os.path.exists(STATE_PATH):
-        return {"seen": []}
-    with open(STATE_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def save_state(state):
-    os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
-    with open(STATE_PATH, "w", encoding="utf-8") as f:
-        json.dump(state, f, ensure_ascii=False, indent=2)
 
 
 def fetch(url: str) -> bytes:
@@ -149,7 +136,12 @@ def parse_date_to_utc(text: str) -> datetime | None:
         return None
 
 
-def parse_feed(feed_name: str, feed_label: str, feed_url: str, seen: set[str]):
+def parse_feed(
+    feed_name: str,
+    feed_label: str,
+    feed_url: str,
+    hours_back: int | None,
+):
     xml_bytes = fetch(feed_url)
 
     # Parse RSS/Atom
@@ -161,6 +153,9 @@ def parse_feed(feed_name: str, feed_label: str, feed_url: str, seen: set[str]):
     new_items = []
 
     now = datetime.now(timezone.utc)
+    cutoff = None
+    if hours_back is not None:
+        cutoff = now - timedelta(hours=hours_back)
     if items:
         total_items = len(items)
         for item in items:
@@ -173,11 +168,11 @@ def parse_feed(feed_name: str, feed_label: str, feed_url: str, seen: set[str]):
             content = next((c.text for c in item if c.tag.endswith("encoded")), "") or ""
             if not content:
                 content = next((c.text for c in item if c.tag.endswith("description")), "") or ""
-            if not link or link in seen:
+            if not link:
                 continue
             if feed_name == "Reddit":
                 pub_dt = parse_date_to_utc(pub)
-                if pub_dt is not None and pub_dt < (now - timedelta(hours=24)):
+                if cutoff is not None and pub_dt is not None and pub_dt < cutoff:
                     continue
             if not content and link:
                 content = fetch_post_text_fallback(link)
@@ -209,11 +204,11 @@ def parse_feed(feed_name: str, feed_label: str, feed_url: str, seen: set[str]):
             pub = (pub_el.text or "").strip() if pub_el is not None else ""
             author = (author_el.text or "").strip() if author_el is not None else ""
             content = extract_element_text(content_el)
-            if not link or link in seen:
+            if not link:
                 continue
             if feed_name == "Reddit":
                 pub_dt = parse_date_to_utc(pub)
-                if pub_dt is not None and pub_dt < (now - timedelta(hours=24)):
+                if cutoff is not None and pub_dt is not None and pub_dt < cutoff:
                     continue
             if not content and link:
                 content = fetch_post_text_fallback(link)
@@ -239,9 +234,6 @@ def main():
         os.makedirs(RAW_DIR, exist_ok=True)
     os.makedirs(OUT_DIR, exist_ok=True)
 
-    state = load_state()
-    seen = set(state.get("seen", []))
-
     new_items = []
     total_items = 0
     for feed in FEEDS:
@@ -250,7 +242,12 @@ def main():
             raw_path = os.path.join(RAW_DIR, f"{safe_slug(feed['label'])}_{today}.rss")
             with open(raw_path, "wb") as f:
                 f.write(fetch(feed["url"]))
-        feed_total, feed_new = parse_feed(feed["name"], feed["label"], feed["url"], seen)
+        feed_total, feed_new = parse_feed(
+            feed["name"],
+            feed["label"],
+            feed["url"],
+            feed["hours_back"],
+        )
         total_items += feed_total
         new_items.extend(feed_new)
 
@@ -358,12 +355,6 @@ def main():
     ]
     with open(PREVIEW_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(preview_lines))
-
-    # Update state
-    for it in new_items:
-        seen.add(it["link"])
-    state["seen"] = list(seen)[-MAX_SEEN:]
-    save_state(state)
 
     print(f"Created {out_path} with {len(new_items)} items.")
     return 0
