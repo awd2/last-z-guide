@@ -43,16 +43,8 @@ jobs:
         run: |
           SITE_URL="sc-domain:lastzguides.com"
           SITEMAP_URL="https://lastzguides.com/sitemap.xml"
-          enc_site=$(python - <<'PY'
-import urllib.parse
-print(urllib.parse.quote("sc-domain:lastzguides.com", safe=""))
-PY
-)
-          enc_sitemap=$(python - <<'PY'
-import urllib.parse
-print(urllib.parse.quote("https://lastzguides.com/sitemap.xml", safe=""))
-PY
-)
+          enc_site=$(python -c 'import urllib.parse; print(urllib.parse.quote("sc-domain:lastzguides.com", safe=""))')
+          enc_sitemap=$(python -c 'import urllib.parse; print(urllib.parse.quote("https://lastzguides.com/sitemap.xml", safe=""))')
           http_code=$(curl -sS -o gsc-response.json -w "%{http_code}" \
             -H "Authorization: Bearer $ACCESS_TOKEN" \
             -X PUT \
