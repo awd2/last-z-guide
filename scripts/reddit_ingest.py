@@ -1,3 +1,4 @@
+import html
 import json
 import os
 import re
@@ -5,6 +6,7 @@ import sys
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 
 FEED_URL = "https://old.reddit.com/r/LastZShooterRun/new/.rss"
 STATE_PATH = "data/state/reddit_lastz.json"
@@ -42,6 +44,39 @@ def safe_slug(text: str) -> str:
     return re.sub(r"-+", "-", text).strip("-")[:60] or "post"
 
 
+def strip_html(text: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", text or "")
+    text = html.unescape(text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def make_preview(text: str, limit: int = 240) -> str:
+    text = strip_html(text)
+    if len(text) <= limit:
+        return text
+    return text[: limit - 1].rstrip() + "…"
+
+
+def normalize_date(text: str) -> str:
+    text = (text or "").strip()
+    if not text:
+        return ""
+    try:
+        dt = parsedate_to_datetime(text)
+        if dt is not None:
+            dt = dt.astimezone(timezone.utc)
+            return dt.strftime("%b %d, %Y, %H:%M UTC")
+    except (TypeError, ValueError):
+        pass
+    try:
+        iso = text.replace("Z", "+00:00")
+        dt = datetime.fromisoformat(iso)
+        dt = dt.astimezone(timezone.utc)
+        return dt.strftime("%b %d, %Y, %H:%M UTC")
+    except ValueError:
+        return text
+
+
 def main():
     debug_raw = os.getenv("DEBUG_RAW") == "1"
     if debug_raw:
@@ -74,9 +109,23 @@ def main():
             title = next((c.text for c in item if c.tag.endswith("title")), "") or ""
             link = next((c.text for c in item if c.tag.endswith("link")), "") or ""
             pub = next((c.text for c in item if c.tag.endswith("pubDate")), "") or ""
+            author = next((c.text for c in item if c.tag.endswith("creator")), "") or ""
+            if not author:
+                author = next((c.text for c in item if c.tag.endswith("author")), "") or ""
+            content = next((c.text for c in item if c.tag.endswith("encoded")), "") or ""
+            if not content:
+                content = next((c.text for c in item if c.tag.endswith("description")), "") or ""
             if not link or link in seen:
                 continue
-            new_items.append({"title": title.strip(), "link": link.strip(), "pubDate": pub.strip()})
+            new_items.append(
+                {
+                    "title": title.strip(),
+                    "link": link.strip(),
+                    "pubDate": pub.strip(),
+                    "author": author.strip(),
+                    "content": content.strip(),
+                }
+            )
     else:
         # Atom fallback
         ns = {"a": "http://www.w3.org/2005/Atom"}
@@ -86,12 +135,24 @@ def main():
             title_el = entry.find("a:title", ns)
             link_el = entry.find("a:link[@rel='alternate']", ns) or entry.find("a:link", ns)
             pub_el = entry.find("a:updated", ns) or entry.find("a:published", ns)
+            author_el = entry.find("a:author/a:name", ns)
+            content_el = entry.find("a:content", ns) or entry.find("a:summary", ns)
             title = (title_el.text or "").strip() if title_el is not None else ""
             link = (link_el.get("href") or "").strip() if link_el is not None else ""
             pub = (pub_el.text or "").strip() if pub_el is not None else ""
+            author = (author_el.text or "").strip() if author_el is not None else ""
+            content = (content_el.text or "").strip() if content_el is not None else ""
             if not link or link in seen:
                 continue
-            new_items.append({"title": title, "link": link, "pubDate": pub})
+            new_items.append(
+                {
+                    "title": title,
+                    "link": link,
+                    "pubDate": pub,
+                    "author": author,
+                    "content": content,
+                }
+            )
 
     print(f"Found {total_items} posts, new {len(new_items)}.")
 
@@ -114,7 +175,17 @@ def main():
     lines.append("## New posts\n")
 
     for it in new_items:
-        lines.append(f'- [{it["title"]}]({it["link"]})')
+        full_text = strip_html(it.get("content", ""))
+        author = it.get("author") or ""
+        pub = normalize_date(it.get("pubDate") or "")
+        lines.append(f'### [{it["title"]}]({it["link"]})')
+        if author:
+            lines.append(f"- **Author:** {author}")
+        if pub:
+            lines.append(f"- **Date:** {pub}")
+        if full_text:
+            lines.append(f"- **Text:** {full_text}")
+        lines.append("")
     lines.append("")
 
     with open(out_path, "w", encoding="utf-8") as f:
@@ -137,7 +208,20 @@ def main():
         "  <ul>",
     ]
     for it in new_items:
-        preview_lines.append(f'    <li><a href="{it["link"]}">{it["title"]}</a></li>')
+        full_text = strip_html(it.get("content", ""))
+        author = it.get("author") or ""
+        pub = normalize_date(it.get("pubDate") or "")
+        title = html.escape(it["title"])
+        link = html.escape(it["link"])
+        preview_lines.append("    <li>")
+        preview_lines.append(f'      <a href="{link}">{title}</a>')
+        if author:
+            preview_lines.append(f'      <div><strong>Author:</strong> {html.escape(author)}</div>')
+        if pub:
+            preview_lines.append(f'      <div><strong>Date:</strong> {html.escape(pub)}</div>')
+        if full_text:
+            preview_lines.append(f'      <div><strong>Text:</strong> {html.escape(full_text)}</div>')
+        preview_lines.append("    </li>")
     preview_lines += [
         "  </ul>",
         "</body>",
