@@ -71,7 +71,7 @@ def extract_element_text(el: ET.Element | None) -> str:
 def fetch_post_text_fallback(link: str) -> str:
     if not link:
         return ""
-    json_url = link.rstrip("/") + ".json"
+    json_url = link.replace("old.reddit.com", "www.reddit.com").rstrip("/") + ".json?raw_json=1"
     try:
         data = json.loads(fetch(json_url).decode("utf-8"))
     except Exception:
@@ -143,6 +143,8 @@ def main():
                 content = next((c.text for c in item if c.tag.endswith("description")), "") or ""
             if not content and link:
                 content = fetch_post_text_fallback(link)
+            if not strip_html(content):
+                print(f"No text for {link}")
             if not link or link in seen:
                 continue
             new_items.append(
@@ -172,6 +174,8 @@ def main():
             content = extract_element_text(content_el)
             if not content and link:
                 content = fetch_post_text_fallback(link)
+            if not strip_html(content):
+                print(f"No text for {link}")
             if not link or link in seen:
                 continue
             new_items.append(
