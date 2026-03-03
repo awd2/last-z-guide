@@ -56,6 +56,30 @@ def query_search_analytics(site_url: str, access_token: str, dimensions: list[st
         "endDate": end_date.isoformat(),
         "dimensions": dimensions,
         "rowLimit": rows,
+        "type": "web",
+    }
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json",
+    }
+    url = f"{API_URL}/sites/{urllib.parse.quote(site_url, safe='')}/searchAnalytics/query"
+    data = post_json(url, payload, headers)
+    return data.get("rows", [])
+
+def query_search_analytics_custom(
+    site_url: str,
+    access_token: str,
+    dimensions: list[str],
+    rows: int,
+    start_date: date,
+    end_date: date,
+) -> list[dict]:
+    payload = {
+        "startDate": start_date.isoformat(),
+        "endDate": end_date.isoformat(),
+        "dimensions": dimensions,
+        "rowLimit": rows,
+        "type": "web",
     }
     headers = {
         "Authorization": f"Bearer {access_token}",
@@ -155,6 +179,79 @@ def render_insight_list(rows: list[dict], kind: str) -> list[str]:
     return lines
 
 
+def bucket_position(queries: list[dict]) -> list[str]:
+    buckets = [
+        ("1–3", 1, 3),
+        ("4–10", 4, 10),
+        ("11–20", 11, 20),
+        ("21–50", 21, 50),
+        ("51+", 51, 1000),
+    ]
+    stats = {b[0]: {"impr": 0.0, "clicks": 0.0} for b in buckets}
+    for r in queries:
+        pos = r.get("position", 0.0)
+        impr = r.get("impressions", 0.0)
+        clicks = r.get("clicks", 0.0)
+        for name, lo, hi in buckets:
+            if lo <= pos <= hi:
+                stats[name]["impr"] += impr
+                stats[name]["clicks"] += clicks
+                break
+    lines = []
+    lines.append("| Position | Clicks | Impr. | CTR |")
+    lines.append("| --- | --- | --- | --- |")
+    for name, _, _ in buckets:
+        impr = stats[name]["impr"]
+        clicks = stats[name]["clicks"]
+        ctr = (clicks / impr * 100) if impr else 0.0
+        lines.append(f"| {name} | {clicks:.0f} | {impr:.0f} | {ctr:.2f}% |")
+    return lines
+
+
+def extract_kv(rows: list[dict], key_name: str) -> list[list[str]]:
+    table = []
+    for r in rows:
+        key = r.get("keys", [""])[0]
+        clicks = f'{r.get("clicks", 0):.0f}'
+        impr = f'{r.get("impressions", 0):.0f}'
+        ctr = f'{r.get("ctr", 0) * 100:.2f}%'
+        pos = f'{r.get("position", 0):.2f}'
+        table.append([key, clicks, impr, ctr, pos])
+    return table
+
+
+def compute_new_queries(current: list[dict], previous: list[dict]) -> list[dict]:
+    prev_keys = {r.get("keys", [""])[0] for r in previous}
+    new_rows = [r for r in current if r.get("keys", [""])[0] not in prev_keys]
+    new_rows.sort(key=lambda r: r.get("impressions", 0.0), reverse=True)
+    return new_rows
+
+
+def compute_rising_queries(current: list[dict], previous: list[dict]) -> list[dict]:
+    prev_map = {r.get("keys", [""])[0]: r for r in previous}
+    deltas = []
+    for r in current:
+        key = r.get("keys", [""])[0]
+        prev = prev_map.get(key)
+        if not prev:
+            continue
+        delta_impr = r.get("impressions", 0.0) - prev.get("impressions", 0.0)
+        if delta_impr <= 0:
+            continue
+        deltas.append(
+            {
+                "query": key,
+                "delta_impr": delta_impr,
+                "impr": r.get("impressions", 0.0),
+                "clicks": r.get("clicks", 0.0),
+                "ctr": r.get("ctr", 0.0),
+                "pos": r.get("position", 0.0),
+            }
+        )
+    deltas.sort(key=lambda r: r["delta_impr"], reverse=True)
+    return deltas
+
+
 def main() -> int:
     client_id = get_env("GSC_CLIENT_ID")
     client_secret = get_env("GSC_CLIENT_SECRET")
@@ -166,9 +263,25 @@ def main() -> int:
 
     queries = query_search_analytics(site_url, access_token, ["query"], rows_limit)
     pages = query_search_analytics(site_url, access_token, ["page"], rows_limit)
+    devices = query_search_analytics(site_url, access_token, ["device"], rows_limit)
+    countries = query_search_analytics(site_url, access_token, ["country"], rows_limit)
+    appearances = query_search_analytics(site_url, access_token, ["searchAppearance"], rows_limit)
+    query_page = query_search_analytics(site_url, access_token, ["query", "page"], rows_limit)
 
     end_date = date.today() - timedelta(days=1)
     start_date = end_date - timedelta(days=27)
+    last_7_start = end_date - timedelta(days=6)
+    prev_7_start = end_date - timedelta(days=13)
+    prev_7_end = end_date - timedelta(days=7)
+
+    last7_queries = query_search_analytics_custom(
+        site_url, access_token, ["query"], rows_limit, last_7_start, end_date
+    )
+    prev7_queries = query_search_analytics_custom(
+        site_url, access_token, ["query"], rows_limit, prev_7_start, prev_7_end
+    )
+    new_queries = compute_new_queries(last7_queries, prev7_queries)
+    rising_queries = compute_rising_queries(last7_queries, prev7_queries)
 
     os.makedirs(OUT_DIR, exist_ok=True)
     out_path = os.path.join(OUT_DIR, f"{end_date.isoformat()}-gsc-report.md")
@@ -205,6 +318,73 @@ def main() -> int:
         position = f'{r.get("position", 0):.2f}'
         p_rows.append([p, clicks, impressions, ctr, position])
     lines += render_table(["Page", "Clicks", "Impr.", "CTR", "Pos."], p_rows)
+    lines.append("")
+
+    lines.append("## Position buckets (queries)")
+    lines.append("")
+    lines += bucket_position(queries)
+    lines.append("")
+
+    lines.append("## Devices")
+    lines.append("")
+    lines += render_table(["Device", "Clicks", "Impr.", "CTR", "Pos."], extract_kv(devices, "device"))
+    lines.append("")
+
+    lines.append("## Countries")
+    lines.append("")
+    lines += render_table(["Country", "Clicks", "Impr.", "CTR", "Pos."], extract_kv(countries, "country"))
+    lines.append("")
+
+    lines.append("## Search appearance")
+    lines.append("")
+    lines += render_table(["Appearance", "Clicks", "Impr.", "CTR", "Pos."], extract_kv(appearances, "appearance"))
+    lines.append("")
+
+    lines.append("## Query → Page (top)")
+    lines.append("")
+    qp_rows = []
+    for r in query_page:
+        keys = r.get("keys", ["", ""])
+        query = keys[0] if len(keys) > 0 else ""
+        page = keys[1] if len(keys) > 1 else ""
+        clicks = f'{r.get("clicks", 0):.0f}'
+        impressions = f'{r.get("impressions", 0):.0f}'
+        ctr = f'{r.get("ctr", 0) * 100:.2f}%'
+        position = f'{r.get("position", 0):.2f}'
+        qp_rows.append([query, page, clicks, impressions, ctr, position])
+    lines += render_table(["Query", "Page", "Clicks", "Impr.", "CTR", "Pos."], qp_rows)
+    lines.append("")
+
+    lines.append("## New queries (last 7 days vs previous 7)")
+    lines.append("")
+    if new_queries:
+        nq_rows = []
+        for r in new_queries[:20]:
+            q = r.get("keys", [""])[0]
+            clicks = f'{r.get("clicks", 0):.0f}'
+            impressions = f'{r.get("impressions", 0):.0f}'
+            ctr = f'{r.get("ctr", 0) * 100:.2f}%'
+            position = f'{r.get("position", 0):.2f}'
+            nq_rows.append([q, clicks, impressions, ctr, position])
+        lines += render_table(["Query", "Clicks", "Impr.", "CTR", "Pos."], nq_rows)
+    else:
+        lines.append("_No new queries in the last 7 days._")
+    lines.append("")
+
+    lines.append("## Rising queries (impr delta, last 7 vs previous 7)")
+    lines.append("")
+    if rising_queries:
+        rq_rows = []
+        for r in rising_queries[:20]:
+            clicks = f'{r.get("clicks", 0):.0f}'
+            impressions = f'{r.get("impr", 0):.0f}'
+            delta = f'{r.get("delta_impr", 0):.0f}'
+            ctr = f'{r.get("ctr", 0) * 100:.2f}%'
+            position = f'{r.get("pos", 0):.2f}'
+            rq_rows.append([r.get("query", ""), delta, clicks, impressions, ctr, position])
+        lines += render_table(["Query", "Δ Impr.", "Clicks", "Impr.", "CTR", "Pos."], rq_rows)
+    else:
+        lines.append("_No rising queries by impressions._")
     lines.append("")
 
     insights = pick_insights(queries, pages)

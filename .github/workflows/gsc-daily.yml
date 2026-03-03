@@ -3,7 +3,7 @@ name: GSC daily report
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "25 6 * * *"
+    - cron: "25 6 * * 1"
 
 concurrency:
   group: gsc-daily-${{ github.ref }}
