@@ -108,7 +108,7 @@ feeds:
   - **Date:** Feb 20, 2026, 12:00 UTC
   - **Text:** [Gold Bar Store Bundles] Survivors! New item bundles have been added to the Gold Bar store! 🎁 Click "Item Purchase" for good deals and item bundles that suit you best! ❤️‍🔥 🔗: https://store.last-z.com/#/order/facebook ====================== Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGoldBarStore
 
-### Facebook (FetchRSS #2)
+### Community Feed (FetchRSS #2)
 - [Still no packages](https://www.reddit.com/r/LastZShooterRun/comments/1rcl6mu/still_no_packages/)
   - **Author:** /u/AngryKhakis
   - **Date:** Feb 23, 2026, 15:55 UTC

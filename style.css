@@ -36,6 +36,69 @@ body {
     color: #999;
 }
 
+.home-featured-header {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px 20px 0;
+}
+
+.home-featured-header h2 {
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.home-featured-header p {
+    margin-top: 6px;
+    color: #8d8d8d;
+    font-size: 0.92rem;
+}
+
+.featured-grid,
+.path-grid {
+    padding-top: 16px;
+}
+
+.featured-card,
+.path-card {
+    position: relative;
+}
+
+.card-badge {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #ffd7d7;
+    background: rgba(196, 68, 68, 0.18);
+    border: 1px solid rgba(196, 68, 68, 0.45);
+}
+
+.path-card {
+    cursor: default;
+}
+
+.path-links {
+    margin-top: 14px;
+    color: #b3b3b3;
+    font-size: 0.88rem;
+}
+
+.path-links a {
+    color: #e2e2e2;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196, 68, 68, 0.4);
+}
+
+.path-links a:hover {
+    color: #fff;
+    border-bottom-color: rgba(196, 68, 68, 0.8);
+}
+
 /* Секция с карточками */
 .sections {
     display: grid;
@@ -129,6 +192,14 @@ body {
     color: #fff;
     font-weight: 600;
     letter-spacing: -0.01em;
+}
+
+.group-intro {
+    max-width: 1000px;
+    margin: 6px auto 0;
+    padding: 0 20px;
+    color: #8d8d8d;
+    font-size: 0.94rem;
 }
 
 .home-group .sections {

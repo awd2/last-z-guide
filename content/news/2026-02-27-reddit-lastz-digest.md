@@ -105,7 +105,7 @@ feeds:
   - **Date:** Feb 21, 2026, 12:00 UTC
   - **Text:** [Gold Bar Store Celebrations] We've updated and optimized the Gold Bar store for Survivors! 🎇 To commemorate the improvements, we've prepared a small gift! 🎁 Redemption Code: GOLDBAR2026 Valid Dates: February 21st 00:00 - February 23rd 00:00 (Apocalyptic Time) Number of Redemption Codes: 200,000 How to redeem: - Visit https://last-z.com/ - Click on the "Top-Up Center" - Click the three lines at the top left corner - Select "Redeem Gift Code" - Enter your UID and the Gift Code Be sure to follow us on Facebook for details on codes and gifts in the future! ❤️‍🔥 ====================== Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGoldBarStore #CDKey
 
-### Facebook (FetchRSS #2)
+### Community Feed (FetchRSS #2)
 - [State analysis for 241-259 before migration](https://www.reddit.com/r/LastZShooterRun/comments/1rf8g5j/state_analysis_for_241259_before_migration/)
   - **Author:** /u/zevah
   - **Date:** Feb 26, 2026, 12:07 UTC

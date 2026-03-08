@@ -79,7 +79,7 @@ feeds:
   - **Date:** Feb 25, 2026, 10:00 UTC
   - **Text:** [March Affirmations] February is coming to an end soon and we're excited to spend another month with Survivors! ❤️‍🔥 Screenshot or pause the GIF below for your own personal affirmations for March. Show us in the comments below which you landed on! 👇 Let's have another amazing month together! 🥳 ====================== Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
 
-### Facebook (FetchRSS #2)
+### Community Feed (FetchRSS #2)
 - [Formations part2](https://www.reddit.com/r/LastZShooterRun/comments/1rila94/formations_part2/)
   - **Author:** /u/batmanjl
   - **Date:** Mar 02, 2026, 06:20 UTC

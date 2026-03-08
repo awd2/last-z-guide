@@ -1,9 +1,56 @@
 [
   {
+    "url": "index.html",
+    "title": "Guides",
+    "category": "Home",
+    "description": "Last Z guides for research order, HQ upgrades, events, heroes, formations, resource planning, and F2P progression. Start with the strongest pages for your cu...",
+    "keywords": [
+      "Last Z guides",
+      "all guides",
+      "home",
+      "directory",
+      "research",
+      "heroes",
+      "events",
+      "pvp",
+      "economy",
+      "progression"
+    ]
+  },
+  {
+    "url": "about.html",
+    "title": "About Last Z Guides",
+    "category": "Site",
+    "description": "About Last Z Guides: how we verify data, update guides, use sources, and keep content consistent for accurate progression help.",
+    "keywords": [
+      "about",
+      "about last z guides",
+      "site info",
+      "editorial",
+      "who runs this site"
+    ]
+  },
+  {
+    "url": "alliance-duel-rewards.html",
+    "title": "Alliance Duel Rewards",
+    "category": "Events",
+    "description": "Complete Last Z Alliance Duel rewards table: chest thresholds for Days 1–5 and Day 6, daily totals, weekly totals, and the best reward checkpoints to aim for.",
+    "keywords": [
+      "alliance duel rewards",
+      "alliance duel chests",
+      "chest thresholds",
+      "daily totals",
+      "weekly totals",
+      "badges",
+      "valor medal",
+      "Last Z"
+    ]
+  },
+  {
     "url": "alliance-duel.html",
     "title": "Alliance Duel Guide",
     "category": "Events",
-    "description": "Day-by-day F2P strategy, Alliance Recognition research, Full Preparedness sync",
+    "description": "Complete Last Z Alliance Duel schedule: Day 1–6 plan, when to use speed-ups, how VS schedule works, and the best F2P strategy for more weekly chests.",
     "keywords": [
       "Alliance Duel",
       "AD",
@@ -26,26 +73,10 @@
     ]
   },
   {
-    "url": "alliance-duel-rewards.html",
-    "title": "Alliance Duel Rewards",
-    "category": "Events",
-    "description": "Chest thresholds, daily totals, and weekly totals for Alliance Duel",
-    "keywords": [
-      "alliance duel rewards",
-      "alliance duel chests",
-      "chest thresholds",
-      "daily totals",
-      "weekly totals",
-      "badges",
-      "valor medal",
-      "Last Z"
-    ]
-  },
-  {
     "url": "alliance-recognition-cost.html",
     "title": "Alliance Recognition Costs",
     "category": "Research",
-    "description": "Alliance Recognition badge costs by item and level",
+    "description": "Alliance Recognition research costs by item and level, total badge path cost, and the key planning checkpoints for Alliance Duel and long-term badge spending.",
     "keywords": [
       "alliance recognition cost",
       "alliance recognition badges",
@@ -61,7 +92,7 @@
     "url": "base-building-order.html",
     "title": "Base Building Order",
     "category": "Progression",
-    "description": "Shelter progression order \u2014 HQ priority, core resources, shooter stages",
+    "description": "Shelter progression order: prioritize HQ and Laboratory, follow HQ prerequisites, keep food/wood/electricity production, and push shooter stages for rewards...",
     "keywords": [
       "base building",
       "shelter progression",
@@ -77,53 +108,10 @@
     ]
   },
   {
-    "url": "early-game-optimization.html",
-    "title": "Beginner Guide 2.0",
-    "category": "Progression",
-    "description": "Early-game optimization \u2014 shooter stages, HQ/Lab prerequisites, research priorities, hero roles",
-    "keywords": [
-      "beginner guide",
-      "how to start",
-      "early game priorities",
-      "early game",
-      "optimization",
-      "hq",
-      "laboratory",
-      "prerequisites",
-      "shooter stages",
-      "hero roles",
-      "faction synergy",
-      "research"
-    ]
-  },
-  {
-    "url": "formations.html",
-    "title": "Best Formations",
-    "category": "Strategy",
-    "description": "Faction combos, hero placement, 3+2 meta builds for PvP and PvE",
-    "keywords": [
-      "formation",
-      "faction combo",
-      "3+2",
-      "hero placement",
-      "counter",
-      "Wings of Dawn",
-      "Blood Rose",
-      "Guard of Order",
-      "synergy",
-      "troop type",
-      "commander slot",
-      "meta",
-      "team comp",
-      "lineup",
-      "squad"
-    ]
-  },
-  {
     "url": "canyon-clash.html",
     "title": "Canyon Clash Guide",
     "category": "Events",
-    "description": "Weekly schedule, eligibility, battle phases, and rewards",
+    "description": "Canyon Clash weekly timing, eligibility, battle phases, scoring rules, and a step-by-step prep plan for higher rewards and rank.",
     "keywords": [
       "canyon clash",
       "canyon clash schedule",
@@ -138,10 +126,42 @@
     ]
   },
   {
+    "url": "codes.html",
+    "title": "Redeem Codes",
+    "category": "Rewards",
+    "description": "Active Last Z redeem codes, official Gift Center login, how to find your UID, how to redeem codes step by step, and why a code may not work.",
+    "keywords": [
+      "codes",
+      "redeem",
+      "gift code",
+      "free diamonds",
+      "UID",
+      "Gift Center",
+      "rewards",
+      "promo",
+      "coupon",
+      "free stuff"
+    ]
+  },
+  {
+    "url": "contact.html",
+    "title": "Contact",
+    "category": "Site",
+    "description": "Contact Last Z Guides for corrections, partnerships, and feedback. We respond to data fixes, sponsorships, and collaboration requests.",
+    "keywords": [
+      "contact",
+      "contact last z guides",
+      "feedback",
+      "correction",
+      "partnership",
+      "collaboration"
+    ]
+  },
+  {
     "url": "daily.html",
     "title": "Daily Checklist",
     "category": "Routine",
-    "description": "What to do every day \u2014 trucks, bounty, Furylord, arena, radar events, daily tasks",
+    "description": "Best Last Z daily routine: trucks, bounty missions, Full Preparedness, Furylord, radar, arena, mines, and the daily tasks that matter most for steady account...",
     "keywords": [
       "daily",
       "checklist",
@@ -165,10 +185,59 @@
     ]
   },
   {
+    "url": "disclosure.html",
+    "title": "Disclosure",
+    "category": "Site",
+    "description": "Disclosure of advertising, affiliate relationships, sponsored content, and how we keep guides independent, transparent, and reader-first.",
+    "keywords": [
+      "disclosure",
+      "affiliate disclosure",
+      "transparency",
+      "site disclosure"
+    ]
+  },
+  {
+    "url": "early-game-optimization.html",
+    "title": "Beginner Guide 2.0",
+    "category": "Progression",
+    "description": "Early-game optimization for Last Z: shooter stages, HQ/Lab requirements, resource balance, hero roles and faction synergy, gacha focus, and Full Preparedness...",
+    "keywords": [
+      "beginner guide",
+      "how to start",
+      "early game priorities",
+      "early game",
+      "optimization",
+      "hq",
+      "laboratory",
+      "prerequisites",
+      "shooter stages",
+      "hero roles",
+      "faction synergy",
+      "research"
+    ]
+  },
+  {
+    "url": "emergency-hospital-cost.html",
+    "title": "Hospital Cost Table",
+    "category": "Progression",
+    "description": "Emergency Hospital upgrade costs with resources, capacity increases, and power per level so you can plan healing and upgrades.",
+    "keywords": [
+      "emergency hospital cost",
+      "hospital upgrade",
+      "hospital capacity",
+      "injured troops",
+      "healing capacity",
+      "wood",
+      "zents",
+      "food",
+      "Last Z"
+    ]
+  },
+  {
     "url": "events.html",
-    "title": "Daily Events Schedule",
+    "title": "Events Schedule",
     "category": "Events",
-    "description": "F2P schedule \u2014 what to save, when to spend, daily rotation",
+    "description": "Complete Last Z events schedule: daily rotation, Full Preparedness, Alliance Duel timing, hot event planning, and what to save or spend each day.",
     "keywords": [
       "events",
       "daily",
@@ -186,27 +255,28 @@
     ]
   },
   {
-    "url": "emergency-hospital-cost.html",
-    "title": "Emergency Hospital Costs",
-    "category": "Progression",
-    "description": "Emergency Hospital resource costs, capacity increases, and power by level",
+    "url": "f2p.html",
+    "title": "F2P Guide",
+    "category": "Economy",
+    "description": "Complete Last Z F2P guide: how to get free diamonds, what to buy first, the best spending priority for builders and refugees, and how F2P players stay compet...",
     "keywords": [
-      "emergency hospital cost",
-      "hospital upgrade",
-      "hospital capacity",
-      "injured troops",
-      "healing capacity",
-      "wood",
-      "zents",
-      "food",
-      "Last Z"
+      "f2p",
+      "free to play",
+      "diamonds",
+      "diamond spending",
+      "free diamonds",
+      "what to buy",
+      "builders",
+      "refugees",
+      "vip shop",
+      "economy"
     ]
   },
   {
     "url": "farm-account.html",
     "title": "Farm Account Guide",
     "category": "Economy",
-    "description": "Farm account setup, Season 2 timing, and resource support for your main HQ",
+    "description": "How to create a Last Z farm account on your server before Season 2, what you need, how to set up a farm alt, and how to use it to support your main account.",
     "keywords": [
       "farm account",
       "farm alt",
@@ -222,7 +292,7 @@
     "url": "field-research.html",
     "title": "Field Research Guide",
     "category": "Progression",
-    "description": "Full badge cost breakdown \u2014 594k badges total, all 14 nodes, Recharge Shield, unlock requirements",
+    "description": "Field Research badge costs, Recharge Shield value, and unlock requirements to plan badge farming and upgrades efficiently.",
     "keywords": [
       "Field Research",
       "field research cost",
@@ -243,9 +313,9 @@
   },
   {
     "url": "formation-power.html",
-    "title": "Formation Power",
+    "title": "Formation Power Guide",
     "category": "Strategy",
-    "description": "5 same faction rule, Hall of Honor, march capacity, siege buildings",
+    "description": "Top power multipliers explained: Hall of Honor, troop HP, march capacity, siege bonuses, and where to invest first for PvE and PvP.",
     "keywords": [
       "formation power",
       "faction bonus",
@@ -260,10 +330,33 @@
     ]
   },
   {
+    "url": "formations.html",
+    "title": "Best Formations",
+    "category": "Strategy",
+    "description": "Best formations and counters: 3+2 meta builds, faction synergy, hero placement, and lineup tips for PvP and PvE with templates.",
+    "keywords": [
+      "formation",
+      "faction combo",
+      "3+2",
+      "hero placement",
+      "counter",
+      "Wings of Dawn",
+      "Blood Rose",
+      "Guard of Order",
+      "synergy",
+      "troop type",
+      "commander slot",
+      "meta",
+      "team comp",
+      "lineup",
+      "squad"
+    ]
+  },
+  {
     "url": "furylord.html",
     "title": "Furylord Guide",
     "category": "Events",
-    "description": "Spawn times, attack rules, scoring, and achievement tips for Furylord",
+    "description": "Best Furylord strategy in Last Z: spawn windows, daily attack limits, highest-hit scoring, War Frenzy timing, and how to get better rewards from every cycle.",
     "keywords": [
       "Furylord",
       "Fury Lord",
@@ -280,9 +373,9 @@
   },
   {
     "url": "gacha-go.html",
-    "title": "Gacha Go Event",
+    "title": "Gacha Go Guide",
     "category": "Events",
-    "description": "Golden Wrenches farming \u2014 key strategy, diamond efficiency, Hercules path",
+    "description": "Best Gacha Go strategy in Last Z: how keys work, whether to save for 300, diamond efficiency, and the fastest path toward Golden Wrenches and Hercules progress.",
     "keywords": [
       "Gacha Go",
       "golden wrench",
@@ -301,7 +394,7 @@
     "url": "gear.html",
     "title": "Gear Guide",
     "category": "Equipment",
-    "description": "Best equipment, how to enhance, Power Cores, upgrade priority",
+    "description": "Step-by-step gear upgrades: best equipment, enhancement priority, Power Cores, promotions, and mythic equipment in Last Z.",
     "keywords": [
       "gear",
       "equipment",
@@ -319,71 +412,66 @@
     ]
   },
   {
-    "url": "start.html",
-    "title": "Getting Started",
-    "category": "Beginner",
-    "description": "First steps for new players \u2014 beginner guide",
+    "url": "heroes-es.html",
+    "title": "Qué Héroes Potenciar en Last Z",
+    "category": "Heroes",
+    "description": "Qué héroes potenciar en Last Z: cuáles subir primero, mejores héroes por facción, qué equipo usar y qué opción conviene más para jugadores nuevos y F2P.",
     "keywords": [
-      "beginner",
-      "new player",
-      "start",
-      "first steps",
-      "tutorial",
-      "basics",
-      "noob",
-      "newbie",
-      "how to play",
-      "guide"
-    ]
-  },
-  {
-    "url": "hq-construction-cost.html",
-    "title": "HQ Construction Costs",
-    "category": "Progression",
-    "description": "HQ levels, hero caps, resource costs, requirements, and build times",
-    "keywords": [
-      "HQ construction cost",
-      "HQ upgrade cost",
-      "HQ 30 cost",
-      "HQ 35 cost",
-      "headquarters",
-      "hero level cap",
-      "building requirements",
-      "wood",
-      "food",
-      "zent",
-      "steel",
-      "construction time",
-      "Last Z"
-    ]
-  },
-  {
-    "url": "hq.html",
-    "title": "HQ Upgrade Guide",
-    "category": "Progression",
-    "description": "Levels 1-35, Steel resource, Sophia strategy, building requirements",
-    "keywords": [
-      "HQ",
-      "headquarters",
-      "upgrade",
-      "steel",
-      "Sophia",
-      "level 35",
-      "level 30",
-      "hero level cap",
-      "construction",
-      "builder",
-      "base",
-      "town",
-      "city",
-      "building"
+      "lista de héroes",
+      "mejores héroes",
+      "qué héroes potenciar",
+      "Yu Chan",
+      "Licia",
+      "Bella",
+      "Selena",
+      "Oliveira",
+      "Sofía",
+      "Katrina",
+      "Ava",
+      "Vivian",
+      "Miranda",
+      "Audrey",
+      "Giselle",
+      "Queenie",
+      "Liliana",
+      "Alma",
+      "Nyx",
+      "Scarlett",
+      "Laura",
+      "Amelia",
+      "Cristina",
+      "Fiona",
+      "Isabella",
+      "Angelina",
+      "Natalia",
+      "Amber",
+      "Dodemeki",
+      "Harleyena",
+      "Sakura",
+      "Evelyn",
+      "Mia",
+      "Chinatsu",
+      "Maria",
+      "Elizabeth",
+      "Leah",
+      "William",
+      "Atenea",
+      "Rosa Sangrienta",
+      "Alas del Amanecer",
+      "Guardia del Orden",
+      "Asaltantes",
+      "Tiradores",
+      "Jinetes",
+      "tiers",
+      "formación",
+      "alineación de tropas"
     ]
   },
   {
     "url": "heroes.html",
-    "title": "Heroes Tier List",
+    "title": "Best Heroes Tier List",
     "category": "Heroes",
-    "description": "Best heroes ranked by faction \u2014 formation strategy, troop alignment",
+    "description": "Best heroes in Last Z ranked by faction: Season 4 tier list, strongest heroes to upgrade first, best faction picks, and troop matching for Blood Rose, Wings...",
     "keywords": [
       "heroes",
       "tier list",
@@ -439,108 +527,53 @@
     ]
   },
   {
-    "url": "heroes-es.html",
-    "title": "Lista de H\u00e9roes (ES)",
-    "category": "Heroes",
-    "description": "Mejores h\u00e9roes por facci\u00f3n \u2014 formaci\u00f3n, alineaci\u00f3n de tropas y tiers",
+    "url": "hq-construction-cost.html",
+    "title": "HQ Construction Cost Table",
+    "category": "Progression",
+    "description": "HQ construction costs with hero caps, resources, prerequisite buildings, and build times for a clear 1–35 upgrade plan.",
     "keywords": [
-      "lista de h\u00e9roes",
-      "mejores h\u00e9roes",
-      "qu\u00e9 h\u00e9roes potenciar",
-      "Yu Chan",
-      "Licia",
-      "Bella",
-      "Selena",
-      "Oliveira",
-      "Sof\u00eda",
-      "Katrina",
-      "Ava",
-      "Vivian",
-      "Miranda",
-      "Audrey",
-      "Giselle",
-      "Queenie",
-      "Liliana",
-      "Alma",
-      "Nyx",
-      "Scarlett",
-      "Laura",
-      "Amelia",
-      "Cristina",
-      "Fiona",
-      "Isabella",
-      "Angelina",
-      "Natalia",
-      "Amber",
-      "Dodemeki",
-      "Harleyena",
-      "Sakura",
-      "Evelyn",
-      "Mia",
-      "Chinatsu",
-      "Maria",
-      "Elizabeth",
-      "Leah",
-      "William",
-      "Atenea",
-      "Rosa Sangrienta",
-      "Alas del Amanecer",
-      "Guardia del Orden",
-      "Asaltantes",
-      "Tiradores",
-      "Jinetes",
-      "tiers",
-      "formaci\u00f3n",
-      "alineaci\u00f3n de tropas"
-    ]
-  },
-  {
-    "url": "queenie.html",
-    "title": "Queenie Guide",
-    "category": "Heroes",
-    "description": "Queenie skills, max effects, star ladder, and Wings of Dawn DPS build",
-    "keywords": [
-      "Queenie",
-      "Queenie guide",
-      "Queenie skills",
-      "Queenie build",
-      "Wings of Dawn",
-      "WoD",
-      "DPS",
-      "Shooter",
-      "Raven Reigns",
-      "Firefall",
-      "All-in Assault",
-      "Crimson Dominion",
+      "HQ construction cost",
+      "HQ upgrade cost",
+      "HQ 30 cost",
+      "HQ 35 cost",
+      "headquarters",
+      "hero level cap",
+      "building requirements",
+      "wood",
+      "food",
+      "zent",
+      "steel",
+      "construction time",
       "Last Z"
     ]
   },
   {
-    "url": "yu-chan.html",
-    "title": "Yu Chan Guide",
-    "category": "Heroes",
-    "description": "Yu Chan skills, max effects, star ladder, and Blood Rose DPS build",
+    "url": "hq.html",
+    "title": "HQ Upgrade Guide",
+    "category": "Progression",
+    "description": "Complete Last Z HQ upgrade guide: requirements by level, fastest path to HQ 30 and HQ 35, when steel unlocks, and why HQ controls your hero level cap.",
     "keywords": [
-      "Yu Chan",
-      "Yu Chan guide",
-      "Yu Chan skills",
-      "Yu Chan build",
-      "Blood Rose",
-      "BR",
-      "DPS",
-      "Assaulter",
-      "Death's Aim",
-      "Soul Striker",
-      "Wyrm Wrath",
-      "Dragon's Bane",
-      "Last Z"
+      "HQ",
+      "headquarters",
+      "upgrade",
+      "steel",
+      "Sophia",
+      "level 35",
+      "level 30",
+      "hero level cap",
+      "construction",
+      "builder",
+      "base",
+      "town",
+      "city",
+      "building"
     ]
   },
   {
     "url": "leveling.html",
-    "title": "Leveling Up Fast",
+    "title": "How to Level Up Fast in Last Z: Survival Shooter",
     "category": "Progression",
-    "description": "Progression strategies \u2014 daily tasks, campaign, efficiency tips",
+    "description": "Best ways to level fast: daily priorities, efficient upgrades, XP sources, and a simple path to steady early growth for F2P and light spenders.",
     "keywords": [
       "leveling",
       "level up",
@@ -557,9 +590,9 @@
   },
   {
     "url": "lucky-discounter.html",
-    "title": "Lucky Discounter",
+    "title": "Lucky Discounter Guide",
     "category": "Events",
-    "description": "Badge farming \u2014 90% discount strategy, ticket saving, F2P optimized",
+    "description": "Best Lucky Discounter strategy in Last Z: guaranteed 90% discount attempts, how many tickets to save, best badge purchases, and how to plan diamonds for maxi...",
     "keywords": [
       "Lucky Discounter",
       "badges",
@@ -577,7 +610,7 @@
     "url": "power-guide.html",
     "title": "Power Guide",
     "category": "Progression",
-    "description": "Increase CP 2-4x faster \u2014 all 5 power types explained",
+    "description": "How to increase power fast in Last Z: the 5 power types, best upgrade order, and the biggest CP gains from HQ, research, troops, heroes, and vehicle power.",
     "keywords": [
       "power",
       "CP",
@@ -593,10 +626,23 @@
     ]
   },
   {
+    "url": "privacy.html",
+    "title": "Privacy Policy",
+    "category": "Site",
+    "description": "Privacy policy for Last Z Guides, including analytics usage, cookies, data handling, and how we protect visitor information.",
+    "keywords": [
+      "privacy",
+      "privacy policy",
+      "cookies",
+      "analytics",
+      "data policy"
+    ]
+  },
+  {
     "url": "pvp.html",
     "title": "PvP Guide",
     "category": "Combat",
-    "description": "Faction counters, Canyon Clash, SVS, scouting, hospital strategy",
+    "description": "PvP guide for scouting, faction counters, Canyon Clash, SVS timing, and hospital strategy to win more fights and choose safer targets.",
     "keywords": [
       "PvP",
       "PvE",
@@ -617,28 +663,31 @@
     ]
   },
   {
-    "url": "codes.html",
-    "title": "Redeem Codes",
-    "category": "Rewards",
-    "description": "Free diamonds, speedups & resources \u2014 updated January 2026",
+    "url": "queenie.html",
+    "title": "Queenie Guide",
+    "category": "Heroes",
+    "description": "Queenie (Wings of Dawn DPS) skills, max effects, star ladder, best build, and team synergy for Last Z.",
     "keywords": [
-      "codes",
-      "redeem",
-      "gift code",
-      "free diamonds",
-      "UID",
-      "Gift Center",
-      "rewards",
-      "promo",
-      "coupon",
-      "free stuff"
+      "Queenie",
+      "Queenie guide",
+      "Queenie skills",
+      "Queenie build",
+      "Wings of Dawn",
+      "WoD",
+      "DPS",
+      "Shooter",
+      "Raven Reigns",
+      "Firefall",
+      "All-in Assault",
+      "Crimson Dominion",
+      "Last Z"
     ]
   },
   {
     "url": "refugees.html",
     "title": "Refugees Guide",
     "category": "Progression",
-    "description": "Refugee priority tiers, ticket sources, and diplomat strategy for alliance help",
+    "description": "Best refugees in Last Z: who to prioritize first, how Diplomats work, when to use 500 vs 2000/5000 tickets, and the best refugee roles for long-term progress.",
     "keywords": [
       "refugees",
       "refugee tickets",
@@ -653,9 +702,9 @@
   },
   {
     "url": "research.html",
-    "title": "Research Priority",
+    "title": "Research Guide",
     "category": "Progression",
-    "description": "What to research first \u2014 Hero Training, UST, Peace Shield, Military Strategies",
+    "description": "Step-by-step Last Z research tree guide: what to research first, how to unlock Peace Shield and Urgent Rescue, and the best path toward T10.",
     "keywords": [
       "research",
       "priority",
@@ -678,7 +727,7 @@
     "url": "resources.html",
     "title": "Resources Guide",
     "category": "Economy",
-    "description": "How to farm fast, gathering strategy, Steel, diamonds, farm accounts",
+    "description": "How to get resources fast in Last Z: the best gathering strategy, why resource buildings are weak, how to farm steel and diamonds, and when to use farm accou...",
     "keywords": [
       "resources",
       "food",
@@ -698,9 +747,9 @@
   },
   {
     "url": "shooter-stages.html",
-    "title": "Shooter Stages",
+    "title": "Shooter Stages Guide",
     "category": "Progression",
-    "description": "Dodge & shoot stages \u2014 barrels, gates, XP crates, rewards",
+    "description": "Shooter stages explained: dodge & shoot basics, barrels, gates, XP crates, hazards, and why stages matter for progression.",
     "keywords": [
       "shooter stages",
       "dodge and shoot",
@@ -714,10 +763,28 @@
     ]
   },
   {
+    "url": "start.html",
+    "title": "Beginner Guide",
+    "category": "Beginner",
+    "description": "Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days.",
+    "keywords": [
+      "beginner",
+      "new player",
+      "start",
+      "first steps",
+      "tutorial",
+      "basics",
+      "noob",
+      "newbie",
+      "how to play",
+      "guide"
+    ]
+  },
+  {
     "url": "steel.html",
     "title": "Steel Guide",
     "category": "Economy",
-    "description": "Best Steel sources \u2014 Tyrant, nodes, and HQ31-35 usage",
+    "description": "How to get steel in Last Z: when steel unlocks, why Tyrant is the best source, how steel nodes work, and where steel matters for HQ31-35 and Steel Age research.",
     "keywords": [
       "steel",
       "steel guide",
@@ -739,10 +806,26 @@
     ]
   },
   {
+    "url": "svs.html",
+    "title": "SVS Guide",
+    "category": "PvP",
+    "description": "Complete Last Z SVS guide: State vs State prep phase, Capital Clash strategy, how to become invader, and how to unlock all 9 boxes for maximum Valor Medals.",
+    "keywords": [
+      "svs",
+      "state vs state",
+      "capital clash",
+      "valor medals",
+      "cross-state event",
+      "invasion rights",
+      "prep phase",
+      "pvp event"
+    ]
+  },
+  {
     "url": "tech.html",
-    "title": "Tech Deep Dive",
+    "title": "Tech Guide",
     "category": "Strategy",
-    "description": "Expert discussion \u2014 AR, Trap Accounts, HP stacking strategies",
+    "description": "Tech priorities and stacking rules with the upgrades that move power most, plus a simple research order for faster growth.",
     "keywords": [
       "tech",
       "AR",
@@ -757,10 +840,22 @@
     ]
   },
   {
+    "url": "terms.html",
+    "title": "Terms of Use",
+    "category": "Site",
+    "description": "Terms of use for Last Z Guides: content rights, liability limits, updates, and rules for using and reusing our resources.",
+    "keywords": [
+      "terms",
+      "terms and conditions",
+      "site terms",
+      "legal"
+    ]
+  },
+  {
     "url": "tips.html",
     "title": "Tips & Tricks",
     "category": "Tips",
-    "description": "25+ life-changing tips \u2014 buildings, heroes, alliances, efficiency",
+    "description": "Practical tips to speed progression, avoid waste, improve daily efficiency, and build long-term momentum with common mistakes.",
     "keywords": [
       "tips",
       "tricks",
@@ -779,10 +874,26 @@
     ]
   },
   {
+    "url": "trap.html",
+    "title": "Trap Account Guide",
+    "category": "PvP",
+    "description": "How to spot trap accounts, avoid bait, and choose safer PvP targets using scouting clues, power signals, and activity patterns.",
+    "keywords": [
+      "trap account",
+      "trap base",
+      "bait",
+      "hidden troops",
+      "low power",
+      "counter attack",
+      "pvp trap",
+      "scouting"
+    ]
+  },
+  {
     "url": "tyrant.html",
     "title": "Tyrant Rally Guide",
     "category": "Events",
-    "description": "Maximum damage strategy \u2014 7-8 member rallies, engage offline, Steel farming",
+    "description": "Best Tyrant rally strategy in Last Z: ideal rally size, max damage setup, Engage Offline, steel rewards, and the key mistakes that lower alliance results.",
     "keywords": [
       "Tyrant",
       "rally",
@@ -804,7 +915,7 @@
     "url": "vehicle-modification-cost.html",
     "title": "Vehicle Modification Costs",
     "category": "Progression",
-    "description": "Levels 0\u2013240, wrench totals, cumulative costs, milestone unlocks",
+    "description": "Vehicle Modification cost table with wrench totals, cumulative milestones, Hercules and Destroyer unlocks, and the best planning points for licenses and modi...",
     "keywords": [
       "vehicle modification",
       "wrenches",
@@ -820,10 +931,31 @@
     ]
   },
   {
+    "url": "yu-chan.html",
+    "title": "Yu Chan Guide",
+    "category": "Heroes",
+    "description": "Yu Chan (Blood Rose DPS) skills, max effects, star ladder, best build, and team synergy for Last Z.",
+    "keywords": [
+      "Yu Chan",
+      "Yu Chan guide",
+      "Yu Chan skills",
+      "Yu Chan build",
+      "Blood Rose",
+      "BR",
+      "DPS",
+      "Assaulter",
+      "Death's Aim",
+      "Soul Striker",
+      "Wyrm Wrath",
+      "Dragon's Bane",
+      "Last Z"
+    ]
+  },
+  {
     "url": "zombie-siege.html",
     "title": "Zombie Siege Guide",
     "category": "Events",
-    "description": "Waves, scheduling rules, prep checklist, and reward timing for Zombie Siege",
+    "description": "Zombie Siege guide: wave rules, schedule timing, prep checklist, and tactics to maximize rewards and minimize losses for alliances.",
     "keywords": [
       "Zombie Siege",
       "zombie siege",

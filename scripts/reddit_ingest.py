@@ -1,4 +1,5 @@
 import html
+import json
 import os
 import re
 import sys
@@ -21,8 +22,8 @@ FEEDS = [
         "hours_back": None,
     },
     {
-        "name": "Facebook",
-        "label": "Facebook (FetchRSS #2)",
+        "name": "Community",
+        "label": "Community Feed (FetchRSS #2)",
         "url": "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYsj5hi7kb.rss",
         "hours_back": None,
     },

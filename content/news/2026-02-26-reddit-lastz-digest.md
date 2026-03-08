@@ -75,7 +75,7 @@ feeds:
   - **Date:** Feb 20, 2026, 12:00 UTC
   - **Text:** [Gold Bar Store Bundles] Survivors! New item bundles have been added to the Gold Bar store! 🎁 Click "Item Purchase" for good deals and item bundles that suit you best! ❤️‍🔥 🔗: https://store.last-z.com/#/order/facebook ====================== Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGoldBarStore
 
-### Facebook (FetchRSS #2)
+### Community Feed (FetchRSS #2)
 - [Whale Hunting - VIB from 467 took down mega whale in VS last week. Anyone else seen 1.4B VS points in one week?](https://www.reddit.com/r/LastZShooterRun/comments/1re4m7q/whale_hunting_vib_from_467_took_down_mega_whale/)
   - **Author:** /u/Nice-Bag7651
   - **Date:** Feb 25, 2026, 05:31 UTC

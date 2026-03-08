@@ -76,7 +76,7 @@ feeds:
   - **Date:** Feb 23, 2026, 12:00 UTC
   - **Text:** [Tough Choices] If you were stuck in a zombie apocalypse and could only choose one of the three options below, which would you go for? 🤔 A: A phone that never runs out of battery B: A gun with unlimited bullets C: A reliable, capable, and beautiful teammate Tell us your answer in the comments or let us know if you have other ideas! 💡 ====================== Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
 
-### Facebook (FetchRSS #2)
+### Community Feed (FetchRSS #2)
 - [Its happening](https://www.reddit.com/r/LastZShooterRun/comments/1rhqlfd/its_happening/)
   - **Author:** /u/Tricky-Wallaby-6651
   - **Date:** Mar 01, 2026, 07:01 UTC

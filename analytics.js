@@ -204,9 +204,9 @@
 
     function init() {
         scheduleGALoad();
-        window.addEventListener(\'scroll\', loadGAOnInteraction, { passive: true });
-        window.addEventListener(\'pointerdown\', loadGAOnInteraction, { passive: true });
-        window.addEventListener(\'keydown\', loadGAOnInteraction);
+        window.addEventListener('scroll', loadGAOnInteraction, { passive: true });
+        window.addEventListener('pointerdown', loadGAOnInteraction, { passive: true });
+        window.addEventListener('keydown', loadGAOnInteraction);
         attachHomeTracking();
         attachGuideTracking();
         attachTableTracking();

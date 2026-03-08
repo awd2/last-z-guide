@@ -75,7 +75,7 @@ feeds:
   - **Author:** Last Z: Survival Shooter
   - **Date:** Feb 23, 2026, 03:28 UTC
 
-### Facebook (FetchRSS #2)
+### Community Feed (FetchRSS #2)
 - [last Z](https://www.reddit.com/r/LastZShooterRun/comments/1rgpr9m/last_z/)
   - **Author:** /u/Objective_Warthog656
   - **Date:** Feb 28, 2026, 01:49 UTC
