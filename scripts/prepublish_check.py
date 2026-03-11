@@ -23,7 +23,7 @@ def main() -> int:
     parser.add_argument(
         "--fix",
         action="store_true",
-        help="First sync sitemap/search-index, then run the audit.",
+        help="First sync structured data, verification blocks, sitemap/search-index, then run the audit.",
     )
     parser.add_argument(
         "--strict",
@@ -33,6 +33,16 @@ def main() -> int:
     args = parser.parse_args()
 
     failures = 0
+
+    if args.fix:
+        failures += run_step(
+            "Structured Data Sync",
+            [sys.executable, str(SCRIPT_DIR / "sync_structured_data.py")],
+        )
+        failures += run_step(
+            "Verification Blocks Sync",
+            [sys.executable, str(SCRIPT_DIR / "sync_verification_blocks.py")],
+        )
 
     indexing_cmd = [sys.executable, str(SCRIPT_DIR / "check_site_indexing.py")]
     if args.fix:

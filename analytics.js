@@ -57,6 +57,67 @@
         return url.replace(/^\//, '').replace(/\.html$/, '');
     }
 
+    function getReferrerHost() {
+        try {
+            return document.referrer ? new URL(document.referrer).hostname.toLowerCase() : '';
+        } catch (err) {
+            return '';
+        }
+    }
+
+    function resolveLLMSource() {
+        const params = new URLSearchParams(window.location.search);
+        const utmSource = (params.get('utm_source') || '').toLowerCase();
+        if (utmSource === 'chatgpt.com') {
+            return { source: 'chatgpt', sourceType: 'utm', referrerHost: getReferrerHost() };
+        }
+
+        const referrerHost = getReferrerHost();
+        const sourceMap = [
+            { match: 'chatgpt.com', source: 'chatgpt' },
+            { match: 'perplexity.ai', source: 'perplexity' },
+            { match: 'copilot.microsoft.com', source: 'copilot' },
+            { match: 'bing.com', source: 'bing' },
+            { match: 'grok.com', source: 'grok' },
+            { match: 'x.com', source: 'x' }
+        ];
+
+        const hit = sourceMap.find((entry) => referrerHost === entry.match || referrerHost.endsWith('.' + entry.match));
+        if (!hit) return null;
+        return { source: hit.source, sourceType: 'referrer', referrerHost };
+    }
+
+    function trackLLMReferralSession() {
+        const detected = resolveLLMSource();
+        if (!detected) return;
+
+        const storageKey = 'lastz_llm_referral_logged';
+        try {
+            if (window.sessionStorage && window.sessionStorage.getItem(storageKey)) {
+                return;
+            }
+        } catch (err) {
+            // Ignore storage failures and still try to track once.
+        }
+
+        track('llm_referral_session', {
+            llm_source: detected.source,
+            llm_source_type: detected.sourceType,
+            referrer_host: detected.referrerHost || '',
+            landing_page: getPath(),
+            guide_slug: slugFromUrl(getPath()),
+            page_type: getPath() === 'index.html' ? 'home' : 'guide'
+        });
+
+        try {
+            if (window.sessionStorage) {
+                window.sessionStorage.setItem(storageKey, '1');
+            }
+        } catch (err) {
+            // Ignore storage failures.
+        }
+    }
+
     function attachHomeTracking() {
         const homeNav = document.querySelector('.home-nav');
         if (homeNav) {
@@ -207,6 +268,7 @@
         window.addEventListener('scroll', loadGAOnInteraction, { passive: true });
         window.addEventListener('pointerdown', loadGAOnInteraction, { passive: true });
         window.addEventListener('keydown', loadGAOnInteraction);
+        trackLLMReferralSession();
         attachHomeTracking();
         attachGuideTracking();
         attachTableTracking();

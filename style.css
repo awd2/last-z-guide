@@ -620,6 +620,34 @@ body {
     margin: 0;
 }
 
+.verification-note {
+    margin-top: 36px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    font-size: 0.84rem;
+    color: #8f8f8f;
+}
+
+.verification-note-title {
+    margin: 0 0 10px;
+    font-size: 0.78rem;
+    color: #7f7f7f;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.verification-note ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.verification-note li + li {
+    margin-top: 6px;
+}
+
 .related-guides {
     margin-top: 48px;
     padding-top: 24px;
