@@ -1,0 +1,131 @@
+---
+title: "Reddit digest — LastZShooterRun (2026-03-13)"
+date: 2026-03-13
+source: reddit+facebook
+feeds:
+  - "https://old.reddit.com/r/LastZShooterRun/new/.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYq6GGU414.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYsj5hi7kb.rss"
+---
+
+## New posts
+
+### Reddit
+- [Lab 1 and Lab 2](https://old.reddit.com/r/LastZShooterRun/comments/1rsfufb/lab_1_and_lab_2/)
+  - **Author:** /u/Least-Egg0318
+  - **Date:** Mar 13, 2026, 06:31 UTC
+- [Offense Line mastery? Is it for the HQ?](https://old.reddit.com/r/LastZShooterRun/comments/1rsfpol/offense_line_mastery_is_it_for_the_hq/)
+  - **Author:** /u/Simmering_Spirit
+  - **Date:** Mar 13, 2026, 06:23 UTC
+- [Let’s talk about whales…](https://old.reddit.com/r/LastZShooterRun/comments/1rsfhek/lets_talk_about_whales/)
+  - **Author:** /u/Ok-Literature-611
+  - **Date:** Mar 13, 2026, 06:10 UTC
+- [URGENT ACCOUNT RECOVERY](https://old.reddit.com/r/LastZShooterRun/comments/1rsfdhl/urgent_account_recovery/)
+  - **Author:** /u/debalik07
+  - **Date:** Mar 13, 2026, 06:03 UTC
+- [Is this worth it??](https://old.reddit.com/r/LastZShooterRun/comments/1rsf5gs/is_this_worth_it/)
+  - **Author:** /u/Dazzling_Try7495
+  - **Date:** Mar 13, 2026, 05:50 UTC
+- [HQ Defense While Out Attacking](https://old.reddit.com/r/LastZShooterRun/comments/1rsegr7/hq_defense_while_out_attacking/)
+  - **Author:** /u/The_Einsteins
+  - **Date:** Mar 13, 2026, 05:12 UTC
+- [F2P. Am I doing the right thing?](https://old.reddit.com/r/LastZShooterRun/comments/1rsbi03/f2p_am_i_doing_the_right_thing/)
+  - **Author:** /u/Hack-Memed
+  - **Date:** Mar 13, 2026, 02:43 UTC
+- [Colored/bold text announcements](https://old.reddit.com/r/LastZShooterRun/comments/1rs8jrp/coloredbold_text_announcements/)
+  - **Author:** /u/DumpyRumpkins
+  - **Date:** Mar 13, 2026, 00:33 UTC
+- [Vivian fortune compass](https://old.reddit.com/r/LastZShooterRun/comments/1rs6ldr/vivian_fortune_compass/)
+  - **Author:** /u/liquidand
+  - **Date:** Mar 12, 2026, 23:13 UTC
+- [Does the construction buff skill (15%) only apply to new builds or does it apply to builds in progress? It doesn't state that it reduces total construction time but that it increases speed for 1 hour. It's consfusing.](https://old.reddit.com/r/LastZShooterRun/comments/1rs1x26/does_the_construction_buff_skill_15_only_apply_to/)
+  - **Author:** /u/JT31085
+  - **Date:** Mar 12, 2026, 20:18 UTC
+- [Alliance Switch Cooldown Period for Glory War](https://old.reddit.com/r/LastZShooterRun/comments/1rs1ku1/alliance_switch_cooldown_period_for_glory_war/)
+  - **Author:** /u/DisciplineOdd9943
+  - **Date:** Mar 12, 2026, 20:06 UTC
+- [Orange Fragments: Second Troop or Hall of Glory?](https://old.reddit.com/r/LastZShooterRun/comments/1rs0irq/orange_fragments_second_troop_or_hall_of_glory/)
+  - **Author:** /u/CrisChagas
+  - **Date:** Mar 12, 2026, 19:28 UTC
+- [Éviter pillage camion](https://old.reddit.com/r/LastZShooterRun/comments/1rs01eg/éviter_pillage_camion/)
+  - **Author:** /u/Fun-Celebration-400
+  - **Date:** Mar 12, 2026, 19:10 UTC
+- [Can season 2 players attack season 1 players?](https://old.reddit.com/r/LastZShooterRun/comments/1rrywyf/can_season_2_players_attack_season_1_players/)
+  - **Author:** /u/Dry_Blackberry2190
+  - **Date:** Mar 12, 2026, 18:30 UTC
+- [Account level 27 in state 421 and 443 up for $£!!](https://old.reddit.com/r/LastZShooterRun/comments/1rryeka/account_level_27_in_state_421_and_443_up_for/)
+  - **Author:** /u/Ybaa1996
+  - **Date:** Mar 12, 2026, 18:12 UTC
+- [Suche Account auf 211](https://old.reddit.com/r/LastZShooterRun/comments/1rrx1eq/suche_account_auf_211/)
+  - **Author:** /u/Sufficient_Till2989
+  - **Date:** Mar 12, 2026, 17:23 UTC
+- [Suche Account auf 211](https://old.reddit.com/r/LastZShooterRun/comments/1rrx0yw/suche_account_auf_211/)
+  - **Author:** /u/Sufficient_Till2989
+  - **Date:** Mar 12, 2026, 17:23 UTC
+- [Anyone have farm in 221 state last z survival shooter or lilite account](https://old.reddit.com/r/LastZShooterRun/comments/1rrwo1r/anyone_have_farm_in_221_state_last_z_survival/)
+  - **Author:** /u/Useful_Caramel_4416
+  - **Date:** Mar 12, 2026, 17:10 UTC
+- [Anyone have farm in 221 state last z survival shooter or lilite account](https://old.reddit.com/r/LastZShooterRun/comments/1rrwnle/anyone_have_farm_in_221_state_last_z_survival/)
+  - **Author:** /u/Useful_Caramel_4416
+  - **Date:** Mar 12, 2026, 17:10 UTC
+- [I have a problem.](https://old.reddit.com/r/LastZShooterRun/comments/1rrubfb/i_have_a_problem/)
+  - **Author:** /u/CoffeeOk7146
+  - **Date:** Mar 12, 2026, 15:46 UTC
+- [Is the only way to buy is gold bricks now?](https://old.reddit.com/r/LastZShooterRun/comments/1rrq2p5/is_the_only_way_to_buy_is_gold_bricks_now/)
+  - **Author:** /u/jessewh187
+  - **Date:** Mar 12, 2026, 12:59 UTC
+- [Duel end s3](https://old.reddit.com/r/LastZShooterRun/comments/1rrmwdb/duel_end_s3/)
+  - **Author:** /u/Character_Noise_3826
+  - **Date:** Mar 12, 2026, 10:18 UTC
+- [Is the game time consuming or is it just FOMO?](https://old.reddit.com/r/LastZShooterRun/comments/1rrkw5v/is_the_game_time_consuming_or_is_it_just_fomo/)
+  - **Author:** /u/DigiEmpireIndia
+  - **Date:** Mar 12, 2026, 08:13 UTC
+- [レーダーの貯蓄について](https://old.reddit.com/r/LastZShooterRun/comments/1rrkk46/レーダーの貯蓄について/)
+  - **Author:** /u/peco2_goo
+  - **Date:** Mar 12, 2026, 07:51 UTC
+- [Max out orange equipment on one hero first, or get another set for the 2nd hero?](https://old.reddit.com/r/LastZShooterRun/comments/1rrk4uw/max_out_orange_equipment_on_one_hero_first_or_get/)
+  - **Author:** /u/Simmering_Spirit
+  - **Date:** Mar 12, 2026, 07:23 UTC
+
+### Facebook (FetchRSS #1)
+- [[Beginner Hero Hot Tips]](https://www.facebook.com/122208818816561196/posts/122211054716561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 10, 2026, 12:00 UTC
+  - **Text:** [Beginner Hero Hot Tips] We're bringing it back to basics with some important tips and tricks for players new to Last Z: Survival Shooter! 💡 Did you know that many heroes have skills that can greatly help you on your journey? Pay extra attention to their 3rd skills! Sophia - Increases your free construction duration and construction speed Laura - Receive 10 free Radar events daily Katrina - Get 100 fuel for free daily Vivian - Decreases fuel costs and increases damage dealt ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZHotTips
+- [[Gold Bar Store Bundles]](https://www.facebook.com/122208818816561196/posts/122210907530561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 09, 2026, 12:00 UTC
+  - **Text:** [Gold Bar Store Bundles] Survivors! Don't miss out on the item bundles in the official Last Z: Survival Shooter Gold Bar store! 🎁 Click "Item Purchase" for good deals and packs that suit you best! ❤️‍🔥 🔗: https://store.last-z.com/#/order/facebook ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGoldBarStore
+- [[International Women's Day]](https://www.facebook.com/122208818816561196/posts/122210490962561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 08, 2026, 12:00 UTC
+  - **Text:** [International Women's Day] Happy International Women's Day to the bravest heroes and Survivors of Last Z: Survival Shooter! 💕🫂 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #InternationalWomensDay
+- [[Last Z: Survival Shooter Setup]](https://www.facebook.com/122208818816561196/posts/122210490782561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 06, 2026, 12:00 UTC
+  - **Text:** [Last Z: Survival Shooter Setup] Survivors! We want to see how you play Last Z: Survival Shooter! Show off your Last Z related wallpapers or setups in the comments below and stand to win in-game rewards! 🎁 📜 Rules: - Follow Last Z: Survival Shooter on Facebook - Post a picture of your Last Z: Survival Shooter setup in the comments section - This could be a screenshot of your Last Z: Survival Shooter mobile/PC wallpaper, a picture of your mobile phone with Last Z: Survival Shooter running, or a picture of your PC setup with Last Z: Survival Shooter running - Be sure to include your Game ID in the comment! Feel free to use any of the provided Last Z: Survival Shooter wallpapers from the links below in your submission! 🔗: https://www.facebook.com/share/p/1Gyx2PJwwM/ 🔗: https://www.facebook.com/share/p/1Aj6dPERxq/ 🎁 Rewards: 50 Survivors will each receive 2000 Diamonds 🗓️ Event Deadline: March 12, 2026, 23:59 (Apocalypse Time) Rewards will be sent within 3 working days. We look forward to seeing your submissions! ❣️ ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
+- [Photos from Last Z: Survival Shooter's post](https://www.facebook.com/122208818816561196/posts/122210314832561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 05, 2026, 12:00 UTC
+  - **Text:** [Wallpaper Distribution] Survivors! Here are PC and mobile wallpapers of Last Z: Survival Shooter's bravest and strongest, Katrina! 💖 Feel free to save and use them! ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZWallpaper
+
+### Community Feed (FetchRSS #2)
+- [What are the options for ny alliance? What are our paths out of here?](https://www.reddit.com/r/LastZShooterRun/comments/1rrjq1d/what_are_the_options_for_ny_alliance_what_are_our/)
+  - **Author:** /u/Discodoggyy
+  - **Date:** Mar 12, 2026, 06:58 UTC
+- [A Dear Friend Passed Away in 268](https://www.reddit.com/r/LastZShooterRun/comments/1rrj8zn/a_dear_friend_passed_away_in_268/)
+  - **Author:** /u/lastzsquirt
+  - **Date:** Mar 12, 2026, 06:29 UTC
+  - **Text:** Our dear friend Jeong, aka Double Jinx, suddenly passed away this week. It is beyond heart breaking news. She is the most encouraging, smart, funny, kind, welcoming, fierce, beautiful person and made a lasting impact on many people’s lives in our state. We send all of our love to her family, friends, and fiance. May she rest in peace. We’ll always remember you. ❤️❤️❤️
+- [Last Z Bullseye Booty – STOP NOW ⛔ You’re Doing This WRONG (F2P Guide)](https://www.reddit.com/r/LastZShooterRun/comments/1rr1v0z/last_z_bullseye_booty_stop_now_youre_doing_this/)
+  - **Author:** /u/DWDytchannel
+  - **Date:** Mar 11, 2026, 18:24 UTC
+  - **Text:** Most players are doing Bullseye Booty wrong. If you’re pushing 200 rounds as F2P, you’re probably wasting months of progress. Here’s the short version: Bullseye Booty appears every ~4 weeks. You get 41 free bullets from tasks. You can buy 100 bullets with diamonds per event. Bullets carry over. That means F2P players realistically have around 141 bullets per month. Now here’s where it gets interesting. To reach: • 12 rounds → ~120 bullets • 50 rounds → ~500 bullets • 200 rounds → ~2000 bullets So pushing 200 means saving for many months. But 12 rounds gives: • Orange Equipment Choice Box • Strong Power Core milestone rewards • Consistent monthly progression Instead of saving 4–5 months for 50 or 200, repeating 12 rounds every month gives steady Orange Equipment and Power Core income. For F2P players, consistency beats long-term hoarding. Power Cores are one of the most important resources for upgrading hero equipment in Last Z, and Bullseye Booty is one of the best sources if played correctly. If you care about maximizing Power Cores and progressing faster, you need to understand the full math behind this event. I break down: • Exact bullet math • Efficiency comparison 12 vs 50 vs 200 • Power Core totals • Long-term strategy • Why most players waste diamonds Full video guide here: 👉 https://www.youtube.com/watch?v=9FYllaKi66I&list=PLs7OWrq-XhDCaFqvLQes4LHDtxbkLiSv- If this helps, share it with your alliance so nobody wastes bullets.
+- [Wealth Changes the Way You See Spending 💸🎮](https://www.reddit.com/r/LastZShooterRun/comments/1rqwmag/wealth_changes_the_way_you_see_spending/)
+  - **Author:** /u/DigiEmpireIndia
+  - **Date:** Mar 11, 2026, 15:18 UTC
+  - **Text:** A wealthy person’s perspective is spending a lot of money on a game is simply a matter of personal value, prestige and scale. If someone has a large amount of wealth, the money they spend on a game might be a tiny fraction of what they own, similar to how an average person casually spends on movies, hobbies, or eating out. To them, the game provides entertainment, relaxation, and sometimes a sense of achievement or collection, so spending money on it feels justified. On the other hand, people who criticize such spending often view it from their own financial situation, where the same amount of money would be significant, so they assume it must be wasteful. The reality is that both choices, spending and not spending, depend on personal priorities and financial comfort. If someone enjoys the game and the cost is negligible to them, it is simply a hobby. And honestly, worrying about how someone else spends their own money says more about the critic than the spender, because people who are busy building their own wealth usually do not have time to crib about someone else buying skins in a game.
+- [Accounts for sale](https://www.reddit.com/r/LastZShooterRun/comments/1me9h80/accounts_for_sale/)
+  - **Author:** /u/AutoModerator
+  - **Date:** Jul 31, 2025, 18:31 UTC
+  - **Text:** If you have an account for sale, make a comment here outlining the account you're putting up for sale. Don't make a thread outside of this one, it will be removed.
