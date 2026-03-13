@@ -71,14 +71,16 @@ Suggested GA4 views:
 
 - segment or exploration filtered to `event_name = llm_referral_session`
 - breakdown by the event parameter `llm_source`
+- breakdown by the event parameter `llm_channel`
 - landing pages filtered by the event parameter `landing_page`
 - optional secondary breakdown by `referrer_host`
 
 Suggested GA4 setup:
 
-- register `llm_source`, `landing_page`, and `referrer_host` as event-scoped custom dimensions
+- register `llm_source`, `llm_source_type`, `llm_channel`, `landing_page`, and `referrer_host` as event-scoped custom dimensions
 - build an exploration filtered to `event_name = llm_referral_session`
 - compare `chatgpt`, `perplexity`, `copilot`, `bing`, and `grok` over time
+- use `llm_channel` to separate true LLM traffic from Bing/search-surface traffic
 
 This is meant to answer:
 

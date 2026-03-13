@@ -69,22 +69,32 @@
         const params = new URLSearchParams(window.location.search);
         const utmSource = (params.get('utm_source') || '').toLowerCase();
         if (utmSource === 'chatgpt.com') {
-            return { source: 'chatgpt', sourceType: 'utm', referrerHost: getReferrerHost() };
+            return {
+                source: 'chatgpt',
+                sourceType: 'utm',
+                channel: 'llm',
+                referrerHost: getReferrerHost()
+            };
         }
 
         const referrerHost = getReferrerHost();
         const sourceMap = [
-            { match: 'chatgpt.com', source: 'chatgpt' },
-            { match: 'perplexity.ai', source: 'perplexity' },
-            { match: 'copilot.microsoft.com', source: 'copilot' },
-            { match: 'bing.com', source: 'bing' },
-            { match: 'grok.com', source: 'grok' },
-            { match: 'x.com', source: 'x' }
+            { match: 'chatgpt.com', source: 'chatgpt', channel: 'llm' },
+            { match: 'perplexity.ai', source: 'perplexity', channel: 'llm' },
+            { match: 'copilot.microsoft.com', source: 'copilot', channel: 'llm' },
+            { match: 'bing.com', source: 'bing', channel: 'search_surface' },
+            { match: 'grok.com', source: 'grok', channel: 'llm' },
+            { match: 'x.com', source: 'x', channel: 'search_surface' }
         ];
 
         const hit = sourceMap.find((entry) => referrerHost === entry.match || referrerHost.endsWith('.' + entry.match));
         if (!hit) return null;
-        return { source: hit.source, sourceType: 'referrer', referrerHost };
+        return {
+            source: hit.source,
+            sourceType: 'referrer',
+            channel: hit.channel,
+            referrerHost
+        };
     }
 
     function trackLLMReferralSession() {
@@ -103,6 +113,7 @@
         track('llm_referral_session', {
             llm_source: detected.source,
             llm_source_type: detected.sourceType,
+            llm_channel: detected.channel,
             referrer_host: detected.referrerHost || '',
             landing_page: getPath(),
             guide_slug: slugFromUrl(getPath()),
