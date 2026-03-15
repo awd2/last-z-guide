@@ -7,16 +7,82 @@ on:
 jobs:
   ping:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Download sitemap
         run: curl -sS https://lastzguides.com/sitemap.xml -o sitemap.xml
 
-      - name: Build URL list and send to IndexNow
+      - name: Build URL list for IndexNow
+        id: url_list
         env:
           KEY: dd8b3d12471744c4ad67e9dc368f04cd
           KEY_LOC: https://lastzguides.com/dd8b3d12471744c4ad67e9dc368f04cd.txt
         run: |
-          URLS=$(python -c 'import xml.etree.ElementTree as ET, json; ns={"sm":"http://www.sitemaps.org/schemas/sitemap/0.9"}; tree=ET.parse("sitemap.xml"); urls=[loc.text for loc in tree.findall(".//sm:loc", ns)]; print(json.dumps(urls))')
+          python <<'PY'
+          import json
+          import os
+          import urllib.request
+          import xml.etree.ElementTree as ET
+
+          event_name = os.environ["GITHUB_EVENT_NAME"]
+          repo = os.environ["GITHUB_REPOSITORY"]
+          sha = os.environ["GITHUB_SHA"]
+          token = os.environ["GITHUB_TOKEN"]
+
+          ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+          tree = ET.parse("sitemap.xml")
+          sitemap_urls = [loc.text for loc in tree.findall(".//sm:loc", ns)]
+          sitemap_set = set(sitemap_urls)
+
+          print(f"Sitemap URLs found: {len(sitemap_urls)}")
+
+          if event_name == "workflow_dispatch":
+              submit_urls = sitemap_urls
+              changed_files = []
+          else:
+              api_url = f"https://api.github.com/repos/{repo}/commits/{sha}"
+              req = urllib.request.Request(
+                  api_url,
+                  headers={
+                      "Accept": "application/vnd.github+json",
+                      "Authorization": f"Bearer {token}",
+                      "User-Agent": "lastzguides-indexnow-workflow",
+                  },
+              )
+              with urllib.request.urlopen(req) as resp:
+                  payload = json.load(resp)
+
+              changed_files = [item["filename"] for item in payload.get("files", [])]
+              changed_html = [
+                  path for path in changed_files
+                  if path.endswith(".html") and "/" not in path and path != "news-preview.html"
+              ]
+              candidate_urls = [f"https://lastzguides.com/{path}" for path in changed_html]
+              submit_urls = [url for url in candidate_urls if url in sitemap_set]
+
+              print(f"Changed files in commit: {len(changed_files)}")
+              print(f"Changed root HTML files: {len(changed_html)}")
+
+          print(f"URLs selected for IndexNow submit: {len(submit_urls)}")
+          if submit_urls:
+              for url in submit_urls:
+                  print(f" - {url}")
+          else:
+              print("No changed indexable URLs to submit.")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+              fh.write(f"url_count={len(submit_urls)}\n")
+              fh.write(f"urls_json={json.dumps(submit_urls)}\n")
+          PY
+
+      - name: Send URL list to IndexNow
+        if: steps.url_list.outputs.url_count != '0'
+        env:
+          KEY: dd8b3d12471744c4ad67e9dc368f04cd
+          KEY_LOC: https://lastzguides.com/dd8b3d12471744c4ad67e9dc368f04cd.txt
+          URLS: ${{ steps.url_list.outputs.urls_json }}
+        run: |
           payload=$(jq -n \
             --arg host "lastzguides.com" \
             --arg key "$KEY" \
@@ -27,7 +93,17 @@ jobs:
             -H "Content-Type: application/json; charset=utf-8" \
             -d "$payload" https://api.indexnow.org/IndexNow)
           echo "IndexNow HTTP $http_code"
-          cat indexnow-response.json || true
+          echo "Submitted URL count: ${{ steps.url_list.outputs.url_count }}"
+          ls -l indexnow-response.json || true
+          if [ -s indexnow-response.json ]; then
+            cat indexnow-response.json
+          else
+            echo "IndexNow response body is empty."
+          fi
+
+      - name: Skip IndexNow submit when there are no changed indexable URLs
+        if: steps.url_list.outputs.url_count == '0'
+        run: echo "Skipping IndexNow submit because no changed indexable URLs were found."
 
       - name: Authenticate to Google (Search Console)
         id: gsc_auth
