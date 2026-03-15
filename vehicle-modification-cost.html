@@ -40,7 +40,7 @@
     <meta property="og:site_name" content="Last Z Guides">
 
     <meta property="article:published_time" content="2026-01-25">
-    <meta property="article:modified_time" content="2026-03-13">
+    <meta property="article:modified_time" content="2026-03-15">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -63,7 +63,7 @@
             "name": "Last Z Guides"
         },
         "datePublished": "2026-01-25",
-        "dateModified": "2026-03-13"}
+        "dateModified": "2026-03-15"}
     </script>
 
     <script type="application/ld+json">
@@ -391,6 +391,27 @@
             </div>
 
             <aside class="data-sidebar">
+                <div class="info-card">
+                    <div class="panel-title">Vehicle Wrench Planner</div>
+                    <p>Enter your current wrench stash to estimate your next unlock and how far it will take you in the full vehicle path.</p>
+                    <form class="planner-form" id="vehicle-planner" novalidate>
+                        <label for="vehicle-wrenches" class="planner-label">Current wrenches</label>
+                        <div class="planner-row">
+                            <input id="vehicle-wrenches" name="wrenches" type="number" min="0" step="1" inputmode="numeric" placeholder="Example: 10380">
+                            <button type="submit" class="planner-button">Estimate progress</button>
+                        </div>
+                    </form>
+                    <div class="planner-results" id="vehicle-planner-results" hidden>
+                        <p><strong>Progress:</strong> <span data-field="percent"></span></p>
+                        <p><strong>Highest fully affordable milestone:</strong> <span data-field="milestone"></span></p>
+                        <p><strong>Total wrenches used:</strong> <span data-field="used"></span></p>
+                        <p><strong>Wrenches remaining:</strong> <span data-field="remaining"></span></p>
+                        <p><strong>Next major unlock:</strong> <span data-field="next"></span></p>
+                    </div>
+                    <p class="planner-note">Need more wrenches? Use the <a href="gacha-go.html">Gacha Go Guide</a> to plan keys and diamond timing before big vehicle pushes.</p>
+                    <noscript><p class="planner-note">This planner requires JavaScript, but the full wrench table and milestone cards remain available below.</p></noscript>
+                </div>
+
                 <div class="vehicle-panel">
                     <div class="panel-title">Vehicle Milestones</div>
                     <div class="vehicle-grid">
@@ -553,7 +574,7 @@
             </div>
             <div class="faq-item">
                 <h3>How many wrenches do I need for my next vehicle milestone?</h3>
-                <p>Use the cumulative total column to compare your current wrench stash against the next milestone. This is the fastest way to judge whether you can reach Hercules, Destroyer, or Destroyer EX without guessing.</p>
+                <p>Use the wrench planner on this page to compare your current stash against the next major unlock. It shows your highest affordable milestone, remaining wrenches, and how far you are from the next big checkpoint.</p>
             </div>
             <div class="faq-item">
                 <h3>Should I save wrenches or spend them immediately?</h3>
@@ -618,6 +639,113 @@
         <a href="disclosure.html">Disclosure</a>
         </div>
     </footer>
+    <script>
+    (function () {
+        var form = document.getElementById('vehicle-planner');
+        var input = document.getElementById('vehicle-wrenches');
+        var results = document.getElementById('vehicle-planner-results');
+        var rows = Array.from(document.querySelectorAll('.data-table tbody tr'));
+
+        if (!form || !input || !results || rows.length === 0) {
+            return;
+        }
+
+        function parseNumber(text) {
+            return Number(String(text).replace(/,/g, '').trim()) || 0;
+        }
+
+        function formatNumber(value) {
+            return new Intl.NumberFormat('en-US').format(value);
+        }
+
+        var entries = rows.map(function (row) {
+            var cells = row.querySelectorAll('td');
+            if (cells.length < 7) {
+                return null;
+            }
+
+            var level = parseNumber(cells[2].textContent);
+            var cumulative = parseNumber(cells[6].textContent);
+            var nameCell = cells[1];
+            var badge = nameCell.querySelector('.milestone-badge');
+            var name = nameCell.textContent.replace('Milestone', '').trim();
+            var isMilestone = row.classList.contains('milestone-row') || Boolean(badge);
+
+            return {
+                row: row,
+                level: level,
+                name: name,
+                cumulative: cumulative,
+                isMilestone: isMilestone,
+                label: 'Level ' + level + ' — ' + name
+            };
+        }).filter(Boolean);
+
+        if (!entries.length) {
+            return;
+        }
+
+        var totalCost = entries[entries.length - 1].cumulative;
+        var majorMilestones = entries.filter(function (entry) {
+            return entry.isMilestone;
+        });
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var stash = Math.max(0, Number(input.value || 0));
+            var affordableEntry = null;
+            var affordableMilestone = null;
+            var nextMajor = null;
+
+            entries.forEach(function (entry) {
+                if (entry.cumulative <= stash) {
+                    affordableEntry = entry;
+                }
+            });
+
+            majorMilestones.forEach(function (entry) {
+                if (entry.cumulative <= stash) {
+                    affordableMilestone = entry;
+                } else if (!nextMajor) {
+                    nextMajor = entry;
+                }
+            });
+
+            var used = affordableEntry ? affordableEntry.cumulative : 0;
+            var remaining = stash - used;
+            var percent = totalCost > 0 ? (Math.min(stash, totalCost) / totalCost) * 100 : 0;
+
+            results.querySelector('[data-field="percent"]').textContent = percent.toFixed(1) + '% of the full vehicle path';
+            results.querySelector('[data-field="used"]').textContent = formatNumber(used);
+
+            if (stash >= totalCost) {
+                results.querySelector('[data-field="milestone"]').textContent = 'Full table completed';
+                results.querySelector('[data-field="remaining"]').textContent = formatNumber(stash - totalCost) + ' after maxing the table';
+                results.querySelector('[data-field="next"]').textContent = 'All major vehicle unlocks reached';
+            } else {
+                if (affordableMilestone) {
+                    results.querySelector('[data-field="milestone"]').textContent = affordableMilestone.name + ' at level ' + affordableMilestone.level;
+                } else if (affordableEntry) {
+                    results.querySelector('[data-field="milestone"]').textContent = 'Below the first major unlock (' + affordableEntry.label + ')';
+                } else {
+                    results.querySelector('[data-field="milestone"]').textContent = 'Not enough to reach the first table row yet';
+                }
+
+                results.querySelector('[data-field="remaining"]').textContent = formatNumber(Math.max(remaining, 0));
+
+                if (nextMajor) {
+                    var short = Math.max(nextMajor.cumulative - stash, 0);
+                    results.querySelector('[data-field="next"]').textContent = nextMajor.name + ' in ' + formatNumber(short) + ' more wrenches';
+                } else {
+                    results.querySelector('[data-field="next"]').textContent = 'All major vehicle unlocks reached';
+                }
+            }
+
+            results.hidden = false;
+        });
+    }());
+    </script>
     <script src="analytics.js" defer></script>
     <script src="search-loader.js" defer></script>
 </body>

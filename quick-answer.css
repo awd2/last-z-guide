@@ -86,13 +86,20 @@
 .quick-answer--modern .qa-body {
     width: 100%;
     max-width: 64ch;
+    display: grid;
+    gap: 16px;
+}
+
+.data-guide .quick-answer--modern .qa-body,
+.research-branch-guide .quick-answer--modern .qa-body {
+    max-width: 92ch;
 }
 
 /* Lead paragraph */
 .quick-answer--modern .qa-lede {
     font-size: 1.05rem;
     color: #f0f0f0;
-    margin: 0 0 12px 0;
+    margin: 0;
     line-height: 1.45;
 }
 
@@ -104,9 +111,9 @@
 .quick-answer--modern .qa-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin: 0;
     display: grid;
-    gap: 14px;
+    gap: 12px;
 }
 
 /* List items with number + text grid */
@@ -166,7 +173,7 @@
 
 /* Callouts container */
 .quick-answer--modern .qa-callouts {
-    margin-top: 16px;
+    margin-top: 0;
     display: grid;
     gap: 12px;
 }
@@ -233,16 +240,16 @@
         border-radius: 0 16px 16px 0;
     }
 
+    .quick-answer--modern .qa-body {
+        gap: 18px;
+    }
+
     .quick-answer--modern .qa-kicker {
         margin-bottom: 18px;
     }
 
-    .quick-answer--modern .qa-lede {
-        margin-bottom: 18px;
-    }
-
     .quick-answer--modern .qa-list {
-        margin-bottom: 24px;
+        gap: 14px;
     }
 
     .quick-answer--modern .qa-item {
@@ -264,11 +271,12 @@
         border-radius: 0 8px 8px 0;
     }
 
-    .quick-answer--modern .qa-kicker {
-        margin-bottom: 12px;
+    .quick-answer--modern .qa-body {
+        gap: 14px;
     }
 
-    .quick-answer--modern .qa-lede {
+    .quick-answer--modern .qa-kicker {
+        margin-bottom: 12px;
     }
 
     .quick-answer--modern .qa-list {

@@ -89,6 +89,42 @@
     ]
   },
   {
+    "url": "arena.html",
+    "title": "Arena Guide",
+    "category": "Guides",
+    "description": "Best Last Z arena strategy: how to use your 5 daily attempts, when to refresh for weaker targets, why weekly rank matters, and what to buy first in the Arena...",
+    "keywords": [
+      "Last",
+      "Arena",
+      "Guide",
+      "2026",
+      "Best",
+      "Daily",
+      "Wins",
+      "Rank",
+      "Rewards",
+      "and"
+    ]
+  },
+  {
+    "url": "army-building-cost.html",
+    "title": "Army Building Costs",
+    "category": "Guides",
+    "description": "Army Building badge costs in Last Z: total branch cost, exact node totals, Peace Shield follow-up path, and the later Recharge Shield checkpoint for deep com...",
+    "keywords": [
+      "Last",
+      "Army",
+      "Building",
+      "Costs",
+      "2026",
+      "Total",
+      "Badge",
+      "Cost",
+      "and",
+      "Peace"
+    ]
+  },
+  {
     "url": "base-building-order.html",
     "title": "Base Building Order",
     "category": "Progression",
@@ -185,6 +221,24 @@
     ]
   },
   {
+    "url": "diamond-reserve.html",
+    "title": "Diamond Reserve Guide",
+    "category": "Guides",
+    "description": "Best Last Z diamond reserve strategy: what to save diamonds for first, how the Friday shield reserve works, when Lucky Discounter is worth it, and which purc...",
+    "keywords": [
+      "Last",
+      "Diamond",
+      "Reserve",
+      "Guide",
+      "2026",
+      "What",
+      "Save",
+      "Diamonds",
+      "For",
+      "First"
+    ]
+  },
+  {
     "url": "disclosure.html",
     "title": "Disclosure",
     "category": "Site",
@@ -258,7 +312,7 @@
     "url": "f2p.html",
     "title": "F2P Guide",
     "category": "Economy",
-    "description": "Complete Last Z F2P guide: how to get free diamonds, what to buy first, the best spending priority for builders and refugees, and how F2P players stay compet...",
+    "description": "Complete Last Z F2P guide: how to get free diamonds, what to save them for first, the best spending priority for shields, refugees, and event value, and how...",
     "keywords": [
       "f2p",
       "free to play",
@@ -290,9 +344,9 @@
   },
   {
     "url": "field-research.html",
-    "title": "Field Research Guide",
+    "title": "Field Research Costs",
     "category": "Progression",
-    "description": "Field Research badge costs, Recharge Shield value, and unlock requirements to plan badge farming and upgrades efficiently.",
+    "description": "Field Research badge costs in Last Z: total branch cost, Recharge Shield path, node-by-node totals, and what unlocks after Siege to Seize is fully complete.",
     "keywords": [
       "Field Research",
       "field research cost",
@@ -353,6 +407,24 @@
     ]
   },
   {
+    "url": "fully-armed-alliance-cost.html",
+    "title": "Fully Armed Alliance Costs",
+    "category": "Guides",
+    "description": "Fully Armed Alliance badge costs in Last Z: total branch cost, Annihilation and Move Out totals, and the exact node costs behind one of the most aggressive l...",
+    "keywords": [
+      "Last",
+      "Fully",
+      "Armed",
+      "Alliance",
+      "Costs",
+      "2026",
+      "Annihilation",
+      "Move",
+      "Out",
+      "and"
+    ]
+  },
+  {
     "url": "furylord.html",
     "title": "Furylord Guide",
     "category": "Events",
@@ -409,6 +481,42 @@
       "weapon",
       "accessory",
       "mythic"
+    ]
+  },
+  {
+    "url": "gift-center-uid.html",
+    "title": "Gift Center & UID Guide",
+    "category": "Guides",
+    "description": "Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption.",
+    "keywords": [
+      "Last",
+      "Gift",
+      "Center",
+      "UID",
+      "Guide",
+      "2026",
+      "Official",
+      "Login",
+      "Copy",
+      "iPhone"
+    ]
+  },
+  {
+    "url": "hero-training-cost.html",
+    "title": "Hero Training Costs",
+    "category": "Guides",
+    "description": "Hero Training badge costs in Last Z: total branch cost, Cockpit path, node-by-node totals, and where most players should stop before moving to Military Strat...",
+    "keywords": [
+      "Last",
+      "Hero",
+      "Training",
+      "Costs",
+      "2026",
+      "Cockpit",
+      "Path",
+      "and",
+      "Total",
+      "Badge"
     ]
   },
   {
@@ -607,6 +715,42 @@
     ]
   },
   {
+    "url": "military-strategies-cost.html",
+    "title": "Military Strategies Costs",
+    "category": "Guides",
+    "description": "Military Strategies badge costs in Last Z: total branch cost, Recharge Shield path, troop HP milestones, and the branch totals that lead into Peace Shield an...",
+    "keywords": [
+      "Last",
+      "Military",
+      "Strategies",
+      "Costs",
+      "2026",
+      "Total",
+      "Badge",
+      "Cost",
+      "and",
+      "Recharge"
+    ]
+  },
+  {
+    "url": "peace-shield-cost.html",
+    "title": "Peace Shield Costs",
+    "category": "Guides",
+    "description": "Peace Shield badge costs in Last Z: total branch cost, Urgent Rescue path, Recharge Shield totals, and the exact node costs behind one of the most valuable P...",
+    "keywords": [
+      "Last",
+      "Peace",
+      "Shield",
+      "Costs",
+      "2026",
+      "Urgent",
+      "Rescue",
+      "and",
+      "Total",
+      "Badge"
+    ]
+  },
+  {
     "url": "power-guide.html",
     "title": "Power Guide",
     "category": "Progression",
@@ -684,6 +828,42 @@
     ]
   },
   {
+    "url": "radar.html",
+    "title": "Radar Events Guide",
+    "category": "Guides",
+    "description": "Best Last Z radar event strategy: when to claim radar tasks, how often to check them, how to stack them for Alliance Duel, and why radar timing matters for d...",
+    "keywords": [
+      "Last",
+      "Radar",
+      "Events",
+      "Guide",
+      "2026",
+      "Best",
+      "Timing",
+      "Claims",
+      "and",
+      "Alliance"
+    ]
+  },
+  {
+    "url": "redeem-code-not-working.html",
+    "title": "Code Not Working? Gift Center, UID, and Reward Fixes",
+    "category": "Guides",
+    "description": "Last Z code not working? Check Gift Center login, UID mistakes, expired or already-used codes, mailbox delays, and the fastest fixes for failed redemption.",
+    "keywords": [
+      "Last",
+      "Code",
+      "Not",
+      "Working",
+      "2026",
+      "Gift",
+      "Center",
+      "UID",
+      "and",
+      "Reward"
+    ]
+  },
+  {
     "url": "refugees.html",
     "title": "Refugees Guide",
     "category": "Progression",
@@ -698,6 +878,24 @@
       "talent hub",
       "refugee fragments",
       "Last Z"
+    ]
+  },
+  {
+    "url": "research-costs.html",
+    "title": "Research Costs Atlas",
+    "category": "Guides",
+    "description": "All major Last Z research trees in one place: total badge costs, unlock requirements, best stopping points, and links to every exact node-cost tree.",
+    "keywords": [
+      "Last",
+      "Research",
+      "Costs",
+      "Atlas",
+      "2026",
+      "All",
+      "Trees",
+      "Badge",
+      "Totals",
+      "and"
     ]
   },
   {
@@ -746,6 +944,24 @@
     ]
   },
   {
+    "url": "shield.html",
+    "title": "Shield Strategy",
+    "category": "Guides",
+    "description": "Best Last Z shield strategy: when to save 2,000 diamonds by Friday, when to use Alliance Shop 8h and 24h shields instead of diamonds, and how to protect reso...",
+    "keywords": [
+      "Last",
+      "Shield",
+      "Strategy",
+      "2026",
+      "Weekly",
+      "Protection",
+      "Friday",
+      "Diamonds",
+      "and",
+      "Raid"
+    ]
+  },
+  {
     "url": "shooter-stages.html",
     "title": "Shooter Stages Guide",
     "category": "Progression",
@@ -760,6 +976,24 @@
       "stage rewards",
       "progression",
       "last z"
+    ]
+  },
+  {
+    "url": "siege-to-seize-cost.html",
+    "title": "Siege to Seize Costs",
+    "category": "Guides",
+    "description": "Siege to Seize badge costs in Last Z: total branch cost, aggressive research path, final Recharge Shield totals, and the exact node costs before Field Resear...",
+    "keywords": [
+      "Last",
+      "Siege",
+      "Seize",
+      "Costs",
+      "2026",
+      "Total",
+      "Badge",
+      "Cost",
+      "and",
+      "Aggressive"
     ]
   },
   {
@@ -909,6 +1143,24 @@
       "HQ35",
       "boss",
       "raid"
+    ]
+  },
+  {
+    "url": "unit-special-training-cost.html",
+    "title": "Unit Special Training Costs",
+    "category": "Guides",
+    "description": "Unit Special Training badge costs in Last Z: total T10 path cost, major node totals, final Unit Special Training unlock, and the exact branch commitment befo...",
+    "keywords": [
+      "Last",
+      "Unit",
+      "Special",
+      "Training",
+      "Costs",
+      "2026",
+      "T10",
+      "Path",
+      "and",
+      "Total"
     ]
   },
   {

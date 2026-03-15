@@ -1,0 +1,285 @@
+{
+  "page": {
+    "slug": "hero-training-cost",
+    "short_name": "Hero Training",
+    "title": "Last Z Hero Training Costs (2026) — Cockpit Path and Total Badge Cost",
+    "meta_description": "Hero Training badge costs in Last Z: total branch cost, Cockpit path, node-by-node totals, and where most players should stop before moving to Military Strategies.",
+    "keywords": "Last Z Hero Training cost, Last Z Cockpit cost, Last Z Hero Training badges, Last Z research cost, Last Z what to research first",
+    "h1": "Last Z Hero Training Costs — Cockpit Path and Total Badge Cost",
+    "headline": "Last Z Hero Training Costs — Cockpit Path and Total Badge Cost",
+    "guide_meta": "Research Costs • Updated March 15, 2026 • Branch breakdown",
+    "updated_iso": "2026-03-15",
+    "updated_human": "March 15, 2026"
+  },
+  "guide_verified": "Hero Training is one of the cheapest badge branches in Last Z, but its value is concentrated in Cockpit. For most players, this page matters because it shows exactly how much that stop point costs before Hero Training turns into a low-efficiency badge sink.",
+  "data_lede": "Use this page to see the total Hero Training badge cost, understand the full branch structure, and judge whether your current badge stash is enough to reach Cockpit before you move on to Military Strategies.",
+  "quick_answer": {
+    "lede": "<strong>Best Hero Training rule for most players:</strong> push the branch until Cockpit, then stop. The full branch costs 37,270 badges, but Cockpit arrives much earlier and is usually the efficient endpoint before deeper badge investment loses value.",
+    "items": [
+      {
+        "title": "Full branch cost",
+        "detail": "37,270 badges"
+      },
+      {
+        "title": "Best stopping point",
+        "detail": "Cockpit at 19,500 cumulative badges"
+      },
+      {
+        "title": "What comes next",
+        "detail": "Military Strategies for better badge efficiency"
+      }
+    ],
+    "callout": "Hero Training is useful early because Cockpit matters. It becomes much less efficient once you keep paying badges just to finish the branch."
+  },
+  "summary": {
+    "title": "Hero Training Summary",
+    "body": "Hero Training is an early research branch that looks larger than it really is. Most of the branch value comes from reaching Cockpit, not from maxing every later node before shifting into better mid-game research.",
+    "bullets": [
+      {
+        "label": "Total cost",
+        "value": "37,270 badges"
+      },
+      {
+        "label": "Branch size",
+        "value": "13 nodes / 67 total levels"
+      },
+      {
+        "label": "Best stopping point",
+        "value": "Cockpit"
+      },
+      {
+        "label": "Best companion page",
+        "value": "<a href=\"research.html\">Research Guide</a> for the broader order after Hero Training"
+      }
+    ]
+  },
+  "tree": {
+    "title": "Hero Training Tree Overview",
+    "lede": "This overview groups the full Hero Training branch into node totals, so you can see where Cockpit sits and how much each section of the branch actually costs.",
+    "rows": [
+      [
+        "atk-spec-1",
+        "str-train-1"
+      ],
+      [
+        "rose-bloom",
+        "morning-star",
+        "light-of-order"
+      ],
+      [
+        "resource-gathering-1"
+      ],
+      [
+        "rose-barrier",
+        "dawns-light",
+        "shield-of-order"
+      ],
+      [
+        "cockpit"
+      ],
+      [
+        "resource-gathering-2"
+      ],
+      [
+        "atk-spec-2",
+        "str-train-2"
+      ]
+    ]
+  },
+  "nodes": [
+    {
+      "id": "atk-spec-1",
+      "name": "Attack Special Training I",
+      "levels": "Lv. 1-5",
+      "total_badges": 120,
+      "parents": [],
+      "type": "regular"
+    },
+    {
+      "id": "str-train-1",
+      "name": "Strength Training I",
+      "levels": "Lv. 1-5",
+      "total_badges": 120,
+      "parents": [],
+      "type": "regular"
+    },
+    {
+      "id": "rose-bloom",
+      "name": "Rose Bloom",
+      "levels": "Lv. 1-5",
+      "total_badges": 1900,
+      "parents": ["atk-spec-1", "str-train-1"],
+      "type": "regular"
+    },
+    {
+      "id": "morning-star",
+      "name": "Morning Star",
+      "levels": "Lv. 1-5",
+      "total_badges": 1900,
+      "parents": ["atk-spec-1", "str-train-1"],
+      "type": "regular"
+    },
+    {
+      "id": "light-of-order",
+      "name": "Light of Order",
+      "levels": "Lv. 1-5",
+      "total_badges": 1900,
+      "parents": ["atk-spec-1", "str-train-1"],
+      "type": "regular"
+    },
+    {
+      "id": "resource-gathering-1",
+      "name": "Resource Gathering I",
+      "levels": "Lv. 1-3",
+      "total_badges": 1910,
+      "parents": ["rose-bloom", "morning-star", "light-of-order"],
+      "type": "regular"
+    },
+    {
+      "id": "rose-barrier",
+      "name": "Rose Barrier",
+      "levels": "Lv. 1-5",
+      "total_badges": 3150,
+      "parents": ["resource-gathering-1"],
+      "type": "regular"
+    },
+    {
+      "id": "dawns-light",
+      "name": "Dawn's Light",
+      "levels": "Lv. 1-5",
+      "total_badges": 3150,
+      "parents": ["resource-gathering-1"],
+      "type": "regular"
+    },
+    {
+      "id": "shield-of-order",
+      "name": "Shield of Order",
+      "levels": "Lv. 1-5",
+      "total_badges": 3150,
+      "parents": ["resource-gathering-1"],
+      "type": "regular"
+    },
+    {
+      "id": "cockpit",
+      "name": "Cockpit",
+      "levels": "Lv. 1",
+      "total_badges": 2200,
+      "parents": ["rose-barrier", "dawns-light", "shield-of-order"],
+      "type": "highlight"
+    },
+    {
+      "id": "resource-gathering-2",
+      "name": "Resource Gathering II",
+      "levels": "Lv. 1-3",
+      "total_badges": 2850,
+      "parents": ["cockpit"],
+      "type": "regular"
+    },
+    {
+      "id": "atk-spec-2",
+      "name": "Attack Special Training II",
+      "levels": "Lv. 1-10",
+      "total_badges": 7460,
+      "parents": ["resource-gathering-2"],
+      "type": "regular"
+    },
+    {
+      "id": "str-train-2",
+      "name": "Strength Training II",
+      "levels": "Lv. 1-10",
+      "total_badges": 7460,
+      "parents": ["resource-gathering-2"],
+      "type": "regular"
+    }
+  ],
+  "table": {
+    "title": "Full Hero Training Node Cost Table",
+    "intro": "These totals show how many badges each node consumes across its full level range. Use this view when you care about branch planning instead of single-level micro-costs."
+  },
+  "requirements": {
+    "title": "Where Hero Training Fits in the Research Order",
+    "intro": "Hero Training sits in the early research path before the stronger mid-game combat branches. Most players do not need to treat it as a full-completion branch before moving on.",
+    "bullets": [
+      "Hero Training is part of the early combat research setup before Military Strategies.",
+      "Cockpit is the practical branch goal for most F2P and low-spender accounts.",
+      "The branch matters because it gives a clean early stopping point, not because it should always be maxed immediately."
+    ],
+    "followup": "For the broader order around Hero Training, Military Strategies, and Peace Shield, use the <a href=\"research.html\">Research Guide</a>."
+  },
+  "checkpoints": {
+    "title": "Key Hero Training Checkpoints",
+    "items": [
+      {
+        "title": "Core opener",
+        "badges": "240 badges",
+        "text": "Attack Special Training I and Strength Training I together cost only 240 badges, so the early branch is very cheap."
+      },
+      {
+        "title": "First real branch structure",
+        "badges": "7,850 badges",
+        "text": "Once you clear the three middle nodes and Resource Gathering I, you have already committed enough badges that finishing the Cockpit path makes sense."
+      },
+      {
+        "title": "Cockpit reached",
+        "badges": "19,500 badges",
+        "text": "This is the efficient stopping point for most players. After Cockpit, Hero Training gives much weaker badge efficiency than Military Strategies."
+      },
+      {
+        "title": "Full branch",
+        "badges": "37,270 badges",
+        "text": "Maxing the whole branch is still cheap compared with later research, but most accounts get better value from moving on before finishing every late node."
+      }
+    ]
+  },
+  "next_steps": {
+    "title": "What Comes Next After Hero Training",
+    "paragraphs": [
+      "For most accounts, Hero Training is not the branch you keep maxing just because it is available. The efficient route is to reach <strong>Cockpit</strong>, lock in the meaningful value there, and then shift badge pressure into <strong>Military Strategies</strong> and later <strong>Peace Shield</strong>.",
+      "If you are following the broader order rather than maxing one branch at a time, use the <a href=\"research.html\">Research Guide</a> and the <a href=\"tech.html\">Tech Deep Dive</a>. Those pages explain why Hero Training stops being a great badge trade once Cockpit is done."
+    ]
+  },
+  "faq": [
+    {
+      "question": "How many badges does Hero Training cost in Last Z?",
+      "answer": "Hero Training costs 37,270 badges in total. That makes it much cheaper than later branches like Peace Shield, Field Research, or Unit Special Training."
+    },
+    {
+      "question": "Where should I stop in Hero Training?",
+      "answer": "For most players, the efficient stopping point is Cockpit. It arrives at 19,500 cumulative badges and gives the branch its main practical value before badge efficiency drops."
+    },
+    {
+      "question": "Is it worth maxing Hero Training before Military Strategies?",
+      "answer": "Usually no. Once Cockpit is done, most accounts get better combat value by moving their next badge investment into Military Strategies instead of fully maxing Hero Training first."
+    },
+    {
+      "question": "Why does Cockpit matter so much in Hero Training?",
+      "answer": "Cockpit is the main reason most players invest in Hero Training at all. It is the branch checkpoint that makes the badge spend feel justified before the later nodes turn into lower-efficiency upgrades."
+    },
+    {
+      "question": "What research should come after Hero Training?",
+      "answer": "For most players, Hero Training should be followed by Military Strategies, then Peace Shield for Urgent Rescue, instead of pouring every remaining badge into Hero Training completion."
+    }
+  ],
+  "related_guides": [
+    {
+      "href": "research.html",
+      "label": "Research Guide"
+    },
+    {
+      "href": "tech.html",
+      "label": "Tech Deep Dive"
+    },
+    {
+      "href": "alliance-recognition-cost.html",
+      "label": "Alliance Recognition Costs"
+    },
+    {
+      "href": "field-research.html",
+      "label": "Field Research"
+    },
+    {
+      "href": "power-guide.html",
+      "label": "Power Guide"
+    }
+  ]
+}

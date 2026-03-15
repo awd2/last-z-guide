@@ -1,0 +1,130 @@
+{
+  "page": {
+    "slug": "fully-armed-alliance-cost",
+    "short_name": "Fully Armed Alliance",
+    "title": "Last Z Fully Armed Alliance Costs (2026) — Annihilation, Move Out, and Total Badge Cost",
+    "meta_description": "Fully Armed Alliance badge costs in Last Z: total branch cost, Annihilation and Move Out totals, and the exact node costs behind one of the most aggressive late combat trees.",
+    "keywords": "Last Z Fully Armed Alliance cost, Last Z Annihilation cost, Last Z Move Out cost, Last Z FAA badges, Last Z aggressive research",
+    "h1": "Last Z Fully Armed Alliance Costs — Annihilation, Move Out, and Total Badge Cost",
+    "headline": "Last Z Fully Armed Alliance Costs — Annihilation, Move Out, and Total Badge Cost",
+    "guide_meta": "Research Costs • Updated March 15, 2026 • Branch breakdown",
+    "updated_iso": "2026-03-15",
+    "updated_human": "March 15, 2026"
+  },
+  "guide_verified": "Fully Armed Alliance is one of the most aggressive combat branches in Last Z. Players usually ask about it for Annihilation and Move Out, but the full branch is a serious badge sink and should not be treated as an automatic early priority.",
+  "data_lede": "Use this page to see the total Fully Armed Alliance badge cost, understand where Annihilation and Move Out sit inside the branch, and judge whether this aggressive path is really worth your badges yet.",
+  "quick_answer": {
+    "lede": "<strong>Best Fully Armed Alliance rule for most players:</strong> treat this as a late aggressive branch, not an early badge priority. The full path costs 492,920 badges, and most of its identity is tied to <strong>Annihilation</strong> and <strong>Move Out</strong> rather than efficient early value.",
+    "items": [
+      { "title": "Full branch cost", "detail": "492,920 badges" },
+      { "title": "Key unlock", "detail": "Annihilation at 148,820 cumulative badges" },
+      { "title": "Final wall", "detail": "Move Out finishes the branch at 492,920 badges" }
+    ],
+    "callout": "Fully Armed Alliance can be powerful, but it is usually not where most F2P and low-spender accounts should put badges before their core survival and efficiency branches are done."
+  },
+  "summary": {
+    "title": "Fully Armed Alliance Summary",
+    "body": "Fully Armed Alliance is a late aggressive combat branch with several distinct cost walls. The branch feels manageable at first, then quickly turns into a major badge commitment once Annihilation and Move Out enter the picture.",
+    "bullets": [
+      { "label": "Total cost", "value": "492,920 badges" },
+      { "label": "Branch size", "value": "18 nodes / 210 total levels" },
+      { "label": "Key unlock", "value": "Annihilation" },
+      { "label": "Final node", "value": "Move Out" }
+    ]
+  },
+  "tree": {
+    "title": "Fully Armed Alliance Tree Overview",
+    "lede": "This overview groups the full Fully Armed Alliance branch into node totals, so you can see where the branch changes from moderate cost to a true late-game badge wall.",
+    "rows": [
+      ["mechanical-repair"],
+      ["piercing-shot", "tough-shield"],
+      ["bazooka", "hold-fast"],
+      ["circuitous-tactics", "alloy-composite"],
+      ["peace-breaker"],
+      ["annihilation"],
+      ["riders-attack-training", "shooters-attack-training", "assaulters-attack-training"],
+      ["riders-defense-training", "shooters-defense-training", "assaulters-defense-training"],
+      ["mechanical-repair-2", "repair-kit"],
+      ["move-out"]
+    ]
+  },
+  "nodes": [
+    { "id": "mechanical-repair", "name": "Mechanical Repair", "levels": "Lv. 1-10", "total_badges": 7390, "parents": [], "type": "regular" },
+    { "id": "piercing-shot", "name": "Piercing Shot", "levels": "Lv. 1-10", "total_badges": 9210, "parents": ["mechanical-repair"], "type": "regular" },
+    { "id": "tough-shield", "name": "Tough Shield", "levels": "Lv. 1-10", "total_badges": 9210, "parents": ["mechanical-repair"], "type": "regular" },
+    { "id": "bazooka", "name": "Bazooka", "levels": "Lv. 1-10", "total_badges": 10970, "parents": ["piercing-shot"], "type": "regular" },
+    { "id": "hold-fast", "name": "Hold Fast", "levels": "Lv. 1-10", "total_badges": 10970, "parents": ["tough-shield"], "type": "regular" },
+    { "id": "circuitous-tactics", "name": "Circuitous Tactics", "levels": "Lv. 1-10", "total_badges": 10970, "parents": ["bazooka"], "type": "regular" },
+    { "id": "alloy-composite", "name": "Alloy Composite", "levels": "Lv. 1-10", "total_badges": 10970, "parents": ["hold-fast"], "type": "regular" },
+    { "id": "peace-breaker", "name": "Peace Breaker", "levels": "Lv. 1-10", "total_badges": 14670, "parents": ["circuitous-tactics", "alloy-composite"], "type": "regular" },
+    { "id": "annihilation", "name": "Annihilation", "levels": "Lv. 1-20", "total_badges": 64460, "parents": ["peace-breaker"], "type": "highlight" },
+    { "id": "riders-attack-training", "name": "Rider's Attack Training", "levels": "Lv. 1-10", "total_badges": 25750, "parents": ["annihilation"], "type": "regular" },
+    { "id": "shooters-attack-training", "name": "Shooter's Attack Training", "levels": "Lv. 1-10", "total_badges": 25750, "parents": ["annihilation"], "type": "regular" },
+    { "id": "assaulters-attack-training", "name": "Assaulter's Attack Training", "levels": "Lv. 1-10", "total_badges": 25750, "parents": ["annihilation"], "type": "regular" },
+    { "id": "riders-defense-training", "name": "Rider's Defense Training", "levels": "Lv. 1-10", "total_badges": 25750, "parents": ["riders-attack-training"], "type": "regular" },
+    { "id": "shooters-defense-training", "name": "Shooter's Defense Training", "levels": "Lv. 1-10", "total_badges": 25750, "parents": ["shooters-attack-training"], "type": "regular" },
+    { "id": "assaulters-defense-training", "name": "Assaulter's Defense Training", "levels": "Lv. 1-10", "total_badges": 25750, "parents": ["assaulters-attack-training"], "type": "regular" },
+    { "id": "mechanical-repair-2", "name": "Mechanical Repair II", "levels": "Lv. 1-10", "total_badges": 32200, "parents": ["riders-defense-training", "assaulters-defense-training"], "type": "regular" },
+    { "id": "repair-kit", "name": "Repair Kit", "levels": "Lv. 1-10", "total_badges": 32200, "parents": ["assaulters-defense-training", "shooters-defense-training"], "type": "regular" },
+    { "id": "move-out", "name": "Move Out", "levels": "Lv. 1-20", "total_badges": 125200, "parents": ["mechanical-repair-2", "repair-kit"], "type": "reward" }
+  ],
+  "table": {
+    "title": "Full Fully Armed Alliance Node Cost Table",
+    "intro": "These totals show how many badges each Fully Armed Alliance node consumes across its full level range. Use this view when you want the exact cost behind the branch's aggressive late-game identity."
+  },
+  "requirements": {
+    "title": "Why This Branch Is Usually a Late Priority",
+    "intro": "Fully Armed Alliance is one of the easiest branches to romanticize and one of the easiest to overbuy too early.",
+    "bullets": [
+      "The branch stays moderate early, then spikes hard at Annihilation and Move Out.",
+      "Most low-spender and F2P accounts should not treat it as an early badge priority.",
+      "It makes the most sense when your account is already built for aggressive combat play."
+    ],
+    "followup": "This is why many players leave Fully Armed Alliance for later even if the branch itself looks exciting."
+  },
+  "checkpoints": {
+    "title": "Key Fully Armed Alliance Checkpoints",
+    "items": [
+      { "title": "Early branch frame", "badges": "84,360 badges", "text": "By Peace Breaker, the branch still looks manageable, which is one reason players underestimate what comes next." },
+      { "title": "Annihilation reached", "badges": "148,820 badges", "text": "Annihilation is the first major branch-defining unlock and a big reason players talk about Fully Armed Alliance at all." },
+      { "title": "Post-Annihilation combat block", "badges": "367,720 badges", "text": "After the six troop training nodes and the mechanical-repair pair, the branch is already deep into late-game badge territory." },
+      { "title": "Full branch", "badges": "492,920 badges", "text": "Move Out alone adds 125,200 badges at the end, which makes the branch far more expensive than its early rows suggest." }
+    ]
+  },
+  "next_steps": {
+    "title": "How to Think About Fully Armed Alliance",
+    "paragraphs": [
+      "Fully Armed Alliance is a branch for players who are already comfortable committing badges to aggressive late-game combat. If your account still needs stronger foundation branches, this is often not the best next research target.",
+      "Use the <a href=\"tech.html\">Tech Deep Dive</a> and <a href=\"pvp.html\">PvP Guide</a> if you are deciding whether the account context really justifies an Annihilation or Move Out push."
+    ]
+  },
+  "faq": [
+    {
+      "question": "How many badges does Fully Armed Alliance cost in Last Z?",
+      "answer": "Fully Armed Alliance costs 492,920 badges in total. It is a large late-game branch and gets especially expensive at Annihilation and Move Out."
+    },
+    {
+      "question": "Where is Annihilation in Fully Armed Alliance?",
+      "answer": "Annihilation arrives at 148,820 cumulative badges and is one of the main reasons players care about this branch."
+    },
+    {
+      "question": "What is the final node in Fully Armed Alliance?",
+      "answer": "The final node is Move Out, which costs 125,200 badges by itself and brings the full branch total to 492,920 badges."
+    },
+    {
+      "question": "Is Fully Armed Alliance an early priority?",
+      "answer": "Usually no. Most accounts should handle cheaper and more efficient badge branches before Fully Armed Alliance becomes a sensible investment."
+    },
+    {
+      "question": "Why do players delay Fully Armed Alliance?",
+      "answer": "Because the early branch cost understates how expensive the late branch really becomes. Annihilation and especially Move Out turn it into a serious badge sink."
+    }
+  ],
+  "related_guides": [
+    { "href": "tech.html", "label": "Tech Deep Dive" },
+    { "href": "pvp.html", "label": "PvP & Canyon Clash" },
+    { "href": "research.html", "label": "Research Guide" },
+    { "href": "power-guide.html", "label": "Power Guide" },
+    { "href": "heroes.html", "label": "Heroes Tier List" }
+  ]
+}

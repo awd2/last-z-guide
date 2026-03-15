@@ -1,0 +1,136 @@
+{
+  "page": {
+    "slug": "army-building-cost",
+    "short_name": "Army Building",
+    "title": "Last Z Army Building Costs (2026) — Total Badge Cost and Peace Shield Follow-Up",
+    "meta_description": "Army Building badge costs in Last Z: total branch cost, exact node totals, Peace Shield follow-up path, and the later Recharge Shield checkpoint for deep combat research.",
+    "keywords": "Last Z Army Building cost, Last Z Army Building badges, Last Z Peace Shield follow-up, Last Z recharge shield, Last Z combat research cost",
+    "h1": "Last Z Army Building Costs — Total Badge Cost and Peace Shield Follow-Up",
+    "headline": "Last Z Army Building Costs — Total Badge Cost and Peace Shield Follow-Up",
+    "guide_meta": "Research Costs • Updated March 15, 2026 • Branch breakdown",
+    "updated_iso": "2026-03-15",
+    "updated_human": "March 15, 2026"
+  },
+  "guide_verified": "Army Building is a deep combat branch that opens only after Peace Shield is fully complete. It is much more serious than the mid-game branches before it, so exact node totals matter before you commit.",
+  "data_lede": "Use this page to see the total Army Building badge cost, understand the branch structure, and judge whether your account is really ready for this late Peace Shield follow-up.",
+  "quick_answer": {
+    "lede": "<strong>Best Army Building rule for most players:</strong> do not treat this as an early branch. The full path costs 627,130 badges, requires 100% Peace Shield, and only starts to make sense once your earlier research value is already secured.",
+    "items": [
+      { "title": "Full branch cost", "detail": "627,130 badges" },
+      { "title": "Unlock requirement", "detail": "100% Peace Shield" },
+      { "title": "Best use", "detail": "Late-game combat scaling, not early efficiency" }
+    ],
+    "callout": "Army Building is where badge planning stops being about cheap efficiency and starts becoming a real endgame account decision."
+  },
+  "summary": {
+    "title": "Army Building Summary",
+    "body": "Army Building is a large follow-up branch that only opens once Peace Shield is fully complete. It adds a lot of combat weight, but it is far enough into the tree that many accounts should think carefully before moving into it.",
+    "bullets": [
+      { "label": "Total cost", "value": "627,130 badges" },
+      { "label": "Branch size", "value": "23 nodes / 256 total levels" },
+      { "label": "Unlock requirement", "value": "100% Peace Shield" },
+      { "label": "Final node", "value": "Recharge Shield" }
+    ]
+  },
+  "tree": {
+    "title": "Army Building Tree Overview",
+    "lede": "This overview groups the full Army Building branch into node totals, so you can see where the large stat walls begin after the cheaper opening nodes.",
+    "rows": [
+      ["combat-policy", "interceptions"],
+      ["field-training", "camo-coating"],
+      ["demolition-crew"],
+      ["alloy-plate", "enhanced-armour", "aerocraft-material"],
+      ["mobility-enhancement", "melee-combat", "weapon-upgrading"],
+      ["stronger-armor", "shield-upgrade", "tactical-cover"],
+      ["joint-operation", "mobile-defense"],
+      ["combat-policy-2", "interceptions-2"],
+      ["field-training-2", "camo-coating-2"],
+      ["fire-up", "armor-upgrade"],
+      ["recharge-shield"]
+    ]
+  },
+  "nodes": [
+    { "id": "combat-policy", "name": "Combat Policy I", "levels": "Lv. 1-10", "total_badges": 4180, "parents": [], "type": "regular" },
+    { "id": "interceptions", "name": "Interceptions I", "levels": "Lv. 1-10", "total_badges": 4180, "parents": [], "type": "regular" },
+    { "id": "field-training", "name": "Field Training I", "levels": "Lv. 1-10", "total_badges": 4180, "parents": ["combat-policy", "interceptions"], "type": "regular" },
+    { "id": "camo-coating", "name": "Camo Coating I", "levels": "Lv. 1-10", "total_badges": 4180, "parents": ["combat-policy", "interceptions"], "type": "regular" },
+    { "id": "demolition-crew", "name": "Demolition Crew", "levels": "Lv. 1", "total_badges": 420, "parents": ["field-training", "camo-coating"], "type": "regular" },
+    { "id": "alloy-plate", "name": "Alloy Plate", "levels": "Lv. 1-3", "total_badges": 4030, "parents": ["demolition-crew"], "type": "regular" },
+    { "id": "enhanced-armour", "name": "Enhanced Armour", "levels": "Lv. 1-3", "total_badges": 4030, "parents": ["demolition-crew"], "type": "regular" },
+    { "id": "aerocraft-material", "name": "Aerocraft Material", "levels": "Lv. 1-3", "total_badges": 4030, "parents": ["demolition-crew"], "type": "regular" },
+    { "id": "mobility-enhancement", "name": "Mobility Enhancement", "levels": "Lv. 1-10", "total_badges": 23800, "parents": ["alloy-plate", "enhanced-armour"], "type": "regular" },
+    { "id": "melee-combat", "name": "Melee Combat", "levels": "Lv. 1-10", "total_badges": 23800, "parents": ["enhanced-armour"], "type": "regular" },
+    { "id": "weapon-upgrading", "name": "Weapon Upgrading", "levels": "Lv. 1-10", "total_badges": 23800, "parents": ["enhanced-armour", "aerocraft-material"], "type": "regular" },
+    { "id": "stronger-armor", "name": "Stronger Armor", "levels": "Lv. 1-10", "total_badges": 23800, "parents": ["mobility-enhancement", "melee-combat"], "type": "regular" },
+    { "id": "shield-upgrade", "name": "Shield Upgrade", "levels": "Lv. 1-10", "total_badges": 23800, "parents": ["melee-combat"], "type": "regular" },
+    { "id": "tactical-cover", "name": "Tactical Cover", "levels": "Lv. 1-10", "total_badges": 23800, "parents": ["melee-combat", "weapon-upgrading"], "type": "regular" },
+    { "id": "joint-operation", "name": "Joint Operation II", "levels": "Lv. 1-15", "total_badges": 48610, "parents": ["stronger-armor", "shield-upgrade"], "type": "regular" },
+    { "id": "mobile-defense", "name": "Mobile Defense II", "levels": "Lv. 1-15", "total_badges": 48610, "parents": ["shield-upgrade", "tactical-cover"], "type": "regular" },
+    { "id": "combat-policy-2", "name": "Combat Policy II", "levels": "Lv. 1-15", "total_badges": 48610, "parents": ["joint-operation", "mobile-defense"], "type": "regular" },
+    { "id": "interceptions-2", "name": "Interceptions II", "levels": "Lv. 1-15", "total_badges": 48610, "parents": ["joint-operation", "mobile-defense"], "type": "regular" },
+    { "id": "field-training-2", "name": "Field Training II", "levels": "Lv. 1-15", "total_badges": 48610, "parents": ["combat-policy-2", "interceptions-2"], "type": "regular" },
+    { "id": "camo-coating-2", "name": "Camo Coating II", "levels": "Lv. 1-15", "total_badges": 48610, "parents": ["combat-policy-2", "interceptions-2"], "type": "regular" },
+    { "id": "fire-up", "name": "Fire Up", "levels": "Lv. 1-20", "total_badges": 69520, "parents": ["field-training-2", "camo-coating-2"], "type": "regular" },
+    { "id": "armor-upgrade", "name": "Armor Upgrade", "levels": "Lv. 1-20", "total_badges": 69520, "parents": ["field-training-2", "camo-coating-2"], "type": "regular" },
+    { "id": "recharge-shield", "name": "Recharge Shield", "levels": "Lv. 1-15", "total_badges": 24400, "parents": ["fire-up", "armor-upgrade"], "type": "reward" }
+  ],
+  "table": {
+    "title": "Full Army Building Node Cost Table",
+    "intro": "These totals show how many badges each Army Building node consumes across its full level range. Use this view when you want the exact cost of the late Peace Shield follow-up."
+  },
+  "requirements": {
+    "title": "Unlock Requirements and Why This Branch Matters",
+    "intro": "Army Building only appears once Peace Shield is fully complete, which already makes it a late-game branch by definition.",
+    "bullets": [
+      "Unlock requirement: 100% Peace Shield.",
+      "This branch is a true follow-up, not an alternative early path.",
+      "The biggest cost walls arrive well after the opening nodes."
+    ],
+    "followup": "That is why Army Building is usually planned as part of a late combat roadmap rather than a broad early recommendation."
+  },
+  "checkpoints": {
+    "title": "Key Army Building Checkpoints",
+    "items": [
+      { "title": "Opening structure cleared", "badges": "29,230 badges", "text": "The first eight nodes are still relatively controlled and mostly serve as setup before the real branch cost begins." },
+      { "title": "Mid combat block finished", "badges": "172,030 badges", "text": "After the two three-node combat clusters, Army Building has already become a major badge commitment." },
+      { "title": "Second major wall", "badges": "463,690 badges", "text": "The repeated 15-level branches are where Army Building starts to feel like a true late-game cost wall." },
+      { "title": "Full branch", "badges": "627,130 badges", "text": "The late Fire Up, Armor Upgrade, and final Recharge Shield turn Army Building into one of the site's larger research commitments." }
+    ]
+  },
+  "next_steps": {
+    "title": "How to Use Army Building in Your Research Plan",
+    "paragraphs": [
+      "Army Building is less about early efficiency and more about whether your account is already ready for a serious late-game badge branch. It only makes sense after Peace Shield is fully done and your earlier value branches are already locked in.",
+      "If you are still comparing whether to push Army Building or something even deeper, use the <a href=\"unit-special-training-cost.html\">Unit Special Training Costs</a> page to compare the next major badge wall."
+    ]
+  },
+  "faq": [
+    {
+      "question": "How many badges does Army Building cost in Last Z?",
+      "answer": "Army Building costs 627,130 badges in total. It is a large late-game branch and should be planned as a major badge commitment."
+    },
+    {
+      "question": "What unlocks Army Building?",
+      "answer": "Army Building requires 100% Peace Shield before it becomes available."
+    },
+    {
+      "question": "Is Army Building an early priority?",
+      "answer": "No. Army Building is a late Peace Shield follow-up branch and usually only makes sense once earlier high-efficiency branches are already done."
+    },
+    {
+      "question": "What is the final node in Army Building?",
+      "answer": "The final node is Recharge Shield, which costs 24,400 badges on top of a branch that is already very expensive before it."
+    },
+    {
+      "question": "Is Army Building cheaper than Unit Special Training?",
+      "answer": "Yes. Army Building is still expensive, but it is far cheaper than Unit Special Training and sits earlier in the late-game research ladder."
+    }
+  ],
+  "related_guides": [
+    { "href": "peace-shield-cost.html", "label": "Peace Shield Costs" },
+    { "href": "unit-special-training-cost.html", "label": "Unit Special Training Costs" },
+    { "href": "research.html", "label": "Research Guide" },
+    { "href": "tech.html", "label": "Tech Deep Dive" },
+    { "href": "power-guide.html", "label": "Power Guide" }
+  ]
+}

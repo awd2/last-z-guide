@@ -1,0 +1,126 @@
+{
+  "page": {
+    "slug": "peace-shield-cost",
+    "short_name": "Peace Shield",
+    "title": "Last Z Peace Shield Costs (2026) — Urgent Rescue and Total Badge Cost",
+    "meta_description": "Peace Shield badge costs in Last Z: total branch cost, Urgent Rescue path, Recharge Shield totals, and the exact node costs behind one of the most valuable PvP branches.",
+    "keywords": "Last Z Peace Shield cost, Last Z Urgent Rescue cost, Last Z Peace Shield badges, Last Z Recharge Shield, Last Z PvP research",
+    "h1": "Last Z Peace Shield Costs — Urgent Rescue and Total Badge Cost",
+    "headline": "Last Z Peace Shield Costs — Urgent Rescue and Total Badge Cost",
+    "guide_meta": "Research Costs • Updated March 15, 2026 • Branch breakdown",
+    "updated_iso": "2026-03-15",
+    "updated_human": "March 15, 2026"
+  },
+  "guide_verified": "Peace Shield is one of the most important combat research branches in Last Z because it contains Urgent Rescue and ends in a major Recharge Shield node. This is the branch many players should prioritize once Military Strategies is in place.",
+  "data_lede": "Use this page to see the total Peace Shield badge cost, understand the branch structure, and plan the exact cost to reach Urgent Rescue before you decide whether to finish the full tree.",
+  "quick_answer": {
+    "lede": "<strong>Best Peace Shield rule for most players:</strong> this branch matters because of <strong>Urgent Rescue</strong> and the deep defensive HP path behind it. The full branch costs 267,613 badges, but its first truly game-changing checkpoint appears much earlier.",
+    "items": [
+      { "title": "Full branch cost", "detail": "267,613 badges" },
+      { "title": "Key unlock", "detail": "Urgent Rescue at 39,913 cumulative badges" },
+      { "title": "Best use", "detail": "PvP survivability and lower unit-loss pressure" }
+    ],
+    "callout": "If your server has real PvP pressure, Peace Shield is usually more important than badge spending on weaker prestige branches."
+  },
+  "summary": {
+    "title": "Peace Shield Summary",
+    "body": "Peace Shield is one of the defining PvP branches in Last Z. It is much more expensive than Military Strategies, but its value is concentrated in unlocks that change real combat outcomes instead of only improving small paper stats.",
+    "bullets": [
+      { "label": "Total cost", "value": "267,613 badges" },
+      { "label": "Branch size", "value": "16 nodes / 165 total levels" },
+      { "label": "Key unlock", "value": "Urgent Rescue" },
+      { "label": "Final node", "value": "Recharge Shield" }
+    ]
+  },
+  "tree": {
+    "title": "Peace Shield Tree Overview",
+    "lede": "This overview groups the full Peace Shield branch into node totals, so you can see how Urgent Rescue sits inside the branch and where the expensive late-game nodes begin.",
+    "rows": [
+      ["auto-repair"],
+      ["combat-policy", "interceptions"],
+      ["mobility-enhancement", "melee-combat", "weapon-upgrading"],
+      ["target-training", "arms-assembly", "quick-assembly"],
+      ["urgent-rescue"],
+      ["stronger-armor", "shield-upgrade", "tactical-cover"],
+      ["combat-policy-2", "interceptions-2"],
+      ["recharge-shield"]
+    ]
+  },
+  "nodes": [
+    { "id": "auto-repair", "name": "Auto Repair", "levels": "Lv. 1-10", "total_badges": 2363, "parents": [], "type": "regular" },
+    { "id": "combat-policy", "name": "Combat Policy", "levels": "Lv. 1-10", "total_badges": 3470, "parents": ["auto-repair"], "type": "regular" },
+    { "id": "interceptions", "name": "Interceptions", "levels": "Lv. 1-10", "total_badges": 3470, "parents": ["auto-repair"], "type": "regular" },
+    { "id": "mobility-enhancement", "name": "Mobility Enhancement", "levels": "Lv. 1-10", "total_badges": 4530, "parents": ["combat-policy"], "type": "regular" },
+    { "id": "melee-combat", "name": "Melee Combat", "levels": "Lv. 1-10", "total_badges": 4530, "parents": ["combat-policy", "interceptions"], "type": "regular" },
+    { "id": "weapon-upgrading", "name": "Weapon Upgrading", "levels": "Lv. 1-10", "total_badges": 4530, "parents": ["interceptions"], "type": "regular" },
+    { "id": "target-training", "name": "Target Training", "levels": "Lv. 1-5", "total_badges": 2690, "parents": ["weapon-upgrading"], "type": "regular" },
+    { "id": "arms-assembly", "name": "Arms Assembly", "levels": "Lv. 1-5", "total_badges": 2690, "parents": ["melee-combat"], "type": "regular" },
+    { "id": "quick-assembly", "name": "Quick Assembly", "levels": "Lv. 1-5", "total_badges": 2690, "parents": ["mobility-enhancement"], "type": "regular" },
+    { "id": "urgent-rescue", "name": "Urgent Rescue", "levels": "Lv. 1-10", "total_badges": 8950, "parents": ["target-training", "arms-assembly", "quick-assembly"], "type": "highlight" },
+    { "id": "stronger-armor", "name": "Stronger Armor", "levels": "Lv. 1-10", "total_badges": 11270, "parents": ["urgent-rescue"], "type": "regular" },
+    { "id": "shield-upgrade", "name": "Shield Upgrade", "levels": "Lv. 1-10", "total_badges": 11270, "parents": ["urgent-rescue"], "type": "regular" },
+    { "id": "tactical-cover", "name": "Tactical Cover", "levels": "Lv. 1-10", "total_badges": 11270, "parents": ["urgent-rescue"], "type": "regular" },
+    { "id": "combat-policy-2", "name": "Combat Policy II", "levels": "Lv. 1-20", "total_badges": 68460, "parents": ["stronger-armor", "shield-upgrade"], "type": "regular" },
+    { "id": "interceptions-2", "name": "Interceptions II", "levels": "Lv. 1-20", "total_badges": 68460, "parents": ["tactical-cover", "shield-upgrade"], "type": "regular" },
+    { "id": "recharge-shield", "name": "Recharge Shield", "levels": "Lv. 1-10", "total_badges": 56970, "parents": ["interceptions-2", "combat-policy-2"], "type": "reward" }
+  ],
+  "table": {
+    "title": "Full Peace Shield Node Cost Table",
+    "intro": "These totals show how many badges each Peace Shield node consumes across its full level range. Use this view when you want the exact cost of Urgent Rescue and the late defensive path."
+  },
+  "requirements": {
+    "title": "Unlock Requirements and Why This Branch Matters",
+    "intro": "Peace Shield is not an entry-level branch. It opens only after you have already built a strong foundation in Shelter Building and Military Strategies.",
+    "bullets": [
+      "Unlock requirement: 50% Shelter Building.",
+      "Unlock requirement: 45% Military Strategies.",
+      "Army Building later requires 100% Peace Shield."
+    ],
+    "followup": "This is why Peace Shield usually comes after Military Strategies in the strongest research order, but before more aggressive branches when survivability matters."
+  },
+  "checkpoints": {
+    "title": "Key Peace Shield Checkpoints",
+    "items": [
+      { "title": "Early setup finished", "badges": "30,963 badges", "text": "By the time you clear the first nine nodes, you have already paid most of the price needed to reach Urgent Rescue." },
+      { "title": "Urgent Rescue reached", "badges": "39,913 badges", "text": "Urgent Rescue is the first major branch-defining unlock and the main reason many players push Peace Shield early." },
+      { "title": "Late defensive block", "badges": "73,723 badges", "text": "After the Stronger Armor, Shield Upgrade, and Tactical Cover trio, the branch starts transitioning into much more expensive late-game nodes." },
+      { "title": "Full branch", "badges": "267,613 badges", "text": "The two 20-level policy branches and final Recharge Shield are what turn Peace Shield into a serious long-term badge commitment." }
+    ]
+  },
+  "next_steps": {
+    "title": "What Comes Next After Peace Shield",
+    "paragraphs": [
+      "Peace Shield is often the branch that separates \"good paper stats\" from research that changes real PvP outcomes. Once Urgent Rescue is secured, you can decide whether to finish the full branch or move toward <a href=\"siege-to-seize-cost.html\">Siege to Seize Costs</a> depending on your server and playstyle.",
+      "If your goal is the later Army Building path, Peace Shield is also a prerequisite. Use the <a href=\"army-building-cost.html\">Army Building Costs</a> page when you are planning beyond this branch."
+    ]
+  },
+  "faq": [
+    {
+      "question": "How many badges does Peace Shield cost in Last Z?",
+      "answer": "Peace Shield costs 267,613 badges in total. It is a much bigger commitment than Military Strategies, but it contains some of the strongest defensive value in the game."
+    },
+    {
+      "question": "Where is Urgent Rescue in Peace Shield?",
+      "answer": "Urgent Rescue sits in the middle of the branch and arrives at 39,913 cumulative badges. It is the first major reason many players push Peace Shield."
+    },
+    {
+      "question": "Is Peace Shield worth doing before Siege to Seize?",
+      "answer": "Usually yes. For most accounts, Peace Shield gives stronger real-world survivability and loss reduction than rushing into the more aggressive Siege to Seize path first."
+    },
+    {
+      "question": "What unlocks Peace Shield in Last Z?",
+      "answer": "Peace Shield requires 50% Shelter Building and 45% Military Strategies before it appears in your lab."
+    },
+    {
+      "question": "Does Peace Shield unlock Army Building?",
+      "answer": "Yes. Army Building requires 100% Peace Shield, which is one reason many late-game accounts eventually finish this branch."
+    }
+  ],
+  "related_guides": [
+    { "href": "military-strategies-cost.html", "label": "Military Strategies Costs" },
+    { "href": "siege-to-seize-cost.html", "label": "Siege to Seize Costs" },
+    { "href": "army-building-cost.html", "label": "Army Building Costs" },
+    { "href": "research.html", "label": "Research Guide" },
+    { "href": "pvp.html", "label": "PvP & Canyon Clash" }
+  ]
+}

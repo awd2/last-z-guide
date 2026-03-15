@@ -1,0 +1,193 @@
+{
+  "page": {
+    "slug": "military-strategies-cost",
+    "short_name": "Military Strategies",
+    "title": "Last Z Military Strategies Costs (2026) — Total Badge Cost and Recharge Shield Path",
+    "meta_description": "Military Strategies badge costs in Last Z: total branch cost, Recharge Shield path, troop HP milestones, and the branch totals that lead into Peace Shield and Siege to Seize.",
+    "keywords": "Last Z Military Strategies cost, Last Z Military Strategies badges, Last Z Recharge Shield cost, Last Z troop HP research, Last Z Peace Shield unlock",
+    "h1": "Last Z Military Strategies Costs — Total Badge Cost and Recharge Shield Path",
+    "headline": "Last Z Military Strategies Costs — Total Badge Cost and Recharge Shield Path",
+    "guide_meta": "Research Costs • Updated March 15, 2026 • Branch breakdown",
+    "updated_iso": "2026-03-15",
+    "updated_human": "March 15, 2026"
+  },
+  "guide_verified": "Military Strategies is one of the highest-efficiency badge branches in Last Z. It is cheap compared with late research, gives practical troop-value upgrades, and acts as the bridge into both Peace Shield and Siege to Seize.",
+  "data_lede": "Use this page to see the total Military Strategies badge cost, understand the branch structure, and plan how much you need before the key troop HP and Recharge Shield checkpoints.",
+  "quick_answer": {
+    "lede": "<strong>Best Military Strategies rule for most players:</strong> this is a branch you usually do not skip. The full path costs 79,816 badges, Recharge Shield arrives early at 22,096 cumulative badges, and the branch unlocks both Peace Shield and Siege to Seize.",
+    "items": [
+      {
+        "title": "Full branch cost",
+        "detail": "79,816 badges"
+      },
+      {
+        "title": "Key unlock",
+        "detail": "Recharge Shield at 22,096 cumulative badges"
+      },
+      {
+        "title": "What it opens",
+        "detail": "Peace Shield at 45% and Siege to Seize at 40%"
+      }
+    ],
+    "callout": "Military Strategies is one of the cleanest examples of good badge efficiency: it is cheap, useful, and directly unlocks stronger research later."
+  },
+  "summary": {
+    "title": "Military Strategies Summary",
+    "body": "Military Strategies is a compact combat branch that gives efficient troop-value upgrades before the expensive late game trees begin. It is one of the strongest badge investments for players who want useful progress instead of prestige completion.",
+    "bullets": [
+      {
+        "label": "Total cost",
+        "value": "79,816 badges"
+      },
+      {
+        "label": "Branch size",
+        "value": "18 nodes / 149 total levels"
+      },
+      {
+        "label": "Key unlock",
+        "value": "Recharge Shield"
+      },
+      {
+        "label": "Unlock requirement",
+        "value": "100% Elite Troops"
+      }
+    ]
+  },
+  "tree": {
+    "title": "Military Strategies Tree Overview",
+    "lede": "This overview groups the full Military Strategies branch into node totals, so you can see the early efficient path, Recharge Shield, and the later specialization nodes clearly.",
+    "rows": [
+      [
+        "fire-up",
+        "armor-upgrade"
+      ],
+      [
+        "joint-operation",
+        "mobile-defense"
+      ],
+      [
+        "combat-policy",
+        "interceptions"
+      ],
+      [
+        "demolition-crew"
+      ],
+      [
+        "quick-assembly",
+        "arms-assembly",
+        "target-training"
+      ],
+      [
+        "recharge-shield"
+      ],
+      [
+        "fire-up-2",
+        "armor-upgrade-2"
+      ],
+      [
+        "field-training",
+        "camo-cloating"
+      ],
+      [
+        "alloy-plate",
+        "enhanced-armor",
+        "aerocraft-material"
+      ]
+    ]
+  },
+  "nodes": [
+    { "id": "fire-up", "name": "Fire Up", "levels": "Lv. 1-10", "total_badges": 2129, "parents": [], "type": "regular" },
+    { "id": "armor-upgrade", "name": "Armor Upgrade", "levels": "Lv. 1-10", "total_badges": 2129, "parents": [], "type": "regular" },
+    { "id": "joint-operation", "name": "Joint Operation", "levels": "Lv. 1-10", "total_badges": 2129, "parents": ["fire-up"], "type": "regular" },
+    { "id": "mobile-defense", "name": "Mobile Defense", "levels": "Lv. 1-10", "total_badges": 2129, "parents": ["armor-upgrade"], "type": "regular" },
+    { "id": "combat-policy", "name": "Combat Policy", "levels": "Lv. 1-10", "total_badges": 2830, "parents": ["joint-operation"], "type": "regular" },
+    { "id": "interceptions", "name": "Interceptions", "levels": "Lv. 1-10", "total_badges": 2830, "parents": ["mobile-defense"], "type": "regular" },
+    { "id": "demolition-crew", "name": "Demolition Crew", "levels": "Lv. 1", "total_badges": 570, "parents": ["combat-policy", "interceptions"], "type": "regular" },
+    { "id": "quick-assembly", "name": "Quick Assembly", "levels": "Lv. 1-5", "total_badges": 2120, "parents": ["demolition-crew"], "type": "regular" },
+    { "id": "arms-assembly", "name": "Arms Assembly", "levels": "Lv. 1-5", "total_badges": 2120, "parents": ["demolition-crew"], "type": "regular" },
+    { "id": "target-training", "name": "Target Training", "levels": "Lv. 1-5", "total_badges": 2120, "parents": ["demolition-crew"], "type": "regular" },
+    { "id": "recharge-shield", "name": "Recharge Shield", "levels": "Lv. 1-3", "total_badges": 990, "parents": ["quick-assembly", "arms-assembly", "target-training"], "type": "highlight" },
+    { "id": "fire-up-2", "name": "Fire Up II", "levels": "Lv. 1-10", "total_badges": 7050, "parents": ["recharge-shield"], "type": "regular" },
+    { "id": "armor-upgrade-2", "name": "Armor Upgrade II", "levels": "Lv. 1-10", "total_badges": 7050, "parents": ["recharge-shield"], "type": "regular" },
+    { "id": "field-training", "name": "Field Training", "levels": "Lv. 1-10", "total_badges": 7050, "parents": ["fire-up-2"], "type": "regular" },
+    { "id": "camo-cloating", "name": "Camo Cloaking", "levels": "Lv. 1-10", "total_badges": 7050, "parents": ["armor-upgrade-2"], "type": "regular" },
+    { "id": "alloy-plate", "name": "Alloy Plate", "levels": "Lv. 1-10", "total_badges": 9840, "parents": ["field-training"], "type": "regular" },
+    { "id": "enhanced-armor", "name": "Enhanced Armor", "levels": "Lv. 1-10", "total_badges": 9840, "parents": ["field-training", "camo-cloating"], "type": "regular" },
+    { "id": "aerocraft-material", "name": "Aerocraft Material", "levels": "Lv. 1-10", "total_badges": 9840, "parents": ["camo-cloating"], "type": "regular" }
+  ],
+  "table": {
+    "title": "Full Military Strategies Node Cost Table",
+    "intro": "These totals show how many badges each Military Strategies node consumes across its full level range. Use this view when you care about branch planning and unlock timing."
+  },
+  "requirements": {
+    "title": "Unlock Requirements and Why This Branch Matters",
+    "intro": "Military Strategies unlocks after you complete Elite Troops and then becomes one of the most important bridge branches in the whole combat tree.",
+    "bullets": [
+      "Unlock requirement: 100% Elite Troops.",
+      "40% Military Strategies unlocks Siege to Seize.",
+      "45% Military Strategies plus 50% Shelter Building unlocks Peace Shield."
+    ],
+    "followup": "This is why Military Strategies usually comes right after Hero Training in the strongest research order for most accounts."
+  },
+  "checkpoints": {
+    "title": "Key Military Strategies Checkpoints",
+    "items": [
+      {
+        "title": "Early opener",
+        "badges": "4,258 badges",
+        "text": "Fire Up and Armor Upgrade together cost only 4,258 badges, so the branch starts cheaply."
+      },
+      {
+        "title": "First full combat block",
+        "badges": "14,176 badges",
+        "text": "After the first six ten-level nodes, you already have the core cheap value that makes Military Strategies so efficient."
+      },
+      {
+        "title": "Recharge Shield reached",
+        "badges": "22,096 badges",
+        "text": "Recharge Shield arrives early and is one of the main reasons this branch pays back its badge cost so well."
+      },
+      {
+        "title": "Full branch",
+        "badges": "79,816 badges",
+        "text": "Even fully completed, Military Strategies stays far cheaper than Peace Shield, Army Building, or Unit Special Training."
+      }
+    ]
+  },
+  "next_steps": {
+    "title": "What Comes Next After Military Strategies",
+    "paragraphs": [
+      "For most players, Military Strategies is not a branch you rush past. It is usually worth doing properly because it gives efficient combat value and opens two critical next branches: <strong>Peace Shield</strong> and <strong>Siege to Seize</strong>.",
+      "If your next goal is survivability and loss reduction, move into <a href=\"peace-shield-cost.html\">Peace Shield Costs</a>. If you are planning the more aggressive path or want the unlock route toward Field Research, move into <a href=\"siege-to-seize-cost.html\">Siege to Seize Costs</a>."
+    ]
+  },
+  "faq": [
+    {
+      "question": "How many badges does Military Strategies cost in Last Z?",
+      "answer": "Military Strategies costs 79,816 badges in total. That is very cheap compared with deeper combat branches, which is one reason it is such a strong early investment."
+    },
+    {
+      "question": "Is Military Strategies worth finishing?",
+      "answer": "Usually yes. The branch is efficient, gives practical combat value, and unlocks both Peace Shield and Siege to Seize."
+    },
+    {
+      "question": "What does Military Strategies unlock?",
+      "answer": "Military Strategies unlocks Siege to Seize at 40% progress and Peace Shield at 45% progress when your Shelter Building branch is also at 50%."
+    },
+    {
+      "question": "Where is Recharge Shield in Military Strategies?",
+      "answer": "Recharge Shield sits in the middle of the branch and arrives at 22,096 cumulative badges. It is one of the strongest value checkpoints on the tree."
+    },
+    {
+      "question": "Is Military Strategies better than pushing Hero Training further?",
+      "answer": "Usually yes. Once Cockpit is done, Military Strategies gives stronger badge efficiency than spending more badges just to finish Hero Training."
+    }
+  ],
+  "related_guides": [
+    { "href": "hero-training-cost.html", "label": "Hero Training Costs" },
+    { "href": "peace-shield-cost.html", "label": "Peace Shield Costs" },
+    { "href": "siege-to-seize-cost.html", "label": "Siege to Seize Costs" },
+    { "href": "research.html", "label": "Research Guide" },
+    { "href": "tech.html", "label": "Tech Deep Dive" }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "page": {
+    "slug": "siege-to-seize-cost",
+    "short_name": "Siege to Seize",
+    "title": "Last Z Siege to Seize Costs (2026) — Total Badge Cost and Aggressive Path",
+    "meta_description": "Siege to Seize badge costs in Last Z: total branch cost, aggressive research path, final Recharge Shield totals, and the exact node costs before Field Research unlocks.",
+    "keywords": "Last Z Siege to Seize cost, Last Z Siege to Seize badges, Last Z Recharge Shield cost, Last Z Field Research unlock, Last Z aggressive research",
+    "h1": "Last Z Siege to Seize Costs — Total Badge Cost and Aggressive Path",
+    "headline": "Last Z Siege to Seize Costs — Total Badge Cost and Aggressive Path",
+    "guide_meta": "Research Costs • Updated March 15, 2026 • Branch breakdown",
+    "updated_iso": "2026-03-15",
+    "updated_human": "March 15, 2026"
+  },
+  "guide_verified": "Siege to Seize is the more aggressive combat branch after Military Strategies. It is useful, but it is usually not the first place most players should dump badges if Peace Shield value is still missing.",
+  "data_lede": "Use this page to see the total Siege to Seize badge cost, understand the branch structure, and judge how much you need before the major late checkpoints and Field Research unlock path.",
+  "quick_answer": {
+    "lede": "<strong>Best Siege to Seize rule for most players:</strong> treat it as the aggressive follow-up branch after your core survival research is already in place. The full branch costs 267,375 badges and is usually stronger once Peace Shield essentials are done first.",
+    "items": [
+      { "title": "Full branch cost", "detail": "267,375 badges" },
+      { "title": "Unlock requirement", "detail": "40% Military Strategies" },
+      { "title": "Why it matters", "detail": "Aggressive path that leads toward Field Research" }
+    ],
+    "callout": "Siege to Seize improves offensive pressure, but many accounts get better practical value by securing Peace Shield before they commit fully here."
+  },
+  "summary": {
+    "title": "Siege to Seize Summary",
+    "body": "Siege to Seize is one of the core aggressive research branches in Last Z. It is a real branch, not a side branch, but it usually makes the most sense once your account already has the key survivability tools that Peace Shield provides.",
+    "bullets": [
+      { "label": "Total cost", "value": "267,375 badges" },
+      { "label": "Branch size", "value": "18 nodes / 170 total levels" },
+      { "label": "Unlock requirement", "value": "40% Military Strategies" },
+      { "label": "What it leads to", "value": "<a href=\"field-research.html\">Field Research</a>" }
+    ]
+  },
+  "tree": {
+    "title": "Siege to Seize Tree Overview",
+    "lede": "This overview groups the full Siege to Seize branch into node totals, so you can see the early aggressive path, the Demolition Crew checkpoints, and the final Recharge Shield route.",
+    "rows": [
+      ["demolition-crew"],
+      ["joint-operation", "mobile-defense"],
+      ["mobility-enhancement", "melee-combat", "weapon-upgrading"],
+      ["load-module", "propulsion"],
+      ["quick-assembly", "arms-assembly", "target-training"],
+      ["demolition-crew-2"],
+      ["stronger-armor", "shield-upgrade", "tactical-cover"],
+      ["joint-operation-2", "mobile-defense-2"],
+      ["recharge-shield"]
+    ]
+  },
+  "nodes": [
+    { "id": "demolition-crew", "name": "Demolition Crew I", "levels": "Lv. 1-5", "total_badges": 911, "parents": [], "type": "regular" },
+    { "id": "joint-operation", "name": "Joint Operation I", "levels": "Lv. 1-10", "total_badges": 2677, "parents": ["demolition-crew"], "type": "regular" },
+    { "id": "mobile-defense", "name": "Mobile Defense I", "levels": "Lv. 1-10", "total_badges": 2677, "parents": ["demolition-crew"], "type": "regular" },
+    { "id": "mobility-enhancement", "name": "Mobility Enhancement", "levels": "Lv. 1-10", "total_badges": 4450, "parents": ["joint-operation"], "type": "regular" },
+    { "id": "melee-combat", "name": "Melee Combat", "levels": "Lv. 1-10", "total_badges": 4450, "parents": ["joint-operation", "mobile-defense"], "type": "regular" },
+    { "id": "weapon-upgrading", "name": "Weapon Upgrading", "levels": "Lv. 1-10", "total_badges": 4450, "parents": ["mobile-defense"], "type": "regular" },
+    { "id": "load-module", "name": "Load Module", "levels": "Lv. 1-10", "total_badges": 6190, "parents": ["mobility-enhancement", "melee-combat"], "type": "regular" },
+    { "id": "propulsion", "name": "Propulsion", "levels": "Lv. 1-10", "total_badges": 6190, "parents": ["melee-combat", "weapon-upgrading"], "type": "regular" },
+    { "id": "quick-assembly", "name": "Quick Assembly", "levels": "Lv. 1-5", "total_badges": 4430, "parents": ["load-module"], "type": "regular" },
+    { "id": "arms-assembly", "name": "Arms Assembly", "levels": "Lv. 1-5", "total_badges": 4430, "parents": ["load-module", "propulsion"], "type": "regular" },
+    { "id": "target-training", "name": "Target Training", "levels": "Lv. 1-5", "total_badges": 4430, "parents": ["propulsion"], "type": "regular" },
+    { "id": "demolition-crew-2", "name": "Demolition Crew II", "levels": "Lv. 1-10", "total_badges": 13010, "parents": ["quick-assembly", "arms-assembly", "target-training"], "type": "highlight" },
+    { "id": "stronger-armor", "name": "Stronger Armor", "levels": "Lv. 1-10", "total_badges": 15720, "parents": ["demolition-crew-2"], "type": "regular" },
+    { "id": "shield-upgrade", "name": "Shield Upgrade", "levels": "Lv. 1-10", "total_badges": 15720, "parents": ["demolition-crew-2"], "type": "regular" },
+    { "id": "tactical-cover", "name": "Tactical Cover", "levels": "Lv. 1-10", "total_badges": 15720, "parents": ["demolition-crew-2"], "type": "regular" },
+    { "id": "joint-operation-2", "name": "Joint Operation II", "levels": "Lv. 1-20", "total_badges": 70400, "parents": ["stronger-armor", "shield-upgrade"], "type": "regular" },
+    { "id": "mobile-defense-2", "name": "Mobile Defense II", "levels": "Lv. 1-20", "total_badges": 70400, "parents": ["shield-upgrade", "tactical-cover"], "type": "regular" },
+    { "id": "recharge-shield", "name": "Recharge Shield", "levels": "Lv. 1-10", "total_badges": 21120, "parents": ["joint-operation-2", "mobile-defense-2"], "type": "reward" }
+  ],
+  "table": {
+    "title": "Full Siege to Seize Node Cost Table",
+    "intro": "These totals show how many badges each Siege to Seize node consumes across its full level range. Use this view when you care about the branch cost before you commit to the aggressive path."
+  },
+  "requirements": {
+    "title": "Unlock Requirements and Why This Branch Matters",
+    "intro": "Siege to Seize opens before the deepest late-game branches, but it is still a serious badge commitment. It works best as a deliberate aggressive path, not as a random detour.",
+    "bullets": [
+      "Unlock requirement: 40% Military Strategies.",
+      "100% Siege to Seize unlocks Field Research.",
+      "This branch is usually stronger after your key Peace Shield value is already secured."
+    ],
+    "followup": "If you are using badges mainly for safer PvP value, Peace Shield often deserves priority before a full Siege to Seize push."
+  },
+  "checkpoints": {
+    "title": "Key Siege to Seize Checkpoints",
+    "items": [
+      { "title": "Early branch setup", "badges": "19,615 badges", "text": "The first six nodes get you through the early aggressive frame of the branch without yet touching the expensive late nodes." },
+      { "title": "Demolition Crew II reached", "badges": "58,295 badges", "text": "This is the first clearly expensive checkpoint and a good line for deciding whether you want to keep going on the aggressive path." },
+      { "title": "Late pre-final block", "badges": "105,455 badges", "text": "After the defensive trio, the branch turns into two very expensive 20-level nodes plus the final Recharge Shield." },
+      { "title": "Full branch", "badges": "267,375 badges", "text": "Finishing Siege to Seize is a serious badge investment and is often best justified when you are already planning Field Research next." }
+    ]
+  },
+  "next_steps": {
+    "title": "What Comes Next After Siege to Seize",
+    "paragraphs": [
+      "For many accounts, the main reason to fully finish Siege to Seize is not the branch by itself, but what it unlocks next: <a href=\"field-research.html\">Field Research</a>. If that is your plan, this page gives you the exact badge commitment before you cross that line.",
+      "If you are still deciding between aggressive and defensive badge allocation, compare this branch against <a href=\"peace-shield-cost.html\">Peace Shield Costs</a> before committing fully."
+    ]
+  },
+  "faq": [
+    {
+      "question": "How many badges does Siege to Seize cost in Last Z?",
+      "answer": "Siege to Seize costs 267,375 badges in total. It is a large branch and should usually be treated as a deliberate mid-to-late combat investment."
+    },
+    {
+      "question": "What unlocks Siege to Seize?",
+      "answer": "Siege to Seize unlocks after you reach 40% Military Strategies."
+    },
+    {
+      "question": "Is Siege to Seize better than Peace Shield first?",
+      "answer": "Usually no. Most players get more immediate survivability and real combat value from Peace Shield before they fully commit to Siege to Seize."
+    },
+    {
+      "question": "Does Siege to Seize unlock Field Research?",
+      "answer": "Yes. Reaching 100% Siege to Seize unlocks Field Research, which is one of the biggest reasons some accounts finish this branch."
+    },
+    {
+      "question": "What is the key checkpoint in Siege to Seize?",
+      "answer": "A practical early checkpoint is Demolition Crew II at 58,295 cumulative badges, because it tells you whether you really want to continue toward the expensive late nodes."
+    }
+  ],
+  "related_guides": [
+    { "href": "military-strategies-cost.html", "label": "Military Strategies Costs" },
+    { "href": "peace-shield-cost.html", "label": "Peace Shield Costs" },
+    { "href": "field-research.html", "label": "Field Research" },
+    { "href": "research.html", "label": "Research Guide" },
+    { "href": "pvp.html", "label": "PvP & Canyon Clash" }
+  ]
+}

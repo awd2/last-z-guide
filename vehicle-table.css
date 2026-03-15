@@ -297,8 +297,32 @@
     contain-intrinsic-size: 400px;
 }
 
+.data-guide .info-card > *,
+.research-branch-guide .info-card > *,
+.data-guide .table-followup > *,
+.research-branch-guide .table-followup > * {
+    max-width: 92ch;
+}
+
+.info-card ul,
+.table-followup ul {
+    margin: 12px 0 0;
+    padding-left: 20px;
+}
+
+.info-card li,
+.table-followup li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
 .table-followup {
     margin-top: 18px;
+}
+
+.quick-answer--modern + .table-followup,
+.quick-answer--modern + .info-card {
+    margin-top: 0;
 }
 
 .panel-title {

@@ -1,7 +1,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://lastzguides.com/</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -19,12 +19,24 @@
     </url>
     <url>
         <loc>https://lastzguides.com/alliance-duel.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://lastzguides.com/alliance-recognition-cost.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://lastzguides.com/arena.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://lastzguides.com/army-building-cost.html</loc>
         <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -43,7 +55,7 @@
     </url>
     <url>
         <loc>https://lastzguides.com/codes.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
@@ -55,9 +67,15 @@
     </url>
     <url>
         <loc>https://lastzguides.com/daily.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://lastzguides.com/diamond-reserve.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://lastzguides.com/disclosure.html</loc>
@@ -79,13 +97,13 @@
     </url>
     <url>
         <loc>https://lastzguides.com/events.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://lastzguides.com/f2p.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -97,7 +115,7 @@
     </url>
     <url>
         <loc>https://lastzguides.com/field-research.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -112,6 +130,12 @@
         <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://lastzguides.com/fully-armed-alliance-cost.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://lastzguides.com/furylord.html</loc>
@@ -132,6 +156,18 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://lastzguides.com/gift-center-uid.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://lastzguides.com/hero-training-cost.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://lastzguides.com/heroes-es.html</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
@@ -139,7 +175,7 @@
     </url>
     <url>
         <loc>https://lastzguides.com/heroes.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -151,7 +187,7 @@
     </url>
     <url>
         <loc>https://lastzguides.com/hq.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -163,13 +199,25 @@
     </url>
     <url>
         <loc>https://lastzguides.com/lucky-discounter.html</loc>
-        <lastmod>2026-03-13</lastmod>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://lastzguides.com/military-strategies-cost.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://lastzguides.com/peace-shield-cost.html</loc>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://lastzguides.com/power-guide.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -181,7 +229,7 @@
     </url>
     <url>
         <loc>https://lastzguides.com/pvp.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -192,20 +240,44 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://lastzguides.com/radar.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://lastzguides.com/redeem-code-not-working.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://lastzguides.com/refugees.html</loc>
         <lastmod>2026-03-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://lastzguides.com/research-costs.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://lastzguides.com/research.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://lastzguides.com/resources.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://lastzguides.com/shield.html</loc>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -216,26 +288,32 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://lastzguides.com/siege-to-seize-cost.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://lastzguides.com/start.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://lastzguides.com/steel.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://lastzguides.com/svs.html</loc>
-        <lastmod>2026-03-11</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://lastzguides.com/tech.html</loc>
-        <lastmod>2026-03-13</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -264,8 +342,14 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://lastzguides.com/unit-special-training-cost.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://lastzguides.com/vehicle-modification-cost.html</loc>
-        <lastmod>2026-03-13</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>

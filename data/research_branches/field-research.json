@@ -1,0 +1,316 @@
+{
+  "page": {
+    "slug": "field-research",
+    "short_name": "Field Research",
+    "title": "Last Z Field Research Costs (2026) — Recharge Shield Path and Total Badge Cost",
+    "meta_description": "Field Research badge costs in Last Z: total branch cost, Recharge Shield path, node-by-node totals, and what unlocks after Siege to Seize is fully complete.",
+    "keywords": "Last Z Field Research cost, Last Z Field Research badges, Last Z Recharge Shield cost, Last Z Siege to Seize follow-up, Last Z research cost",
+    "h1": "Last Z Field Research Costs — Recharge Shield Path and Total Badge Cost",
+    "headline": "Last Z Field Research Costs — Recharge Shield Path and Total Badge Cost",
+    "guide_meta": "Research Costs • Updated March 15, 2026 • Branch breakdown",
+    "updated_iso": "2026-03-15",
+    "updated_human": "March 15, 2026"
+  },
+  "guide_verified": "Field Research is the heavy follow-up branch after Siege to Seize. It matters because Recharge Shield sits at the end of an already expensive path, so this page shows exactly where the real badge wall begins.",
+  "data_lede": "Use this page to see the total Field Research badge cost, understand the full branch structure, and judge whether your account is ready to push all the way to Recharge Shield after Siege to Seize.",
+  "quick_answer": {
+    "lede": "<strong>Best Field Research rule for most players:</strong> treat the branch as a serious late research commitment, not a casual follow-up. The full path costs 594,430 badges, and the last three nodes alone consume 411,500 of that total before you finish Recharge Shield.",
+    "items": [
+      {
+        "title": "Full branch cost",
+        "detail": "594,430 badges"
+      },
+      {
+        "title": "Unlock requirement",
+        "detail": "100% Siege to Seize"
+      },
+      {
+        "title": "Final node",
+        "detail": "Recharge Shield at 594,430 cumulative badges"
+      }
+    ],
+    "callout": "Field Research becomes dramatically more expensive at the end. The two level-20 nodes and Recharge Shield together make up most of the branch cost."
+  },
+  "summary": {
+    "title": "Field Research Summary",
+    "body": "Field Research is where branch planning stops being about cheap node hopping and starts becoming a real badge wall. The opening and middle rows are manageable, but the final stretch to Recharge Shield is where most of the total cost lives.",
+    "bullets": [
+      {
+        "label": "Total cost",
+        "value": "594,430 badges"
+      },
+      {
+        "label": "Branch size",
+        "value": "14 nodes / 145 total levels"
+      },
+      {
+        "label": "Unlock requirement",
+        "value": "100% Siege to Seize"
+      },
+      {
+        "label": "What it unlocks next",
+        "value": "Shooter Training, Assaulter Training, and Rider Training"
+      }
+    ]
+  },
+  "tree": {
+    "title": "Field Research Tree Overview",
+    "lede": "This overview groups the full Field Research branch into node totals, so you can see how the three-way combat path narrows back into the two huge level-20 nodes before Recharge Shield.",
+    "rows": [
+      [
+        "field-training",
+        "camo-coating"
+      ],
+      [
+        "mobility-enhancement",
+        "melee-combat",
+        "weapon-upgrading"
+      ],
+      [
+        "target-training",
+        "arms-assembly",
+        "quick-assembly"
+      ],
+      [
+        "stronger-armor",
+        "shield-upgrade",
+        "tactical-cover"
+      ],
+      [
+        "field-training-2",
+        "camo-coating-2"
+      ],
+      [
+        "recharge-shield"
+      ]
+    ]
+  },
+  "nodes": [
+    {
+      "id": "field-training",
+      "name": "Field Training I",
+      "levels": "Lv. 1-10",
+      "total_badges": 10180,
+      "parents": [],
+      "type": "regular"
+    },
+    {
+      "id": "camo-coating",
+      "name": "Camo Coating I",
+      "levels": "Lv. 1-10",
+      "total_badges": 10180,
+      "parents": [],
+      "type": "regular"
+    },
+    {
+      "id": "mobility-enhancement",
+      "name": "Mobility Enhancement",
+      "levels": "Lv. 1-10",
+      "total_badges": 15270,
+      "parents": [
+        "field-training"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "melee-combat",
+      "name": "Melee Combat",
+      "levels": "Lv. 1-10",
+      "total_badges": 15270,
+      "parents": [
+        "field-training",
+        "camo-coating"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "weapon-upgrading",
+      "name": "Weapon Upgrading",
+      "levels": "Lv. 1-10",
+      "total_badges": 15270,
+      "parents": [
+        "camo-coating"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "target-training",
+      "name": "Target Training",
+      "levels": "Lv. 1-5",
+      "total_badges": 8220,
+      "parents": [
+        "mobility-enhancement"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "arms-assembly",
+      "name": "Arms Assembly",
+      "levels": "Lv. 1-5",
+      "total_badges": 8220,
+      "parents": [
+        "melee-combat"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "quick-assembly",
+      "name": "Quick Assembly",
+      "levels": "Lv. 1-5",
+      "total_badges": 8220,
+      "parents": [
+        "weapon-upgrading"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "stronger-armor",
+      "name": "Stronger Armor",
+      "levels": "Lv. 1-10",
+      "total_badges": 30700,
+      "parents": [
+        "target-training"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "shield-upgrade",
+      "name": "Shield Upgrade",
+      "levels": "Lv. 1-10",
+      "total_badges": 30700,
+      "parents": [
+        "arms-assembly"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "tactical-cover",
+      "name": "Tactical Cover",
+      "levels": "Lv. 1-10",
+      "total_badges": 30700,
+      "parents": [
+        "quick-assembly"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "field-training-2",
+      "name": "Field Training II",
+      "levels": "Lv. 1-20",
+      "total_badges": 154600,
+      "parents": [
+        "stronger-armor",
+        "shield-upgrade"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "camo-coating-2",
+      "name": "Camo Coating II",
+      "levels": "Lv. 1-20",
+      "total_badges": 154600,
+      "parents": [
+        "shield-upgrade",
+        "tactical-cover"
+      ],
+      "type": "regular"
+    },
+    {
+      "id": "recharge-shield",
+      "name": "Recharge Shield",
+      "levels": "Lv. 1-10",
+      "total_badges": 102300,
+      "parents": [
+        "field-training-2",
+        "camo-coating-2"
+      ],
+      "type": "highlight"
+    }
+  ],
+  "table": {
+    "title": "Full Field Research Node Cost Table",
+    "intro": "These totals show how many badges each node consumes across its full level range. Use this view when you care about branch planning instead of single-level micro-costs."
+  },
+  "requirements": {
+    "title": "Where Field Research Fits in the Research Order",
+    "intro": "Field Research only appears after the account has already cleared the core mid-game research path. It is the branch that follows Siege to Seize once you are ready to convert badge spending into heavier combat scaling.",
+    "bullets": [
+      "Field Research requires 100% Siege to Seize before it unlocks.",
+      "The branch is not an early detour; it sits well after Hero Training, Military Strategies, Peace Shield, and Siege to Seize.",
+      "Completing Field Research unlocks troop-type-specific training branches for Shooter, Assaulter, and Rider."
+    ],
+    "followup": "For the broader order around Peace Shield, Siege to Seize, and late-game badge planning, use the <a href=\"research.html\">Research Guide</a>."
+  },
+  "checkpoints": {
+    "title": "Key Field Research Checkpoints",
+    "items": [
+      {
+        "title": "Opening pair",
+        "badges": "20,360 badges",
+        "text": "Field Training I and Camo Coating I together cost just 20,360 badges, which makes the branch look cheaper than it really is."
+      },
+      {
+        "title": "First combat spread",
+        "badges": "66,170 badges",
+        "text": "Once the three Lv. 1-10 middle nodes are done, you have already moved past the cheap opener and into the real body of the branch."
+      },
+      {
+        "title": "Before the final wall",
+        "badges": "182,930 badges",
+        "text": "The first 11 nodes cost 182,930 badges in total. That means the remaining two Lv. 1-20 nodes and Recharge Shield still account for 411,500 badges."
+      },
+      {
+        "title": "Recharge Shield reached",
+        "badges": "594,430 badges",
+        "text": "Recharge Shield is the final payoff node. It is very strong, but the account must already survive the two 154,600-badge level-20 nodes before finishing the branch."
+      }
+    ]
+  },
+  "next_steps": {
+    "title": "What Comes Next After Field Research",
+    "paragraphs": [
+      "Field Research is not just another stat branch. It is the bridge into troop-specific late-game research, which is why most players only push it after the earlier badge-efficiency branches are already finished.",
+      "If you are working backward from this branch, use the <a href=\"siege-to-seize-cost.html\">Siege to Seize Costs</a> page to see the requirement immediately before it. For broader sequencing, use the <a href=\"research.html\">Research Guide</a> and <a href=\"power-guide.html\">Power Guide</a>."
+    ]
+  },
+  "faq": [
+    {
+      "question": "How many badges does Field Research cost in Last Z?",
+      "answer": "Field Research costs 594,430 badges in total. The final three nodes alone consume 411,500 badges, which is why the branch feels much more expensive at the end."
+    },
+    {
+      "question": "What unlocks Field Research?",
+      "answer": "Field Research requires 100% Siege to Seize before it becomes available in the lab."
+    },
+    {
+      "question": "What is the final node in Field Research?",
+      "answer": "The final node is Recharge Shield. It costs 102,300 badges on top of a branch that already includes two 154,600-badge level-20 nodes."
+    },
+    {
+      "question": "Is Field Research worth it?",
+      "answer": "Yes, but mostly for accounts that are already deep into the late-game badge path. The branch is powerful, but it is far too expensive to treat like an early side investment."
+    },
+    {
+      "question": "What does finishing Field Research unlock?",
+      "answer": "Completing Field Research unlocks the troop-specific Shooter Training, Assaulter Training, and Rider Training branches."
+    }
+  ],
+  "related_guides": [
+    {
+      "href": "research.html",
+      "label": "Research Guide"
+    },
+    {
+      "href": "siege-to-seize-cost.html",
+      "label": "Siege to Seize Costs"
+    },
+    {
+      "href": "peace-shield-cost.html",
+      "label": "Peace Shield Costs"
+    },
+    {
+      "href": "power-guide.html",
+      "label": "Power Guide"
+    }
+  ]
+}
