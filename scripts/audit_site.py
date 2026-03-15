@@ -18,6 +18,8 @@ BROKEN_MARKERS = [
     "turn0search",
     "turn0fetch",
 ]
+GA_SNIPPET_SRC = "https://www.googletagmanager.com/gtag/js?id=G-PYBSRQ1QFP"
+GA_SNIPPET_CONFIG = "gtag('config', 'G-PYBSRQ1QFP')"
 
 
 @dataclass
@@ -60,6 +62,10 @@ def audit() -> list[Issue]:
             issues.append(Issue("error", page.filename, "Missing <title>"))
         if not page.meta_description and not page.noindex:
             issues.append(Issue("error", page.filename, "Missing meta description"))
+        if not page.noindex:
+            has_ga_head = GA_SNIPPET_SRC in page.text and GA_SNIPPET_CONFIG in page.text
+            if not has_ga_head:
+                issues.append(Issue("error", page.filename, "Missing early GA head snippet"))
         if not page.h1:
             issues.append(Issue("error", page.filename, "Missing <h1>"))
         if not page.canonical and not page.noindex:
