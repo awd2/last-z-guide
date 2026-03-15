@@ -18,6 +18,7 @@ jobs:
         env:
           KEY: dd8b3d12471744c4ad67e9dc368f04cd
           KEY_LOC: https://lastzguides.com/dd8b3d12471744c4ad67e9dc368f04cd.txt
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           python <<'PY'
           import json
@@ -28,7 +29,7 @@ jobs:
           event_name = os.environ["GITHUB_EVENT_NAME"]
           repo = os.environ["GITHUB_REPOSITORY"]
           sha = os.environ["GITHUB_SHA"]
-          token = os.environ["GITHUB_TOKEN"]
+          token = os.environ.get("GITHUB_TOKEN", "")
 
           ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
           tree = ET.parse("sitemap.xml")
@@ -46,10 +47,11 @@ jobs:
                   api_url,
                   headers={
                       "Accept": "application/vnd.github+json",
-                      "Authorization": f"Bearer {token}",
                       "User-Agent": "lastzguides-indexnow-workflow",
                   },
               )
+              if token:
+                  req.add_header("Authorization", f"Bearer {token}")
               with urllib.request.urlopen(req) as resp:
                   payload = json.load(resp)
 

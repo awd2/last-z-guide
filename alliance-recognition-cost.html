@@ -40,7 +40,7 @@
     <meta property="og:site_name" content="Last Z Guides">
 
     <meta property="article:published_time" content="2026-01-28">
-    <meta property="article:modified_time" content="2026-03-13">
+    <meta property="article:modified_time" content="2026-03-15">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -63,7 +63,7 @@
             "name": "Last Z Guides"
         },
         "datePublished": "2026-01-28",
-        "dateModified": "2026-03-13"}
+        "dateModified": "2026-03-15"}
     </script>
 
     <script type="application/ld+json">
@@ -227,6 +227,26 @@
                 <li><strong>Main use:</strong> plan badge cost before committing to the tree</li>
                 <li><strong>Best companion page:</strong> <a href="lucky-discounter.html">Lucky Discounter</a> for cheaper badge buying</li>
             </ul>
+        </section>
+
+        <section class="info-card table-followup" aria-label="Badge Planner">
+            <div class="panel-title">Alliance Recognition Badge Planner</div>
+            <p>Enter your current badge stash to estimate how far it will take you in the full Alliance Recognition tree.</p>
+            <form class="planner-form" id="ar-planner" novalidate>
+                <label for="ar-badges" class="planner-label">Current badges</label>
+                <div class="planner-row">
+                    <input id="ar-badges" name="badges" type="number" min="0" step="1" inputmode="numeric" placeholder="Example: 42000">
+                    <button type="submit" class="planner-button">Estimate progress</button>
+                </div>
+            </form>
+            <div class="planner-results" id="ar-planner-results" hidden>
+                <p><strong>Progress:</strong> <span data-field="percent"></span></p>
+                <p><strong>Highest fully affordable milestone:</strong> <span data-field="milestone"></span></p>
+                <p><strong>Total badges used:</strong> <span data-field="used"></span></p>
+                <p><strong>Badges remaining:</strong> <span data-field="remaining"></span></p>
+            </div>
+            <p class="planner-note">Need more badges? Use the <a href="lucky-discounter.html">Lucky Discounter Guide</a> and <a href="alliance-duel.html">Alliance Duel Guide</a> to build your badge stash faster.</p>
+            <noscript><p class="planner-note">This planner requires JavaScript, but the full badge table below remains available.</p></noscript>
         </section>
 
         <section class="data-layout">
@@ -476,7 +496,7 @@
             </div>
             <div class="faq-item">
                 <h3>How far will my current badges go in Alliance Recognition?</h3>
-                <p>That depends on your current level and target checkpoint. This table is designed to help you estimate exactly how much progress a saved badge stash will buy.</p>
+                <p>Use the badge planner on this page to estimate your progress instantly. It shows your highest affordable milestone, total badges used, and how much of the full tree your stash covers.</p>
             </div>
         </section>
 
@@ -524,6 +544,84 @@
         <a href="disclosure.html">Disclosure</a>
         </div>
     </footer>
+    <script>
+    (function () {
+        var form = document.getElementById('ar-planner');
+        var input = document.getElementById('ar-badges');
+        var results = document.getElementById('ar-planner-results');
+        var rows = Array.from(document.querySelectorAll('.data-table tbody tr'));
+
+        if (!form || !input || !results || rows.length === 0) {
+            return;
+        }
+
+        function parseBadgeValue(text) {
+            return Number(String(text).replace(/,/g, '').trim()) || 0;
+        }
+
+        function formatNumber(value) {
+            return new Intl.NumberFormat('en-US').format(value);
+        }
+
+        var milestones = [];
+        var cumulative = 0;
+
+        rows.forEach(function (row) {
+            var cells = row.querySelectorAll('td');
+            if (cells.length < 3) {
+                return;
+            }
+
+            var item = cells[0].textContent.trim();
+            var level = cells[1].textContent.trim();
+            var badges = parseBadgeValue(cells[2].textContent);
+
+            cumulative += badges;
+            milestones.push({
+                item: item,
+                level: level,
+                cost: badges,
+                cumulative: cumulative,
+                label: item + ' ' + level
+            });
+        });
+
+        var totalCost = milestones[milestones.length - 1].cumulative;
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var stash = Math.max(0, Number(input.value || 0));
+            var affordable = null;
+
+            milestones.forEach(function (entry) {
+                if (entry.cumulative <= stash) {
+                    affordable = entry;
+                }
+            });
+
+            var used = affordable ? affordable.cumulative : 0;
+            var remaining = stash - used;
+            var percent = totalCost > 0 ? (Math.min(stash, totalCost) / totalCost) * 100 : 0;
+
+            results.querySelector('[data-field="percent"]').textContent = percent.toFixed(1) + '% of the full tree';
+            results.querySelector('[data-field="used"]').textContent = formatNumber(used);
+
+            if (stash >= totalCost) {
+                results.querySelector('[data-field="milestone"]').textContent = 'Full tree completed';
+                results.querySelector('[data-field="remaining"]').textContent = formatNumber(stash - totalCost) + ' after maxing the tree';
+            } else if (affordable) {
+                results.querySelector('[data-field="milestone"]').textContent = affordable.label;
+                results.querySelector('[data-field="remaining"]').textContent = formatNumber(remaining);
+            } else {
+                results.querySelector('[data-field="milestone"]').textContent = 'Not enough to reach the first level yet';
+                results.querySelector('[data-field="remaining"]').textContent = formatNumber(stash);
+            }
+
+            results.hidden = false;
+        });
+    }());
+    </script>
     <script src="analytics.js" defer></script>
     <script src="search-loader.js" defer></script>
 </body>
