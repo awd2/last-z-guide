@@ -1,0 +1,124 @@
+---
+title: "Reddit digest — LastZShooterRun (2026-03-17)"
+date: 2026-03-17
+source: reddit+facebook
+feeds:
+  - "https://old.reddit.com/r/LastZShooterRun/new/.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYq6GGU414.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYsj5hi7kb.rss"
+---
+
+## New posts
+
+### Reddit
+- [Dm](https://old.reddit.com/r/LastZShooterRun/comments/1rvyqf1/dm/)
+  - **Author:** /u/Think_Property1555
+  - **Date:** Mar 17, 2026, 06:16 UTC
+- [Free migration?](https://old.reddit.com/r/LastZShooterRun/comments/1rvye2y/free_migration/)
+  - **Author:** /u/whit_1
+  - **Date:** Mar 17, 2026, 05:56 UTC
+- [Why is the power core hero code greyed out for me?](https://old.reddit.com/r/LastZShooterRun/comments/1rvv8zk/why_is_the_power_core_hero_code_greyed_out_for_me/)
+  - **Author:** /u/No-Importance-1755
+  - **Date:** Mar 17, 2026, 03:11 UTC
+- [S1 in my server and guy has 1.06g in arena. I’ve never seen this!](https://old.reddit.com/r/LastZShooterRun/comments/1rvtqsf/s1_in_my_server_and_guy_has_106g_in_arena_ive/)
+  - **Author:** /u/drereps
+  - **Date:** Mar 17, 2026, 02:03 UTC
+- [Lost its charm](https://old.reddit.com/r/LastZShooterRun/comments/1rvswjp/lost_its_charm/)
+  - **Author:** /u/x-looke-x
+  - **Date:** Mar 17, 2026, 01:26 UTC
+- [What's this bar that pops up after attacking a base?](https://old.reddit.com/r/LastZShooterRun/comments/1rvs6eq/whats_this_bar_that_pops_up_after_attacking_a_base/)
+  - **Author:** /u/Jchattdesign
+  - **Date:** Mar 17, 2026, 00:55 UTC
+- [If you had to purchase a upgrade package what would it be . I’m level 22 (days) 23, Hero’s 110 all gold (1)S1 and 200 golden wrenches away from a tank lol](https://old.reddit.com/r/LastZShooterRun/comments/1rvqolb/if_you_had_to_purchase_a_upgrade_package_what/)
+  - **Author:** /u/mike6495
+  - **Date:** Mar 16, 2026, 23:52 UTC
+- [What are the gold bars for ?](https://old.reddit.com/r/LastZShooterRun/comments/1rvqm66/what_are_the_gold_bars_for/)
+  - **Author:** /u/mike6495
+  - **Date:** Mar 16, 2026, 23:50 UTC
+- [Research question](https://old.reddit.com/r/LastZShooterRun/comments/1rvlgtf/research_question/)
+  - **Author:** /u/TopAide6
+  - **Date:** Mar 16, 2026, 20:37 UTC
+- [JaxAttack #95 VS Server #65](https://old.reddit.com/r/LastZShooterRun/comments/1rvk4ne/jaxattack_95_vs_server_65/)
+  - **Author:** /u/Spiritual-Reveal-990
+  - **Date:** Mar 16, 2026, 19:50 UTC
+- [Nao e possivel criar novo personagem apos 21 dias da abertura da zona de guerra "It is not possible to create a new character after 21 days from the opening of the war zone."](https://old.reddit.com/r/LastZShooterRun/comments/1rvjg6g/nao_e_possivel_criar_novo_personagem_apos_21_dias/)
+  - **Author:** /u/luizwenner
+  - **Date:** Mar 16, 2026, 19:26 UTC
+- [I will never forget this moment](https://old.reddit.com/r/LastZShooterRun/comments/1rvikgi/i_will_never_forget_this_moment/)
+  - **Author:** /u/thehousewhite
+  - **Date:** Mar 16, 2026, 18:56 UTC
+- [Account for LAST Z survival Game in State 421 and 443](https://old.reddit.com/r/LastZShooterRun/comments/1rvfkk7/account_for_last_z_survival_game_in_state_421_and/)
+  - **Author:** /u/Ybaa1996
+  - **Date:** Mar 16, 2026, 17:12 UTC
+- [How many actually have T10 troops?](https://old.reddit.com/r/LastZShooterRun/comments/1rvf2ol/how_many_actually_have_t10_troops/)
+  - **Author:** /u/MJCExperience
+  - **Date:** Mar 16, 2026, 16:55 UTC
+- [Assembly point](https://old.reddit.com/r/LastZShooterRun/comments/1rvelgf/assembly_point/)
+  - **Author:** /u/Separate-Number-9051
+  - **Date:** Mar 16, 2026, 16:38 UTC
+- [log out issue](https://old.reddit.com/r/LastZShooterRun/comments/1rve5xl/log_out_issue/)
+  - **Author:** /u/Creepyfancypoop
+  - **Date:** Mar 16, 2026, 16:24 UTC
+- [Share your invite code here (don't make a post about it)](https://old.reddit.com/r/LastZShooterRun/comments/1rvdnzp/share_your_invite_code_here_dont_make_a_post/)
+  - **Author:** /u/wherearethemarxists
+  - **Date:** Mar 16, 2026, 16:06 UTC
+- [compte dans le #624](https://old.reddit.com/r/LastZShooterRun/comments/1rvdlbs/compte_dans_le_624/)
+  - **Author:** /u/Turbulent-Release315
+  - **Date:** Mar 16, 2026, 16:04 UTC
+- [why can't i create new game. why does it keep saying coming soon?? can anyone help](https://old.reddit.com/r/LastZShooterRun/comments/1rvcpbt/why_cant_i_create_new_game_why_does_it_keep/)
+  - **Author:** /u/Creepyfancypoop
+  - **Date:** Mar 16, 2026, 15:32 UTC
+- [March speed is INSANE in this game (I did the math)](https://old.reddit.com/r/LastZShooterRun/comments/1rvceda/march_speed_is_insane_in_this_game_i_did_the_math/)
+  - **Author:** /u/tasteslikechaos
+  - **Date:** Mar 16, 2026, 15:20 UTC
+- [How to Prevent Losing Hero’s!](https://old.reddit.com/r/LastZShooterRun/comments/1rvawx0/how_to_prevent_losing_heros/)
+  - **Author:** /u/drpeppper240000
+  - **Date:** Mar 16, 2026, 14:25 UTC
+- [migration tickets](https://old.reddit.com/r/LastZShooterRun/comments/1rv7va7/migration_tickets/)
+  - **Author:** /u/Lanky_Rhubarb9603
+  - **Date:** Mar 16, 2026, 12:19 UTC
+- [How do to increase hero power?](https://old.reddit.com/r/LastZShooterRun/comments/1rv456d/how_do_to_increase_hero_power/)
+  - **Author:** /u/curious7189
+  - **Date:** Mar 16, 2026, 08:48 UTC
+
+### Facebook (FetchRSS #1)
+- [[Pi Day]](https://www.facebook.com/122208818816561196/posts/122211502418561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 14, 2026, 12:00 UTC
+  - **Text:** [Pi Day] Happy Pi Day, Survivors! There's nothing like a slice of warm pie to keep you going while fighting zombies. 🥧 Which flavour are you reaching for first? 🤔 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
+- [[Gold Bar Store Bonus Packs]](https://www.facebook.com/122208818816561196/posts/122211466292561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 13, 2026, 04:00 UTC
+  - **Text:** [Gold Bar Store Bonus Packs] Survivors, we're introducing all new Gold Bar deals to the store! ❗ Enjoy more than double the value for purple packs limited to the first purchase of each pack per month! Click on the link below for more details and deals! 🔗: https://store.last-z.com/#/order/facebook ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGoldBarStore
+- [[Facebook Follower Event]](https://www.facebook.com/122208818816561196/posts/122211359996561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 12, 2026, 12:00 UTC
+  - **Text:** [Facebook Follower Event] Survivors, follow us on Facebook and stand a chance to win in-game rewards! 🎁 📜 Rules: - Follow Last Z: Survival Shooter on Facebook - Take a screenshot of the page (please ensure that the "Following" icon can be seen) - Post your screenshot in the comments with your Game ID - Do note that you MUST be following Last Z: Survival Shooter on Facebook in order to stand a chance to win 🎁 Rewards: 50 Survivors will each receive 1000 Diamonds and 1h Construct Speedup x3 🗓️ Event Deadline: March 31, 2026, 23:59 (Apocalypse Time) ❗ Notes: - Rewards will be sent via in-game mail within 5 business days after the event ends - The list of 50 lucky Survivors will be announced in the comments section We look forward to having you as part of our Facebook community! ❣️ ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #FollowerEvent
+- [[Beginner Hero Hot Tips]](https://www.facebook.com/122208818816561196/posts/122211054716561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 10, 2026, 12:00 UTC
+  - **Text:** [Beginner Hero Hot Tips] We're bringing it back to basics with some important tips and tricks for players new to Last Z: Survival Shooter! 💡 Did you know that many heroes have skills that can greatly help you on your journey? Pay extra attention to their 3rd skills! Sophia - Increases your free construction duration and construction speed Laura - Receive 10 free Radar events daily Katrina - Get 100 fuel for free daily Vivian - Decreases fuel costs and increases damage dealt ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZHotTips
+- [[Gold Bar Store Bundles]](https://www.facebook.com/122208818816561196/posts/122210907530561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 09, 2026, 12:00 UTC
+  - **Text:** [Gold Bar Store Bundles] Survivors! Don't miss out on the item bundles in the official Last Z: Survival Shooter Gold Bar store! 🎁 Click "Item Purchase" for good deals and packs that suit you best! ❤️‍🔥 🔗: https://store.last-z.com/#/order/facebook ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGoldBarStore
+
+### Community Feed (FetchRSS #2)
+- [How many roses??](https://www.reddit.com/r/LastZShooterRun/comments/1ruy3mk/how_many_roses/)
+  - **Author:** /u/EXTIM_GAMER
+  - **Date:** Mar 16, 2026, 03:02 UTC
+- [Where are my troops? They don’t add up.](https://www.reddit.com/r/LastZShooterRun/comments/1rusep5/where_are_my_troops_they_dont_add_up/)
+  - **Author:** /u/texican1911
+  - **Date:** Mar 15, 2026, 22:49 UTC
+  - **Text:** This says I have 13820 total troops but it only adds up to 9564. Is it not counting troops that are out harvesting?
+- [New Glory War](https://www.reddit.com/r/LastZShooterRun/comments/1rujy2h/new_glory_war/)
+  - **Author:** /u/gabodelabarca
+  - **Date:** Mar 15, 2026, 17:24 UTC
+  - **Text:** With the new rules starting this week, if the attacking alliance doesn't destroy the alliance center then they lose or the victory will be based on points?
+- [One of the longest SvS in entire game,The historical and intense battle between #104 and #124 finally end 🤩❤️‍🔥](https://www.reddit.com/r/LastZShooterRun/comments/1ru63et/one_of_the_longest_svs_in_entire_gamethe/)
+  - **Author:** /u/Rengoku_9
+  - **Date:** Mar 15, 2026, 05:44 UTC
+- [Accounts for sale](https://www.reddit.com/r/LastZShooterRun/comments/1me9h80/accounts_for_sale/)
+  - **Author:** /u/AutoModerator
+  - **Date:** Jul 31, 2025, 18:31 UTC
+  - **Text:** If you have an account for sale, make a comment here outlining the account you're putting up for sale. Don't make a thread outside of this one, it will be removed.
