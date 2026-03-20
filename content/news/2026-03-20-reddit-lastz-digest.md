@@ -1,0 +1,122 @@
+---
+title: "Reddit digest — LastZShooterRun (2026-03-20)"
+date: 2026-03-20
+source: reddit+facebook
+feeds:
+  - "https://old.reddit.com/r/LastZShooterRun/new/.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYq6GGU414.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYsj5hi7kb.rss"
+---
+
+## New posts
+
+### Reddit
+- [How long until server migration?](https://old.reddit.com/r/LastZShooterRun/comments/1ryond5/how_long_until_server_migration/)
+  - **Author:** /u/ExtensionOnly2352
+  - **Date:** Mar 20, 2026, 06:20 UTC
+- [What is shield points in combat report ?](https://old.reddit.com/r/LastZShooterRun/comments/1ryj4zi/what_is_shield_points_in_combat_report/)
+  - **Author:** /u/BillFirpo
+  - **Date:** Mar 20, 2026, 01:40 UTC
+- [Refund players dominating F2P](https://old.reddit.com/r/LastZShooterRun/comments/1ryhldt/refund_players_dominating_f2p/)
+  - **Author:** /u/vincearmenti
+  - **Date:** Mar 20, 2026, 00:31 UTC
+- [My highly detailed guide to creating and running farms](https://old.reddit.com/r/LastZShooterRun/comments/1rydlzm/my_highly_detailed_guide_to_creating_and_running/)
+  - **Author:** /u/OpenScarcity6591
+  - **Date:** Mar 19, 2026, 21:51 UTC
+- [S3 State Merge](https://old.reddit.com/r/LastZShooterRun/comments/1ryb4l0/s3_state_merge/)
+  - **Author:** /u/Educational-Panda897
+  - **Date:** Mar 19, 2026, 20:17 UTC
+- [Last Z Refugee Guide: Stop⛔️ Wasting Tickets📜 (100,000 Tickets Tested)](https://old.reddit.com/r/LastZShooterRun/comments/1ry9thj/last_z_refugee_guide_stop_wasting_tickets_100000/)
+  - **Author:** /u/DWDytchannel
+  - **Date:** Mar 19, 2026, 19:29 UTC
+- [Where are the season rewards??](https://old.reddit.com/r/LastZShooterRun/comments/1ry8fx5/where_are_the_season_rewards/)
+  - **Author:** /u/hahahaaqw
+  - **Date:** Mar 19, 2026, 18:28 UTC
+- [Is there a point to upgrade formation 4 wall if you don’t have a 4th formation?](https://old.reddit.com/r/LastZShooterRun/comments/1ry3dzm/is_there_a_point_to_upgrade_formation_4_wall_if/)
+  - **Author:** /u/texican1911
+  - **Date:** Mar 19, 2026, 15:24 UTC
+- [Pases de migración.](https://old.reddit.com/r/LastZShooterRun/comments/1ry3b2n/pases_de_migración/)
+  - **Author:** /u/Dismal-Quantity-4766
+  - **Date:** Mar 19, 2026, 15:20 UTC
+- [Problems with creating a farm account before season 1 ends](https://old.reddit.com/r/LastZShooterRun/comments/1ry333l/problems_with_creating_a_farm_account_before/)
+  - **Author:** /u/Scary-Abalone7168
+  - **Date:** Mar 19, 2026, 15:12 UTC
+- [katrina](https://old.reddit.com/r/LastZShooterRun/comments/1ry32uo/katrina/)
+  - **Author:** /u/Ok_Reindeer5533
+  - **Date:** Mar 19, 2026, 15:12 UTC
+- [Research Help](https://old.reddit.com/r/LastZShooterRun/comments/1ry30iv/research_help/)
+  - **Author:** /u/Legitimate_Muffin63
+  - **Date:** Mar 19, 2026, 15:09 UTC
+- [Uzmanlık / Savaş Bölümü](https://old.reddit.com/r/LastZShooterRun/comments/1ry1omr/uzmanlık_savaş_bölümü/)
+  - **Author:** /u/Leading-Point561
+  - **Date:** Mar 19, 2026, 14:19 UTC
+- [Hero progression recommendations please, S2 soon.](https://old.reddit.com/r/LastZShooterRun/comments/1ry1edm/hero_progression_recommendations_please_s2_soon/)
+  - **Author:** /u/Shrimpkin69
+  - **Date:** Mar 19, 2026, 14:08 UTC
+- [Destroyer Secured 🥹](https://old.reddit.com/r/LastZShooterRun/comments/1ry110d/destroyer_secured/)
+  - **Author:** /u/Vegetable-Affect-134
+  - **Date:** Mar 19, 2026, 13:54 UTC
+- [Season 2: Starts in 2 weeks](https://old.reddit.com/r/LastZShooterRun/comments/1rxxouq/season_2_starts_in_2_weeks/)
+  - **Author:** /u/zombi3poo
+  - **Date:** Mar 19, 2026, 11:19 UTC
+- [Season 3 heads up](https://old.reddit.com/r/LastZShooterRun/comments/1rxwf9l/season_3_heads_up/)
+  - **Author:** /u/Feisty_Dot_5952
+  - **Date:** Mar 19, 2026, 10:08 UTC
+- [Can I buy the third builder and just keep hiring the second one with diamonds?](https://old.reddit.com/r/LastZShooterRun/comments/1rxvp39/can_i_buy_the_third_builder_and_just_keep_hiring/)
+  - **Author:** /u/ImportantSuccotash39
+  - **Date:** Mar 19, 2026, 09:25 UTC
+- [How to change currency on gold bar store after passing over account?](https://old.reddit.com/r/LastZShooterRun/comments/1rxvdyp/how_to_change_currency_on_gold_bar_store_after/)
+  - **Author:** /u/Wishywashy211
+  - **Date:** Mar 19, 2026, 09:06 UTC
+- [24 hours can change everything](https://old.reddit.com/r/LastZShooterRun/comments/1rxvbyt/24_hours_can_change_everything/)
+  - **Author:** /u/DisasterPractical788
+  - **Date:** Mar 19, 2026, 09:02 UTC
+- [Alma exclusive weapon](https://old.reddit.com/r/LastZShooterRun/comments/1rxue1q/alma_exclusive_weapon/)
+  - **Author:** /u/Feisty_Dot_5952
+  - **Date:** Mar 19, 2026, 08:00 UTC
+- ["Destruction Value" research](https://old.reddit.com/r/LastZShooterRun/comments/1rxu8jm/destruction_value_research/)
+  - **Author:** /u/No-Tackle-8652
+  - **Date:** Mar 19, 2026, 07:50 UTC
+
+### Facebook (FetchRSS #1)
+- [[Weapon of Choice]](https://www.facebook.com/122208818816561196/posts/122212453442561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 19, 2026, 12:00 UTC
+  - **Text:** [Weapon of Choice] You're stuck in a zombie-infested battlefield and have 30 seconds to choose a weapon! 🔫⚔️🔥 Which are you picking up and why? Tell us in the comments! 🧟 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
+- [[Gold Bar Store Invite Event]](https://www.facebook.com/122208818816561196/posts/122212318016561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 18, 2026, 10:00 UTC
+  - **Text:** [Gold Bar Store Invite Event] Survivors, thank you for your continued love and support for the Gold Bar Store! We have launched a new "Invite Event" where you can complete missions for generous rewards such as Prime Recruit Tickets, Power Cores, and Golden Wrenches! Get Bond Tokens from these missions to receive up to 7200 Gold Bars! How to Participate: - Log in to the Gold Bar store (https://store.last-z.com/#/order/facebook) with your UID - Click on the three lines at the top left corner - Click on "Invite Event" - Recharge any amount to obtain a unique invitation code - Share the invitation code with your friends for them to receive Diamonds and resources for free! For more details, visit the store page at the link below! 🔗: https://store.last-z.com/#/order/facebook ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGoldBarStore
+- [[St. Patrick's Day]](https://www.facebook.com/122208818816561196/posts/122212077374561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 17, 2026, 12:00 UTC
+  - **Text:** [St. Patrick's Day] Happy St. Patrick's Day! 🍀 Last Z: Survival Shooter wishes all Survivors good luck, good health, and happiness! Thank you for being our lucky stars! 🌟 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #StPatricksDay
+- [[Last Z Survivor Gift!]](https://www.facebook.com/122208818816561196/posts/122211938954561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 16, 2026, 10:13 UTC
+  - **Text:** [Last Z Survivor Gift!] Thank you, Survivors, for your support and love! As a show of our gratitude, we've prepared a code for you to redeem a small gift! ❣️ Redemption Code: WELCOMELZFB Note: - This code can be redeemed by every Survivor one time - Check out our official Discord (https://discord.gg/last-z) and X (https://x.com/LastZ_EN) for more surprises! How to redeem: - Visit https://last-z.com/ - Click on "Top-Up Center" at the top right corner - Click the three lines at the top left corner - Select "Redeem Gift Code" - Enter your UID and the Gift Code Be sure to follow us on Facebook for details on future codes and gifts! ====================== Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #CDKey
+- [[Pi Day]](https://www.facebook.com/122208818816561196/posts/122211502418561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 14, 2026, 12:00 UTC
+  - **Text:** [Pi Day] Happy Pi Day, Survivors! There's nothing like a slice of warm pie to keep you going while fighting zombies. 🥧 Which flavour are you reaching for first? 🤔 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
+
+### Community Feed (FetchRSS #2)
+- [My highly detailed guide to creating and running farms](https://www.reddit.com/r/LastZShooterRun/comments/1rydlzm/my_highly_detailed_guide_to_creating_and_running/)
+  - **Author:** /u/OpenScarcity6591
+  - **Date:** Mar 19, 2026, 21:51 UTC
+  - **Text:** Hi guys, I wrote this guide for my server. It's a improved upon version of previous guides I found here on reddit. It's gotten good feedback on my server and has organically started to spread to a few younger ones. If it's useful to more players I would only be happy. Cheers. https://docs.google.com/document/d/1PvKvc4d5gznctzh2urLDvdsLxe_HjJRLTUA8K_vHuzM/edit?usp=drivesdk
+- [Last Z Refugee Guide: Stop⛔️ Wasting Tickets📜 (100,000 Tickets Tested)](https://www.reddit.com/r/LastZShooterRun/comments/1ry9thj/last_z_refugee_guide_stop_wasting_tickets_100000/)
+  - **Author:** /u/DWDytchannel
+  - **Date:** Mar 19, 2026, 19:29 UTC
+  - **Text:** Last Z Refugee Guide (Stop Wasting Tickets) If you’re just pulling all 3 refugees every time, you’re losing a huge amount of tickets. After testing with 100,000+ tickets, here’s the core idea most players miss: Every refresh gives 3 refugees, but pulls are random from the pool First pull (500) is the most efficient If there’s no Orange → pull once → refresh for free If there is Orange → only pull until you get it, then refresh Pity system guarantees 1 Orange every 10 recruits, but you can get more before that A lot of players also make mistakes with upgrades: Only Orange and Purple are worth upgrading Always upgrade evenly across 4 refugees in a building Focus on important buildings like: Alliance Center Construction Research Avoid wasting resources on production/refarm refugees This system is actually predictable once you understand it, and it can save you a massive amount of tickets. I break down the full strategy, probabilities, upgrade system, and real results from 100K tickets here: 👉 Full guide: https://www.youtube.com/watch?v=53yl2HxJIlI&list=PLs7OWrq-XhDCaFqvLQes4LHDtxbkLiSv- Curious how others are doing this — are you saving tickets or just pulling everything?
+- [Destroyer Secured 🥹](https://www.reddit.com/r/LastZShooterRun/comments/1ry110d/destroyer_secured/)
+  - **Author:** /u/Vegetable-Affect-134
+  - **Date:** Mar 19, 2026, 13:54 UTC
+  - **Text:** When the grind finally ends and you just sit there admiring it. And slowly realizing you didn’t let your crew know at 5AM wrenches would pop 😂 glad it’s finally done. Ready for S3!
+- [Share your invite code here (don't make a post about it)](https://www.reddit.com/r/LastZShooterRun/comments/1rvdnzp/share_your_invite_code_here_dont_make_a_post/)
+  - **Author:** /u/wherearethemarxists
+  - **Date:** Mar 16, 2026, 16:06 UTC
+- [Accounts for sale](https://www.reddit.com/r/LastZShooterRun/comments/1me9h80/accounts_for_sale/)
+  - **Author:** /u/AutoModerator
+  - **Date:** Jul 31, 2025, 18:31 UTC
+  - **Text:** If you have an account for sale, make a comment here outlining the account you're putting up for sale. Don't make a thread outside of this one, it will be removed.
