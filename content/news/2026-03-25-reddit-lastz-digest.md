@@ -1,0 +1,121 @@
+---
+title: "Reddit digest — LastZShooterRun (2026-03-25)"
+date: 2026-03-25
+source: reddit+facebook
+feeds:
+  - "https://old.reddit.com/r/LastZShooterRun/new/.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYq6GGU414.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYsj5hi7kb.rss"
+---
+
+## New posts
+
+### Reddit
+- [free](https://old.reddit.com/r/LastZShooterRun/comments/1s32j36/free/)
+  - **Author:** /u/Fearless_Cow8325
+  - **Date:** Mar 25, 2026, 05:57 UTC
+- [HQ 30 is useless without the goodies](https://old.reddit.com/r/LastZShooterRun/comments/1s326oo/hq_30_is_useless_without_the_goodies/)
+  - **Author:** /u/romicuoi
+  - **Date:** Mar 25, 2026, 05:37 UTC
+- [level 26, top alliance in server. want to give up the account](https://old.reddit.com/r/LastZShooterRun/comments/1s31scq/level_26_top_alliance_in_server_want_to_give_up/)
+  - **Author:** /u/kelseymademe
+  - **Date:** Mar 25, 2026, 05:14 UTC
+- [Just got to level 16 HQ. Thoughts on what I need to prioritize to upgrade next?](https://old.reddit.com/r/LastZShooterRun/comments/1s2zhr8/just_got_to_level_16_hq_thoughts_on_what_i_need/)
+  - **Author:** /u/UpUpDnDnLRLRBAstart
+  - **Date:** Mar 25, 2026, 03:17 UTC
+- [What is going on here?](https://old.reddit.com/r/LastZShooterRun/comments/1s2zfai/what_is_going_on_here/)
+  - **Author:** /u/Dipsetfan2
+  - **Date:** Mar 25, 2026, 03:13 UTC
+- [Intercity Trucks](https://old.reddit.com/r/LastZShooterRun/comments/1s2ys07/intercity_trucks/)
+  - **Author:** /u/ReceptionAlive760
+  - **Date:** Mar 25, 2026, 02:43 UTC
+- [Snow Leopard](https://old.reddit.com/r/LastZShooterRun/comments/1s2xo6z/snow_leopard/)
+  - **Author:** /u/Crashedgaf
+  - **Date:** Mar 25, 2026, 01:55 UTC
+- [T10 vs other research](https://old.reddit.com/r/LastZShooterRun/comments/1s2tvfk/t10_vs_other_research/)
+  - **Author:** /u/The_Cult_
+  - **Date:** Mar 24, 2026, 23:16 UTC
+- [Combats Mastery Guide](https://old.reddit.com/r/LastZShooterRun/comments/1s2trv0/combats_mastery_guide/)
+  - **Author:** /u/Informal_Trick_2367
+  - **Date:** Mar 24, 2026, 23:12 UTC
+- [JaxAttack (#95) was not enough against #65.](https://old.reddit.com/r/LastZShooterRun/comments/1s2p13e/jaxattack_95_was_not_enough_against_65/)
+  - **Author:** /u/Spiritual-Reveal-990
+  - **Date:** Mar 24, 2026, 20:13 UTC
+- [Fully Armed Alliance Research](https://old.reddit.com/r/LastZShooterRun/comments/1s2l7ij/fully_armed_alliance_research/)
+  - **Author:** /u/Impossible_Ad_5797
+  - **Date:** Mar 24, 2026, 17:57 UTC
+- [Does S3 skill “Swift Rally” work during SvS? Or only for PvE/Yeti rallies](https://old.reddit.com/r/LastZShooterRun/comments/1s2jth3/does_s3_skill_swift_rally_work_during_svs_or_only/)
+  - **Author:** /u/CostlyElk
+  - **Date:** Mar 24, 2026, 17:08 UTC
+- [Troop size](https://old.reddit.com/r/LastZShooterRun/comments/1s2ixxk/troop_size/)
+  - **Author:** /u/SurroundAcceptable31
+  - **Date:** Mar 24, 2026, 16:38 UTC
+- [Zombie Siege buff](https://old.reddit.com/r/LastZShooterRun/comments/1s2goyc/zombie_siege_buff/)
+  - **Author:** /u/DoubleAA2018
+  - **Date:** Mar 24, 2026, 15:18 UTC
+- [New character cannot be created](https://old.reddit.com/r/LastZShooterRun/comments/1s2e3ly/new_character_cannot_be_created/)
+  - **Author:** /u/Character_Test9550
+  - **Date:** Mar 24, 2026, 13:41 UTC
+- [Besoin d’aide, mes soldats meurent 🤷🏽‍♂️](https://old.reddit.com/r/LastZShooterRun/comments/1s2e26l/besoin_daide_mes_soldats_meurent/)
+  - **Author:** /u/Aggressive-Arm-5257
+  - **Date:** Mar 24, 2026, 13:39 UTC
+- [Killing boomers and this showed up, what is it?](https://old.reddit.com/r/LastZShooterRun/comments/1s2blyp/killing_boomers_and_this_showed_up_what_is_it/)
+  - **Author:** /u/illuciddd
+  - **Date:** Mar 24, 2026, 11:53 UTC
+- [Help with formations](https://old.reddit.com/r/LastZShooterRun/comments/1s2bdf5/help_with_formations/)
+  - **Author:** /u/Heavenly_fluid
+  - **Date:** Mar 24, 2026, 11:40 UTC
+- [Peace shield badges](https://old.reddit.com/r/LastZShooterRun/comments/1s2a6jo/peace_shield_badges/)
+  - **Author:** /u/Feisty_Dot_5952
+  - **Date:** Mar 24, 2026, 10:38 UTC
+- [Invite event](https://old.reddit.com/r/LastZShooterRun/comments/1s28oj4/invite_event/)
+  - **Author:** /u/Zestyclose-Truth-153
+  - **Date:** Mar 24, 2026, 09:09 UTC
+- [Research](https://old.reddit.com/r/LastZShooterRun/comments/1s282iq/research/)
+  - **Author:** /u/Sea_Butterscotch8215
+  - **Date:** Mar 24, 2026, 08:29 UTC
+- [What’s the best strategy if you have to fight an alliance to capture a lvl 6 city?](https://old.reddit.com/r/LastZShooterRun/comments/1s27jwu/whats_the_best_strategy_if_you_have_to_fight_an/)
+  - **Author:** /u/Suitable_Detective_6
+  - **Date:** Mar 24, 2026, 07:56 UTC
+
+### Facebook (FetchRSS #1)
+- [[March 500k Follower Milestone Push]](https://www.facebook.com/122208818816561196/posts/122213191838561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 24, 2026, 12:00 UTC
+  - **Text:** [March 500k Follower Milestone Push] Survivors! Help us reach 500k followers on Facebook this month for a chance to win rewards! Reply in the comments with your game ID and we will select 10 lucky Survivors to each receive 1000 Diamonds and 400 Badges! In addition, all Survivors will receive 700 Diamonds and 200 Badges when the 500k follower milestone is hit! Be sure to follow our Facebook page for a higher chance of winning. 🗓️ Event Deadline: March 27, 2026, 23:59 (Apocalypse Time) ❗ Note: Rewards will be sent via in-game mail and the list of 10 winners will be announced in the comments section. ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #MilestoneChallenge
+- [[National Puppy Day]](https://www.facebook.com/122208818816561196/posts/122213067272561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 23, 2026, 10:00 UTC
+  - **Text:** [National Puppy Day] 🐶 Happy National Puppy Day! 🐾 In a world full of chaos, puppies make everything better! 💛 Survivors, show us your loyal companions and furbabies in the comments below 👇 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
+- [[Vivian's Shadow]](https://www.facebook.com/122208818816561196/posts/122212609394561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 22, 2026, 12:00 UTC
+  - **Text:** [Vivian's Shadow] Survivors, we need help identifying Vivian's shadow! 🔍 Which option best matches her? Let us know below! 🧠 Leave your answer and game ID in the comments section and we will randomly select 50 lucky fans to each receive 400 Diamonds! Be sure to follow our Facebook page to stand a higher chance of winning! 🗓️ Event Deadline: March 31, 2026, 23:59 (Apocalypse Time) ❗ Note: Rewards will be sent via in-game mail and the list of 50 winners will be announced in the comments section. ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
+- [[Last Z on X]](https://www.facebook.com/122208818816561196/posts/122212608938561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 21, 2026, 12:00 UTC
+  - **Text:** [Last Z on X] Survivors! We're commemorating the launch of our new X account with a giveaway! 🥳 Participate in the event on X for a chance to win 2000 Diamonds! 🎇💎 Follow us on X! 🔗: https://x.com/LastZ_EN Join the giveaway here! 🔗: https://x.com/LastZ_EN/status/2034600781265949004?s=20 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZGiveaway
+- [[International Day of Happiness]](https://www.facebook.com/122208818816561196/posts/122212608728561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 20, 2026, 12:00 UTC
+  - **Text:** [International Day of Happiness] Every day spent with you is a happy one! Thank you for making our days brighter! 😄 Survivors! What was something that made you happy today? Tell us below! 👇 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZActivity
+
+### Community Feed (FetchRSS #2)
+- [Just got to level 16 HQ. Thoughts on what I need to prioritize to upgrade next?](https://www.reddit.com/r/LastZShooterRun/comments/1s2zhr8/just_got_to_level_16_hq_thoughts_on_what_i_need/)
+  - **Author:** /u/UpUpDnDnLRLRBAstart
+  - **Date:** Mar 25, 2026, 03:17 UTC
+- [Snow Leopard](https://www.reddit.com/r/LastZShooterRun/comments/1s2xo6z/snow_leopard/)
+  - **Author:** /u/Crashedgaf
+  - **Date:** Mar 25, 2026, 01:55 UTC
+  - **Text:** I’m not really sure about the mechanics involved with it, but I am plateaued on snow Leopards. I can take down a lvl 23, but it seems no matter what I do, I can’t take a lvl 24. My base power is 11.7 mil, bio lab level is 22, icy arsenal and icy fort are each 17. Every time I upgrade something else I try again, and no dice. My HQ has been upgraded to a lvl 27, and it’s all gold heroes between 3-5 stars, lvl 8 soldiers, and I’m just getting frustrated. Especially when I see someone the same level as me taking out lvl 35 leopards with ease. What buffs am I missing? Any suggestions would be appreciated
+- [T10 vs other research](https://www.reddit.com/r/LastZShooterRun/comments/1s2tvfk/t10_vs_other_research/)
+  - **Author:** /u/The_Cult_
+  - **Date:** Mar 24, 2026, 23:16 UTC
+  - **Text:** I’m no whale but I have spent enough money to be level 30 in season 1. My question is do I now spend and try get t10 or upgrade all my other research trees? (I have level 30 lab currently building) and any tips on teams too pleeaseee x
+- [Share your invite code here (don't make a post about it)](https://www.reddit.com/r/LastZShooterRun/comments/1rvdnzp/share_your_invite_code_here_dont_make_a_post/)
+  - **Author:** /u/wherearethemarxists
+  - **Date:** Mar 16, 2026, 16:06 UTC
+- [Accounts for sale](https://www.reddit.com/r/LastZShooterRun/comments/1me9h80/accounts_for_sale/)
+  - **Author:** /u/AutoModerator
+  - **Date:** Jul 31, 2025, 18:31 UTC
+  - **Text:** If you have an account for sale, make a comment here outlining the account you're putting up for sale. Don't make a thread outside of this one, it will be removed.
