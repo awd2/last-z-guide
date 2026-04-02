@@ -1,0 +1,122 @@
+---
+title: "Reddit digest — LastZShooterRun (2026-04-02)"
+date: 2026-04-02
+source: reddit+facebook
+feeds:
+  - "https://old.reddit.com/r/LastZShooterRun/new/.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYq6GGU414.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYsj5hi7kb.rss"
+---
+
+## New posts
+
+### Reddit
+- [Just trying to get a rough idea from the community.](https://old.reddit.com/r/LastZShooterRun/comments/1saa3jf/just_trying_to_get_a_rough_idea_from_the_community/)
+  - **Author:** /u/DigiEmpireIndia
+  - **Date:** Apr 02, 2026, 06:53 UTC
+- [🚀 Command Center — April Update (Strategy Guides + UI Upgrade)](https://old.reddit.com/r/LastZShooterRun/comments/1sa9e3n/command_center_april_update_strategy_guides_ui/)
+  - **Author:** /u/sidehustlewithai7
+  - **Date:** Apr 02, 2026, 06:10 UTC
+- [Oliviera outift to buy](https://old.reddit.com/r/LastZShooterRun/comments/1sa8yud/oliviera_outift_to_buy/)
+  - **Author:** /u/romicuoi
+  - **Date:** Apr 02, 2026, 05:46 UTC
+- [Lucky Egg Machine / Easter special](https://old.reddit.com/r/LastZShooterRun/comments/1sa8gdl/lucky_egg_machine_easter_special/)
+  - **Author:** /u/surf4x4lec9155
+  - **Date:** Apr 02, 2026, 05:17 UTC
+- [Any Alliances out of Australia, NZ? Oceania ways?](https://old.reddit.com/r/LastZShooterRun/comments/1sa8e6i/any_alliances_out_of_australia_nz_oceania_ways/)
+  - **Author:** /u/Patrick296
+  - **Date:** Apr 02, 2026, 05:13 UTC
+- [How would you rank the exclusive weapons?](https://old.reddit.com/r/LastZShooterRun/comments/1sa7a9k/how_would_you_rank_the_exclusive_weapons/)
+  - **Author:** /u/Legitimate_Cable_811
+  - **Date:** Apr 02, 2026, 04:15 UTC
+- [Migration Powers](https://old.reddit.com/r/LastZShooterRun/comments/1sa3o1i/migration_powers/)
+  - **Author:** /u/TheSneakyOne83
+  - **Date:** Apr 02, 2026, 01:26 UTC
+- [Good luck 313](https://old.reddit.com/r/LastZShooterRun/comments/1sa1vkk/good_luck_313/)
+  - **Author:** /u/Key-Screen-8254
+  - **Date:** Apr 02, 2026, 00:06 UTC
+- [S694 is a shit show](https://old.reddit.com/r/LastZShooterRun/comments/1sa1r13/s694_is_a_shit_show/)
+  - **Author:** /u/deadroomba
+  - **Date:** Apr 02, 2026, 00:00 UTC
+- [Optimized Packs?](https://old.reddit.com/r/LastZShooterRun/comments/1sa0uer/optimized_packs/)
+  - **Author:** /u/porkshopper
+  - **Date:** Apr 01, 2026, 23:22 UTC
+- [LastZ Online Store - Gift Card](https://old.reddit.com/r/LastZShooterRun/comments/1sa0hp1/lastz_online_store_gift_card/)
+  - **Author:** /u/Asleep-Tonight8842
+  - **Date:** Apr 01, 2026, 23:07 UTC
+- [Pharoah's Monument Upgrade](https://old.reddit.com/r/LastZShooterRun/comments/1sa034d/pharoahs_monument_upgrade/)
+  - **Author:** /u/werewolfwrangler
+  - **Date:** Apr 01, 2026, 22:50 UTC
+- [Account in state 270](https://old.reddit.com/r/LastZShooterRun/comments/1s9zrre/account_in_state_270/)
+  - **Author:** /u/Able-Cardiologist814
+  - **Date:** Apr 01, 2026, 22:37 UTC
+- [Pictures in Group Chats](https://old.reddit.com/r/LastZShooterRun/comments/1s9x48j/pictures_in_group_chats/)
+  - **Author:** /u/CrusioG4
+  - **Date:** Apr 01, 2026, 20:54 UTC
+- [Choose the one that give best value](https://old.reddit.com/r/LastZShooterRun/comments/1s9su1u/choose_the_one_that_give_best_value/)
+  - **Author:** /u/Vogeldeich
+  - **Date:** Apr 01, 2026, 18:22 UTC
+- [Season rewards](https://old.reddit.com/r/LastZShooterRun/comments/1s9sfyk/season_rewards/)
+  - **Author:** /u/Longjumping_Zone_984
+  - **Date:** Apr 01, 2026, 18:10 UTC
+- [What is this?](https://old.reddit.com/r/LastZShooterRun/comments/1s9jz9d/what_is_this/)
+  - **Author:** /u/korsk32
+  - **Date:** Apr 01, 2026, 13:04 UTC
+- [A qué números de servidores se puede migrar? (Soy del server #333)](https://old.reddit.com/r/LastZShooterRun/comments/1s9gyu6/a_qué_números_de_servidores_se_puede_migrar_soy/)
+  - **Author:** /u/Glum_Yogurt_3550
+  - **Date:** Apr 01, 2026, 10:44 UTC
+- [Advice](https://old.reddit.com/r/LastZShooterRun/comments/1s9fy9l/advice/)
+  - **Author:** /u/Fearless_Pay2131
+  - **Date:** Apr 01, 2026, 09:47 UTC
+- [Troop Count 🫡](https://old.reddit.com/r/LastZShooterRun/comments/1s9fi7n/troop_count/)
+  - **Author:** /u/NextPut9
+  - **Date:** Apr 01, 2026, 09:22 UTC
+- [Strongest Server 373](https://old.reddit.com/r/LastZShooterRun/comments/1s9f078/strongest_server_373/)
+  - **Author:** /u/Individual-Pen8287
+  - **Date:** Apr 01, 2026, 08:52 UTC
+- [Vehicle Modules](https://old.reddit.com/r/LastZShooterRun/comments/1s9eq3f/vehicle_modules/)
+  - **Author:** /u/Particular-Stable165
+  - **Date:** Apr 01, 2026, 08:35 UTC
+
+### Facebook (FetchRSS #1)
+- [[Follower Milestones Hit!]](https://www.facebook.com/122208818816561196/posts/122214411980561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Apr 01, 2026, 10:00 UTC
+  - **Text:** [Follower Milestones Hit!] As promised, the 500k follower rewards, including Diamonds and Badges, will be sent to your in-game mail soon! 🥰 Thank you, Survivors! 🥳 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #MilestoneChallenge
+- [[500k Facebook Followers!]](https://www.facebook.com/122208818816561196/posts/122214400544561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Apr 01, 2026, 07:00 UTC
+  - **Text:** [500k Facebook Followers!] Thank you so much to our Survivors on Facebook for helping us hit 500,000 followers! ❣️ We are so grateful for all your support and love, and will work towards making Last Z: Survival Shooter an even better game! Thank you! 💘 ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #MilestoneChallenge
+- [[New Hero Introduction...?]](https://www.facebook.com/122208818816561196/posts/122214382802561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Apr 01, 2026, 04:00 UTC
+  - **Text:** [New Hero Introduction...?] Word on the street is that a new hero stumbled upon our shelter today. He also looks kinda... familiar? 🥸 Happy 1st of April to all Survivors! ====================== Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #AprilFoolsDay
+- [[April Milestone Challenge]](https://www.facebook.com/122208818816561196/posts/122214271388561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 31, 2026, 10:00 UTC
+  - **Text:** [April Milestone Challenge] Survivors, help us hit the upcoming milestones to unlock rewards! 💎🔧 🗓️ Event Deadline: April 30, 2026, 23:59 (Apocalypse Time) 📜 How to Participate: 1. Follow our Facebook page 2. Leave your game ID in the comments section below and we will randomly select 50 fans to receive 2000 Diamonds + Universal Orange Hero Fragment x2. Following us on Facebook will GREATLY INCREASE your chances of winning! 3. Rewards will be given to all Survivors once the follower milestones are hit! 🎁 Rewards: 🥉 Tier 1 (550K Followers): 1000 Diamonds + 200 Badges 🥈 Tier 2 (600K Followers): 1000 Diamonds + 300 Badges 🥇 Tier 3 (650K Followers): 2000 Diamonds + 3 Golden Wrenches ❗ Note: Rewards will be sent via in-game mail. Additionally, the list of 50 lucky fans will be announced in the comments section. Be part of our official Facebook community today and unlock bountiful rewards! ❣️ ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #MilestoneChallenge
+- [[Bunnies, Chocolate, Eggs, and Easter]](https://www.facebook.com/122208818816561196/posts/122214106298561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Mar 30, 2026, 10:00 UTC
+  - **Text:** [Bunnies, Chocolate, Eggs, and Easter] Hop... hop... found a spot! To hide my chocolates as the sun gets hot. Eggs and pastel, bunnies and more, Come celebrate, just knock on my door! 🥚 The Last Z: Survival Shooter Easter Event begins soon! 🧺🐇 Stay tuned for more details! ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter #LastZEaster
+
+### Community Feed (FetchRSS #2)
+- [Pictures in Group Chats](https://www.reddit.com/r/LastZShooterRun/comments/1s9x48j/pictures_in_group_chats/)
+  - **Author:** /u/CrusioG4
+  - **Date:** Apr 01, 2026, 20:54 UTC
+  - **Text:** In a recent upgrade they added the ability to send pictures in Group Chats. Did they remove it? It would be usefull and also a way to make chat more fun. I'm not able to do it but I'm sure it was reccently made available.
+- [Choose the one that give best value](https://www.reddit.com/r/LastZShooterRun/comments/1s9su1u/choose_the_one_that_give_best_value/)
+  - **Author:** /u/Vogeldeich
+  - **Date:** Apr 01, 2026, 18:22 UTC
+  - **Text:** if I can only buy one each month which one give me more value. ApocaAid monthly pass Hero Code (universal orange hero fragment or exclusive equip fragment) Current situation season 1 only 38 days left.
+- [Season rewards](https://www.reddit.com/r/LastZShooterRun/comments/1s9sfyk/season_rewards/)
+  - **Author:** /u/Longjumping_Zone_984
+  - **Date:** Apr 01, 2026, 18:10 UTC
+  - **Text:** How long before the countdown ends do players have to join the alliance to recieve full rewards? We are looking at moving a few members between alliances and farms, etc..and want to make sure they get the full reward.
+- [📢 Update on Community Guidelines – Account Trading](https://www.reddit.com/r/LastZShooterRun/comments/1s42ubz/update_on_community_guidelines_account_trading/)
+  - **Author:** /u/LastZ_Official
+  - **Date:** Mar 26, 2026, 09:37 UTC
+  - **Text:** Hey Survivors 👋 As part of the updated community guidelines, we’ll be making a small but important change to help keep the subreddit safe and fair for everyone. The accounts for sale megathread will be removed , and moving forward, posts related to account trading will no longer be allowed under Rule 3: No Account Trading or Commercial Promotion Account buying, selling, trading, and giving away your account is forbidden. Additionally, any commercial promotion and forms of activity that involve virtual or real-life monetary transactions are strictly prohibited in this subreddit. We understand this has been part of the community for a while, but account trading can come with risks (scams, account loss, etc.) and goes against our official Terms Of Service (TOS). This change is to help: Keep all Survivors safe Maintain fair gameplay Align the subreddit with official community standards Moving forward our team will be working to support and grow the Last Z Reddit community together with all of you. We really appreciate your understanding, and if you have any thoughts or concerns, feel free to share them below—we’re always listening. Regards, The Last Z Team
+- [Share your invite code here (don't make a post about it)](https://www.reddit.com/r/LastZShooterRun/comments/1rvdnzp/share_your_invite_code_here_dont_make_a_post/)
+  - **Author:** /u/wherearethemarxists
+  - **Date:** Mar 16, 2026, 16:06 UTC
