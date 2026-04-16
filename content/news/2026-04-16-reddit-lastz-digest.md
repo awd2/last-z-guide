@@ -1,0 +1,80 @@
+---
+title: "Reddit digest — LastZShooterRun (2026-04-16)"
+date: 2026-04-16
+source: reddit+facebook
+feeds:
+  - "https://old.reddit.com/r/LastZShooterRun/new/.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYq6GGU414.rss"
+  - "https://fetchrss.com/feed/1vuYpg5Bj8Go1vuYsj5hi7kb.rss"
+---
+
+## New posts
+
+### Reddit
+- [S3 Liliana Hero. Who to replace? Laura or Amelia?](https://old.reddit.com/r/LastZShooterRun/comments/1smptom/s3_liliana_hero_who_to_replace_laura_or_amelia/)
+  - **Author:** /u/Ja-KooLit
+  - **Date:** Apr 16, 2026, 01:49 UTC
+- [Je n’ai rien compris en l’utilité de ça](https://old.reddit.com/r/LastZShooterRun/comments/1smks25/je_nai_rien_compris_en_lutilité_de_ça/)
+  - **Author:** /u/Star_Disastrous
+  - **Date:** Apr 15, 2026, 22:13 UTC
+- [This game is a scam.](https://old.reddit.com/r/LastZShooterRun/comments/1smg7rz/this_game_is_a_scam/)
+  - **Author:** /u/IP2A
+  - **Date:** Apr 15, 2026, 19:27 UTC
+- [How many Migration Tickets will I roughly need?](https://old.reddit.com/r/LastZShooterRun/comments/1smbdya/how_many_migration_tickets_will_i_roughly_need/)
+  - **Author:** /u/elden_ring_666
+  - **Date:** Apr 15, 2026, 16:39 UTC
+- [Is there a guide with the tank plug-in upgrade cost?](https://old.reddit.com/r/LastZShooterRun/comments/1smb6st/is_there_a_guide_with_the_tank_plugin_upgrade_cost/)
+  - **Author:** /u/JinJaDubstep
+  - **Date:** Apr 15, 2026, 16:32 UTC
+- [Reservist camp - wtf does it do?](https://old.reddit.com/r/LastZShooterRun/comments/1smamvv/reservist_camp_wtf_does_it_do/)
+  - **Author:** /u/JinJaDubstep
+  - **Date:** Apr 15, 2026, 16:12 UTC
+- [Mastery Hall](https://old.reddit.com/r/LastZShooterRun/comments/1sma6nj/mastery_hall/)
+  - **Author:** /u/Playful_Buddy_787
+  - **Date:** Apr 15, 2026, 15:57 UTC
+- [Opinions/Guidance on stats and progression.](https://old.reddit.com/r/LastZShooterRun/comments/1sm7lmn/opinionsguidance_on_stats_and_progression/)
+  - **Author:** /u/Consistent-Yam3817
+  - **Date:** Apr 15, 2026, 14:24 UTC
+
+### Facebook (FetchRSS #1)
+- [[Easter Event Feedback Collection]](https://www.facebook.com/122208818816561196/posts/122216745818561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Apr 15, 2026, 10:00 UTC
+  - **Text:** [Easter Event Feedback Collection] Survivors, now that the Easter event has come to an end, we want to know your thoughts! 💬 What did you like or dislike? Did you run into any issues? Do you have any suggestions for improvement? Share them in the comments below! #LastZSurvivalShooter #LastZActivity #LastZEaster #ListenToYourVoice
+- [[Alliance Shoutout]](https://www.facebook.com/122208818816561196/posts/122216567468561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Apr 14, 2026, 10:00 UTC
+  - **Text:** [Alliance Shoutout] Did someone in your Alliance teach you secret tips and tricks? Did your R4 or R5 reinforce you when you were under attack? In the comments below, share a moment when someone in your Alliance or in Last Z was kind to you! 📣 #LastZSurvivalShooter #LastZActivity
+- [[Version 704 Update]](https://www.facebook.com/122208818816561196/posts/122216436926561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Apr 13, 2026, 10:00 UTC
+  - **Text:** [Version 704 Update] Key Points: - During the Capital Clash phase of State Ruler, rallied troops will no longer engage guards at the Capital or Turrets within the same state. - Improved troop movement handling for smoother and more responsive command. - Addressed occasional stuttering issues that could occur during combat. For more details, click the link below! 🔗: https://discord.com/channels/1354780389658591263/1404402423895691387/1493186144270159892 #LastZSurvivalShooter #LastZUpdate
+- [[Last Z on Reddit]](https://www.facebook.com/122208818816561196/posts/122216001206561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Apr 12, 2026, 10:00 UTC
+  - **Text:** [Last Z on Reddit] Join Last Z: Survival Shooter on Reddit to meet other Survivors and enrich your gaming experience! Do note that this is a community-run subreddit officially supported by us! Join Reddit for Discussion: https://www.reddit.com/r/LastZShooterRun/
+- [[𝐑𝐚𝐭𝐞 𝐟𝐨𝐫 𝐑𝐞𝐰𝐚𝐫𝐝𝐬!]](https://www.facebook.com/122208818816561196/posts/122215710770561196)
+  - **Author:** Last Z: Survival Shooter
+  - **Date:** Apr 09, 2026, 10:00 UTC
+  - **Text:** [𝐑𝐚𝐭𝐞 𝐟𝐨𝐫 𝐑𝐞𝐰𝐚𝐫𝐝𝐬!] We've heard your feedback regarding the translations in Last Z: Survival Shooter and are officially enlisting the help of all Survivors! 🆘 Rate official in-game text translations and earn rewards, with up to three reward opportunities each week! 🎁 This feature is available to all Survivors with a HQ level of 10 and above! Survivors from any country will be able to rate translations in their own language. This will greatly help our development team improve the in-game translations and provide everyone with a more pleasant gaming experience! Thank you for making Last Z: Survival Shooter an even better game! ❣️ ====================== Visit the official Last Z: Survival Shooter Gold Bar store for the best deals, extra rewards, and limited gifts! You don't want to miss out! Join us on Discord: https://discord.gg/last-z Follow us on X: https://x.com/LastZ_EN Official Store: https://store.last-z.com/#/order/facebook #LastZSurvivalShooter
+
+### Community Feed (FetchRSS #2)
+- [S3 Liliana Hero. Who to replace? Laura or Amelia?](https://www.reddit.com/r/LastZShooterRun/comments/1smptom/s3_liliana_hero_who_to_replace_laura_or_amelia/)
+  - **Author:** /u/Ja-KooLit
+  - **Date:** Apr 16, 2026, 01:49 UTC
+  - **Text:** As per title. Who to replace for WoD line up? Laura or Amelia?
+- [This game is a scam.](https://www.reddit.com/r/LastZShooterRun/comments/1smg7rz/this_game_is_a_scam/)
+  - **Author:** /u/IP2A
+  - **Date:** Apr 15, 2026, 19:27 UTC
+  - **Text:** I recently started the game, I am on server 718. A hero was available for purchase in the store for $5, so I purchased it. I made other purchases that I would not have made otherwise, like skill books and hero fragments. I received an in game mail this morning that me being able to purchase it was an 'accident' and I was refunded, however, I was refunded less than 10% of what I had put into the hero.
+- [Opinions/Guidance on stats and progression.](https://www.reddit.com/r/LastZShooterRun/comments/1sm7lmn/opinionsguidance_on_stats_and_progression/)
+  - **Author:** /u/Consistent-Yam3817
+  - **Date:** Apr 15, 2026, 14:24 UTC
+  - **Text:** HQ 30, Lab is almost 30. 18 days into season 3. f1 143m f2 90m. F1 will jump close to another 15m tomorrow when the new exclusive weapon drops.
+- [📢 Update on Community Guidelines – Account Trading](https://www.reddit.com/r/LastZShooterRun/comments/1s42ubz/update_on_community_guidelines_account_trading/)
+  - **Author:** /u/LastZ_Official
+  - **Date:** Mar 26, 2026, 09:37 UTC
+  - **Text:** Hey Survivors 👋 As part of the updated community guidelines, we’ll be making a small but important change to help keep the subreddit safe and fair for everyone. The accounts for sale megathread will be removed , and moving forward, posts related to account trading will no longer be allowed under Rule 3: No Account Trading or Commercial Promotion Account buying, selling, trading, and giving away your account is forbidden. Additionally, any commercial promotion and forms of activity that involve virtual or real-life monetary transactions are strictly prohibited in this subreddit. We understand this has been part of the community for a while, but account trading can come with risks (scams, account loss, etc.) and goes against our official Terms Of Service (TOS). This change is to help: Keep all Survivors safe Maintain fair gameplay Align the subreddit with official community standards Moving forward our team will be working to support and grow the Last Z Reddit community together with all of you. We really appreciate your understanding, and if you have any thoughts or concerns, feel free to share them below—we’re always listening. Regards, The Last Z Team
+- [Share your invite code here (don't make a post about it)](https://www.reddit.com/r/LastZShooterRun/comments/1rvdnzp/share_your_invite_code_here_dont_make_a_post/)
+  - **Author:** /u/wherearethemarxists
+  - **Date:** Mar 16, 2026, 16:06 UTC
