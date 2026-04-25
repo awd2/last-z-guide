@@ -122,6 +122,7 @@ python3 automation/pipeline.py init-run <topic_id>
 python3 automation/pipeline.py review <run_id>
 python3 automation/pipeline.py brief <run_id>
 python3 automation/pipeline.py patch-plan <run_id>
+python3 automation/pipeline.py propose <run_id>
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
@@ -154,6 +155,7 @@ python3 automation/pipeline.py init-run season-alias-clarification
 python3 automation/pipeline.py review 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py brief 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py patch-plan 2026-04-22-research-cluster-nav
+python3 automation/pipeline.py propose 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
@@ -167,6 +169,7 @@ Lifecycle shorthand:
 - `review` -> take an existing `planned` manifest to `reviewed`
 - `brief` -> create a brief-only editor artifact and move the run to `draft_brief_ready`
 - `patch-plan` -> create a proposal-only patch artifact and move the run to `patch_plan_ready`
+- `propose` -> render human-reviewable proposed edits and move the run to `proposal_ready`
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
@@ -257,6 +260,7 @@ python3 automation/pipeline.py show <run_id> --json
 - markdown review bundle
 - editor brief
 - patch plan
+- proposed edits report
 
 `show --json` gives the same compact run summary in machine-readable form.
 
@@ -277,6 +281,7 @@ You can filter `recent-runs` by lifecycle status, for example:
 - `reviewed`
 - `draft_brief_ready`
 - `patch_plan_ready`
+- `proposal_ready`
 
 `recent-runs` also supports `--json` for machine-readable recent run feeds.
 
@@ -343,7 +348,8 @@ python3 automation/pipeline.py next-step <run_id> --json
 - `planned` -> `review`
 - `reviewed` -> `brief`
 - `draft_brief_ready` -> `patch-plan`
-- `patch_plan_ready` -> human review / manual edit gate
+- `patch_plan_ready` -> `propose`
+- `proposal_ready` -> human review / manual edit gate
 
 `next-step --json` gives the same lifecycle hint in machine-readable form.
 It now includes structured fields such as:
@@ -362,6 +368,14 @@ Patch plans include `Patch Spec v1` entries with:
 - validation commands
 - explicit human approval requirement
 
+`propose` reads Patch Spec v1 entries and renders a human-reviewable proposed
+edit report at:
+
+- `automation/reports/<run_id>.proposed.md`
+
+It does not edit site content. Generated research pages are still routed through
+their JSON source files and generator commands in the report.
+
 Run review as a separate lifecycle step:
 
 ```bash
@@ -378,6 +392,12 @@ Create a proposal-only patch plan from an existing draft brief run:
 
 ```bash
 python3 automation/pipeline.py patch-plan <run_id>
+```
+
+Render proposed edits from an existing patch plan:
+
+```bash
+python3 automation/pipeline.py propose <run_id>
 ```
 
 Export a markdown bundle for an existing run:

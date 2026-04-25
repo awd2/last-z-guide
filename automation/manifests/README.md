@@ -39,10 +39,13 @@ The current automation MVP uses this concrete lifecycle:
 - `reviewed`
 - `draft_brief_ready`
 - `patch_plan_ready`
+- `proposal_ready`
 
-`patch_plan_ready` is the current stop point. It means the run has a
-proposal-only patch plan and now needs human review before any site files are
-edited.
+`patch_plan_ready` means the run has Patch Spec v1 metadata and can render a
+human-reviewable proposal artifact.
+
+`proposal_ready` is the current stop point. It means the run has proposed edits
+and now needs human review before any site files are edited.
 
 Future lifecycle stages may add names such as `drafted`, `qa_passed`,
 `ready_for_approval`, `approved`, and `released`, but those are not implemented

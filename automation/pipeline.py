@@ -131,6 +131,13 @@ def cmd_patch_plan(run_id: str) -> int:
     )
 
 
+def cmd_propose(run_id: str) -> int:
+    return run_step(
+        "Proposal Renderer",
+        [sys.executable, str(AUTOMATION_DIR / "proposal_renderer.py"), run_id],
+    )
+
+
 def cmd_bundle(topic_id: str) -> int:
     return run_step(
         "Review Bundle",
@@ -292,12 +299,15 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     review_context = (manifest.artifacts or {}).get("review_context", {})
     editor_context = (manifest.artifacts or {}).get("editor", {})
     patch_plan_context = (manifest.artifacts or {}).get("patch_plan", {})
+    proposal_context = (manifest.artifacts or {}).get("proposal", {})
 
     bundle_path = AUTOMATION_DIR / "reports" / f"{run_id}.md"
     brief_path_value = editor_context.get("brief_path")
     brief_path = ROOT / brief_path_value if brief_path_value else None
     patch_path_value = patch_plan_context.get("report_path")
     patch_path = ROOT / patch_path_value if patch_path_value else None
+    proposal_path_value = proposal_context.get("report_path")
+    proposal_path = ROOT / proposal_path_value if proposal_path_value else None
 
     payload = {
         "run_id": manifest.run_id,
@@ -319,6 +329,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
         else None,
         "review_context": review_context,
         "patch_plan_context": patch_plan_context,
+        "proposal_context": proposal_context,
         "checks": {
             name: {"status": result.status, "notes": result.notes}
             for name, result in manifest.checks.items()
@@ -328,6 +339,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
             "review_bundle": str(bundle_path.relative_to(ROOT)) if bundle_path.exists() else None,
             "editor_brief": str(brief_path.relative_to(ROOT)) if brief_path and brief_path.exists() else None,
             "patch_plan": str(patch_path.relative_to(ROOT)) if patch_path and patch_path.exists() else None,
+            "proposal": str(proposal_path.relative_to(ROOT)) if proposal_path and proposal_path.exists() else None,
         },
     }
 
@@ -413,6 +425,13 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
                     f"  - {proposal.get('file')} -> {proposal.get('change_type')} "
                     f"({proposal.get('reason')})"
                 )
+    if proposal_context:
+        print("\nProposal Context")
+        rendered_specs = proposal_context.get("rendered_specs", [])
+        report_path = proposal_context.get("report_path")
+        print(f"- rendered_specs: {len(rendered_specs)}")
+        if report_path:
+            print(f"- report_path: {report_path}")
 
     if manifest.changed_files:
         print("\nChanged Files")
@@ -430,6 +449,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     print(f"- review bundle: {bundle_path.relative_to(ROOT) if bundle_path.exists() else 'not generated yet'}")
     print(f"- editor brief: {brief_path.relative_to(ROOT) if brief_path and brief_path.exists() else 'not generated yet'}")
     print(f"- patch plan: {patch_path.relative_to(ROOT) if patch_path and patch_path.exists() else 'not generated yet'}")
+    print(f"- proposal: {proposal_path.relative_to(ROOT) if proposal_path and proposal_path.exists() else 'not generated yet'}")
     return 0
 
 
@@ -465,11 +485,18 @@ def cmd_next_step(run_id: str, as_json: bool) -> int:
             "reason": "The editor brief exists and the next safe step is a proposal-only patch plan.",
         },
         "patch_plan_ready": {
+            "next_step": f"python3 automation/pipeline.py propose {run_id}",
+            "recommended_command": f"python3 automation/pipeline.py propose {run_id}",
+            "requires_human_review": False,
+            "requires_manual_edit_gate": False,
+            "reason": "The run has Patch Spec v1 metadata and can render a human-reviewable proposal artifact next.",
+        },
+        "proposal_ready": {
             "next_step": "human_review_then_manual_edit",
             "recommended_command": None,
             "requires_human_review": True,
             "requires_manual_edit_gate": True,
-            "reason": "The run has a proposal-only patch plan and now needs human review before any site edits.",
+            "reason": "The run has human-reviewable proposed edits and now needs approval before any site edits.",
         },
     }
 
@@ -515,6 +542,7 @@ def cmd_show(run_id: str, as_json: bool) -> int:
     review_context = (manifest.artifacts or {}).get("review_context", {})
     editor_context = (manifest.artifacts or {}).get("editor", {})
     patch_plan_context = (manifest.artifacts or {}).get("patch_plan", {})
+    proposal_context = (manifest.artifacts or {}).get("proposal", {})
     claim_ids = review_context.get("canonical_claim_ids", [])
     related_pages = review_context.get("related_filenames", [])
     bundle_path = AUTOMATION_DIR / "reports" / f"{run_id}.md"
@@ -522,6 +550,8 @@ def cmd_show(run_id: str, as_json: bool) -> int:
     brief_path = ROOT / brief_path_value if brief_path_value else None
     patch_path_value = patch_plan_context.get("report_path")
     patch_path = ROOT / patch_path_value if patch_path_value else None
+    proposal_path_value = proposal_context.get("report_path")
+    proposal_path = ROOT / proposal_path_value if proposal_path_value else None
 
     payload = {
         "run_id": manifest.run_id,
@@ -539,6 +569,7 @@ def cmd_show(run_id: str, as_json: bool) -> int:
             "review_bundle": str(bundle_path.relative_to(ROOT)) if bundle_path.exists() else None,
             "editor_brief": str(brief_path.relative_to(ROOT)) if brief_path and brief_path.exists() else None,
             "patch_plan": str(patch_path.relative_to(ROOT)) if patch_path and patch_path.exists() else None,
+            "proposal": str(proposal_path.relative_to(ROOT)) if proposal_path and proposal_path.exists() else None,
         },
     }
 
@@ -576,6 +607,10 @@ def cmd_show(run_id: str, as_json: bool) -> int:
         print(f"Patch plan: {patch_path.relative_to(ROOT)}")
     else:
         print("Patch plan: not generated yet")
+    if proposal_path and proposal_path.exists():
+        print(f"Proposal: {proposal_path.relative_to(ROOT)}")
+    else:
+        print("Proposal: not generated yet")
     return 0
 
 
@@ -608,14 +643,19 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
         bundle_path = REPORTS_DIR / f"{manifest.run_id}.md"
         editor_context = (manifest.artifacts or {}).get("editor", {})
         patch_plan_context = (manifest.artifacts or {}).get("patch_plan", {})
+        proposal_context = (manifest.artifacts or {}).get("proposal", {})
         brief_path_value = editor_context.get("brief_path")
         patch_path_value = patch_plan_context.get("report_path")
+        proposal_path_value = proposal_context.get("report_path")
         has_brief = False
         has_patch_plan = False
+        has_proposal = False
         if brief_path_value:
             has_brief = (ROOT / brief_path_value).exists()
         if patch_path_value:
             has_patch_plan = (ROOT / patch_path_value).exists()
+        if proposal_path_value:
+            has_proposal = (ROOT / proposal_path_value).exists()
 
         rows.append(
             {
@@ -628,6 +668,7 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
                 "has_bundle": bundle_path.exists(),
                 "has_brief": has_brief,
                 "has_patch_plan": has_patch_plan,
+                "has_proposal": has_proposal,
                 "summary": manifest.summary,
             }
         )
@@ -645,7 +686,8 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
         print(
             f"  type={row['run_type']} | changed={row['changed_files_count']} | "
             f"bundle={'yes' if row['has_bundle'] else 'no'} | "
-            f"brief={'yes' if row['has_brief'] else 'no'} | patch={'yes' if row['has_patch_plan'] else 'no'}"
+            f"brief={'yes' if row['has_brief'] else 'no'} | patch={'yes' if row['has_patch_plan'] else 'no'} | "
+            f"proposal={'yes' if row['has_proposal'] else 'no'}"
         )
         print(f"  summary: {row['summary']}")
     return 0
@@ -862,6 +904,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     patch_parser.add_argument("run_id", help="Run manifest basename without .json")
 
+    propose_parser = subparsers.add_parser(
+        "propose",
+        help="Render human-reviewable proposed edits from Patch Spec v1.",
+    )
+    propose_parser.add_argument("run_id", help="Run manifest basename without .json")
+
     run_parser = subparsers.add_parser("run", help="Create and review a manifest for one backlog topic.")
     run_parser.add_argument("topic_id", help="Backlog topic_id to run.")
 
@@ -912,6 +960,8 @@ def main() -> int:
         return cmd_brief(args.run_id)
     if args.command == "patch-plan":
         return cmd_patch_plan(args.run_id)
+    if args.command == "propose":
+        return cmd_propose(args.run_id)
     if args.command == "run":
         return cmd_run(args.topic_id)
     if args.command == "bundle":

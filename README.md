@@ -98,6 +98,7 @@ python3 automation/pipeline.py list
 python3 automation/pipeline.py open-topic <topic_id>
 python3 automation/pipeline.py open-run <run_id>
 python3 automation/pipeline.py recent-runs
+python3 automation/pipeline.py propose <run_id>
 ```
 
 `checks` includes:
