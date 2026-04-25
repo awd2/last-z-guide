@@ -1,0 +1,95 @@
+{
+  "run_id": "2026-04-22-gift-center-login-setup",
+  "created_at": "2026-04-22T16:56:58.397517Z",
+  "run_type": "update_existing",
+  "status": "reviewed",
+  "risk_level": "medium",
+  "summary": "Update the existing page `gift-center-uid.html` for the `Economy` cluster using the `support-guide` archetype.",
+  "inputs": {
+    "topic_id": "gift-center-login-setup",
+    "title": "Gift Center login setup intent refinement",
+    "cluster": "Economy",
+    "source_type": "analytics",
+    "source_reference": "GSC/Bing: gift center login and UID intent cluster",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog"
+  },
+  "plan": {
+    "topic_id": "gift-center-login-setup",
+    "title": "Gift Center login setup intent refinement",
+    "cluster": "Economy",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "support-guide",
+    "target_page_or_slug": "gift-center-uid.html",
+    "source_type": "analytics",
+    "source_reference": "GSC/Bing: gift center login and UID intent cluster",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "risk_level": "medium",
+    "plan_summary": "Update the existing page `gift-center-uid.html` for the `Economy` cluster using the `support-guide` archetype.",
+    "memory_files": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/entities.json"
+    ],
+    "related_pages": [
+      "gift-center-uid.html",
+      "codes.html",
+      "diamond-reserve.html",
+      "f2p.html",
+      "farm-account.html",
+      "redeem-code-not-working.html",
+      "refugees.html"
+    ],
+    "deterministic_checks": [
+      "python3 automation/run_checks.py",
+      "python3 scripts/prepublish_check.py --fix",
+      "python3 scripts/prepublish_check.py"
+    ],
+    "notes": "Keep the page setup-focused and exact. Avoid drifting back into broad codes coverage."
+  },
+  "artifacts": {
+    "memory_files_used": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/entities.json"
+    ],
+    "review_context": {
+      "canonical_claim_ids": [
+        "diamond-reserve-before-reactive-spend",
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox",
+        "shield-alliance-shop-first",
+        "uid-copy-path"
+      ],
+      "related_filenames": [
+        "codes.html",
+        "diamond-reserve.html",
+        "f2p.html",
+        "farm-account.html",
+        "gift-center-uid.html",
+        "redeem-code-not-working.html",
+        "refugees.html"
+      ]
+    }
+  },
+  "changed_files": [],
+  "checks": {},
+  "review": {
+    "verdict": "needs_human_review",
+    "open_questions": [],
+    "next_action": "review_human",
+    "reviewer_notes": "Deterministic review scaffold complete. The run should explicitly respect these canonical claims: diamond-reserve-before-reactive-spend, gift-center-cluster-role-separation, gift-center-only-redeem-flow, gift-rewards-mailbox, shield-alliance-shop-first, uid-copy-path."
+  }
+}

@@ -2,6 +2,24 @@
 
 Static guide site for `lastzguides.com`.
 
+## Project Instructions
+
+Root [AGENTS.md](/Users/oleg/Projects/claude-playground/AGENTS.md) is the main repo-level instruction file for this project.
+
+Use it as the default operating manual for both:
+
+- agent-style workflows
+- ordinary chat requests about this repository
+
+It does not override platform or developer instructions, but it is the default local source for:
+
+- project rules
+- file-reading flow
+- cluster roles
+- canonical content constraints
+- SEO / LLM optimization rules
+- safe editing and publishing behavior
+
 ## Local workflow
 
 The publish flow stays the same:
@@ -48,6 +66,56 @@ python3 scripts/check_site_indexing.py --fix
 python3 scripts/sync_structured_data.py
 python3 scripts/sync_verification_blocks.py
 ```
+
+## Automation MVP
+
+The repo now also contains a separate `automation/` layer for a controlled editorial automation MVP.
+
+This is **not** an autonomous publishing system. It is a draft-first planning and review foundation:
+
+- explicit site memory
+- structured backlog
+- deterministic QA helpers
+- run manifests
+- human-readable review bundles
+- editor briefs
+
+Root `README.md` only gives the short project-level view.
+Use [automation/README.md](/Users/oleg/Projects/claude-playground/automation/README.md) as the full operator reference for:
+
+- CLI commands
+- lifecycle states
+- manifests and report artifacts
+- baseline vs strict automation checks
+
+Most useful entrypoints:
+
+```bash
+python3 automation/pipeline.py checks
+python3 automation/pipeline.py checks --strict
+python3 automation/pipeline.py status
+python3 automation/pipeline.py list
+python3 automation/pipeline.py open-topic <topic_id>
+python3 automation/pipeline.py open-run <run_id>
+python3 automation/pipeline.py recent-runs
+```
+
+`checks` includes:
+
+- content index memory sync
+- orphan / weak-cluster coverage
+- cluster-link expectations
+- SEO/LLM alignment warnings
+- basic cannibalization warnings
+
+`checks --strict` turns weak-cluster and SEO/LLM warnings into a failing gate.
+
+Automation artifacts live in:
+
+- `automation/manifests/<run_id>.json`
+- `automation/reports/<run_id>.md`
+- `automation/reports/<run_id>.brief.md`
+- `automation/reports/<run_id>.patch.md`
 
 ## Notes
 

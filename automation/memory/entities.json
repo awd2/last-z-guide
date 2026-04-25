@@ -1,0 +1,400 @@
+{
+  "generated_at": "2026-04-22",
+  "notes": "Shared entity and alias registry for editorial automation. This is not a full game database. It only covers the core entities the pipeline should normalize across planning, writing, and review.",
+  "entities": {
+    "research_branches": [
+      {
+        "id": "hero-training",
+        "label": "Hero Training",
+        "aliases": [
+          "hero training research"
+        ],
+        "cluster": "Research",
+        "page": "hero-training-cost.html"
+      },
+      {
+        "id": "military-strategies",
+        "label": "Military Strategies",
+        "aliases": [
+          "military strategies research"
+        ],
+        "cluster": "Research",
+        "page": "military-strategies-cost.html"
+      },
+      {
+        "id": "peace-shield",
+        "label": "Peace Shield",
+        "aliases": [
+          "peace shield research"
+        ],
+        "cluster": "Research",
+        "page": "peace-shield-cost.html"
+      },
+      {
+        "id": "siege-to-seize",
+        "label": "Siege to Seize",
+        "aliases": [
+          "siege to seize research"
+        ],
+        "cluster": "Research",
+        "page": "siege-to-seize-cost.html"
+      },
+      {
+        "id": "field-research",
+        "label": "Field Research",
+        "aliases": [
+          "field research tree",
+          "field research path"
+        ],
+        "cluster": "Research",
+        "page": "field-research.html"
+      },
+      {
+        "id": "alliance-recognition",
+        "label": "Alliance Recognition",
+        "aliases": [
+          "alliance recognition research"
+        ],
+        "cluster": "Research",
+        "page": "alliance-recognition-cost.html"
+      },
+      {
+        "id": "army-building",
+        "label": "Army Building",
+        "aliases": [
+          "army building research"
+        ],
+        "cluster": "Research",
+        "page": "army-building-cost.html"
+      },
+      {
+        "id": "fully-armed-alliance",
+        "label": "Fully Armed Alliance",
+        "aliases": [
+          "fully armed alliance research"
+        ],
+        "cluster": "Research",
+        "page": "fully-armed-alliance-cost.html"
+      },
+      {
+        "id": "unit-special-training",
+        "label": "Unit Special Training",
+        "aliases": [
+          "ust",
+          "unit special training research",
+          "t10 research"
+        ],
+        "cluster": "Research",
+        "page": "unit-special-training-cost.html"
+      }
+    ],
+    "research_unlocks": [
+      {
+        "id": "cockpit",
+        "label": "Cockpit",
+        "aliases": [],
+        "cluster": "Research"
+      },
+      {
+        "id": "urgent-rescue",
+        "label": "Urgent Rescue",
+        "aliases": [],
+        "cluster": "Research"
+      },
+      {
+        "id": "recharge-shield",
+        "label": "Recharge Shield",
+        "aliases": [],
+        "cluster": "Research"
+      },
+      {
+        "id": "event-expert",
+        "label": "Event Expert",
+        "aliases": [],
+        "cluster": "Research"
+      },
+      {
+        "id": "event-king",
+        "label": "Event King",
+        "aliases": [],
+        "cluster": "Research"
+      },
+      {
+        "id": "one-more",
+        "label": "One More!",
+        "aliases": [],
+        "cluster": "Research"
+      },
+      {
+        "id": "annihilation",
+        "label": "Annihilation",
+        "aliases": [],
+        "cluster": "Research"
+      },
+      {
+        "id": "move-out",
+        "label": "Move Out",
+        "aliases": [],
+        "cluster": "Research"
+      }
+    ],
+    "events": [
+      {
+        "id": "alliance-duel",
+        "label": "Alliance Duel",
+        "aliases": [
+          "ad",
+          "vs"
+        ],
+        "cluster": "Events",
+        "page": "alliance-duel.html"
+      },
+      {
+        "id": "state-vs-state",
+        "label": "State vs State",
+        "aliases": [
+          "svs"
+        ],
+        "cluster": "PvP",
+        "page": "svs.html"
+      },
+      {
+        "id": "lucky-discounter",
+        "label": "Lucky Discounter",
+        "aliases": [
+          "discounter"
+        ],
+        "cluster": "Events",
+        "page": "lucky-discounter.html"
+      },
+      {
+        "id": "gacha-go",
+        "label": "Gacha Go",
+        "aliases": [],
+        "cluster": "Events",
+        "page": "gacha-go.html"
+      },
+      {
+        "id": "tyrant",
+        "label": "Tyrant",
+        "aliases": [],
+        "cluster": "Events",
+        "page": "tyrant.html"
+      },
+      {
+        "id": "furylord",
+        "label": "Furylord",
+        "aliases": [],
+        "cluster": "Events",
+        "page": "furylord.html"
+      },
+      {
+        "id": "zombie-siege",
+        "label": "Zombie Siege",
+        "aliases": [],
+        "cluster": "Events",
+        "page": "zombie-siege.html"
+      },
+      {
+        "id": "canyon-clash",
+        "label": "Canyon Clash",
+        "aliases": [],
+        "cluster": "Events",
+        "page": "canyon-clash.html"
+      },
+      {
+        "id": "radar-events",
+        "label": "Radar Events",
+        "aliases": [
+          "radar"
+        ],
+        "cluster": "Events",
+        "page": "radar.html"
+      }
+    ],
+    "economy_and_redeem": [
+      {
+        "id": "gift-center",
+        "label": "Gift Center",
+        "aliases": [
+          "gift center login",
+          "redeem page",
+          "redeem website"
+        ],
+        "cluster": "Economy",
+        "page": "gift-center-uid.html"
+      },
+      {
+        "id": "redeem-codes",
+        "label": "Redeem Codes",
+        "aliases": [
+          "gift codes",
+          "active codes"
+        ],
+        "cluster": "Economy",
+        "page": "codes.html"
+      },
+      {
+        "id": "uid",
+        "label": "UID",
+        "aliases": [
+          "copy id",
+          "player id"
+        ],
+        "cluster": "Economy",
+        "page": "gift-center-uid.html"
+      },
+      {
+        "id": "mailbox",
+        "label": "Mailbox",
+        "aliases": [
+          "mail",
+          "in-game mail"
+        ],
+        "cluster": "Economy"
+      },
+      {
+        "id": "diamonds",
+        "label": "Diamonds",
+        "aliases": [],
+        "cluster": "Economy",
+        "page": "diamond-reserve.html"
+      },
+      {
+        "id": "alliance-shop",
+        "label": "Alliance Shop",
+        "aliases": [
+          "alliance points shop"
+        ],
+        "cluster": "Economy",
+        "page": "shield.html"
+      },
+      {
+        "id": "shield",
+        "label": "Shield",
+        "aliases": [
+          "peace shield",
+          "8h shield",
+          "24h shield"
+        ],
+        "cluster": "Economy",
+        "page": "shield.html"
+      },
+      {
+        "id": "refugees",
+        "label": "Refugees",
+        "aliases": [],
+        "cluster": "Economy",
+        "page": "refugees.html"
+      },
+      {
+        "id": "steel",
+        "label": "Steel",
+        "aliases": [],
+        "cluster": "Economy",
+        "page": "steel.html"
+      }
+    ],
+    "vehicles_and_progression": [
+      {
+        "id": "vehicle-modification",
+        "label": "Vehicle Modification",
+        "aliases": [
+          "vehicle research",
+          "vehicle tree"
+        ],
+        "cluster": "Equipment",
+        "page": "vehicle-modification-cost.html"
+      },
+      {
+        "id": "hercules",
+        "label": "Hercules",
+        "aliases": [],
+        "cluster": "Equipment",
+        "page": "vehicle-modification-cost.html"
+      },
+      {
+        "id": "destroyer",
+        "label": "Destroyer",
+        "aliases": [],
+        "cluster": "Equipment",
+        "page": "vehicle-modification-cost.html"
+      },
+      {
+        "id": "destroyer-ex",
+        "label": "Destroyer EX",
+        "aliases": [],
+        "cluster": "Equipment",
+        "page": "vehicle-modification-cost.html"
+      },
+      {
+        "id": "headquarters",
+        "label": "Headquarters",
+        "aliases": [
+          "hq"
+        ],
+        "cluster": "Progression",
+        "page": "hq.html"
+      },
+      {
+        "id": "hospital",
+        "label": "Emergency Hospital",
+        "aliases": [
+          "hospital"
+        ],
+        "cluster": "Progression",
+        "page": "emergency-hospital-cost.html"
+      },
+      {
+        "id": "arena",
+        "label": "Arena",
+        "aliases": [],
+        "cluster": "PvP",
+        "page": "arena.html"
+      }
+    ],
+    "heroes": [
+      {
+        "id": "queenie",
+        "label": "Queenie",
+        "aliases": [],
+        "cluster": "Heroes",
+        "page": "queenie.html"
+      },
+      {
+        "id": "yu-chan",
+        "label": "Yu Chan",
+        "aliases": [
+          "yuchan"
+        ],
+        "cluster": "Heroes",
+        "page": "yu-chan.html"
+      }
+    ],
+    "seasons": [
+      {
+        "id": "season-2",
+        "label": "Season 2",
+        "aliases": [
+          "s2"
+        ],
+        "cluster": "Seasons"
+      },
+      {
+        "id": "winter",
+        "label": "Winter",
+        "aliases": [
+          "ice",
+          "everfrost"
+        ],
+        "cluster": "Seasons"
+      },
+      {
+        "id": "desert",
+        "label": "Desert",
+        "aliases": [],
+        "cluster": "Seasons"
+      }
+    ]
+  }
+}

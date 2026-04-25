@@ -1,0 +1,453 @@
+{
+  "run_id": "2026-04-22-research-cluster-nav",
+  "created_at": "2026-04-22T16:51:13.725356Z",
+  "run_type": "update_existing",
+  "status": "patch_plan_ready",
+  "risk_level": "medium",
+  "summary": "Update the existing page `research-costs.html` for the `Research` cluster using the `atlas-page` archetype.",
+  "inputs": {
+    "topic_id": "research-cluster-nav",
+    "title": "Research cost cluster local navigation",
+    "cluster": "Research",
+    "source_type": "product",
+    "source_reference": "Known rollout next step from research atlas project",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog"
+  },
+  "plan": {
+    "topic_id": "research-cluster-nav",
+    "title": "Research cost cluster local navigation",
+    "cluster": "Research",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "atlas-page",
+    "target_page_or_slug": "research-costs.html",
+    "source_type": "product",
+    "source_reference": "Known rollout next step from research atlas project",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "risk_level": "medium",
+    "plan_summary": "Update the existing page `research-costs.html` for the `Research` cluster using the `atlas-page` archetype.",
+    "memory_files": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/entities.json"
+    ],
+    "related_pages": [
+      "research-costs.html",
+      "alliance-recognition-cost.html",
+      "army-building-cost.html",
+      "field-research.html",
+      "fully-armed-alliance-cost.html",
+      "hero-training-cost.html",
+      "military-strategies-cost.html"
+    ],
+    "deterministic_checks": [
+      "python3 automation/run_checks.py",
+      "python3 scripts/generate_research_branch.py <data-file-if-applicable>",
+      "python3 scripts/prepublish_check.py --fix",
+      "python3 scripts/prepublish_check.py"
+    ],
+    "notes": "Add readable cluster-nav patterns without overloading each branch page."
+  },
+  "artifacts": {
+    "memory_files_used": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/entities.json"
+    ],
+    "review_context": {
+      "canonical_claim_ids": [
+        "alliance-recognition-utility-page",
+        "field-research-follows-siege",
+        "hero-training-cockpit-stop",
+        "peace-shield-value",
+        "research-atlas-role",
+        "research-best-mainline"
+      ],
+      "related_filenames": [
+        "alliance-recognition-cost.html",
+        "army-building-cost.html",
+        "field-research.html",
+        "fully-armed-alliance-cost.html",
+        "hero-training-cost.html",
+        "military-strategies-cost.html",
+        "research-costs.html"
+      ]
+    },
+    "editor": {
+      "brief_path": "automation/reports/2026-04-22-research-cluster-nav.brief.md"
+    },
+    "patch_plan": {
+      "target_page_or_slug": "research-costs.html",
+      "archetype_suggestion": "atlas-page",
+      "recommended_action": "update_existing",
+      "proposed_changes": [
+        {
+          "file": "research-costs.html",
+          "change_type": "first_screen_update",
+          "reason": "Align the opening answer with the run summary, target intent, and cluster role."
+        },
+        {
+          "file": "research-costs.html",
+          "change_type": "meta_refresh",
+          "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent."
+        },
+        {
+          "file": "research-costs.html",
+          "change_type": "internal_link_addition",
+          "reason": "Strengthen routing between the target page and adjacent cluster pages."
+        },
+        {
+          "file": "research-costs.html",
+          "change_type": "atlas_card_update",
+          "reason": "Adjust atlas cards or route blocks to improve cluster navigation and page choice."
+        },
+        {
+          "file": "alliance-recognition-cost.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `research-costs.html` from a related cluster page."
+        },
+        {
+          "file": "army-building-cost.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `research-costs.html` from a related cluster page."
+        },
+        {
+          "file": "field-research.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `research-costs.html` from a related cluster page."
+        },
+        {
+          "file": "fully-armed-alliance-cost.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `research-costs.html` from a related cluster page."
+        }
+      ],
+      "patch_specs": [
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "alliance-recognition-utility-page",
+            "field-research-follows-siege",
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "alliance-recognition-utility-page",
+            "field-research-follows-siege",
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Strengthen routing between the target page and adjacent cluster pages.",
+          "canonical_claims_to_protect": [
+            "alliance-recognition-utility-page",
+            "field-research-follows-siege",
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "atlas_card_update",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Adjust atlas cards or route blocks to improve cluster navigation and page choice.",
+          "canonical_claims_to_protect": [
+            "alliance-recognition-utility-page",
+            "field-research-follows-siege",
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "alliance-recognition-cost.html",
+          "source_of_truth_file": "alliance-recognition-cost.html",
+          "output_file": "alliance-recognition-cost.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `research-costs.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "alliance-recognition-utility-page",
+            "field-research-follows-siege",
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "army-building-cost.html",
+          "source_of_truth_file": "data/research_branches/army-building.json",
+          "output_file": "army-building-cost.html",
+          "source_type": "generated_research_branch",
+          "is_generated": true,
+          "generator_command": "python3 scripts/generate_research_branch.py data/research_branches/army-building.json",
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the JSON source first, then regenerate the HTML output.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `research-costs.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "alliance-recognition-utility-page",
+            "field-research-follows-siege",
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/generate_research_branch.py data/research_branches/army-building.json",
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "field-research.html",
+          "source_of_truth_file": "data/research_branches/field-research.json",
+          "output_file": "field-research.html",
+          "source_type": "generated_research_branch",
+          "is_generated": true,
+          "generator_command": "python3 scripts/generate_research_branch.py data/research_branches/field-research.json",
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the JSON source first, then regenerate the HTML output.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `research-costs.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "alliance-recognition-utility-page",
+            "field-research-follows-siege",
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/generate_research_branch.py data/research_branches/field-research.json",
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "fully-armed-alliance-cost.html",
+          "source_of_truth_file": "data/research_branches/fully-armed-alliance.json",
+          "output_file": "fully-armed-alliance-cost.html",
+          "source_type": "generated_research_branch",
+          "is_generated": true,
+          "generator_command": "python3 scripts/generate_research_branch.py data/research_branches/fully-armed-alliance.json",
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the JSON source first, then regenerate the HTML output.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `research-costs.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "alliance-recognition-utility-page",
+            "field-research-follows-siege",
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/generate_research_branch.py data/research_branches/fully-armed-alliance.json",
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        }
+      ],
+      "changed_files": [
+        "alliance-recognition-cost.html",
+        "army-building-cost.html",
+        "field-research.html",
+        "fully-armed-alliance-cost.html",
+        "research-costs.html"
+      ],
+      "source_files": [
+        "alliance-recognition-cost.html",
+        "data/research_branches/army-building.json",
+        "data/research_branches/field-research.json",
+        "data/research_branches/fully-armed-alliance.json",
+        "research-costs.html"
+      ],
+      "canonical_claim_ids": [
+        "alliance-recognition-utility-page",
+        "field-research-follows-siege",
+        "hero-training-cockpit-stop",
+        "peace-shield-value",
+        "research-atlas-role",
+        "research-best-mainline"
+      ],
+      "deterministic_checks": [
+        "python3 automation/run_checks.py",
+        "python3 scripts/generate_research_branch.py <data-file-if-applicable>",
+        "python3 scripts/prepublish_check.py --fix",
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+        "python3 automation/pipeline.py checks"
+      ],
+      "report_path": "automation/reports/2026-04-22-research-cluster-nav.patch.md"
+    }
+  },
+  "changed_files": [
+    "alliance-recognition-cost.html",
+    "army-building-cost.html",
+    "field-research.html",
+    "fully-armed-alliance-cost.html",
+    "research-costs.html"
+  ],
+  "checks": {
+    "automation_checks": {
+      "status": "pass",
+      "notes": "Orphan page baseline passed with warnings. Re-run with --strict to fail on weak same-cluster support. | Cluster link check passed. | SEO/LLM alignment warnings: | Checked SEO/LLM alignment on 62 memory pages: 8 alignment warning(s), 0 cannibalization warning(s). | SEO/LLM alignment baseline passed with warnings. Re-run with --strict to fail on them. | Automation checks passed."
+    },
+    "changed_pages_report": {
+      "status": "pass",
+      "notes": "same-cluster inbound links: 1 | expected hubs: index.html, research.html, research-costs.html | linked from hubs: index.html, research.html"
+    }
+  },
+  "review": {
+    "verdict": "needs_human_review",
+    "open_questions": [],
+    "next_action": "review_human",
+    "reviewer_notes": "Deterministic review scaffold complete. The run should explicitly respect these canonical claims: alliance-recognition-utility-page, field-research-follows-siege, hero-training-cockpit-stop, peace-shield-value, research-atlas-role, research-best-mainline."
+  }
+}

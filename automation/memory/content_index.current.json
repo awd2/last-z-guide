@@ -1,0 +1,378 @@
+{
+  "generated_at": "current",
+  "notes": "Auto-derived current repo inventory. This file is safe to regenerate.",
+  "pages": [
+    {
+      "filename": "about.html",
+      "url": "/about.html",
+      "cluster": "Site",
+      "archetype": "site-page"
+    },
+    {
+      "filename": "alliance-duel-rewards.html",
+      "url": "/alliance-duel-rewards.html",
+      "cluster": "Events",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "alliance-duel.html",
+      "url": "/alliance-duel.html",
+      "cluster": "Events",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "alliance-recognition-cost.html",
+      "url": "/alliance-recognition-cost.html",
+      "cluster": "Research",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "arena.html",
+      "url": "/arena.html",
+      "cluster": "Guides",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "army-building-cost.html",
+      "url": "/army-building-cost.html",
+      "cluster": "Guides",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "base-building-order.html",
+      "url": "/base-building-order.html",
+      "cluster": "Progression",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "canyon-clash.html",
+      "url": "/canyon-clash.html",
+      "cluster": "Events",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "codes.html",
+      "url": "/codes.html",
+      "cluster": "Economy",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "contact.html",
+      "url": "/contact.html",
+      "cluster": "Site",
+      "archetype": "site-page"
+    },
+    {
+      "filename": "daily.html",
+      "url": "/daily.html",
+      "cluster": "Routine",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "diamond-reserve.html",
+      "url": "/diamond-reserve.html",
+      "cluster": "Guides",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "disclosure.html",
+      "url": "/disclosure.html",
+      "cluster": "Site",
+      "archetype": "site-page"
+    },
+    {
+      "filename": "early-game-optimization.html",
+      "url": "/early-game-optimization.html",
+      "cluster": "Progression",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "emergency-hospital-cost.html",
+      "url": "/emergency-hospital-cost.html",
+      "cluster": "Progression",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "events.html",
+      "url": "/events.html",
+      "cluster": "Events",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "f2p.html",
+      "url": "/f2p.html",
+      "cluster": "Economy",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "farm-account.html",
+      "url": "/farm-account.html",
+      "cluster": "Economy",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "field-research.html",
+      "url": "/field-research.html",
+      "cluster": "Research",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "formation-power.html",
+      "url": "/formation-power.html",
+      "cluster": "Strategy",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "formations.html",
+      "url": "/formations.html",
+      "cluster": "Strategy",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "fully-armed-alliance-cost.html",
+      "url": "/fully-armed-alliance-cost.html",
+      "cluster": "Guides",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "furylord.html",
+      "url": "/furylord.html",
+      "cluster": "Events",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "gacha-go.html",
+      "url": "/gacha-go.html",
+      "cluster": "Events",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "gear.html",
+      "url": "/gear.html",
+      "cluster": "Equipment",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "gift-center-uid.html",
+      "url": "/gift-center-uid.html",
+      "cluster": "Guides",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "hero-training-cost.html",
+      "url": "/hero-training-cost.html",
+      "cluster": "Guides",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "heroes-es.html",
+      "url": "/heroes-es.html",
+      "cluster": "Heroes",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "heroes.html",
+      "url": "/heroes.html",
+      "cluster": "Heroes",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "hq-construction-cost.html",
+      "url": "/hq-construction-cost.html",
+      "cluster": "Progression",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "hq.html",
+      "url": "/hq.html",
+      "cluster": "Progression",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "index.html",
+      "url": "/",
+      "cluster": "Home",
+      "archetype": "home-hub"
+    },
+    {
+      "filename": "leveling.html",
+      "url": "/leveling.html",
+      "cluster": "Progression",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "lucky-discounter.html",
+      "url": "/lucky-discounter.html",
+      "cluster": "Events",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "military-strategies-cost.html",
+      "url": "/military-strategies-cost.html",
+      "cluster": "Guides",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "news-preview.html",
+      "url": "/news-preview.html",
+      "cluster": "Guides",
+      "archetype": "news-digest"
+    },
+    {
+      "filename": "peace-shield-cost.html",
+      "url": "/peace-shield-cost.html",
+      "cluster": "Guides",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "power-guide.html",
+      "url": "/power-guide.html",
+      "cluster": "Progression",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "privacy.html",
+      "url": "/privacy.html",
+      "cluster": "Site",
+      "archetype": "site-page"
+    },
+    {
+      "filename": "pvp.html",
+      "url": "/pvp.html",
+      "cluster": "PvP",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "queenie.html",
+      "url": "/queenie.html",
+      "cluster": "Heroes",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "radar.html",
+      "url": "/radar.html",
+      "cluster": "Guides",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "redeem-code-not-working.html",
+      "url": "/redeem-code-not-working.html",
+      "cluster": "Guides",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "refugees.html",
+      "url": "/refugees.html",
+      "cluster": "Economy",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "research-costs.html",
+      "url": "/research-costs.html",
+      "cluster": "Guides",
+      "archetype": "atlas-page"
+    },
+    {
+      "filename": "research.html",
+      "url": "/research.html",
+      "cluster": "Research",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "resources.html",
+      "url": "/resources.html",
+      "cluster": "Economy",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "shield.html",
+      "url": "/shield.html",
+      "cluster": "Guides",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "shooter-stages.html",
+      "url": "/shooter-stages.html",
+      "cluster": "Progression",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "siege-to-seize-cost.html",
+      "url": "/siege-to-seize-cost.html",
+      "cluster": "Guides",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "start.html",
+      "url": "/start.html",
+      "cluster": "Progression",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "steel.html",
+      "url": "/steel.html",
+      "cluster": "Economy",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "svs.html",
+      "url": "/svs.html",
+      "cluster": "PvP",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "tech.html",
+      "url": "/tech.html",
+      "cluster": "Research",
+      "archetype": "cornerstone-guide"
+    },
+    {
+      "filename": "terms.html",
+      "url": "/terms.html",
+      "cluster": "Site",
+      "archetype": "site-page"
+    },
+    {
+      "filename": "tips.html",
+      "url": "/tips.html",
+      "cluster": "Strategy",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "trap.html",
+      "url": "/trap.html",
+      "cluster": "PvP",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "tyrant.html",
+      "url": "/tyrant.html",
+      "cluster": "Events",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "unit-special-training-cost.html",
+      "url": "/unit-special-training-cost.html",
+      "cluster": "Guides",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "vehicle-modification-cost.html",
+      "url": "/vehicle-modification-cost.html",
+      "cluster": "Equipment",
+      "archetype": "cost-page"
+    },
+    {
+      "filename": "yu-chan.html",
+      "url": "/yu-chan.html",
+      "cluster": "Heroes",
+      "archetype": "support-guide"
+    },
+    {
+      "filename": "zombie-siege.html",
+      "url": "/zombie-siege.html",
+      "cluster": "Events",
+      "archetype": "support-guide"
+    }
+  ]
+}

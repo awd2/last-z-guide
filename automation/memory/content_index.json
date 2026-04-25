@@ -1,0 +1,564 @@
+{
+  "generated_at": "2026-04-22",
+  "notes": "Initial hand-curated content index for the editorial automation MVP. This file is the site-memory source for page cluster, archetype, status, and freshness priority.",
+  "pages": [
+    {
+      "filename": "index.html",
+      "url": "/",
+      "title_hint": "Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy",
+      "cluster": "Home",
+      "archetype": "home-hub",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "about.html",
+      "url": "/about.html",
+      "title_hint": "About Last Z Guides",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "status": "published",
+      "freshness_priority": "low"
+    },
+    {
+      "filename": "contact.html",
+      "url": "/contact.html",
+      "title_hint": "Contact",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "status": "published",
+      "freshness_priority": "low"
+    },
+    {
+      "filename": "disclosure.html",
+      "url": "/disclosure.html",
+      "title_hint": "Disclosure",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "status": "published",
+      "freshness_priority": "low"
+    },
+    {
+      "filename": "privacy.html",
+      "url": "/privacy.html",
+      "title_hint": "Privacy Policy",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "status": "published",
+      "freshness_priority": "low"
+    },
+    {
+      "filename": "terms.html",
+      "url": "/terms.html",
+      "title_hint": "Terms of Use",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "status": "published",
+      "freshness_priority": "low"
+    },
+    {
+      "filename": "start.html",
+      "url": "/start.html",
+      "title_hint": "Last Z Beginner Guide — Best Start and Early Mistakes to Avoid",
+      "cluster": "Progression",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "early-game-optimization.html",
+      "url": "/early-game-optimization.html",
+      "title_hint": "Beginner Guide 2.0 — Early-Game Optimization",
+      "cluster": "Progression",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "base-building-order.html",
+      "url": "/base-building-order.html",
+      "title_hint": "Last Z Base Building Order — Shelter Progression Guide",
+      "cluster": "Progression",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "shooter-stages.html",
+      "url": "/shooter-stages.html",
+      "title_hint": "Last Z Shooter Stages Guide — Dodge & Shoot Tips",
+      "cluster": "Progression",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "hq.html",
+      "url": "/hq.html",
+      "title_hint": "Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
+      "cluster": "Progression",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "hq-construction-cost.html",
+      "url": "/hq-construction-cost.html",
+      "title_hint": "HQ Construction Cost Table",
+      "cluster": "Progression",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "emergency-hospital-cost.html",
+      "url": "/emergency-hospital-cost.html",
+      "title_hint": "Hospital Cost Table",
+      "cluster": "Progression",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "power-guide.html",
+      "url": "/power-guide.html",
+      "title_hint": "Last Z Power Guide — How to Increase Combat Power Fast",
+      "cluster": "Progression",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "leveling.html",
+      "url": "/leveling.html",
+      "title_hint": "How to Level Up Fast in Last Z: Survival Shooter",
+      "cluster": "Progression",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "research.html",
+      "url": "/research.html",
+      "title_hint": "Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+      "cluster": "Research",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "research-costs.html",
+      "url": "/research-costs.html",
+      "title_hint": "Last Z Research Costs Atlas — All Research Trees, Badge Totals, and Unlock Paths",
+      "cluster": "Research",
+      "archetype": "atlas-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "tech.html",
+      "url": "/tech.html",
+      "title_hint": "Last Z Tech Guide — Best Research Path for F2P and Low Spenders",
+      "cluster": "Research",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "field-research.html",
+      "url": "/field-research.html",
+      "title_hint": "Last Z Field Research Costs — Recharge Shield Path and Total Badge Cost",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "alliance-recognition-cost.html",
+      "url": "/alliance-recognition-cost.html",
+      "title_hint": "Last Z Alliance Recognition Costs — Total Badge Cost and Research Path",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "hero-training-cost.html",
+      "url": "/hero-training-cost.html",
+      "title_hint": "Last Z Hero Training Costs — Cockpit Path and Total Badge Cost",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "military-strategies-cost.html",
+      "url": "/military-strategies-cost.html",
+      "title_hint": "Last Z Military Strategies Costs — Total Badge Cost and Recharge Shield Path",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "peace-shield-cost.html",
+      "url": "/peace-shield-cost.html",
+      "title_hint": "Last Z Peace Shield Costs — Urgent Rescue and Total Badge Cost",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "siege-to-seize-cost.html",
+      "url": "/siege-to-seize-cost.html",
+      "title_hint": "Last Z Siege to Seize Costs — Total Badge Cost and Aggressive Path",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "army-building-cost.html",
+      "url": "/army-building-cost.html",
+      "title_hint": "Last Z Army Building Costs — Total Badge Cost and Peace Shield Follow-Up",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "fully-armed-alliance-cost.html",
+      "url": "/fully-armed-alliance-cost.html",
+      "title_hint": "Last Z Fully Armed Alliance Costs — Annihilation, Move Out, and Total Badge Cost",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "unit-special-training-cost.html",
+      "url": "/unit-special-training-cost.html",
+      "title_hint": "Last Z Unit Special Training Costs — T10 Path and Total Badge Cost",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "heroes.html",
+      "url": "/heroes.html",
+      "title_hint": "Last Z Best Heroes Tier List — Season 4 Rankings by Faction",
+      "cluster": "Heroes",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "heroes-es.html",
+      "url": "/heroes-es.html",
+      "title_hint": "Qué Héroes Potenciar en Last Z — Mejores Héroes para Subir Primero en 2026",
+      "cluster": "Heroes",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "queenie.html",
+      "url": "/queenie.html",
+      "title_hint": "Queenie Guide — Skills & Best Build",
+      "cluster": "Heroes",
+      "archetype": "hero-profile",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "yu-chan.html",
+      "url": "/yu-chan.html",
+      "title_hint": "Yu Chan Guide — Skills & Best Build",
+      "cluster": "Heroes",
+      "archetype": "hero-profile",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "gear.html",
+      "url": "/gear.html",
+      "title_hint": "Last Z Gear Guide — Best Equipment & How to Enhance",
+      "cluster": "Equipment",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "vehicle-modification-cost.html",
+      "url": "/vehicle-modification-cost.html",
+      "title_hint": "Last Z Vehicle Modification Costs — Wrenches, Milestones, and Unlock Path",
+      "cluster": "Equipment",
+      "archetype": "cost-page",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "formations.html",
+      "url": "/formations.html",
+      "title_hint": "Last Z Best Formations — Faction Combos & Hero Placement",
+      "cluster": "Strategy",
+      "archetype": "comparison-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "formation-power.html",
+      "url": "/formation-power.html",
+      "title_hint": "Last Z Formation Power Guide — How to Reach 100M+ Power",
+      "cluster": "Strategy",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "tips.html",
+      "url": "/tips.html",
+      "title_hint": "Last Z Tips & Tricks — 25+ Life-Changing Pro Secrets",
+      "cluster": "Strategy",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "daily.html",
+      "url": "/daily.html",
+      "title_hint": "Last Z Daily Checklist — Best Daily Tasks and Routine",
+      "cluster": "Routine",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "events.html",
+      "url": "/events.html",
+      "title_hint": "Last Z Events Schedule — Daily Rotation, Alliance Duel, and Full Preparedness",
+      "cluster": "Events",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "alliance-duel.html",
+      "url": "/alliance-duel.html",
+      "title_hint": "Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "alliance-duel-rewards.html",
+      "url": "/alliance-duel-rewards.html",
+      "title_hint": "Last Z Alliance Duel Rewards — Chest Thresholds, Daily Totals, and Weekly Totals",
+      "cluster": "Events",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "canyon-clash.html",
+      "url": "/canyon-clash.html",
+      "title_hint": "Last Z Canyon Clash Guide - Schedule, Rules, Rewards",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "zombie-siege.html",
+      "url": "/zombie-siege.html",
+      "title_hint": "Last Z Zombie Siege Guide — Waves, Schedule & Best Tips",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "tyrant.html",
+      "url": "/tyrant.html",
+      "title_hint": "Last Z Tyrant Rally Guide — Best Rally Size, Max Damage, and Steel Rewards",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "furylord.html",
+      "url": "/furylord.html",
+      "title_hint": "Last Z Furylord Guide — Spawn Times, Damage, Rules, and Rewards",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "lucky-discounter.html",
+      "url": "/lucky-discounter.html",
+      "title_hint": "Last Z Lucky Discounter Guide — 90% Discount Strategy, Tickets, and Best Buys",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "gacha-go.html",
+      "url": "/gacha-go.html",
+      "title_hint": "Last Z Gacha Go Guide — Golden Wrench Strategy, Keys, and Hercules Path",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "radar.html",
+      "url": "/radar.html",
+      "title_hint": "Last Z Radar Events Guide — Best Timing, Claims, and Alliance Duel Sync",
+      "cluster": "Events",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "pvp.html",
+      "url": "/pvp.html",
+      "title_hint": "Last Z PvP Guide — Faction Counters, Events & Pro Tips",
+      "cluster": "PvP",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "svs.html",
+      "url": "/svs.html",
+      "title_hint": "Last Z SVS Guide — State vs State, Capital Clash, and Reward Boxes",
+      "cluster": "PvP",
+      "archetype": "event-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "trap.html",
+      "url": "/trap.html",
+      "title_hint": "Last Z Trap Account Guide — Low Power, High Kill Strategy",
+      "cluster": "PvP",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "arena.html",
+      "url": "/arena.html",
+      "title_hint": "Last Z Arena Guide — Best Daily Wins, Rank Rewards, and Shop Priority",
+      "cluster": "PvP",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "codes.html",
+      "url": "/codes.html",
+      "title_hint": "Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+      "cluster": "Economy",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "gift-center-uid.html",
+      "url": "/gift-center-uid.html",
+      "title_hint": "Last Z Gift Center Login & UID Guide — Official Redeem Page",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "redeem-code-not-working.html",
+      "url": "/redeem-code-not-working.html",
+      "title_hint": "Last Z Code Not Working? Gift Center, UID, and Reward Fixes",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "resources.html",
+      "url": "/resources.html",
+      "title_hint": "Last Z Resources Guide — How to Farm Food, Wood, Steel, and Diamonds Fast",
+      "cluster": "Economy",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "steel.html",
+      "url": "/steel.html",
+      "title_hint": "Last Z Steel Guide — How to Get Steel, Tyrant, and HQ31-35",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "farm-account.html",
+      "url": "/farm-account.html",
+      "title_hint": "Last Z Farm Account Guide - How to Create a Farm Before Season 2",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "f2p.html",
+      "url": "/f2p.html",
+      "title_hint": "Last Z F2P Guide — Best Diamond Spending, Free Sources, and What to Buy First",
+      "cluster": "Economy",
+      "archetype": "cornerstone-guide",
+      "status": "published",
+      "freshness_priority": "high"
+    },
+    {
+      "filename": "refugees.html",
+      "url": "/refugees.html",
+      "title_hint": "Last Z Refugees Guide - Priority, Tickets, and Best Refugees to Upgrade",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "diamond-reserve.html",
+      "url": "/diamond-reserve.html",
+      "title_hint": "Last Z Diamond Reserve Guide — What to Save Diamonds For First",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "shield.html",
+      "url": "/shield.html",
+      "title_hint": "Last Z Shield Strategy — Weekly Protection, Friday Diamonds, and Raid Safety",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
+      "filename": "news-preview.html",
+      "url": "/news-preview.html",
+      "title_hint": "Reddit digest — LastZShooterRun (2026-03-22)",
+      "cluster": "News",
+      "archetype": "news-digest",
+      "status": "draft-noindex",
+      "freshness_priority": "low"
+    }
+  ]
+}

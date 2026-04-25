@@ -1,0 +1,216 @@
+{
+  "generated_at": "2026-04-22",
+  "notes": "Canonical site-level claims for reviewer validation. These are the highest-priority truths the editorial pipeline should protect against contradiction.",
+  "claims": [
+    {
+      "id": "season-2-winter-current-naming",
+      "category": "seasons",
+      "status": "active",
+      "confidence": "high",
+      "summary": "For newer servers, Season 2 is Winter. Desert was canceled or skipped, so older guides that map Season 2 to Desert may be outdated for current players.",
+      "implications": [
+        "New content must not assume Season 2 equals Desert without a clarification block.",
+        "Season pages should explain the old naming versus the current naming when confusion is likely."
+      ],
+      "related_pages": [
+        "start.html",
+        "farm-account.html"
+      ]
+    },
+    {
+      "id": "gift-center-only-redeem-flow",
+      "category": "gift-center",
+      "status": "active",
+      "confidence": "high",
+      "summary": "Last Z redeem codes are claimed through the official Gift Center website, not inside the game client.",
+      "implications": [
+        "Gift Center pages should keep setup language exact and procedural.",
+        "Troubleshooting pages should not imply an in-game redeem flow exists."
+      ],
+      "related_pages": [
+        "codes.html",
+        "gift-center-uid.html",
+        "redeem-code-not-working.html"
+      ]
+    },
+    {
+      "id": "uid-copy-path",
+      "category": "gift-center",
+      "status": "active",
+      "confidence": "high",
+      "summary": "The clean UID path is Avatar → Settings → Copy ID.",
+      "implications": [
+        "Setup pages should recommend copy-paste instead of manual typing.",
+        "Troubleshooting pages should treat wrong UID as a primary failure cause."
+      ],
+      "related_pages": [
+        "gift-center-uid.html",
+        "redeem-code-not-working.html"
+      ]
+    },
+    {
+      "id": "gift-rewards-mailbox",
+      "category": "gift-center",
+      "status": "active",
+      "confidence": "high",
+      "summary": "Redeemed code rewards appear in the in-game mailbox, not as an instant in-page inventory grant.",
+      "implications": [
+        "Setup pages should say where rewards appear.",
+        "Troubleshooting pages should include mailbox delay as a normal check."
+      ],
+      "related_pages": [
+        "codes.html",
+        "gift-center-uid.html",
+        "redeem-code-not-working.html"
+      ]
+    },
+    {
+      "id": "gift-center-cluster-role-separation",
+      "category": "architecture",
+      "status": "active",
+      "confidence": "high",
+      "summary": "The Gift Center cluster has three distinct roles: codes.html is the hub, gift-center-uid.html is the setup page, and redeem-code-not-working.html is the troubleshooting page.",
+      "implications": [
+        "New edits should reinforce, not blur, these page roles.",
+        "No new page should duplicate one of these jobs without a very strong reason."
+      ],
+      "related_pages": [
+        "codes.html",
+        "gift-center-uid.html",
+        "redeem-code-not-working.html"
+      ]
+    },
+    {
+      "id": "research-best-mainline",
+      "category": "research",
+      "status": "active",
+      "confidence": "high",
+      "summary": "The main research route for most players is Hero Training to Cockpit, then Military Strategies, then Peace Shield, then Siege to Seize, then Field Research.",
+      "implications": [
+        "New research content should not recommend expensive late branches before the core path without strong context.",
+        "Atlas and branch pages should keep the mainline path consistent."
+      ],
+      "related_pages": [
+        "research.html",
+        "tech.html",
+        "research-costs.html",
+        "hero-training-cost.html",
+        "military-strategies-cost.html",
+        "peace-shield-cost.html",
+        "siege-to-seize-cost.html",
+        "field-research.html"
+      ]
+    },
+    {
+      "id": "hero-training-cockpit-stop",
+      "category": "research",
+      "status": "active",
+      "confidence": "high",
+      "summary": "Hero Training is mainly valuable for Cockpit. Most players should stop at Cockpit instead of fully clearing the branch early.",
+      "implications": [
+        "Hero Training pages should stay Cockpit-first.",
+        "Follow-up pages should treat Military Strategies as the next main research value."
+      ],
+      "related_pages": [
+        "research.html",
+        "tech.html",
+        "hero-training-cost.html"
+      ]
+    },
+    {
+      "id": "peace-shield-value",
+      "category": "research",
+      "status": "active",
+      "confidence": "high",
+      "summary": "Peace Shield is a high-value survivability branch because of Urgent Rescue and its wider PvP value.",
+      "implications": [
+        "Research guides should not frame Peace Shield as optional fluff.",
+        "Army Building should be treated as a later follow-up after Peace Shield is complete."
+      ],
+      "related_pages": [
+        "research.html",
+        "peace-shield-cost.html",
+        "army-building-cost.html",
+        "pvp.html"
+      ]
+    },
+    {
+      "id": "field-research-follows-siege",
+      "category": "research",
+      "status": "active",
+      "confidence": "high",
+      "summary": "Field Research follows 100% Siege to Seize and contains the final Recharge Shield path and major late badge pressure.",
+      "implications": [
+        "Field Research should be framed as a late follow-up, not an early branch.",
+        "Siege to Seize pages should route into Field Research."
+      ],
+      "related_pages": [
+        "field-research.html",
+        "siege-to-seize-cost.html",
+        "research-costs.html"
+      ]
+    },
+    {
+      "id": "research-atlas-role",
+      "category": "architecture",
+      "status": "active",
+      "confidence": "high",
+      "summary": "research-costs.html is the atlas/hub for the research cost cluster. It should compare branches and route to exact tree pages, not replace them.",
+      "implications": [
+        "New research branch pages should be discoverable through the atlas.",
+        "The atlas should stay navigational and comparative rather than turning into a giant guide."
+      ],
+      "related_pages": [
+        "research-costs.html",
+        "research.html"
+      ]
+    },
+    {
+      "id": "diamond-reserve-before-reactive-spend",
+      "category": "economy",
+      "status": "active",
+      "confidence": "high",
+      "summary": "Diamonds should be protected as reserve first, especially for shield safety and high-value event decisions, not spent reactively on low-value convenience buys.",
+      "implications": [
+        "Economy pages should not encourage casual reactive diamond spending.",
+        "Diamond advice should stay aligned across f2p, shield, and reserve pages."
+      ],
+      "related_pages": [
+        "f2p.html",
+        "diamond-reserve.html",
+        "shield.html"
+      ]
+    },
+    {
+      "id": "shield-alliance-shop-first",
+      "category": "economy",
+      "status": "active",
+      "confidence": "high",
+      "summary": "8h and 24h shields from the Alliance Shop using alliance points are usually better value than buying shields directly with diamonds when stock is available.",
+      "implications": [
+        "Shield pages should position diamonds as fallback or reserve, not as the first shield source.",
+        "Economy advice should mention the Alliance Shop option where relevant."
+      ],
+      "related_pages": [
+        "shield.html",
+        "f2p.html",
+        "diamond-reserve.html"
+      ]
+    },
+    {
+      "id": "alliance-recognition-utility-page",
+      "category": "architecture",
+      "status": "active",
+      "confidence": "high",
+      "summary": "Alliance Recognition is a proven utility page family: tree overview, exact costs, and planner-driven UX outperform generic explanation.",
+      "implications": [
+        "Research/cost pages should prefer structured utility over essay-like expansion.",
+        "Future cost/planner pages should reuse the same value model where possible."
+      ],
+      "related_pages": [
+        "alliance-recognition-cost.html",
+        "vehicle-modification-cost.html"
+      ]
+    }
+  ]
+}

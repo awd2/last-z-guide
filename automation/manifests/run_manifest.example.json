@@ -1,0 +1,78 @@
+{
+  "run_id": "2026-04-22-gift-center-cluster-pass-001",
+  "created_at": "2026-04-22T10:30:00Z",
+  "run_type": "update_existing",
+  "status": "reviewed",
+  "risk_level": "medium",
+  "summary": "Tighten Gift Center cluster query match, first-screen answer fit, and internal routing.",
+  "inputs": {
+    "topics": [
+      "gift center ctr improvement pass",
+      "gift center login setup intent refinement",
+      "redeem failure intent"
+    ],
+    "target_pages": [
+      "codes.html",
+      "gift-center-uid.html",
+      "redeem-code-not-working.html",
+      "index.html",
+      "start.html"
+    ],
+    "source_references": [
+      "GSC: gift center query cluster",
+      "Bing: gift center and redeem code failure queries",
+      "topic_backlog.csv"
+    ]
+  },
+  "plan": {
+    "goal": "Improve intent alignment for codes, setup, and troubleshooting pages without creating new URLs.",
+    "archetypes_touched": [
+      "cornerstone-guide",
+      "support-guide"
+    ],
+    "actions": [
+      "tighten titles and meta descriptions",
+      "sharpen first-screen answers",
+      "reinforce hub-setup-troubleshooting role separation",
+      "improve internal cluster routing from hub and feeder pages"
+    ]
+  },
+  "artifacts": {
+    "reports": [
+      "post-change-review.md"
+    ],
+    "memory_files_used": [
+      "automation/memory/canonical_claims.json",
+      "automation/memory/entities.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/topic_backlog.csv"
+    ]
+  },
+  "changed_files": [
+    "codes.html",
+    "gift-center-uid.html",
+    "redeem-code-not-working.html",
+    "index.html",
+    "start.html"
+  ],
+  "checks": {
+    "automation_run_checks": {
+      "status": "pass",
+      "notes": "Deterministic automation-layer checks passed or known weak-cluster issues were unrelated to this run."
+    },
+    "prepublish_check_fix": {
+      "status": "pass",
+      "notes": "prepublish_check.py --fix completed successfully."
+    },
+    "prepublish_check": {
+      "status": "pass",
+      "notes": "prepublish_check.py completed successfully."
+    }
+  },
+  "review": {
+    "verdict": "pass",
+    "open_questions": [],
+    "next_action": "ready_for_approval",
+    "reviewer_notes": "Cluster roles are clearer, first-screen answer fit is stronger, and no canonical claims were contradicted."
+  }
+}
