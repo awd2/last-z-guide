@@ -372,6 +372,8 @@ python3 automation/pipeline.py open-topic <topic_id>
 python3 automation/pipeline.py open-run <run_id>
 python3 automation/pipeline.py next-step <run_id>
 python3 automation/pipeline.py recent-runs
+python3 automation/pipeline.py propose <run_id>
+python3 automation/pipeline.py approval <run_id> --state approved --all
 ```
 
 Machine-readable snapshots exist for:
@@ -393,9 +395,22 @@ Lifecycle currently:
 - `review`
 - `brief`
 - `patch-plan`
+- `propose`
+- `approval`
 - `bundle-run`
 
 `patch-plan` is still safe/proposal-only. It may populate candidate `changed_files` in the manifest, but it must not edit site content automatically.
+
+`propose` renders human-reviewable proposed edits from Patch Spec v1 entries. It must not edit site content.
+
+`approval` records human approval decisions for proposal specs. `approved_for_apply` is still not an autonomous publishing state; it only gates a future controlled manual apply or safe apply worker.
+
+Whenever automation commands, lifecycle stages, manifest states, instructions, or operator workflows are added or changed, update the relevant documentation in the same change. At minimum, check:
+
+- `AGENTS.md`
+- `automation/README.md`
+- `automation/manifests/README.md`
+- root `README.md` when the operator-facing summary changes
 
 ## Preferred Behavior For Future Agents
 
@@ -406,8 +421,9 @@ When given a new request:
 3. Follow the file reading policy in this file.
 4. Make the smallest useful, safest change.
 5. Keep cluster roles and canonical claims intact.
-6. Run the appropriate checks.
-7. Report concrete outcomes and residual risks.
+6. Update documentation when automation, instructions, lifecycle states, or operator commands change.
+7. Run the appropriate checks.
+8. Report concrete outcomes and residual risks.
 
 If there is ambiguity between:
 
