@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-gift-center-login-setup",
   "created_at": "2026-04-22T16:56:58.397517Z",
   "run_type": "update_existing",
-  "status": "reviewed",
+  "status": "proposal_ready",
   "risk_level": "medium",
   "summary": "Update the existing page `gift-center-uid.html` for the `Economy` cluster using the `support-guide` archetype.",
   "inputs": {
@@ -82,9 +82,573 @@
         "redeem-code-not-working.html",
         "refugees.html"
       ]
+    },
+    "editor": {
+      "brief_path": "automation/reports/2026-04-22-gift-center-login-setup.brief.md"
+    },
+    "patch_plan": {
+      "target_page_or_slug": "gift-center-uid.html",
+      "archetype_suggestion": "support-guide",
+      "recommended_action": "update_existing",
+      "proposed_changes": [
+        {
+          "file": "gift-center-uid.html",
+          "change_type": "first_screen_update",
+          "reason": "Align the opening answer with the run summary, target intent, and cluster role."
+        },
+        {
+          "file": "gift-center-uid.html",
+          "change_type": "meta_refresh",
+          "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent."
+        },
+        {
+          "file": "gift-center-uid.html",
+          "change_type": "internal_link_addition",
+          "reason": "Strengthen routing between the target page and adjacent cluster pages."
+        },
+        {
+          "file": "codes.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page."
+        },
+        {
+          "file": "diamond-reserve.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page."
+        },
+        {
+          "file": "f2p.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page."
+        },
+        {
+          "file": "farm-account.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page."
+        }
+      ],
+      "patch_specs": [
+        {
+          "target_file": "gift-center-uid.html",
+          "source_of_truth_file": "gift-center-uid.html",
+          "output_file": "gift-center-uid.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "gift-center-uid.html",
+          "source_of_truth_file": "gift-center-uid.html",
+          "output_file": "gift-center-uid.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "gift-center-uid.html",
+          "source_of_truth_file": "gift-center-uid.html",
+          "output_file": "gift-center-uid.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Strengthen routing between the target page and adjacent cluster pages.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "codes.html",
+          "source_of_truth_file": "codes.html",
+          "output_file": "codes.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "diamond-reserve.html",
+          "source_of_truth_file": "diamond-reserve.html",
+          "output_file": "diamond-reserve.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "f2p.html",
+          "source_of_truth_file": "f2p.html",
+          "output_file": "f2p.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "farm-account.html",
+          "source_of_truth_file": "farm-account.html",
+          "output_file": "farm-account.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        }
+      ],
+      "changed_files": [
+        "codes.html",
+        "diamond-reserve.html",
+        "f2p.html",
+        "farm-account.html",
+        "gift-center-uid.html"
+      ],
+      "source_files": [
+        "codes.html",
+        "diamond-reserve.html",
+        "f2p.html",
+        "farm-account.html",
+        "gift-center-uid.html"
+      ],
+      "canonical_claim_ids": [
+        "diamond-reserve-before-reactive-spend",
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox",
+        "shield-alliance-shop-first",
+        "uid-copy-path"
+      ],
+      "deterministic_checks": [
+        "python3 automation/run_checks.py",
+        "python3 scripts/prepublish_check.py --fix",
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+        "python3 automation/pipeline.py checks"
+      ],
+      "report_path": "automation/reports/2026-04-22-gift-center-login-setup.patch.md"
+    },
+    "proposal": {
+      "report_path": "automation/reports/2026-04-22-gift-center-login-setup.proposed.md",
+      "rendered_specs": [
+        {
+          "target_file": "gift-center-uid.html",
+          "source_of_truth_file": "gift-center-uid.html",
+          "output_file": "gift-center-uid.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Gift Center Login & UID Guide (2026) — Official Redeem Page | h1: Last Z Gift Center Login & UID Guide — Official Redeem Page | meta: Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption. | verified: The official Last Z Gift Center login page is the only place where codes are redeemed. Copy your UID from Avatar → Settings → Copy ID, redeem in a browser, and collect rewards from your mailbox.",
+          "desired_after_summary": "Opening answer matches the page role for Gift Center login setup and UID lookup, gives the exact setup answer quickly, and avoids drifting into a broader hub page.",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "gift-center-uid.html",
+          "source_of_truth_file": "gift-center-uid.html",
+          "output_file": "gift-center-uid.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Gift Center Login & UID Guide (2026) — Official Redeem Page | h1: Last Z Gift Center Login & UID Guide — Official Redeem Page | meta: Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption. | verified: The official Last Z Gift Center login page is the only place where codes are redeemed. Copy your UID from Avatar → Settings → Copy ID, redeem in a browser, and collect rewards from your mailbox.",
+          "desired_after_summary": "Title, H1, and meta description use the same exact intent: Gift Center login setup and UID lookup.",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "gift-center-uid.html",
+          "source_of_truth_file": "gift-center-uid.html",
+          "output_file": "gift-center-uid.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "Related Guides",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Strengthen routing between the target page and adjacent cluster pages.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Gift Center Login & UID Guide (2026) — Official Redeem Page | h1: Last Z Gift Center Login & UID Guide — Official Redeem Page | meta: Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption. | verified: The official Last Z Gift Center login page is the only place where codes are redeemed. Copy your UID from Avatar → Settings → Copy ID, redeem in a browser, and collect rewards from your mailbox.",
+          "desired_after_summary": "Do not add a self-link. Strengthen outbound routing to the correct hub, troubleshooting page, or adjacent support page instead.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "codes.html",
+          "source_of_truth_file": "codes.html",
+          "output_file": "codes.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "related-guides section or nearest relevant paragraph",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID | h1: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID | meta: Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work. | verified: Use the official Last Z Gift Center to redeem active codes. This page gives you the current verified codes, the official login page, the fastest UID steps, and the main reasons redemption fails.",
+          "desired_after_summary": "Source adds a crawlable, user-visible bridge to `gift-center-uid.html` in the relevant section or related-guides block.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "diamond-reserve.html",
+          "source_of_truth_file": "diamond-reserve.html",
+          "output_file": "diamond-reserve.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "Related Guides",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Diamond Reserve Guide (2026) — What to Save Diamonds For First | h1: Last Z Diamond Reserve Guide — What to Save Diamonds For First | meta: Best Last Z diamond reserve strategy: what to save diamonds for first, how the Friday shield reserve works, when Lucky Discounter is worth it, and which purchases are a waste for F2P. | verified: Best diamond rule for most F2P and low spenders: keep a protected reserve for shields first, spend only on high-value event discounts or long-term account value you can actually buy with diamonds second, and avoid reactive purchases that do not improve your account long term.",
+          "desired_after_summary": "Source adds a crawlable, user-visible bridge to `gift-center-uid.html` in the relevant section or related-guides block.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "f2p.html",
+          "source_of_truth_file": "f2p.html",
+          "output_file": "f2p.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "related-guides section or nearest relevant paragraph",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z F2P Guide (2026) — Best Diamond Spending, Free Sources, What to Buy First | h1: Last Z F2P Guide — Best Diamond Spending, Free Sources, and What to Buy First | meta: Complete Last Z F2P guide: how to get free diamonds, what to save them for first, the best spending priority for shields, refugees, and event value, and how F2P players stay competitive. | verified: Best F2P plan for most players: protect your weekly shield reserve first, invest in refugees for long-term speed, and only spend diamonds aggressively when events improve the value instead of wasting them on random convenience.",
+          "desired_after_summary": "Source adds a crawlable, user-visible bridge to `gift-center-uid.html` in the relevant section or related-guides block.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "farm-account.html",
+          "source_of_truth_file": "farm-account.html",
+          "output_file": "farm-account.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "Related Guides",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `gift-center-uid.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Farm Account Guide (2026) - How to Create a Farm Before Season 2 | h1: Last Z Farm Account Guide - How to Create a Farm Before Season 2 | meta: How to create a Last Z farm account on your server before Season 2, what you need, how to set up a farm alt, and how to use it to support your main account. | verified: Best farm account setup for most players: create the farm before Season 2 starts on your server, place it on the same server as your main account, and use it for steady resource support instead of trying to turn it into a second main.",
+          "desired_after_summary": "Source adds a crawlable, user-visible bridge to `gift-center-uid.html` in the relevant section or related-guides block.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        }
+      ]
     }
   },
-  "changed_files": [],
+  "changed_files": [
+    "codes.html",
+    "diamond-reserve.html",
+    "f2p.html",
+    "farm-account.html",
+    "gift-center-uid.html"
+  ],
   "checks": {},
   "review": {
     "verdict": "needs_human_review",

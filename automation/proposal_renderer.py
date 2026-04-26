@@ -131,17 +131,34 @@ def before_summary(context: dict[str, Any]) -> str:
     return " | ".join(parts[:4]) if parts else "No compact source summary available."
 
 
+def target_topic_label(run_target: str) -> str:
+    labels = {
+        "gift-center-uid.html": "Gift Center login setup and UID lookup",
+        "research-costs.html": "research costs atlas",
+    }
+    return labels.get(run_target, run_target or "the target page")
+
+
 def desired_after_summary(spec: dict[str, Any], run_target: str) -> str:
     operation = spec.get("operation_type", "")
     source_type = spec.get("source_type", "")
-    if operation == "first_screen_update":
+    topic = target_topic_label(run_target)
+    if operation == "first_screen_update" and run_target == "research-costs.html":
         return "Opening answer names the atlas role, main research route, and exact branch-page routing without turning the atlas into a giant guide."
-    if operation == "meta_refresh":
+    if operation == "first_screen_update":
+        return f"Opening answer matches the page role for {topic}, gives the exact setup answer quickly, and avoids drifting into a broader hub page."
+    if operation == "meta_refresh" and run_target == "research-costs.html":
         return "Title, H1, and meta description use the same exact intent: research costs atlas, branch comparison, badge totals, and unlock paths."
-    if operation == "atlas_card_update":
+    if operation == "meta_refresh":
+        return f"Title, H1, and meta description use the same exact intent: {topic}."
+    if operation == "atlas_card_update" and run_target == "research-costs.html":
         return "Atlas cards help users choose the correct branch page and keep the core order visible: Hero Training, Military Strategies, Peace Shield, Siege to Seize, Field Research."
+    if operation == "atlas_card_update":
+        return "Card or route blocks stay scoped to the target page role and help users choose the correct next page."
     if operation == "internal_link_addition" and source_type == "generated_research_branch":
         return f"JSON source adds or strengthens a route back to `{run_target}` through `related_guides` or `next_steps`, then regenerates the HTML output."
+    if operation == "internal_link_addition" and spec.get("source_of_truth_file") == run_target:
+        return "Do not add a self-link. Strengthen outbound routing to the correct hub, troubleshooting page, or adjacent support page instead."
     if operation == "internal_link_addition":
         return f"Source adds a crawlable, user-visible bridge to `{run_target}` in the relevant section or related-guides block."
     return "Edit remains scoped to the stated run summary and canonical claims."
