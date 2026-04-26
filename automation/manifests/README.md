@@ -118,7 +118,7 @@ and `released`, but those are not implemented states yet.
   - apply preview artifacts may include `approved_specs_count`, `generated_at`,
     and `preview_items`
   - apply result artifacts may include `applied_operations`,
-    `generator_commands`, and `applied_at`
+    `skipped_operations`, `generator_commands`, and `applied_at`
   - closeout artifacts may include `closed_at`, `note`, and a final report path
 
 - `changed_files`

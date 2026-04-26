@@ -472,6 +472,8 @@ entries. It is intentionally narrower than a general writing worker:
   templates
 - generated research branch pages are edited through their JSON source files
   and regenerated
+- duplicate related links and target-page self-links are skipped and recorded
+  in the apply result artifact
 - the manifest moves to `applied_pending_qa`
 - production publishing is still manual and still requires green checks
 

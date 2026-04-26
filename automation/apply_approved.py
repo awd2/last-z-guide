@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -20,8 +21,10 @@ from automation.io import load_run_manifest, write_json, write_run_manifest
 from automation.proposal_renderer import REPORTS_DIR, md_list, resolve_manifest_path
 
 
-TARGET_ATLAS = "research-costs.html"
-ATLAS_CARD = {"href": "research-costs.html", "label": "Research Costs Atlas"}
+TARGET_CARDS = {
+    "gift-center-uid.html": {"href": "gift-center-uid.html", "label": "Gift Center UID Setup"},
+    "research-costs.html": {"href": "research-costs.html", "label": "Research Costs Atlas"},
+}
 
 
 def approved_specs(manifest) -> list[dict[str, Any]]:
@@ -40,10 +43,15 @@ def replace_once(text: str, old: str, new: str, applied: list[str], label: str) 
     return text.replace(old, new, 1)
 
 
-def apply_research_costs(specs: list[dict[str, Any]]) -> list[str]:
-    path = ROOT / TARGET_ATLAS
+def target_card(target_page: str) -> dict[str, str]:
+    return TARGET_CARDS.get(target_page, {"href": target_page, "label": target_page})
+
+
+def apply_research_costs(specs: list[dict[str, Any]]) -> tuple[list[str], list[str]]:
+    path = ROOT / "research-costs.html"
     text = path.read_text(encoding="utf-8")
     applied: list[str] = []
+    skipped: list[str] = []
     operations = {spec.get("operation_type") for spec in specs}
 
     if "meta_refresh" in operations:
@@ -129,41 +137,134 @@ def apply_research_costs(specs: list[dict[str, Any]]) -> list[str]:
             )
             applied.append(f"research-costs:atlas_link_copy:{count}")
 
+    if "internal_link_addition" in operations:
+        skipped.append("research-costs.html:self_link_skipped")
+
     path.write_text(text, encoding="utf-8")
-    return applied
+    return applied, skipped
 
 
-def add_html_related_card(source_file: str) -> list[str]:
+def apply_gift_center_uid(specs: list[dict[str, Any]]) -> tuple[list[str], list[str]]:
+    path = ROOT / "gift-center-uid.html"
+    text = path.read_text(encoding="utf-8")
+    applied: list[str] = []
+    skipped: list[str] = []
+    operations = {spec.get("operation_type") for spec in specs}
+
+    if "meta_refresh" in operations:
+        replacements = [
+            (
+                "<title>Last Z Gift Center Login & UID Guide (2026) — Official Redeem Page</title>",
+                "<title>Last Z Gift Center Login and UID Setup (2026) — Official Redeem Page</title>",
+                "title",
+            ),
+            (
+                '<meta name="description" content="Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption.">',
+                '<meta name="description" content="Official Last Z Gift Center login setup: how to copy your UID from Avatar > Settings > Copy ID, redeem in a browser, and collect rewards from mailbox.">',
+                "meta_description",
+            ),
+            (
+                '<meta property="og:title" content="Last Z Gift Center Login & UID Guide — Official Redeem Page">',
+                '<meta property="og:title" content="Last Z Gift Center Login and UID Setup — Official Redeem Page">',
+                "og_title",
+            ),
+            (
+                '<meta property="og:description" content="Official Last Z Gift Center login, how to copy your UID, redeem codes on iPhone or Android, and where rewards appear after redemption.">',
+                '<meta property="og:description" content="Official Last Z Gift Center login setup, UID copying path, browser redemption flow, and mailbox reward delivery.">',
+                "og_description",
+            ),
+            (
+                '<meta name="twitter:title" content="Last Z Gift Center Login & UID Guide — Official Redeem Page">',
+                '<meta name="twitter:title" content="Last Z Gift Center Login and UID Setup — Official Redeem Page">',
+                "twitter_title",
+            ),
+            (
+                '<meta name="twitter:description" content="Official Last Z Gift Center login, how to copy your UID, redeem codes on iPhone or Android, and where rewards appear after redemption.">',
+                '<meta name="twitter:description" content="Official Last Z Gift Center login setup, UID copying path, browser redemption flow, and mailbox reward delivery.">',
+                "twitter_description",
+            ),
+            (
+                '"headline": "Last Z Gift Center Login & UID Guide — Official Redeem Page"',
+                '"headline": "Last Z Gift Center Login and UID Setup — Official Redeem Page"',
+                "article_headline",
+            ),
+            (
+                '"description": "Setup guide for Last Z Gift Center login, UID copying, mobile redemption flow, and mailbox reward delivery"',
+                '"description": "Official Last Z Gift Center login setup, UID copying path, browser redemption flow, and mailbox reward delivery"',
+                "article_description",
+            ),
+            (
+                "<h1>Last Z Gift Center Login &amp; UID Guide — Official Redeem Page</h1>",
+                "<h1>Last Z Gift Center Login and UID Setup — Official Redeem Page</h1>",
+                "h1",
+            ),
+        ]
+        for old, new, label in replacements:
+            text = replace_once(text, old, new, applied, f"gift-center-uid:{label}")
+
+    if "first_screen_update" in operations:
+        text = replace_once(
+            text,
+            '<p class="guide-verified">The official Last Z Gift Center login page is the only place where codes are redeemed. Copy your UID from Avatar → Settings → Copy ID, redeem in a browser, and collect rewards from your mailbox.</p>',
+            '<p class="guide-verified">Use the official Last Z Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, redeem outside the game client, and collect rewards from your in-game mailbox.</p>',
+            applied,
+            "gift-center-uid:guide_verified",
+        )
+        text = replace_once(
+            text,
+            '<p class="qa-lede"><strong>Official Last Z Gift Center setup:</strong> open the redeem website, copy your UID from Settings, paste the code in your browser on iPhone or Android, and check your in-game mailbox for rewards.</p>',
+            '<p class="qa-lede"><strong>Official Last Z Gift Center setup:</strong> open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.</p>',
+            applied,
+            "gift-center-uid:qa_lede",
+        )
+
+    if "internal_link_addition" in operations:
+        if 'href="codes.html"' in text and 'href="redeem-code-not-working.html"' in text:
+            skipped.append("gift-center-uid.html:self_link_skipped_outbound_routing_already_present")
+        else:
+            skipped.append("gift-center-uid.html:self_link_skipped_manual_outbound_review")
+
+    path.write_text(text, encoding="utf-8")
+    return applied, skipped
+
+
+def add_html_related_card(source_file: str, target_page: str) -> tuple[list[str], list[str]]:
     path = ROOT / source_file
     text = path.read_text(encoding="utf-8")
-    if f'href="{TARGET_ATLAS}"' in text:
-        return []
-    anchor = '                <a href="research.html" class="related-card">Research Priority</a>'
-    if anchor not in text:
-        anchor = '                <a href="research.html" class="related-card">Research Guide</a>'
-    if anchor not in text:
-        return []
-    replacement = anchor + '\n                <a href="research-costs.html" class="related-card">Research Costs Atlas</a>'
-    text = text.replace(anchor, replacement, 1)
+    card = target_card(target_page)
+    if f'href="{target_page}"' in text:
+        return [], [f"{source_file}:related_card_duplicate_skipped"]
+
+    match = re.search(
+        r'(<div class="related-grid">\n)(?P<body>.*?)(\n\s*</div>)',
+        text,
+        flags=re.S,
+    )
+    if not match:
+        return [], [f"{source_file}:related_grid_not_found"]
+
+    new_card = f'                <a href="{card["href"]}" class="related-card">{card["label"]}</a>'
+    replacement = match.group(1) + match.group("body") + "\n" + new_card + match.group(3)
+    text = text[: match.start()] + replacement + text[match.end() :]
     path.write_text(text, encoding="utf-8")
-    return [f"{source_file}:related_card"]
+    return [f"{source_file}:related_card:{target_page}"], []
 
 
-def add_json_related_guide(source_file: str) -> list[str]:
+def add_json_related_guide(source_file: str, target_page: str) -> tuple[list[str], list[str]]:
     path = ROOT / source_file
     payload = json.loads(path.read_text(encoding="utf-8"))
     related = payload.setdefault("related_guides", [])
-    if any(item.get("href") == TARGET_ATLAS for item in related if isinstance(item, dict)):
-        return []
+    if any(item.get("href") == target_page for item in related if isinstance(item, dict)):
+        return [], [f"{source_file}:related_guides_duplicate_skipped"]
 
     insert_at = len(related)
     for index, item in enumerate(related):
         if isinstance(item, dict) and item.get("href") == "research.html":
             insert_at = index + 1
             break
-    related.insert(insert_at, dict(ATLAS_CARD))
+    related.insert(insert_at, dict(target_card(target_page)))
     write_json(path, payload)
-    return [f"{source_file}:related_guides"]
+    return [f"{source_file}:related_guides:{target_page}"], []
 
 
 def run_generators(specs: list[dict[str, Any]]) -> list[str]:
@@ -180,7 +281,7 @@ def run_generators(specs: list[dict[str, Any]]) -> list[str]:
     return ran
 
 
-def render_report(manifest, applied: list[str], generators: list[str], applied_at: str) -> str:
+def render_report(manifest, applied: list[str], skipped: list[str], generators: list[str], applied_at: str) -> str:
     return f"""# Apply Result: {manifest.run_id}
 
 ## Overview
@@ -188,6 +289,7 @@ def render_report(manifest, applied: list[str], generators: list[str], applied_a
 - Summary: {manifest.summary}
 - Applied at: `{applied_at}`
 - Applied operations: {len(applied)}
+- Skipped operations: {len(skipped)}
 - Generator commands: {len(generators)}
 - Status after apply: `applied_pending_qa`
 
@@ -200,6 +302,10 @@ def render_report(manifest, applied: list[str], generators: list[str], applied_a
 ## Applied Operations
 
 {md_list(applied)}
+
+## Skipped Operations
+
+{md_list(skipped)}
 
 ## Generator Commands
 
@@ -218,10 +324,19 @@ def apply_approved(path: Path):
         grouped.setdefault(str(spec.get("source_of_truth_file")), []).append(spec)
 
     applied: list[str] = []
+    skipped: list[str] = []
     generated_specs: list[dict[str, Any]] = []
+    target_page = str((manifest.plan or {}).get("target_page_or_slug", ""))
     for source_file, source_specs in grouped.items():
-        if source_file == TARGET_ATLAS:
-            applied.extend(apply_research_costs(source_specs))
+        if source_file == "research-costs.html":
+            source_applied, source_skipped = apply_research_costs(source_specs)
+            applied.extend(source_applied)
+            skipped.extend(source_skipped)
+            continue
+        if source_file == "gift-center-uid.html":
+            source_applied, source_skipped = apply_gift_center_uid(source_specs)
+            applied.extend(source_applied)
+            skipped.extend(source_skipped)
             continue
         for spec in source_specs:
             operation = spec.get("operation_type")
@@ -229,28 +344,33 @@ def apply_approved(path: Path):
             if operation != "internal_link_addition":
                 continue
             if source_type == "generated_research_branch":
-                applied.extend(add_json_related_guide(source_file))
+                source_applied, source_skipped = add_json_related_guide(source_file, target_page)
+                applied.extend(source_applied)
+                skipped.extend(source_skipped)
                 generated_specs.append(spec)
             elif source_type == "html_file":
-                applied.extend(add_html_related_card(source_file))
+                source_applied, source_skipped = add_html_related_card(source_file, target_page)
+                applied.extend(source_applied)
+                skipped.extend(source_skipped)
 
     generators = run_generators(generated_specs)
     applied_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
     out_path = REPORTS_DIR / f"{manifest.run_id}.apply-result.md"
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(render_report(manifest, applied, generators, applied_at), encoding="utf-8")
+    out_path.write_text(render_report(manifest, applied, skipped, generators, applied_at), encoding="utf-8")
 
     manifest.artifacts.setdefault("apply_result", {})
     manifest.artifacts["apply_result"] = {
         "report_path": str(out_path.relative_to(ROOT)),
         "applied_at": applied_at,
         "applied_operations": applied,
+        "skipped_operations": skipped,
         "generator_commands": generators,
     }
     manifest.status = "applied_pending_qa"
     write_run_manifest(path, manifest)
-    return out_path, applied, generators
+    return out_path, applied, skipped, generators
 
 
 def main() -> int:
@@ -260,13 +380,14 @@ def main() -> int:
 
     manifest_path = resolve_manifest_path(args.manifest)
     try:
-        out_path, applied, generators = apply_approved(manifest_path)
+        out_path, applied, skipped, generators = apply_approved(manifest_path)
     except ValueError as exc:
         print(str(exc))
         return 1
 
     print(f"Wrote {out_path.relative_to(ROOT)}")
     print(f"Applied operations: {len(applied)}")
+    print(f"Skipped operations: {len(skipped)}")
     print(f"Generator commands: {len(generators)}")
     print(f"Updated {manifest_path.relative_to(ROOT)}")
     return 0
