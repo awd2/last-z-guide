@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-research-cluster-nav",
   "created_at": "2026-04-22T16:51:13.725356Z",
   "run_type": "update_existing",
-  "status": "apply_preview_ready",
+  "status": "qa_passed",
   "risk_level": "medium",
   "summary": "Update the existing page `research-costs.html` for the `Research` cluster using the `atlas-page` archetype.",
   "inputs": {
@@ -933,6 +933,34 @@
           "target_page": "research-costs.html"
         }
       ]
+    },
+    "apply_result": {
+      "report_path": "automation/reports/2026-04-22-research-cluster-nav.apply-result.md",
+      "applied_at": "2026-04-26T10:27:56Z",
+      "applied_operations": [
+        "research-costs:title",
+        "research-costs:meta_description",
+        "research-costs:og_title",
+        "research-costs:og_description",
+        "research-costs:twitter_title",
+        "research-costs:twitter_description",
+        "research-costs:article_headline",
+        "research-costs:article_description",
+        "research-costs:h1",
+        "research-costs:guide_verified",
+        "research-costs:data_lede",
+        "research-costs:qa_lede",
+        "research-costs:atlas_link_copy:9",
+        "alliance-recognition-cost.html:related_card",
+        "data/research_branches/army-building.json:related_guides",
+        "data/research_branches/field-research.json:related_guides",
+        "data/research_branches/fully-armed-alliance.json:related_guides"
+      ],
+      "generator_commands": [
+        "python3 scripts/generate_research_branch.py data/research_branches/army-building.json",
+        "python3 scripts/generate_research_branch.py data/research_branches/field-research.json",
+        "python3 scripts/generate_research_branch.py data/research_branches/fully-armed-alliance.json"
+      ]
     }
   },
   "changed_files": [
@@ -949,7 +977,7 @@
     },
     "changed_pages_report": {
       "status": "pass",
-      "notes": "same-cluster inbound links: 1 | expected hubs: index.html, research.html, research-costs.html | linked from hubs: index.html, research.html"
+      "notes": "same-cluster inbound links: 5 | expected hubs: index.html, research.html, research-costs.html | linked from hubs: index.html, research.html"
     },
     "automation_checks_strict": {
       "status": "pass",

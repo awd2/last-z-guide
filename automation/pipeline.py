@@ -65,6 +65,20 @@ def record_check_result(run_id: str, name: str, returncode: int, output: str) ->
     print(f"Recorded `{name}` in {manifest_path.relative_to(ROOT)}")
 
 
+def advance_manifest_after_checks(run_id: str, strict: bool, checks_code: int, report_code: int) -> None:
+    if not strict or checks_code or report_code:
+        return
+    manifest_path = AUTOMATION_DIR / "manifests" / f"{run_id}.json"
+    if not manifest_path.exists():
+        return
+    manifest = load_run_manifest(manifest_path)
+    if manifest.status != "applied_pending_qa":
+        return
+    manifest.status = "qa_passed"
+    write_run_manifest(manifest_path, manifest)
+    print(f"Advanced `{run_id}` to qa_passed.")
+
+
 def cmd_checks(strict: bool, manifest: str | None) -> int:
     command = [sys.executable, str(AUTOMATION_DIR / "run_checks.py")]
     if strict:
@@ -85,6 +99,7 @@ def cmd_checks(strict: bool, manifest: str | None) -> int:
         ]
         report_code, report_output = run_step_capture("Changed Pages Report", report_cmd)
         record_check_result(manifest, "changed_pages_report", report_code, report_output)
+        advance_manifest_after_checks(manifest, strict, code, report_code)
         return 1 if code or report_code else 0
     return run_step("Automation Checks", command)
 
@@ -174,6 +189,13 @@ def cmd_apply_preview(run_id: str) -> int:
     return run_step(
         "Apply Preview",
         [sys.executable, str(AUTOMATION_DIR / "apply_preview.py"), run_id],
+    )
+
+
+def cmd_apply_approved(run_id: str) -> int:
+    return run_step(
+        "Apply Approved",
+        [sys.executable, str(AUTOMATION_DIR / "apply_approved.py"), run_id],
     )
 
 
@@ -340,6 +362,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     patch_plan_context = (manifest.artifacts or {}).get("patch_plan", {})
     proposal_context = (manifest.artifacts or {}).get("proposal", {})
     apply_preview_context = (manifest.artifacts or {}).get("apply_preview", {})
+    apply_result_context = (manifest.artifacts or {}).get("apply_result", {})
 
     bundle_path = AUTOMATION_DIR / "reports" / f"{run_id}.md"
     brief_path_value = editor_context.get("brief_path")
@@ -350,6 +373,8 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     proposal_path = ROOT / proposal_path_value if proposal_path_value else None
     apply_preview_path_value = apply_preview_context.get("report_path")
     apply_preview_path = ROOT / apply_preview_path_value if apply_preview_path_value else None
+    apply_result_path_value = apply_result_context.get("report_path")
+    apply_result_path = ROOT / apply_result_path_value if apply_result_path_value else None
 
     payload = {
         "run_id": manifest.run_id,
@@ -373,6 +398,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
         "patch_plan_context": patch_plan_context,
         "proposal_context": proposal_context,
         "apply_preview_context": apply_preview_context,
+        "apply_result_context": apply_result_context,
         "checks": {
             name: {"status": result.status, "notes": result.notes}
             for name, result in manifest.checks.items()
@@ -385,6 +411,9 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
             "proposal": str(proposal_path.relative_to(ROOT)) if proposal_path and proposal_path.exists() else None,
             "apply_preview": str(apply_preview_path.relative_to(ROOT))
             if apply_preview_path and apply_preview_path.exists()
+            else None,
+            "apply_result": str(apply_result_path.relative_to(ROOT))
+            if apply_result_path and apply_result_path.exists()
             else None,
         },
     }
@@ -484,6 +513,13 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
         print(f"- approved_specs_count: {apply_preview_context.get('approved_specs_count', 0)}")
         if report_path:
             print(f"- report_path: {report_path}")
+    if apply_result_context:
+        print("\nApply Result Context")
+        report_path = apply_result_context.get("report_path")
+        print(f"- applied_operations: {len(apply_result_context.get('applied_operations', []))}")
+        print(f"- generator_commands: {len(apply_result_context.get('generator_commands', []))}")
+        if report_path:
+            print(f"- report_path: {report_path}")
 
     if manifest.changed_files:
         print("\nChanged Files")
@@ -504,6 +540,9 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     print(f"- proposal: {proposal_path.relative_to(ROOT) if proposal_path and proposal_path.exists() else 'not generated yet'}")
     print(
         f"- apply preview: {apply_preview_path.relative_to(ROOT) if apply_preview_path and apply_preview_path.exists() else 'not generated yet'}"
+    )
+    print(
+        f"- apply result: {apply_result_path.relative_to(ROOT) if apply_result_path and apply_result_path.exists() else 'not generated yet'}"
     )
     return 0
 
@@ -568,11 +607,25 @@ def cmd_next_step(run_id: str, as_json: bool) -> int:
             "reason": "All proposal specs are approved. The next safe automation step is a no-write apply preview.",
         },
         "apply_preview_ready": {
-            "next_step": "manual_review_apply_preview_then_controlled_apply",
+            "next_step": f"python3 automation/pipeline.py apply-approved {run_id}",
+            "recommended_command": f"python3 automation/pipeline.py apply-approved {run_id}",
+            "requires_human_review": True,
+            "requires_manual_edit_gate": True,
+            "reason": "The run has a no-write apply preview. After review, the controlled apply step may edit approved source files.",
+        },
+        "applied_pending_qa": {
+            "next_step": f"python3 automation/pipeline.py checks --strict --manifest {run_id}",
+            "recommended_command": f"python3 automation/pipeline.py checks --strict --manifest {run_id}",
+            "requires_human_review": False,
+            "requires_manual_edit_gate": True,
+            "reason": "Approved specs were applied. Run strict automation checks and prepublish checks before merge/deploy.",
+        },
+        "qa_passed": {
+            "next_step": "manual_review_then_commit_merge_or_deploy",
             "recommended_command": None,
             "requires_human_review": True,
             "requires_manual_edit_gate": True,
-            "reason": "The run has a no-write apply preview. Review it before any content files are edited.",
+            "reason": "Approved specs were applied and strict automation checks passed. Production deployment is still manual.",
         },
         "rejected": {
             "next_step": "revise_or_close_run",
@@ -627,6 +680,7 @@ def cmd_show(run_id: str, as_json: bool) -> int:
     patch_plan_context = (manifest.artifacts or {}).get("patch_plan", {})
     proposal_context = (manifest.artifacts or {}).get("proposal", {})
     apply_preview_context = (manifest.artifacts or {}).get("apply_preview", {})
+    apply_result_context = (manifest.artifacts or {}).get("apply_result", {})
     claim_ids = review_context.get("canonical_claim_ids", [])
     related_pages = review_context.get("related_filenames", [])
     bundle_path = AUTOMATION_DIR / "reports" / f"{run_id}.md"
@@ -638,6 +692,8 @@ def cmd_show(run_id: str, as_json: bool) -> int:
     proposal_path = ROOT / proposal_path_value if proposal_path_value else None
     apply_preview_path_value = apply_preview_context.get("report_path")
     apply_preview_path = ROOT / apply_preview_path_value if apply_preview_path_value else None
+    apply_result_path_value = apply_result_context.get("report_path")
+    apply_result_path = ROOT / apply_result_path_value if apply_result_path_value else None
 
     payload = {
         "run_id": manifest.run_id,
@@ -658,6 +714,9 @@ def cmd_show(run_id: str, as_json: bool) -> int:
             "proposal": str(proposal_path.relative_to(ROOT)) if proposal_path and proposal_path.exists() else None,
             "apply_preview": str(apply_preview_path.relative_to(ROOT))
             if apply_preview_path and apply_preview_path.exists()
+            else None,
+            "apply_result": str(apply_result_path.relative_to(ROOT))
+            if apply_result_path and apply_result_path.exists()
             else None,
         },
     }
@@ -704,6 +763,10 @@ def cmd_show(run_id: str, as_json: bool) -> int:
         print(f"Apply preview: {apply_preview_path.relative_to(ROOT)}")
     else:
         print("Apply preview: not generated yet")
+    if apply_result_path and apply_result_path.exists():
+        print(f"Apply result: {apply_result_path.relative_to(ROOT)}")
+    else:
+        print("Apply result: not generated yet")
     return 0
 
 
@@ -738,14 +801,17 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
         patch_plan_context = (manifest.artifacts or {}).get("patch_plan", {})
         proposal_context = (manifest.artifacts or {}).get("proposal", {})
         apply_preview_context = (manifest.artifacts or {}).get("apply_preview", {})
+        apply_result_context = (manifest.artifacts or {}).get("apply_result", {})
         brief_path_value = editor_context.get("brief_path")
         patch_path_value = patch_plan_context.get("report_path")
         proposal_path_value = proposal_context.get("report_path")
         apply_preview_path_value = apply_preview_context.get("report_path")
+        apply_result_path_value = apply_result_context.get("report_path")
         has_brief = False
         has_patch_plan = False
         has_proposal = False
         has_apply_preview = False
+        has_apply_result = False
         if brief_path_value:
             has_brief = (ROOT / brief_path_value).exists()
         if patch_path_value:
@@ -754,6 +820,8 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
             has_proposal = (ROOT / proposal_path_value).exists()
         if apply_preview_path_value:
             has_apply_preview = (ROOT / apply_preview_path_value).exists()
+        if apply_result_path_value:
+            has_apply_result = (ROOT / apply_result_path_value).exists()
 
         rows.append(
             {
@@ -768,6 +836,7 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
                 "has_patch_plan": has_patch_plan,
                 "has_proposal": has_proposal,
                 "has_apply_preview": has_apply_preview,
+                "has_apply_result": has_apply_result,
                 "summary": manifest.summary,
             }
         )
@@ -787,7 +856,8 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
             f"bundle={'yes' if row['has_bundle'] else 'no'} | "
             f"brief={'yes' if row['has_brief'] else 'no'} | patch={'yes' if row['has_patch_plan'] else 'no'} | "
             f"proposal={'yes' if row['has_proposal'] else 'no'} | "
-            f"apply_preview={'yes' if row['has_apply_preview'] else 'no'}"
+            f"apply_preview={'yes' if row['has_apply_preview'] else 'no'} | "
+            f"apply_result={'yes' if row['has_apply_result'] else 'no'}"
         )
         print(f"  summary: {row['summary']}")
     return 0
@@ -1034,6 +1104,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     apply_preview_parser.add_argument("run_id", help="Run manifest basename without .json")
 
+    apply_approved_parser = subparsers.add_parser(
+        "apply-approved",
+        help="Apply approved Patch Spec v1 entries with conservative deterministic templates.",
+    )
+    apply_approved_parser.add_argument("run_id", help="Run manifest basename without .json")
+
     run_parser = subparsers.add_parser("run", help="Create and review a manifest for one backlog topic.")
     run_parser.add_argument("topic_id", help="Backlog topic_id to run.")
 
@@ -1099,6 +1175,8 @@ def main() -> int:
         )
     if args.command == "apply-preview":
         return cmd_apply_preview(args.run_id)
+    if args.command == "apply-approved":
+        return cmd_apply_approved(args.run_id)
     if args.command == "run":
         return cmd_run(args.topic_id)
     if args.command == "bundle":
