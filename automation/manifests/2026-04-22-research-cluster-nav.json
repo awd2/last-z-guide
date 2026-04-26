@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-research-cluster-nav",
   "created_at": "2026-04-22T16:51:13.725356Z",
   "run_type": "update_existing",
-  "status": "proposal_ready",
+  "status": "approved_for_apply",
   "risk_level": "medium",
   "summary": "Update the existing page `research-costs.html` for the `Research` cluster using the `atlas-page` archetype.",
   "inputs": {
@@ -164,7 +164,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs."
         },
         {
           "target_file": "research-costs.html",
@@ -196,7 +199,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs."
         },
         {
           "target_file": "research-costs.html",
@@ -228,7 +234,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs."
         },
         {
           "target_file": "research-costs.html",
@@ -260,7 +269,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs."
         },
         {
           "target_file": "alliance-recognition-cost.html",
@@ -292,7 +304,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs."
         },
         {
           "target_file": "army-building-cost.html",
@@ -325,7 +340,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs."
         },
         {
           "target_file": "field-research.html",
@@ -358,7 +376,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs."
         },
         {
           "target_file": "fully-armed-alliance-cost.html",
@@ -391,7 +412,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs."
         }
       ],
       "changed_files": [
@@ -460,10 +484,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs.",
           "before_summary": "title: Last Z Research Costs Atlas (2026) — All Research Trees, Badge Totals, and Unlock Paths | h1: Last Z Research Costs Atlas — All Research Trees, Badge Totals, and Unlock Paths | meta: All major Last Z research trees in one place: total badge costs, unlock requirements, best stopping points, and links to every exact node-cost tree. | verified: This atlas is the fastest way to compare all major badge-heavy research trees in Last Z. Use it when you want to see total branch cost, unlock requirements, and the exact tree page for each branch without jumping through the whole site blindly.",
           "desired_after_summary": "Opening answer names the atlas role, main research route, and exact branch-page routing without turning the atlas into a giant guide.",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "research-costs.html",
@@ -496,10 +522,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs.",
           "before_summary": "title: Last Z Research Costs Atlas (2026) — All Research Trees, Badge Totals, and Unlock Paths | h1: Last Z Research Costs Atlas — All Research Trees, Badge Totals, and Unlock Paths | meta: All major Last Z research trees in one place: total badge costs, unlock requirements, best stopping points, and links to every exact node-cost tree. | verified: This atlas is the fastest way to compare all major badge-heavy research trees in Last Z. Use it when you want to see total branch cost, unlock requirements, and the exact tree page for each branch without jumping through the whole site blindly.",
           "desired_after_summary": "Title, H1, and meta description use the same exact intent: research costs atlas, branch comparison, badge totals, and unlock paths.",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "research-costs.html",
@@ -532,10 +560,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs.",
           "before_summary": "title: Last Z Research Costs Atlas (2026) — All Research Trees, Badge Totals, and Unlock Paths | h1: Last Z Research Costs Atlas — All Research Trees, Badge Totals, and Unlock Paths | meta: All major Last Z research trees in one place: total badge costs, unlock requirements, best stopping points, and links to every exact node-cost tree. | verified: This atlas is the fastest way to compare all major badge-heavy research trees in Last Z. Use it when you want to see total branch cost, unlock requirements, and the exact tree page for each branch without jumping through the whole site blindly.",
           "desired_after_summary": "Source adds a crawlable, user-visible bridge to `research-costs.html` in the relevant section or related-guides block.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "research-costs.html",
@@ -568,10 +598,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs.",
           "before_summary": "title: Last Z Research Costs Atlas (2026) — All Research Trees, Badge Totals, and Unlock Paths | h1: Last Z Research Costs Atlas — All Research Trees, Badge Totals, and Unlock Paths | meta: All major Last Z research trees in one place: total badge costs, unlock requirements, best stopping points, and links to every exact node-cost tree. | verified: This atlas is the fastest way to compare all major badge-heavy research trees in Last Z. Use it when you want to see total branch cost, unlock requirements, and the exact tree page for each branch without jumping through the whole site blindly.",
           "desired_after_summary": "Atlas cards help users choose the correct branch page and keep the core order visible: Hero Training, Military Strategies, Peace Shield, Siege to Seize, Field Research.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "alliance-recognition-cost.html",
@@ -604,10 +636,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs.",
           "before_summary": "title: Last Z Alliance Recognition Costs (2026) — Total Badge Cost and Research Path | h1: Last Z Alliance Recognition Costs — Total Badge Cost and Research Path | meta: Total Alliance Recognition badge cost in Last Z: full research path, key checkpoints, and how many badges you need before spending on this tree. | verified: Alliance Recognition costs 356,770 badges in total; use this research path and badge planner before committing badges to the full tree.",
           "desired_after_summary": "Source adds a crawlable, user-visible bridge to `research-costs.html` in the relevant section or related-guides block.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "army-building-cost.html",
@@ -641,10 +675,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs.",
           "before_summary": "title: Last Z Army Building Costs (2026) — Total Badge Cost and Peace Shield Follow-Up | h1: Last Z Army Building Costs — Total Badge Cost and Peace Shield Follow-Up | meta: Army Building badge costs in Last Z: total branch cost, exact node totals, Peace Shield follow-up path, and the later Recharge Shield checkpoint for deep combat research. | verified: Army Building is a deep combat branch that opens only after Peace Shield is fully complete. It is much more serious than the mid-game branches before it, so exact node totals matter before you commit.",
           "desired_after_summary": "JSON source adds or strengthens a route back to `research-costs.html` through `related_guides` or `next_steps`, then regenerates the HTML output.",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "field-research.html",
@@ -678,10 +714,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs.",
           "before_summary": "title: Last Z Field Research Costs (2026) — Recharge Shield Path and Total Badge Cost | h1: Last Z Field Research Costs — Recharge Shield Path and Total Badge Cost | meta: Field Research badge costs in Last Z: total branch cost, Recharge Shield path, node-by-node totals, and what unlocks after Siege to Seize is fully complete. | verified: Field Research is the heavy follow-up branch after Siege to Seize. It matters because Recharge Shield sits at the end of an already expensive path, so this page shows exactly where the real badge wall begins.",
           "desired_after_summary": "JSON source adds or strengthens a route back to `research-costs.html` through `related_guides` or `next_steps`, then regenerates the HTML output.",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "fully-armed-alliance-cost.html",
@@ -715,10 +753,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:17:56Z",
+          "approval_note": "Human review approved all proposal specs.",
           "before_summary": "title: Last Z Fully Armed Alliance Costs (2026) — Annihilation, Move Out, and Total Badge Cost | h1: Last Z Fully Armed Alliance Costs — Annihilation, Move Out, and Total Badge Cost | meta: Fully Armed Alliance badge costs in Last Z: total branch cost, Annihilation and Move Out totals, and the exact node costs behind one of the most aggressive late combat trees. | verified: Fully Armed Alliance is one of the most aggressive combat branches in Last Z. Players usually ask about it for Annihilation and Move Out, but the full branch is a serious badge sink and should not be treated as an automatic early priority.",
           "desired_after_summary": "JSON source adds or strengthens a route back to `research-costs.html` through `related_guides` or `next_steps`, then regenerates the HTML output.",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         }
       ]
     }

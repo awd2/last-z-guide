@@ -3,7 +3,7 @@
 ## Overview
 
 - Summary: Update the existing page `research-costs.html` for the `Research` cluster using the `atlas-page` archetype.
-- Status: `proposal_ready`
+- Status: `approved_for_apply`
 - Risk: `medium`
 - Cluster: `Research`
 - Target: `research-costs.html`
@@ -33,7 +33,7 @@
 - Generated page: `false`
 - Selector or anchor: `Related Guides`
 - Risk: `low`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:
@@ -58,7 +58,7 @@ Validation:
 - Generated page: `true`
 - Selector or anchor: `related_guides or next_steps`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `python3 scripts/generate_research_branch.py data/research_branches/army-building.json`
 
 Before:
@@ -84,7 +84,7 @@ Validation:
 - Generated page: `true`
 - Selector or anchor: `related_guides or next_steps`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `python3 scripts/generate_research_branch.py data/research_branches/field-research.json`
 
 Before:
@@ -110,7 +110,7 @@ Validation:
 - Generated page: `true`
 - Selector or anchor: `related_guides or next_steps`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `python3 scripts/generate_research_branch.py data/research_branches/fully-armed-alliance.json`
 
 Before:
@@ -136,7 +136,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `<title>, meta description, H1, first-screen block`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:
@@ -160,7 +160,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `<title>, meta description, H1, first-screen block`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:
@@ -184,7 +184,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `Related Guides`
 - Risk: `low`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:
@@ -208,7 +208,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `atlas cards / branch comparison route block`
 - Risk: `low`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:
