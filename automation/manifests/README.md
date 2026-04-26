@@ -40,6 +40,9 @@ The current automation MVP uses this concrete lifecycle:
 - `draft_brief_ready`
 - `patch_plan_ready`
 - `proposal_ready`
+- `partially_approved`
+- `approved_for_apply`
+- `rejected`
 
 `patch_plan_ready` means the run has Patch Spec v1 metadata and can render a
 human-reviewable proposal artifact.
@@ -47,9 +50,18 @@ human-reviewable proposal artifact.
 `proposal_ready` is the current stop point. It means the run has proposed edits
 and now needs human review before any site files are edited.
 
-Future lifecycle stages may add names such as `drafted`, `qa_passed`,
-`ready_for_approval`, `approved`, and `released`, but those are not implemented
-states yet.
+`partially_approved` means at least one proposal spec has been approved or
+rejected, but the run still has mixed decisions.
+
+`approved_for_apply` means every proposal spec is approved. This is still not
+an autonomous publishing state; it is only a gate for a controlled manual apply
+or future safe apply worker.
+
+`rejected` means every proposal spec was rejected and the run should be revised
+or closed before any content edits are created.
+
+Future lifecycle stages may add names such as `drafted`, `qa_passed`, and
+`released`, but those are not implemented states yet.
 
 ## Required top-level fields
 
@@ -83,6 +95,8 @@ states yet.
 
 - `artifacts`
   - reports, briefs, or generated files produced by the run
+  - proposal artifacts may include `approval_state`, `approval_updated_at`, and
+    `approval_note` fields for rendered Patch Spec v1 entries
 
 - `changed_files`
   - explicit file list if the run edits the repo

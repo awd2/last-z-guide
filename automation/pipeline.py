@@ -138,6 +138,38 @@ def cmd_propose(run_id: str) -> int:
     )
 
 
+def cmd_approval(
+    run_id: str,
+    state: str,
+    all_specs: bool,
+    source: str | None,
+    target: str | None,
+    operation: str | None,
+    note: str | None,
+    dry_run: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "approval.py"),
+        run_id,
+        "--state",
+        state,
+    ]
+    if all_specs:
+        command.append("--all")
+    if source:
+        command.extend(["--source", source])
+    if target:
+        command.extend(["--target", target])
+    if operation:
+        command.extend(["--operation", operation])
+    if note:
+        command.extend(["--note", note])
+    if dry_run:
+        command.append("--dry-run")
+    return run_step("Proposal Approval", command)
+
+
 def cmd_bundle(topic_id: str) -> int:
     return run_step(
         "Review Bundle",
@@ -492,11 +524,32 @@ def cmd_next_step(run_id: str, as_json: bool) -> int:
             "reason": "The run has Patch Spec v1 metadata and can render a human-reviewable proposal artifact next.",
         },
         "proposal_ready": {
-            "next_step": "human_review_then_manual_edit",
+            "next_step": f"python3 automation/pipeline.py approval {run_id} --state approved --all",
             "recommended_command": None,
             "requires_human_review": True,
             "requires_manual_edit_gate": True,
-            "reason": "The run has human-reviewable proposed edits and now needs approval before any site edits.",
+            "reason": "The run has proposed edits and now needs human review. Approve or reject specs before any apply step.",
+        },
+        "partially_approved": {
+            "next_step": "review_remaining_proposal_specs",
+            "recommended_command": None,
+            "requires_human_review": True,
+            "requires_manual_edit_gate": True,
+            "reason": "Some proposal specs have approval decisions, but the run is not fully approved or rejected.",
+        },
+        "approved_for_apply": {
+            "next_step": "manual_apply_or_future_safe_apply_worker",
+            "recommended_command": None,
+            "requires_human_review": False,
+            "requires_manual_edit_gate": True,
+            "reason": "All proposal specs are approved. The next stage must still be a controlled manual or future safe apply step.",
+        },
+        "rejected": {
+            "next_step": "revise_or_close_run",
+            "recommended_command": None,
+            "requires_human_review": False,
+            "requires_manual_edit_gate": True,
+            "reason": "All proposal specs were rejected. Revise the plan before creating any content edits.",
         },
     }
 
@@ -910,6 +963,24 @@ def build_parser() -> argparse.ArgumentParser:
     )
     propose_parser.add_argument("run_id", help="Run manifest basename without .json")
 
+    approval_parser = subparsers.add_parser(
+        "approval",
+        help="Record human approval decisions for rendered proposal specs.",
+    )
+    approval_parser.add_argument("run_id", help="Run manifest basename without .json")
+    approval_parser.add_argument(
+        "--state",
+        required=True,
+        choices=["approved", "proposed", "rejected"],
+        help="Approval state to write to matching proposal specs.",
+    )
+    approval_parser.add_argument("--source", help="Only update specs for this source_of_truth_file.")
+    approval_parser.add_argument("--target", help="Only update specs for this output_file.")
+    approval_parser.add_argument("--operation", help="Only update specs for this operation_type.")
+    approval_parser.add_argument("--all", action="store_true", help="Update every rendered proposal spec.")
+    approval_parser.add_argument("--note", help="Optional human review note to store with matched specs.")
+    approval_parser.add_argument("--dry-run", action="store_true", help="Show what would change without writing files.")
+
     run_parser = subparsers.add_parser("run", help="Create and review a manifest for one backlog topic.")
     run_parser.add_argument("topic_id", help="Backlog topic_id to run.")
 
@@ -962,6 +1033,17 @@ def main() -> int:
         return cmd_patch_plan(args.run_id)
     if args.command == "propose":
         return cmd_propose(args.run_id)
+    if args.command == "approval":
+        return cmd_approval(
+            args.run_id,
+            args.state,
+            args.all,
+            args.source,
+            args.target,
+            args.operation,
+            args.note,
+            args.dry_run,
+        )
     if args.command == "run":
         return cmd_run(args.topic_id)
     if args.command == "bundle":
