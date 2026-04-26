@@ -42,6 +42,7 @@ The current automation MVP uses this concrete lifecycle:
 - `proposal_ready`
 - `partially_approved`
 - `approved_for_apply`
+- `apply_preview_ready`
 - `rejected`
 
 `patch_plan_ready` means the run has Patch Spec v1 metadata and can render a
@@ -56,6 +57,10 @@ rejected, but the run still has mixed decisions.
 `approved_for_apply` means every proposal spec is approved. This is still not
 an autonomous publishing state; it is only a gate for a controlled manual apply
 or future safe apply worker.
+
+`apply_preview_ready` means a no-write apply preview has been rendered from the
+approved specs. The preview still needs human review before any source files are
+edited.
 
 `rejected` means every proposal spec was rejected and the run should be revised
 or closed before any content edits are created.
@@ -97,6 +102,8 @@ Future lifecycle stages may add names such as `drafted`, `qa_passed`, and
   - reports, briefs, or generated files produced by the run
   - proposal artifacts may include `approval_state`, `approval_updated_at`, and
     `approval_note` fields for rendered Patch Spec v1 entries
+  - apply preview artifacts may include `approved_specs_count`, `generated_at`,
+    and `preview_items`
 
 - `changed_files`
   - explicit file list if the run edits the repo

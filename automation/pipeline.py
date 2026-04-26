@@ -170,6 +170,13 @@ def cmd_approval(
     return run_step("Proposal Approval", command)
 
 
+def cmd_apply_preview(run_id: str) -> int:
+    return run_step(
+        "Apply Preview",
+        [sys.executable, str(AUTOMATION_DIR / "apply_preview.py"), run_id],
+    )
+
+
 def cmd_bundle(topic_id: str) -> int:
     return run_step(
         "Review Bundle",
@@ -332,6 +339,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     editor_context = (manifest.artifacts or {}).get("editor", {})
     patch_plan_context = (manifest.artifacts or {}).get("patch_plan", {})
     proposal_context = (manifest.artifacts or {}).get("proposal", {})
+    apply_preview_context = (manifest.artifacts or {}).get("apply_preview", {})
 
     bundle_path = AUTOMATION_DIR / "reports" / f"{run_id}.md"
     brief_path_value = editor_context.get("brief_path")
@@ -340,6 +348,8 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     patch_path = ROOT / patch_path_value if patch_path_value else None
     proposal_path_value = proposal_context.get("report_path")
     proposal_path = ROOT / proposal_path_value if proposal_path_value else None
+    apply_preview_path_value = apply_preview_context.get("report_path")
+    apply_preview_path = ROOT / apply_preview_path_value if apply_preview_path_value else None
 
     payload = {
         "run_id": manifest.run_id,
@@ -362,6 +372,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
         "review_context": review_context,
         "patch_plan_context": patch_plan_context,
         "proposal_context": proposal_context,
+        "apply_preview_context": apply_preview_context,
         "checks": {
             name: {"status": result.status, "notes": result.notes}
             for name, result in manifest.checks.items()
@@ -372,6 +383,9 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
             "editor_brief": str(brief_path.relative_to(ROOT)) if brief_path and brief_path.exists() else None,
             "patch_plan": str(patch_path.relative_to(ROOT)) if patch_path and patch_path.exists() else None,
             "proposal": str(proposal_path.relative_to(ROOT)) if proposal_path and proposal_path.exists() else None,
+            "apply_preview": str(apply_preview_path.relative_to(ROOT))
+            if apply_preview_path and apply_preview_path.exists()
+            else None,
         },
     }
 
@@ -464,6 +478,12 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
         print(f"- rendered_specs: {len(rendered_specs)}")
         if report_path:
             print(f"- report_path: {report_path}")
+    if apply_preview_context:
+        print("\nApply Preview Context")
+        report_path = apply_preview_context.get("report_path")
+        print(f"- approved_specs_count: {apply_preview_context.get('approved_specs_count', 0)}")
+        if report_path:
+            print(f"- report_path: {report_path}")
 
     if manifest.changed_files:
         print("\nChanged Files")
@@ -482,6 +502,9 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     print(f"- editor brief: {brief_path.relative_to(ROOT) if brief_path and brief_path.exists() else 'not generated yet'}")
     print(f"- patch plan: {patch_path.relative_to(ROOT) if patch_path and patch_path.exists() else 'not generated yet'}")
     print(f"- proposal: {proposal_path.relative_to(ROOT) if proposal_path and proposal_path.exists() else 'not generated yet'}")
+    print(
+        f"- apply preview: {apply_preview_path.relative_to(ROOT) if apply_preview_path and apply_preview_path.exists() else 'not generated yet'}"
+    )
     return 0
 
 
@@ -538,11 +561,18 @@ def cmd_next_step(run_id: str, as_json: bool) -> int:
             "reason": "Some proposal specs have approval decisions, but the run is not fully approved or rejected.",
         },
         "approved_for_apply": {
-            "next_step": "manual_apply_or_future_safe_apply_worker",
-            "recommended_command": None,
+            "next_step": f"python3 automation/pipeline.py apply-preview {run_id}",
+            "recommended_command": f"python3 automation/pipeline.py apply-preview {run_id}",
             "requires_human_review": False,
             "requires_manual_edit_gate": True,
-            "reason": "All proposal specs are approved. The next stage must still be a controlled manual or future safe apply step.",
+            "reason": "All proposal specs are approved. The next safe automation step is a no-write apply preview.",
+        },
+        "apply_preview_ready": {
+            "next_step": "manual_review_apply_preview_then_controlled_apply",
+            "recommended_command": None,
+            "requires_human_review": True,
+            "requires_manual_edit_gate": True,
+            "reason": "The run has a no-write apply preview. Review it before any content files are edited.",
         },
         "rejected": {
             "next_step": "revise_or_close_run",
@@ -596,6 +626,7 @@ def cmd_show(run_id: str, as_json: bool) -> int:
     editor_context = (manifest.artifacts or {}).get("editor", {})
     patch_plan_context = (manifest.artifacts or {}).get("patch_plan", {})
     proposal_context = (manifest.artifacts or {}).get("proposal", {})
+    apply_preview_context = (manifest.artifacts or {}).get("apply_preview", {})
     claim_ids = review_context.get("canonical_claim_ids", [])
     related_pages = review_context.get("related_filenames", [])
     bundle_path = AUTOMATION_DIR / "reports" / f"{run_id}.md"
@@ -605,6 +636,8 @@ def cmd_show(run_id: str, as_json: bool) -> int:
     patch_path = ROOT / patch_path_value if patch_path_value else None
     proposal_path_value = proposal_context.get("report_path")
     proposal_path = ROOT / proposal_path_value if proposal_path_value else None
+    apply_preview_path_value = apply_preview_context.get("report_path")
+    apply_preview_path = ROOT / apply_preview_path_value if apply_preview_path_value else None
 
     payload = {
         "run_id": manifest.run_id,
@@ -623,6 +656,9 @@ def cmd_show(run_id: str, as_json: bool) -> int:
             "editor_brief": str(brief_path.relative_to(ROOT)) if brief_path and brief_path.exists() else None,
             "patch_plan": str(patch_path.relative_to(ROOT)) if patch_path and patch_path.exists() else None,
             "proposal": str(proposal_path.relative_to(ROOT)) if proposal_path and proposal_path.exists() else None,
+            "apply_preview": str(apply_preview_path.relative_to(ROOT))
+            if apply_preview_path and apply_preview_path.exists()
+            else None,
         },
     }
 
@@ -664,6 +700,10 @@ def cmd_show(run_id: str, as_json: bool) -> int:
         print(f"Proposal: {proposal_path.relative_to(ROOT)}")
     else:
         print("Proposal: not generated yet")
+    if apply_preview_path and apply_preview_path.exists():
+        print(f"Apply preview: {apply_preview_path.relative_to(ROOT)}")
+    else:
+        print("Apply preview: not generated yet")
     return 0
 
 
@@ -697,18 +737,23 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
         editor_context = (manifest.artifacts or {}).get("editor", {})
         patch_plan_context = (manifest.artifacts or {}).get("patch_plan", {})
         proposal_context = (manifest.artifacts or {}).get("proposal", {})
+        apply_preview_context = (manifest.artifacts or {}).get("apply_preview", {})
         brief_path_value = editor_context.get("brief_path")
         patch_path_value = patch_plan_context.get("report_path")
         proposal_path_value = proposal_context.get("report_path")
+        apply_preview_path_value = apply_preview_context.get("report_path")
         has_brief = False
         has_patch_plan = False
         has_proposal = False
+        has_apply_preview = False
         if brief_path_value:
             has_brief = (ROOT / brief_path_value).exists()
         if patch_path_value:
             has_patch_plan = (ROOT / patch_path_value).exists()
         if proposal_path_value:
             has_proposal = (ROOT / proposal_path_value).exists()
+        if apply_preview_path_value:
+            has_apply_preview = (ROOT / apply_preview_path_value).exists()
 
         rows.append(
             {
@@ -722,6 +767,7 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
                 "has_brief": has_brief,
                 "has_patch_plan": has_patch_plan,
                 "has_proposal": has_proposal,
+                "has_apply_preview": has_apply_preview,
                 "summary": manifest.summary,
             }
         )
@@ -740,7 +786,8 @@ def cmd_recent_runs(limit: int, status: str | None, as_json: bool) -> int:
             f"  type={row['run_type']} | changed={row['changed_files_count']} | "
             f"bundle={'yes' if row['has_bundle'] else 'no'} | "
             f"brief={'yes' if row['has_brief'] else 'no'} | patch={'yes' if row['has_patch_plan'] else 'no'} | "
-            f"proposal={'yes' if row['has_proposal'] else 'no'}"
+            f"proposal={'yes' if row['has_proposal'] else 'no'} | "
+            f"apply_preview={'yes' if row['has_apply_preview'] else 'no'}"
         )
         print(f"  summary: {row['summary']}")
     return 0
@@ -981,6 +1028,12 @@ def build_parser() -> argparse.ArgumentParser:
     approval_parser.add_argument("--note", help="Optional human review note to store with matched specs.")
     approval_parser.add_argument("--dry-run", action="store_true", help="Show what would change without writing files.")
 
+    apply_preview_parser = subparsers.add_parser(
+        "apply-preview",
+        help="Render a no-write apply preview from approved Patch Spec v1 entries.",
+    )
+    apply_preview_parser.add_argument("run_id", help="Run manifest basename without .json")
+
     run_parser = subparsers.add_parser("run", help="Create and review a manifest for one backlog topic.")
     run_parser.add_argument("topic_id", help="Backlog topic_id to run.")
 
@@ -1044,6 +1097,8 @@ def main() -> int:
             args.note,
             args.dry_run,
         )
+    if args.command == "apply-preview":
+        return cmd_apply_preview(args.run_id)
     if args.command == "run":
         return cmd_run(args.topic_id)
     if args.command == "bundle":

@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-research-cluster-nav",
   "created_at": "2026-04-22T16:51:13.725356Z",
   "run_type": "update_existing",
-  "status": "approved_for_apply",
+  "status": "apply_preview_ready",
   "risk_level": "medium",
   "summary": "Update the existing page `research-costs.html` for the `Research` cluster using the `atlas-page` archetype.",
   "inputs": {
@@ -759,6 +759,178 @@
           "before_summary": "title: Last Z Fully Armed Alliance Costs (2026) — Annihilation, Move Out, and Total Badge Cost | h1: Last Z Fully Armed Alliance Costs — Annihilation, Move Out, and Total Badge Cost | meta: Fully Armed Alliance badge costs in Last Z: total branch cost, Annihilation and Move Out totals, and the exact node costs behind one of the most aggressive late combat trees. | verified: Fully Armed Alliance is one of the most aggressive combat branches in Last Z. Players usually ask about it for Annihilation and Move Out, but the full branch is a serious badge sink and should not be treated as an automatic early priority.",
           "desired_after_summary": "JSON source adds or strengthens a route back to `research-costs.html` through `related_guides` or `next_steps`, then regenerates the HTML output.",
           "risk_level": "medium"
+        }
+      ]
+    },
+    "apply_preview": {
+      "report_path": "automation/reports/2026-04-22-research-cluster-nav.apply-preview.md",
+      "generated_at": "2026-04-26T10:23:32Z",
+      "approved_specs_count": 8,
+      "preview_items": [
+        {
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "operation_type": "first_screen_update",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "replace_first_screen_answer",
+          "warnings": [],
+          "preview": "```diff\n# first-screen answer\n- Best way to use the research atlas: start with Hero Training to Cockpit...\n+ Best way to use the research atlas: use this page as the branch router, then open the exact cost page for node totals. For most players, the main route is Hero Training to Cockpit, Military Strategies, Peace Shield, Siege to Seize, then Field Research.\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "research-costs.html"
+        },
+        {
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "operation_type": "meta_refresh",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "replace_metadata_strings",
+          "warnings": [],
+          "preview": "```diff\n# <title>\n- Last Z Research Costs Atlas (2026) -- All Research Trees, Badge Totals, and Unlock Paths\n+ Last Z Research Costs Atlas (2026) -- Branch Comparison, Badge Totals, and Unlock Paths\n```\n\n```diff\n# meta description\n- All major Last Z research trees in one place: total badge costs, unlock requirements, best stopping points, and links to every exact node-cost tree.\n+ Compare Last Z research branches by badge total, unlock path, priority role, and exact node-cost page before spending badges.\n```\n\n```diff\n# H1\n- Last Z Research Costs Atlas -- All Research Trees, Badge Totals, and Unlock Paths\n+ Last Z Research Costs Atlas -- Branch Comparison, Badge Totals, and Unlock Paths\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "research-costs.html"
+        },
+        {
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "no_self_link_strengthen_outbound_routes",
+          "warnings": [
+            "Do not add a self-link from the atlas to itself."
+          ],
+          "preview": "```diff\n# outbound atlas routing\n- <span class=\"atlas-link\">View tree -></span>\n+ <span class=\"atlas-link\">View exact cost tree -></span>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "research-costs.html"
+        },
+        {
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "operation_type": "atlas_card_update",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "tighten_atlas_card_copy",
+          "warnings": [],
+          "preview": "```diff\n# atlas card routing copy\n- View tree ->\n+ View exact cost tree ->\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "research-costs.html"
+        },
+        {
+          "source_of_truth_file": "alliance-recognition-cost.html",
+          "output_file": "alliance-recognition-cost.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "add_related_card",
+          "warnings": [],
+          "preview": "```diff\n# related guide card\n- <div class=\"related-grid\"> ... </div>\n+ <div class=\"related-grid\"> ... <a href=\"research-costs.html\" class=\"related-card\">Research Costs Atlas</a> ... </div>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "research-costs.html"
+        },
+        {
+          "source_of_truth_file": "data/research_branches/army-building.json",
+          "output_file": "army-building-cost.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "generated_research_branch",
+          "is_generated": true,
+          "generator_command": "python3 scripts/generate_research_branch.py data/research_branches/army-building.json",
+          "approval_state": "approved",
+          "preview_action": "add_json_related_guide",
+          "warnings": [],
+          "preview": "```diff\n# related_guides JSON entry\n- \"related_guides\": [ ... ]\n+ \"related_guides\": [ ..., { \"href\": \"research-costs.html\", \"label\": \"Research Costs Atlas\" } ]\n```",
+          "validation_commands": [
+            "python3 scripts/generate_research_branch.py data/research_branches/army-building.json",
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "research-costs.html"
+        },
+        {
+          "source_of_truth_file": "data/research_branches/field-research.json",
+          "output_file": "field-research.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "generated_research_branch",
+          "is_generated": true,
+          "generator_command": "python3 scripts/generate_research_branch.py data/research_branches/field-research.json",
+          "approval_state": "approved",
+          "preview_action": "add_json_related_guide",
+          "warnings": [],
+          "preview": "```diff\n# related_guides JSON entry\n- \"related_guides\": [ ... ]\n+ \"related_guides\": [ ..., { \"href\": \"research-costs.html\", \"label\": \"Research Costs Atlas\" } ]\n```",
+          "validation_commands": [
+            "python3 scripts/generate_research_branch.py data/research_branches/field-research.json",
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "research-costs.html"
+        },
+        {
+          "source_of_truth_file": "data/research_branches/fully-armed-alliance.json",
+          "output_file": "fully-armed-alliance-cost.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "generated_research_branch",
+          "is_generated": true,
+          "generator_command": "python3 scripts/generate_research_branch.py data/research_branches/fully-armed-alliance.json",
+          "approval_state": "approved",
+          "preview_action": "add_json_related_guide",
+          "warnings": [],
+          "preview": "```diff\n# related_guides JSON entry\n- \"related_guides\": [ ... ]\n+ \"related_guides\": [ ..., { \"href\": \"research-costs.html\", \"label\": \"Research Costs Atlas\" } ]\n```",
+          "validation_commands": [
+            "python3 scripts/generate_research_branch.py data/research_branches/fully-armed-alliance.json",
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "research-costs.html"
         }
       ]
     }

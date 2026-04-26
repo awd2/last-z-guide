@@ -124,6 +124,7 @@ python3 automation/pipeline.py brief <run_id>
 python3 automation/pipeline.py patch-plan <run_id>
 python3 automation/pipeline.py propose <run_id>
 python3 automation/pipeline.py approval <run_id> --state approved --all
+python3 automation/pipeline.py apply-preview <run_id>
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
@@ -158,6 +159,7 @@ python3 automation/pipeline.py brief 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py patch-plan 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py propose 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py approval 2026-04-22-research-cluster-nav --state approved --all --dry-run
+python3 automation/pipeline.py apply-preview 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
@@ -173,6 +175,7 @@ Lifecycle shorthand:
 - `patch-plan` -> create a proposal-only patch artifact and move the run to `patch_plan_ready`
 - `propose` -> render human-reviewable proposed edits and move the run to `proposal_ready`
 - `approval` -> record human approval decisions for proposal specs; still does not edit site content
+- `apply-preview` -> render a no-write preview from approved specs and move the run to `apply_preview_ready`
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
@@ -264,6 +267,7 @@ python3 automation/pipeline.py show <run_id> --json
 - editor brief
 - patch plan
 - proposed edits report
+- apply preview report
 
 `show --json` gives the same compact run summary in machine-readable form.
 
@@ -287,6 +291,7 @@ You can filter `recent-runs` by lifecycle status, for example:
 - `proposal_ready`
 - `partially_approved`
 - `approved_for_apply`
+- `apply_preview_ready`
 - `rejected`
 
 `recent-runs` also supports `--json` for machine-readable recent run feeds.
@@ -357,7 +362,8 @@ python3 automation/pipeline.py next-step <run_id> --json
 - `patch_plan_ready` -> `propose`
 - `proposal_ready` -> human review, then `approval`
 - `partially_approved` -> review remaining proposal specs
-- `approved_for_apply` -> manual apply or future safe apply worker
+- `approved_for_apply` -> `apply-preview`
+- `apply_preview_ready` -> manual review, then controlled apply
 - `rejected` -> revise or close the run
 
 `next-step --json` gives the same lifecycle hint in machine-readable form.
@@ -412,6 +418,27 @@ Lifecycle status after approval:
 
 `approved_for_apply` is not an automatic publishing state. It only means a
 future controlled apply step may use the approved specs as input.
+
+`apply-preview` renders a no-write preview from approved Patch Spec v1 entries:
+
+```bash
+python3 automation/pipeline.py apply-preview <run_id>
+```
+
+The output lives at:
+
+- `automation/reports/<run_id>.apply-preview.md`
+
+It does not edit site content. It records an `apply_preview` artifact in the
+manifest and moves `approved_for_apply` runs to `apply_preview_ready`.
+
+The preview is intentionally conservative:
+
+- only `approval_state=approved` specs are included
+- generated research branch edits are represented as JSON-source changes plus
+  generator commands
+- potential self-link or duplicate-link cases are called out as warnings
+- it is a review artifact, not an apply engine
 
 Run review as a separate lifecycle step:
 
