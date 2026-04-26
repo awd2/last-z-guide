@@ -21,8 +21,10 @@ from automation.io import load_run_manifest, write_run_manifest
 from automation.proposal_renderer import REPORTS_DIR, md_list, resolve_manifest_path
 
 
-TARGET_ATLAS = "research-costs.html"
-ATLAS_LABEL = "Research Costs Atlas"
+TARGET_LABELS = {
+    "gift-center-uid.html": "Gift Center UID Setup",
+    "research-costs.html": "Research Costs Atlas",
+}
 
 
 def approved_specs(manifest) -> list[dict[str, Any]]:
@@ -57,18 +59,13 @@ def diff_block(title: str, before: str, after: str) -> str:
 ```"""
 
 
-def preview_for_spec(spec: dict[str, Any], target_page: str) -> dict[str, Any]:
-    source_file = str(spec.get("source_of_truth_file", ""))
-    operation = str(spec.get("operation_type", ""))
-    source_type = str(spec.get("source_type", ""))
-    path = ROOT / source_file
-    warnings: list[str] = []
-    preview = ""
-    action = "manual_review"
+def target_label(target_page: str) -> str:
+    return TARGET_LABELS.get(target_page, target_page)
 
-    if operation == "meta_refresh" and source_file == TARGET_ATLAS:
-        action = "replace_metadata_strings"
-        preview = "\n\n".join(
+
+def meta_preview_for_target(source_file: str) -> str | None:
+    if source_file == "research-costs.html":
+        return "\n\n".join(
             [
                 diff_block(
                     "<title>",
@@ -87,16 +84,67 @@ def preview_for_spec(spec: dict[str, Any], target_page: str) -> dict[str, Any]:
                 ),
             ]
         )
+    if source_file == "gift-center-uid.html":
+        return "\n\n".join(
+            [
+                diff_block(
+                    "<title>",
+                    "Last Z Gift Center Login & UID Guide (2026) -- Official Redeem Page",
+                    "Last Z Gift Center Login and UID Setup (2026) -- Official Redeem Page",
+                ),
+                diff_block(
+                    "meta description",
+                    "Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption.",
+                    "Official Last Z Gift Center login setup: how to copy your UID from Avatar > Settings > Copy ID, redeem in a browser, and collect rewards from mailbox.",
+                ),
+                diff_block(
+                    "H1",
+                    "Last Z Gift Center Login & UID Guide -- Official Redeem Page",
+                    "Last Z Gift Center Login and UID Setup -- Official Redeem Page",
+                ),
+            ]
+        )
+    return None
 
-    elif operation == "first_screen_update" and source_file == TARGET_ATLAS:
-        action = "replace_first_screen_answer"
-        preview = diff_block(
+
+def first_screen_preview_for_target(source_file: str) -> str | None:
+    if source_file == "research-costs.html":
+        return diff_block(
             "first-screen answer",
             "Best way to use the research atlas: start with Hero Training to Cockpit...",
             "Best way to use the research atlas: use this page as the branch router, then open the exact cost page for node totals. For most players, the main route is Hero Training to Cockpit, Military Strategies, Peace Shield, Siege to Seize, then Field Research.",
         )
+    if source_file == "gift-center-uid.html":
+        return diff_block(
+            "first-screen answer",
+            "The official Last Z Gift Center login page is the only place where codes are redeemed...",
+            "Use the official Last Z Gift Center in a browser, copy your UID from Avatar > Settings > Copy ID, redeem the code outside the game, then collect rewards from mailbox.",
+        )
+    return None
 
-    elif operation == "atlas_card_update" and source_file == TARGET_ATLAS:
+
+def preview_for_spec(spec: dict[str, Any], target_page: str) -> dict[str, Any]:
+    source_file = str(spec.get("source_of_truth_file", ""))
+    operation = str(spec.get("operation_type", ""))
+    source_type = str(spec.get("source_type", ""))
+    path = ROOT / source_file
+    warnings: list[str] = []
+    preview = ""
+    action = "manual_review"
+
+    if operation == "meta_refresh":
+        action = "replace_metadata_strings"
+        preview = meta_preview_for_target(source_file) or "Manual metadata preview required."
+        if preview.startswith("Manual"):
+            warnings.append("No deterministic metadata preview template exists for this target yet.")
+
+    elif operation == "first_screen_update":
+        action = "replace_first_screen_answer"
+        preview = first_screen_preview_for_target(source_file) or "Manual first-screen preview required."
+        if preview.startswith("Manual"):
+            warnings.append("No deterministic first-screen preview template exists for this target yet.")
+
+    elif operation == "atlas_card_update" and source_file == "research-costs.html":
         action = "tighten_atlas_card_copy"
         preview = diff_block(
             "atlas card routing copy",
@@ -106,33 +154,33 @@ def preview_for_spec(spec: dict[str, Any], target_page: str) -> dict[str, Any]:
 
     elif operation == "internal_link_addition" and source_type == "generated_research_branch":
         action = "add_json_related_guide"
-        exists = json_has_related_link(path, TARGET_ATLAS)
+        exists = json_has_related_link(path, target_page)
         if exists:
-            warnings.append(f"`{source_file}` already links to `{TARGET_ATLAS}` in `related_guides`.")
+            warnings.append(f"`{source_file}` already links to `{target_page}` in `related_guides`.")
         preview = diff_block(
             "related_guides JSON entry",
             '"related_guides": [ ... ]',
-            '"related_guides": [ ..., { "href": "research-costs.html", "label": "Research Costs Atlas" } ]',
+            f'"related_guides": [ ..., {{ "href": "{target_page}", "label": "{target_label(target_page)}" }} ]',
         )
 
-    elif operation == "internal_link_addition" and source_file == TARGET_ATLAS:
+    elif operation == "internal_link_addition" and source_file == target_page:
         action = "no_self_link_strengthen_outbound_routes"
-        warnings.append("Do not add a self-link from the atlas to itself.")
+        warnings.append(f"Do not add a self-link from `{source_file}` to itself.")
         preview = diff_block(
-            "outbound atlas routing",
-            '<span class="atlas-link">View tree -></span>',
-            '<span class="atlas-link">View exact cost tree -></span>',
+            "outbound routing",
+            "Related guides stay unchanged or underspecified.",
+            "Strengthen links to the correct hub, troubleshooting page, or adjacent support page instead of adding a self-link.",
         )
 
     elif operation == "internal_link_addition":
         action = "add_related_card"
-        exists = html_has_link(path, TARGET_ATLAS)
+        exists = html_has_link(path, target_page)
         if exists:
-            warnings.append(f"`{source_file}` already links to `{TARGET_ATLAS}`.")
+            warnings.append(f"`{source_file}` already links to `{target_page}`.")
         preview = diff_block(
             "related guide card",
             '<div class="related-grid"> ... </div>',
-            f'<div class="related-grid"> ... <a href="{TARGET_ATLAS}" class="related-card">{ATLAS_LABEL}</a> ... </div>',
+            f'<div class="related-grid"> ... <a href="{target_page}" class="related-card">{target_label(target_page)}</a> ... </div>',
         )
 
     else:

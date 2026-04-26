@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-gift-center-login-setup",
   "created_at": "2026-04-22T16:56:58.397517Z",
   "run_type": "update_existing",
-  "status": "proposal_ready",
+  "status": "apply_preview_ready",
   "risk_level": "medium",
   "summary": "Update the existing page `gift-center-uid.html` for the `Economy` cluster using the `support-guide` archetype.",
   "inputs": {
@@ -158,7 +158,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal."
         },
         {
           "target_file": "gift-center-uid.html",
@@ -190,7 +193,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal."
         },
         {
           "target_file": "gift-center-uid.html",
@@ -222,7 +228,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal."
         },
         {
           "target_file": "codes.html",
@@ -254,7 +263,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal."
         },
         {
           "target_file": "diamond-reserve.html",
@@ -286,7 +298,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal."
         },
         {
           "target_file": "f2p.html",
@@ -318,7 +333,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal."
         },
         {
           "target_file": "farm-account.html",
@@ -350,7 +368,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal."
         }
       ],
       "changed_files": [
@@ -418,10 +439,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal.",
           "before_summary": "title: Last Z Gift Center Login & UID Guide (2026) — Official Redeem Page | h1: Last Z Gift Center Login & UID Guide — Official Redeem Page | meta: Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption. | verified: The official Last Z Gift Center login page is the only place where codes are redeemed. Copy your UID from Avatar → Settings → Copy ID, redeem in a browser, and collect rewards from your mailbox.",
           "desired_after_summary": "Opening answer matches the page role for Gift Center login setup and UID lookup, gives the exact setup answer quickly, and avoids drifting into a broader hub page.",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "gift-center-uid.html",
@@ -454,10 +477,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal.",
           "before_summary": "title: Last Z Gift Center Login & UID Guide (2026) — Official Redeem Page | h1: Last Z Gift Center Login & UID Guide — Official Redeem Page | meta: Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption. | verified: The official Last Z Gift Center login page is the only place where codes are redeemed. Copy your UID from Avatar → Settings → Copy ID, redeem in a browser, and collect rewards from your mailbox.",
           "desired_after_summary": "Title, H1, and meta description use the same exact intent: Gift Center login setup and UID lookup.",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "gift-center-uid.html",
@@ -490,10 +515,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal.",
           "before_summary": "title: Last Z Gift Center Login & UID Guide (2026) — Official Redeem Page | h1: Last Z Gift Center Login & UID Guide — Official Redeem Page | meta: Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption. | verified: The official Last Z Gift Center login page is the only place where codes are redeemed. Copy your UID from Avatar → Settings → Copy ID, redeem in a browser, and collect rewards from your mailbox.",
           "desired_after_summary": "Do not add a self-link. Strengthen outbound routing to the correct hub, troubleshooting page, or adjacent support page instead.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "codes.html",
@@ -526,10 +553,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal.",
           "before_summary": "title: Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID | h1: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID | meta: Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work. | verified: Use the official Last Z Gift Center to redeem active codes. This page gives you the current verified codes, the official login page, the fastest UID steps, and the main reasons redemption fails.",
           "desired_after_summary": "Source adds a crawlable, user-visible bridge to `gift-center-uid.html` in the relevant section or related-guides block.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "diamond-reserve.html",
@@ -562,10 +591,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal.",
           "before_summary": "title: Last Z Diamond Reserve Guide (2026) — What to Save Diamonds For First | h1: Last Z Diamond Reserve Guide — What to Save Diamonds For First | meta: Best Last Z diamond reserve strategy: what to save diamonds for first, how the Friday shield reserve works, when Lucky Discounter is worth it, and which purchases are a waste for F2P. | verified: Best diamond rule for most F2P and low spenders: keep a protected reserve for shields first, spend only on high-value event discounts or long-term account value you can actually buy with diamonds second, and avoid reactive purchases that do not improve your account long term.",
           "desired_after_summary": "Source adds a crawlable, user-visible bridge to `gift-center-uid.html` in the relevant section or related-guides block.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "f2p.html",
@@ -598,10 +629,12 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal.",
           "before_summary": "title: Last Z F2P Guide (2026) — Best Diamond Spending, Free Sources, What to Buy First | h1: Last Z F2P Guide — Best Diamond Spending, Free Sources, and What to Buy First | meta: Complete Last Z F2P guide: how to get free diamonds, what to save them for first, the best spending priority for shields, refugees, and event value, and how F2P players stay competitive. | verified: Best F2P plan for most players: protect your weekly shield reserve first, invest in refugees for long-term speed, and only spend diamonds aggressively when events improve the value instead of wasting them on random convenience.",
           "desired_after_summary": "Source adds a crawlable, user-visible bridge to `gift-center-uid.html` in the relevant section or related-guides block.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "farm-account.html",
@@ -634,10 +667,163 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-04-26T10:45:47Z",
+          "approval_note": "Human review approved Gift Center login setup proposal.",
           "before_summary": "title: Last Z Farm Account Guide (2026) - How to Create a Farm Before Season 2 | h1: Last Z Farm Account Guide - How to Create a Farm Before Season 2 | meta: How to create a Last Z farm account on your server before Season 2, what you need, how to set up a farm alt, and how to use it to support your main account. | verified: Best farm account setup for most players: create the farm before Season 2 starts on your server, place it on the same server as your main account, and use it for steady resource support instead of trying to turn it into a second main.",
           "desired_after_summary": "Source adds a crawlable, user-visible bridge to `gift-center-uid.html` in the relevant section or related-guides block.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
+        }
+      ]
+    },
+    "apply_preview": {
+      "report_path": "automation/reports/2026-04-22-gift-center-login-setup.apply-preview.md",
+      "generated_at": "2026-04-26T10:46:43Z",
+      "approved_specs_count": 7,
+      "preview_items": [
+        {
+          "source_of_truth_file": "gift-center-uid.html",
+          "output_file": "gift-center-uid.html",
+          "operation_type": "first_screen_update",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "replace_first_screen_answer",
+          "warnings": [],
+          "preview": "```diff\n# first-screen answer\n- The official Last Z Gift Center login page is the only place where codes are redeemed...\n+ Use the official Last Z Gift Center in a browser, copy your UID from Avatar > Settings > Copy ID, redeem the code outside the game, then collect rewards from mailbox.\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "gift-center-uid.html"
+        },
+        {
+          "source_of_truth_file": "gift-center-uid.html",
+          "output_file": "gift-center-uid.html",
+          "operation_type": "meta_refresh",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "replace_metadata_strings",
+          "warnings": [],
+          "preview": "```diff\n# <title>\n- Last Z Gift Center Login & UID Guide (2026) -- Official Redeem Page\n+ Last Z Gift Center Login and UID Setup (2026) -- Official Redeem Page\n```\n\n```diff\n# meta description\n- Official Last Z Gift Center login, how to find and copy your UID, how to redeem codes on iPhone or Android, and where rewards appear after redemption.\n+ Official Last Z Gift Center login setup: how to copy your UID from Avatar > Settings > Copy ID, redeem in a browser, and collect rewards from mailbox.\n```\n\n```diff\n# H1\n- Last Z Gift Center Login & UID Guide -- Official Redeem Page\n+ Last Z Gift Center Login and UID Setup -- Official Redeem Page\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "gift-center-uid.html"
+        },
+        {
+          "source_of_truth_file": "gift-center-uid.html",
+          "output_file": "gift-center-uid.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "no_self_link_strengthen_outbound_routes",
+          "warnings": [
+            "Do not add a self-link from `gift-center-uid.html` to itself."
+          ],
+          "preview": "```diff\n# outbound routing\n- Related guides stay unchanged or underspecified.\n+ Strengthen links to the correct hub, troubleshooting page, or adjacent support page instead of adding a self-link.\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "gift-center-uid.html"
+        },
+        {
+          "source_of_truth_file": "codes.html",
+          "output_file": "codes.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "add_related_card",
+          "warnings": [
+            "`codes.html` already links to `gift-center-uid.html`."
+          ],
+          "preview": "```diff\n# related guide card\n- <div class=\"related-grid\"> ... </div>\n+ <div class=\"related-grid\"> ... <a href=\"gift-center-uid.html\" class=\"related-card\">Gift Center UID Setup</a> ... </div>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "gift-center-uid.html"
+        },
+        {
+          "source_of_truth_file": "diamond-reserve.html",
+          "output_file": "diamond-reserve.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "add_related_card",
+          "warnings": [],
+          "preview": "```diff\n# related guide card\n- <div class=\"related-grid\"> ... </div>\n+ <div class=\"related-grid\"> ... <a href=\"gift-center-uid.html\" class=\"related-card\">Gift Center UID Setup</a> ... </div>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "gift-center-uid.html"
+        },
+        {
+          "source_of_truth_file": "f2p.html",
+          "output_file": "f2p.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "add_related_card",
+          "warnings": [],
+          "preview": "```diff\n# related guide card\n- <div class=\"related-grid\"> ... </div>\n+ <div class=\"related-grid\"> ... <a href=\"gift-center-uid.html\" class=\"related-card\">Gift Center UID Setup</a> ... </div>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "gift-center-uid.html"
+        },
+        {
+          "source_of_truth_file": "farm-account.html",
+          "output_file": "farm-account.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "add_related_card",
+          "warnings": [],
+          "preview": "```diff\n# related guide card\n- <div class=\"related-grid\"> ... </div>\n+ <div class=\"related-grid\"> ... <a href=\"gift-center-uid.html\" class=\"related-card\">Gift Center UID Setup</a> ... </div>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "gift-center-uid.html"
         }
       ]
     }
