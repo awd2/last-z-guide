@@ -82,6 +82,7 @@ This is **not** an autonomous publishing system. It is a draft-first planning an
 - proposal approval records
 - no-write apply previews
 - controlled apply results
+- closeout reports
 
 Root `README.md` only gives the short project-level view.
 Use [automation/README.md](/Users/oleg/Projects/claude-playground/automation/README.md) as the full operator reference for:
@@ -105,6 +106,7 @@ python3 automation/pipeline.py propose <run_id>
 python3 automation/pipeline.py approval <run_id> --state approved --all --dry-run
 python3 automation/pipeline.py apply-preview <run_id>
 python3 automation/pipeline.py apply-approved <run_id>
+python3 automation/pipeline.py close-run <run_id>
 ```
 
 `checks` includes:
@@ -126,6 +128,7 @@ Automation artifacts live in:
 - `automation/reports/<run_id>.proposed.md`
 - `automation/reports/<run_id>.apply-preview.md`
 - `automation/reports/<run_id>.apply-result.md`
+- `automation/reports/<run_id>.closed.md`
 
 ## Notes
 

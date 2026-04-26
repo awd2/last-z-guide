@@ -376,6 +376,7 @@ python3 automation/pipeline.py propose <run_id>
 python3 automation/pipeline.py approval <run_id> --state approved --all
 python3 automation/pipeline.py apply-preview <run_id>
 python3 automation/pipeline.py apply-approved <run_id>
+python3 automation/pipeline.py close-run <run_id>
 ```
 
 Machine-readable snapshots exist for:
@@ -401,6 +402,7 @@ Lifecycle currently:
 - `approval`
 - `apply-preview`
 - `apply-approved`
+- `close-run`
 - `bundle-run`
 
 `patch-plan` is still safe/proposal-only. It may populate candidate `changed_files` in the manifest, but it must not edit site content automatically.
@@ -414,6 +416,8 @@ Lifecycle currently:
 `apply-approved` may edit source files, but only from approved Patch Spec v1 entries and only through conservative deterministic templates. Generated research branch pages must still be edited through JSON source files and regenerated.
 
 When `checks --strict --manifest <run_id>` passes after `apply-approved`, the run may advance from `applied_pending_qa` to `qa_passed`. `qa_passed` is still not an autonomous production publishing state.
+
+`close-run` closes a `qa_passed` run with a final handoff artifact. It must not deploy.
 
 Whenever automation commands, lifecycle stages, manifest states, instructions, or operator workflows are added or changed, update the relevant documentation in the same change. At minimum, check:
 

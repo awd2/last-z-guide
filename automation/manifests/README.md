@@ -45,6 +45,7 @@ The current automation MVP uses this concrete lifecycle:
 - `apply_preview_ready`
 - `applied_pending_qa`
 - `qa_passed`
+- `closed`
 - `rejected`
 
 `patch_plan_ready` means the run has Patch Spec v1 metadata and can render a
@@ -70,6 +71,9 @@ merge or deploy decision.
 
 `qa_passed` means approved specs have been applied and strict manifest checks
 passed. It is still not an autonomous production publish state.
+
+`closed` means the local automation lifecycle is complete and a final closeout
+report exists. Deployment remains manual.
 
 `rejected` means every proposal spec was rejected and the run should be revised
 or closed before any content edits are created.
@@ -115,6 +119,7 @@ and `released`, but those are not implemented states yet.
     and `preview_items`
   - apply result artifacts may include `applied_operations`,
     `generator_commands`, and `applied_at`
+  - closeout artifacts may include `closed_at`, `note`, and a final report path
 
 - `changed_files`
   - explicit file list if the run edits the repo

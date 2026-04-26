@@ -126,6 +126,7 @@ python3 automation/pipeline.py propose <run_id>
 python3 automation/pipeline.py approval <run_id> --state approved --all
 python3 automation/pipeline.py apply-preview <run_id>
 python3 automation/pipeline.py apply-approved <run_id>
+python3 automation/pipeline.py close-run <run_id>
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
@@ -162,6 +163,7 @@ python3 automation/pipeline.py propose 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py approval 2026-04-22-research-cluster-nav --state approved --all --dry-run
 python3 automation/pipeline.py apply-preview 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py apply-approved 2026-04-22-research-cluster-nav
+python3 automation/pipeline.py close-run 2026-04-22-research-cluster-nav --note "Human reviewed local page output."
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
@@ -180,6 +182,7 @@ Lifecycle shorthand:
 - `apply-preview` -> render a no-write preview from approved specs and move the run to `apply_preview_ready`
 - `apply-approved` -> apply approved specs with conservative deterministic templates and move the run to `applied_pending_qa`
 - `checks --strict --manifest <run_id>` -> record strict QA and move `applied_pending_qa` to `qa_passed` when all checks pass
+- `close-run` -> close a `qa_passed` run with a final handoff artifact
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
@@ -273,6 +276,7 @@ python3 automation/pipeline.py show <run_id> --json
 - proposed edits report
 - apply preview report
 - apply result report
+- closeout report
 
 `show --json` gives the same compact run summary in machine-readable form.
 
@@ -299,6 +303,7 @@ You can filter `recent-runs` by lifecycle status, for example:
 - `apply_preview_ready`
 - `applied_pending_qa`
 - `qa_passed`
+- `closed`
 - `rejected`
 
 `recent-runs` also supports `--json` for machine-readable recent run feeds.
@@ -372,7 +377,8 @@ python3 automation/pipeline.py next-step <run_id> --json
 - `approved_for_apply` -> `apply-preview`
 - `apply_preview_ready` -> `apply-approved`
 - `applied_pending_qa` -> strict checks + prepublish checks
-- `qa_passed` -> manual review, commit, merge, or deploy decision
+- `qa_passed` -> `close-run`
+- `closed` -> manual release decision or next backlog topic
 - `rejected` -> revise or close the run
 
 `next-step --json` gives the same lifecycle hint in machine-readable form.
@@ -479,6 +485,20 @@ the pipeline records `automation_checks_strict` and `changed_pages_report`.
 If both pass and the run was `applied_pending_qa`, it advances the manifest to
 `qa_passed`. This is still not a deployment state; it only means the local
 automation gate is green.
+
+`close-run` closes a QA-passed run after human review:
+
+```bash
+python3 automation/pipeline.py close-run <run_id> --note "Human reviewed local page output."
+```
+
+The output lives at:
+
+- `automation/reports/<run_id>.closed.md`
+
+The command only updates the manifest and report artifacts. It does not deploy.
+Use it when the local automation lifecycle is complete and the remaining choice
+is either manual release/deploy or moving to the next backlog topic.
 
 Run review as a separate lifecycle step:
 

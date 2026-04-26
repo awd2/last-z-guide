@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-research-cluster-nav",
   "created_at": "2026-04-22T16:51:13.725356Z",
   "run_type": "update_existing",
-  "status": "qa_passed",
+  "status": "closed",
   "risk_level": "medium",
   "summary": "Update the existing page `research-costs.html` for the `Research` cluster using the `atlas-page` archetype.",
   "inputs": {
@@ -961,6 +961,11 @@
         "python3 scripts/generate_research_branch.py data/research_branches/field-research.json",
         "python3 scripts/generate_research_branch.py data/research_branches/fully-armed-alliance.json"
       ]
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-04-22-research-cluster-nav.closed.md",
+      "closed_at": "2026-04-26T10:38:46Z",
+      "note": "Human reviewed research-costs.html locally at http://localhost:5500/research-costs.html and approved the result."
     }
   },
   "changed_files": [
