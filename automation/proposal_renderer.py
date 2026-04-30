@@ -139,6 +139,7 @@ def before_summary(context: dict[str, Any]) -> str:
 
 def target_topic_label(run_target: str) -> str:
     labels = {
+        "codes.html": "redeem codes hub, Gift Center login, UID, and redemption routing",
         "gift-center-uid.html": "Gift Center login setup and UID lookup",
         "research-costs.html": "research costs atlas",
         "start.html": "beginner start guide and season naming clarification",
@@ -152,8 +153,28 @@ def protects_claim(spec: dict[str, Any], claim_id: str) -> bool:
 
 def desired_after_summary(spec: dict[str, Any], run_target: str) -> str:
     operation = spec.get("operation_type", "")
+    source = spec.get("source_of_truth_file", "")
     source_type = spec.get("source_type", "")
     topic = target_topic_label(run_target)
+    if run_target == "codes.html":
+        if source == "codes.html" and operation == "first_screen_update":
+            return (
+                "Tighten the first-screen answer so the page remains the codes hub: active codes first, "
+                "official Gift Center redemption second, UID and mailbox facts visible without drifting into setup or troubleshooting."
+            )
+        if source == "codes.html" and operation == "meta_refresh":
+            return (
+                "No metadata change is recommended unless analytics show a specific query mismatch. "
+                "The current title/H1/meta already include active codes, Gift Center login, and UID intent."
+            )
+        if source == "codes.html" and operation == "internal_link_addition":
+            return "Do not add a self-link. Dedupe the early setup/troubleshooting routing so users choose the right adjacent Gift Center page."
+        if source == "diamond-reserve.html" and operation == "internal_link_addition":
+            return "Add a `Redeem Codes` related-card because this page already references free diamonds from codes in body copy."
+        if source == "f2p.html" and operation == "internal_link_addition":
+            return "No edit recommended: this page already links to `codes.html` in the Gift Codes section and related-guides grid."
+        if source == "farm-account.html" and operation == "internal_link_addition":
+            return "Add a `Redeem Codes` related-card near Gift Center UID Setup so farm-account readers can route to free-code redemption."
     if run_target == "start.html" and protects_claim(spec, "season-2-winter-current-naming"):
         if operation == "first_screen_update":
             return (
@@ -190,6 +211,34 @@ def desired_after_summary(spec: dict[str, Any], run_target: str) -> str:
 def suggested_content(spec: dict[str, Any], run_target: str) -> str:
     operation = spec.get("operation_type", "")
     source = spec.get("source_of_truth_file", "")
+    if run_target == "codes.html" and source == "codes.html" and operation == "first_screen_update":
+        return """Replace the current `guide-verified` paragraph with:
+
+```html
+<p class="guide-verified">Use this page for active Last Z codes first, then redeem them through the official Gift Center. Copy your UID from Avatar &gt; Settings &gt; Copy ID, paste the code exactly, and check your in-game mailbox for rewards.</p>
+```"""
+    if run_target == "codes.html" and source == "codes.html" and operation == "meta_refresh":
+        return "No metadata edit is recommended for this pass. Keep the current title, H1, and meta description focused on active codes, Gift Center login, and UID intent."
+    if run_target == "codes.html" and source == "codes.html" and operation == "internal_link_addition":
+        return """Replace the two early troubleshooting/setup routing paragraphs in the highlight box with one deduped routing paragraph:
+
+```html
+<p><strong>Need setup only?</strong> Use the <a href="gift-center-uid.html">Gift Center &amp; UID Guide</a>. <strong>Code failed?</strong> Use the <a href="redeem-code-not-working.html">Last Z Code Not Working?</a> guide.</p>
+```"""
+    if run_target == "codes.html" and source == "diamond-reserve.html" and operation == "internal_link_addition":
+        return """Add this related-card inside the existing `Related Guides` grid, after `Resources Guide`:
+
+```html
+<a href="codes.html" class="related-card">Redeem Codes</a>
+```"""
+    if run_target == "codes.html" and source == "f2p.html" and operation == "internal_link_addition":
+        return "Reject this spec for this pass. `f2p.html` already has an inline `Redeem Codes` link in the Gift Codes bullet and a `Redeem Codes` related-card."
+    if run_target == "codes.html" and source == "farm-account.html" and operation == "internal_link_addition":
+        return """Add this related-card inside the existing `Related Guides` grid, after `Gift Center UID Setup`:
+
+```html
+<a href="codes.html" class="related-card">Redeem Codes</a>
+```"""
     if (
         run_target == "start.html"
         and source == "start.html"
