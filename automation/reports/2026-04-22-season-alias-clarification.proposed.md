@@ -3,7 +3,7 @@
 ## Overview
 
 - Summary: Update the existing page `start.html` for the `Seasons` cluster using the `support-guide` archetype.
-- Status: `proposal_ready`
+- Status: `partially_approved`
 - Risk: `low`
 - Cluster: `Seasons`
 - Target: `start.html`
@@ -29,7 +29,7 @@
 - Generated page: `false`
 - Selector or anchor: `Quick Answer -> .qa-callouts`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:
@@ -63,7 +63,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `<title>, meta description, H1, first-screen block`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `rejected`
 - Generator command: `None`
 
 Before:
