@@ -18,7 +18,7 @@ if str(ROOT) not in sys.path:
 from scripts.site_utils import load_all_pages
 
 EXCLUDED_CLUSTERS = {"Home", "Site", "News"}
-EXCLUDED_STATUSES = {"draft-noindex"}
+EXCLUDED_STATUSES = {"archived-noindex", "draft-noindex"}
 
 
 def load_memory_pages() -> dict[str, dict]:

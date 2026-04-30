@@ -31,6 +31,7 @@ FEEDS = [
 RAW_DIR = "data/raw"
 OUT_DIR = "content/news"
 PREVIEW_PATH = "news-preview.html"
+ENABLE_ENV = "ENABLE_REDDIT_INGEST"
 
 
 def fetch(url: str) -> bytes:
@@ -230,6 +231,13 @@ def parse_feed(
 
 
 def main():
+    if os.getenv(ENABLE_ENV) != "1":
+        print(
+            "Reddit ingest is archived and disabled by default. "
+            f"Set {ENABLE_ENV}=1 to run it intentionally."
+        )
+        return 0
+
     debug_raw = os.getenv("DEBUG_RAW") == "1"
     if debug_raw:
         os.makedirs(RAW_DIR, exist_ok=True)

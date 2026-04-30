@@ -88,6 +88,9 @@ This file defines the page families the editorial pipeline should choose from be
 - Must do:
   - stay clearly marked as preview/draft when applicable
   - avoid being treated as a canonical evergreen guide
+- Current status:
+  - `news-preview.html` is an archived noindex experiment
+  - do not optimize, link, or include it in editorial / LLM automation unless explicitly requested
 
 ## Archetype Selection Rules
 

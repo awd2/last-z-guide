@@ -20,6 +20,10 @@ SITE_PAGES = {
     "terms.html",
 }
 
+ARCHIVED_INTERNAL_PAGES = {
+    "news-preview.html",
+}
+
 HOMEPAGE_CARD_CATEGORY_MAP = {
     "start.html": "Progression",
     "early-game-optimization.html": "Progression",
@@ -100,6 +104,8 @@ def guess_cluster(filename: str) -> str:
         return "Home"
     if filename in SITE_PAGES:
         return "Site"
+    if filename in ARCHIVED_INTERNAL_PAGES:
+        return "News"
     return HOMEPAGE_CARD_CATEGORY_MAP.get(filename, "Guides")
 
 

@@ -272,6 +272,16 @@ Current canonical interpretation:
 
 When a page touches seasons, ambiguity must be clarified explicitly.
 
+### News preview / Reddit digest
+
+`news-preview.html` and `content/news/*reddit-lastz-digest.md` are archived internal experiments.
+
+Rules:
+
+- do not optimize, modernize, link, or include them in editorial / LLM automation unless explicitly requested
+- keep `news-preview.html` noindex-only and outside user-facing navigation
+- do not run `scripts/reddit_ingest.py` unless the task explicitly resumes the news experiment
+
 ### Economy / diamonds / shields
 
 Current canonical stance:

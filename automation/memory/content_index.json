@@ -557,7 +557,7 @@
       "title_hint": "Reddit digest — LastZShooterRun (2026-03-22)",
       "cluster": "News",
       "archetype": "news-digest",
-      "status": "draft-noindex",
+      "status": "archived-noindex",
       "freshness_priority": "low"
     }
   ]

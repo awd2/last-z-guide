@@ -92,6 +92,18 @@ It does:
 - keep content inventory auditable
 - create a structured backlog for future automation
 
+## Archived experiments
+
+`news-preview.html` and `content/news/*reddit-lastz-digest.md` are archived internal experiments from an abandoned Reddit/news digest test.
+
+They are intentionally:
+
+- `noindex`
+- excluded from user-facing navigation
+- outside editorial / LLM automation scope
+
+Do not optimize, modernize, link, or regenerate them unless a task explicitly resumes the news experiment. `scripts/reddit_ingest.py` is disabled by default and requires `ENABLE_REDDIT_INGEST=1` to run intentionally.
+
 ## Basic commands
 
 Recommended entrypoint:

@@ -30,7 +30,7 @@ TARGET_ARCHETYPES = {
     "event-guide",
 }
 EXCLUDED_CLUSTERS = {"Home", "Site", "News"}
-EXCLUDED_STATUSES = {"draft-noindex"}
+EXCLUDED_STATUSES = {"archived-noindex", "draft-noindex"}
 STOPWORDS = {
     "a",
     "an",
