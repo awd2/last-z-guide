@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-season-alias-clarification",
   "created_at": "2026-04-22T17:33:27.310031Z",
   "run_type": "update_existing",
-  "status": "qa_passed",
+  "status": "closed",
   "risk_level": "low",
   "summary": "Update the existing page `start.html` for the `Seasons` cluster using the `support-guide` archetype.",
   "inputs": {
@@ -273,6 +273,11 @@
         "start.html:season_note_already_present"
       ],
       "generator_commands": []
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-04-22-season-alias-clarification.closed.md",
+      "closed_at": "2026-04-30T18:41:06Z",
+      "note": ""
     }
   },
   "changed_files": [
