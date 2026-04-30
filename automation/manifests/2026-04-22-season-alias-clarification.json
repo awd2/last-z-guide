@@ -170,7 +170,7 @@
           "is_generated": false,
           "generator_command": null,
           "operation_type": "first_screen_update",
-          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "selector_or_anchor": "Quick Answer -> .qa-callouts",
           "required_preconditions": [
             "Edit the target file directly.",
             "Read the target/source file before editing.",
@@ -190,6 +190,7 @@
           "human_approval_required": true,
           "before_summary": "title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.",
           "desired_after_summary": "Add a concise early clarification that for newer servers Season 2 is Winter, Desert was canceled or skipped, and older guides that call Season 2 Desert may be outdated. Keep the page primarily a beginner start guide.",
+          "suggested_content": "Add this callout inside the existing `Quick Answer` `.qa-callouts` block, after the current `Core rule` callout:\n\n```html\n<p class=\"qa-callout qa-callout--note\">\n    <span class=\"qa-icon\" aria-hidden=\"true\">i</span>\n    <span class=\"qa-callout-text\"><strong>Season naming note:</strong> on newer servers, Season 2 is Winter. Older guides may call Season 2 Desert, but Desert was canceled or skipped for current servers, so follow Winter naming when planning your early timeline.</span>\n</p>\n```",
           "risk_level": "medium",
           "approval_state": "proposed"
         },
@@ -221,6 +222,7 @@
           "human_approval_required": true,
           "before_summary": "title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.",
           "desired_after_summary": "Preserve the beginner-guide title and H1. Only adjust metadata if needed to support the season naming clarification without turning `start.html` into a season guide.",
+          "suggested_content": "No metadata edit is recommended for this pass. Keep the current title, H1, and meta description focused on beginner intent.",
           "risk_level": "medium",
           "approval_state": "proposed"
         }

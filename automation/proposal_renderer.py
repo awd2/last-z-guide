@@ -96,6 +96,12 @@ def source_context(source_file: str) -> dict[str, Any]:
 def infer_anchor(spec: dict[str, Any], context: dict[str, Any]) -> str:
     operation = spec.get("operation_type", "")
     source = spec.get("source_of_truth_file", "")
+    if (
+        source == "start.html"
+        and operation == "first_screen_update"
+        and protects_claim(spec, "season-2-winter-current-naming")
+    ):
+        return "Quick Answer -> .qa-callouts"
     if operation in {"first_screen_update", "meta_refresh"}:
         return "page.title / page.h1 / meta_description" if source.endswith(".json") else "<title>, meta description, H1, first-screen block"
     if operation == "atlas_card_update":
@@ -181,6 +187,33 @@ def desired_after_summary(spec: dict[str, Any], run_target: str) -> str:
     return "Edit remains scoped to the stated run summary and canonical claims."
 
 
+def suggested_content(spec: dict[str, Any], run_target: str) -> str:
+    operation = spec.get("operation_type", "")
+    source = spec.get("source_of_truth_file", "")
+    if (
+        run_target == "start.html"
+        and source == "start.html"
+        and operation == "first_screen_update"
+        and protects_claim(spec, "season-2-winter-current-naming")
+    ):
+        return """Add this callout inside the existing `Quick Answer` `.qa-callouts` block, after the current `Core rule` callout:
+
+```html
+<p class="qa-callout qa-callout--note">
+    <span class="qa-icon" aria-hidden="true">i</span>
+    <span class="qa-callout-text"><strong>Season naming note:</strong> on newer servers, Season 2 is Winter. Older guides may call Season 2 Desert, but Desert was canceled or skipped for current servers, so follow Winter naming when planning your early timeline.</span>
+</p>
+```"""
+    if (
+        run_target == "start.html"
+        and source == "start.html"
+        and operation == "meta_refresh"
+        and protects_claim(spec, "season-2-winter-current-naming")
+    ):
+        return "No metadata edit is recommended for this pass. Keep the current title, H1, and meta description focused on beginner intent."
+    return ""
+
+
 def risk_level(spec: dict[str, Any]) -> str:
     if spec.get("is_generated"):
         return "medium"
@@ -204,6 +237,7 @@ def build_rendered_specs(manifest) -> list[dict[str, Any]]:
         item["selector_or_anchor"] = infer_anchor(spec, context)
         item["before_summary"] = before_summary(context)
         item["desired_after_summary"] = desired_after_summary(spec, str(target))
+        item["suggested_content"] = suggested_content(spec, str(target))
         item["risk_level"] = risk_level(spec)
         item["approval_state"] = approval_state(spec)
         rendered.append(item)
@@ -239,6 +273,9 @@ Before:
 
 Desired after:
 {spec.get("desired_after_summary")}
+
+Suggested content:
+{spec.get("suggested_content") or "No exact snippet generated; use the desired-after summary as the review target."}
 
 Validation:
 {md_list([str(item) for item in spec.get("validation_commands", [])])}

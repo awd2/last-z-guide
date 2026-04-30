@@ -27,7 +27,7 @@
 - Target output: `start.html`
 - Source type: `html_file`
 - Generated page: `false`
-- Selector or anchor: `<title>, meta description, H1, first-screen block`
+- Selector or anchor: `Quick Answer -> .qa-callouts`
 - Risk: `medium`
 - Approval state: `proposed`
 - Generator command: `None`
@@ -37,6 +37,16 @@ title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid |
 
 Desired after:
 Add a concise early clarification that for newer servers Season 2 is Winter, Desert was canceled or skipped, and older guides that call Season 2 Desert may be outdated. Keep the page primarily a beginner start guide.
+
+Suggested content:
+Add this callout inside the existing `Quick Answer` `.qa-callouts` block, after the current `Core rule` callout:
+
+```html
+<p class="qa-callout qa-callout--note">
+    <span class="qa-icon" aria-hidden="true">i</span>
+    <span class="qa-callout-text"><strong>Season naming note:</strong> on newer servers, Season 2 is Winter. Older guides may call Season 2 Desert, but Desert was canceled or skipped for current servers, so follow Winter naming when planning your early timeline.</span>
+</p>
+```
 
 Validation:
 - python3 automation/run_checks.py
@@ -61,6 +71,9 @@ title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid |
 
 Desired after:
 Preserve the beginner-guide title and H1. Only adjust metadata if needed to support the season naming clarification without turning `start.html` into a season guide.
+
+Suggested content:
+No metadata edit is recommended for this pass. Keep the current title, H1, and meta description focused on beginner intent.
 
 Validation:
 - python3 automation/run_checks.py
