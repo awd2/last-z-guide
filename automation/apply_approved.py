@@ -26,6 +26,20 @@ TARGET_CARDS = {
     "research-costs.html": {"href": "research-costs.html", "label": "Research Costs Atlas"},
 }
 
+TARGET_OPERATION_SUPPORT = {
+    "research-costs.html": {
+        "meta_refresh",
+        "first_screen_update",
+        "internal_link_addition",
+        "atlas_card_update",
+    },
+    "gift-center-uid.html": {
+        "meta_refresh",
+        "first_screen_update",
+        "internal_link_addition",
+    },
+}
+
 
 def approved_specs(manifest) -> list[dict[str, Any]]:
     patch_plan = (manifest.artifacts or {}).get("patch_plan", {})
@@ -45,6 +59,31 @@ def replace_once(text: str, old: str, new: str, applied: list[str], label: str) 
 
 def target_card(target_page: str) -> dict[str, str]:
     return TARGET_CARDS.get(target_page, {"href": target_page, "label": target_page})
+
+
+def validate_supported_specs(grouped: dict[str, list[dict[str, Any]]]) -> None:
+    for source_file, source_specs in grouped.items():
+        supported = TARGET_OPERATION_SUPPORT.get(source_file)
+        if supported is not None:
+            unsupported = [
+                str(spec.get("operation_type"))
+                for spec in source_specs
+                if spec.get("operation_type") not in supported
+            ]
+            if unsupported:
+                raise ValueError(
+                    f"Unsupported approved operation(s) for {source_file}: "
+                    f"{', '.join(sorted(set(unsupported)))}"
+                )
+            continue
+
+        for spec in source_specs:
+            operation = spec.get("operation_type")
+            source_type = spec.get("source_type")
+            if operation != "internal_link_addition":
+                raise ValueError(f"Unsupported approved operation for {source_file}: {operation}")
+            if source_type not in {"generated_research_branch", "html_file"}:
+                raise ValueError(f"Unsupported source type for {source_file}: {source_type}")
 
 
 def apply_research_costs(specs: list[dict[str, Any]]) -> tuple[list[str], list[str]]:
@@ -322,6 +361,7 @@ def apply_approved(path: Path):
     grouped: dict[str, list[dict[str, Any]]] = {}
     for spec in specs:
         grouped.setdefault(str(spec.get("source_of_truth_file")), []).append(spec)
+    validate_supported_specs(grouped)
 
     applied: list[str] = []
     skipped: list[str] = []
@@ -342,7 +382,7 @@ def apply_approved(path: Path):
             operation = spec.get("operation_type")
             source_type = spec.get("source_type")
             if operation != "internal_link_addition":
-                continue
+                raise ValueError(f"Unsupported approved operation for {source_file}: {operation}")
             if source_type == "generated_research_branch":
                 source_applied, source_skipped = add_json_related_guide(source_file, target_page)
                 applied.extend(source_applied)

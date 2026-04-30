@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-gift-center-login-setup",
   "created_at": "2026-04-22T16:56:58.397517Z",
   "run_type": "update_existing",
-  "status": "qa_passed",
+  "status": "closed",
   "risk_level": "medium",
   "summary": "Update the existing page `gift-center-uid.html` for the `Economy` cluster using the `support-guide` archetype.",
   "inputs": {
@@ -851,6 +851,11 @@
         "codes.html:related_card_duplicate_skipped"
       ],
       "generator_commands": []
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-04-22-gift-center-login-setup.closed.md",
+      "closed_at": "2026-04-30T15:53:53Z",
+      "note": "Reviewed current local automation state; Gift Center login setup is QA-passed and ready for manual release decision."
     }
   },
   "changed_files": [

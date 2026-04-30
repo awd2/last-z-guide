@@ -45,6 +45,10 @@ def main() -> int:
         "Cluster Links",
         [sys.executable, str(AUTOMATION_DIR / "checks" / "cluster_links.py")],
     )
+    failures += run_step(
+        "Site Structure",
+        [sys.executable, str(AUTOMATION_DIR / "checks" / "site_structure.py")],
+    )
     seo_cmd = [sys.executable, str(AUTOMATION_DIR / "checks" / "seo_llm_alignment.py")]
     if args.strict:
         seo_cmd.append("--strict")

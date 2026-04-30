@@ -346,6 +346,7 @@ Remember:
 
 - `checks` = baseline health
 - `checks --strict` = stronger gate, includes weak-cluster and SEO/LLM warning-level failures
+- site structure failures are always hard failures because they protect shared navigation, guide template signals, and generated research branch boundaries
 
 No autonomous production publish.
 
@@ -413,7 +414,7 @@ Lifecycle currently:
 
 `apply-preview` renders a no-write preview from approved specs. It may write manifest/report artifacts, but it must not edit site content.
 
-`apply-approved` may edit source files, but only from approved Patch Spec v1 entries and only through conservative deterministic templates. Generated research branch pages must still be edited through JSON source files and regenerated.
+`apply-approved` may edit source files, but only from approved Patch Spec v1 entries and only through conservative deterministic templates. Unsupported approved operations must fail loudly instead of being silently skipped. Generated research branch pages must still be edited through JSON source files and regenerated.
 
 When `checks --strict --manifest <run_id>` passes after `apply-approved`, the run may advance from `applied_pending_qa` to `qa_passed`. `qa_passed` is still not an autonomous production publishing state.
 

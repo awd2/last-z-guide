@@ -232,10 +232,14 @@ terminal logs.
 - content index memory sync
 - orphan / weak-cluster coverage
 - cluster-link expectations
+- site structure consistency:
+  - shared top navigation link order and active section
+  - breadcrumb / related-grid / first-screen signal presence on guide pages
+  - generated research branch output boundaries
 - basic SEO/LLM alignment checks
 - basic cannibalization warnings
 
-`checks --strict` escalates weak-cluster and SEO/LLM warning-level findings into a failing gate.
+`checks --strict` escalates weak-cluster and SEO/LLM warning-level findings into a failing gate. Site structure failures are always hard failures because they protect shared templates, navigation, and generated-source boundaries.
 
 Show a compact health summary for the automation layer:
 
@@ -473,6 +477,7 @@ entries. It is intentionally narrower than a general writing worker:
 - generated research branch pages are edited through their JSON source files
   and regenerated
 - duplicate related links and target-page self-links are skipped and recorded
+- unsupported approved operations fail loudly instead of being silently skipped
   in the apply result artifact
 - the manifest moves to `applied_pending_qa`
 - production publishing is still manual and still requires green checks

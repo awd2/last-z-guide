@@ -114,10 +114,11 @@ python3 automation/pipeline.py close-run <run_id>
 - content index memory sync
 - orphan / weak-cluster coverage
 - cluster-link expectations
+- site structure consistency for shared navigation, guide template signals, and generated research branch boundaries
 - SEO/LLM alignment warnings
 - basic cannibalization warnings
 
-`checks --strict` turns weak-cluster and SEO/LLM warnings into a failing gate.
+`checks --strict` turns weak-cluster and SEO/LLM warnings into a failing gate. Site structure issues are always hard failures.
 
 Automation artifacts live in:
 
