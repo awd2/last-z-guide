@@ -65,13 +65,14 @@ def propose_change_types(manifest) -> list[dict[str, object]]:
         )
 
     if archetype in {"atlas-page", "support-guide", "cornerstone-guide"} and target:
-        proposals.append(
-            {
-                "file": target,
-                "change_type": "internal_link_addition",
-                "reason": "Strengthen routing between the target page and adjacent cluster pages.",
-            }
-        )
+        if any(page != target for page in related_pages):
+            proposals.append(
+                {
+                    "file": target,
+                    "change_type": "internal_link_addition",
+                    "reason": "Strengthen routing between the target page and adjacent cluster pages.",
+                }
+            )
 
     if archetype == "atlas-page" and target:
         proposals.append(

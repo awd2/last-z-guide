@@ -36,7 +36,7 @@ Before:
 title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.
 
 Desired after:
-Opening answer matches the page role for start.html, gives the exact setup answer quickly, and avoids drifting into a broader hub page.
+Add a concise early clarification that for newer servers Season 2 is Winter, Desert was canceled or skipped, and older guides that call Season 2 Desert may be outdated. Keep the page primarily a beginner start guide.
 
 Validation:
 - python3 automation/run_checks.py
@@ -60,31 +60,7 @@ Before:
 title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.
 
 Desired after:
-Title, H1, and meta description use the same exact intent: start.html.
-
-Validation:
-- python3 automation/run_checks.py
-- python3 scripts/prepublish_check.py --fix
-- python3 scripts/prepublish_check.py
-- python3 automation/checks/changed_pages_report.py --manifest <run_id>
-- python3 automation/pipeline.py checks
-
-
-### internal_link_addition
-
-- Target output: `start.html`
-- Source type: `html_file`
-- Generated page: `false`
-- Selector or anchor: `Related Guides`
-- Risk: `low`
-- Approval state: `proposed`
-- Generator command: `None`
-
-Before:
-title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.
-
-Desired after:
-Do not add a self-link. Strengthen outbound routing to the correct hub, troubleshooting page, or adjacent support page instead.
+Preserve the beginner-guide title and H1. Only adjust metadata if needed to support the season naming clarification without turning `start.html` into a season guide.
 
 Validation:
 - python3 automation/run_checks.py

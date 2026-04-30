@@ -83,11 +83,6 @@
           "file": "start.html",
           "change_type": "meta_refresh",
           "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent."
-        },
-        {
-          "file": "start.html",
-          "change_type": "internal_link_addition",
-          "reason": "Strengthen routing between the target page and adjacent cluster pages."
         }
       ],
       "patch_specs": [
@@ -133,33 +128,6 @@
             "Protect the canonical claims listed on this patch spec."
           ],
           "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
-          "canonical_claims_to_protect": [
-            "season-2-winter-current-naming"
-          ],
-          "validation_commands": [
-            "python3 automation/run_checks.py",
-            "python3 scripts/prepublish_check.py --fix",
-            "python3 scripts/prepublish_check.py",
-            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
-            "python3 automation/pipeline.py checks"
-          ],
-          "human_approval_required": true
-        },
-        {
-          "target_file": "start.html",
-          "source_of_truth_file": "start.html",
-          "output_file": "start.html",
-          "source_type": "html_file",
-          "is_generated": false,
-          "generator_command": null,
-          "operation_type": "internal_link_addition",
-          "selector_or_anchor": "manual_review_required",
-          "required_preconditions": [
-            "Edit the target file directly.",
-            "Read the target/source file before editing.",
-            "Protect the canonical claims listed on this patch spec."
-          ],
-          "proposed_change_summary": "Strengthen routing between the target page and adjacent cluster pages.",
           "canonical_claims_to_protect": [
             "season-2-winter-current-naming"
           ],
@@ -221,7 +189,7 @@
           ],
           "human_approval_required": true,
           "before_summary": "title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.",
-          "desired_after_summary": "Opening answer matches the page role for start.html, gives the exact setup answer quickly, and avoids drifting into a broader hub page.",
+          "desired_after_summary": "Add a concise early clarification that for newer servers Season 2 is Winter, Desert was canceled or skipped, and older guides that call Season 2 Desert may be outdated. Keep the page primarily a beginner start guide.",
           "risk_level": "medium",
           "approval_state": "proposed"
         },
@@ -252,39 +220,8 @@
           ],
           "human_approval_required": true,
           "before_summary": "title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.",
-          "desired_after_summary": "Title, H1, and meta description use the same exact intent: start.html.",
+          "desired_after_summary": "Preserve the beginner-guide title and H1. Only adjust metadata if needed to support the season naming clarification without turning `start.html` into a season guide.",
           "risk_level": "medium",
-          "approval_state": "proposed"
-        },
-        {
-          "target_file": "start.html",
-          "source_of_truth_file": "start.html",
-          "output_file": "start.html",
-          "source_type": "html_file",
-          "is_generated": false,
-          "generator_command": null,
-          "operation_type": "internal_link_addition",
-          "selector_or_anchor": "Related Guides",
-          "required_preconditions": [
-            "Edit the target file directly.",
-            "Read the target/source file before editing.",
-            "Protect the canonical claims listed on this patch spec."
-          ],
-          "proposed_change_summary": "Strengthen routing between the target page and adjacent cluster pages.",
-          "canonical_claims_to_protect": [
-            "season-2-winter-current-naming"
-          ],
-          "validation_commands": [
-            "python3 automation/run_checks.py",
-            "python3 scripts/prepublish_check.py --fix",
-            "python3 scripts/prepublish_check.py",
-            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
-            "python3 automation/pipeline.py checks"
-          ],
-          "human_approval_required": true,
-          "before_summary": "title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.",
-          "desired_after_summary": "Do not add a self-link. Strengthen outbound routing to the correct hub, troubleshooting page, or adjacent support page instead.",
-          "risk_level": "low",
           "approval_state": "proposed"
         }
       ]

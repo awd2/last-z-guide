@@ -135,14 +135,31 @@ def target_topic_label(run_target: str) -> str:
     labels = {
         "gift-center-uid.html": "Gift Center login setup and UID lookup",
         "research-costs.html": "research costs atlas",
+        "start.html": "beginner start guide and season naming clarification",
     }
     return labels.get(run_target, run_target or "the target page")
+
+
+def protects_claim(spec: dict[str, Any], claim_id: str) -> bool:
+    return claim_id in {str(item) for item in spec.get("canonical_claims_to_protect", [])}
 
 
 def desired_after_summary(spec: dict[str, Any], run_target: str) -> str:
     operation = spec.get("operation_type", "")
     source_type = spec.get("source_type", "")
     topic = target_topic_label(run_target)
+    if run_target == "start.html" and protects_claim(spec, "season-2-winter-current-naming"):
+        if operation == "first_screen_update":
+            return (
+                "Add a concise early clarification that for newer servers Season 2 is Winter, "
+                "Desert was canceled or skipped, and older guides that call Season 2 Desert may be outdated. "
+                "Keep the page primarily a beginner start guide."
+            )
+        if operation == "meta_refresh":
+            return (
+                "Preserve the beginner-guide title and H1. Only adjust metadata if needed to support "
+                "the season naming clarification without turning `start.html` into a season guide."
+            )
     if operation == "first_screen_update" and run_target == "research-costs.html":
         return "Opening answer names the atlas role, main research route, and exact branch-page routing without turning the atlas into a giant guide."
     if operation == "first_screen_update":

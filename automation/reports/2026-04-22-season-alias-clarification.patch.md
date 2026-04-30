@@ -3,7 +3,7 @@
 ## Overview
 
 - Summary: Update the existing page `start.html` for the `Seasons` cluster using the `support-guide` archetype.
-- Status: `draft_brief_ready`
+- Status: `proposal_ready`
 - Risk: `low`
 - Cluster: `Seasons`
 - Target: `start.html`
@@ -15,8 +15,6 @@
   reason: Align the opening answer with the run summary, target intent, and cluster role.
 - `start.html` -> `meta_refresh`
   reason: Tighten title/meta/H1 alignment around the page’s exact search intent.
-- `start.html` -> `internal_link_addition`
-  reason: Strengthen routing between the target page and adjacent cluster pages.
 
 ## Candidate Changed Files
 
@@ -34,11 +32,6 @@
   generator: `None`
   approval: `required`
 - `start.html` -> `meta_refresh`
-  source: `start.html`
-  generated: `false`
-  generator: `None`
-  approval: `required`
-- `start.html` -> `internal_link_addition`
   source: `start.html`
   generated: `false`
   generator: `None`
