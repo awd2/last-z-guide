@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-season-alias-clarification",
   "created_at": "2026-04-22T17:33:27.310031Z",
   "run_type": "update_existing",
-  "status": "reviewed",
+  "status": "proposal_ready",
   "risk_level": "low",
   "summary": "Update the existing page `start.html` for the `Seasons` cluster using the `support-guide` archetype.",
   "inputs": {
@@ -65,9 +65,234 @@
       "related_filenames": [
         "start.html"
       ]
+    },
+    "editor": {
+      "brief_path": "automation/reports/2026-04-22-season-alias-clarification.brief.md"
+    },
+    "patch_plan": {
+      "target_page_or_slug": "start.html",
+      "archetype_suggestion": "support-guide",
+      "recommended_action": "update_existing",
+      "proposed_changes": [
+        {
+          "file": "start.html",
+          "change_type": "first_screen_update",
+          "reason": "Align the opening answer with the run summary, target intent, and cluster role."
+        },
+        {
+          "file": "start.html",
+          "change_type": "meta_refresh",
+          "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent."
+        },
+        {
+          "file": "start.html",
+          "change_type": "internal_link_addition",
+          "reason": "Strengthen routing between the target page and adjacent cluster pages."
+        }
+      ],
+      "patch_specs": [
+        {
+          "target_file": "start.html",
+          "source_of_truth_file": "start.html",
+          "output_file": "start.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "season-2-winter-current-naming"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "start.html",
+          "source_of_truth_file": "start.html",
+          "output_file": "start.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "season-2-winter-current-naming"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "start.html",
+          "source_of_truth_file": "start.html",
+          "output_file": "start.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Strengthen routing between the target page and adjacent cluster pages.",
+          "canonical_claims_to_protect": [
+            "season-2-winter-current-naming"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        }
+      ],
+      "changed_files": [
+        "start.html"
+      ],
+      "source_files": [
+        "start.html"
+      ],
+      "canonical_claim_ids": [
+        "season-2-winter-current-naming"
+      ],
+      "deterministic_checks": [
+        "python3 automation/run_checks.py",
+        "python3 scripts/prepublish_check.py --fix",
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+        "python3 automation/pipeline.py checks"
+      ],
+      "report_path": "automation/reports/2026-04-22-season-alias-clarification.patch.md"
+    },
+    "proposal": {
+      "report_path": "automation/reports/2026-04-22-season-alias-clarification.proposed.md",
+      "rendered_specs": [
+        {
+          "target_file": "start.html",
+          "source_of_truth_file": "start.html",
+          "output_file": "start.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "season-2-winter-current-naming"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.",
+          "desired_after_summary": "Opening answer matches the page role for start.html, gives the exact setup answer quickly, and avoids drifting into a broader hub page.",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "start.html",
+          "source_of_truth_file": "start.html",
+          "output_file": "start.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "season-2-winter-current-naming"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.",
+          "desired_after_summary": "Title, H1, and meta description use the same exact intent: start.html.",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "start.html",
+          "source_of_truth_file": "start.html",
+          "output_file": "start.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "Related Guides",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Strengthen routing between the target page and adjacent cluster pages.",
+          "canonical_claims_to_protect": [
+            "season-2-winter-current-naming"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.",
+          "desired_after_summary": "Do not add a self-link. Strengthen outbound routing to the correct hub, troubleshooting page, or adjacent support page instead.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        }
+      ]
     }
   },
-  "changed_files": [],
+  "changed_files": [
+    "start.html"
+  ],
   "checks": {},
   "review": {
     "verdict": "needs_human_review",
