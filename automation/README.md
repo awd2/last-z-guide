@@ -465,12 +465,13 @@ Approval states:
 Lifecycle status after approval:
 
 - all proposed -> `proposal_ready`
-- mixed decisions -> `partially_approved`
-- all approved -> `approved_for_apply`
+- approved/rejected plus at least one still proposed -> `partially_approved`
+- approved/rejected with no proposed specs left and at least one approved -> `approved_for_apply`
 - all rejected -> `rejected`
 
 `approved_for_apply` is not an automatic publishing state. It only means a
-future controlled apply step may use the approved specs as input.
+future controlled apply step may use the approved specs as input. Rejected specs
+stay recorded in the manifest, but apply-preview and apply-approved ignore them.
 
 `apply-preview` renders a no-write preview from approved Patch Spec v1 entries:
 

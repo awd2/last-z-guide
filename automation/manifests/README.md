@@ -55,11 +55,12 @@ human-reviewable proposal artifact.
 and now needs human review before any site files are edited.
 
 `partially_approved` means at least one proposal spec has been approved or
-rejected, but the run still has mixed decisions.
+rejected, but at least one proposal spec is still undecided.
 
-`approved_for_apply` means every proposal spec is approved. This is still not
-an autonomous publishing state; it is only a gate for a controlled manual apply
-or future safe apply worker.
+`approved_for_apply` means every proposal spec has a terminal review decision
+and at least one spec is approved. Rejected specs are not applied. This is still
+not an autonomous publishing state; it is only a gate for a controlled manual
+apply or future safe apply worker.
 
 `apply_preview_ready` means a no-write apply preview has been rendered from the
 approved specs. The preview still needs human review before any source files are

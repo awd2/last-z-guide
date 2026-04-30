@@ -47,12 +47,12 @@ def compute_status(states: list[str], current_status: str) -> str:
         return current_status
     if all(state == "proposed" for state in states):
         return "proposal_ready"
-    if all(state == "approved" for state in states):
-        return "approved_for_apply"
     if all(state == "rejected" for state in states):
         return "rejected"
-    if any(state in TERMINAL_STATES for state in states):
+    if "proposed" in states and any(state in TERMINAL_STATES for state in states):
         return "partially_approved"
+    if all(state in TERMINAL_STATES for state in states) and "approved" in states:
+        return "approved_for_apply"
     return current_status
 
 

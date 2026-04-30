@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-season-alias-clarification",
   "created_at": "2026-04-22T17:33:27.310031Z",
   "run_type": "update_existing",
-  "status": "partially_approved",
+  "status": "qa_passed",
   "risk_level": "low",
   "summary": "Update the existing page `start.html` for the `Seasons` cluster using the `support-guide` archetype.",
   "inputs": {
@@ -143,7 +143,7 @@
           ],
           "human_approval_required": true,
           "approval_state": "rejected",
-          "approval_updated_at": "2026-04-30T18:33:06Z",
+          "approval_updated_at": "2026-04-30T18:37:05Z",
           "approval_note": "Rejected for this pass: metadata should stay focused on beginner intent."
         }
       ],
@@ -229,7 +229,7 @@
           ],
           "human_approval_required": true,
           "approval_state": "rejected",
-          "approval_updated_at": "2026-04-30T18:33:06Z",
+          "approval_updated_at": "2026-04-30T18:37:05Z",
           "approval_note": "Rejected for this pass: metadata should stay focused on beginner intent.",
           "before_summary": "title: Last Z Beginner Guide (2026) — Best Start and Early Mistakes to Avoid | h1: Last Z Beginner Guide — Best Start and Early Mistakes to Avoid | meta: Best beginner path in Last Z: early priorities, key upgrades, alliance timing, and the first mistakes to avoid in your opening days. | verified: Best early plan for most players: finish the tutorial, follow main quests, join an active alliance fast, push HQ correctly, and save diamonds for long-term value instead of random early spending.",
           "desired_after_summary": "Preserve the beginner-guide title and H1. Only adjust metadata if needed to support the season naming clarification without turning `start.html` into a season guide.",
@@ -237,6 +237,42 @@
           "risk_level": "medium"
         }
       ]
+    },
+    "apply_preview": {
+      "report_path": "automation/reports/2026-04-22-season-alias-clarification.apply-preview.md",
+      "generated_at": "2026-04-30T18:38:06Z",
+      "approved_specs_count": 1,
+      "preview_items": [
+        {
+          "source_of_truth_file": "start.html",
+          "output_file": "start.html",
+          "operation_type": "first_screen_update",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "replace_first_screen_answer",
+          "warnings": [],
+          "preview": "```diff\n# Quick Answer callout\n- Only the existing Core rule callout appears in `.qa-callouts`.\n+ <p class=\"qa-callout qa-callout--note\">\n    <span class=\"qa-icon\" aria-hidden=\"true\">i</span>\n    <span class=\"qa-callout-text\"><strong>Season naming note:</strong> on newer servers, Season 2 is Winter. Older guides may call Season 2 Desert, but Desert was canceled or skipped for current servers, so follow Winter naming when planning your early timeline.</span>\n</p>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "start.html"
+        }
+      ]
+    },
+    "apply_result": {
+      "report_path": "automation/reports/2026-04-22-season-alias-clarification.apply-result.md",
+      "applied_at": "2026-04-30T18:38:21Z",
+      "applied_operations": [],
+      "skipped_operations": [
+        "start.html:season_note_already_present"
+      ],
+      "generator_commands": []
     }
   },
   "changed_files": [

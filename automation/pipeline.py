@@ -756,7 +756,7 @@ def cmd_next_step(run_id: str, as_json: bool) -> int:
             "recommended_command": f"python3 automation/pipeline.py apply-preview {run_id}",
             "requires_human_review": False,
             "requires_manual_edit_gate": True,
-            "reason": "All proposal specs are approved. The next safe automation step is a no-write apply preview.",
+            "reason": "All proposal specs have terminal review decisions and at least one spec is approved. The next safe automation step is a no-write apply preview for approved specs only.",
         },
         "apply_preview_ready": {
             "next_step": f"python3 automation/pipeline.py apply-approved {run_id}",

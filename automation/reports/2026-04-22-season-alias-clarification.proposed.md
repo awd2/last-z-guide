@@ -3,7 +3,7 @@
 ## Overview
 
 - Summary: Update the existing page `start.html` for the `Seasons` cluster using the `support-guide` archetype.
-- Status: `partially_approved`
+- Status: `approved_for_apply`
 - Risk: `low`
 - Cluster: `Seasons`
 - Target: `start.html`

@@ -26,6 +26,13 @@ TARGET_LABELS = {
     "research-costs.html": "Research Costs Atlas",
 }
 
+START_SEASON_NOTE = (
+    '<p class="qa-callout qa-callout--note">\n'
+    '    <span class="qa-icon" aria-hidden="true">i</span>\n'
+    '    <span class="qa-callout-text"><strong>Season naming note:</strong> on newer servers, Season 2 is Winter. Older guides may call Season 2 Desert, but Desert was canceled or skipped for current servers, so follow Winter naming when planning your early timeline.</span>\n'
+    "</p>"
+)
+
 
 def approved_specs(manifest) -> list[dict[str, Any]]:
     patch_plan = (manifest.artifacts or {}).get("patch_plan", {})
@@ -119,6 +126,12 @@ def first_screen_preview_for_target(source_file: str) -> str | None:
             "first-screen answer",
             "The official Last Z Gift Center login page is the only place where codes are redeemed...",
             "Use the official Last Z Gift Center in a browser, copy your UID from Avatar > Settings > Copy ID, redeem the code outside the game, then collect rewards from mailbox.",
+        )
+    if source_file == "start.html":
+        return diff_block(
+            "Quick Answer callout",
+            "Only the existing Core rule callout appears in `.qa-callouts`.",
+            START_SEASON_NOTE,
         )
     return None
 
