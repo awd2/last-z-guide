@@ -99,6 +99,7 @@ python3 automation/pipeline.py checks
 python3 automation/pipeline.py checks --strict
 python3 automation/pipeline.py status
 python3 automation/pipeline.py list
+python3 automation/pipeline.py backlog-sync
 python3 automation/pipeline.py open-topic <topic_id>
 python3 automation/pipeline.py open-run <run_id>
 python3 automation/pipeline.py recent-runs

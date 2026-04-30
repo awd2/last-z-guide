@@ -355,6 +355,139 @@ def cmd_backlog_summary(as_json: bool) -> int:
     return 0
 
 
+def load_run_manifests() -> list:
+    manifest_files = sorted(
+        [
+            path for path in MANIFESTS_DIR.glob("*.json") if path.name != "run_manifest.example.json"
+        ],
+        key=lambda path: path.name,
+    )
+    return [load_run_manifest(path) for path in manifest_files]
+
+
+def lifecycle_group(status: str) -> str:
+    if status == "closed":
+        return "closed"
+    if status in {"qa_passed", "applied_pending_qa", "apply_preview_ready", "approved_for_apply"}:
+        return "post_apply"
+    if status in {"reviewed", "draft_brief_ready", "patch_plan_ready", "proposal_ready", "partially_approved"}:
+        return "active"
+    if status == "rejected":
+        return "rejected"
+    return "planned"
+
+
+def backlog_sync_rows() -> tuple[list[dict], list[dict]]:
+    backlog_items = load_topic_backlog()
+    manifests = load_run_manifests()
+    manifests_by_topic: dict[str, list] = {}
+    for manifest in manifests:
+        topic_id = str((manifest.inputs or {}).get("topic_id") or (manifest.plan or {}).get("topic_id") or "")
+        if not topic_id:
+            continue
+        manifests_by_topic.setdefault(topic_id, []).append(manifest)
+
+    rows: list[dict] = []
+    for item in backlog_items:
+        topic_runs = sorted(
+            manifests_by_topic.get(item.topic_id, []),
+            key=lambda manifest: manifest.created_at,
+            reverse=True,
+        )
+        latest = topic_runs[0] if topic_runs else None
+        latest_status = latest.status if latest else None
+        latest_group = lifecycle_group(latest_status) if latest_status else "no_run"
+
+        if latest is None:
+            sync_state = "available"
+            recommendation = "ready_for_run"
+        elif latest.status == "closed" and item.status == "backlog":
+            sync_state = "stale_backlog_completed"
+            recommendation = "mark_backlog_done_or_remove_from_active_queue"
+        elif latest.status == "closed":
+            sync_state = "completed"
+            recommendation = "no_action"
+        elif latest.status == "rejected":
+            sync_state = "rejected_run"
+            recommendation = "revise_or_reopen_topic"
+        else:
+            sync_state = "active_run"
+            recommendation = f"continue_with_next_step_for_{latest.run_id}"
+
+        rows.append(
+            {
+                "topic_id": item.topic_id,
+                "title": item.title,
+                "cluster": item.cluster,
+                "priority": item.priority,
+                "backlog_status": item.status,
+                "target": item.target_page_or_slug,
+                "run_count": len(topic_runs),
+                "latest_run_id": latest.run_id if latest else None,
+                "latest_run_status": latest_status,
+                "latest_run_group": latest_group,
+                "sync_state": sync_state,
+                "recommendation": recommendation,
+            }
+        )
+
+    backlog_topic_ids = {item.topic_id for item in backlog_items}
+    orphan_runs = []
+    for manifest in manifests:
+        topic_id = str((manifest.inputs or {}).get("topic_id") or (manifest.plan or {}).get("topic_id") or "")
+        if topic_id and topic_id in backlog_topic_ids:
+            continue
+        orphan_runs.append(
+            {
+                "run_id": manifest.run_id,
+                "topic_id": topic_id or None,
+                "status": manifest.status,
+                "summary": manifest.summary,
+            }
+        )
+
+    return rows, orphan_runs
+
+
+def cmd_backlog_sync(as_json: bool) -> int:
+    rows, orphan_runs = backlog_sync_rows()
+    counts: dict[str, int] = {}
+    for row in rows:
+        counts[row["sync_state"]] = counts.get(row["sync_state"], 0) + 1
+
+    payload = {
+        "total_topics": len(rows),
+        "sync_states": dict(sorted(counts.items())),
+        "topics": rows,
+        "runs_without_backlog_topic": orphan_runs,
+    }
+
+    if as_json:
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+        return 0
+
+    print("Backlog / Run Sync")
+    print(f"- total topics: {payload['total_topics']}")
+    if payload["sync_states"]:
+        print(
+            "- sync states: "
+            + ", ".join(f"{state}={count}" for state, count in payload["sync_states"].items())
+        )
+    for row in rows:
+        run = row["latest_run_id"] or "none"
+        run_status = row["latest_run_status"] or "none"
+        print(
+            f"- {row['topic_id']} | backlog={row['backlog_status']} | "
+            f"latest_run={run} ({run_status}) | sync={row['sync_state']}"
+        )
+        print(f"  recommendation: {row['recommendation']}")
+    if orphan_runs:
+        print("- runs without backlog topic:")
+        for run in orphan_runs:
+            print(f"  - {run['run_id']} | topic={run['topic_id'] or 'none'} | status={run['status']}")
+    return 0
+
+
 def cmd_open_run(run_id: str, as_json: bool) -> int:
     manifest_path = AUTOMATION_DIR / "manifests" / f"{run_id}.json"
     if not manifest_path.exists():
@@ -1033,6 +1166,12 @@ def build_parser() -> argparse.ArgumentParser:
     backlog_summary_parser = subparsers.choices["backlog-summary"]
     backlog_summary_parser.add_argument("--json", action="store_true", help="Print the backlog summary as JSON.")
 
+    backlog_sync_parser = subparsers.add_parser(
+        "backlog-sync",
+        help="Compare topic_backlog.csv with run manifests and report stale or active topics.",
+    )
+    backlog_sync_parser.add_argument("--json", action="store_true", help="Print the backlog/run sync report as JSON.")
+
     open_run_parser = subparsers.add_parser(
         "open-run",
         help="Show a detailed view for one run manifest.",
@@ -1188,6 +1327,8 @@ def main() -> int:
         return cmd_open_topic(args.topic_id, args.json)
     if args.command == "backlog-summary":
         return cmd_backlog_summary(args.json)
+    if args.command == "backlog-sync":
+        return cmd_backlog_sync(args.json)
     if args.command == "open-run":
         return cmd_open_run(args.run_id, args.json)
     if args.command == "next-step":

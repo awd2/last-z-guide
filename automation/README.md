@@ -113,6 +113,8 @@ python3 automation/pipeline.py list
 python3 automation/pipeline.py list --json
 python3 automation/pipeline.py backlog-summary
 python3 automation/pipeline.py backlog-summary --json
+python3 automation/pipeline.py backlog-sync
+python3 automation/pipeline.py backlog-sync --json
 python3 automation/pipeline.py open-topic <topic_id>
 python3 automation/pipeline.py open-topic <topic_id> --json
 python3 automation/pipeline.py open-run <run_id>
@@ -153,6 +155,8 @@ python3 automation/pipeline.py list --cluster Research --priority high
 python3 automation/pipeline.py list --cluster Research --priority high --json
 python3 automation/pipeline.py backlog-summary
 python3 automation/pipeline.py backlog-summary --json
+python3 automation/pipeline.py backlog-sync
+python3 automation/pipeline.py backlog-sync --json
 python3 automation/pipeline.py open-topic gift-center-ctr-pass
 python3 automation/pipeline.py open-topic gift-center-ctr-pass --json
 python3 automation/pipeline.py open-run 2026-04-22-research-cluster-nav
@@ -357,6 +361,24 @@ python3 automation/pipeline.py backlog-summary --json
 - status
 
 `backlog-summary --json` gives the same intake snapshot in machine-readable form.
+
+Compare the backlog against active and closed run manifests:
+
+```bash
+python3 automation/pipeline.py backlog-sync
+python3 automation/pipeline.py backlog-sync --json
+```
+
+`backlog-sync` is report-only. It does not edit `topic_backlog.csv`.
+Use it before starting LLM/editorial work to avoid re-running closed topics or ignoring active runs.
+It reports:
+
+- topics with no run yet
+- topics with active runs
+- backlog rows whose latest run is already closed
+- run manifests that no longer map to a backlog topic
+
+`backlog-sync --json` gives the same reconciliation snapshot in machine-readable form.
 
 Show one run manifest in a detailed review-friendly form:
 

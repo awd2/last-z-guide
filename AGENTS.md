@@ -379,6 +379,7 @@ Important commands:
 ```bash
 python3 automation/pipeline.py health
 python3 automation/pipeline.py list
+python3 automation/pipeline.py backlog-sync
 python3 automation/pipeline.py open-topic <topic_id>
 python3 automation/pipeline.py open-run <run_id>
 python3 automation/pipeline.py next-step <run_id>
@@ -396,6 +397,7 @@ Machine-readable snapshots exist for:
 - `status --json`
 - `list --json`
 - `backlog-summary --json`
+- `backlog-sync --json`
 - `open-topic --json`
 - `show --json`
 - `open-run --json`
