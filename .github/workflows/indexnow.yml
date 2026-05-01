@@ -10,8 +10,21 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Download sitemap
-        run: curl -sS https://lastzguides.com/sitemap.xml -o sitemap.xml
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify IndexNow key file
+        env:
+          KEY: dd8b3d12471744c4ad67e9dc368f04cd
+          KEY_LOC: https://lastzguides.com/dd8b3d12471744c4ad67e9dc368f04cd.txt
+        run: |
+          set -euo pipefail
+          key_body=$(curl -fsS "$KEY_LOC")
+          if [ "$key_body" != "$KEY" ]; then
+            echo "IndexNow key verification failed: $KEY_LOC did not return the expected key."
+            exit 1
+          fi
+          echo "IndexNow key file verified at $KEY_LOC."
 
       - name: Build URL list for IndexNow
         id: url_list
@@ -73,6 +86,19 @@ jobs:
           else:
               print("No changed indexable URLs to submit.")
 
+          summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+          if summary_path:
+              with open(summary_path, "a", encoding="utf-8") as summary:
+                  summary.write("## IndexNow URL Selection\n\n")
+                  summary.write(f"- Event: `{event_name}`\n")
+                  summary.write(f"- Sitemap URLs: `{len(sitemap_urls)}`\n")
+                  summary.write(f"- Changed files: `{len(changed_files)}`\n")
+                  summary.write(f"- URLs selected: `{len(submit_urls)}`\n")
+                  if submit_urls:
+                      summary.write("\n### Selected URLs\n\n")
+                      for url in submit_urls:
+                          summary.write(f"- {url}\n")
+
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
               fh.write(f"url_count={len(submit_urls)}\n")
               fh.write(f"urls_json={json.dumps(submit_urls)}\n")
@@ -85,6 +111,7 @@ jobs:
           KEY_LOC: https://lastzguides.com/dd8b3d12471744c4ad67e9dc368f04cd.txt
           URLS: ${{ steps.url_list.outputs.urls_json }}
         run: |
+          set -euo pipefail
           payload=$(jq -n \
             --arg host "lastzguides.com" \
             --arg key "$KEY" \
@@ -102,6 +129,16 @@ jobs:
           else
             echo "IndexNow response body is empty."
           fi
+          if [ "$http_code" != "200" ] && [ "$http_code" != "202" ]; then
+            echo "IndexNow submit failed. Expected HTTP 200 or 202."
+            exit 1
+          fi
+          {
+            echo "## IndexNow Submit"
+            echo
+            echo "- HTTP status: \`$http_code\`"
+            echo "- Submitted URL count: \`${{ steps.url_list.outputs.url_count }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Skip IndexNow submit when there are no changed indexable URLs
         if: steps.url_list.outputs.url_count == '0'
@@ -119,8 +156,7 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ steps.gsc_auth.outputs.access_token }}
         run: |
-          SITE_URL="sc-domain:lastzguides.com"
-          SITEMAP_URL="https://lastzguides.com/sitemap.xml"
+          set -euo pipefail
           enc_site=$(python -c 'import urllib.parse; print(urllib.parse.quote("sc-domain:lastzguides.com", safe=""))')
           enc_sitemap=$(python -c 'import urllib.parse; print(urllib.parse.quote("https://lastzguides.com/sitemap.xml", safe=""))')
           http_code=$(curl -sS -o gsc-response.json -w "%{http_code}" \
@@ -129,3 +165,13 @@ jobs:
             "https://www.googleapis.com/webmasters/v3/sites/${enc_site}/sitemaps/${enc_sitemap}")
           echo "GSC sitemap submit HTTP $http_code"
           cat gsc-response.json || true
+          if [ "$http_code" != "200" ] && [ "$http_code" != "204" ]; then
+            echo "GSC sitemap submit failed. Expected HTTP 200 or 204."
+            exit 1
+          fi
+          {
+            echo "## GSC Sitemap Submit"
+            echo
+            echo "- HTTP status: \`$http_code\`"
+            echo "- Sitemap: https://lastzguides.com/sitemap.xml"
+          } >> "$GITHUB_STEP_SUMMARY"
