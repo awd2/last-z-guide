@@ -3,7 +3,7 @@
 ## Overview
 
 - Summary: Update the existing page `redeem-code-not-working.html` for the `Economy` cluster using the `support-guide` archetype.
-- Status: `proposal_ready`
+- Status: `approved_for_apply`
 - Risk: `low`
 - Cluster: `Economy`
 - Target: `redeem-code-not-working.html`
@@ -33,7 +33,7 @@
 - Generated page: `false`
 - Selector or anchor: `related-guides section or nearest relevant paragraph`
 - Risk: `low`
-- Approval state: `proposed`
+- Approval state: `rejected`
 - Generator command: `None`
 
 Before:
@@ -61,7 +61,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `Related Guides`
 - Risk: `low`
-- Approval state: `proposed`
+- Approval state: `rejected`
 - Generator command: `None`
 
 Before:
@@ -89,7 +89,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `related-guides section or nearest relevant paragraph`
 - Risk: `low`
-- Approval state: `proposed`
+- Approval state: `rejected`
 - Generator command: `None`
 
 Before:
@@ -117,7 +117,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `Related Guides`
 - Risk: `low`
-- Approval state: `proposed`
+- Approval state: `rejected`
 - Generator command: `None`
 
 Before:
@@ -145,7 +145,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `<title>, meta description, H1, first-screen block`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:
@@ -179,7 +179,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `<title>, meta description, H1, first-screen block`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `rejected`
 - Generator command: `None`
 
 Before:
@@ -206,7 +206,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `related-guides section or nearest relevant paragraph`
 - Risk: `low`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:

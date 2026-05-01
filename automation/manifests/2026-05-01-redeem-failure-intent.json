@@ -2,7 +2,7 @@
   "run_id": "2026-05-01-redeem-failure-intent",
   "created_at": "2026-05-01T15:17:55.497405Z",
   "run_type": "update_existing",
-  "status": "proposal_ready",
+  "status": "closed",
   "risk_level": "low",
   "summary": "Update the existing page `redeem-code-not-working.html` for the `Economy` cluster using the `support-guide` archetype.",
   "inputs": {
@@ -158,7 +158,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T15:24:23Z",
+          "approval_note": "Approved: add first-screen failure-type sorting callout."
         },
         {
           "target_file": "redeem-code-not-working.html",
@@ -190,7 +193,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:24:28Z",
+          "approval_note": "Rejected: current metadata already matches failed redemption intent."
         },
         {
           "target_file": "redeem-code-not-working.html",
@@ -222,7 +228,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T15:23:39Z",
+          "approval_note": "Approved: add Gift Center UID Setup related-card on troubleshooting page."
         },
         {
           "target_file": "codes.html",
@@ -254,7 +263,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:24:36Z",
+          "approval_note": "Rejected: codes.html already links to troubleshooting in multiple places."
         },
         {
           "target_file": "diamond-reserve.html",
@@ -286,7 +298,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:23:51Z",
+          "approval_note": "Rejected: not a close failed-code troubleshooting source."
         },
         {
           "target_file": "f2p.html",
@@ -318,7 +333,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:24:41Z",
+          "approval_note": "Rejected: not a close failed-code troubleshooting source."
         },
         {
           "target_file": "farm-account.html",
@@ -350,14 +368,13 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:24:46Z",
+          "approval_note": "Rejected: not a close failed-code troubleshooting source."
         }
       ],
       "changed_files": [
-        "codes.html",
-        "diamond-reserve.html",
-        "f2p.html",
-        "farm-account.html",
         "redeem-code-not-working.html"
       ],
       "source_files": [
@@ -418,11 +435,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T15:24:23Z",
+          "approval_note": "Approved: add first-screen failure-type sorting callout.",
           "before_summary": "title: Last Z Gift Center Code Not Working? (2026) — UID, Login, Reward Fixes | h1: Last Z Code Not Working? Gift Center, UID, and Reward Fixes | meta: Last Z code not working? Check Gift Center login, UID mistakes, expired or already-used codes, mailbox delays, and the fastest fixes for failed redemption. | verified: If your Last Z code is not working, the most common causes are a wrong UID, expired code, already-used code, typo, or checking the wrong place for rewards. Start with the official Gift Center and this checklist before assuming the code is dead.",
           "desired_after_summary": "Add one first-screen clarification for failure-type sorting: wrong UID/typo, expired/already-used code, and mailbox delay are different checks. Keep the page as troubleshooting, not the codes hub.",
           "suggested_content": "Add this callout inside the existing `Quick Answer` `.qa-callouts` block, after the mailbox callout:\n\n```html\n<p class=\"qa-callout qa-callout--note\">\n    <span class=\"qa-icon\" aria-hidden=\"true\">i</span>\n    <span class=\"qa-callout-text\"><strong>Sort the failure first:</strong> wrong UID or typo means the redemption failed, expired or already-used means the code is no longer claimable for that account, and missing rewards means you should check mailbox timing before retrying.</span>\n</p>\n```",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "redeem-code-not-working.html",
@@ -455,11 +474,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:24:28Z",
+          "approval_note": "Rejected: current metadata already matches failed redemption intent.",
           "before_summary": "title: Last Z Gift Center Code Not Working? (2026) — UID, Login, Reward Fixes | h1: Last Z Code Not Working? Gift Center, UID, and Reward Fixes | meta: Last Z code not working? Check Gift Center login, UID mistakes, expired or already-used codes, mailbox delays, and the fastest fixes for failed redemption. | verified: If your Last Z code is not working, the most common causes are a wrong UID, expired code, already-used code, typo, or checking the wrong place for rewards. Start with the official Gift Center and this checklist before assuming the code is dead.",
           "desired_after_summary": "No metadata change is recommended. The current title, H1, and meta already target code-not-working, Gift Center, UID, login, reward, expired, already-used, and mailbox intent.",
           "suggested_content": "No metadata edit is recommended for this pass. Keep the current title, H1, and meta description focused on failed redemption, Gift Center, UID, expired/already-used codes, and mailbox delays.",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "redeem-code-not-working.html",
@@ -492,11 +513,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T15:23:39Z",
+          "approval_note": "Approved: add Gift Center UID Setup related-card on troubleshooting page.",
           "before_summary": "title: Last Z Gift Center Code Not Working? (2026) — UID, Login, Reward Fixes | h1: Last Z Code Not Working? Gift Center, UID, and Reward Fixes | meta: Last Z code not working? Check Gift Center login, UID mistakes, expired or already-used codes, mailbox delays, and the fastest fixes for failed redemption. | verified: If your Last Z code is not working, the most common causes are a wrong UID, expired code, already-used code, typo, or checking the wrong place for rewards. Start with the official Gift Center and this checklist before assuming the code is dead.",
           "desired_after_summary": "Add `Gift Center UID Setup` to related guides because failed-code troubleshooting often starts with setup validation.",
           "suggested_content": "Add this related-card inside the existing `Related Guides` grid, after `Redeem Codes`:\n\n```html\n<a href=\"gift-center-uid.html\" class=\"related-card\">Gift Center UID Setup</a>\n```",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "codes.html",
@@ -529,11 +552,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:24:36Z",
+          "approval_note": "Rejected: codes.html already links to troubleshooting in multiple places.",
           "before_summary": "title: Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID | h1: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID | meta: Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work. | verified: Use this page for active Last Z codes first, then redeem them through the official Gift Center. Copy your UID from Avatar > Settings > Copy ID, paste the code exactly, and check your in-game mailbox for rewards.",
           "desired_after_summary": "No edit recommended: `codes.html` already links to this troubleshooting page in the early routing block, troubleshooting section, FAQ, and related-guides grid.",
           "suggested_content": "Reject this spec for this pass. `codes.html` already links to `redeem-code-not-working.html` in the early routing block, troubleshooting section, FAQ, and related-guides grid.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "diamond-reserve.html",
@@ -566,11 +591,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:23:51Z",
+          "approval_note": "Rejected: not a close failed-code troubleshooting source.",
           "before_summary": "title: Last Z Diamond Reserve Guide (2026) — What to Save Diamonds For First | h1: Last Z Diamond Reserve Guide — What to Save Diamonds For First | meta: Best Last Z diamond reserve strategy: what to save diamonds for first, how the Friday shield reserve works, when Lucky Discounter is worth it, and which purchases are a waste for F2P. | verified: Best diamond rule for most F2P and low spenders: keep a protected reserve for shields first, spend only on high-value event discounts or long-term account value you can actually buy with diamonds second, and avoid reactive purchases that do not improve your account long term.",
           "desired_after_summary": "No edit recommended: this page is not a close troubleshooting source for failed code redemption.",
           "suggested_content": "Reject this spec for this pass. The source page is not close enough to failed-code troubleshooting to justify another cross-link.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "f2p.html",
@@ -603,11 +630,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:24:41Z",
+          "approval_note": "Rejected: not a close failed-code troubleshooting source.",
           "before_summary": "title: Last Z F2P Guide (2026) — Best Diamond Spending, Free Sources, What to Buy First | h1: Last Z F2P Guide — Best Diamond Spending, Free Sources, and What to Buy First | meta: Complete Last Z F2P guide: how to get free diamonds, what to save them for first, the best spending priority for shields, refugees, and event value, and how F2P players stay competitive. | verified: Best F2P plan for most players: protect your weekly shield reserve first, invest in refugees for long-term speed, and only spend diamonds aggressively when events improve the value instead of wasting them on random convenience.",
           "desired_after_summary": "No edit recommended: this page is not a close troubleshooting source for failed code redemption.",
           "suggested_content": "Reject this spec for this pass. The source page is not close enough to failed-code troubleshooting to justify another cross-link.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "farm-account.html",
@@ -640,23 +669,93 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T15:24:46Z",
+          "approval_note": "Rejected: not a close failed-code troubleshooting source.",
           "before_summary": "title: Last Z Farm Account Guide (2026) - How to Create a Farm Before Season 2 | h1: Last Z Farm Account Guide - How to Create a Farm Before Season 2 | meta: How to create a Last Z farm account on your server before Season 2, what you need, how to set up a farm alt, and how to use it to support your main account. | verified: Best farm account setup for most players: create the farm before Season 2 starts on your server, place it on the same server as your main account, and use it for steady resource support instead of trying to turn it into a second main.",
           "desired_after_summary": "No edit recommended: this page is not a close troubleshooting source for failed code redemption.",
           "suggested_content": "Reject this spec for this pass. The source page is not close enough to failed-code troubleshooting to justify another cross-link.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         }
       ]
+    },
+    "apply_preview": {
+      "report_path": "automation/reports/2026-05-01-redeem-failure-intent.apply-preview.md",
+      "generated_at": "2026-05-01T15:26:59Z",
+      "approved_specs_count": 2,
+      "preview_items": [
+        {
+          "source_of_truth_file": "redeem-code-not-working.html",
+          "output_file": "redeem-code-not-working.html",
+          "operation_type": "first_screen_update",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "replace_first_screen_answer",
+          "warnings": [],
+          "preview": "```diff\n# Quick Answer callout\n- Existing callouts explain official Gift Center, UID copying, and mailbox rewards.\n+ <p class=\"qa-callout qa-callout--note\">\n    <span class=\"qa-icon\" aria-hidden=\"true\">i</span>\n    <span class=\"qa-callout-text\"><strong>Sort the failure first:</strong> wrong UID or typo means the redemption failed, expired or already-used means the code is no longer claimable for that account, and missing rewards means you should check mailbox timing before retrying.</span>\n</p>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "redeem-code-not-working.html"
+        },
+        {
+          "source_of_truth_file": "redeem-code-not-working.html",
+          "output_file": "redeem-code-not-working.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "add_setup_related_card",
+          "warnings": [],
+          "preview": "```diff\n# related guide card\n- <a href=\"codes.html\" class=\"related-card\">Redeem Codes</a>\n+ <a href=\"codes.html\" class=\"related-card\">Redeem Codes</a>\n<a href=\"gift-center-uid.html\" class=\"related-card\">Gift Center UID Setup</a>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "redeem-code-not-working.html"
+        }
+      ]
+    },
+    "apply_result": {
+      "report_path": "automation/reports/2026-05-01-redeem-failure-intent.apply-result.md",
+      "applied_at": "2026-05-01T15:27:26Z",
+      "applied_operations": [
+        "redeem-code-not-working.html:uid_related_card"
+      ],
+      "skipped_operations": [
+        "redeem-code-not-working.html:failure_sorting_callout_already_present"
+      ],
+      "generator_commands": []
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-05-01-redeem-failure-intent.closed.md",
+      "closed_at": "2026-05-01T15:33:32Z",
+      "note": ""
     }
   },
   "changed_files": [
-    "codes.html",
-    "diamond-reserve.html",
-    "f2p.html",
-    "farm-account.html",
     "redeem-code-not-working.html"
   ],
-  "checks": {},
+  "checks": {
+    "automation_checks_strict": {
+      "status": "pass",
+      "notes": "Cluster link check passed. | Checked site structure on 62 HTML pages and 55 guide/data pages. | Site structure check passed. | Checked SEO/LLM alignment on 62 memory pages: 0 alignment warning(s), 0 cannibalization warning(s). | SEO/LLM alignment check passed. | Automation checks passed."
+    },
+    "changed_pages_report": {
+      "status": "pass",
+      "notes": "same-cluster inbound links: 1 | expected hubs: index.html, codes.html | linked from hubs: index.html"
+    }
+  },
   "review": {
     "verdict": "needs_human_review",
     "open_questions": [],

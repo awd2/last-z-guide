@@ -24,6 +24,7 @@ from automation.proposal_renderer import REPORTS_DIR, md_list, resolve_manifest_
 TARGET_CARDS = {
     "codes.html": {"href": "codes.html", "label": "Redeem Codes"},
     "gift-center-uid.html": {"href": "gift-center-uid.html", "label": "Gift Center UID Setup"},
+    "redeem-code-not-working.html": {"href": "redeem-code-not-working.html", "label": "Code Not Working"},
     "research-costs.html": {"href": "research-costs.html", "label": "Research Costs Atlas"},
 }
 
@@ -43,6 +44,10 @@ TARGET_OPERATION_SUPPORT = {
         "first_screen_update",
         "internal_link_addition",
     },
+    "redeem-code-not-working.html": {
+        "first_screen_update",
+        "internal_link_addition",
+    },
     "start.html": {
         "first_screen_update",
     },
@@ -59,6 +64,19 @@ CODES_GUIDE_VERIFIED_NEW = '<p class="guide-verified">Use this page for active L
 CODES_ROUTING_OLD = """            <p><strong>Need setup only?</strong> Use the <a href="gift-center-uid.html">Gift Center &amp; UID Guide</a>. <strong>Need troubleshooting?</strong> Use <a href="redeem-code-not-working.html">Code Not Working?</a>.</p>
             <p>If you want the full troubleshooting flow, use the <a href="redeem-code-not-working.html">Last Z Code Not Working?</a> guide.</p>"""
 CODES_ROUTING_NEW = '            <p><strong>Need setup only?</strong> Use the <a href="gift-center-uid.html">Gift Center &amp; UID Guide</a>. <strong>Code failed?</strong> Use the <a href="redeem-code-not-working.html">Last Z Code Not Working?</a> guide.</p>'
+
+REDEEM_MAILBOX_CALLOUT = """                    <p class="qa-callout qa-callout--tip">
+                        <span class="qa-icon" aria-hidden="true">📬</span>
+                        <span class="qa-callout-text"><strong>Check your mailbox:</strong> rewards go to in-game mail, not the Gift Center screen.</span>
+                    </p>"""
+
+REDEEM_FAILURE_SORTING_CALLOUT = """                    <p class="qa-callout qa-callout--note">
+                        <span class="qa-icon" aria-hidden="true">i</span>
+                        <span class="qa-callout-text"><strong>Sort the failure first:</strong> wrong UID or typo means the redemption failed, expired or already-used means the code is no longer claimable for that account, and missing rewards means you should check mailbox timing before retrying.</span>
+                    </p>"""
+
+REDEEM_RELATED_CODES_CARD = '                <a href="codes.html" class="related-card">Redeem Codes</a>'
+REDEEM_RELATED_UID_CARD = '                <a href="gift-center-uid.html" class="related-card">Gift Center UID Setup</a>'
 
 
 def approved_specs(manifest) -> list[dict[str, Any]]:
@@ -350,6 +368,52 @@ def apply_codes(specs: list[dict[str, Any]]) -> tuple[list[str], list[str]]:
     return applied, skipped
 
 
+def apply_redeem_code_not_working(specs: list[dict[str, Any]]) -> tuple[list[str], list[str]]:
+    path = ROOT / "redeem-code-not-working.html"
+    text = path.read_text(encoding="utf-8")
+    applied: list[str] = []
+    skipped: list[str] = []
+    operations = {spec.get("operation_type") for spec in specs}
+
+    if "first_screen_update" in operations:
+        if "Sort the failure first:" in text:
+            skipped.append("redeem-code-not-working.html:failure_sorting_callout_already_present")
+        elif REDEEM_MAILBOX_CALLOUT in text:
+            text = replace_once(
+                text,
+                REDEEM_MAILBOX_CALLOUT,
+                REDEEM_MAILBOX_CALLOUT + "\n" + REDEEM_FAILURE_SORTING_CALLOUT,
+                applied,
+                "redeem-code-not-working.html:failure_sorting_callout",
+            )
+        else:
+            skipped.append("redeem-code-not-working.html:mailbox_callout_anchor_not_found")
+
+    if "internal_link_addition" in operations:
+        related_match = re.search(
+            r'(<div class="related-grid">\n)(?P<body>.*?)(\n\s*</div>)',
+            text,
+            flags=re.S,
+        )
+        if not related_match:
+            skipped.append("redeem-code-not-working.html:related_grid_not_found")
+        elif 'href="gift-center-uid.html"' in related_match.group("body"):
+            skipped.append("redeem-code-not-working.html:uid_related_card_already_present")
+        elif REDEEM_RELATED_CODES_CARD in related_match.group("body"):
+            text = replace_once(
+                text,
+                REDEEM_RELATED_CODES_CARD,
+                REDEEM_RELATED_CODES_CARD + "\n" + REDEEM_RELATED_UID_CARD,
+                applied,
+                "redeem-code-not-working.html:uid_related_card",
+            )
+        else:
+            skipped.append("redeem-code-not-working.html:related_codes_card_anchor_not_found")
+
+    path.write_text(text, encoding="utf-8")
+    return applied, skipped
+
+
 def add_html_related_card(source_file: str, target_page: str) -> tuple[list[str], list[str]]:
     path = ROOT / source_file
     text = path.read_text(encoding="utf-8")
@@ -484,6 +548,11 @@ def apply_approved(path: Path):
             continue
         if source_file == "start.html":
             source_applied, source_skipped = apply_start(source_specs)
+            applied.extend(source_applied)
+            skipped.extend(source_skipped)
+            continue
+        if source_file == "redeem-code-not-working.html":
+            source_applied, source_skipped = apply_redeem_code_not_working(source_specs)
             applied.extend(source_applied)
             skipped.extend(source_skipped)
             continue

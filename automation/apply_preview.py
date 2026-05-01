@@ -24,6 +24,7 @@ from automation.proposal_renderer import REPORTS_DIR, md_list, resolve_manifest_
 TARGET_LABELS = {
     "codes.html": "Redeem Codes",
     "gift-center-uid.html": "Gift Center UID Setup",
+    "redeem-code-not-working.html": "Code Not Working",
     "research-costs.html": "Research Costs Atlas",
 }
 
@@ -42,6 +43,13 @@ CODES_GUIDE_VERIFIED = (
 CODES_ROUTING_PARAGRAPH = (
     '<p><strong>Need setup only?</strong> Use the <a href="gift-center-uid.html">Gift Center &amp; UID Guide</a>. '
     '<strong>Code failed?</strong> Use the <a href="redeem-code-not-working.html">Last Z Code Not Working?</a> guide.</p>'
+)
+
+REDEEM_FAILURE_SORTING_CALLOUT = (
+    '<p class="qa-callout qa-callout--note">\n'
+    '    <span class="qa-icon" aria-hidden="true">i</span>\n'
+    '    <span class="qa-callout-text"><strong>Sort the failure first:</strong> wrong UID or typo means the redemption failed, expired or already-used means the code is no longer claimable for that account, and missing rewards means you should check mailbox timing before retrying.</span>\n'
+    "</p>"
 )
 
 
@@ -162,6 +170,12 @@ def first_screen_preview_for_target(source_file: str) -> str | None:
             "Use the official Last Z Gift Center to redeem active codes. This page gives you the current verified codes, the official login page, the fastest UID steps, and the main reasons redemption fails.",
             CODES_GUIDE_VERIFIED,
         )
+    if source_file == "redeem-code-not-working.html":
+        return diff_block(
+            "Quick Answer callout",
+            "Existing callouts explain official Gift Center, UID copying, and mailbox rewards.",
+            REDEEM_FAILURE_SORTING_CALLOUT,
+        )
     return None
 
 
@@ -212,6 +226,16 @@ def preview_for_spec(spec: dict[str, Any], target_page: str) -> dict[str, Any]:
                 "early Gift Center routing",
                 "Two overlapping setup/troubleshooting paragraphs in the highlight box.",
                 CODES_ROUTING_PARAGRAPH,
+            )
+        elif source_file == "redeem-code-not-working.html":
+            action = "add_setup_related_card"
+            exists = html_related_grid_has_link(path, "gift-center-uid.html")
+            if exists:
+                warnings.append("`redeem-code-not-working.html` already links to `gift-center-uid.html` in related guides.")
+            preview = diff_block(
+                "related guide card",
+                '<a href="codes.html" class="related-card">Redeem Codes</a>',
+                '<a href="codes.html" class="related-card">Redeem Codes</a>\n<a href="gift-center-uid.html" class="related-card">Gift Center UID Setup</a>',
             )
         else:
             action = "no_self_link_strengthen_outbound_routes"
