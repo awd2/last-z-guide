@@ -395,6 +395,7 @@ python3 automation/pipeline.py approval <run_id> --state approved --all
 python3 automation/pipeline.py apply-preview <run_id>
 python3 automation/pipeline.py apply-approved <run_id>
 python3 automation/pipeline.py close-run <run_id>
+python3 automation/pipeline.py worker-chain --topic-id <topic_id> --json
 python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id <topic_id> --json
 python3 automation/workers/reviewer.py --topic-id <topic_id> --json

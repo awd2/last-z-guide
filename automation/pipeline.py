@@ -220,6 +220,32 @@ def cmd_bundle_run(run_id: str) -> int:
     )
 
 
+def cmd_worker_chain(
+    topic_id: str | None,
+    target: str | None,
+    limit: int,
+    min_impressions: int,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "run_chain.py"),
+        "--limit",
+        str(limit),
+        "--min-impressions",
+        str(min_impressions),
+    ]
+    if topic_id:
+        command.extend(["--topic-id", topic_id])
+    if target:
+        command.extend(["--target", target])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== Worker Chain ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_list(status: str | None, cluster: str | None, priority: str | None, as_json: bool) -> int:
     items = load_topic_backlog()
 
@@ -1315,6 +1341,21 @@ def build_parser() -> argparse.ArgumentParser:
     )
     bundle_run_parser.add_argument("run_id", help="Run manifest basename without .json")
 
+    worker_chain_parser = subparsers.add_parser(
+        "worker-chain",
+        help="Run the no-write Scout -> Editor -> Reviewer chain for one topic proposal.",
+    )
+    worker_chain_parser.add_argument("--topic-id", help="Scout topic_id to select after Scout runs.")
+    worker_chain_parser.add_argument("--target", help="Alternative selector: target page or slug.")
+    worker_chain_parser.add_argument("--limit", type=int, default=8, help="Maximum Scout proposals to render.")
+    worker_chain_parser.add_argument(
+        "--min-impressions",
+        type=int,
+        default=200,
+        help="Minimum page impressions for Scout proposals.",
+    )
+    worker_chain_parser.add_argument("--json", action="store_true", help="Print the chain summary as JSON.")
+
     return parser
 
 
@@ -1377,6 +1418,8 @@ def main() -> int:
         return cmd_bundle(args.topic_id)
     if args.command == "bundle-run":
         return cmd_bundle_run(args.run_id)
+    if args.command == "worker-chain":
+        return cmd_worker_chain(args.topic_id, args.target, args.limit, args.min_impressions, args.json)
 
     parser.error(f"Unknown command: {args.command}")
     return 2

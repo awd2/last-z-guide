@@ -176,6 +176,7 @@ python3 automation/pipeline.py approval <run_id> --state approved --all
 python3 automation/pipeline.py apply-preview <run_id>
 python3 automation/pipeline.py apply-approved <run_id>
 python3 automation/pipeline.py close-run <run_id>
+python3 automation/pipeline.py worker-chain --topic-id <topic_id>
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
@@ -219,6 +220,7 @@ python3 automation/pipeline.py approval 2026-04-22-research-cluster-nav --state 
 python3 automation/pipeline.py apply-preview 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py apply-approved 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py close-run 2026-04-22-research-cluster-nav --note "Human reviewed local page output."
+python3 automation/pipeline.py worker-chain --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
@@ -242,6 +244,7 @@ Lifecycle shorthand:
 - `apply-approved` -> apply approved specs with conservative deterministic templates and move the run to `applied_pending_qa`
 - `checks --strict --manifest <run_id>` -> record strict QA and move `applied_pending_qa` to `qa_passed` when all checks pass
 - `close-run` -> close a `qa_passed` run with a final handoff artifact
+- `worker-chain` -> run the no-write `Scout -> Editor -> Reviewer` chain for one topic proposal
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
@@ -266,7 +269,7 @@ Reviewer gate generation:
 
 Worker chain:
 
-- `python3 automation/workers/run_chain.py --topic-id <topic_id> --json` -> run `Scout -> Editor -> Reviewer` and generate a chain summary
+- `python3 automation/pipeline.py worker-chain --topic-id <topic_id> --json` -> run `Scout -> Editor -> Reviewer` and generate a chain summary
 - output lives in `automation/reports/worker-chain-<topic_id>.json` and `automation/reports/worker-chain-<topic_id>.md`
 - this is the preferred no-write operator command for reviewing one analytics-backed opportunity end to end
 
