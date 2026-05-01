@@ -398,7 +398,10 @@ def backlog_sync_rows() -> tuple[list[dict], list[dict]]:
         latest_status = latest.status if latest else None
         latest_group = lifecycle_group(latest_status) if latest_status else "no_run"
 
-        if latest is None:
+        if latest is None and item.status == "done":
+            sync_state = "manual_completed"
+            recommendation = "no_action"
+        elif latest is None:
             sync_state = "available"
             recommendation = "ready_for_run"
         elif latest.status == "closed" and item.status == "backlog":

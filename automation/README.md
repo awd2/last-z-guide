@@ -383,6 +383,7 @@ Use it before starting LLM/editorial work to avoid re-running closed topics or i
 It reports:
 
 - topics with no run yet
+- done topics with no run manifest
 - topics with active runs
 - backlog rows whose latest run is already closed
 - run manifests that no longer map to a backlog topic
