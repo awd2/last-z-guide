@@ -78,6 +78,13 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
 - `demo_review_bundle.py`
   - one-command flow that creates a reviewed manifest and a markdown review bundle
 
+### `workers/`
+
+- `workers/README.md`
+  - defines the contracts for future `Scout -> Editor -> Reviewer` LLM workers
+  - keeps worker outputs structured and reviewable before any implementation work
+  - protects templates, cluster roles, canonical claims, and human approval gates
+
 ## Current operating model
 
 Right now this layer is **foundation only**.
@@ -91,6 +98,14 @@ It does:
 - store site memory explicitly
 - keep content inventory auditable
 - create a structured backlog for future automation
+
+The next worker milestone is contracts-first:
+
+- `Scout` finds topic/update opportunities from GSC signals, backlog, and site memory.
+- `Editor` turns approved opportunities into structured content briefs.
+- `Reviewer` checks fit, risk, duplication, canonical claims, and required QA.
+
+See `automation/workers/README.md` before adding or changing worker behavior.
 
 ## Archived experiments
 

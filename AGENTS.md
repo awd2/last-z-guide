@@ -83,6 +83,9 @@ Use these files as explicit authorities for different concerns:
   - merge/readiness gate
 - `automation/README.md`
   - automation operator reference
+- `automation/workers/README.md`
+  - future `Scout -> Editor -> Reviewer` worker contracts
+  - structured worker outputs and human-gate rules
 
 ## Required Context Before Any Content Edit
 
@@ -107,6 +110,8 @@ Load these when the task specifically needs them:
   - when evaluating merge-readiness, SEO/publishing quality, or final QA
 - [automation/README.md](/Users/oleg/Projects/claude-playground/automation/README.md)
   - when the task touches automation, manifests, pipeline commands, or reports
+- [automation/workers/README.md](/Users/oleg/Projects/claude-playground/automation/workers/README.md)
+  - when the task designs, reviews, or implements LLM workers / agents
 - [automation/memory/topic_backlog.csv](/Users/oleg/Projects/claude-playground/automation/memory/topic_backlog.csv)
   - when the task is about planning, backlog, prioritization, or automation intake
 
@@ -196,6 +201,7 @@ Use these defaults unless there is a good reason not to:
   - do not rely on generated HTML alone
 - for automation tasks:
   - open `automation/README.md`
+  - open `automation/workers/README.md` when the task touches LLM workers / agents
   - open the relevant memory file(s)
   - open the exact script or CLI entrypoint being changed
 - for SEO/indexing/publishing tasks:

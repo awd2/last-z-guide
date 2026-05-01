@@ -132,6 +132,12 @@ Automation artifacts live in:
 - `automation/reports/<run_id>.apply-result.md`
 - `automation/reports/<run_id>.closed.md`
 
+Future LLM worker contracts live in:
+
+- `automation/workers/README.md`
+
+That contract layer defines the planned `Scout -> Editor -> Reviewer` flow and must be followed before adding worker code.
+
 ## GSC Analytics Automation
 
 The weekly GSC workflow writes:
