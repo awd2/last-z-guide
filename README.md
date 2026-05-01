@@ -113,6 +113,7 @@ python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id <topic_id> --json
 python3 automation/workers/reviewer.py --topic-id <topic_id> --json
 python3 automation/workers/run_chain.py --topic-id <topic_id> --json
+python3 automation/workers/intake.py --topic-id <topic_id> --json
 ```
 
 `checks` includes:
@@ -141,7 +142,7 @@ Future LLM worker contracts live in:
 
 - `automation/workers/README.md`
 
-That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout`, `Editor`, and `Reviewer` steps plus a chain runner that turns weekly GSC agent signals into reviewable topic proposals, content briefs, readiness verdicts, and a single chain summary.
+That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout`, `Editor`, and `Reviewer` steps plus a chain runner and intake gate that turn weekly GSC agent signals into reviewable topic proposals, content briefs, readiness verdicts, and explicit human-gated intake artifacts.
 
 ## GSC Analytics Automation
 

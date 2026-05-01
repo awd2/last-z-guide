@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "worker_review",
-  "generated_at": "2026-05-01T18:15:28Z",
+  "generated_at": "2026-05-01T18:22:05Z",
   "source_topic_id": "codes-gsc-opportunity",
   "source_brief_file": "automation/reports/editor-brief-codes-gsc-opportunity.json",
   "source_proposal_file": "automation/reports/scout-topic-proposals.json",

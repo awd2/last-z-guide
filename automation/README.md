@@ -105,6 +105,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - writes a no-change chain summary artifact
   - does not mutate backlog, manifests, or content
 
+- `workers/intake.py`
+  - reads one Worker chain summary
+  - writes a no-change intake gate artifact
+  - keeps high-risk or human-review opportunities in `approval_required` until `--approved-by` is supplied
+  - does not mutate backlog, manifests, or content
+
 ## Current operating model
 
 Right now this layer is **foundation only**.
@@ -186,6 +192,7 @@ python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id <topic_id> --json
 python3 automation/workers/reviewer.py --topic-id <topic_id> --json
 python3 automation/workers/run_chain.py --topic-id <topic_id> --json
+python3 automation/workers/intake.py --topic-id <topic_id> --json
 ```
 
 Example:
@@ -229,6 +236,7 @@ python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/reviewer.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/run_chain.py --topic-id codes-gsc-opportunity --json
+python3 automation/workers/intake.py --topic-id codes-gsc-opportunity --json
 ```
 
 Lifecycle shorthand:
@@ -272,6 +280,12 @@ Worker chain:
 - `python3 automation/pipeline.py worker-chain --topic-id <topic_id> --json` -> run `Scout -> Editor -> Reviewer` and generate a chain summary
 - output lives in `automation/reports/worker-chain-<topic_id>.json` and `automation/reports/worker-chain-<topic_id>.md`
 - this is the preferred no-write operator command for reviewing one analytics-backed opportunity end to end
+
+Worker intake gate:
+
+- `python3 automation/workers/intake.py --topic-id <topic_id> --json` -> generate a no-write intake artifact from one Worker chain summary
+- output lives in `automation/reports/worker-intake-<topic_id>.json` and `automation/reports/worker-intake-<topic_id>.md`
+- if human approval is required, intake remains `approval_required` until rerun with `--approved-by <name>`
 
 Lower-level helpers are still available when needed.
 

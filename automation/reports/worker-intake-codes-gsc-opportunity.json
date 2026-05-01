@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "report_type": "worker_proposal_intake",
+  "generated_at": "2026-05-01T18:22:05Z",
+  "source_chain_file": "automation/reports/worker-chain-codes-gsc-opportunity.json",
+  "source_topic_id": "codes-gsc-opportunity",
+  "target_page_or_slug": "codes.html",
+  "state": "approval_required",
+  "approved_by": null,
+  "approval_note": null,
+  "review_verdict": "needs_human_review",
+  "risk_level": "high",
+  "approved_next_stage": "patch_plan",
+  "blockers": [],
+  "warnings": [
+    "Human approval is required before this opportunity can become backlog/run intake."
+  ],
+  "proposed_backlog_item": {
+    "topic_id": "codes-gsc-opportunity-approved-intake",
+    "title": "Worker-reviewed opportunity: codes.html",
+    "cluster": "Economy",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "codes.html",
+    "source_type": "analytics",
+    "source_reference": "Worker chain review: codes-gsc-opportunity",
+    "confidence": "medium",
+    "priority": "high",
+    "status": "backlog",
+    "notes": "Created as a proposed intake record only. Do not add to topic_backlog.csv without human review."
+  },
+  "next_actions": [
+    "Human reviews automation/reports/worker-chain-codes-gsc-opportunity.md.",
+    "If approved, run: python3 automation/workers/intake.py --topic-id codes-gsc-opportunity --approved-by <name> --json"
+  ],
+  "safety": "No content, backlog, or manifest files were modified by this intake gate."
+}

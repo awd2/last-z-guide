@@ -34,6 +34,19 @@ It runs `Scout -> Editor -> Reviewer` and writes a summary artifact:
 - `automation/reports/worker-chain-<topic_id>.json`
 - `automation/reports/worker-chain-<topic_id>.md`
 
+The current no-write intake gate is:
+
+```bash
+python3 automation/workers/intake.py --topic-id <topic_id> --json
+```
+
+It reads `automation/reports/worker-chain-<topic_id>.json` and writes:
+
+- `automation/reports/worker-intake-<topic_id>.json`
+- `automation/reports/worker-intake-<topic_id>.md`
+
+If the worker review requires human approval, intake remains `approval_required` until rerun with `--approved-by <name>`.
+
 ## Shared Inputs
 
 Every worker must treat these files as source-of-truth context:
