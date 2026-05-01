@@ -2,7 +2,7 @@
   "run_id": "2026-04-22-gift-center-ctr-pass",
   "created_at": "2026-04-22T16:42:29.382541Z",
   "run_type": "update_existing",
-  "status": "proposal_ready",
+  "status": "qa_passed",
   "risk_level": "high",
   "summary": "Update the existing page `codes.html` for the `Economy` cluster using the `support-guide` archetype.",
   "inputs": {
@@ -153,7 +153,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T09:53:33Z",
+          "approval_note": "Approved: tighten guide-verified while preserving codes hub role."
         },
         {
           "target_file": "codes.html",
@@ -185,7 +188,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T09:53:41Z",
+          "approval_note": "Rejected: current title, H1, and meta already match active codes, Gift Center login, and UID intent."
         },
         {
           "target_file": "codes.html",
@@ -217,7 +223,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T09:53:46Z",
+          "approval_note": "Approved: dedupe early Gift Center setup and troubleshooting routing."
         },
         {
           "target_file": "diamond-reserve.html",
@@ -249,7 +258,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T09:53:51Z",
+          "approval_note": "Approved: add Redeem Codes related-card to diamond reserve page."
         },
         {
           "target_file": "f2p.html",
@@ -281,7 +293,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T09:53:56Z",
+          "approval_note": "Rejected: f2p.html already links to Redeem Codes inline and in related guides."
         },
         {
           "target_file": "farm-account.html",
@@ -313,7 +328,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T09:54:01Z",
+          "approval_note": "Approved: add Redeem Codes related-card to farm account page."
         }
       ],
       "changed_files": [
@@ -379,11 +397,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T09:53:33Z",
+          "approval_note": "Approved: tighten guide-verified while preserving codes hub role.",
           "before_summary": "title: Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID | h1: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID | meta: Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work. | verified: Use the official Last Z Gift Center to redeem active codes. This page gives you the current verified codes, the official login page, the fastest UID steps, and the main reasons redemption fails.",
           "desired_after_summary": "Tighten the first-screen answer so the page remains the codes hub: active codes first, official Gift Center redemption second, UID and mailbox facts visible without drifting into setup or troubleshooting.",
           "suggested_content": "Replace the current `guide-verified` paragraph with:\n\n```html\n<p class=\"guide-verified\">Use this page for active Last Z codes first, then redeem them through the official Gift Center. Copy your UID from Avatar &gt; Settings &gt; Copy ID, paste the code exactly, and check your in-game mailbox for rewards.</p>\n```",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "codes.html",
@@ -416,11 +436,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T09:53:41Z",
+          "approval_note": "Rejected: current title, H1, and meta already match active codes, Gift Center login, and UID intent.",
           "before_summary": "title: Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID | h1: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID | meta: Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work. | verified: Use the official Last Z Gift Center to redeem active codes. This page gives you the current verified codes, the official login page, the fastest UID steps, and the main reasons redemption fails.",
           "desired_after_summary": "No metadata change is recommended unless analytics show a specific query mismatch. The current title/H1/meta already include active codes, Gift Center login, and UID intent.",
           "suggested_content": "No metadata edit is recommended for this pass. Keep the current title, H1, and meta description focused on active codes, Gift Center login, and UID intent.",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "codes.html",
@@ -453,11 +475,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T09:53:46Z",
+          "approval_note": "Approved: dedupe early Gift Center setup and troubleshooting routing.",
           "before_summary": "title: Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID | h1: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID | meta: Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work. | verified: Use the official Last Z Gift Center to redeem active codes. This page gives you the current verified codes, the official login page, the fastest UID steps, and the main reasons redemption fails.",
           "desired_after_summary": "Do not add a self-link. Dedupe the early setup/troubleshooting routing so users choose the right adjacent Gift Center page.",
           "suggested_content": "Replace the two early troubleshooting/setup routing paragraphs in the highlight box with one deduped routing paragraph:\n\n```html\n<p><strong>Need setup only?</strong> Use the <a href=\"gift-center-uid.html\">Gift Center &amp; UID Guide</a>. <strong>Code failed?</strong> Use the <a href=\"redeem-code-not-working.html\">Last Z Code Not Working?</a> guide.</p>\n```",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "diamond-reserve.html",
@@ -490,11 +514,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T09:53:51Z",
+          "approval_note": "Approved: add Redeem Codes related-card to diamond reserve page.",
           "before_summary": "title: Last Z Diamond Reserve Guide (2026) — What to Save Diamonds For First | h1: Last Z Diamond Reserve Guide — What to Save Diamonds For First | meta: Best Last Z diamond reserve strategy: what to save diamonds for first, how the Friday shield reserve works, when Lucky Discounter is worth it, and which purchases are a waste for F2P. | verified: Best diamond rule for most F2P and low spenders: keep a protected reserve for shields first, spend only on high-value event discounts or long-term account value you can actually buy with diamonds second, and avoid reactive purchases that do not improve your account long term.",
           "desired_after_summary": "Add a `Redeem Codes` related-card because this page already references free diamonds from codes in body copy.",
           "suggested_content": "Add this related-card inside the existing `Related Guides` grid, after `Resources Guide`:\n\n```html\n<a href=\"codes.html\" class=\"related-card\">Redeem Codes</a>\n```",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "f2p.html",
@@ -527,11 +553,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "rejected",
+          "approval_updated_at": "2026-05-01T09:53:56Z",
+          "approval_note": "Rejected: f2p.html already links to Redeem Codes inline and in related guides.",
           "before_summary": "title: Last Z F2P Guide (2026) — Best Diamond Spending, Free Sources, What to Buy First | h1: Last Z F2P Guide — Best Diamond Spending, Free Sources, and What to Buy First | meta: Complete Last Z F2P guide: how to get free diamonds, what to save them for first, the best spending priority for shields, refugees, and event value, and how F2P players stay competitive. | verified: Best F2P plan for most players: protect your weekly shield reserve first, invest in refugees for long-term speed, and only spend diamonds aggressively when events improve the value instead of wasting them on random convenience.",
           "desired_after_summary": "No edit recommended: this page already links to `codes.html` in the Gift Codes section and related-guides grid.",
           "suggested_content": "Reject this spec for this pass. `f2p.html` already has an inline `Redeem Codes` link in the Gift Codes bullet and a `Redeem Codes` related-card.",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         },
         {
           "target_file": "farm-account.html",
@@ -564,22 +592,135 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-01T09:54:01Z",
+          "approval_note": "Approved: add Redeem Codes related-card to farm account page.",
           "before_summary": "title: Last Z Farm Account Guide (2026) - How to Create a Farm Before Season 2 | h1: Last Z Farm Account Guide - How to Create a Farm Before Season 2 | meta: How to create a Last Z farm account on your server before Season 2, what you need, how to set up a farm alt, and how to use it to support your main account. | verified: Best farm account setup for most players: create the farm before Season 2 starts on your server, place it on the same server as your main account, and use it for steady resource support instead of trying to turn it into a second main.",
           "desired_after_summary": "Add a `Redeem Codes` related-card near Gift Center UID Setup so farm-account readers can route to free-code redemption.",
           "suggested_content": "Add this related-card inside the existing `Related Guides` grid, after `Gift Center UID Setup`:\n\n```html\n<a href=\"codes.html\" class=\"related-card\">Redeem Codes</a>\n```",
-          "risk_level": "low",
-          "approval_state": "proposed"
+          "risk_level": "low"
         }
       ]
+    },
+    "apply_preview": {
+      "report_path": "automation/reports/2026-04-22-gift-center-ctr-pass.apply-preview.md",
+      "generated_at": "2026-05-01T09:55:58Z",
+      "approved_specs_count": 4,
+      "preview_items": [
+        {
+          "source_of_truth_file": "codes.html",
+          "output_file": "codes.html",
+          "operation_type": "first_screen_update",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "replace_first_screen_answer",
+          "warnings": [],
+          "preview": "```diff\n# guide-verified\n- Use the official Last Z Gift Center to redeem active codes. This page gives you the current verified codes, the official login page, the fastest UID steps, and the main reasons redemption fails.\n+ <p class=\"guide-verified\">Use this page for active Last Z codes first, then redeem them through the official Gift Center. Copy your UID from Avatar &gt; Settings &gt; Copy ID, paste the code exactly, and check your in-game mailbox for rewards.</p>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "codes.html"
+        },
+        {
+          "source_of_truth_file": "codes.html",
+          "output_file": "codes.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "dedupe_gift_center_routing",
+          "warnings": [],
+          "preview": "```diff\n# early Gift Center routing\n- Two overlapping setup/troubleshooting paragraphs in the highlight box.\n+ <p><strong>Need setup only?</strong> Use the <a href=\"gift-center-uid.html\">Gift Center &amp; UID Guide</a>. <strong>Code failed?</strong> Use the <a href=\"redeem-code-not-working.html\">Last Z Code Not Working?</a> guide.</p>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "codes.html"
+        },
+        {
+          "source_of_truth_file": "diamond-reserve.html",
+          "output_file": "diamond-reserve.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "add_related_card",
+          "warnings": [
+            "`diamond-reserve.html` already links to `codes.html`."
+          ],
+          "preview": "```diff\n# related guide card\n- <div class=\"related-grid\"> ... </div>\n+ <div class=\"related-grid\"> ... <a href=\"codes.html\" class=\"related-card\">Redeem Codes</a> ... </div>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "codes.html"
+        },
+        {
+          "source_of_truth_file": "farm-account.html",
+          "output_file": "farm-account.html",
+          "operation_type": "internal_link_addition",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "add_related_card",
+          "warnings": [
+            "`farm-account.html` already links to `codes.html`."
+          ],
+          "preview": "```diff\n# related guide card\n- <div class=\"related-grid\"> ... </div>\n+ <div class=\"related-grid\"> ... <a href=\"codes.html\" class=\"related-card\">Redeem Codes</a> ... </div>\n```",
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "codes.html"
+        }
+      ]
+    },
+    "apply_result": {
+      "report_path": "automation/reports/2026-04-22-gift-center-ctr-pass.apply-result.md",
+      "applied_at": "2026-05-01T09:55:22Z",
+      "applied_operations": [
+        "codes.html:guide_verified",
+        "codes.html:dedupe_setup_troubleshooting_routing",
+        "diamond-reserve.html:related_card:codes.html",
+        "farm-account.html:related_card:codes.html"
+      ],
+      "skipped_operations": [],
+      "generator_commands": []
     }
   },
   "changed_files": [
     "codes.html",
     "diamond-reserve.html",
-    "f2p.html",
     "farm-account.html"
   ],
-  "checks": {},
+  "checks": {
+    "automation_checks_strict": {
+      "status": "pass",
+      "notes": "Cluster link check passed. | Checked site structure on 62 HTML pages and 55 guide/data pages. | Site structure check passed. | Checked SEO/LLM alignment on 62 memory pages: 0 alignment warning(s), 0 cannibalization warning(s). | SEO/LLM alignment check passed. | Automation checks passed."
+    },
+    "changed_pages_report": {
+      "status": "pass",
+      "notes": "same-cluster inbound links: 1 | expected hubs: index.html, codes.html | linked from hubs: index.html"
+    }
+  },
   "review": {
     "verdict": "needs_human_review",
     "open_questions": [

@@ -22,6 +22,7 @@ from automation.proposal_renderer import REPORTS_DIR, md_list, resolve_manifest_
 
 
 TARGET_LABELS = {
+    "codes.html": "Redeem Codes",
     "gift-center-uid.html": "Gift Center UID Setup",
     "research-costs.html": "Research Costs Atlas",
 }
@@ -31,6 +32,16 @@ START_SEASON_NOTE = (
     '    <span class="qa-icon" aria-hidden="true">i</span>\n'
     '    <span class="qa-callout-text"><strong>Season naming note:</strong> on newer servers, Season 2 is Winter. Older guides may call Season 2 Desert, but Desert was canceled or skipped for current servers, so follow Winter naming when planning your early timeline.</span>\n'
     "</p>"
+)
+
+CODES_GUIDE_VERIFIED = (
+    '<p class="guide-verified">Use this page for active Last Z codes first, then redeem them through the official Gift Center. '
+    'Copy your UID from Avatar &gt; Settings &gt; Copy ID, paste the code exactly, and check your in-game mailbox for rewards.</p>'
+)
+
+CODES_ROUTING_PARAGRAPH = (
+    '<p><strong>Need setup only?</strong> Use the <a href="gift-center-uid.html">Gift Center &amp; UID Guide</a>. '
+    '<strong>Code failed?</strong> Use the <a href="redeem-code-not-working.html">Last Z Code Not Working?</a> guide.</p>'
 )
 
 
@@ -56,6 +67,18 @@ def json_has_related_link(path: Path, href: str) -> bool:
 
 def html_has_link(path: Path, href: str) -> bool:
     return f'href="{href}"' in read_text(path)
+
+
+def html_related_grid_has_link(path: Path, href: str) -> bool:
+    text = read_text(path)
+    marker = '<div class="related-grid">'
+    start = text.find(marker)
+    if start == -1:
+        return False
+    end = text.find("</div>", start)
+    if end == -1:
+        return False
+    return f'href="{href}"' in text[start:end]
 
 
 def diff_block(title: str, before: str, after: str) -> str:
@@ -133,6 +156,12 @@ def first_screen_preview_for_target(source_file: str) -> str | None:
             "Only the existing Core rule callout appears in `.qa-callouts`.",
             START_SEASON_NOTE,
         )
+    if source_file == "codes.html":
+        return diff_block(
+            "guide-verified",
+            "Use the official Last Z Gift Center to redeem active codes. This page gives you the current verified codes, the official login page, the fastest UID steps, and the main reasons redemption fails.",
+            CODES_GUIDE_VERIFIED,
+        )
     return None
 
 
@@ -177,17 +206,25 @@ def preview_for_spec(spec: dict[str, Any], target_page: str) -> dict[str, Any]:
         )
 
     elif operation == "internal_link_addition" and source_file == target_page:
-        action = "no_self_link_strengthen_outbound_routes"
-        warnings.append(f"Do not add a self-link from `{source_file}` to itself.")
-        preview = diff_block(
-            "outbound routing",
-            "Related guides stay unchanged or underspecified.",
-            "Strengthen links to the correct hub, troubleshooting page, or adjacent support page instead of adding a self-link.",
-        )
+        if source_file == "codes.html":
+            action = "dedupe_gift_center_routing"
+            preview = diff_block(
+                "early Gift Center routing",
+                "Two overlapping setup/troubleshooting paragraphs in the highlight box.",
+                CODES_ROUTING_PARAGRAPH,
+            )
+        else:
+            action = "no_self_link_strengthen_outbound_routes"
+            warnings.append(f"Do not add a self-link from `{source_file}` to itself.")
+            preview = diff_block(
+                "outbound routing",
+                "Related guides stay unchanged or underspecified.",
+                "Strengthen links to the correct hub, troubleshooting page, or adjacent support page instead of adding a self-link.",
+            )
 
     elif operation == "internal_link_addition":
         action = "add_related_card"
-        exists = html_has_link(path, target_page)
+        exists = html_related_grid_has_link(path, target_page)
         if exists:
             warnings.append(f"`{source_file}` already links to `{target_page}`.")
         preview = diff_block(

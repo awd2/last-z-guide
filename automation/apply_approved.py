@@ -22,11 +22,16 @@ from automation.proposal_renderer import REPORTS_DIR, md_list, resolve_manifest_
 
 
 TARGET_CARDS = {
+    "codes.html": {"href": "codes.html", "label": "Redeem Codes"},
     "gift-center-uid.html": {"href": "gift-center-uid.html", "label": "Gift Center UID Setup"},
     "research-costs.html": {"href": "research-costs.html", "label": "Research Costs Atlas"},
 }
 
 TARGET_OPERATION_SUPPORT = {
+    "codes.html": {
+        "first_screen_update",
+        "internal_link_addition",
+    },
     "research-costs.html": {
         "meta_refresh",
         "first_screen_update",
@@ -47,6 +52,13 @@ START_SEASON_NOTE = """                    <p class="qa-callout qa-callout--note
                         <span class="qa-icon" aria-hidden="true">i</span>
                         <span class="qa-callout-text"><strong>Season naming note:</strong> on newer servers, Season 2 is Winter. Older guides may call Season 2 Desert, but Desert was canceled or skipped for current servers, so follow Winter naming when planning your early timeline.</span>
                     </p>"""
+
+CODES_GUIDE_VERIFIED_OLD = '<p class="guide-verified">Use the official Last Z Gift Center to redeem active codes. This page gives you the current verified codes, the official login page, the fastest UID steps, and the main reasons redemption fails.</p>'
+CODES_GUIDE_VERIFIED_NEW = '<p class="guide-verified">Use this page for active Last Z codes first, then redeem them through the official Gift Center. Copy your UID from Avatar &gt; Settings &gt; Copy ID, paste the code exactly, and check your in-game mailbox for rewards.</p>'
+
+CODES_ROUTING_OLD = """            <p><strong>Need setup only?</strong> Use the <a href="gift-center-uid.html">Gift Center &amp; UID Guide</a>. <strong>Need troubleshooting?</strong> Use <a href="redeem-code-not-working.html">Code Not Working?</a>.</p>
+            <p>If you want the full troubleshooting flow, use the <a href="redeem-code-not-working.html">Last Z Code Not Working?</a> guide.</p>"""
+CODES_ROUTING_NEW = '            <p><strong>Need setup only?</strong> Use the <a href="gift-center-uid.html">Gift Center &amp; UID Guide</a>. <strong>Code failed?</strong> Use the <a href="redeem-code-not-working.html">Last Z Code Not Working?</a> guide.</p>'
 
 
 def approved_specs(manifest) -> list[dict[str, Any]]:
@@ -299,12 +311,49 @@ def apply_start(specs: list[dict[str, Any]]) -> tuple[list[str], list[str]]:
     return applied, skipped
 
 
+def apply_codes(specs: list[dict[str, Any]]) -> tuple[list[str], list[str]]:
+    path = ROOT / "codes.html"
+    text = path.read_text(encoding="utf-8")
+    applied: list[str] = []
+    skipped: list[str] = []
+    operations = {spec.get("operation_type") for spec in specs}
+
+    if "first_screen_update" in operations:
+        text = replace_once(
+            text,
+            CODES_GUIDE_VERIFIED_OLD,
+            CODES_GUIDE_VERIFIED_NEW,
+            applied,
+            "codes.html:guide_verified",
+        )
+        if "codes.html:guide_verified" not in applied:
+            if CODES_GUIDE_VERIFIED_NEW in text:
+                skipped.append("codes.html:guide_verified_already_updated")
+            else:
+                skipped.append("codes.html:guide_verified_anchor_not_found")
+
+    if "internal_link_addition" in operations:
+        text = replace_once(
+            text,
+            CODES_ROUTING_OLD,
+            CODES_ROUTING_NEW,
+            applied,
+            "codes.html:dedupe_setup_troubleshooting_routing",
+        )
+        if "codes.html:dedupe_setup_troubleshooting_routing" not in applied:
+            if CODES_ROUTING_NEW in text:
+                skipped.append("codes.html:routing_already_deduped")
+            else:
+                skipped.append("codes.html:routing_anchor_not_found")
+
+    path.write_text(text, encoding="utf-8")
+    return applied, skipped
+
+
 def add_html_related_card(source_file: str, target_page: str) -> tuple[list[str], list[str]]:
     path = ROOT / source_file
     text = path.read_text(encoding="utf-8")
     card = target_card(target_page)
-    if f'href="{target_page}"' in text:
-        return [], [f"{source_file}:related_card_duplicate_skipped"]
 
     match = re.search(
         r'(<div class="related-grid">\n)(?P<body>.*?)(\n\s*</div>)',
@@ -314,8 +363,26 @@ def add_html_related_card(source_file: str, target_page: str) -> tuple[list[str]
     if not match:
         return [], [f"{source_file}:related_grid_not_found"]
 
+    if f'href="{target_page}"' in match.group("body"):
+        return [], [f"{source_file}:related_card_duplicate_skipped"]
+
     new_card = f'                <a href="{card["href"]}" class="related-card">{card["label"]}</a>'
-    replacement = match.group(1) + match.group("body") + "\n" + new_card + match.group(3)
+    body = match.group("body")
+    if source_file == "diamond-reserve.html" and target_page == "codes.html":
+        anchor = '                <a href="resources.html" class="related-card">Resources Guide</a>'
+        if anchor in body:
+            replacement_body = body.replace(anchor, anchor + "\n" + new_card, 1)
+        else:
+            replacement_body = body + "\n" + new_card
+    elif source_file == "farm-account.html" and target_page == "codes.html":
+        anchor = '                <a href="gift-center-uid.html" class="related-card">Gift Center UID Setup</a>'
+        if anchor in body:
+            replacement_body = body.replace(anchor, anchor + "\n" + new_card, 1)
+        else:
+            replacement_body = body + "\n" + new_card
+    else:
+        replacement_body = body + "\n" + new_card
+    replacement = match.group(1) + replacement_body + match.group(3)
     text = text[: match.start()] + replacement + text[match.end() :]
     path.write_text(text, encoding="utf-8")
     return [f"{source_file}:related_card:{target_page}"], []
@@ -400,6 +467,11 @@ def apply_approved(path: Path):
     generated_specs: list[dict[str, Any]] = []
     target_page = str((manifest.plan or {}).get("target_page_or_slug", ""))
     for source_file, source_specs in grouped.items():
+        if source_file == "codes.html":
+            source_applied, source_skipped = apply_codes(source_specs)
+            applied.extend(source_applied)
+            skipped.extend(source_skipped)
+            continue
         if source_file == "research-costs.html":
             source_applied, source_skipped = apply_research_costs(source_specs)
             applied.extend(source_applied)
