@@ -580,6 +580,8 @@ def main() -> int:
     for name in os.listdir(OUT_DIR):
         if not name.endswith("-gsc-report.md"):
             continue
+        if name == os.path.basename(LATEST_REPORT_PATH):
+            continue
         path = os.path.join(OUT_DIR, name)
         if os.path.abspath(path) == os.path.abspath(out_path):
             continue
