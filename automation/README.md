@@ -90,6 +90,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - writes no-change Scout topic proposals for human review
   - does not mutate backlog, manifests, or content
 
+- `workers/editor.py`
+  - reads one Scout topic proposal
+  - writes a no-change Editor brief with context, links, protected claims, and checks
+  - does not mutate backlog, manifests, or content
+
 ## Current operating model
 
 Right now this layer is **foundation only**.
@@ -167,6 +172,7 @@ python3 automation/pipeline.py bundle <topic_id>
 python3 automation/pipeline.py show <run_id>
 python3 automation/pipeline.py show <run_id> --json
 python3 automation/workers/scout.py --json
+python3 automation/workers/editor.py --topic-id <topic_id> --json
 ```
 
 Example:
@@ -206,6 +212,7 @@ python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-research-cluster-nav --json
 python3 automation/workers/scout.py --json
+python3 automation/workers/editor.py --topic-id codes-gsc-opportunity --json
 ```
 
 Lifecycle shorthand:
@@ -230,6 +237,12 @@ Scout discovery:
 - `python3 automation/workers/scout.py --json` -> generate reviewable topic proposals from `content/gsc/latest-gsc-agent-signals.json`
 - output lives in `automation/reports/scout-topic-proposals.json` and `automation/reports/scout-topic-proposals.md`
 - operators decide which proposals become backlog items; Scout does not update the backlog automatically
+
+Editor brief generation:
+
+- `python3 automation/workers/editor.py --topic-id <topic_id> --json` -> generate a no-write Editor brief from one Scout proposal
+- output lives in `automation/reports/editor-brief-<topic_id>.json` and `automation/reports/editor-brief-<topic_id>.md`
+- operators still approve any later patch plan or content apply step separately
 
 Lower-level helpers are still available when needed.
 

@@ -109,6 +109,7 @@ python3 automation/pipeline.py apply-preview <run_id>
 python3 automation/pipeline.py apply-approved <run_id>
 python3 automation/pipeline.py close-run <run_id>
 python3 automation/workers/scout.py --json
+python3 automation/workers/editor.py --topic-id <topic_id> --json
 ```
 
 `checks` includes:
@@ -137,7 +138,7 @@ Future LLM worker contracts live in:
 
 - `automation/workers/README.md`
 
-That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented worker is a no-write `Scout` that turns weekly GSC agent signals into reviewable topic proposals.
+That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout` and `Editor` steps that turn weekly GSC agent signals into reviewable topic proposals and content briefs.
 
 ## GSC Analytics Automation
 

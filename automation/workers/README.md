@@ -173,6 +173,21 @@ A Scout proposal is acceptable only if it:
 
 ## Editor Contract
 
+### Current Worker
+
+The first no-write implementation lives at:
+
+```bash
+python3 automation/workers/editor.py --topic-id <topic_id> --json
+```
+
+It reads `automation/reports/scout-topic-proposals.json` by default and writes:
+
+- `automation/reports/editor-brief-<topic_id>.json`
+- `automation/reports/editor-brief-<topic_id>.md`
+
+This worker does not mutate content, manifests, or `topic_backlog.csv`.
+
 ### Job
 
 Turn an approved topic or run manifest into a content/edit brief that fits the current site.

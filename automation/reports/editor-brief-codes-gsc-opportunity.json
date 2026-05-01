@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "report_type": "editor_brief",
+  "generated_at": "2026-05-01T17:59:26Z",
+  "source_proposal_file": "automation/reports/scout-topic-proposals.json",
+  "source_topic_id": "codes-gsc-opportunity",
+  "run_id": "2026-05-01-codes-gsc-opportunity",
+  "target_page_or_slug": "codes.html",
+  "page_role": "cornerstone-guide",
+  "primary_query_family": "last z gift center",
+  "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
+  "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `last z gift center` without changing `codes.html` into a different page role.",
+  "template_reference": "codes.html",
+  "required_sections": [
+    "Quick Answer",
+    "Best overall recommendation",
+    "Decision framework",
+    "Cluster route block",
+    "Related guides / FAQ"
+  ],
+  "internal_links": {
+    "upstream": [
+      "index.html"
+    ],
+    "downstream": [
+      "diamond-reserve.html",
+      "events.html",
+      "f2p.html",
+      "lucky-discounter.html",
+      "start.html"
+    ],
+    "lateral": [
+      "gift-center-uid.html",
+      "redeem-code-not-working.html",
+      "resources.html"
+    ]
+  },
+  "protected_claims": [
+    "gift-center-cluster-role-separation",
+    "gift-center-only-redeem-flow",
+    "gift-rewards-mailbox"
+  ],
+  "do_not_change": [
+    "Do not publish or apply content changes from this brief automatically.",
+    "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+    "Do not create a new page when the Scout proposal recommends updating an existing page.",
+    "Do not use analytics signals as proof that a rewrite is required.",
+    "The query intent is already better served by another canonical page.",
+    "The proposed change would blur cluster role separation.",
+    "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope.",
+    "Do not contradict canonical claim `gift-center-cluster-role-separation`.",
+    "Do not contradict canonical claim `gift-center-only-redeem-flow`.",
+    "Do not contradict canonical claim `gift-rewards-mailbox`."
+  ],
+  "required_context_before_patch": [
+    "AGENTS.md",
+    "automation/memory/site_style_guide.md",
+    "automation/memory/page_archetypes.md",
+    "automation/memory/seo_llm_optimization.md",
+    "automation/memory/canonical_claims.json",
+    "automation/memory/content_index.json",
+    "automation/memory/entities.json",
+    "automation/memory/release_checklist.md",
+    "codes.html",
+    "index.html",
+    "gift-center-uid.html",
+    "redeem-code-not-working.html",
+    "resources.html"
+  ],
+  "source_evidence": [
+    "GSC page signal: codes.html had 14781 impressions, 254 clicks, 1.72% CTR, avg position 6.55.",
+    "Low CTR query: `last z gift center` had 1548 impressions, 51 clicks, 3.29% CTR, position 7.25.",
+    "Low CTR query: `last z gift center login` had 511 impressions, 13 clicks, 2.54% CTR, position 6.04.",
+    "Low CTR query: `last-z.com gift center` had 276 impressions, 13 clicks, 4.71% CTR, position 6.25.",
+    "Rising query: `last z gift center` gained 350 impressions in the last 7-day comparison window.",
+    "Rising query: `last z gift center login` gained 66 impressions in the last 7-day comparison window.",
+    "Rising query: `last-z.com gift center` gained 46 impressions in the last 7-day comparison window."
+  ],
+  "source_constraints": [
+    "Use existing page template and navigation patterns.",
+    "Treat GSC data as a signal, not proof that a rewrite is needed.",
+    "Protect canonical claim `gift-center-only-redeem-flow`.",
+    "Protect canonical claim `gift-rewards-mailbox`.",
+    "Protect canonical claim `gift-center-cluster-role-separation`.",
+    "Existing backlog history for this page: gift-center-ctr-pass:done."
+  ],
+  "current_page_snapshot": {
+    "exists": true,
+    "filename": "codes.html",
+    "title": "Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID",
+    "h1": "Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+    "meta_description": "Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work.",
+    "quick_answer": "How to redeem Last Z codes correctly: open the official Gift Center, copy your UID from Settings, paste the code exactly, and then collect rewards from your in-game mailbox.",
+    "data_lede": "",
+    "h2_headings": [
+      "Official Gift Center Login",
+      "Can I Redeem Last Z Codes on iPhone or Android?",
+      "How to Find Your UID in Last Z",
+      "How to Redeem Last Z Codes Step by Step",
+      "Active Last Z Codes (Verified)",
+      "Verification Protocol",
+      "Inactive Codes (Previously Active)",
+      "Important Notes",
+      "Why Your Last Z Code Is Not Working",
+      "Where Are My Last Z Code Rewards?"
+    ],
+    "internal_links": [
+      "about.html",
+      "contact.html",
+      "diamond-reserve.html",
+      "disclosure.html",
+      "events.html",
+      "f2p.html",
+      "gift-center-uid.html",
+      "https://lastzguides.com/codes.html",
+      "lucky-discounter.html",
+      "privacy.html",
+      "redeem-code-not-working.html",
+      "resources.html",
+      "start.html",
+      "terms.html"
+    ]
+  },
+  "acceptance_checks": [
+    "python3 scripts/prepublish_check.py",
+    "python3 automation/pipeline.py checks --strict",
+    "manual review: first-screen answer and internal links on codes.html"
+  ]
+}
