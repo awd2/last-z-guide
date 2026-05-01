@@ -516,6 +516,15 @@
       "freshness_priority": "medium"
     },
     {
+      "filename": "season-2-winter.html",
+      "url": "/season-2-winter.html",
+      "title_hint": "Last Z Season 2 Winter Guide - Desert Naming Clarification",
+      "cluster": "Seasons",
+      "archetype": "support-guide",
+      "status": "published",
+      "freshness_priority": "medium"
+    },
+    {
       "filename": "f2p.html",
       "url": "/f2p.html",
       "title_hint": "Last Z F2P Guide — Best Diamond Spending, Free Sources, and What to Buy First",

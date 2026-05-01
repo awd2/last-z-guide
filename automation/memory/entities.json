@@ -378,7 +378,8 @@
         "aliases": [
           "s2"
         ],
-        "cluster": "Seasons"
+        "cluster": "Seasons",
+        "page": "season-2-winter.html"
       },
       {
         "id": "winter",
@@ -387,13 +388,15 @@
           "ice",
           "everfrost"
         ],
-        "cluster": "Seasons"
+        "cluster": "Seasons",
+        "page": "season-2-winter.html"
       },
       {
         "id": "desert",
         "label": "Desert",
         "aliases": [],
-        "cluster": "Seasons"
+        "cluster": "Seasons",
+        "page": "season-2-winter.html"
       }
     ]
   }

@@ -57,6 +57,10 @@ def classify_pages() -> tuple[list[dict], list[dict], list[dict]]:
             continue
         candidates.append(meta)
 
+    cluster_sizes: dict[str, int] = defaultdict(int)
+    for meta in candidates:
+        cluster_sizes[meta["cluster"]] += 1
+
     inbound, cluster_inbound = build_inlink_maps(page["filename"] for page in candidates)
 
     orphaned = []
@@ -77,7 +81,11 @@ def classify_pages() -> tuple[list[dict], list[dict], list[dict]]:
 
         if total_inlinks == 0:
             orphaned.append(record)
-        elif meta["archetype"] != "cornerstone-guide" and same_cluster_inlinks == 0:
+        elif (
+            meta["archetype"] != "cornerstone-guide"
+            and cluster_sizes[meta["cluster"]] > 1
+            and same_cluster_inlinks == 0
+        ):
             weak_cluster.append(record)
         else:
             healthy.append(record)

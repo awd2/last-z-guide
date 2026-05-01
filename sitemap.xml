@@ -276,6 +276,12 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://lastzguides.com/season-2-winter.html</loc>
+        <lastmod>2026-05-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://lastzguides.com/shield.html</loc>
         <lastmod>2026-04-30</lastmod>
         <changefreq>monthly</changefreq>
@@ -295,7 +301,7 @@
     </url>
     <url>
         <loc>https://lastzguides.com/start.html</loc>
-        <lastmod>2026-04-30</lastmod>
+        <lastmod>2026-05-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
