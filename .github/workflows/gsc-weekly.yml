@@ -4,6 +4,12 @@ on:
   workflow_dispatch: {}
   schedule:
     - cron: "25 6 * * 1"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/gsc-weekly.yml"
+      - "scripts/gsc_daily.py"
 
 concurrency:
   group: gsc-weekly-${{ github.ref }}
