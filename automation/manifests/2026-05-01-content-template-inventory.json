@@ -1,0 +1,104 @@
+{
+  "run_id": "2026-05-01-content-template-inventory",
+  "created_at": "2026-05-01T16:29:25.135807Z",
+  "run_type": "create_new",
+  "status": "closed",
+  "risk_level": "high",
+  "summary": "Create a new page or file `automation/checks/template_inventory.py` for the `Site` cluster using the `site-page` archetype.",
+  "inputs": {
+    "topic_id": "content-template-inventory",
+    "title": "Content template inventory report",
+    "cluster": "Site",
+    "source_type": "product",
+    "source_reference": "Next automation hardening milestone before broader content workers",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog"
+  },
+  "plan": {
+    "topic_id": "content-template-inventory",
+    "title": "Content template inventory report",
+    "cluster": "Site",
+    "recommended_action": "create_new",
+    "archetype_suggestion": "site-page",
+    "target_page_or_slug": "automation/checks/template_inventory.py",
+    "source_type": "product",
+    "source_reference": "Next automation hardening milestone before broader content workers",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "risk_level": "high",
+    "plan_summary": "Create a new page or file `automation/checks/template_inventory.py` for the `Site` cluster using the `site-page` archetype.",
+    "memory_files": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/entities.json"
+    ],
+    "related_pages": [
+      "about.html",
+      "contact.html",
+      "disclosure.html",
+      "privacy.html",
+      "terms.html"
+    ],
+    "deterministic_checks": [
+      "python3 automation/run_checks.py",
+      "python3 scripts/prepublish_check.py --fix",
+      "python3 scripts/prepublish_check.py"
+    ],
+    "notes": "Deterministically inventory page templates, nav patterns, quick-answer blocks, related-guides grids, schema families, and generated-page boundaries."
+  },
+  "artifacts": {
+    "memory_files_used": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/entities.json"
+    ],
+    "review_context": {
+      "canonical_claim_ids": [],
+      "related_filenames": [
+        "about.html",
+        "contact.html",
+        "disclosure.html",
+        "privacy.html",
+        "terms.html"
+      ]
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-05-01-content-template-inventory.closed.md",
+      "closed_at": "2026-05-01T16:31:50Z",
+      "note": ""
+    }
+  },
+  "changed_files": [
+    "automation/README.md",
+    "automation/checks/template_inventory.py",
+    "season-2-winter.html"
+  ],
+  "checks": {
+    "automation_checks_strict": {
+      "status": "pass",
+      "notes": "Cluster link check passed. | Checked site structure on 63 HTML pages and 56 guide/data pages. | Site structure check passed. | Checked SEO/LLM alignment on 63 memory pages: 0 alignment warning(s), 0 cannibalization warning(s). | SEO/LLM alignment check passed. | Automation checks passed."
+    },
+    "changed_pages_report": {
+      "status": "pass",
+      "notes": "same-cluster inbound links: 5 | expected hubs: index.html | linked from hubs: index.html"
+    }
+  },
+  "review": {
+    "verdict": "needs_human_review",
+    "open_questions": [
+      "Does this run need human approval before any content drafting or merge?",
+      "Does this topic deserve a new URL, or should it be folded into an existing page or atlas?",
+      "No canonical claims matched automatically. Should the claim layer be expanded for this topic?"
+    ],
+    "next_action": "review_human",
+    "reviewer_notes": "Deterministic review scaffold complete. No canonical claims matched automatically, so this run should be reviewed carefully before drafting content."
+  }
+}

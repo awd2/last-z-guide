@@ -257,6 +257,15 @@ terminal logs.
 
 `checks --strict` escalates weak-cluster and SEO/LLM warning-level findings into a failing gate. Site structure failures are always hard failures because they protect shared templates, navigation, and generated-source boundaries.
 
+Render a template/component inventory report:
+
+```bash
+python3 automation/checks/template_inventory.py
+python3 automation/checks/template_inventory.py --json
+```
+
+This report is informational. It inventories clusters, archetypes, article classes, nav state, footer/script patterns, first-screen signals, related-guide grids, schema families, and generated research branch boundaries.
+
 Show a compact health summary for the automation layer:
 
 ```bash
