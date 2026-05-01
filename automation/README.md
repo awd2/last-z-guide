@@ -586,6 +586,25 @@ Outputs:
 
 ## Intended next steps
 
+## LLM Referral Report
+
+Use the local helper when you export `llm_referral_session` rows from GA4:
+
+```bash
+python3 automation/reports/llm_referral_report.py path/to/ga4-llm-referrals.csv
+```
+
+Optional outputs:
+
+```bash
+python3 automation/reports/llm_referral_report.py path/to/ga4-llm-referrals.csv --output automation/reports/llm-referrals.md
+python3 automation/reports/llm_referral_report.py path/to/ga4-llm-referrals.csv --json
+```
+
+Expected CSV dimensions include `llm_source`, `llm_channel`, `landing_page`, and `referrer_host`. Expected metrics include `sessions`, `event_count`, and `total_users`. The helper is intentionally offline and deterministic; it reads exported CSV only.
+
+## Intended next steps
+
 The next pieces should be added in this order:
 
 1. more deterministic QA helpers

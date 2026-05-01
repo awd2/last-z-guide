@@ -165,6 +165,14 @@ Suggested GA4 setup:
 - compare `chatgpt`, `perplexity`, `copilot`, `bing`, and `grok` over time
 - use `llm_channel` to separate true LLM traffic from Bing/search-surface traffic
 
+Local reporting helper:
+
+```bash
+python3 automation/reports/llm_referral_report.py path/to/ga4-llm-referrals.csv --output automation/reports/llm-referrals.md
+```
+
+The helper expects a GA4 CSV export with dimensions such as `llm_source`, `llm_channel`, `landing_page`, and `referrer_host`, plus metrics such as `sessions`, `event_count`, or `total_users`. It does not call GA4 directly.
+
 This is meant to answer:
 
 - which pages get LLM referrals
