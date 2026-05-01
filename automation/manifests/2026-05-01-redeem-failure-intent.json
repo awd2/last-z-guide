@@ -1,0 +1,666 @@
+{
+  "run_id": "2026-05-01-redeem-failure-intent",
+  "created_at": "2026-05-01T15:17:55.497405Z",
+  "run_type": "update_existing",
+  "status": "proposal_ready",
+  "risk_level": "low",
+  "summary": "Update the existing page `redeem-code-not-working.html` for the `Economy` cluster using the `support-guide` archetype.",
+  "inputs": {
+    "topic_id": "redeem-failure-intent",
+    "title": "Redeem code not working refinement",
+    "cluster": "Economy",
+    "source_type": "analytics",
+    "source_reference": "GSC/Bing: failure intent early signals",
+    "confidence": "medium",
+    "priority": "medium",
+    "status": "backlog"
+  },
+  "plan": {
+    "topic_id": "redeem-failure-intent",
+    "title": "Redeem code not working refinement",
+    "cluster": "Economy",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "support-guide",
+    "target_page_or_slug": "redeem-code-not-working.html",
+    "source_type": "analytics",
+    "source_reference": "GSC/Bing: failure intent early signals",
+    "confidence": "medium",
+    "priority": "medium",
+    "status": "backlog",
+    "risk_level": "low",
+    "plan_summary": "Update the existing page `redeem-code-not-working.html` for the `Economy` cluster using the `support-guide` archetype.",
+    "memory_files": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/entities.json"
+    ],
+    "related_pages": [
+      "redeem-code-not-working.html",
+      "codes.html",
+      "diamond-reserve.html",
+      "f2p.html",
+      "farm-account.html",
+      "gift-center-uid.html",
+      "refugees.html"
+    ],
+    "deterministic_checks": [
+      "python3 automation/run_checks.py",
+      "python3 scripts/prepublish_check.py --fix",
+      "python3 scripts/prepublish_check.py"
+    ],
+    "notes": "Watch for query growth around wrong UID, already used, expired, and mailbox delay."
+  },
+  "artifacts": {
+    "memory_files_used": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/entities.json"
+    ],
+    "review_context": {
+      "canonical_claim_ids": [
+        "diamond-reserve-before-reactive-spend",
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox",
+        "shield-alliance-shop-first",
+        "uid-copy-path"
+      ],
+      "related_filenames": [
+        "codes.html",
+        "diamond-reserve.html",
+        "f2p.html",
+        "farm-account.html",
+        "gift-center-uid.html",
+        "redeem-code-not-working.html",
+        "refugees.html"
+      ]
+    },
+    "editor": {
+      "brief_path": "automation/reports/2026-05-01-redeem-failure-intent.brief.md"
+    },
+    "patch_plan": {
+      "target_page_or_slug": "redeem-code-not-working.html",
+      "archetype_suggestion": "support-guide",
+      "recommended_action": "update_existing",
+      "proposed_changes": [
+        {
+          "file": "redeem-code-not-working.html",
+          "change_type": "first_screen_update",
+          "reason": "Align the opening answer with the run summary, target intent, and cluster role."
+        },
+        {
+          "file": "redeem-code-not-working.html",
+          "change_type": "meta_refresh",
+          "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent."
+        },
+        {
+          "file": "redeem-code-not-working.html",
+          "change_type": "internal_link_addition",
+          "reason": "Strengthen routing between the target page and adjacent cluster pages."
+        },
+        {
+          "file": "codes.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page."
+        },
+        {
+          "file": "diamond-reserve.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page."
+        },
+        {
+          "file": "f2p.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page."
+        },
+        {
+          "file": "farm-account.html",
+          "change_type": "internal_link_addition",
+          "reason": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page."
+        }
+      ],
+      "patch_specs": [
+        {
+          "target_file": "redeem-code-not-working.html",
+          "source_of_truth_file": "redeem-code-not-working.html",
+          "output_file": "redeem-code-not-working.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "redeem-code-not-working.html",
+          "source_of_truth_file": "redeem-code-not-working.html",
+          "output_file": "redeem-code-not-working.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "redeem-code-not-working.html",
+          "source_of_truth_file": "redeem-code-not-working.html",
+          "output_file": "redeem-code-not-working.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Strengthen routing between the target page and adjacent cluster pages.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "codes.html",
+          "source_of_truth_file": "codes.html",
+          "output_file": "codes.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "diamond-reserve.html",
+          "source_of_truth_file": "diamond-reserve.html",
+          "output_file": "diamond-reserve.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "f2p.html",
+          "source_of_truth_file": "f2p.html",
+          "output_file": "f2p.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "farm-account.html",
+          "source_of_truth_file": "farm-account.html",
+          "output_file": "farm-account.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        }
+      ],
+      "changed_files": [
+        "codes.html",
+        "diamond-reserve.html",
+        "f2p.html",
+        "farm-account.html",
+        "redeem-code-not-working.html"
+      ],
+      "source_files": [
+        "codes.html",
+        "diamond-reserve.html",
+        "f2p.html",
+        "farm-account.html",
+        "redeem-code-not-working.html"
+      ],
+      "canonical_claim_ids": [
+        "diamond-reserve-before-reactive-spend",
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox",
+        "shield-alliance-shop-first",
+        "uid-copy-path"
+      ],
+      "deterministic_checks": [
+        "python3 automation/run_checks.py",
+        "python3 scripts/prepublish_check.py --fix",
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+        "python3 automation/pipeline.py checks"
+      ],
+      "report_path": "automation/reports/2026-05-01-redeem-failure-intent.patch.md"
+    },
+    "proposal": {
+      "report_path": "automation/reports/2026-05-01-redeem-failure-intent.proposed.md",
+      "rendered_specs": [
+        {
+          "target_file": "redeem-code-not-working.html",
+          "source_of_truth_file": "redeem-code-not-working.html",
+          "output_file": "redeem-code-not-working.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Gift Center Code Not Working? (2026) — UID, Login, Reward Fixes | h1: Last Z Code Not Working? Gift Center, UID, and Reward Fixes | meta: Last Z code not working? Check Gift Center login, UID mistakes, expired or already-used codes, mailbox delays, and the fastest fixes for failed redemption. | verified: If your Last Z code is not working, the most common causes are a wrong UID, expired code, already-used code, typo, or checking the wrong place for rewards. Start with the official Gift Center and this checklist before assuming the code is dead.",
+          "desired_after_summary": "Add one first-screen clarification for failure-type sorting: wrong UID/typo, expired/already-used code, and mailbox delay are different checks. Keep the page as troubleshooting, not the codes hub.",
+          "suggested_content": "Add this callout inside the existing `Quick Answer` `.qa-callouts` block, after the mailbox callout:\n\n```html\n<p class=\"qa-callout qa-callout--note\">\n    <span class=\"qa-icon\" aria-hidden=\"true\">i</span>\n    <span class=\"qa-callout-text\"><strong>Sort the failure first:</strong> wrong UID or typo means the redemption failed, expired or already-used means the code is no longer claimable for that account, and missing rewards means you should check mailbox timing before retrying.</span>\n</p>\n```",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "redeem-code-not-working.html",
+          "source_of_truth_file": "redeem-code-not-working.html",
+          "output_file": "redeem-code-not-working.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Gift Center Code Not Working? (2026) — UID, Login, Reward Fixes | h1: Last Z Code Not Working? Gift Center, UID, and Reward Fixes | meta: Last Z code not working? Check Gift Center login, UID mistakes, expired or already-used codes, mailbox delays, and the fastest fixes for failed redemption. | verified: If your Last Z code is not working, the most common causes are a wrong UID, expired code, already-used code, typo, or checking the wrong place for rewards. Start with the official Gift Center and this checklist before assuming the code is dead.",
+          "desired_after_summary": "No metadata change is recommended. The current title, H1, and meta already target code-not-working, Gift Center, UID, login, reward, expired, already-used, and mailbox intent.",
+          "suggested_content": "No metadata edit is recommended for this pass. Keep the current title, H1, and meta description focused on failed redemption, Gift Center, UID, expired/already-used codes, and mailbox delays.",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "redeem-code-not-working.html",
+          "source_of_truth_file": "redeem-code-not-working.html",
+          "output_file": "redeem-code-not-working.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "related-guides section or nearest relevant paragraph",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Strengthen routing between the target page and adjacent cluster pages.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Gift Center Code Not Working? (2026) — UID, Login, Reward Fixes | h1: Last Z Code Not Working? Gift Center, UID, and Reward Fixes | meta: Last Z code not working? Check Gift Center login, UID mistakes, expired or already-used codes, mailbox delays, and the fastest fixes for failed redemption. | verified: If your Last Z code is not working, the most common causes are a wrong UID, expired code, already-used code, typo, or checking the wrong place for rewards. Start with the official Gift Center and this checklist before assuming the code is dead.",
+          "desired_after_summary": "Add `Gift Center UID Setup` to related guides because failed-code troubleshooting often starts with setup validation.",
+          "suggested_content": "Add this related-card inside the existing `Related Guides` grid, after `Redeem Codes`:\n\n```html\n<a href=\"gift-center-uid.html\" class=\"related-card\">Gift Center UID Setup</a>\n```",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "codes.html",
+          "source_of_truth_file": "codes.html",
+          "output_file": "codes.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "related-guides section or nearest relevant paragraph",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID | h1: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID | meta: Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work. | verified: Use this page for active Last Z codes first, then redeem them through the official Gift Center. Copy your UID from Avatar > Settings > Copy ID, paste the code exactly, and check your in-game mailbox for rewards.",
+          "desired_after_summary": "No edit recommended: `codes.html` already links to this troubleshooting page in the early routing block, troubleshooting section, FAQ, and related-guides grid.",
+          "suggested_content": "Reject this spec for this pass. `codes.html` already links to `redeem-code-not-working.html` in the early routing block, troubleshooting section, FAQ, and related-guides grid.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "diamond-reserve.html",
+          "source_of_truth_file": "diamond-reserve.html",
+          "output_file": "diamond-reserve.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "Related Guides",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Diamond Reserve Guide (2026) — What to Save Diamonds For First | h1: Last Z Diamond Reserve Guide — What to Save Diamonds For First | meta: Best Last Z diamond reserve strategy: what to save diamonds for first, how the Friday shield reserve works, when Lucky Discounter is worth it, and which purchases are a waste for F2P. | verified: Best diamond rule for most F2P and low spenders: keep a protected reserve for shields first, spend only on high-value event discounts or long-term account value you can actually buy with diamonds second, and avoid reactive purchases that do not improve your account long term.",
+          "desired_after_summary": "No edit recommended: this page is not a close troubleshooting source for failed code redemption.",
+          "suggested_content": "Reject this spec for this pass. The source page is not close enough to failed-code troubleshooting to justify another cross-link.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "f2p.html",
+          "source_of_truth_file": "f2p.html",
+          "output_file": "f2p.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "related-guides section or nearest relevant paragraph",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z F2P Guide (2026) — Best Diamond Spending, Free Sources, What to Buy First | h1: Last Z F2P Guide — Best Diamond Spending, Free Sources, and What to Buy First | meta: Complete Last Z F2P guide: how to get free diamonds, what to save them for first, the best spending priority for shields, refugees, and event value, and how F2P players stay competitive. | verified: Best F2P plan for most players: protect your weekly shield reserve first, invest in refugees for long-term speed, and only spend diamonds aggressively when events improve the value instead of wasting them on random convenience.",
+          "desired_after_summary": "No edit recommended: this page is not a close troubleshooting source for failed code redemption.",
+          "suggested_content": "Reject this spec for this pass. The source page is not close enough to failed-code troubleshooting to justify another cross-link.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "farm-account.html",
+          "source_of_truth_file": "farm-account.html",
+          "output_file": "farm-account.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "internal_link_addition",
+          "selector_or_anchor": "Related Guides",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Add or strengthen the expected bridge into `redeem-code-not-working.html` from a related cluster page.",
+          "canonical_claims_to_protect": [
+            "diamond-reserve-before-reactive-spend",
+            "gift-center-cluster-role-separation",
+            "gift-center-only-redeem-flow",
+            "gift-rewards-mailbox",
+            "shield-alliance-shop-first",
+            "uid-copy-path"
+          ],
+          "validation_commands": [
+            "python3 automation/run_checks.py",
+            "python3 scripts/prepublish_check.py --fix",
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Farm Account Guide (2026) - How to Create a Farm Before Season 2 | h1: Last Z Farm Account Guide - How to Create a Farm Before Season 2 | meta: How to create a Last Z farm account on your server before Season 2, what you need, how to set up a farm alt, and how to use it to support your main account. | verified: Best farm account setup for most players: create the farm before Season 2 starts on your server, place it on the same server as your main account, and use it for steady resource support instead of trying to turn it into a second main.",
+          "desired_after_summary": "No edit recommended: this page is not a close troubleshooting source for failed code redemption.",
+          "suggested_content": "Reject this spec for this pass. The source page is not close enough to failed-code troubleshooting to justify another cross-link.",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        }
+      ]
+    }
+  },
+  "changed_files": [
+    "codes.html",
+    "diamond-reserve.html",
+    "f2p.html",
+    "farm-account.html",
+    "redeem-code-not-working.html"
+  ],
+  "checks": {},
+  "review": {
+    "verdict": "needs_human_review",
+    "open_questions": [],
+    "next_action": "review_human",
+    "reviewer_notes": "Deterministic review scaffold complete. The run should explicitly respect these canonical claims: diamond-reserve-before-reactive-spend, gift-center-cluster-role-separation, gift-center-only-redeem-flow, gift-rewards-mailbox, shield-alliance-shop-first, uid-copy-path."
+  }
+}

@@ -141,6 +141,7 @@ def target_topic_label(run_target: str) -> str:
     labels = {
         "codes.html": "redeem codes hub, Gift Center login, UID, and redemption routing",
         "gift-center-uid.html": "Gift Center login setup and UID lookup",
+        "redeem-code-not-working.html": "Gift Center troubleshooting, failed code redemption, UID, expired/already-used codes, and mailbox delay fixes",
         "research-costs.html": "research costs atlas",
         "start.html": "beginner start guide and season naming clarification",
     }
@@ -175,6 +176,25 @@ def desired_after_summary(spec: dict[str, Any], run_target: str) -> str:
             return "No edit recommended: this page already links to `codes.html` in the Gift Codes section and related-guides grid."
         if source == "farm-account.html" and operation == "internal_link_addition":
             return "Add a `Redeem Codes` related-card near Gift Center UID Setup so farm-account readers can route to free-code redemption."
+    if run_target == "redeem-code-not-working.html":
+        if source == "redeem-code-not-working.html" and operation == "first_screen_update":
+            return (
+                "Add one first-screen clarification for failure-type sorting: wrong UID/typo, expired/already-used code, "
+                "and mailbox delay are different checks. Keep the page as troubleshooting, not the codes hub."
+            )
+        if source == "redeem-code-not-working.html" and operation == "meta_refresh":
+            return (
+                "No metadata change is recommended. The current title, H1, and meta already target code-not-working, "
+                "Gift Center, UID, login, reward, expired, already-used, and mailbox intent."
+            )
+        if source == "redeem-code-not-working.html" and operation == "internal_link_addition":
+            return "Add `Gift Center UID Setup` to related guides because failed-code troubleshooting often starts with setup validation."
+        if source == "codes.html" and operation == "internal_link_addition":
+            return "No edit recommended: `codes.html` already links to this troubleshooting page in the early routing block, troubleshooting section, FAQ, and related-guides grid."
+        if source == "gift-center-uid.html" and operation == "internal_link_addition":
+            return "No edit recommended: `gift-center-uid.html` already links to this troubleshooting page in body copy and related guides."
+        if source in {"diamond-reserve.html", "f2p.html", "farm-account.html"} and operation == "internal_link_addition":
+            return "No edit recommended: this page is not a close troubleshooting source for failed code redemption."
     if run_target == "start.html" and protects_claim(spec, "season-2-winter-current-naming"):
         if operation == "first_screen_update":
             return (
@@ -239,6 +259,27 @@ def suggested_content(spec: dict[str, Any], run_target: str) -> str:
 ```html
 <a href="codes.html" class="related-card">Redeem Codes</a>
 ```"""
+    if run_target == "redeem-code-not-working.html" and source == "redeem-code-not-working.html" and operation == "first_screen_update":
+        return """Add this callout inside the existing `Quick Answer` `.qa-callouts` block, after the mailbox callout:
+
+```html
+<p class="qa-callout qa-callout--note">
+    <span class="qa-icon" aria-hidden="true">i</span>
+    <span class="qa-callout-text"><strong>Sort the failure first:</strong> wrong UID or typo means the redemption failed, expired or already-used means the code is no longer claimable for that account, and missing rewards means you should check mailbox timing before retrying.</span>
+</p>
+```"""
+    if run_target == "redeem-code-not-working.html" and source == "redeem-code-not-working.html" and operation == "meta_refresh":
+        return "No metadata edit is recommended for this pass. Keep the current title, H1, and meta description focused on failed redemption, Gift Center, UID, expired/already-used codes, and mailbox delays."
+    if run_target == "redeem-code-not-working.html" and source == "redeem-code-not-working.html" and operation == "internal_link_addition":
+        return """Add this related-card inside the existing `Related Guides` grid, after `Redeem Codes`:
+
+```html
+<a href="gift-center-uid.html" class="related-card">Gift Center UID Setup</a>
+```"""
+    if run_target == "redeem-code-not-working.html" and source == "codes.html" and operation == "internal_link_addition":
+        return "Reject this spec for this pass. `codes.html` already links to `redeem-code-not-working.html` in the early routing block, troubleshooting section, FAQ, and related-guides grid."
+    if run_target == "redeem-code-not-working.html" and source in {"diamond-reserve.html", "f2p.html", "farm-account.html"} and operation == "internal_link_addition":
+        return "Reject this spec for this pass. The source page is not close enough to failed-code troubleshooting to justify another cross-link."
     if (
         run_target == "start.html"
         and source == "start.html"
