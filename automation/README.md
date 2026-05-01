@@ -85,6 +85,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - keeps worker outputs structured and reviewable before any implementation work
   - protects templates, cluster roles, canonical claims, and human approval gates
 
+- `workers/scout.py`
+  - reads weekly GSC agent signals and site memory
+  - writes no-change Scout topic proposals for human review
+  - does not mutate backlog, manifests, or content
+
 ## Current operating model
 
 Right now this layer is **foundation only**.
@@ -161,6 +166,7 @@ python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
 python3 automation/pipeline.py show <run_id>
 python3 automation/pipeline.py show <run_id> --json
+python3 automation/workers/scout.py --json
 ```
 
 Example:
@@ -199,6 +205,7 @@ python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-research-cluster-nav --json
+python3 automation/workers/scout.py --json
 ```
 
 Lifecycle shorthand:
@@ -217,6 +224,12 @@ Lifecycle shorthand:
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
+
+Scout discovery:
+
+- `python3 automation/workers/scout.py --json` -> generate reviewable topic proposals from `content/gsc/latest-gsc-agent-signals.json`
+- output lives in `automation/reports/scout-topic-proposals.json` and `automation/reports/scout-topic-proposals.md`
+- operators decide which proposals become backlog items; Scout does not update the backlog automatically
 
 Lower-level helpers are still available when needed.
 

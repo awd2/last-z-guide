@@ -62,6 +62,21 @@ All workers must follow these rules:
 
 ## Scout Contract
 
+### Current Worker
+
+The first no-write implementation lives at:
+
+```bash
+python3 automation/workers/scout.py --json
+```
+
+It reads `content/gsc/latest-gsc-agent-signals.json` by default and writes:
+
+- `automation/reports/scout-topic-proposals.json`
+- `automation/reports/scout-topic-proposals.md`
+
+This worker does not mutate content, manifests, or `topic_backlog.csv`.
+
 ### Job
 
 Find candidate topics, updates, gaps, and optimization opportunities.
