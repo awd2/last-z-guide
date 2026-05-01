@@ -2,11 +2,14 @@ import json
 import os
 import sys
 import urllib.parse
+import urllib.error
 import urllib.request
 from datetime import date, timedelta
 from statistics import median
 
 OUT_DIR = "content/gsc"
+AGENT_SIGNALS_PATH = os.path.join(OUT_DIR, "latest-gsc-agent-signals.json")
+LATEST_REPORT_PATH = os.path.join(OUT_DIR, "latest-gsc-report.md")
 API_URL = "https://searchconsole.googleapis.com/webmasters/v3"
 TOKEN_URL = "https://oauth2.googleapis.com/token"
 
@@ -21,8 +24,13 @@ def get_env(name: str) -> str:
 def post_json(url: str, data: dict, headers: dict | None = None) -> dict:
     body = json.dumps(data).encode("utf-8")
     req = urllib.request.Request(url, data=body, headers=headers or {}, method="POST")
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            raw = resp.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        error_body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"HTTP {exc.code} for {url}: {error_body}") from exc
+    return json.loads(raw) if raw else {}
 
 
 def exchange_refresh_token(client_id: str, client_secret: str, refresh_token: str) -> str:
@@ -40,12 +48,27 @@ def exchange_refresh_token(client_id: str, client_secret: str, refresh_token: st
         headers={"Content-Type": "application/x-www-form-urlencoded"},
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        data = json.loads(resp.read().decode("utf-8"))
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        error_body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"Failed to refresh GSC OAuth token: HTTP {exc.code}: {error_body}") from exc
     access_token = data.get("access_token")
     if not access_token:
         raise RuntimeError(f"Failed to refresh token: {data}")
     return access_token
+
+
+def resolve_access_token() -> str:
+    direct_token = os.getenv("GSC_ACCESS_TOKEN", "").strip()
+    if direct_token:
+        return direct_token
+    return exchange_refresh_token(
+        get_env("GSC_CLIENT_ID"),
+        get_env("GSC_CLIENT_SECRET"),
+        get_env("GSC_REFRESH_TOKEN"),
+    )
 
 
 def query_search_analytics(site_url: str, access_token: str, dimensions: list[str], rows: int) -> list[dict]:
@@ -179,6 +202,125 @@ def render_insight_list(rows: list[dict], kind: str) -> list[str]:
     return lines
 
 
+def metric_row(row: dict, key_field: str, keys_index: int = 0) -> dict:
+    keys = row.get("keys", [])
+    value = row.get(key_field)
+    if value is None and keys:
+        value = keys[keys_index] if len(keys) > keys_index else ""
+    return {
+        key_field: value or "",
+        "clicks": round(float(row.get("clicks", 0.0)), 2),
+        "impressions": round(float(row.get("impressions", row.get("impr", 0.0))), 2),
+        "ctr": round(float(row.get("ctr", 0.0)), 6),
+        "position": round(float(row.get("position", row.get("pos", 0.0))), 4),
+    }
+
+
+def agent_query_row(row: dict) -> dict:
+    return metric_row(row, "query")
+
+
+def agent_page_row(row: dict) -> dict:
+    return metric_row(row, "page")
+
+
+def agent_delta_query_row(row: dict) -> dict:
+    return {
+        "query": row.get("query", ""),
+        "delta_impressions": round(float(row.get("delta_impr", 0.0)), 2),
+        "clicks": round(float(row.get("clicks", 0.0)), 2),
+        "impressions": round(float(row.get("impr", 0.0)), 2),
+        "ctr": round(float(row.get("ctr", 0.0)), 6),
+        "position": round(float(row.get("pos", 0.0)), 4),
+    }
+
+
+def local_page_path(url: str) -> str:
+    parsed = urllib.parse.urlparse(url)
+    path = parsed.path.lstrip("/")
+    if not path:
+        return "index.html"
+    if path.endswith("/"):
+        return path + "index.html"
+    return path
+
+
+def agent_query_page_row(row: dict) -> dict:
+    keys = row.get("keys", ["", ""])
+    query = keys[0] if len(keys) > 0 else ""
+    page = keys[1] if len(keys) > 1 else ""
+    payload = metric_row(row, "query")
+    payload["query"] = query
+    payload["page"] = page
+    payload["local_page"] = local_page_path(page)
+    return payload
+
+
+def build_agent_signals(
+    *,
+    site_url: str,
+    generated_for: date,
+    start_date: date,
+    end_date: date,
+    last_7_start: date,
+    prev_7_start: date,
+    prev_7_end: date,
+    rows_limit: int,
+    queries: list[dict],
+    pages: list[dict],
+    query_page: list[dict],
+    new_queries: list[dict],
+    rising_queries: list[dict],
+    insights: dict,
+) -> dict:
+    page_opportunities = []
+    for row in insights["page_underperform"][:25]:
+        item = agent_page_row(row)
+        item["local_page"] = local_page_path(item["page"])
+        item["reason"] = "high impressions with below-median CTR"
+        page_opportunities.append(item)
+
+    return {
+        "schema_version": 1,
+        "report_type": "gsc_weekly_agent_signals",
+        "generated_for": generated_for.isoformat(),
+        "property": site_url,
+        "date_range": {
+            "start": start_date.isoformat(),
+            "end": end_date.isoformat(),
+            "days": (end_date - start_date).days + 1,
+        },
+        "comparison_windows": {
+            "last_7_days": {"start": last_7_start.isoformat(), "end": end_date.isoformat()},
+            "previous_7_days": {"start": prev_7_start.isoformat(), "end": prev_7_end.isoformat()},
+        },
+        "rows_limit": rows_limit,
+        "agent_use": [
+            "Use query_opportunities for title/meta/first-screen CTR work.",
+            "Use quick_win_queries for existing-page optimization before creating new pages.",
+            "Use query_page_pairs to verify query-to-page intent match and cannibalization risk.",
+            "Do not create content from GSC data alone; check site memory and canonical claims first.",
+        ],
+        "summary": {
+            "query_rows": len(queries),
+            "page_rows": len(pages),
+            "query_page_rows": len(query_page),
+            "ctr_median_queries_min_50_impressions": round(float(insights["ctr_median"]), 6),
+        },
+        "query_opportunities": {
+            "low_ctr_good_positions": [agent_query_row(r) for r in insights["low_ctr_good_pos"][:25]],
+            "high_impressions_low_clicks": [agent_query_row(r) for r in insights["high_impr_low_clicks"][:25]],
+            "quick_wins_positions_11_20": [agent_query_row(r) for r in insights["quick_wins"][:25]],
+        },
+        "trend_signals": {
+            "new_queries_last_7_days": [agent_query_row(r) for r in new_queries[:25]],
+            "rising_queries_last_7_vs_previous_7": [agent_delta_query_row(r) for r in rising_queries[:25]],
+        },
+        "page_opportunities": page_opportunities,
+        "query_page_pairs": [agent_query_page_row(r) for r in query_page[:50]],
+    }
+
+
 def bucket_position(queries: list[dict]) -> list[str]:
     buckets = [
         ("1–3", 1, 3),
@@ -253,13 +395,10 @@ def compute_rising_queries(current: list[dict], previous: list[dict]) -> list[di
 
 
 def main() -> int:
-    client_id = get_env("GSC_CLIENT_ID")
-    client_secret = get_env("GSC_CLIENT_SECRET")
-    refresh_token = get_env("GSC_REFRESH_TOKEN")
     site_url = get_env("GSC_PROPERTY")
     rows_limit = int(os.getenv("GSC_ROWS", "100"))
 
-    access_token = exchange_refresh_token(client_id, client_secret, refresh_token)
+    access_token = resolve_access_token()
 
     queries = query_search_analytics(site_url, access_token, ["query"], rows_limit)
     pages = query_search_analytics(site_url, access_token, ["page"], rows_limit)
@@ -287,7 +426,7 @@ def main() -> int:
     out_path = os.path.join(OUT_DIR, f"{end_date.isoformat()}-gsc-report.md")
 
     lines = []
-    lines.append(f"# GSC Daily Report — {end_date.isoformat()}")
+    lines.append(f"# GSC Weekly Report — {end_date.isoformat()}")
     lines.append("")
     lines.append(f"- Property: `{site_url}`")
     lines.append(f"- Date range: {start_date.isoformat()} → {end_date.isoformat()}")
@@ -411,8 +550,31 @@ def main() -> int:
     lines += render_insight_list(insights["page_underperform"], "page")
     lines.append("")
 
+    report_text = "\n".join(lines)
     with open(out_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines))
+        f.write(report_text)
+    with open(LATEST_REPORT_PATH, "w", encoding="utf-8") as f:
+        f.write(report_text)
+
+    agent_signals = build_agent_signals(
+        site_url=site_url,
+        generated_for=end_date,
+        start_date=start_date,
+        end_date=end_date,
+        last_7_start=last_7_start,
+        prev_7_start=prev_7_start,
+        prev_7_end=prev_7_end,
+        rows_limit=rows_limit,
+        queries=queries,
+        pages=pages,
+        query_page=query_page,
+        new_queries=new_queries,
+        rising_queries=rising_queries,
+        insights=insights,
+    )
+    with open(AGENT_SIGNALS_PATH, "w", encoding="utf-8") as f:
+        json.dump(agent_signals, f, indent=2, sort_keys=True)
+        f.write("\n")
 
     # Keep only the latest report file
     for name in os.listdir(OUT_DIR):
@@ -424,6 +586,8 @@ def main() -> int:
         os.remove(path)
 
     print(f"Wrote {out_path} with {len(queries)} queries and {len(pages)} pages.")
+    print(f"Wrote {LATEST_REPORT_PATH}.")
+    print(f"Wrote {AGENT_SIGNALS_PATH}.")
     return 0
 
 

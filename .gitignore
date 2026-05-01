@@ -2,3 +2,4 @@
 data/raw/
 __pycache__/
 *.pyc
+gha-creds-*.json

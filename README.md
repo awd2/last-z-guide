@@ -132,6 +132,15 @@ Automation artifacts live in:
 - `automation/reports/<run_id>.apply-result.md`
 - `automation/reports/<run_id>.closed.md`
 
+## GSC Analytics Automation
+
+The weekly GSC workflow writes:
+
+- `content/gsc/latest-gsc-report.md` for human review
+- `content/gsc/latest-gsc-agent-signals.json` for LLM-agent planning input
+
+Use the JSON file as an analytics signal source only. Before turning a signal into a content task, check `AGENTS.md`, site memory, canonical claims, cluster roles, and the relevant page source.
+
 ## Notes
 
 - No CI or deploy changes are required.
