@@ -23,6 +23,17 @@ The intended chain is:
 
 Each worker must write structured output into run artifacts or explicit proposal files. Workers must not directly publish production content.
 
+The current no-write chain command is:
+
+```bash
+python3 automation/workers/run_chain.py --topic-id <topic_id> --json
+```
+
+It runs `Scout -> Editor -> Reviewer` and writes a summary artifact:
+
+- `automation/reports/worker-chain-<topic_id>.json`
+- `automation/reports/worker-chain-<topic_id>.md`
+
 ## Shared Inputs
 
 Every worker must treat these files as source-of-truth context:

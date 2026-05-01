@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "report_type": "worker_chain_summary",
+  "generated_at": "2026-05-01T18:10:12Z",
+  "source_topic_id": "codes-gsc-opportunity",
+  "target_page_or_slug": "codes.html",
+  "cluster": "Economy",
+  "recommended_action": "update_existing",
+  "page_role": "cornerstone-guide",
+  "primary_query_family": "last z gift center",
+  "review_verdict": "needs_human_review",
+  "risk_level": "high",
+  "approved_next_stage": "patch_plan",
+  "human_approval_required": true,
+  "blocking_issue_count": 0,
+  "warning_count": 3,
+  "artifacts": {
+    "scout_json": "automation/reports/scout-topic-proposals.json",
+    "scout_markdown": "automation/reports/scout-topic-proposals.md",
+    "editor_json": "automation/reports/editor-brief-codes-gsc-opportunity.json",
+    "editor_markdown": "automation/reports/editor-brief-codes-gsc-opportunity.md",
+    "reviewer_json": "automation/reports/worker-review-codes-gsc-opportunity.json",
+    "reviewer_markdown": "automation/reports/worker-review-codes-gsc-opportunity.md",
+    "chain_json": "automation/reports/worker-chain-codes-gsc-opportunity.json",
+    "chain_markdown": "automation/reports/worker-chain-codes-gsc-opportunity.md"
+  },
+  "safety": "No content, backlog, or manifest files were modified by this worker chain."
+}

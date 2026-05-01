@@ -100,6 +100,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - writes a no-change Worker review verdict with blockers, warnings, required context, and checks
   - does not mutate backlog, manifests, or content
 
+- `workers/run_chain.py`
+  - runs `Scout -> Editor -> Reviewer` for one selected topic proposal
+  - writes a no-change chain summary artifact
+  - does not mutate backlog, manifests, or content
+
 ## Current operating model
 
 Right now this layer is **foundation only**.
@@ -179,6 +184,7 @@ python3 automation/pipeline.py show <run_id> --json
 python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id <topic_id> --json
 python3 automation/workers/reviewer.py --topic-id <topic_id> --json
+python3 automation/workers/run_chain.py --topic-id <topic_id> --json
 ```
 
 Example:
@@ -220,6 +226,7 @@ python3 automation/pipeline.py show 2026-04-22-research-cluster-nav --json
 python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/reviewer.py --topic-id codes-gsc-opportunity --json
+python3 automation/workers/run_chain.py --topic-id codes-gsc-opportunity --json
 ```
 
 Lifecycle shorthand:
@@ -256,6 +263,12 @@ Reviewer gate generation:
 - `python3 automation/workers/reviewer.py --topic-id <topic_id> --json` -> generate a no-write Worker review from one Editor brief
 - output lives in `automation/reports/worker-review-<topic_id>.json` and `automation/reports/worker-review-<topic_id>.md`
 - `needs_human_review` is expected for high-risk cornerstone opportunities and does not mean the proposal failed
+
+Worker chain:
+
+- `python3 automation/workers/run_chain.py --topic-id <topic_id> --json` -> run `Scout -> Editor -> Reviewer` and generate a chain summary
+- output lives in `automation/reports/worker-chain-<topic_id>.json` and `automation/reports/worker-chain-<topic_id>.md`
+- this is the preferred no-write operator command for reviewing one analytics-backed opportunity end to end
 
 Lower-level helpers are still available when needed.
 
