@@ -262,6 +262,21 @@ An Editor brief is acceptable only if it:
 
 ## Reviewer Contract
 
+### Current Worker
+
+The first no-write implementation lives at:
+
+```bash
+python3 automation/workers/reviewer.py --topic-id <topic_id> --json
+```
+
+It reads `automation/reports/editor-brief-<topic_id>.json` by default, checks the related Scout proposal from `automation/reports/scout-topic-proposals.json`, and writes:
+
+- `automation/reports/worker-review-<topic_id>.json`
+- `automation/reports/worker-review-<topic_id>.md`
+
+This worker does not mutate content, manifests, or `topic_backlog.csv`.
+
 ### Job
 
 Review Scout proposals, Editor briefs, and future patch specs for site fit, risk, and readiness.
@@ -353,14 +368,14 @@ Human approval is required before:
 
 The system may prepare artifacts before approval. It must not publish autonomously.
 
-## Initial Implementation Milestone
+## Current Implementation Milestone
 
-The first implementation milestone should be deterministic and no-write:
+The current implementation is deterministic and no-write:
 
-1. Read `content/gsc/latest-gsc-agent-signals.json`.
-2. Produce Scout `topic_proposal` records into a review artifact.
-3. Do not mutate `topic_backlog.csv` automatically.
-4. Let the operator choose which proposals become backlog items.
-5. Reuse existing `plan -> init-run -> review -> brief` lifecycle after approval.
+1. `Scout` reads `content/gsc/latest-gsc-agent-signals.json`.
+2. `Scout` produces `topic_proposal` records into review artifacts.
+3. `Editor` turns one proposal into an `editor_brief` artifact.
+4. `Reviewer` gates the brief for site fit, risk, context, canonical claims, and next-stage readiness.
+5. Operators decide which reviewed proposals become backlog items or patch-plan work.
 
 This keeps discovery useful without letting analytics noise become content churn.

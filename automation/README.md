@@ -95,6 +95,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - writes a no-change Editor brief with context, links, protected claims, and checks
   - does not mutate backlog, manifests, or content
 
+- `workers/reviewer.py`
+  - reads one Editor brief and its Scout proposal
+  - writes a no-change Worker review verdict with blockers, warnings, required context, and checks
+  - does not mutate backlog, manifests, or content
+
 ## Current operating model
 
 Right now this layer is **foundation only**.
@@ -173,6 +178,7 @@ python3 automation/pipeline.py show <run_id>
 python3 automation/pipeline.py show <run_id> --json
 python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id <topic_id> --json
+python3 automation/workers/reviewer.py --topic-id <topic_id> --json
 ```
 
 Example:
@@ -213,6 +219,7 @@ python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-research-cluster-nav --json
 python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id codes-gsc-opportunity --json
+python3 automation/workers/reviewer.py --topic-id codes-gsc-opportunity --json
 ```
 
 Lifecycle shorthand:
@@ -243,6 +250,12 @@ Editor brief generation:
 - `python3 automation/workers/editor.py --topic-id <topic_id> --json` -> generate a no-write Editor brief from one Scout proposal
 - output lives in `automation/reports/editor-brief-<topic_id>.json` and `automation/reports/editor-brief-<topic_id>.md`
 - operators still approve any later patch plan or content apply step separately
+
+Reviewer gate generation:
+
+- `python3 automation/workers/reviewer.py --topic-id <topic_id> --json` -> generate a no-write Worker review from one Editor brief
+- output lives in `automation/reports/worker-review-<topic_id>.json` and `automation/reports/worker-review-<topic_id>.md`
+- `needs_human_review` is expected for high-risk cornerstone opportunities and does not mean the proposal failed
 
 Lower-level helpers are still available when needed.
 
