@@ -519,8 +519,11 @@ entries. It is intentionally narrower than a general writing worker:
 
 - HTML edits are limited to known safe metadata, first-screen, and related-link
   templates
+- every apply route must map to a specialized deterministic handler or an
+  explicitly allowlisted generic related-link route
 - generated research branch pages are edited through their JSON source files
-  and regenerated
+  and regenerated; generated related-guide targets are allowlisted instead of
+  inferred from arbitrary specs
 - duplicate related links and target-page self-links are skipped and recorded
 - unsupported approved operations fail loudly instead of being silently skipped
   in the apply result artifact

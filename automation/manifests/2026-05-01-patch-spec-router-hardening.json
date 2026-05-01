@@ -1,0 +1,102 @@
+{
+  "run_id": "2026-05-01-patch-spec-router-hardening",
+  "created_at": "2026-05-01T16:37:34.614799Z",
+  "run_type": "update_existing",
+  "status": "closed",
+  "risk_level": "medium",
+  "summary": "Update the existing page `automation/apply_approved.py` for the `Site` cluster using the `site-page` archetype.",
+  "inputs": {
+    "topic_id": "patch-spec-router-hardening",
+    "title": "Patch Spec router hardening",
+    "cluster": "Site",
+    "source_type": "product",
+    "source_reference": "Apply layer needs stronger routing before expanding LLM-worker scope",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog"
+  },
+  "plan": {
+    "topic_id": "patch-spec-router-hardening",
+    "title": "Patch Spec router hardening",
+    "cluster": "Site",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "site-page",
+    "target_page_or_slug": "automation/apply_approved.py",
+    "source_type": "product",
+    "source_reference": "Apply layer needs stronger routing before expanding LLM-worker scope",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "risk_level": "medium",
+    "plan_summary": "Update the existing page `automation/apply_approved.py` for the `Site` cluster using the `site-page` archetype.",
+    "memory_files": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/entities.json"
+    ],
+    "related_pages": [
+      "about.html",
+      "contact.html",
+      "disclosure.html",
+      "privacy.html",
+      "terms.html"
+    ],
+    "deterministic_checks": [
+      "python3 automation/run_checks.py",
+      "python3 scripts/prepublish_check.py --fix",
+      "python3 scripts/prepublish_check.py"
+    ],
+    "notes": "Map page archetype and operation type to explicit safe apply handlers, and fail closed when no deterministic template exists."
+  },
+  "artifacts": {
+    "memory_files_used": [
+      "automation/memory/content_index.json",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/release_checklist.md",
+      "automation/memory/topic_backlog.csv",
+      "automation/memory/entities.json"
+    ],
+    "review_context": {
+      "canonical_claim_ids": [],
+      "related_filenames": [
+        "about.html",
+        "contact.html",
+        "disclosure.html",
+        "privacy.html",
+        "terms.html"
+      ]
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-05-01-patch-spec-router-hardening.closed.md",
+      "closed_at": "2026-05-01T16:40:11Z",
+      "note": ""
+    }
+  },
+  "changed_files": [
+    "automation/README.md",
+    "automation/apply_approved.py",
+    "automation/memory/topic_backlog.csv"
+  ],
+  "checks": {
+    "automation_checks_strict": {
+      "status": "pass",
+      "notes": "Cluster link check passed. | Checked site structure on 63 HTML pages and 56 guide/data pages. | Site structure check passed. | Checked SEO/LLM alignment on 63 memory pages: 0 alignment warning(s), 0 cannibalization warning(s). | SEO/LLM alignment check passed. | Automation checks passed."
+    },
+    "changed_pages_report": {
+      "status": "pass",
+      "notes": "same-cluster inbound links: 5 | expected hubs: index.html | linked from hubs: index.html"
+    }
+  },
+  "review": {
+    "verdict": "needs_human_review",
+    "open_questions": [
+      "No canonical claims matched automatically. Should the claim layer be expanded for this topic?"
+    ],
+    "next_action": "review_human",
+    "reviewer_notes": "Deterministic review scaffold complete. No canonical claims matched automatically, so this run should be reviewed carefully before drafting content."
+  }
+}

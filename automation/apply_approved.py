@@ -53,6 +53,19 @@ TARGET_OPERATION_SUPPORT = {
     },
 }
 
+GENERIC_HTML_RELATED_CARD_SUPPORT = {
+    ("alliance-recognition-cost.html", "research-costs.html"),
+    ("diamond-reserve.html", "codes.html"),
+    ("diamond-reserve.html", "gift-center-uid.html"),
+    ("f2p.html", "gift-center-uid.html"),
+    ("farm-account.html", "codes.html"),
+    ("farm-account.html", "gift-center-uid.html"),
+}
+
+GENERATED_RESEARCH_RELATED_GUIDE_TARGETS = {
+    "research-costs.html",
+}
+
 START_SEASON_NOTE = """                    <p class="qa-callout qa-callout--note">
                         <span class="qa-icon" aria-hidden="true">i</span>
                         <span class="qa-callout-text"><strong>Season naming note:</strong> on newer servers, Season 2 is Winter. Older guides may call Season 2 Desert, but Desert was canceled or skipped for current servers, so follow Winter naming when planning your early timeline.</span>
@@ -99,7 +112,7 @@ def target_card(target_page: str) -> dict[str, str]:
     return TARGET_CARDS.get(target_page, {"href": target_page, "label": target_page})
 
 
-def validate_supported_specs(grouped: dict[str, list[dict[str, Any]]]) -> None:
+def validate_supported_specs(grouped: dict[str, list[dict[str, Any]]], target_page: str) -> None:
     for source_file, source_specs in grouped.items():
         supported = TARGET_OPERATION_SUPPORT.get(source_file)
         if supported is not None:
@@ -120,8 +133,21 @@ def validate_supported_specs(grouped: dict[str, list[dict[str, Any]]]) -> None:
             source_type = spec.get("source_type")
             if operation != "internal_link_addition":
                 raise ValueError(f"Unsupported approved operation for {source_file}: {operation}")
-            if source_type not in {"generated_research_branch", "html_file"}:
-                raise ValueError(f"Unsupported source type for {source_file}: {source_type}")
+            if source_type == "generated_research_branch":
+                if target_page not in GENERATED_RESEARCH_RELATED_GUIDE_TARGETS:
+                    raise ValueError(
+                        "Unsupported generated research related-guide target for "
+                        f"{source_file}: {target_page}"
+                    )
+                continue
+            if source_type == "html_file":
+                if (source_file, target_page) not in GENERIC_HTML_RELATED_CARD_SUPPORT:
+                    raise ValueError(
+                        "Unsupported generic HTML related-card route for "
+                        f"{source_file} -> {target_page}"
+                    )
+                continue
+            raise ValueError(f"Unsupported source type for {source_file}: {source_type}")
 
 
 def apply_research_costs(specs: list[dict[str, Any]]) -> tuple[list[str], list[str]]:
@@ -483,6 +509,15 @@ def run_generators(specs: list[dict[str, Any]]) -> list[str]:
     return ran
 
 
+SPECIALIZED_APPLY_HANDLERS = {
+    "codes.html": apply_codes,
+    "gift-center-uid.html": apply_gift_center_uid,
+    "redeem-code-not-working.html": apply_redeem_code_not_working,
+    "research-costs.html": apply_research_costs,
+    "start.html": apply_start,
+}
+
+
 def render_report(manifest, applied: list[str], skipped: list[str], generators: list[str], applied_at: str) -> str:
     return f"""# Apply Result: {manifest.run_id}
 
@@ -524,38 +559,21 @@ def apply_approved(path: Path):
     grouped: dict[str, list[dict[str, Any]]] = {}
     for spec in specs:
         grouped.setdefault(str(spec.get("source_of_truth_file")), []).append(spec)
-    validate_supported_specs(grouped)
 
     applied: list[str] = []
     skipped: list[str] = []
     generated_specs: list[dict[str, Any]] = []
     target_page = str((manifest.plan or {}).get("target_page_or_slug", ""))
+    validate_supported_specs(grouped, target_page)
+
     for source_file, source_specs in grouped.items():
-        if source_file == "codes.html":
-            source_applied, source_skipped = apply_codes(source_specs)
+        handler = SPECIALIZED_APPLY_HANDLERS.get(source_file)
+        if handler is not None:
+            source_applied, source_skipped = handler(source_specs)
             applied.extend(source_applied)
             skipped.extend(source_skipped)
             continue
-        if source_file == "research-costs.html":
-            source_applied, source_skipped = apply_research_costs(source_specs)
-            applied.extend(source_applied)
-            skipped.extend(source_skipped)
-            continue
-        if source_file == "gift-center-uid.html":
-            source_applied, source_skipped = apply_gift_center_uid(source_specs)
-            applied.extend(source_applied)
-            skipped.extend(source_skipped)
-            continue
-        if source_file == "start.html":
-            source_applied, source_skipped = apply_start(source_specs)
-            applied.extend(source_applied)
-            skipped.extend(source_skipped)
-            continue
-        if source_file == "redeem-code-not-working.html":
-            source_applied, source_skipped = apply_redeem_code_not_working(source_specs)
-            applied.extend(source_applied)
-            skipped.extend(source_skipped)
-            continue
+
         for spec in source_specs:
             operation = spec.get("operation_type")
             source_type = spec.get("source_type")
@@ -570,6 +588,8 @@ def apply_approved(path: Path):
                 source_applied, source_skipped = add_html_related_card(source_file, target_page)
                 applied.extend(source_applied)
                 skipped.extend(source_skipped)
+            else:
+                raise ValueError(f"Unsupported source type for {source_file}: {source_type}")
 
     generators = run_generators(generated_specs)
     applied_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
