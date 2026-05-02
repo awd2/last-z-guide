@@ -320,6 +320,26 @@ Current generated branch set includes:
 
 ## Content Editing Rules
 
+### User-Visible Content Approval Gate
+
+Any change that affects content real users can read or search/AI systems can quote requires explicit user approval before it is applied, committed, or pushed.
+
+This includes:
+
+- visible page copy
+- titles, H1s, meta descriptions, canonical tags, robots directives, and structured data
+- sitemap/search-index changes caused by content updates
+- public navigation, internal links, cards, FAQs, tables, and first-screen answers
+
+Required flow:
+
+1. prepare a proposed text diff or exact before/after text
+2. show it to the user for review
+3. wait for explicit approval
+4. only then apply the content change and continue with checks, commit, and push
+
+Do not treat general permission to work on the project as approval for user-visible content edits. Approval must be tied to the proposed content change or exact diff.
+
 For every content task:
 
 1. Identify the page’s **primary job**.

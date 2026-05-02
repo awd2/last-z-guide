@@ -4,6 +4,8 @@ This checklist is the minimum editorial and QA gate before a content change shou
 
 ## Editorial Gate
 
+- User-visible content changes were shown to the site owner as an exact proposed diff or before/after text before being applied.
+- The site owner explicitly approved the proposed user-visible content changes before commit/push.
 - The page has one clear primary query family.
 - The page has one clear primary job.
 - The first screen answers the main user question.
