@@ -20,25 +20,25 @@ This is a no-write review artifact for public user-facing content. It focuses on
 ## Fixes Applied
 
 - `research.html`
-  - aligned the main research route with the canonical path: Hero Training, Military Strategies, Peace Shield, Siege to Seize, then Field Research before late Unit Special Training planning
-  - removed outdated `Special Unit Training` naming and over-strong UST-first guidance
-  - removed unsupported dollar-cost framing
+  - clarified the main route as Hero Training to Cockpit, Military Strategies, Peace Shield, then the shortest practical path toward UST and T10
+  - replaced `Special Unit Training` with `Unit Special Training`
+  - changed UST cost shorthand to the exact 1,488,100 badge total
+  - kept an explicit warning not to rush UST before efficient mid-game value branches
 - `power-guide.html`
   - replaced absolute `Alliance Recognition FIRST` guidance with balanced core-combat plus Alliance Recognition checkpoint guidance
 - `formation-power.html`
-  - clarified raw formation power vs real PvP counter value
-  - softened Alliance Recognition language so it does not override core combat research needs
+  - owner review restored the stronger raw-power and Alliance Recognition badge-sustainability wording for this page
 - `formations.html`
-  - replaced absolute formation claims with server-meta-aware wording
+  - kept the structured-data softening from absolute "best formation" to a strong default on many Blood Rose-heavy servers
   - clarified that an underbuilt new-season hero should not break a working synergy core by itself
 - `pvp.html`
   - removed outdated `S3 > S2 > S1` priority wording and aligned with current newer-season hero guidance
 - `alliance-duel.html`
   - reframed Alliance Recognition as early event-economy value, not a universal first badge rule
 - `tips.html`
-  - removed absolute `before any badge research` advice
+  - owner review restored the stronger Alliance Recognition-first quick-tip wording
 - `tech.html`
-  - changed the Alliance Recognition section heading to avoid a false absolute-first signal
+  - owner review restored the original Alliance Recognition-first section heading
 
 ## Current Result
 
@@ -46,10 +46,9 @@ This is a no-write review artifact for public user-facing content. It focuses on
   - unqualified `Season 2 = Desert`
   - redeeming codes inside the game as the actual flow
   - UST/Special Unit Training as an early or first research path
-  - absolute Alliance Recognition-first badge advice
-  - single absolute best formation claims
   - diamond shields being preferred over Alliance Shop shields
   - Reddit/news digest exposure
+- Owner-approved stronger wording remains on selected Alliance Recognition and raw formation power pages where it reflects the intended page stance.
 
 ## Follow-Up Recommendation
 
