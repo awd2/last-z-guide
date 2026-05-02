@@ -183,6 +183,7 @@ python3 automation/pipeline.py apply-preview <run_id>
 python3 automation/pipeline.py apply-approved <run_id>
 python3 automation/pipeline.py close-run <run_id>
 python3 automation/pipeline.py worker-chain --topic-id <topic_id>
+python3 automation/pipeline.py worker-intake --topic-id <topic_id>
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
@@ -228,6 +229,7 @@ python3 automation/pipeline.py apply-preview 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py apply-approved 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py close-run 2026-04-22-research-cluster-nav --note "Human reviewed local page output."
 python3 automation/pipeline.py worker-chain --topic-id codes-gsc-opportunity --json
+python3 automation/pipeline.py worker-intake --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
@@ -253,6 +255,7 @@ Lifecycle shorthand:
 - `checks --strict --manifest <run_id>` -> record strict QA and move `applied_pending_qa` to `qa_passed` when all checks pass
 - `close-run` -> close a `qa_passed` run with a final handoff artifact
 - `worker-chain` -> run the no-write `Scout -> Editor -> Reviewer` chain for one topic proposal
+- `worker-intake` -> generate a no-write human-gated intake artifact from a Worker chain summary
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
@@ -283,7 +286,7 @@ Worker chain:
 
 Worker intake gate:
 
-- `python3 automation/workers/intake.py --topic-id <topic_id> --json` -> generate a no-write intake artifact from one Worker chain summary
+- `python3 automation/pipeline.py worker-intake --topic-id <topic_id> --json` -> generate a no-write intake artifact from one Worker chain summary
 - output lives in `automation/reports/worker-intake-<topic_id>.json` and `automation/reports/worker-intake-<topic_id>.md`
 - if human approval is required, intake remains `approval_required` until rerun with `--approved-by <name>`
 

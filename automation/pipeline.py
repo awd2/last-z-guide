@@ -246,6 +246,29 @@ def cmd_worker_chain(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_worker_intake(
+    topic_id: str | None,
+    chain: str | None,
+    approved_by: str | None,
+    note: str | None,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "workers" / "intake.py")]
+    if topic_id:
+        command.extend(["--topic-id", topic_id])
+    if chain:
+        command.extend(["--chain", chain])
+    if approved_by:
+        command.extend(["--approved-by", approved_by])
+    if note:
+        command.extend(["--note", note])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== Worker Intake ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_list(status: str | None, cluster: str | None, priority: str | None, as_json: bool) -> int:
     items = load_topic_backlog()
 
@@ -1356,6 +1379,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     worker_chain_parser.add_argument("--json", action="store_true", help="Print the chain summary as JSON.")
 
+    worker_intake_parser = subparsers.add_parser(
+        "worker-intake",
+        help="Generate a no-write intake gate artifact from one Worker chain summary.",
+    )
+    worker_intake_parser.add_argument("--topic-id", help="Topic id used to infer the default chain path.")
+    worker_intake_parser.add_argument("--chain", help="Path to worker-chain-<topic_id>.json.")
+    worker_intake_parser.add_argument("--approved-by", help="Human approver name or handle.")
+    worker_intake_parser.add_argument("--note", help="Optional approval note.")
+    worker_intake_parser.add_argument("--json", action="store_true", help="Print the intake summary as JSON.")
+
     return parser
 
 
@@ -1420,6 +1453,8 @@ def main() -> int:
         return cmd_bundle_run(args.run_id)
     if args.command == "worker-chain":
         return cmd_worker_chain(args.topic_id, args.target, args.limit, args.min_impressions, args.json)
+    if args.command == "worker-intake":
+        return cmd_worker_intake(args.topic_id, args.chain, args.approved_by, args.note, args.json)
 
     parser.error(f"Unknown command: {args.command}")
     return 2
