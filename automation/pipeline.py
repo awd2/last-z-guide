@@ -358,6 +358,22 @@ def cmd_content_seo_opportunities(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_content_voice(top: int, fail_on_high_risk: bool, as_json: bool) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "checks" / "content_voice.py"),
+        "--top",
+        str(top),
+    ]
+    if fail_on_high_risk:
+        command.append("--fail-on-high-risk")
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== Content Voice Audit ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_list(status: str | None, cluster: str | None, priority: str | None, as_json: bool) -> int:
     items = load_topic_backlog()
 
@@ -1521,6 +1537,18 @@ def build_parser() -> argparse.ArgumentParser:
     content_seo_parser.add_argument("--no-write", action="store_true", help="Build and print only; do not write artifacts.")
     content_seo_parser.add_argument("--json", action="store_true", help="Print the report summary as JSON.")
 
+    content_voice_parser = subparsers.add_parser(
+        "content-voice",
+        help="Run a no-write audit for generic or low-utility public content signals.",
+    )
+    content_voice_parser.add_argument("--top", type=int, default=12, help="Number of top opportunities to print.")
+    content_voice_parser.add_argument(
+        "--fail-on-high-risk",
+        action="store_true",
+        help="Return non-zero when high-risk voice findings exist. Not used by default checks.",
+    )
+    content_voice_parser.add_argument("--json", action="store_true", help="Print the audit as JSON.")
+
     return parser
 
 
@@ -1607,6 +1635,8 @@ def main() -> int:
             args.no_write,
             args.json,
         )
+    if args.command == "content-voice":
+        return cmd_content_voice(args.top, args.fail_on_high_risk, args.json)
 
     parser.error(f"Unknown command: {args.command}")
     return 2

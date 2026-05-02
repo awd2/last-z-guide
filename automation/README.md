@@ -123,6 +123,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - supports offline `fixture` provider for deterministic tests
   - does not mutate backlog, manifests, or content
 
+- `checks/content_voice.py`
+  - runs a no-write audit for generic, mass-produced, or low-utility writing signals
+  - reports repeated trust boilerplate, generic phrases, long smooth paragraphs, and low specificity
+  - does not edit content and is not part of the default strict gate until a human approves baseline policy changes
+
 ## Current operating model
 
 Right now this layer is **foundation only**.
@@ -200,6 +205,7 @@ python3 automation/pipeline.py worker-run-plan --topic-id <topic_id>
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name>
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
 python3 automation/pipeline.py content-seo-opportunities
+python3 automation/pipeline.py content-voice
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
@@ -255,6 +261,7 @@ python3 automation/pipeline.py worker-run-plan --topic-id codes-gsc-opportunity 
 python3 automation/pipeline.py worker-manifest --topic-id codes-gsc-opportunity --created-by oleg --dry-run --json
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider fixture --fixture automation/reports/example-llm-response.json --json
 python3 automation/pipeline.py content-seo-opportunities --json
+python3 automation/pipeline.py content-voice --json
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
@@ -288,6 +295,7 @@ Lifecycle shorthand:
 - `worker-manifest` -> create a `planned` manifest from an approved Worker run-plan proposal
 - `llm-adapter` -> validate future LLM request/response contracts through a fail-closed provider adapter
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
+- `content-voice` -> run a no-write audit for generic, mass-produced, or low-utility public content signals
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
@@ -352,6 +360,15 @@ Content SEO opportunity report:
 - `python3 automation/pipeline.py content-seo-opportunities --json` -> build a no-write page opportunity artifact from `content/gsc/latest-gsc-agent-signals.json`, `content_index.json`, page structure, and `sitemap.xml`
 - output lives in `automation/reports/content-seo-opportunities.json` and `automation/reports/content-seo-opportunities.md`
 - use it as planning context for future workers; it is not permission to edit high-risk pages or generated research HTML directly
+
+Content voice audit:
+
+- `python3 automation/pipeline.py content-voice` -> audit public pages for generic or low-utility writing signals
+- `python3 automation/pipeline.py content-voice --json` -> emit the full machine-readable audit
+- `python3 automation/pipeline.py content-voice --top 20` -> show more opportunities in the human-readable output
+- `python3 automation/pipeline.py content-voice --fail-on-high-risk` -> optionally return non-zero when high-risk findings exist
+- this is a no-write planning audit; it is not automatic approval to rewrite public pages
+- use findings to prepare exact before/after content proposals for human approval
 
 Lower-level helpers are still available when needed.
 

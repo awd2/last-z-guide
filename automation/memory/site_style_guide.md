@@ -54,6 +54,13 @@ Avoid:
 - New content must fit into an existing cluster or intentionally create a new one.
 - Add related links and hub/support bridges as part of the change, not as an afterthought.
 
+6. **Add real human utility**
+- Every new or revised guide section should add at least one concrete player-useful element:
+  - an exact number, threshold, cost, timing, UI path, unlock route, decision rule, exception, or common mistake
+  - a practical scenario that helps a player decide what to do next
+  - a comparison that changes the decision, not just wording that sounds complete
+- If a paragraph can be moved to another generic mobile strategy site without changing anything, rewrite it or remove it.
+
 ## First-Screen Rules
 
 Every important page should have:
@@ -127,8 +134,31 @@ Do not publish:
 - contradictory claims against canonical site knowledge
 - vague intros that delay the answer
 - copy that reads like generic gaming filler
+- smooth but low-utility “AI-ish” paragraphs that restate the topic without helping a player decide
+- mass-produced trust or freshness boilerplate that is identical across many pages without page-specific evidence
+- broad claims like “ultimate”, “game changer”, “maximize your”, or “best possible” unless the page immediately proves them with specific context
 - fake “updated” claims without real content changes
 - speculative event timing or mechanic claims without confidence
+
+## Anti-AI-Slop / Human Voice Rules
+
+The risk is not AI assistance by itself. The risk is publishing content that looks mass-produced, generic, or low-originality.
+
+For all future user-visible content:
+
+- write like an experienced player explaining the shortest useful path, not like a generic guide generator
+- prefer short operational sentences over polished filler
+- replace vague value words with the actual value: badges saved, timing gained, risk avoided, unlock reached, or mistake prevented
+- make trust blocks page-specific when possible; do not repeat the same “verified by in-game data and community validation” line everywhere
+- do not pad pages with generic setup paragraphs, generic conclusions, or repeated definitions
+- keep first-screen answers direct, but make the supporting copy specific to the page’s real job
+
+For LLM-assisted drafts, the draft is not acceptable unless it explains:
+
+- the player problem it solves
+- the existing page or cluster it fits
+- what new utility it adds beyond rewording
+- which claims need human confirmation before publication
 
 ## Update Rules
 

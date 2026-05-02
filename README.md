@@ -114,6 +114,7 @@ python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py content-seo-opportunities --json
+python3 automation/pipeline.py content-voice --json
 python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id <topic_id> --json
 python3 automation/workers/reviewer.py --topic-id <topic_id> --json
@@ -132,10 +133,13 @@ python3 -m unittest discover -s automation/tests -p 'test_*.py'
 - cluster-link expectations
 - site structure consistency for shared navigation, guide template signals, and generated research branch boundaries
 - search visibility controls for robots.txt, snippets, and first-screen answer blocks
+- content consistency protection for canonical player guidance
 - SEO/LLM alignment warnings
 - basic cannibalization warnings
 
 `checks --strict` turns weak-cluster and SEO/LLM warnings into a failing gate. Site structure and search visibility issues are always hard failures.
+
+`content-voice` is a separate no-write audit for generic, mass-produced, or low-utility writing signals. It is planning context only; public content rewrites still require exact proposed text and explicit human approval.
 
 Automation artifacts live in:
 

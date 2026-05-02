@@ -350,11 +350,14 @@ For every content task:
    - canonical terminology
    - internal routing
    - exact utility
+   - concrete human utility beyond generic rewording
 4. Avoid:
    - rewriting winners without evidence
    - duplicate pages for near-identical intent
    - long intros that delay the answer
    - unsupported event/season/mechanic claims
+   - generic AI-guide prose that sounds polished but does not help a player decide
+   - repeated trust/freshness boilerplate without page-specific evidence
 
 Always consider:
 
@@ -421,6 +424,7 @@ python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py content-seo-opportunities --json
+python3 automation/pipeline.py content-voice --json
 python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id <topic_id> --json
 python3 automation/workers/reviewer.py --topic-id <topic_id> --json
@@ -472,6 +476,8 @@ Lifecycle currently:
 `apply-approved` may edit source files, but only from approved Patch Spec v1 entries and only through conservative deterministic templates. Unsupported approved operations must fail loudly instead of being silently skipped. Generated research branch pages must still be edited through JSON source files and regenerated.
 
 `content-seo-opportunities` is a no-write report that combines GSC signals, content index memory, page structure, metadata, trust signals, and generated-page boundaries. It is planning context only and must not be treated as automatic approval to edit high-risk pages.
+
+`content-voice` is a no-write audit for generic, low-utility, or mass-produced writing signals. It is planning context only and must not be treated as automatic approval to rewrite public pages. Public content changes still require exact proposed text and explicit human approval.
 
 When `checks --strict --manifest <run_id>` passes after `apply-approved`, the run may advance from `applied_pending_qa` to `qa_passed`. `qa_passed` is still not an autonomous production publishing state.
 

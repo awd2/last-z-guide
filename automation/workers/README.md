@@ -135,6 +135,8 @@ All workers must follow these rules:
 - No updates to archived Reddit/news experiments unless explicitly requested.
 - No contradiction of canonical claims.
 - No keyword-stuffing or thin intent pages.
+- No generic AI-guide prose that restates the topic without concrete player utility.
+- No mass-produced trust/freshness boilerplate; trust context should be page-specific when possible.
 - No template drift from existing page families.
 - No autonomous edits to cornerstone pages without human approval.
 - No accidental snippet or AI-search exclusion on public guide pages.
@@ -149,6 +151,15 @@ Future LLM-assisted workers must preserve public guide eligibility for search an
 - visible textual answer
 - descriptive internal links
 - structured data that matches visible content
+
+Future LLM-assisted workers must also prove human utility before any content proposal:
+
+- identify the exact player problem
+- compare against the existing page or cluster owner
+- explain why the proposal is not a duplicate or thin variation
+- name the concrete value added: cost, timing, UI path, route, threshold, mistake, exception, or decision rule
+- list any claims that need human confirmation before publication
+- avoid broad language like “ultimate”, “comprehensive”, “game changer”, or “maximize” unless the supporting page context makes the claim specific and defensible
 
 ## Scout Contract
 
@@ -223,6 +234,14 @@ Required fields:
     "expected_internal_route": ["index.html", "cluster-hub.html", "target.html"],
     "archetype_reason": "Why this page family fits"
   },
+  "human_utility": {
+    "player_problem": "The real player question or pain point",
+    "existing_page_compared": "The current page or cluster this was checked against",
+    "new_value_added": ["Exact utility this proposal adds beyond rewording"],
+    "why_not_duplicate": "Why this should be an update/new page instead of no-op",
+    "evidence_basis": ["GSC signal, supplied source, in-game observation, or site memory basis"],
+    "claims_needing_human_confirmation": ["Claims that should not be published without owner review"]
+  },
   "constraints": [
     "Canonical claims or template constraints that matter"
   ],
@@ -257,6 +276,7 @@ A Scout proposal is acceptable only if it:
 - maps to a real cluster or proposes a clear cluster owner
 - identifies the smallest correct archetype
 - explains why the page would help players
+- explains the concrete utility added beyond generic rewording
 - identifies at least one internal route
 - identifies canonical or cannibalization risks
 - can be reviewed without opening external context first

@@ -284,6 +284,31 @@ For Google AI features, there is no separate optimization layer beyond search fu
 - make the answer easy to extract and cite
 - keep the content eligible for normal snippets unless there is a deliberate privacy or policy reason not to
 
+## AI-Assisted Content Quality
+
+AI assistance is allowed only when the final page remains people-first and adds real player value.
+
+Search risk comes from scaled, low-effort, low-originality content, not from the mere fact that a model helped draft or structure a page. Future LLM workers must therefore prove utility before proposing content changes.
+
+Every new page or substantial update should include at least one concrete value signal:
+
+- exact cost, threshold, timing, unlock, UI path, or route
+- a player-stage decision rule
+- a meaningful exception or common mistake
+- a comparison that changes the recommended action
+- current-season or current-server clarification
+- an internal-link improvement that helps users reach the correct support page
+
+Do not use LLMs to create:
+
+- near-duplicate pages for phrase variations
+- long intros that restate the query
+- generic paragraphs with vague claims like “maximize your growth” without proof
+- repeated trust/freshness boilerplate across many pages
+- “FAQ inflation” where questions exist only for schema or keyword coverage
+
+For optimization work, prefer sharpening existing winners over expanding them. A human reviewer should be able to point to the exact player-useful improvement before the edit is approved.
+
 ## Crawler and Snippet Controls
 
 Crawler and snippet controls are part of SEO / LLM visibility.
@@ -354,6 +379,17 @@ Pages are more citation-friendly when they:
 
 Do not write a separate “AI voice”.
 Write a clear operational page that is easy to quote accurately.
+
+Do not write a “generic AI guide voice” either. The preferred voice is practical, specific, and decision-oriented.
+
+Future worker proposals should include:
+
+- `player_problem`
+- `new_value_added`
+- `existing_page_compared`
+- `why_not_duplicate`
+- `evidence_basis`
+- `claims_needing_human_confirmation`
 
 ## Update Rules
 

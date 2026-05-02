@@ -16,6 +16,7 @@ This checklist is the minimum editorial and QA gate before a content change shou
 - The page remains eligible for search and AI-answer snippets unless it is intentionally internal/noindex.
 - The main first-screen answer is visible text and is not hidden behind `data-nosnippet`.
 - The page has clear who/how/why trust context when automation, analytics, generated data, or community ambiguity shaped the update.
+- Trust/freshness language is specific to the page where possible, not copied boilerplate across many guides.
 - The page is linked into the correct cluster:
   - upstream hub
   - downstream support page or atlas
@@ -25,6 +26,8 @@ This checklist is the minimum editorial and QA gate before a content change shou
 ## Content Quality Gate
 
 - The page is materially useful, not just longer.
+- The change adds concrete player utility: a decision rule, exact number, UI path, cost, timing, exception, common mistake, or internal route.
+- Generic AI-guide language was removed or avoided; polished prose alone is not a quality improvement.
 - Any FAQ added is justified by real user intent.
 - Numbers, totals, and unlock requirements are internally consistent.
 - If the page touches seasons/events/community naming, ambiguity is explicitly clarified.
