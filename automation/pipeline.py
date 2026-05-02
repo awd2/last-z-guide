@@ -338,6 +338,26 @@ def cmd_llm_adapter(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_content_seo_opportunities(
+    json_output: str | None,
+    markdown_output: str | None,
+    no_write: bool,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "reports" / "content_seo_opportunities.py")]
+    if json_output:
+        command.extend(["--json-output", json_output])
+    if markdown_output:
+        command.extend(["--markdown-output", markdown_output])
+    if no_write:
+        command.append("--no-write")
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== Content SEO Opportunities ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_list(status: str | None, cluster: str | None, priority: str | None, as_json: bool) -> int:
     items = load_topic_backlog()
 
@@ -1492,6 +1512,15 @@ def build_parser() -> argparse.ArgumentParser:
     llm_adapter_parser.add_argument("--output", help="Optional path for the adapter result artifact.")
     llm_adapter_parser.add_argument("--json", action="store_true", help="Print the adapter summary as JSON.")
 
+    content_seo_parser = subparsers.add_parser(
+        "content-seo-opportunities",
+        help="Build a no-write SEO/LLM content opportunity report.",
+    )
+    content_seo_parser.add_argument("--json-output", help="Path for the full JSON artifact.")
+    content_seo_parser.add_argument("--markdown-output", help="Path for the markdown artifact.")
+    content_seo_parser.add_argument("--no-write", action="store_true", help="Build and print only; do not write artifacts.")
+    content_seo_parser.add_argument("--json", action="store_true", help="Print the report summary as JSON.")
+
     return parser
 
 
@@ -1571,6 +1600,13 @@ def main() -> int:
         )
     if args.command == "llm-adapter":
         return cmd_llm_adapter(args.request, args.provider, args.fixture, args.output, args.json)
+    if args.command == "content-seo-opportunities":
+        return cmd_content_seo_opportunities(
+            args.json_output,
+            args.markdown_output,
+            args.no_write,
+            args.json,
+        )
 
     parser.error(f"Unknown command: {args.command}")
     return 2

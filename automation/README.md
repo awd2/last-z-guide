@@ -199,6 +199,7 @@ python3 automation/pipeline.py worker-intake --topic-id <topic_id>
 python3 automation/pipeline.py worker-run-plan --topic-id <topic_id>
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name>
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
+python3 automation/pipeline.py content-seo-opportunities
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
@@ -212,6 +213,7 @@ python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/reports/content_seo_opportunities.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
@@ -252,6 +254,7 @@ python3 automation/pipeline.py worker-intake --topic-id codes-gsc-opportunity --
 python3 automation/pipeline.py worker-run-plan --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py worker-manifest --topic-id codes-gsc-opportunity --created-by oleg --dry-run --json
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider fixture --fixture automation/reports/example-llm-response.json --json
+python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
@@ -284,6 +287,7 @@ Lifecycle shorthand:
 - `worker-run-plan` -> generate a no-write run-plan proposal from a Worker intake artifact
 - `worker-manifest` -> create a `planned` manifest from an approved Worker run-plan proposal
 - `llm-adapter` -> validate future LLM request/response contracts through a fail-closed provider adapter
+- `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
@@ -342,6 +346,12 @@ LLM adapter:
 - default provider is `disabled` and returns a blocked result
 - `openai` is reserved but intentionally not implemented yet
 - adapter output is structured and must not directly edit content, backlog, manifests, or production state
+
+Content SEO opportunity report:
+
+- `python3 automation/pipeline.py content-seo-opportunities --json` -> build a no-write page opportunity artifact from `content/gsc/latest-gsc-agent-signals.json`, `content_index.json`, page structure, and `sitemap.xml`
+- output lives in `automation/reports/content-seo-opportunities.json` and `automation/reports/content-seo-opportunities.md`
+- use it as planning context for future workers; it is not permission to edit high-risk pages or generated research HTML directly
 
 Lower-level helpers are still available when needed.
 

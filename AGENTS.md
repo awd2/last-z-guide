@@ -400,6 +400,7 @@ python3 automation/pipeline.py worker-intake --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id <topic_id> --json
 python3 automation/workers/reviewer.py --topic-id <topic_id> --json
@@ -408,6 +409,7 @@ python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/reports/content_seo_opportunities.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
@@ -423,6 +425,7 @@ Machine-readable snapshots exist for:
 - `open-run --json`
 - `recent-runs --json`
 - `next-step --json`
+- `content-seo-opportunities --json`
 
 Lifecycle currently:
 
@@ -447,6 +450,8 @@ Lifecycle currently:
 `apply-preview` renders a no-write preview from approved specs. It may write manifest/report artifacts, but it must not edit site content.
 
 `apply-approved` may edit source files, but only from approved Patch Spec v1 entries and only through conservative deterministic templates. Unsupported approved operations must fail loudly instead of being silently skipped. Generated research branch pages must still be edited through JSON source files and regenerated.
+
+`content-seo-opportunities` is a no-write report that combines GSC signals, content index memory, page structure, metadata, trust signals, and generated-page boundaries. It is planning context only and must not be treated as automatic approval to edit high-risk pages.
 
 When `checks --strict --manifest <run_id>` passes after `apply-approved`, the run may advance from `applied_pending_qa` to `qa_passed`. `qa_passed` is still not an autonomous production publishing state.
 

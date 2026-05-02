@@ -113,6 +113,7 @@ python3 automation/pipeline.py worker-intake --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/workers/scout.py --json
 python3 automation/workers/editor.py --topic-id <topic_id> --json
 python3 automation/workers/reviewer.py --topic-id <topic_id> --json
@@ -146,6 +147,8 @@ Automation artifacts live in:
 - `automation/reports/<run_id>.apply-preview.md`
 - `automation/reports/<run_id>.apply-result.md`
 - `automation/reports/<run_id>.closed.md`
+- `automation/reports/content-seo-opportunities.md`
+- `automation/reports/content-seo-opportunities.json`
 
 Future LLM worker contracts live in:
 
@@ -161,6 +164,14 @@ The weekly GSC workflow writes:
 - `content/gsc/latest-gsc-agent-signals.json` for LLM-agent planning input
 
 Use the JSON file as an analytics signal source only. Before turning a signal into a content task, check `AGENTS.md`, site memory, canonical claims, cluster roles, and the relevant page source.
+
+For a no-write sitewide opportunity review, run:
+
+```bash
+python3 automation/pipeline.py content-seo-opportunities --json
+```
+
+The report combines GSC page/query signals with page structure, metadata length, first-screen answer coverage, trust-signal coverage, and generated-page boundaries.
 
 ## Notes
 

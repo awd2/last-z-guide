@@ -1,0 +1,2213 @@
+{
+  "report_type": "content_seo_opportunities",
+  "generated_on": "2026-05-02",
+  "source_inputs": {
+    "content_index": "automation/memory/content_index.json",
+    "gsc_signals": "content/gsc/latest-gsc-agent-signals.json",
+    "sitemap": "sitemap.xml"
+  },
+  "policy": {
+    "no_write_content": true,
+    "do_not_rewrite_winners": true,
+    "high_risk_pages_require_proposal_only_review": true,
+    "generated_research_pages_use_json_source": true
+  },
+  "summary": {
+    "pages_evaluated": 62,
+    "action_counts": {
+      "generated_source_pass": 6,
+      "metadata_review": 12,
+      "monitor": 29,
+      "proposal_only_snippet_pass": 11,
+      "snippet_pass": 3,
+      "trust_block_pass": 1
+    },
+    "risk_counts": {
+      "high": 18,
+      "low": 32,
+      "medium": 12
+    },
+    "flag_counts": {
+      "generated_research_page": 8,
+      "gsc_page_opportunity": 15,
+      "long_meta": 10,
+      "long_title": 24,
+      "missing_trust_signal": 14,
+      "short_first_screen_answer": 1
+    },
+    "gsc_generated_for": "2026-04-30"
+  },
+  "opportunities": [
+    {
+      "page": "heroes.html",
+      "cluster": "Heroes",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 13,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "below-target CTR",
+        "meta description is long"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "long_meta"
+      ],
+      "metrics": {
+        "impressions": 12912.0,
+        "clicks": 298.0,
+        "ctr": 0.023079,
+        "position": 7.9835,
+        "title_len": 66,
+        "meta_len": 185,
+        "first_screen_answer_len": 739,
+        "internal_links": 14,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": [
+        {
+          "query": "last z season 4 heroes",
+          "impressions": 223.0,
+          "clicks": 54.0,
+          "ctr": 0.242152,
+          "position": 3.9731,
+          "inferred": false
+        },
+        {
+          "query": "last z s4 heroes",
+          "impressions": 92.0,
+          "clicks": 17.0,
+          "ctr": 0.184783,
+          "position": 4.6196,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "vehicle-modification-cost.html",
+      "cluster": "Equipment",
+      "archetype": "cost-page",
+      "risk_level": "high",
+      "priority_score": 12,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "title is long",
+        "meta description is long"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "long_title",
+        "long_meta"
+      ],
+      "metrics": {
+        "impressions": 7946.0,
+        "clicks": 592.0,
+        "ctr": 0.074503,
+        "position": 5.6365,
+        "title_len": 87,
+        "meta_len": 181,
+        "first_screen_answer_len": 0,
+        "internal_links": 10,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-25"
+      },
+      "top_queries": [
+        {
+          "query": "last z vehicle upgrade",
+          "impressions": 86.0,
+          "clicks": 21.0,
+          "ctr": 0.244186,
+          "position": 4.2674,
+          "inferred": false
+        },
+        {
+          "query": "last z wrench requirements",
+          "impressions": 58.0,
+          "clicks": 17.0,
+          "ctr": 0.293103,
+          "position": 4.9828,
+          "inferred": false
+        },
+        {
+          "query": "last z vehicle upgrade cost",
+          "impressions": 51.0,
+          "clicks": 21.0,
+          "ctr": 0.411765,
+          "position": 1.8039,
+          "inferred": false
+        },
+        {
+          "query": "last z wrench calculator",
+          "impressions": 41.0,
+          "clicks": 17.0,
+          "ctr": 0.414634,
+          "position": 3.6341,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "tech.html",
+      "cluster": "Research",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 12,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "below-target CTR",
+        "meta description is long"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "long_meta"
+      ],
+      "metrics": {
+        "impressions": 5489.0,
+        "clicks": 100.0,
+        "ctr": 0.018218,
+        "position": 7.1867,
+        "title_len": 70,
+        "meta_len": 184,
+        "first_screen_answer_len": 623,
+        "internal_links": 16,
+        "related_cards": 8,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "codes.html",
+      "cluster": "Economy",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 11,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "below-target CTR"
+      ],
+      "flags": [
+        "gsc_page_opportunity"
+      ],
+      "metrics": {
+        "impressions": 14781.0,
+        "clicks": 254.0,
+        "ctr": 0.017184,
+        "position": 6.5549,
+        "title_len": 65,
+        "meta_len": 126,
+        "first_screen_answer_len": 570,
+        "internal_links": 13,
+        "related_cards": 7,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-30"
+      },
+      "top_queries": [
+        {
+          "query": "last z gift center",
+          "impressions": 1548.0,
+          "clicks": 51.0,
+          "ctr": 0.032946,
+          "position": 7.2513,
+          "inferred": false
+        },
+        {
+          "query": "last z gift center login",
+          "impressions": 511.0,
+          "clicks": 13.0,
+          "ctr": 0.02544,
+          "position": 6.0411,
+          "inferred": false
+        },
+        {
+          "query": "last-z.com gift center",
+          "impressions": 276.0,
+          "clicks": 13.0,
+          "ctr": 0.047101,
+          "position": 6.2464,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "power-guide.html",
+      "cluster": "Progression",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 11,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "below-target CTR"
+      ],
+      "flags": [
+        "gsc_page_opportunity"
+      ],
+      "metrics": {
+        "impressions": 7797.0,
+        "clicks": 63.0,
+        "ctr": 0.00808,
+        "position": 7.69,
+        "title_len": 61,
+        "meta_len": 155,
+        "first_screen_answer_len": 716,
+        "internal_links": 21,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "gear.html",
+      "cluster": "Equipment",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 11,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "below-target CTR",
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 3498.0,
+        "clicks": 65.0,
+        "ctr": 0.018582,
+        "position": 6.9543,
+        "title_len": 60,
+        "meta_len": 122,
+        "first_screen_answer_len": 372,
+        "internal_links": 10,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "research.html",
+      "cluster": "Research",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 10,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "title is long"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 11557.0,
+        "clicks": 519.0,
+        "ctr": 0.044908,
+        "position": 7.3372,
+        "title_len": 84,
+        "meta_len": 140,
+        "first_screen_answer_len": 902,
+        "internal_links": 20,
+        "related_cards": 10,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": [
+        {
+          "query": "last z research guide",
+          "impressions": 320.0,
+          "clicks": 68.0,
+          "ctr": 0.2125,
+          "position": 4.8312,
+          "inferred": false
+        },
+        {
+          "query": "last z research tree",
+          "impressions": 256.0,
+          "clicks": 8.0,
+          "ctr": 0.03125,
+          "position": 8.832,
+          "inferred": true
+        },
+        {
+          "query": "peace shield research last z",
+          "impressions": 142.0,
+          "clicks": 5.0,
+          "ctr": 0.035211,
+          "position": 7.0352,
+          "inferred": true
+        },
+        {
+          "query": "last z research priority",
+          "impressions": 123.0,
+          "clicks": 24.0,
+          "ctr": 0.195122,
+          "position": 4.4715,
+          "inferred": false
+        },
+        {
+          "query": "last z research",
+          "impressions": 95.0,
+          "clicks": 18.0,
+          "ctr": 0.189474,
+          "position": 5.6947,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "alliance-duel.html",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "risk_level": "high",
+      "priority_score": 10,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "title is long"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 7872.0,
+        "clicks": 403.0,
+        "ctr": 0.051194,
+        "position": 6.2184,
+        "title_len": 71,
+        "meta_len": 149,
+        "first_screen_answer_len": 888,
+        "internal_links": 13,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": [
+        {
+          "query": "last z vs schedule",
+          "impressions": 282.0,
+          "clicks": 79.0,
+          "ctr": 0.280142,
+          "position": 2.3688,
+          "inferred": false
+        },
+        {
+          "query": "last z alliance duel schedule",
+          "impressions": 137.0,
+          "clicks": 26.0,
+          "ctr": 0.189781,
+          "position": 2.8613,
+          "inferred": false
+        },
+        {
+          "query": "alliance duel last z",
+          "impressions": 113.0,
+          "clicks": 16.0,
+          "ctr": 0.141593,
+          "position": 4.2743,
+          "inferred": false
+        },
+        {
+          "query": "last z alliance duel",
+          "impressions": 100.0,
+          "clicks": 18.0,
+          "ctr": 0.18,
+          "position": 3.4,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "resources.html",
+      "cluster": "Economy",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 10,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "below-target CTR",
+        "title is long"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 2367.0,
+        "clicks": 52.0,
+        "ctr": 0.021969,
+        "position": 6.3046,
+        "title_len": 76,
+        "meta_len": 161,
+        "first_screen_answer_len": 891,
+        "internal_links": 17,
+        "related_cards": 6,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "events.html",
+      "cluster": "Events",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 9,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "title is long"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 5445.0,
+        "clicks": 368.0,
+        "ctr": 0.067585,
+        "position": 5.9003,
+        "title_len": 80,
+        "meta_len": 145,
+        "first_screen_answer_len": 875,
+        "internal_links": 16,
+        "related_cards": 6,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-25"
+      },
+      "top_queries": [
+        {
+          "query": "last z hot events schedule",
+          "impressions": 161.0,
+          "clicks": 42.0,
+          "ctr": 0.26087,
+          "position": 2.7267,
+          "inferred": false
+        },
+        {
+          "query": "last z event calendar",
+          "impressions": 107.0,
+          "clicks": 47.0,
+          "ctr": 0.439252,
+          "position": 1.8318,
+          "inferred": false
+        },
+        {
+          "query": "last z event rotation",
+          "impressions": 69.0,
+          "clicks": 16.0,
+          "ctr": 0.231884,
+          "position": 2.3623,
+          "inferred": false
+        },
+        {
+          "query": "last z weekly events",
+          "impressions": 57.0,
+          "clicks": 16.0,
+          "ctr": 0.280702,
+          "position": 3.8421,
+          "inferred": false
+        },
+        {
+          "query": "last z events calendar",
+          "impressions": 18.0,
+          "clicks": 11.0,
+          "ctr": 0.611111,
+          "position": 2.3333,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "farm-account.html",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "risk_level": "medium",
+      "priority_score": 9,
+      "safe_action": "snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "title is long"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 3579.0,
+        "clicks": 173.0,
+        "ctr": 0.048338,
+        "position": 5.6183,
+        "title_len": 71,
+        "meta_len": 156,
+        "first_screen_answer_len": 825,
+        "internal_links": 14,
+        "related_cards": 6,
+        "has_guide_verified": true,
+        "lastmod": "2026-05-01"
+      },
+      "top_queries": [
+        {
+          "query": "last z farm account",
+          "impressions": 97.0,
+          "clicks": 13.0,
+          "ctr": 0.134021,
+          "position": 2.9485,
+          "inferred": false
+        },
+        {
+          "query": "last z farm account guide",
+          "impressions": 79.0,
+          "clicks": 14.0,
+          "ctr": 0.177215,
+          "position": 3.2278,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "svs.html",
+      "cluster": "PvP",
+      "archetype": "event-guide",
+      "risk_level": "medium",
+      "priority_score": 9,
+      "safe_action": "snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "title is long"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 3297.0,
+        "clicks": 119.0,
+        "ctr": 0.036093,
+        "position": 6.3276,
+        "title_len": 72,
+        "meta_len": 156,
+        "first_screen_answer_len": 865,
+        "internal_links": 13,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": [
+        {
+          "query": "last z svs guide",
+          "impressions": 45.0,
+          "clicks": 13.0,
+          "ctr": 0.288889,
+          "position": 3.7111,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "formations.html",
+      "cluster": "Strategy",
+      "archetype": "comparison-guide",
+      "risk_level": "medium",
+      "priority_score": 9,
+      "safe_action": "snippet_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "below-target CTR",
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 2582.0,
+        "clicks": 53.0,
+        "ctr": 0.020527,
+        "position": 7.1902,
+        "title_len": 59,
+        "meta_len": 127,
+        "first_screen_answer_len": 467,
+        "internal_links": 10,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-04-25"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "hq.html",
+      "cluster": "Progression",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 8,
+      "safe_action": "proposal_only_snippet_pass",
+      "reasons": [
+        "GSC page opportunity"
+      ],
+      "flags": [
+        "gsc_page_opportunity"
+      ],
+      "metrics": {
+        "impressions": 11003.0,
+        "clicks": 288.0,
+        "ctr": 0.026175,
+        "position": 7.8065,
+        "title_len": 68,
+        "meta_len": 137,
+        "first_screen_answer_len": 860,
+        "internal_links": 17,
+        "related_cards": 6,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-25"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "canyon-clash.html",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "risk_level": "medium",
+      "priority_score": 8,
+      "safe_action": "trust_block_pass",
+      "reasons": [
+        "GSC page opportunity",
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "gsc_page_opportunity",
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 3442.0,
+        "clicks": 87.0,
+        "ctr": 0.025276,
+        "position": 7.1095,
+        "title_len": 59,
+        "meta_len": 128,
+        "first_screen_answer_len": 378,
+        "internal_links": 9,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "fully-armed-alliance-cost.html",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "risk_level": "medium",
+      "priority_score": 5,
+      "safe_action": "generated_source_pass",
+      "reasons": [
+        "title is long",
+        "meta description is long"
+      ],
+      "flags": [
+        "long_title",
+        "long_meta",
+        "generated_research_page"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 87,
+        "meta_len": 174,
+        "first_screen_answer_len": 609,
+        "internal_links": 11,
+        "related_cards": 6,
+        "has_guide_verified": true,
+        "lastmod": "2026-05-01"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "military-strategies-cost.html",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "risk_level": "medium",
+      "priority_score": 5,
+      "safe_action": "generated_source_pass",
+      "reasons": [
+        "title is long",
+        "meta description is long"
+      ],
+      "flags": [
+        "long_title",
+        "long_meta",
+        "generated_research_page"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 83,
+        "meta_len": 174,
+        "first_screen_answer_len": 572,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "unit-special-training-cost.html",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "risk_level": "medium",
+      "priority_score": 5,
+      "safe_action": "generated_source_pass",
+      "reasons": [
+        "title is long",
+        "meta description is long"
+      ],
+      "flags": [
+        "long_title",
+        "long_meta",
+        "generated_research_page"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 73,
+        "meta_len": 174,
+        "first_screen_answer_len": 632,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "f2p.html",
+      "cluster": "Economy",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 4,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long",
+        "meta description is long"
+      ],
+      "flags": [
+        "long_title",
+        "long_meta"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 80,
+        "meta_len": 186,
+        "first_screen_answer_len": 843,
+        "internal_links": 19,
+        "related_cards": 8,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-26"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "radar.html",
+      "cluster": "Events",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 4,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long",
+        "meta description is long"
+      ],
+      "flags": [
+        "long_title",
+        "long_meta"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 78,
+        "meta_len": 171,
+        "first_screen_answer_len": 681,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "shield.html",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 4,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long",
+        "meta description is long"
+      ],
+      "flags": [
+        "long_title",
+        "long_meta"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 83,
+        "meta_len": 176,
+        "first_screen_answer_len": 1074,
+        "internal_links": 11,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-30"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "army-building-cost.html",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "risk_level": "medium",
+      "priority_score": 3,
+      "safe_action": "generated_source_pass",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title",
+        "generated_research_page"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 79,
+        "meta_len": 170,
+        "first_screen_answer_len": 514,
+        "internal_links": 11,
+        "related_cards": 6,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-30"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "field-research.html",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "risk_level": "medium",
+      "priority_score": 3,
+      "safe_action": "generated_source_pass",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title",
+        "generated_research_page"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 78,
+        "meta_len": 156,
+        "first_screen_answer_len": 566,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-05-01"
+      },
+      "top_queries": [
+        {
+          "query": "last z research tree",
+          "impressions": 256.0,
+          "clicks": 8.0,
+          "ctr": 0.03125,
+          "position": 8.832,
+          "inferred": true
+        },
+        {
+          "query": "peace shield research last z",
+          "impressions": 142.0,
+          "clicks": 5.0,
+          "ctr": 0.035211,
+          "position": 7.0352,
+          "inferred": true
+        },
+        {
+          "query": "last z field research",
+          "impressions": 66.0,
+          "clicks": 10.0,
+          "ctr": 0.151515,
+          "position": 3.6061,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "siege-to-seize-cost.html",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "risk_level": "medium",
+      "priority_score": 3,
+      "safe_action": "generated_source_pass",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title",
+        "generated_research_page"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 73,
+        "meta_len": 168,
+        "first_screen_answer_len": 568,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "alliance-duel-rewards.html",
+      "cluster": "Events",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 2,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title",
+        "short_first_screen_answer"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 77,
+        "meta_len": 158,
+        "first_screen_answer_len": 0,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-25"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "alliance-recognition-cost.html",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "risk_level": "low",
+      "priority_score": 2,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 77,
+        "meta_len": 144,
+        "first_screen_answer_len": 0,
+        "internal_links": 11,
+        "related_cards": 6,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-26"
+      },
+      "top_queries": [
+        {
+          "query": "alliance recognition last z",
+          "impressions": 229.0,
+          "clicks": 27.0,
+          "ctr": 0.117904,
+          "position": 4.7686,
+          "inferred": false
+        },
+        {
+          "query": "last z alliance recognition",
+          "impressions": 139.0,
+          "clicks": 15.0,
+          "ctr": 0.107914,
+          "position": 3.7626,
+          "inferred": false
+        },
+        {
+          "query": "alliance recognition last z badges",
+          "impressions": 79.0,
+          "clicks": 19.0,
+          "ctr": 0.240506,
+          "position": 3.0759,
+          "inferred": false
+        },
+        {
+          "query": "last z alliance recognition badge cost",
+          "impressions": 75.0,
+          "clicks": 26.0,
+          "ctr": 0.346667,
+          "position": 1.64,
+          "inferred": false
+        },
+        {
+          "query": "last z alliance recognition badges",
+          "impressions": 61.0,
+          "clicks": 13.0,
+          "ctr": 0.213115,
+          "position": 2.9344,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "arena.html",
+      "cluster": "PvP",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 2,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 76,
+        "meta_len": 163,
+        "first_screen_answer_len": 610,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-30"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "diamond-reserve.html",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 2,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "meta description is long"
+      ],
+      "flags": [
+        "long_meta"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 69,
+        "meta_len": 183,
+        "first_screen_answer_len": 827,
+        "internal_links": 11,
+        "related_cards": 6,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-30"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "heroes-es.html",
+      "cluster": "Heroes",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 2,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 73,
+        "meta_len": 152,
+        "first_screen_answer_len": 793,
+        "internal_links": 13,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "lucky-discounter.html",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "risk_level": "low",
+      "priority_score": 2,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 80,
+        "meta_len": 167,
+        "first_screen_answer_len": 894,
+        "internal_links": 13,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": [
+        {
+          "query": "lucky discounter last z",
+          "impressions": 293.0,
+          "clicks": 59.0,
+          "ctr": 0.201365,
+          "position": 2.5768,
+          "inferred": false
+        },
+        {
+          "query": "last z lucky discounter",
+          "impressions": 212.0,
+          "clicks": 88.0,
+          "ctr": 0.415094,
+          "position": 1.7594,
+          "inferred": false
+        },
+        {
+          "query": "last z lucky discounter schedule",
+          "impressions": 117.0,
+          "clicks": 26.0,
+          "ctr": 0.222222,
+          "position": 2.1026,
+          "inferred": false
+        },
+        {
+          "query": "last z survival shooter lucky discounter",
+          "impressions": 52.0,
+          "clicks": 17.0,
+          "ctr": 0.326923,
+          "position": 1.9808,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "refugees.html",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 2,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 74,
+        "meta_len": 158,
+        "first_screen_answer_len": 810,
+        "internal_links": 11,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "research-costs.html",
+      "cluster": "Research",
+      "archetype": "atlas-page",
+      "risk_level": "low",
+      "priority_score": 2,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 86,
+        "meta_len": 125,
+        "first_screen_answer_len": 685,
+        "internal_links": 16,
+        "related_cards": 3,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-26"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "tyrant.html",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "risk_level": "low",
+      "priority_score": 2,
+      "safe_action": "metadata_review",
+      "reasons": [
+        "title is long"
+      ],
+      "flags": [
+        "long_title"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 77,
+        "meta_len": 154,
+        "first_screen_answer_len": 633,
+        "internal_links": 11,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "base-building-order.html",
+      "cluster": "Progression",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 68,
+        "meta_len": 169,
+        "first_screen_answer_len": 380,
+        "internal_links": 9,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "early-game-optimization.html",
+      "cluster": "Progression",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 61,
+        "meta_len": 165,
+        "first_screen_answer_len": 485,
+        "internal_links": 10,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "formation-power.html",
+      "cluster": "Strategy",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 60,
+        "meta_len": 131,
+        "first_screen_answer_len": 532,
+        "internal_links": 12,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-04-30"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "hero-training-cost.html",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "risk_level": "medium",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [
+        "generated_research_page"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 69,
+        "meta_len": 163,
+        "first_screen_answer_len": 564,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "leveling.html",
+      "cluster": "Progression",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 57,
+        "meta_len": 143,
+        "first_screen_answer_len": 471,
+        "internal_links": 11,
+        "related_cards": 5,
+        "has_guide_verified": false,
+        "lastmod": "2026-04-25"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "peace-shield-cost.html",
+      "cluster": "Research",
+      "archetype": "cost-page",
+      "risk_level": "medium",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [
+        "generated_research_page"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 69,
+        "meta_len": 169,
+        "first_screen_answer_len": 536,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "pvp.html",
+      "cluster": "PvP",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 56,
+        "meta_len": 134,
+        "first_screen_answer_len": 326,
+        "internal_links": 19,
+        "related_cards": 7,
+        "has_guide_verified": false,
+        "lastmod": "2026-04-25"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "queenie.html",
+      "cluster": "Heroes",
+      "archetype": "hero-profile",
+      "risk_level": "low",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 44,
+        "meta_len": 102,
+        "first_screen_answer_len": 340,
+        "internal_links": 9,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": [
+        {
+          "query": "queenie last z",
+          "impressions": 90.0,
+          "clicks": 11.0,
+          "ctr": 0.122222,
+          "position": 2.4778,
+          "inferred": false
+        },
+        {
+          "query": "last z queenie",
+          "impressions": 60.0,
+          "clicks": 17.0,
+          "ctr": 0.283333,
+          "position": 1.5167,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "shooter-stages.html",
+      "cluster": "Progression",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 48,
+        "meta_len": 122,
+        "first_screen_answer_len": 317,
+        "internal_links": 10,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "tips.html",
+      "cluster": "Strategy",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 53,
+        "meta_len": 126,
+        "first_screen_answer_len": 396,
+        "internal_links": 16,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "trap.html",
+      "cluster": "PvP",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 58,
+        "meta_len": 127,
+        "first_screen_answer_len": 410,
+        "internal_links": 9,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "yu-chan.html",
+      "cluster": "Heroes",
+      "archetype": "hero-profile",
+      "risk_level": "low",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 44,
+        "meta_len": 99,
+        "first_screen_answer_len": 327,
+        "internal_links": 9,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": [
+        {
+          "query": "yu chan last z",
+          "impressions": 105.0,
+          "clicks": 36.0,
+          "ctr": 0.342857,
+          "position": 1.1714,
+          "inferred": false
+        },
+        {
+          "query": "last z yu chan",
+          "impressions": 32.0,
+          "clicks": 12.0,
+          "ctr": 0.375,
+          "position": 1.125,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "zombie-siege.html",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "risk_level": "low",
+      "priority_score": 1,
+      "safe_action": "monitor",
+      "reasons": [
+        "missing guide-verified trust block"
+      ],
+      "flags": [
+        "missing_trust_signal"
+      ],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 54,
+        "meta_len": 131,
+        "first_screen_answer_len": 569,
+        "internal_links": 10,
+        "related_cards": 4,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "about.html",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 21,
+        "meta_len": 127,
+        "first_screen_answer_len": 0,
+        "internal_links": 5,
+        "related_cards": 0,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "contact.html",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 23,
+        "meta_len": 134,
+        "first_screen_answer_len": 0,
+        "internal_links": 5,
+        "related_cards": 0,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "daily.html",
+      "cluster": "Routine",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 60,
+        "meta_len": 165,
+        "first_screen_answer_len": 938,
+        "internal_links": 17,
+        "related_cards": 7,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-30"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "disclosure.html",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 26,
+        "meta_len": 137,
+        "first_screen_answer_len": 0,
+        "internal_links": 5,
+        "related_cards": 0,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "emergency-hospital-cost.html",
+      "cluster": "Progression",
+      "archetype": "cost-page",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 53,
+        "meta_len": 126,
+        "first_screen_answer_len": 0,
+        "internal_links": 9,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-25"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "furylord.html",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 59,
+        "meta_len": 157,
+        "first_screen_answer_len": 841,
+        "internal_links": 11,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "gacha-go.html",
+      "cluster": "Events",
+      "archetype": "event-guide",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 69,
+        "meta_len": 160,
+        "first_screen_answer_len": 568,
+        "internal_links": 11,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": [
+        {
+          "query": "gacha go last z",
+          "impressions": 108.0,
+          "clicks": 27.0,
+          "ctr": 0.25,
+          "position": 2.4537,
+          "inferred": false
+        },
+        {
+          "query": "last z gacha go",
+          "impressions": 75.0,
+          "clicks": 24.0,
+          "ctr": 0.32,
+          "position": 2.2533,
+          "inferred": false
+        },
+        {
+          "query": "gacha go event last z",
+          "impressions": 38.0,
+          "clicks": 11.0,
+          "ctr": 0.289474,
+          "position": 1.8947,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "gift-center-uid.html",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 68,
+        "meta_len": 150,
+        "first_screen_answer_len": 634,
+        "internal_links": 9,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-30"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "hq-construction-cost.html",
+      "cluster": "Progression",
+      "archetype": "cost-page",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 55,
+        "meta_len": 119,
+        "first_screen_answer_len": 0,
+        "internal_links": 9,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-04-25"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "index.html",
+      "cluster": "Home",
+      "archetype": "home-hub",
+      "risk_level": "high",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 69,
+        "meta_len": 168,
+        "first_screen_answer_len": 0,
+        "internal_links": 52,
+        "related_cards": 0,
+        "has_guide_verified": false,
+        "lastmod": null
+      },
+      "top_queries": [
+        {
+          "query": "last z guide",
+          "impressions": 417.0,
+          "clicks": 270.0,
+          "ctr": 0.647482,
+          "position": 1.3429,
+          "inferred": false
+        },
+        {
+          "query": "last z research guide",
+          "impressions": 209.0,
+          "clicks": 11.0,
+          "ctr": 0.052632,
+          "position": 8.3541,
+          "inferred": false
+        },
+        {
+          "query": "last z research",
+          "impressions": 205.0,
+          "clicks": 44.0,
+          "ctr": 0.214634,
+          "position": 4.1902,
+          "inferred": false
+        },
+        {
+          "query": "last z guides",
+          "impressions": 61.0,
+          "clicks": 47.0,
+          "ctr": 0.770492,
+          "position": 1.0328,
+          "inferred": false
+        },
+        {
+          "query": "lastz guide",
+          "impressions": 57.0,
+          "clicks": 41.0,
+          "ctr": 0.719298,
+          "position": 1.1579,
+          "inferred": false
+        }
+      ]
+    },
+    {
+      "page": "privacy.html",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 30,
+        "meta_len": 124,
+        "first_screen_answer_len": 0,
+        "internal_links": 5,
+        "related_cards": 0,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "redeem-code-not-working.html",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 70,
+        "meta_len": 155,
+        "first_screen_answer_len": 686,
+        "internal_links": 10,
+        "related_cards": 5,
+        "has_guide_verified": true,
+        "lastmod": "2026-05-01"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "season-2-winter.html",
+      "cluster": "Seasons",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 65,
+        "meta_len": 143,
+        "first_screen_answer_len": 551,
+        "internal_links": 9,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-05-01"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "start.html",
+      "cluster": "Progression",
+      "archetype": "cornerstone-guide",
+      "risk_level": "high",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 69,
+        "meta_len": 132,
+        "first_screen_answer_len": 763,
+        "internal_links": 16,
+        "related_cards": 6,
+        "has_guide_verified": true,
+        "lastmod": "2026-05-01"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "steel.html",
+      "cluster": "Economy",
+      "archetype": "support-guide",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 61,
+        "meta_len": 160,
+        "first_screen_answer_len": 813,
+        "internal_links": 10,
+        "related_cards": 4,
+        "has_guide_verified": true,
+        "lastmod": "2026-03-15"
+      },
+      "top_queries": []
+    },
+    {
+      "page": "terms.html",
+      "cluster": "Site",
+      "archetype": "site-page",
+      "risk_level": "low",
+      "priority_score": 0,
+      "safe_action": "monitor",
+      "reasons": [
+        "no immediate deterministic issue"
+      ],
+      "flags": [],
+      "metrics": {
+        "impressions": 0.0,
+        "clicks": 0.0,
+        "ctr": null,
+        "position": null,
+        "title_len": 28,
+        "meta_len": 121,
+        "first_screen_answer_len": 0,
+        "internal_links": 5,
+        "related_cards": 0,
+        "has_guide_verified": false,
+        "lastmod": "2026-03-11"
+      },
+      "top_queries": []
+    }
+  ]
+}
