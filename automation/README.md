@@ -190,6 +190,7 @@ python3 automation/pipeline.py apply-approved <run_id>
 python3 automation/pipeline.py close-run <run_id>
 python3 automation/pipeline.py worker-chain --topic-id <topic_id>
 python3 automation/pipeline.py worker-intake --topic-id <topic_id>
+python3 automation/pipeline.py worker-run-plan --topic-id <topic_id>
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
@@ -237,6 +238,7 @@ python3 automation/pipeline.py apply-approved 2026-04-22-research-cluster-nav
 python3 automation/pipeline.py close-run 2026-04-22-research-cluster-nav --note "Human reviewed local page output."
 python3 automation/pipeline.py worker-chain --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py worker-intake --topic-id codes-gsc-opportunity --json
+python3 automation/pipeline.py worker-run-plan --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
@@ -264,6 +266,7 @@ Lifecycle shorthand:
 - `close-run` -> close a `qa_passed` run with a final handoff artifact
 - `worker-chain` -> run the no-write `Scout -> Editor -> Reviewer` chain for one topic proposal
 - `worker-intake` -> generate a no-write human-gated intake artifact from a Worker chain summary
+- `worker-run-plan` -> generate a no-write run-plan proposal from a Worker intake artifact
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
@@ -300,7 +303,7 @@ Worker intake gate:
 
 Worker run-plan proposal:
 
-- `python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json` -> generate a no-write run-plan proposal from one Worker intake artifact
+- `python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json` -> generate a no-write run-plan proposal from one Worker intake artifact
 - output lives in `automation/reports/worker-run-plan-<topic_id>.json` and `automation/reports/worker-run-plan-<topic_id>.md`
 - if intake is not `approved_for_intake`, the run-plan artifact is blocked and contains no `proposed_manifest`
 

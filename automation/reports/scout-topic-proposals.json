@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "scout_topic_proposals",
-  "generated_at": "2026-05-02T06:26:25Z",
+  "generated_at": "2026-05-02T06:36:33Z",
   "source_signals": "content/gsc/latest-gsc-agent-signals.json",
   "source_generated_for": "2026-04-30",
   "proposal_count": 8,

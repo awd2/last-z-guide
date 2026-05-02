@@ -269,6 +269,23 @@ def cmd_worker_intake(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_worker_run_plan(
+    topic_id: str | None,
+    intake: str | None,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "workers" / "intake_to_run.py")]
+    if topic_id:
+        command.extend(["--topic-id", topic_id])
+    if intake:
+        command.extend(["--intake", intake])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== Worker Run Plan ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_list(status: str | None, cluster: str | None, priority: str | None, as_json: bool) -> int:
     items = load_topic_backlog()
 
@@ -1389,6 +1406,14 @@ def build_parser() -> argparse.ArgumentParser:
     worker_intake_parser.add_argument("--note", help="Optional approval note.")
     worker_intake_parser.add_argument("--json", action="store_true", help="Print the intake summary as JSON.")
 
+    worker_run_plan_parser = subparsers.add_parser(
+        "worker-run-plan",
+        help="Generate a no-write run-plan proposal from one Worker intake artifact.",
+    )
+    worker_run_plan_parser.add_argument("--topic-id", help="Topic id used to infer the default intake path.")
+    worker_run_plan_parser.add_argument("--intake", help="Path to worker-intake-<topic_id>.json.")
+    worker_run_plan_parser.add_argument("--json", action="store_true", help="Print the run-plan summary as JSON.")
+
     return parser
 
 
@@ -1455,6 +1480,8 @@ def main() -> int:
         return cmd_worker_chain(args.topic_id, args.target, args.limit, args.min_impressions, args.json)
     if args.command == "worker-intake":
         return cmd_worker_intake(args.topic_id, args.chain, args.approved_by, args.note, args.json)
+    if args.command == "worker-run-plan":
+        return cmd_worker_run_plan(args.topic_id, args.intake, args.json)
 
     parser.error(f"Unknown command: {args.command}")
     return 2
