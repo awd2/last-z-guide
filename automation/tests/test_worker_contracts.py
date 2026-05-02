@@ -10,7 +10,7 @@ import unittest
 from pathlib import Path
 
 from automation.io import load_json, write_json
-from automation.workers import editor, intake, intake_to_run, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, reviewer, run_chain, scout, write_manifest
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -73,6 +73,55 @@ def fixture_signals() -> dict:
 
 
 class WorkerContractTests(unittest.TestCase):
+    def test_llm_adapter_fail_closed_and_fixture_provider(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            request = {
+                "schema_version": 1,
+                "request_id": "fixture-editor-brief",
+                "worker_role": "editor",
+                "task": "Return a structured draft note for an approved topic.",
+                "prompt": "Use the supplied site memory and return JSON only.",
+                "inputs": {
+                    "target_page_or_slug": "codes.html",
+                    "cluster": "Economy",
+                },
+                "expected_response_keys": ["summary", "risk_level", "next_action"],
+            }
+            fixture_response = {
+                "response_json": {
+                    "summary": "Keep the Gift Center page role narrow.",
+                    "risk_level": "medium",
+                    "next_action": "review",
+                }
+            }
+            request_path = tmp_path / "request.json"
+            fixture_path = tmp_path / "response.json"
+            output_path = tmp_path / "llm-result.json"
+            write_json(request_path, request)
+            write_json(fixture_path, fixture_response)
+
+            code, blocked = llm_adapter.run_adapter(request_path, "disabled", None)
+            self.assertEqual(code, 1)
+            self.assertEqual(blocked["state"], "blocked")
+            self.assertIsNone(blocked["response_json"])
+
+            code, completed = llm_adapter.run_adapter(request_path, "fixture", fixture_path)
+            self.assertEqual(code, 0)
+            self.assertEqual(completed["state"], "completed")
+            self.assertEqual(completed["response_json"]["risk_level"], "medium")
+            self.assertEqual(completed["errors"], [])
+            written = llm_adapter.write_output(completed, str(output_path))
+            self.assertEqual(written, output_path)
+            self.assertTrue(output_path.exists())
+
+            bad_fixture_path = tmp_path / "bad-response.json"
+            write_json(bad_fixture_path, {"response_json": {"summary": "Incomplete"}})
+            code, bad = llm_adapter.run_adapter(request_path, "fixture", bad_fixture_path)
+            self.assertEqual(code, 1)
+            self.assertEqual(bad["state"], "blocked")
+            self.assertIn("Response is missing expected key `risk_level`.", bad["errors"])
+
     def test_scout_editor_reviewer_contract_shapes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

@@ -86,6 +86,14 @@ python3 -m unittest discover -s automation/tests -p 'test_*.py'
 
 They validate the deterministic contract shape for Scout, Editor, Reviewer, intake, run-plan, and manifest writer steps using temporary output directories.
 
+The current LLM provider adapter is fail-closed and offline-first:
+
+```bash
+python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+```
+
+It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `openai` is reserved but intentionally not implemented yet. The adapter must not edit content, backlog, manifests, or production state.
+
 ## Shared Inputs
 
 Every worker must treat these files as source-of-truth context:
@@ -115,6 +123,7 @@ All workers must follow these rules:
 
 - No production publishing.
 - No direct content edits unless the worker is a later approved apply worker.
+- No live LLM provider calls unless they go through the fail-closed adapter and have explicit configuration.
 - No new page unless the page has a distinct user job and a clear cluster route.
 - No generated research branch edits through generated HTML; use JSON source + generator.
 - No updates to archived Reddit/news experiments unless explicitly requested.

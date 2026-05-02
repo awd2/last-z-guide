@@ -117,6 +117,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - only proposes a manifest when intake is `approved_for_intake`
   - does not mutate backlog, manifests, or content
 
+- `workers/llm_adapter.py`
+  - validates structured future LLM request/response JSON
+  - defaults to fail-closed `disabled` provider
+  - supports offline `fixture` provider for deterministic tests
+  - does not mutate backlog, manifests, or content
+
 ## Current operating model
 
 Right now this layer is **foundation only**.
@@ -204,6 +210,7 @@ python3 automation/workers/run_chain.py --topic-id <topic_id> --json
 python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
+python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
@@ -323,8 +330,15 @@ Worker approved manifest writer:
 
 Worker contract tests:
 
-- `python3 -m unittest discover -s automation/tests -p 'test_*.py'` -> run deterministic fixture tests for Scout, Editor, Reviewer, intake, run-plan, and manifest writer contracts
+- `python3 -m unittest discover -s automation/tests -p 'test_*.py'` -> run deterministic fixture tests for Scout, Editor, Reviewer, intake, run-plan, manifest writer, and LLM adapter contracts
 - tests use temporary directories for generated artifacts and must not write real site content or production manifests
+
+LLM adapter:
+
+- `python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json` -> validate a future LLM request/response contract offline
+- default provider is `disabled` and returns a blocked result
+- `openai` is reserved but intentionally not implemented yet
+- adapter output is structured and must not directly edit content, backlog, manifests, or production state
 
 Lower-level helpers are still available when needed.
 
