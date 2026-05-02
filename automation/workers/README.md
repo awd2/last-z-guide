@@ -78,6 +78,14 @@ The lower-level helper remains available at:
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 ```
 
+Worker contract fixture tests live at:
+
+```bash
+python3 -m unittest discover -s automation/tests -p 'test_*.py'
+```
+
+They validate the deterministic contract shape for Scout, Editor, Reviewer, intake, run-plan, and manifest writer steps using temporary output directories.
+
 ## Shared Inputs
 
 Every worker must treat these files as source-of-truth context:

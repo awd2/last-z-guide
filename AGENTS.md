@@ -406,6 +406,7 @@ python3 automation/workers/run_chain.py --topic-id <topic_id> --json
 python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
+python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
 Machine-readable snapshots exist for:

@@ -204,6 +204,7 @@ python3 automation/workers/run_chain.py --topic-id <topic_id> --json
 python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
+python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
 Example:
@@ -253,6 +254,7 @@ python3 automation/workers/run_chain.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/intake.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/intake_to_run.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/write_manifest.py --topic-id codes-gsc-opportunity --created-by oleg --dry-run --json
+python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
 Lifecycle shorthand:
@@ -318,6 +320,11 @@ Worker approved manifest writer:
 - default output lives in `automation/manifests/<run_id>.json`
 - the writer fails closed unless the run-plan state is `run_plan_ready`, the proposed manifest validates, and the target manifest does not already exist
 - use `--dry-run` to validate without writing
+
+Worker contract tests:
+
+- `python3 -m unittest discover -s automation/tests -p 'test_*.py'` -> run deterministic fixture tests for Scout, Editor, Reviewer, intake, run-plan, and manifest writer contracts
+- tests use temporary directories for generated artifacts and must not write real site content or production manifests
 
 Lower-level helpers are still available when needed.
 
