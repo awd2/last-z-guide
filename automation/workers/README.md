@@ -89,10 +89,16 @@ They validate the deterministic contract shape for Scout, Editor, Reviewer, inta
 The current LLM provider adapter is fail-closed and offline-first:
 
 ```bash
-python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 ```
 
 It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `openai` is reserved but intentionally not implemented yet. The adapter must not edit content, backlog, manifests, or production state.
+
+The lower-level helper remains available at:
+
+```bash
+python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+```
 
 ## Shared Inputs
 

@@ -312,6 +312,32 @@ def cmd_worker_manifest(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_adapter(
+    request: str,
+    provider: str,
+    fixture: str | None,
+    output: str | None,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_adapter.py"),
+        "--request",
+        request,
+        "--provider",
+        provider,
+    ]
+    if fixture:
+        command.extend(["--fixture", fixture])
+    if output:
+        command.extend(["--output", output])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Adapter ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_list(status: str | None, cluster: str | None, priority: str | None, as_json: bool) -> int:
     items = load_topic_backlog()
 
@@ -1451,6 +1477,21 @@ def build_parser() -> argparse.ArgumentParser:
     worker_manifest_parser.add_argument("--dry-run", action="store_true", help="Validate without writing a manifest.")
     worker_manifest_parser.add_argument("--json", action="store_true", help="Print the manifest writer summary as JSON.")
 
+    llm_adapter_parser = subparsers.add_parser(
+        "llm-adapter",
+        help="Run the fail-closed LLM adapter for a structured Worker request.",
+    )
+    llm_adapter_parser.add_argument("--request", required=True, help="Path to a structured LLM request JSON file.")
+    llm_adapter_parser.add_argument(
+        "--provider",
+        default="disabled",
+        choices=["disabled", "fixture", "openai"],
+        help="Provider to use. Defaults to disabled/fail-closed.",
+    )
+    llm_adapter_parser.add_argument("--fixture", help="Fixture response JSON for offline provider tests.")
+    llm_adapter_parser.add_argument("--output", help="Optional path for the adapter result artifact.")
+    llm_adapter_parser.add_argument("--json", action="store_true", help="Print the adapter summary as JSON.")
+
     return parser
 
 
@@ -1528,6 +1569,8 @@ def main() -> int:
             args.dry_run,
             args.json,
         )
+    if args.command == "llm-adapter":
+        return cmd_llm_adapter(args.request, args.provider, args.fixture, args.output, args.json)
 
     parser.error(f"Unknown command: {args.command}")
     return 2
