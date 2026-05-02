@@ -392,10 +392,14 @@ terminal logs.
   - shared top navigation link order and active section
   - breadcrumb / related-grid / first-screen signal presence on guide pages
   - generated research branch output boundaries
+- search visibility controls:
+  - sitemap declaration in `robots.txt`
+  - no accidental public-guide `noindex`, `nosnippet`, or `max-snippet:0`
+  - no first-screen answer block hidden with `data-nosnippet`
 - basic SEO/LLM alignment checks
 - basic cannibalization warnings
 
-`checks --strict` escalates weak-cluster and SEO/LLM warning-level findings into a failing gate. Site structure failures are always hard failures because they protect shared templates, navigation, and generated-source boundaries.
+`checks --strict` escalates weak-cluster and SEO/LLM warning-level findings into a failing gate. Site structure and search visibility failures are always hard failures because they protect shared templates, navigation, generated-source boundaries, and AI/search snippet eligibility.
 
 Render a template/component inventory report:
 

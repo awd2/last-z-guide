@@ -362,7 +362,7 @@ Remember:
 
 - `checks` = baseline health
 - `checks --strict` = stronger gate, includes weak-cluster and SEO/LLM warning-level failures
-- site structure failures are always hard failures because they protect shared navigation, guide template signals, and generated research branch boundaries
+- site structure and search visibility failures are always hard failures because they protect shared navigation, guide template signals, generated research branch boundaries, and AI/search snippet eligibility
 
 No autonomous production publish.
 

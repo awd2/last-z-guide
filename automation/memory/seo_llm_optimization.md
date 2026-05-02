@@ -263,12 +263,70 @@ Do not:
 - add structured data that implies content the page does not actually contain
 - assume schema alone will improve ranking
 
+## AI Search / Answer Feature Eligibility
+
+AI search visibility starts with ordinary search eligibility.
+
+Important indexable pages should remain:
+
+- crawlable
+- indexable
+- eligible for snippets
+- available as visible textual content, not only image or script-rendered content
+- internally linked from relevant pages
+- backed by structured data that matches visible page content
+
+Do not add special “AI schema”, `llms.txt`, hidden summaries, or machine-only content.
+
+For Google AI features, there is no separate optimization layer beyond search fundamentals. The practical rule for this site is:
+
+- make the page useful enough for a player
+- make the answer easy to extract and cite
+- keep the content eligible for normal snippets unless there is a deliberate privacy or policy reason not to
+
+## Crawler and Snippet Controls
+
+Crawler and snippet controls are part of SEO / LLM visibility.
+
+For indexable guide pages:
+
+- do not add `noindex`
+- do not add `nosnippet`
+- do not add `max-snippet:0`
+- do not wrap the first-screen answer, `qa-lede`, `guide-verified`, `data-lede`, or main recommendation in `data-nosnippet`
+- do not block search or answer-engine crawlers in `robots.txt`
+
+Current crawler policy:
+
+- allow search crawlers to access public guide pages
+- allow `OAI-SearchBot` so pages can be linked and surfaced in ChatGPT search features
+- treat training crawlers such as `GPTBot` as a separate policy decision from search visibility
+
+Archived or internal experiments may use `noindex`, but they must stay out of editorial routing and LLM automation.
+
+## Trust / Who / How / Why Signals
+
+Every future content change should preserve or improve trust signals.
+
+The page should make clear:
+
+- who is responsible for the guide: `Last Z Guides`
+- why the page exists: to solve a real player job, not to target a phrase
+- how the answer was produced when that matters:
+  - game observation
+  - canonical site memory
+  - generated JSON data for research branch pages
+  - GSC/Bing evidence for optimization work
+
+Do not fake freshness. Update dates and sitemap `lastmod` should reflect meaningful content, structured data, or internal-link changes.
+
 ## Search Index / Sitemap Rules
 
 After meaningful content or structure changes:
 
 - ensure `sitemap.xml` is in sync
 - ensure `search-index.json` is in sync
+- update sitemap `lastmod` only for meaningful page changes, not cosmetic churn
 - preserve custom titles/descriptions/keywords where they are intentionally better than auto-derived defaults
 
 If a page is important and newly added to a cluster:

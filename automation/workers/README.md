@@ -137,6 +137,18 @@ All workers must follow these rules:
 - No keyword-stuffing or thin intent pages.
 - No template drift from existing page families.
 - No autonomous edits to cornerstone pages without human approval.
+- No accidental snippet or AI-search exclusion on public guide pages.
+- No `FAQPage` schema unless the FAQ is visible, useful, and specific to the page.
+- No sitemap `lastmod` churn for cosmetic-only changes.
+
+Future LLM-assisted workers must preserve public guide eligibility for search and answer features:
+
+- crawlable HTML
+- indexable page
+- snippet-eligible first-screen answer
+- visible textual answer
+- descriptive internal links
+- structured data that matches visible content
 
 ## Scout Contract
 

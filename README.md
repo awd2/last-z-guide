@@ -130,10 +130,11 @@ python3 -m unittest discover -s automation/tests -p 'test_*.py'
 - orphan / weak-cluster coverage
 - cluster-link expectations
 - site structure consistency for shared navigation, guide template signals, and generated research branch boundaries
+- search visibility controls for robots.txt, snippets, and first-screen answer blocks
 - SEO/LLM alignment warnings
 - basic cannibalization warnings
 
-`checks --strict` turns weak-cluster and SEO/LLM warnings into a failing gate. Site structure issues are always hard failures.
+`checks --strict` turns weak-cluster and SEO/LLM warnings into a failing gate. Site structure and search visibility issues are always hard failures.
 
 Automation artifacts live in:
 

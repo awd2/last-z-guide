@@ -11,6 +11,9 @@ This checklist is the minimum editorial and QA gate before a content change shou
 - The title, H1, meta description, and first-screen answer are aligned with each other.
 - New or changed claims do not contradict canonical site knowledge.
 - The terminology matches the rest of the site.
+- The page remains eligible for search and AI-answer snippets unless it is intentionally internal/noindex.
+- The main first-screen answer is visible text and is not hidden behind `data-nosnippet`.
+- The page has clear who/how/why trust context when automation, analytics, generated data, or community ambiguity shaped the update.
 - The page is linked into the correct cluster:
   - upstream hub
   - downstream support page or atlas
@@ -30,8 +33,11 @@ This checklist is the minimum editorial and QA gate before a content change shou
 - Run `python3 scripts/prepublish_check.py --fix`
 - Run `python3 scripts/prepublish_check.py`
 - Confirm `sitemap.xml` and `search-index.json` are in sync.
+- Confirm sitemap `lastmod` only changed for meaningful content, structured data, or internal-link updates.
 - Confirm modified pages still have valid canonical/meta/structured data.
 - Confirm structured data still matches visible page content.
+- Confirm changed indexable guides do not accidentally use `noindex`, `nosnippet`, `max-snippet:0`, or first-screen `data-nosnippet`.
+- Confirm `robots.txt` still exposes the sitemap and does not block public guide pages or `OAI-SearchBot`.
 - Confirm important new/changed pages are reachable through crawlable internal links, not only through sitemap inclusion.
 
 ## UI / Integration Gate

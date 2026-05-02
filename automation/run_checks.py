@@ -49,6 +49,10 @@ def main() -> int:
         "Site Structure",
         [sys.executable, str(AUTOMATION_DIR / "checks" / "site_structure.py")],
     )
+    failures += run_step(
+        "Search Visibility",
+        [sys.executable, str(AUTOMATION_DIR / "checks" / "search_visibility.py")],
+    )
     seo_cmd = [sys.executable, str(AUTOMATION_DIR / "checks" / "seo_llm_alignment.py")]
     if args.strict:
         seo_cmd.append("--strict")
