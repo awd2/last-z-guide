@@ -148,3 +148,19 @@ For the first MVP:
 - no database or external state store is needed
 
 The only goal right now is to establish a durable, explicit state format.
+
+## Worker-created manifests
+
+Approved Worker run-plan proposals may create a `planned` manifest through:
+
+```bash
+python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
+```
+
+This writer is intentionally narrow:
+
+- it only accepts `worker-run-plan` artifacts with `state: run_plan_ready`
+- it validates `proposed_manifest` against the run manifest schema
+- it refuses to overwrite an existing manifest
+- it writes only `automation/manifests/<run_id>.json`
+- it does not edit content, backlog, or production state

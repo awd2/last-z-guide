@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "worker_proposal_intake",
-  "generated_at": "2026-05-02T06:36:33Z",
+  "generated_at": "2026-05-02T06:43:31Z",
   "source_chain_file": "automation/reports/worker-chain-codes-gsc-opportunity.json",
   "source_topic_id": "codes-gsc-opportunity",
   "target_page_or_slug": "codes.html",

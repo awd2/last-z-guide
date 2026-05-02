@@ -202,6 +202,7 @@ python3 automation/workers/reviewer.py --topic-id <topic_id> --json
 python3 automation/workers/run_chain.py --topic-id <topic_id> --json
 python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
+python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 ```
 
 Example:
@@ -249,6 +250,7 @@ python3 automation/workers/reviewer.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/run_chain.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/intake.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/intake_to_run.py --topic-id codes-gsc-opportunity --json
+python3 automation/workers/write_manifest.py --topic-id codes-gsc-opportunity --created-by oleg --dry-run --json
 ```
 
 Lifecycle shorthand:
@@ -306,6 +308,13 @@ Worker run-plan proposal:
 - `python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json` -> generate a no-write run-plan proposal from one Worker intake artifact
 - output lives in `automation/reports/worker-run-plan-<topic_id>.json` and `automation/reports/worker-run-plan-<topic_id>.md`
 - if intake is not `approved_for_intake`, the run-plan artifact is blocked and contains no `proposed_manifest`
+
+Worker approved manifest writer:
+
+- `python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json` -> create a `planned` run manifest from one approved Worker run-plan proposal
+- default output lives in `automation/manifests/<run_id>.json`
+- the writer fails closed unless the run-plan state is `run_plan_ready`, the proposed manifest validates, and the target manifest does not already exist
+- use `--dry-run` to validate without writing
 
 Lower-level helpers are still available when needed.
 

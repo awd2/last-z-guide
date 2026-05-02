@@ -60,6 +60,18 @@ It reads `automation/reports/worker-intake-<topic_id>.json` and writes:
 
 It only produces a `proposed_manifest` when the intake state is `approved_for_intake`; otherwise it emits a blocked artifact.
 
+The current approved manifest writer is:
+
+```bash
+python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
+```
+
+It reads `automation/reports/worker-run-plan-<topic_id>.json` and writes:
+
+- `automation/manifests/<run_id>.json`
+
+It only writes when the run-plan state is `run_plan_ready` and the proposed manifest validates against the run manifest schema. It does not edit content files, backlog files, or production state. Use `--dry-run` to validate the target manifest path without writing.
+
 ## Shared Inputs
 
 Every worker must treat these files as source-of-truth context:
@@ -414,5 +426,6 @@ The current implementation is deterministic and no-write:
 3. `Editor` turns one proposal into an `editor_brief` artifact.
 4. `Reviewer` gates the brief for site fit, risk, context, canonical claims, and next-stage readiness.
 5. Operators decide which reviewed proposals become backlog items or patch-plan work.
+6. An approved run-plan may create a `planned` manifest through the manifest writer.
 
 This keeps discovery useful without letting analytics noise become content churn.

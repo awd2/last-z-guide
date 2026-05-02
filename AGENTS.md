@@ -404,6 +404,7 @@ python3 automation/workers/reviewer.py --topic-id <topic_id> --json
 python3 automation/workers/run_chain.py --topic-id <topic_id> --json
 python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
+python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 ```
 
 Machine-readable snapshots exist for:
