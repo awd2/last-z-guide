@@ -286,6 +286,32 @@ def cmd_worker_run_plan(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_worker_manifest(
+    topic_id: str | None,
+    run_plan: str | None,
+    manifest_dir: str | None,
+    created_by: str | None,
+    dry_run: bool,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "workers" / "write_manifest.py")]
+    if topic_id:
+        command.extend(["--topic-id", topic_id])
+    if run_plan:
+        command.extend(["--run-plan", run_plan])
+    if manifest_dir:
+        command.extend(["--manifest-dir", manifest_dir])
+    if created_by:
+        command.extend(["--created-by", created_by])
+    if dry_run:
+        command.append("--dry-run")
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== Worker Manifest ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_list(status: str | None, cluster: str | None, priority: str | None, as_json: bool) -> int:
     items = load_topic_backlog()
 
@@ -1414,6 +1440,17 @@ def build_parser() -> argparse.ArgumentParser:
     worker_run_plan_parser.add_argument("--intake", help="Path to worker-intake-<topic_id>.json.")
     worker_run_plan_parser.add_argument("--json", action="store_true", help="Print the run-plan summary as JSON.")
 
+    worker_manifest_parser = subparsers.add_parser(
+        "worker-manifest",
+        help="Create a planned manifest from one approved Worker run-plan proposal.",
+    )
+    worker_manifest_parser.add_argument("--topic-id", help="Topic id used to infer the default run-plan path.")
+    worker_manifest_parser.add_argument("--run-plan", help="Path to worker-run-plan-<topic_id>.json.")
+    worker_manifest_parser.add_argument("--manifest-dir", help="Override manifest output directory.")
+    worker_manifest_parser.add_argument("--created-by", help="Human operator name or handle.")
+    worker_manifest_parser.add_argument("--dry-run", action="store_true", help="Validate without writing a manifest.")
+    worker_manifest_parser.add_argument("--json", action="store_true", help="Print the manifest writer summary as JSON.")
+
     return parser
 
 
@@ -1482,6 +1519,15 @@ def main() -> int:
         return cmd_worker_intake(args.topic_id, args.chain, args.approved_by, args.note, args.json)
     if args.command == "worker-run-plan":
         return cmd_worker_run_plan(args.topic_id, args.intake, args.json)
+    if args.command == "worker-manifest":
+        return cmd_worker_manifest(
+            args.topic_id,
+            args.run_plan,
+            args.manifest_dir,
+            args.created_by,
+            args.dry_run,
+            args.json,
+        )
 
     parser.error(f"Unknown command: {args.command}")
     return 2

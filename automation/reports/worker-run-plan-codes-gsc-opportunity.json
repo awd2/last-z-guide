@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "worker_intake_run_plan",
-  "generated_at": "2026-05-02T06:43:37Z",
+  "generated_at": "2026-05-02T06:49:22Z",
   "source_intake_file": "automation/reports/worker-intake-codes-gsc-opportunity.json",
   "source_topic_id": "codes-gsc-opportunity",
   "target_page_or_slug": "codes.html",

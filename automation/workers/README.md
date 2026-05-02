@@ -63,7 +63,7 @@ It only produces a `proposed_manifest` when the intake state is `approved_for_in
 The current approved manifest writer is:
 
 ```bash
-python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
+python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 ```
 
 It reads `automation/reports/worker-run-plan-<topic_id>.json` and writes:
@@ -71,6 +71,12 @@ It reads `automation/reports/worker-run-plan-<topic_id>.json` and writes:
 - `automation/manifests/<run_id>.json`
 
 It only writes when the run-plan state is `run_plan_ready` and the proposed manifest validates against the run manifest schema. It does not edit content files, backlog files, or production state. Use `--dry-run` to validate the target manifest path without writing.
+
+The lower-level helper remains available at:
+
+```bash
+python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
+```
 
 ## Shared Inputs
 

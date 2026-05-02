@@ -154,7 +154,7 @@ The only goal right now is to establish a durable, explicit state format.
 Approved Worker run-plan proposals may create a `planned` manifest through:
 
 ```bash
-python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
+python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 ```
 
 This writer is intentionally narrow:

@@ -191,6 +191,7 @@ python3 automation/pipeline.py close-run <run_id>
 python3 automation/pipeline.py worker-chain --topic-id <topic_id>
 python3 automation/pipeline.py worker-intake --topic-id <topic_id>
 python3 automation/pipeline.py worker-run-plan --topic-id <topic_id>
+python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name>
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
 python3 automation/pipeline.py bundle <topic_id>
@@ -240,6 +241,7 @@ python3 automation/pipeline.py close-run 2026-04-22-research-cluster-nav --note 
 python3 automation/pipeline.py worker-chain --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py worker-intake --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py worker-run-plan --topic-id codes-gsc-opportunity --json
+python3 automation/pipeline.py worker-manifest --topic-id codes-gsc-opportunity --created-by oleg --dry-run --json
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
 python3 automation/pipeline.py show 2026-04-22-gift-center-ctr-pass
@@ -269,6 +271,7 @@ Lifecycle shorthand:
 - `worker-chain` -> run the no-write `Scout -> Editor -> Reviewer` chain for one topic proposal
 - `worker-intake` -> generate a no-write human-gated intake artifact from a Worker chain summary
 - `worker-run-plan` -> generate a no-write run-plan proposal from a Worker intake artifact
+- `worker-manifest` -> create a `planned` manifest from an approved Worker run-plan proposal
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
 - `bundle` -> produce the reviewed manifest plus markdown review bundle in one step
@@ -311,7 +314,7 @@ Worker run-plan proposal:
 
 Worker approved manifest writer:
 
-- `python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json` -> create a `planned` run manifest from one approved Worker run-plan proposal
+- `python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json` -> create a `planned` run manifest from one approved Worker run-plan proposal
 - default output lives in `automation/manifests/<run_id>.json`
 - the writer fails closed unless the run-plan state is `run_plan_ready`, the proposed manifest validates, and the target manifest does not already exist
 - use `--dry-run` to validate without writing
