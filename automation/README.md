@@ -111,6 +111,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - keeps high-risk or human-review opportunities in `approval_required` until `--approved-by` is supplied
   - does not mutate backlog, manifests, or content
 
+- `workers/intake_to_run.py`
+  - reads one Worker intake artifact
+  - writes a no-change run-plan proposal
+  - only proposes a manifest when intake is `approved_for_intake`
+  - does not mutate backlog, manifests, or content
+
 ## Current operating model
 
 Right now this layer is **foundation only**.
@@ -194,6 +200,7 @@ python3 automation/workers/editor.py --topic-id <topic_id> --json
 python3 automation/workers/reviewer.py --topic-id <topic_id> --json
 python3 automation/workers/run_chain.py --topic-id <topic_id> --json
 python3 automation/workers/intake.py --topic-id <topic_id> --json
+python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 ```
 
 Example:
@@ -239,6 +246,7 @@ python3 automation/workers/editor.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/reviewer.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/run_chain.py --topic-id codes-gsc-opportunity --json
 python3 automation/workers/intake.py --topic-id codes-gsc-opportunity --json
+python3 automation/workers/intake_to_run.py --topic-id codes-gsc-opportunity --json
 ```
 
 Lifecycle shorthand:
@@ -289,6 +297,12 @@ Worker intake gate:
 - `python3 automation/pipeline.py worker-intake --topic-id <topic_id> --json` -> generate a no-write intake artifact from one Worker chain summary
 - output lives in `automation/reports/worker-intake-<topic_id>.json` and `automation/reports/worker-intake-<topic_id>.md`
 - if human approval is required, intake remains `approval_required` until rerun with `--approved-by <name>`
+
+Worker run-plan proposal:
+
+- `python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json` -> generate a no-write run-plan proposal from one Worker intake artifact
+- output lives in `automation/reports/worker-run-plan-<topic_id>.json` and `automation/reports/worker-run-plan-<topic_id>.md`
+- if intake is not `approved_for_intake`, the run-plan artifact is blocked and contains no `proposed_manifest`
 
 Lower-level helpers are still available when needed.
 

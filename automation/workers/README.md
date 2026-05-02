@@ -47,6 +47,19 @@ It reads `automation/reports/worker-chain-<topic_id>.json` and writes:
 
 If the worker review requires human approval, intake remains `approval_required` until rerun with `--approved-by <name>`.
 
+The current no-write run-plan proposal step is:
+
+```bash
+python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
+```
+
+It reads `automation/reports/worker-intake-<topic_id>.json` and writes:
+
+- `automation/reports/worker-run-plan-<topic_id>.json`
+- `automation/reports/worker-run-plan-<topic_id>.md`
+
+It only produces a `proposed_manifest` when the intake state is `approved_for_intake`; otherwise it emits a blocked artifact.
+
 ## Shared Inputs
 
 Every worker must treat these files as source-of-truth context:
