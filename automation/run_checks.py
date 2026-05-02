@@ -53,6 +53,13 @@ def main() -> int:
         "Search Visibility",
         [sys.executable, str(AUTOMATION_DIR / "checks" / "search_visibility.py")],
     )
+    consistency_cmd = [sys.executable, str(AUTOMATION_DIR / "checks" / "content_consistency.py")]
+    if args.strict:
+        consistency_cmd.append("--strict")
+    failures += run_step(
+        "Content Consistency",
+        consistency_cmd,
+    )
     seo_cmd = [sys.executable, str(AUTOMATION_DIR / "checks" / "seo_llm_alignment.py")]
     if args.strict:
         seo_cmd.append("--strict")

@@ -381,8 +381,8 @@ python3 automation/pipeline.py checks --strict
 Remember:
 
 - `checks` = baseline health
-- `checks --strict` = stronger gate, includes weak-cluster and SEO/LLM warning-level failures
-- site structure and search visibility failures are always hard failures because they protect shared navigation, guide template signals, generated research branch boundaries, and AI/search snippet eligibility
+- `checks --strict` = stronger gate, includes weak-cluster, content-consistency, and SEO/LLM warning-level failures
+- site structure, search visibility, and content-consistency hard failures are always hard failures because they protect shared navigation, guide template signals, generated research branch boundaries, canonical player guidance, and AI/search snippet eligibility
 
 No autonomous production publish.
 

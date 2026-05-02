@@ -406,10 +406,17 @@ terminal logs.
   - sitemap declaration in `robots.txt`
   - no accidental public-guide `noindex`, `nosnippet`, or `max-snippet:0`
   - no first-screen answer block hidden with `data-nosnippet`
+- content consistency controls:
+  - no unqualified old Season 2 Desert wording
+  - no wrong Gift Center redemption flow
+  - no stale `Special Unit Training` naming
+  - no public exposure of archived Reddit/news experiments
+  - no shield economy claim that prefers direct diamond shields over Alliance Shop shields when stock exists
+  - owner-approved strong wording is reported as allowed context on explicitly approved pages
 - basic SEO/LLM alignment checks
 - basic cannibalization warnings
 
-`checks --strict` escalates weak-cluster and SEO/LLM warning-level findings into a failing gate. Site structure and search visibility failures are always hard failures because they protect shared templates, navigation, generated-source boundaries, and AI/search snippet eligibility.
+`checks --strict` escalates weak-cluster, content-consistency warning-level findings, and SEO/LLM warning-level findings into a failing gate. Site structure, search visibility, and content-consistency failures are always hard failures because they protect shared templates, navigation, generated-source boundaries, canonical player guidance, and AI/search snippet eligibility.
 
 Render a template/component inventory report:
 
