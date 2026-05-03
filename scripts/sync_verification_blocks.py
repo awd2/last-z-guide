@@ -106,6 +106,34 @@ EQUIPMENT_GEAR_PAGES = {
     "gear.html",
 }
 
+EVENT_HUB_PAGES = {
+    "events.html",
+}
+
+DAILY_ROUTINE_PAGES = {
+    "daily.html",
+}
+
+ALLIANCE_DUEL_PAGES = {
+    "alliance-duel.html",
+}
+
+SVS_WAR_STATE_PAGES = {
+    "svs.html",
+}
+
+SPEND_SAVE_EVENT_PAGES = {
+    "gacha-go.html",
+    "lucky-discounter.html",
+}
+
+COMBAT_RALLY_EVENT_PAGES = {
+    "canyon-clash.html",
+    "furylord.html",
+    "tyrant.html",
+    "zombie-siege.html",
+}
+
 FULL_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
             <p class="verification-note-title">Verification &amp; Review</p>
             <ul>
@@ -373,6 +401,102 @@ EQUIPMENT_GEAR_DISCLAIMER = """        <section class="disclaimer">
         </section>
 """
 
+EVENT_HUB_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Event priority advice was checked against current event routing, spend/save timing, linked event guides, and site economy rules.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> event rotation, reward screens, scoring windows, and server-specific timing can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+DAILY_ROUTINE_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Daily routine advice was checked against common reset tasks, event routing, exposed-resource risk, and linked safety/economy guides.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> daily reset timing, event tasks, shop stock, and server risk windows can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+ALLIANCE_DUEL_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Alliance Duel advice was checked against day-by-day scoring, saved-item timing, Duel Shop value, and linked reward/research pages.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> scoring tasks, reward thresholds, shop stock, and server event timing can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+SVS_WAR_STATE_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> SVS advice was checked against war-state timing, invasion/defense roles, shield discipline, PvP risk, and linked event/economy guidance.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> war rules, state matchmaking, shield timing, scoring windows, and troop-loss risk can change after updates or by server group.</li>
+            </ul>
+        </section>
+
+"""
+
+SPEND_SAVE_EVENT_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Spend-event advice was checked against current reward logic, saved-currency timing, site economy rules, and linked F2P/value guides.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> reward pools, discount values, milestone thresholds, and event timing can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+COMBAT_RALLY_EVENT_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Combat-event advice was checked against current event flow, scoring logic, rally/formation requirements, reward timing, and linked PvP/event guides.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> event rules, damage scaling, reward tiers, formation value, and alliance timing can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+EVENT_HUB_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this page to choose which event guide to open next, then verify the live event timer and reward screen before spending saved items.</p>
+        </section>
+"""
+
+DAILY_ROUTINE_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this as a daily checklist, then confirm live timers, exposed resources, and shield needs before logging off or spending saved items.</p>
+        </section>
+"""
+
+ALLIANCE_DUEL_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this to plan your week, then verify the live Alliance Duel day, scoring task, and reward screen before spending speed-ups, badges, or saved items.</p>
+        </section>
+"""
+
+SVS_WAR_STATE_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this as SVS planning support, then check live state rules, timers, shield coverage, and alliance calls before teleporting or attacking.</p>
+        </section>
+"""
+
+SPEND_SAVE_EVENT_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this to decide whether the event is worth your saved currency, then confirm the live reward pool and milestone values before spending diamonds or tickets.</p>
+        </section>
+"""
+
+COMBAT_RALLY_EVENT_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this as event execution guidance, then verify the live event rules, reward tiers, and alliance timing before committing troops, stamina, or saved combat items.</p>
+        </section>
+"""
+
 
 def verification_block_for(page_name: str) -> str:
     if page_name in RESEARCH_BRANCH_PAGES:
@@ -407,6 +531,18 @@ def verification_block_for(page_name: str) -> str:
         return PVP_TRAP_BLOCK
     if page_name in EQUIPMENT_GEAR_PAGES:
         return EQUIPMENT_GEAR_BLOCK
+    if page_name in EVENT_HUB_PAGES:
+        return EVENT_HUB_BLOCK
+    if page_name in DAILY_ROUTINE_PAGES:
+        return DAILY_ROUTINE_BLOCK
+    if page_name in ALLIANCE_DUEL_PAGES:
+        return ALLIANCE_DUEL_BLOCK
+    if page_name in SVS_WAR_STATE_PAGES:
+        return SVS_WAR_STATE_BLOCK
+    if page_name in SPEND_SAVE_EVENT_PAGES:
+        return SPEND_SAVE_EVENT_BLOCK
+    if page_name in COMBAT_RALLY_EVENT_PAGES:
+        return COMBAT_RALLY_EVENT_BLOCK
     return FULL_BLOCK
 
 
@@ -443,6 +579,18 @@ def disclaimer_for(page_name: str) -> str | None:
         return PVP_TRAP_DISCLAIMER
     if page_name in EQUIPMENT_GEAR_PAGES:
         return EQUIPMENT_GEAR_DISCLAIMER
+    if page_name in EVENT_HUB_PAGES:
+        return EVENT_HUB_DISCLAIMER
+    if page_name in DAILY_ROUTINE_PAGES:
+        return DAILY_ROUTINE_DISCLAIMER
+    if page_name in ALLIANCE_DUEL_PAGES:
+        return ALLIANCE_DUEL_DISCLAIMER
+    if page_name in SVS_WAR_STATE_PAGES:
+        return SVS_WAR_STATE_DISCLAIMER
+    if page_name in SPEND_SAVE_EVENT_PAGES:
+        return SPEND_SAVE_EVENT_DISCLAIMER
+    if page_name in COMBAT_RALLY_EVENT_PAGES:
+        return COMBAT_RALLY_EVENT_DISCLAIMER
     return None
 
 
@@ -453,7 +601,7 @@ def sync_page(path: Path) -> bool:
     disclaimer = disclaimer_for(path.name)
 
     verification_pattern = re.compile(
-        r'\s*<section class="verification-note" aria-label="Verification and review">.*?</section>\s*',
+        r'\s*(?:<section class="verification-note"[^>]*>.*?</section>\s*)+',
         re.S,
     )
     disclaimer_pattern = re.compile(r'(<section class="disclaimer">)', re.S)
