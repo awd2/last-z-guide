@@ -172,6 +172,8 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(scout_payload["report_type"], "scout_topic_proposals")
             self.assertGreaterEqual(scout_payload["proposal_count"], 1)
             proposal = scout_payload["proposals"][0]
+            self.assertEqual(proposal["topic_id"], "codes-bing-opportunity")
+            self.assertIn("Bing opportunity review", proposal["title"])
             self.assertIn("Bing weekly", proposal["source_reference"])
             self.assertTrue(any("Treat Bing data as a signal" in item for item in proposal["constraints"]))
 
@@ -179,6 +181,43 @@ class WorkerContractTests(unittest.TestCase):
         self.assertEqual(bing_weekly.parse_bing_date("/Date(1316156400000-0700)/"), "2011-09-16")
         self.assertEqual(bing_weekly.local_page_path("https://lastzguides.com/resources.html"), "resources.html")
         self.assertEqual(bing_weekly.local_page_path("https://lastzguides.com/"), "index.html")
+
+    def test_bing_insights_use_separate_page_ctr_baseline(self) -> None:
+        queries = [
+            {"query": "last z", "impressions": 300, "clicks": 1, "ctr": 0.003, "position": 7},
+            {"query": "last z guide", "impressions": 100, "clicks": 30, "ctr": 0.3, "position": 4},
+        ]
+        pages = [
+            {"page": "https://lastzguides.com/", "impressions": 900, "clicks": 18, "ctr": 0.02, "position": 6},
+            {"page": "https://lastzguides.com/hq.html", "impressions": 300, "clicks": 30, "ctr": 0.1, "position": 4},
+            {"page": "https://lastzguides.com/research.html", "impressions": 200, "clicks": 30, "ctr": 0.15, "position": 3},
+        ]
+
+        insights = bing_weekly.pick_insights(queries, pages)
+        self.assertAlmostEqual(insights["query_ctr_median"], 0.1515)
+        self.assertAlmostEqual(insights["page_ctr_median"], 0.1)
+        self.assertEqual(insights["page_underperform"][0]["page"], "https://lastzguides.com/")
+
+    def test_bing_query_page_rows_keep_undated_page_query_details(self) -> None:
+        rows = bing_weekly.query_page_rows(
+            {
+                "https://lastzguides.com/hq.html": [
+                    {"query": "last z hq", "date": "", "impressions": 42, "clicks": 4, "ctr": 0.095, "position": 3},
+                    {
+                        "query": "old hq",
+                        "date": "2026-04-24",
+                        "impressions": 100,
+                        "clicks": 1,
+                        "ctr": 0.01,
+                        "position": 11,
+                    },
+                ]
+            },
+            "2026-05-01",
+        )
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["query"], "last z hq")
+        self.assertEqual(rows[0]["date_scope"], "page_query_detail_no_date")
 
     def test_run_chain_writes_only_requested_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

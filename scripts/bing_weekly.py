@@ -128,15 +128,20 @@ def potential(row: dict[str, Any]) -> float:
     return float(row.get("impressions", 0.0)) * (1 - float(row.get("ctr", 0.0))) * pos_factor
 
 
+def ctr_median(rows: list[dict[str, Any]], min_impr: int) -> float:
+    values = [float(r["ctr"]) for r in rows if float(r["impressions"]) >= min_impr]
+    return median(values) if values else 0.0
+
+
 def pick_insights(queries: list[dict[str, Any]], pages: list[dict[str, Any]], min_impr: int = 25) -> dict[str, Any]:
-    ctr_values = [float(r["ctr"]) for r in queries if float(r["impressions"]) >= min_impr]
-    ctr_median = median(ctr_values) if ctr_values else 0.0
+    query_ctr_median = ctr_median(queries, min_impr)
+    page_ctr_median = ctr_median(pages, 100)
     low_ctr_good_pos = [
         row
         for row in queries
         if 4 <= float(row.get("position", 0)) <= 10
         and float(row.get("impressions", 0)) >= min_impr
-        and float(row.get("ctr", 0)) <= ctr_median
+        and float(row.get("ctr", 0)) <= query_ctr_median
     ]
     low_ctr_good_pos.sort(key=potential, reverse=True)
     high_impr_low_clicks = [
@@ -150,11 +155,17 @@ def pick_insights(queries: list[dict[str, Any]], pages: list[dict[str, Any]], mi
     ]
     quick_wins.sort(key=potential, reverse=True)
     page_underperform = [
-        row for row in pages if float(row.get("impressions", 0)) >= 100 and float(row.get("ctr", 0)) <= ctr_median
+        row
+        for row in pages
+        if float(row.get("impressions", 0)) >= 100
+        and float(row.get("ctr", 0)) <= page_ctr_median
+        and 1 <= float(row.get("position", 0)) <= 15
     ]
     page_underperform.sort(key=lambda row: float(row.get("impressions", 0)), reverse=True)
     return {
-        "ctr_median": ctr_median,
+        "ctr_median": query_ctr_median,
+        "query_ctr_median": query_ctr_median,
+        "page_ctr_median": page_ctr_median,
         "low_ctr_good_pos": low_ctr_good_pos[:25],
         "high_impr_low_clicks": high_impr_low_clicks[:25],
         "quick_wins": quick_wins[:25],
@@ -220,13 +231,16 @@ def query_page_rows(page_query_map: dict[str, list[dict[str, Any]]], latest_date
     rows = []
     for page, page_rows in page_query_map.items():
         for row in page_rows:
-            if latest_date and row.get("date") != latest_date:
+            row_date = row.get("date")
+            if latest_date and row_date and row_date != latest_date:
                 continue
             rows.append(
                 {
                     "query": row.get("query", ""),
                     "page": page,
                     "local_page": local_page_path(page),
+                    "date": row_date or None,
+                    "date_scope": "latest_week" if row_date else "page_query_detail_no_date",
                     "clicks": row.get("clicks", 0),
                     "impressions": row.get("impressions", 0),
                     "ctr": row.get("ctr", 0),
@@ -280,6 +294,7 @@ def build_agent_signals(
             "query_page_rows": len(query_page),
             "fetch_errors": fetch_errors,
             "ctr_median_queries_min_25_impressions": round(float(insights["ctr_median"]), 6),
+            "ctr_median_pages_min_100_impressions": round(float(insights["page_ctr_median"]), 6),
         },
         "query_opportunities": {
             "low_ctr_good_positions": insights["low_ctr_good_pos"][:25],

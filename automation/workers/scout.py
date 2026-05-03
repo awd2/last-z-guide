@@ -142,9 +142,13 @@ def low_ctr_queries_for_page(signals: dict[str, Any], filename: str) -> list[dic
 
 def rising_queries_for_page(signals: dict[str, Any], filename: str) -> list[dict[str, Any]]:
     page_queries = {str(row.get("query", "")) for row in query_rows_for_page(signals, filename)}
+    trend_signals = signals.get("trend_signals", {})
     rows = [
         row
-        for row in signals.get("trend_signals", {}).get("rising_queries_last_7_vs_previous_7", [])
+        for row in (
+            trend_signals.get("rising_queries_last_7_vs_previous_7", [])
+            + trend_signals.get("rising_queries_latest_vs_previous_week", [])
+        )
         if str(row.get("query", "")) in page_queries
     ]
     rows.sort(key=lambda row: float(row.get("delta_impressions", 0)), reverse=True)
@@ -184,9 +188,9 @@ def primary_query(rows: list[dict[str, Any]], fallback: str) -> str:
     return fallback
 
 
-def title_for_page(filename: str, title_hint: str | None) -> str:
+def title_for_page(filename: str, title_hint: str | None, source_label: str) -> str:
     label = title_hint or filename.replace(".html", "").replace("-", " ").title()
-    return f"GSC opportunity review: {label}"
+    return f"{source_label} opportunity review: {label}"
 
 
 def proposal_for_page(
@@ -209,12 +213,13 @@ def proposal_for_page(
     ctr = float(page_signal.get("ctr", 0))
     position = float(page_signal.get("position", 0))
     query = primary_query(query_rows, page.title_hint or filename)
-    topic_id = f"{slugify(filename.removesuffix('.html'))}-gsc-opportunity"
+    source_slug = source_label.lower()
+    topic_id = f"{slugify(filename.removesuffix('.html'))}-{source_slug}-opportunity"
     existing = backlog_index.get(filename, [])
 
     return {
         "topic_id": topic_id,
-        "title": title_for_page(filename, page.title_hint),
+        "title": title_for_page(filename, page.title_hint, source_label),
         "cluster": page.cluster,
         "recommended_action": "update_existing",
         "archetype_suggestion": page.archetype,
