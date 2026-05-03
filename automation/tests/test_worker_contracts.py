@@ -11,7 +11,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from automation.io import load_json, write_json
-from automation.workers import editor, intake, intake_to_run, llm_adapter, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_scout, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -78,6 +78,30 @@ def fixture_bing_signals() -> dict:
     payload = fixture_signals()
     payload["report_type"] = "bing_weekly_agent_signals"
     return payload
+
+
+def fixture_llm_scout_response() -> dict:
+    return {
+        "response_json": {
+            "overview": "Codes has enough search signal for human review, but Scout should keep the page role narrow.",
+            "selected_opportunities": [
+                {
+                    "topic_id": "codes-gsc-opportunity",
+                    "decision": "update_existing",
+                    "rationale": "The deterministic signal points to CTR and query-fit review for the existing codes hub.",
+                    "player_value": "Make the first-screen answer and Gift Center route clearer for players searching active codes.",
+                    "duplication_risk": "Low if the update stays on codes.html and does not absorb Gift Center setup troubleshooting.",
+                    "priority": "high",
+                    "risk_level": "high",
+                    "next_step": "Run the deterministic Editor brief and require owner approval before content changes.",
+                    "claims_to_verify": ["gift_center_cluster_roles"],
+                }
+            ],
+            "rejected_or_monitor": [],
+            "global_risks": ["Analytics can identify opportunity, but it must not force a broad rewrite."],
+            "next_actions": ["Review the selected opportunity with the existing worker-chain command."],
+        }
+    }
 
 
 class WorkerContractTests(unittest.TestCase):
@@ -174,6 +198,10 @@ class WorkerContractTests(unittest.TestCase):
         self.assertTrue(body["text"]["format"]["strict"])
         self.assertEqual(body["text"]["format"]["schema"]["required"], ["summary", "risk_level", "next_action"])
 
+        request["max_output_tokens"] = 1200
+        body = llm_adapter.openai_request_body(request)
+        self.assertEqual(body["max_output_tokens"], 1200)
+
         payload = {
             "id": "resp_fixture",
             "model": "gpt-5.4-mini",
@@ -196,6 +224,32 @@ class WorkerContractTests(unittest.TestCase):
             ],
         }
         self.assertEqual(llm_adapter.openai_response_json(payload)["next_action"], "review")
+
+    def test_llm_scout_builds_request_and_runs_fixture_provider(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            fixture_path = tmp_path / "llm-scout-response.json"
+            write_json(signals_path, fixture_signals())
+            write_json(fixture_path, fixture_llm_scout_response())
+
+            code, payload = llm_scout.run_llm_scout(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                basename="llm-scout-fixture",
+                provider="fixture",
+                fixture_path=fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(code, 0)
+            self.assertEqual(payload["report_type"], "llm_scout_review")
+            self.assertEqual(payload["adapter_result"]["state"], "completed")
+            self.assertEqual(payload["source_proposal_count"], 1)
+            self.assertEqual(payload["adapter_result"]["response_json"]["selected_opportunities"][0]["topic_id"], "codes-gsc-opportunity")
+            self.assertTrue((tmp_path / "llm-scout-fixture-request.json").exists())
+            self.assertTrue((tmp_path / "llm-scout-fixture-result.json").exists())
+            self.assertTrue((tmp_path / "llm-scout-fixture.md").exists())
 
     def test_scout_editor_reviewer_contract_shapes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

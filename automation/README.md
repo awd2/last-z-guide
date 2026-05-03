@@ -125,6 +125,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`
   - does not mutate backlog, manifests, or content
 
+- `workers/llm_scout.py`
+  - builds deterministic Scout proposals from latest GSC/Bing agent signals
+  - sends a compact JSON-only Scout review request through `llm_adapter`
+  - writes request/result/markdown artifacts for human review
+  - does not mutate backlog, manifests, content, PRs, or production state
+
 - `checks/content_voice.py`
   - runs a no-write audit for generic, mass-produced, or low-utility writing signals
   - reports repeated trust boilerplate, generic phrases, long smooth paragraphs, and low specificity
@@ -206,6 +212,7 @@ python3 automation/pipeline.py worker-intake --topic-id <topic_id>
 python3 automation/pipeline.py worker-run-plan --topic-id <topic_id>
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name>
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
+python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice
@@ -264,6 +271,7 @@ python3 automation/pipeline.py worker-run-plan --topic-id codes-gsc-opportunity 
 python3 automation/pipeline.py worker-manifest --topic-id codes-gsc-opportunity --created-by oleg --dry-run --json
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider fixture --fixture automation/reports/example-llm-response.json --json
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider openai --json
+python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -299,6 +307,7 @@ Lifecycle shorthand:
 - `worker-run-plan` -> generate a no-write run-plan proposal from a Worker intake artifact
 - `worker-manifest` -> create a `planned` manifest from an approved Worker run-plan proposal
 - `llm-adapter` -> validate future LLM request/response contracts through a fail-closed provider adapter
+- `llm-scout` -> run a no-write LLM review over deterministic Scout proposals from GSC/Bing agent signals
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
 - `content-voice` -> run a no-write audit for generic, mass-produced, or low-utility public content signals
@@ -362,6 +371,13 @@ LLM adapter:
 - default provider is `disabled` and returns a blocked result
 - `openai` requires `OPENAI_API_KEY`, uses `OPENAI_MODEL` when set, defaults to `gpt-5.4-mini`, and must remain no-write
 - adapter output is structured and must not directly edit content, backlog, manifests, or production state
+
+LLM Scout review:
+
+- `python3 automation/pipeline.py llm-scout --provider openai --json` -> review deterministic GSC/Bing Scout proposals with the live OpenAI provider
+- default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
+- output lives in `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`
+- this is a no-write opportunity review; selected topics still require deterministic Editor/Reviewer steps and human approval before content work
 
 Content SEO opportunity report:
 

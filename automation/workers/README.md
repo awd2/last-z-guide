@@ -91,6 +91,7 @@ The current LLM provider adapter is fail-closed and artifact-only:
 ```bash
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
+python3 automation/pipeline.py llm-scout --provider openai --json
 ```
 
 It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter must not edit content, backlog, manifests, or production state.
@@ -100,7 +101,16 @@ The lower-level helper remains available at:
 ```bash
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
+python3 automation/workers/llm_scout.py --provider openai --json
 ```
+
+`llm-scout` is the first live LLM worker wrapper. It builds deterministic Scout proposals from the latest GSC/Bing agent signals, sends a compact JSON-only review request through `llm_adapter`, and writes:
+
+- `automation/reports/llm-scout-review-request.json`
+- `automation/reports/llm-scout-review-result.json`
+- `automation/reports/llm-scout-review.md`
+
+It does not mutate backlog, manifests, content, PRs, or production state. Selected opportunities remain review context only until a human approves the deterministic worker chain and any later content proposal.
 
 ## Shared Inputs
 
@@ -488,9 +498,10 @@ The current implementation is deterministic and no-write:
 
 1. `Scout` reads `content/gsc/latest-gsc-agent-signals.json` by default, or Bing agent signals when explicitly passed with `--signals`.
 2. `Scout` produces `topic_proposal` records into review artifacts.
-3. `Editor` turns one proposal into an `editor_brief` artifact.
-4. `Reviewer` gates the brief for site fit, risk, context, canonical claims, and next-stage readiness.
-5. Operators decide which reviewed proposals become backlog items or patch-plan work.
-6. An approved run-plan may create a `planned` manifest through the manifest writer.
+3. `llm-scout` can review deterministic GSC/Bing proposals through the fail-closed LLM adapter and produce JSON/markdown opportunity review artifacts.
+4. `Editor` turns one proposal into an `editor_brief` artifact.
+5. `Reviewer` gates the brief for site fit, risk, context, canonical claims, and next-stage readiness.
+6. Operators decide which reviewed proposals become backlog items or patch-plan work.
+7. An approved run-plan may create a `planned` manifest through the manifest writer.
 
 This keeps discovery useful without letting analytics noise become content churn.

@@ -338,6 +338,41 @@ def cmd_llm_adapter(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_scout(
+    signals: list[str] | None,
+    provider: str,
+    fixture: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    limit: int,
+    min_impressions: int,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_scout.py"),
+        "--provider",
+        provider,
+        "--limit",
+        str(limit),
+        "--min-impressions",
+        str(min_impressions),
+    ]
+    for signal_path in signals or []:
+        command.extend(["--signals", signal_path])
+    if fixture:
+        command.extend(["--fixture", fixture])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Scout ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_content_seo_opportunities(
     json_output: str | None,
     markdown_output: str | None,
@@ -1533,6 +1568,33 @@ def build_parser() -> argparse.ArgumentParser:
     llm_adapter_parser.add_argument("--output", help="Optional path for the adapter result artifact.")
     llm_adapter_parser.add_argument("--json", action="store_true", help="Print the adapter summary as JSON.")
 
+    llm_scout_parser = subparsers.add_parser(
+        "llm-scout",
+        help="Run a no-write LLM Scout review over deterministic Scout proposals.",
+    )
+    llm_scout_parser.add_argument(
+        "--signals",
+        action="append",
+        help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once.",
+    )
+    llm_scout_parser.add_argument(
+        "--provider",
+        default="disabled",
+        choices=["disabled", "fixture", "openai"],
+        help="Provider to use through llm_adapter. Defaults to disabled/fail-closed.",
+    )
+    llm_scout_parser.add_argument("--fixture", help="Fixture response JSON for offline provider tests.")
+    llm_scout_parser.add_argument("--output-dir", help="Directory for LLM Scout artifacts.")
+    llm_scout_parser.add_argument("--basename", help="Output basename without extension.")
+    llm_scout_parser.add_argument("--limit", type=int, default=8, help="Maximum deterministic proposals to review.")
+    llm_scout_parser.add_argument(
+        "--min-impressions",
+        type=int,
+        default=200,
+        help="Minimum page impressions for deterministic Scout proposals.",
+    )
+    llm_scout_parser.add_argument("--json", action="store_true", help="Print the LLM Scout summary as JSON.")
+
     content_seo_parser = subparsers.add_parser(
         "content-seo-opportunities",
         help="Build a no-write SEO/LLM content opportunity report.",
@@ -1638,6 +1700,17 @@ def main() -> int:
         )
     if args.command == "llm-adapter":
         return cmd_llm_adapter(args.request, args.provider, args.fixture, args.output, args.json)
+    if args.command == "llm-scout":
+        return cmd_llm_scout(
+            args.signals,
+            args.provider,
+            args.fixture,
+            args.output_dir,
+            args.basename,
+            args.limit,
+            args.min_impressions,
+            args.json,
+        )
     if args.command == "content-seo-opportunities":
         return cmd_content_seo_opportunities(
             args.json_output,

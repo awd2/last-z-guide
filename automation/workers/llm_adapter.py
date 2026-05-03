@@ -117,6 +117,10 @@ def validate_request(request: dict[str, Any]) -> list[str]:
             errors.append(f"Request `{key}` must be a string.")
     if "response_schema" in request and not isinstance(request.get("response_schema"), dict):
         errors.append("Request `response_schema` must be an object when supplied.")
+    if "max_output_tokens" in request:
+        value = request.get("max_output_tokens")
+        if not isinstance(value, int) or value < 1:
+            errors.append("Request `max_output_tokens` must be a positive integer when supplied.")
     return errors
 
 
@@ -186,6 +190,9 @@ def openai_prompt_input(request: dict[str, Any]) -> list[dict[str, str]]:
 
 def openai_request_body(request: dict[str, Any]) -> dict[str, Any]:
     model = os.getenv("OPENAI_MODEL", DEFAULT_OPENAI_MODEL).strip() or DEFAULT_OPENAI_MODEL
+    max_output_tokens = request.get("max_output_tokens")
+    if not isinstance(max_output_tokens, int):
+        max_output_tokens = int(os.getenv("OPENAI_MAX_OUTPUT_TOKENS", "2000"))
     body: dict[str, Any] = {
         "model": model,
         "input": openai_prompt_input(request),
@@ -197,7 +204,7 @@ def openai_request_body(request: dict[str, Any]) -> dict[str, Any]:
                 "schema": response_schema(request),
             }
         },
-        "max_output_tokens": int(os.getenv("OPENAI_MAX_OUTPUT_TOKENS", "2000")),
+        "max_output_tokens": max_output_tokens,
     }
     reasoning_effort = os.getenv("OPENAI_REASONING_EFFORT", "").strip()
     if reasoning_effort:
