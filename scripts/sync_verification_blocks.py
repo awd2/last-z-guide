@@ -134,6 +134,18 @@ COMBAT_RALLY_EVENT_PAGES = {
     "zombie-siege.html",
 }
 
+CODE_HUB_PAGES = {
+    "codes.html",
+}
+
+GIFT_CENTER_SETUP_PAGES = {
+    "gift-center-uid.html",
+}
+
+CODE_TROUBLESHOOTING_PAGES = {
+    "redeem-code-not-working.html",
+}
+
 FULL_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
             <p class="verification-note-title">Verification &amp; Review</p>
             <ul>
@@ -497,6 +509,54 @@ COMBAT_RALLY_EVENT_DISCLAIMER = """        <section class="disclaimer">
         </section>
 """
 
+CODE_HUB_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Last reviewed for code availability and Gift Center flow:</strong> March 2026.</li>
+                <li><strong>Checked against:</strong> official Gift Center redemption behavior, UID requirements, mailbox reward delivery, and the linked setup and troubleshooting guides.</li>
+                <li><strong>Changes to watch:</strong> code expiry, already-used status, campaign availability, reward contents, and temporary Gift Center outages can change faster than normal guide mechanics.</li>
+            </ul>
+        </section>
+
+"""
+
+GIFT_CENTER_SETUP_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Last reviewed for UID setup and Gift Center login flow:</strong> March 2026.</li>
+                <li><strong>Checked against:</strong> the official Gift Center flow, the in-game UID path (Avatar -> Settings -> Copy ID), mobile browser redemption, mailbox delivery, and the related codes and troubleshooting pages.</li>
+                <li><strong>Changes to watch:</strong> Gift Center page availability, login labels, UID copy path, browser behavior, and mailbox timing may shift after game or web updates.</li>
+            </ul>
+        </section>
+
+"""
+
+CODE_TROUBLESHOOTING_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Last reviewed for code troubleshooting and Gift Center errors:</strong> March 2026.</li>
+                <li><strong>Checked against:</strong> common failed-redemption causes, wrong UID entry, expired or already-used codes, official Gift Center behavior, mailbox delays, and the linked setup and codes pages.</li>
+                <li><strong>Changes to watch:</strong> error wording, code status, account or server eligibility, reward delays, and temporary Gift Center outages can change without notice.</li>
+            </ul>
+        </section>
+
+"""
+
+CODE_HUB_DISCLAIMER = """        <section class="disclaimer">
+            <p>This page is for finding current Last Z codes and redeeming them through the official Gift Center. Always paste your UID directly from the game, check the live Gift Center response, and confirm rewards in your in-game mailbox.</p>
+        </section>
+"""
+
+GIFT_CENTER_SETUP_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this setup guide before redeeming Last Z codes. Copy your UID from the game instead of typing it manually, redeem through the official Gift Center, and check your mailbox after a successful submission.</p>
+        </section>
+"""
+
+CODE_TROUBLESHOOTING_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this checklist before retrying a failed Last Z code. Verify the official Gift Center is loading, copy your UID directly from the game, match the code text exactly, and allow for mailbox delay after a successful redemption.</p>
+        </section>
+"""
+
 
 def verification_block_for(page_name: str) -> str:
     if page_name in RESEARCH_BRANCH_PAGES:
@@ -543,6 +603,12 @@ def verification_block_for(page_name: str) -> str:
         return SPEND_SAVE_EVENT_BLOCK
     if page_name in COMBAT_RALLY_EVENT_PAGES:
         return COMBAT_RALLY_EVENT_BLOCK
+    if page_name in CODE_HUB_PAGES:
+        return CODE_HUB_BLOCK
+    if page_name in GIFT_CENTER_SETUP_PAGES:
+        return GIFT_CENTER_SETUP_BLOCK
+    if page_name in CODE_TROUBLESHOOTING_PAGES:
+        return CODE_TROUBLESHOOTING_BLOCK
     return FULL_BLOCK
 
 
@@ -591,6 +657,12 @@ def disclaimer_for(page_name: str) -> str | None:
         return SPEND_SAVE_EVENT_DISCLAIMER
     if page_name in COMBAT_RALLY_EVENT_PAGES:
         return COMBAT_RALLY_EVENT_DISCLAIMER
+    if page_name in CODE_HUB_PAGES:
+        return CODE_HUB_DISCLAIMER
+    if page_name in GIFT_CENTER_SETUP_PAGES:
+        return GIFT_CENTER_SETUP_DISCLAIMER
+    if page_name in CODE_TROUBLESHOOTING_PAGES:
+        return CODE_TROUBLESHOOTING_DISCLAIMER
     return None
 
 
