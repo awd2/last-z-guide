@@ -38,6 +38,44 @@ STATIC_DATA_PAGES = {
     "vehicle-modification-cost.html",
 }
 
+PROGRESSION_PLANNING_PAGES = {
+    "base-building-order.html",
+    "early-game-optimization.html",
+    "hq.html",
+    "leveling.html",
+    "power-guide.html",
+    "shooter-stages.html",
+    "start.html",
+}
+
+ECONOMY_RESERVE_PAGES = {
+    "diamond-reserve.html",
+    "f2p.html",
+    "refugees.html",
+    "resources.html",
+    "steel.html",
+}
+
+FARM_ACCOUNT_PAGES = {
+    "farm-account.html",
+}
+
+SHIELD_SAFETY_PAGES = {
+    "shield.html",
+}
+
+DAILY_UTILITY_PAGES = {
+    "radar.html",
+}
+
+ARENA_SUPPORT_PAGES = {
+    "arena.html",
+}
+
+RESEARCH_SYSTEM_PAGES = {
+    "tech.html",
+}
+
 FULL_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
             <p class="verification-note-title">Verification &amp; Review</p>
             <ul>
@@ -81,12 +119,138 @@ STATIC_DATA_DISCLAIMER = """        <section class="disclaimer">
         </section>
 """
 
+PROGRESSION_PLANNING_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Progression advice was checked against current in-game systems, HQ and resource bottlenecks, unlock flow, and practical account-stage tradeoffs.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> upgrade requirements, event rewards, shop stock, and server timing can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+ECONOMY_RESERVE_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Economy advice was checked against site canonical reserve-first rules, resource bottlenecks, event-value tradeoffs, and F2P account constraints.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> shop stock, event rewards, resource packages, and server pressure can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+FARM_ACCOUNT_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Farm-account guidance was checked against practical resource-transfer use cases, account safety concerns, and current site economy rules.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> account rules, transfer limits, event behavior, and server enforcement can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+SHIELD_SAFETY_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Shield guidance was checked against reserve-first diamond rules, Alliance Shop shield value, PvP risk windows, and saved-resource protection.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> Alliance Shop stock, shield pricing, server war timing, and event pressure can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+DAILY_UTILITY_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Radar advice was checked against the current Radar workflow, task priority logic, refresh value, and daily event routing.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> task pools, refresh value, rewards, and daily-event timing can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+ARENA_SUPPORT_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Arena advice was checked against daily attempt flow, reward timing, formation matchup logic, and related PvP guidance.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> matchmaking, rewards, formation meta, and server competition can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+RESEARCH_SYSTEM_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Research and tech-priority advice was checked against the site's mainline research route, unlock checkpoints, and linked branch cost pages.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> branch prerequisites, badge costs, unlock names, and late-game tech value can change after research updates.</li>
+            </ul>
+        </section>
+
+"""
+
+PROGRESSION_PLANNING_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this as decision support, then confirm current in-game values before spending diamonds, speedups, badges, or saved resources.</p>
+        </section>
+"""
+
+ECONOMY_RESERVE_DISCLAIMER = """        <section class="disclaimer">
+            <p>Protect reserve resources first, then confirm current shop and event values before spending diamonds or saved items.</p>
+        </section>
+"""
+
+FARM_ACCOUNT_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this as a risk-aware planning guide, and check current game/account rules before building a long-term farm setup.</p>
+        </section>
+"""
+
+SHIELD_SAFETY_DISCLAIMER = """        <section class="disclaimer">
+            <p>Check Alliance Shop stock and current server risk before spending diamonds on shields directly.</p>
+        </section>
+"""
+
+DAILY_UTILITY_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this to choose Radar tasks faster, then confirm the live task reward before spending refreshes or saved resources.</p>
+        </section>
+"""
+
+ARENA_SUPPORT_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this as a daily Arena checklist, then compare matchups against your server meta before spending extra attempts or formation resources.</p>
+        </section>
+"""
+
+RESEARCH_SYSTEM_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this to choose research direction, then confirm exact branch requirements on the linked cost pages and in-game before spending badges.</p>
+        </section>
+"""
+
 
 def verification_block_for(page_name: str) -> str:
     if page_name in RESEARCH_BRANCH_PAGES:
         return RESEARCH_BRANCH_BLOCK
     if page_name in STATIC_DATA_PAGES:
         return STATIC_DATA_BLOCK
+    if page_name in PROGRESSION_PLANNING_PAGES:
+        return PROGRESSION_PLANNING_BLOCK
+    if page_name in ECONOMY_RESERVE_PAGES:
+        return ECONOMY_RESERVE_BLOCK
+    if page_name in FARM_ACCOUNT_PAGES:
+        return FARM_ACCOUNT_BLOCK
+    if page_name in SHIELD_SAFETY_PAGES:
+        return SHIELD_SAFETY_BLOCK
+    if page_name in DAILY_UTILITY_PAGES:
+        return DAILY_UTILITY_BLOCK
+    if page_name in ARENA_SUPPORT_PAGES:
+        return ARENA_SUPPORT_BLOCK
+    if page_name in RESEARCH_SYSTEM_PAGES:
+        return RESEARCH_SYSTEM_BLOCK
     return FULL_BLOCK
 
 
@@ -95,6 +259,20 @@ def disclaimer_for(page_name: str) -> str | None:
         return RESEARCH_BRANCH_DISCLAIMER
     if page_name in STATIC_DATA_PAGES:
         return STATIC_DATA_DISCLAIMER
+    if page_name in PROGRESSION_PLANNING_PAGES:
+        return PROGRESSION_PLANNING_DISCLAIMER
+    if page_name in ECONOMY_RESERVE_PAGES:
+        return ECONOMY_RESERVE_DISCLAIMER
+    if page_name in FARM_ACCOUNT_PAGES:
+        return FARM_ACCOUNT_DISCLAIMER
+    if page_name in SHIELD_SAFETY_PAGES:
+        return SHIELD_SAFETY_DISCLAIMER
+    if page_name in DAILY_UTILITY_PAGES:
+        return DAILY_UTILITY_DISCLAIMER
+    if page_name in ARENA_SUPPORT_PAGES:
+        return ARENA_SUPPORT_DISCLAIMER
+    if page_name in RESEARCH_SYSTEM_PAGES:
+        return RESEARCH_SYSTEM_DISCLAIMER
     return None
 
 
@@ -121,9 +299,11 @@ def sync_page(path: Path) -> bool:
 
     if disclaimer and full_disclaimer_pattern.search(text):
         text = full_disclaimer_pattern.sub("\n" + disclaimer, text, count=1)
-        text = text.replace(
-            '\n<section class="related-guides">',
+        text = re.sub(
+            r'\n{2,}\s*<section class="related-guides">',
             '\n\n        <section class="related-guides">',
+            text,
+            count=1,
         )
     else:
         text = re.sub(
