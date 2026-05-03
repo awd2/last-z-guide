@@ -11,7 +11,52 @@
     "source": "Bing Webmaster API weekly buckets"
   },
   "generated_for": "2026-05-01",
-  "page_opportunities": [],
+  "page_opportunities": [
+    {
+      "avg_click_position": -1.0,
+      "clicks": 23.0,
+      "ctr": 0.023541,
+      "date": "2026-04-24",
+      "impressions": 977.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 6.0,
+      "reason": "Bing page has high impressions with below-median CTR"
+    },
+    {
+      "avg_click_position": -1.0,
+      "clicks": 13.0,
+      "ctr": 0.075145,
+      "date": "2026-04-24",
+      "impressions": 173.0,
+      "local_page": "heroes.html",
+      "page": "https://lastzguides.com/heroes.html",
+      "position": 4.0,
+      "reason": "Bing page has high impressions with below-median CTR"
+    },
+    {
+      "avg_click_position": -1.0,
+      "clicks": 9.0,
+      "ctr": 0.065693,
+      "date": "2026-04-24",
+      "impressions": 137.0,
+      "local_page": "alliance-duel.html",
+      "page": "https://lastzguides.com/alliance-duel.html",
+      "position": 4.0,
+      "reason": "Bing page has high impressions with below-median CTR"
+    },
+    {
+      "avg_click_position": -1.0,
+      "clicks": 8.0,
+      "ctr": 0.065041,
+      "date": "2026-04-24",
+      "impressions": 123.0,
+      "local_page": "canyon-clash.html",
+      "page": "https://lastzguides.com/canyon-clash.html",
+      "position": 2.0,
+      "reason": "Bing page has high impressions with below-median CTR"
+    }
+  ],
   "property": "https://lastzguides.com/",
   "query_opportunities": {
     "high_impressions_low_clicks": [
@@ -43,6 +88,7 @@
   "rows_limit": 250,
   "schema_version": 1,
   "summary": {
+    "ctr_median_pages_min_100_impressions": 0.076366,
     "ctr_median_queries_min_25_impressions": 0.002967,
     "fetch_errors": [],
     "page_rows": 20,
@@ -84,8 +130,8 @@
         "ctr": 0.0,
         "date": "2026-05-01",
         "impressions": 8.0,
-        "position": 3.0,
-        "query": "last war z roses buff this week"
+        "position": 4.0,
+        "query": "calendario de eventos forma\u00e7\u00e3o de herois alerta de last z"
       },
       {
         "avg_click_position": -1.0,
@@ -93,8 +139,8 @@
         "ctr": 0.0,
         "date": "2026-05-01",
         "impressions": 8.0,
-        "position": 4.0,
-        "query": "calendario de eventos forma\u00e7\u00e3o de herois alerta de last z"
+        "position": 3.0,
+        "query": "last war z roses buff this week"
       },
       {
         "avg_click_position": -1.0,
@@ -147,8 +193,8 @@
         "ctr": 0.25,
         "date": "2026-05-01",
         "impressions": 4.0,
-        "position": 3.0,
-        "query": "last z march queues"
+        "position": 5.0,
+        "query": "last-z hero alliance duel"
       },
       {
         "avg_click_position": -1.0,
@@ -156,8 +202,8 @@
         "ctr": 0.25,
         "date": "2026-05-01",
         "impressions": 4.0,
-        "position": 5.0,
-        "query": "last-z hero alliance duel"
+        "position": 3.0,
+        "query": "last z march queues"
       },
       {
         "avg_click_position": -1.0,
@@ -167,15 +213,6 @@
         "impressions": 3.0,
         "position": 4.0,
         "query": "last z survival shooter lab research priority"
-      },
-      {
-        "avg_click_position": -1.0,
-        "clicks": 1.0,
-        "ctr": 0.333333,
-        "date": "2026-05-01",
-        "impressions": 3.0,
-        "position": 3.0,
-        "query": "last z daily upgrades"
       },
       {
         "avg_click_position": -1.0,
@@ -201,6 +238,15 @@
         "ctr": 0.333333,
         "date": "2026-05-01",
         "impressions": 3.0,
+        "position": 3.0,
+        "query": "last z daily upgrades"
+      },
+      {
+        "avg_click_position": -1.0,
+        "clicks": 1.0,
+        "ctr": 0.333333,
+        "date": "2026-05-01",
+        "impressions": 3.0,
         "position": 7.0,
         "query": "last z survival day 1 full preparedness guide"
       },
@@ -210,8 +256,8 @@
         "ctr": 0.333333,
         "date": "2026-05-01",
         "impressions": 3.0,
-        "position": 3.0,
-        "query": "when the peace shield research open in last zombie shooter"
+        "position": 5.0,
+        "query": "last z for gathering"
       },
       {
         "avg_click_position": -1.0,
@@ -219,8 +265,8 @@
         "ctr": 0.333333,
         "date": "2026-05-01",
         "impressions": 3.0,
-        "position": 5.0,
-        "query": "last z for gathering"
+        "position": 3.0,
+        "query": "when the peace shield research open in last zombie shooter"
       },
       {
         "avg_click_position": -1.0,
@@ -237,8 +283,8 @@
         "ctr": 0.5,
         "date": "2026-05-01",
         "impressions": 2.0,
-        "position": 2.0,
-        "query": "last z upgrade hq"
+        "position": 5.0,
+        "query": "last z best defense"
       },
       {
         "avg_click_position": -1.0,
@@ -255,8 +301,8 @@
         "ctr": 0.5,
         "date": "2026-05-01",
         "impressions": 2.0,
-        "position": 6.0,
-        "query": "last z types of construction buffs"
+        "position": 2.0,
+        "query": "last z upgrade hq"
       },
       {
         "avg_click_position": -1.0,
@@ -264,8 +310,8 @@
         "ctr": 0.5,
         "date": "2026-05-01",
         "impressions": 2.0,
-        "position": 7.0,
-        "query": "lastz\u3000t10"
+        "position": 1.0,
+        "query": "canyon clash last z"
       },
       {
         "avg_click_position": -1.0,
@@ -273,8 +319,8 @@
         "ctr": 0.5,
         "date": "2026-05-01",
         "impressions": 2.0,
-        "position": 4.0,
-        "query": "in the last z game what is the best day to have zombie siege"
+        "position": 2.0,
+        "query": "last z hot events order"
       }
     ],
     "rising_queries_latest_vs_previous_week": [
