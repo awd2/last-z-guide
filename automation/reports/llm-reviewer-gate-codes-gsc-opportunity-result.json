@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-03T11:51:25Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-reviewer-gate-codes-gsc-opportunity",
+  "worker_role": "reviewer",
+  "request_path": "automation/reports/llm-reviewer-gate-codes-gsc-opportunity-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "target_page_or_slug": "codes.html",
+    "page_role": "cornerstone-guide",
+    "verdict": "needs_human_review",
+    "risk_level": "high",
+    "approved_next_stage": "brief",
+    "blocking_issues": [
+      {
+        "severity": "high",
+        "issue": "The brief proposes a scoped content adjustment on a high-risk cornerstone page, but the query `last z gift center` may already overlap with a different canonical page in the cluster.",
+        "required_fix": "Owner must confirm codes.html remains the canonical best fit for this intent before any edit planning proceeds."
+      },
+      {
+        "severity": "high",
+        "issue": "Cluster role separation is not fully proven safe from the brief alone.",
+        "required_fix": "Require explicit review against the protected claims `gift-center-cluster-role-separation`, `gift-center-only-redeem-flow`, and `gift-rewards-mailbox` with no wording drift beyond the approved redeem-flow scope."
+      },
+      {
+        "severity": "medium",
+        "issue": "The first-screen and heading-order changes could still blur the page from redeem-codes guide into a gift-center help hub if not tightly constrained.",
+        "required_fix": "Limit the change to clarity, ordering, and routing only; confirm no section expansion or re-architecture."
+      }
+    ],
+    "warnings": [
+      "GSC impressions/CTR are only signals and do not justify a rewrite by themselves.",
+      "Prior optimization history (`gift-center-ctr-pass:done`) may reduce the safe surface for additional changes.",
+      "Manual QA is required for first-screen answer quality and internal link behavior on codes.html."
+    ],
+    "duplicate_intent_review": "Potential overlap exists with gift-center-uid.html and redeem-code-not-working.html, but the brief keeps them as lateral support pages. The main risk is not duplicate content creation, but accidental intent expansion on codes.html beyond the canonical redeem-codes role.",
+    "cluster_role_review": "Generally aligned with a cornerstone-guide in the Economy cluster, but the page must remain the primary redeem-codes destination and not become a generalized gift-center page. The proposed update is only acceptable if it preserves cluster role separation and routing to adjacent pages.",
+    "canonical_claim_review": "The brief explicitly protects the required claims and does not instruct contradicting them. However, final approval requires a human to verify that any wording changes still uphold `gift-center-only-redeem-flow`, `gift-rewards-mailbox`, and `gift-center-cluster-role-separation`.",
+    "template_safety_review": "Template safety looks acceptable at planning level because the brief stays within the existing page template/navigation/schema family and does not request structural re-templating. No template change should be allowed without separate approval.",
+    "owner_approval_required": true,
+    "owner_questions": [
+      "Can we tighten the first-screen answer on codes.html so it more explicitly resolves `last z gift center` while keeping the page a redeem-codes cornerstone guide?",
+      "Should the current heading order be adjusted so the Gift Center login/UID guidance appears before deeper code lists and reference sections?",
+      "Are there any phrases in the existing FAQs or notes that risk implying a different redeem flow or weakening cluster separation?",
+      "Should the related-links block prioritize gift-center-uid.html and redeem-code-not-working.html more prominently for gift-center searchers?",
+      "Is the current scope limited to clarity and ordering, or do you want any section-level pruning to reduce overlap with adjacent Economy pages?"
+    ],
+    "required_context_before_edit": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "codes.html",
+      "index.html",
+      "gift-center-uid.html",
+      "redeem-code-not-working.html",
+      "resources.html"
+    ],
+    "required_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on codes.html"
+    ],
+    "next_step": "Escalate to owner confirmation for a tightly scoped first-screen/heading-order clarification on codes.html; do not proceed to patch planning until canonical fit and cluster separation are explicitly confirmed."
+  },
+  "usage": {
+    "input_tokens": 4153,
+    "input_tokens_details": {
+      "cached_tokens": 3840
+    },
+    "output_tokens": 831,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 4984
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_0096547dffa34b950069f736b7b7f08190818883dbec78f65d",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

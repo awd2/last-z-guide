@@ -408,6 +408,41 @@ def cmd_llm_editor(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_reviewer(
+    topic_id: str | None,
+    editor_result: str | None,
+    editor_request: str | None,
+    provider: str,
+    fixture: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_reviewer.py"),
+        "--provider",
+        provider,
+    ]
+    if topic_id:
+        command.extend(["--topic-id", topic_id])
+    if editor_result:
+        command.extend(["--editor-result", editor_result])
+    if editor_request:
+        command.extend(["--editor-request", editor_request])
+    if fixture:
+        command.extend(["--fixture", fixture])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Reviewer ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_content_seo_opportunities(
     json_output: str | None,
     markdown_output: str | None,
@@ -1648,6 +1683,24 @@ def build_parser() -> argparse.ArgumentParser:
     llm_editor_parser.add_argument("--basename", help="Output basename without extension.")
     llm_editor_parser.add_argument("--json", action="store_true", help="Print the LLM Editor summary as JSON.")
 
+    llm_reviewer_parser = subparsers.add_parser(
+        "llm-reviewer",
+        help="Run a no-write LLM Reviewer gate from one LLM Editor planning brief.",
+    )
+    llm_reviewer_parser.add_argument("--topic-id", help="Topic id used to infer default LLM Editor artifacts.")
+    llm_reviewer_parser.add_argument("--editor-result", help="Path to llm-editor-brief-<topic_id>-result.json.")
+    llm_reviewer_parser.add_argument("--editor-request", help="Path to llm-editor-brief-<topic_id>-request.json.")
+    llm_reviewer_parser.add_argument(
+        "--provider",
+        default="disabled",
+        choices=["disabled", "fixture", "openai"],
+        help="Provider to use through llm_adapter. Defaults to disabled/fail-closed.",
+    )
+    llm_reviewer_parser.add_argument("--fixture", help="Fixture response JSON for offline provider tests.")
+    llm_reviewer_parser.add_argument("--output-dir", help="Directory for LLM Reviewer artifacts.")
+    llm_reviewer_parser.add_argument("--basename", help="Output basename without extension.")
+    llm_reviewer_parser.add_argument("--json", action="store_true", help="Print the LLM Reviewer summary as JSON.")
+
     content_seo_parser = subparsers.add_parser(
         "content-seo-opportunities",
         help="Build a no-write SEO/LLM content opportunity report.",
@@ -1769,6 +1822,17 @@ def main() -> int:
             args.scout_result,
             args.scout_request,
             args.topic_id,
+            args.provider,
+            args.fixture,
+            args.output_dir,
+            args.basename,
+            args.json,
+        )
+    if args.command == "llm-reviewer":
+        return cmd_llm_reviewer(
+            args.topic_id,
+            args.editor_result,
+            args.editor_request,
             args.provider,
             args.fixture,
             args.output_dir,

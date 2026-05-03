@@ -137,6 +137,13 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - writes request/result/markdown artifacts for human review
   - does not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state
 
+- `workers/llm_reviewer.py`
+  - reads one LLM Editor planning brief
+  - sends a JSON-only review gate request through `llm_adapter`
+  - writes request/result/markdown artifacts for human review
+  - checks duplicate intent, cluster role fit, canonical claims, template safety, owner questions, and readiness without applying changes
+  - does not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state
+
 - `checks/content_voice.py`
   - runs a no-write audit for generic, mass-produced, or low-utility writing signals
   - reports repeated trust boilerplate, generic phrases, long smooth paragraphs, and low specificity
@@ -220,6 +227,7 @@ python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-b
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice
@@ -280,6 +288,7 @@ python3 automation/pipeline.py llm-adapter --request automation/reports/example-
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id codes-gsc-opportunity --provider openai --json
+python3 automation/pipeline.py llm-reviewer --topic-id codes-gsc-opportunity --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -317,6 +326,7 @@ Lifecycle shorthand:
 - `llm-adapter` -> validate future LLM request/response contracts through a fail-closed provider adapter
 - `llm-scout` -> run a no-write LLM review over deterministic Scout proposals from GSC/Bing agent signals
 - `llm-editor` -> run a no-write LLM planning brief from one selected LLM Scout opportunity
+- `llm-reviewer` -> run a no-write LLM review gate from one LLM Editor planning brief
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
 - `content-voice` -> run a no-write audit for generic, mass-produced, or low-utility public content signals
@@ -394,6 +404,13 @@ LLM Editor planning brief:
 - default input uses `automation/reports/llm-scout-review-result.json` and `automation/reports/llm-scout-review-request.json`
 - output lives in `automation/reports/llm-editor-brief-<topic_id>-request.json`, `automation/reports/llm-editor-brief-<topic_id>-result.json`, and `automation/reports/llm-editor-brief-<topic_id>.md`
 - this must not generate final public page copy or patch specs; it only prepares planning context for deterministic Reviewer and later owner-approved proposals
+
+LLM Reviewer gate:
+
+- `python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json` -> review one LLM Editor planning brief for site fit and readiness
+- default input uses `automation/reports/llm-editor-brief-<topic_id>-result.json` and `automation/reports/llm-editor-brief-<topic_id>-request.json`
+- output lives in `automation/reports/llm-reviewer-gate-<topic_id>-request.json`, `automation/reports/llm-reviewer-gate-<topic_id>-result.json`, and `automation/reports/llm-reviewer-gate-<topic_id>.md`
+- this is a gate artifact only; high-risk user-visible content changes still require owner approval and later proposal-only patch planning
 
 Content SEO opportunity report:
 

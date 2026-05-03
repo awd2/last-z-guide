@@ -11,7 +11,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from automation.io import load_json, write_json
-from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_scout, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_reviewer, llm_scout, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -145,6 +145,41 @@ def fixture_llm_editor_response() -> dict:
                 "python3 automation/pipeline.py checks --strict",
             ],
             "next_step": "Run deterministic Reviewer before any patch plan.",
+        }
+    }
+
+
+def fixture_llm_reviewer_response() -> dict:
+    return {
+        "response_json": {
+            "target_page_or_slug": "codes.html",
+            "page_role": "cornerstone-guide",
+            "verdict": "needs_human_review",
+            "risk_level": "high",
+            "approved_next_stage": "proposal",
+            "blocking_issues": [],
+            "warnings": [
+                "codes.html is a cornerstone page; owner approval is required before any content proposal."
+            ],
+            "duplicate_intent_review": "The brief keeps Gift Center setup and troubleshooting on adjacent support pages.",
+            "cluster_role_review": "The plan preserves codes.html as the redeem-codes hub.",
+            "canonical_claim_review": "The official Gift Center, UID, and mailbox claims remain protected.",
+            "template_safety_review": "The brief does not request template, schema, or navigation replacement.",
+            "owner_approval_required": True,
+            "owner_questions": ["Should this move to a human-reviewed proposal artifact?"],
+            "required_context_before_edit": [
+                "AGENTS.md",
+                "automation/memory/site_style_guide.md",
+                "automation/memory/page_archetypes.md",
+                "automation/memory/seo_llm_optimization.md",
+                "automation/memory/canonical_claims.json",
+                "codes.html",
+            ],
+            "required_checks": [
+                "python3 scripts/prepublish_check.py",
+                "python3 automation/pipeline.py checks --strict",
+            ],
+            "next_step": "Ask the owner to approve or reject moving this planning brief into a proposal-only content artifact.",
         }
     }
 
@@ -334,6 +369,56 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "llm-editor-fixture-request.json").exists())
             self.assertTrue((tmp_path / "llm-editor-fixture-result.json").exists())
             self.assertTrue((tmp_path / "llm-editor-fixture.md").exists())
+
+    def test_llm_reviewer_gates_llm_editor_fixture(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, fixture_llm_reviewer_response())
+
+            scout_code, scout_payload = llm_scout.run_llm_scout(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                basename="llm-scout-fixture",
+                provider="fixture",
+                fixture_path=scout_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(scout_code, 0)
+            editor_code, editor_payload = llm_editor.run_llm_editor(
+                scout_result_path=Path(scout_payload["result_path"]),
+                scout_request_path=Path(scout_payload["request_path"]),
+                topic_id="codes-gsc-opportunity",
+                output_dir=tmp_path,
+                basename="llm-editor-fixture",
+                provider="fixture",
+                fixture_path=editor_fixture_path,
+            )
+            self.assertEqual(editor_code, 0)
+
+            reviewer_code, reviewer_payload = llm_reviewer.run_llm_reviewer(
+                editor_result_path=Path(editor_payload["result_path"]),
+                editor_request_path=Path(editor_payload["request_path"]),
+                output_dir=tmp_path,
+                basename="llm-reviewer-fixture",
+                provider="fixture",
+                fixture_path=reviewer_fixture_path,
+            )
+            self.assertEqual(reviewer_code, 0)
+            self.assertEqual(reviewer_payload["report_type"], "llm_reviewer_gate")
+            self.assertEqual(reviewer_payload["adapter_result"]["state"], "completed")
+            self.assertEqual(reviewer_payload["adapter_result"]["response_json"]["verdict"], "needs_human_review")
+            self.assertEqual(reviewer_payload["target_page_or_slug"], "codes.html")
+            self.assertTrue((tmp_path / "llm-reviewer-fixture-request.json").exists())
+            self.assertTrue((tmp_path / "llm-reviewer-fixture-result.json").exists())
+            self.assertTrue((tmp_path / "llm-reviewer-fixture.md").exists())
 
     def test_scout_editor_reviewer_contract_shapes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

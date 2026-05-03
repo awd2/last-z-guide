@@ -1,0 +1,477 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-reviewer-gate-codes-gsc-opportunity",
+  "worker_role": "reviewer",
+  "task": "Review one no-write LLM Editor planning brief for site fit, risk, and readiness.",
+  "prompt": "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. Do not write or rewrite public page copy. Do not create patch specs. Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, and deterministic QA readiness. Treat analytics as signals, not proof. Return JSON only.",
+  "inputs": {
+    "source_llm_editor_result": "automation/reports/llm-editor-brief-codes-gsc-opportunity-result.json",
+    "source_llm_editor_request": "automation/reports/llm-editor-brief-codes-gsc-opportunity-request.json",
+    "selected_opportunity": {
+      "topic_id": "codes-gsc-opportunity",
+      "decision": "update_existing",
+      "rationale": "High impressions with weak CTR on a cornerstone Economy page and multiple related gift-center queries suggest a meaningful existing-page optimization opportunity. The intent appears close to the current canonical role, so this is a strong candidate for a scoped update rather than new content.",
+      "player_value": "Faster access to gift center login, redeem flow, and UID guidance from the main redeem-codes entry page.",
+      "duplication_risk": "Medium; gift-center intent could overlap with other Economy pages if the rewrite expands beyond the canonical redeem flow.",
+      "priority": "high",
+      "risk_level": "high",
+      "next_step": "Have the page owner review whether the first screen, headings, and snippet alignment can better answer gift-center queries without altering cluster separation.",
+      "claims_to_verify": [
+        "Whether `last z gift center` intent is fully served by codes.html as the canonical page.",
+        "Whether protected claims `gift-center-only-redeem-flow`, `gift-rewards-mailbox`, and `gift-center-cluster-role-separation` remain intact after any change.",
+        "Whether the prior `gift-center-ctr-pass:done` history already exhausted the safest optimization surface."
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "codes-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+      "cluster": "Economy",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "codes.html",
+      "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "high",
+      "evidence": [
+        "GSC page signal: codes.html had 14781 impressions, 254 clicks, 1.72% CTR, avg position 6.55.",
+        "Low CTR query: `last z gift center` had 1548 impressions, 51 clicks, 3.29% CTR, position 7.25.",
+        "Low CTR query: `last z gift center login` had 511 impressions, 13 clicks, 2.54% CTR, position 6.04.",
+        "Low CTR query: `last-z.com gift center` had 276 impressions, 13 clicks, 4.71% CTR, position 6.25.",
+        "Rising query: `last z gift center` gained 350 impressions in the last 7-day comparison window."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
+        "cluster_owner": "Economy",
+        "expected_internal_route": [
+          "index.html",
+          "codes.html"
+        ],
+        "archetype_reason": "Existing page is `cornerstone-guide` in the `Economy` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed.",
+        "Protect canonical claim `gift-center-only-redeem-flow`.",
+        "Protect canonical claim `gift-rewards-mailbox`.",
+        "Protect canonical claim `gift-center-cluster-role-separation`.",
+        "Existing backlog history for this page: gift-center-ctr-pass:done."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ]
+    },
+    "deterministic_editor_context": {
+      "target_page_or_slug": "codes.html",
+      "page_role": "cornerstone-guide",
+      "primary_query_family": "last z gift center",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `last z gift center` without changing `codes.html` into a different page role.",
+      "template_reference": "codes.html",
+      "required_sections": [
+        "Quick Answer",
+        "Best overall recommendation",
+        "Decision framework",
+        "Cluster route block",
+        "Related guides / FAQ"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html"
+        ],
+        "downstream": [
+          "diamond-reserve.html",
+          "events.html",
+          "f2p.html",
+          "lucky-discounter.html",
+          "start.html"
+        ],
+        "lateral": [
+          "gift-center-uid.html",
+          "redeem-code-not-working.html",
+          "resources.html"
+        ]
+      },
+      "protected_claims": [
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox"
+      ],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope.",
+        "Do not contradict canonical claim `gift-center-cluster-role-separation`.",
+        "Do not contradict canonical claim `gift-center-only-redeem-flow`.",
+        "Do not contradict canonical claim `gift-rewards-mailbox`."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "codes.html",
+        "index.html",
+        "gift-center-uid.html",
+        "redeem-code-not-working.html",
+        "resources.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on codes.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID",
+        "h1": "Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+        "meta_description": "Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work.",
+        "quick_answer": "How to redeem Last Z codes correctly: open the official Gift Center, copy your UID from Settings, paste the code exactly, and then collect rewards from your in-game mailbox.",
+        "data_lede": "",
+        "h2_headings": [
+          "Official Gift Center Login",
+          "Can I Redeem Last Z Codes on iPhone or Android?",
+          "How to Find Your UID in Last Z",
+          "How to Redeem Last Z Codes Step by Step",
+          "Active Last Z Codes (Verified)",
+          "Verification Protocol",
+          "Inactive Codes (Previously Active)",
+          "Important Notes"
+        ],
+        "internal_links": [
+          "about.html",
+          "contact.html",
+          "diamond-reserve.html",
+          "disclosure.html",
+          "events.html",
+          "f2p.html",
+          "gift-center-uid.html",
+          "https://lastzguides.com/codes.html",
+          "lucky-discounter.html",
+          "privacy.html",
+          "redeem-code-not-working.html",
+          "resources.html",
+          "start.html",
+          "terms.html"
+        ]
+      }
+    },
+    "llm_editor_brief": {
+      "brief_summary": "Update the existing codes.html cornerstone guide with a tighter first-screen answer and supporting structure for gift center searchers, while preserving the redeem-codes page role, canonical claims, and cluster separation. The main opportunity is query-to-page match improvement, not a content expansion into a different intent.",
+      "target_page_or_slug": "codes.html",
+      "page_role": "cornerstone-guide",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers without changing the page’s canonical redeem-codes role.",
+      "first_screen_plan": "Keep the answer-first format, but make the opening immediately clarify that the official redeem flow happens through the Gift Center, that the user needs their UID, and that rewards arrive in the in-game mailbox. The first screen should resolve the `last z gift center` intent faster than the current version while staying within the existing page role and avoiding any suggestion that codes are redeemed directly in-game or on a different canonical page.",
+      "section_plan": [
+        {
+          "section": "Quick Answer",
+          "action": "Tighten the opening to lead with the official Gift Center path, UID requirement, and mailbox reward collection in a concise, scannable way.",
+          "reason": "This is the strongest query-intent alignment lever for users arriving on a gift-center query and is the safest surface for CTR and usefulness improvements."
+        },
+        {
+          "section": "Best overall recommendation",
+          "action": "Reframe the recommendation ordering so the official Gift Center flow is clearly the default path before secondary troubleshooting or contextual details.",
+          "reason": "Preserves answer-first behavior while reducing ambiguity for searchers who want the login/redeem destination immediately."
+        },
+        {
+          "section": "Decision framework",
+          "action": "Keep the framework focused on when to use the Gift Center, where to get the UID, and what to check if redemption fails, without broadening into unrelated economy topics.",
+          "reason": "Supports decision-making without diluting the page’s canonical role or cluster boundaries."
+        },
+        {
+          "section": "Cluster route block",
+          "action": "Retain and sharpen routing to related pages so gift-center-uid.html and redeem-code-not-working.html handle adjacent needs, while downstream pages cover progression/economy context.",
+          "reason": "Reinforces cluster role separation and reduces overlap with other Economy pages."
+        },
+        {
+          "section": "Related guides / FAQ",
+          "action": "Audit FAQs for duplication and keep only questions that support the official redeem flow, UID lookup, and mailbox delivery.",
+          "reason": "Prevents intent drift and protects canonical claims while still giving users next-step help."
+        },
+        {
+          "section": "Active Last Z Codes (Verified)",
+          "action": "Keep the verified codes area, but ensure it does not overshadow the Gift Center intent on first load.",
+          "reason": "Maintains the page’s existing utility while improving query match for gift-center searches."
+        },
+        {
+          "section": "Verification Protocol",
+          "action": "Preserve the verification notes, but align them with the same official flow and avoid adding new claims beyond approved scope.",
+          "reason": "Supports trust without changing the page into a different archetype."
+        },
+        {
+          "section": "Important Notes",
+          "action": "Trim or reorder notes so the essential redeem path remains prominent and the page does not read like a general help hub.",
+          "reason": "Keeps the cornerstone page focused and reduces fragmentation of the primary answer."
+        }
+      ],
+      "internal_link_plan": [
+        {
+          "page": "gift-center-uid.html",
+          "role": "lateral",
+          "reason": "Best next step for users who need help locating or copying their UID for the official Gift Center flow."
+        },
+        {
+          "page": "redeem-code-not-working.html",
+          "role": "lateral",
+          "reason": "Handles troubleshooting when a code fails after the user follows the official redeem flow."
+        },
+        {
+          "page": "resources.html",
+          "role": "lateral",
+          "reason": "Useful hub for related help and supporting references without expanding the main page’s role."
+        },
+        {
+          "page": "index.html",
+          "role": "upstream",
+          "reason": "Primary site entry point that can contextualize the main economy/codes cluster."
+        },
+        {
+          "page": "diamond-reserve.html",
+          "role": "downstream",
+          "reason": "Adjacent economy topic that can receive users after they understand the redeem flow."
+        },
+        {
+          "page": "events.html",
+          "role": "downstream",
+          "reason": "Relevant downstream destination for reward-related progression after redemption."
+        },
+        {
+          "page": "f2p.html",
+          "role": "downstream",
+          "reason": "Supports players looking for broader economy guidance beyond the redeem flow."
+        },
+        {
+          "page": "lucky-discounter.html",
+          "role": "downstream",
+          "reason": "Related economy guide that can serve users exploring optimization and value topics."
+        }
+      ],
+      "protected_claims": [
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox"
+      ],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope.",
+        "Do not contradict canonical claim `gift-center-cluster-role-separation`.",
+        "Do not contradict canonical claim `gift-center-only-redeem-flow`.",
+        "Do not contradict canonical claim `gift-rewards-mailbox`."
+      ],
+      "owner_questions": [
+        "Can we tighten the first-screen answer on codes.html so it more explicitly resolves `last z gift center` while keeping the page a redeem-codes cornerstone guide?",
+        "Should the current heading order be adjusted so the Gift Center login/UID guidance appears before deeper code lists and reference sections?",
+        "Are there any phrases in the existing FAQs or notes that risk implying a different redeem flow or weakening cluster separation?",
+        "Should the related-links block prioritize gift-center-uid.html and redeem-code-not-working.html more prominently for gift-center searchers?",
+        "Is the current scope limited to clarity and ordering, or do you want any section-level pruning to reduce overlap with adjacent Economy pages?"
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "codes.html",
+        "index.html",
+        "gift-center-uid.html",
+        "redeem-code-not-working.html",
+        "resources.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on codes.html"
+      ],
+      "next_step": "Have the page owner confirm whether a scoped first-screen and heading-order adjustment is acceptable for codes.html, with explicit review of cluster separation and protected claims before any content work."
+    },
+    "guardrails": [
+      "No content files may be edited by Reviewer.",
+      "No final public page copy may be generated.",
+      "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
+      "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
+      "Owner approval is required before any user-visible content change."
+    ]
+  },
+  "expected_response_keys": [
+    "target_page_or_slug",
+    "page_role",
+    "verdict",
+    "risk_level",
+    "approved_next_stage",
+    "blocking_issues",
+    "warnings",
+    "duplicate_intent_review",
+    "cluster_role_review",
+    "canonical_claim_review",
+    "template_safety_review",
+    "owner_approval_required",
+    "owner_questions",
+    "required_context_before_edit",
+    "required_checks",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "verdict": {
+        "type": "string",
+        "enum": [
+          "pass",
+          "needs_human_review",
+          "revise",
+          "reject"
+        ]
+      },
+      "risk_level": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "approved_next_stage": {
+        "type": "string",
+        "enum": [
+          "none",
+          "brief",
+          "patch_plan",
+          "proposal",
+          "approval",
+          "apply_preview"
+        ]
+      },
+      "blocking_issues": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "severity": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "issue": {
+              "type": "string",
+              "maxLength": 450
+            },
+            "required_fix": {
+              "type": "string",
+              "maxLength": 450
+            }
+          },
+          "required": [
+            "severity",
+            "issue",
+            "required_fix"
+          ]
+        }
+      },
+      "warnings": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 400
+        }
+      },
+      "duplicate_intent_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "cluster_role_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "canonical_claim_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "template_safety_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "owner_approval_required": {
+        "type": "boolean"
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_edit": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "required_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 450
+      }
+    },
+    "required": [
+      "target_page_or_slug",
+      "page_role",
+      "verdict",
+      "risk_level",
+      "approved_next_stage",
+      "blocking_issues",
+      "warnings",
+      "duplicate_intent_review",
+      "cluster_role_review",
+      "canonical_claim_review",
+      "template_safety_review",
+      "owner_approval_required",
+      "owner_questions",
+      "required_context_before_edit",
+      "required_checks",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}
