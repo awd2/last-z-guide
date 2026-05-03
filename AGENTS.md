@@ -423,6 +423,7 @@ python3 automation/pipeline.py worker-intake --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -434,9 +435,12 @@ python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 automation/reports/content_seo_opportunities.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
+
+The `openai` LLM adapter provider is live but still no-write and fail-closed. It requires `OPENAI_API_KEY`, uses `OPENAI_MODEL` when set, defaults to `gpt-5.4-mini`, and returns only validated JSON artifacts. It must not edit content, backlog, manifests, or production state.
 
 Machine-readable snapshots exist for:
 

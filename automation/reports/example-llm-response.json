@@ -1,0 +1,7 @@
+{
+  "response_json": {
+    "summary": "No-write adapter smoke test for an Economy cluster worker request.",
+    "risk_level": "low",
+    "next_action": "review"
+  }
+}

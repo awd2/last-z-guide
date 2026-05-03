@@ -113,6 +113,7 @@ python3 automation/pipeline.py worker-intake --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -124,6 +125,7 @@ python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 

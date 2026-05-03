@@ -86,18 +86,20 @@ python3 -m unittest discover -s automation/tests -p 'test_*.py'
 
 They validate the deterministic contract shape for Scout, Editor, Reviewer, intake, run-plan, and manifest writer steps using temporary output directories.
 
-The current LLM provider adapter is fail-closed and offline-first:
+The current LLM provider adapter is fail-closed and artifact-only:
 
 ```bash
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 ```
 
-It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `openai` is reserved but intentionally not implemented yet. The adapter must not edit content, backlog, manifests, or production state.
+It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter must not edit content, backlog, manifests, or production state.
 
 The lower-level helper remains available at:
 
 ```bash
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 ```
 
 ## Shared Inputs

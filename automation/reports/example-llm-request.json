@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "request_id": "example-editor-brief",
+  "worker_role": "editor",
+  "task": "Return a short structured review note for a no-write worker adapter smoke test.",
+  "prompt": "Use the supplied project context. Return JSON only. Do not claim that files were edited.",
+  "inputs": {
+    "target_page_or_slug": "codes.html",
+    "cluster": "Economy",
+    "project_rule": "User-visible content changes require owner approval before application."
+  },
+  "expected_response_keys": [
+    "summary",
+    "risk_level",
+    "next_action"
+  ]
+}

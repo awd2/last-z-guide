@@ -121,6 +121,8 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - validates structured future LLM request/response JSON
   - defaults to fail-closed `disabled` provider
   - supports offline `fixture` provider for deterministic tests
+  - supports live `openai` provider through the OpenAI Responses API when `OPENAI_API_KEY` is set
+  - uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`
   - does not mutate backlog, manifests, or content
 
 - `checks/content_voice.py`
@@ -261,6 +263,7 @@ python3 automation/pipeline.py worker-intake --topic-id codes-gsc-opportunity --
 python3 automation/pipeline.py worker-run-plan --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py worker-manifest --topic-id codes-gsc-opportunity --created-by oleg --dry-run --json
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider fixture --fixture automation/reports/example-llm-response.json --json
+python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -355,8 +358,9 @@ Worker contract tests:
 LLM adapter:
 
 - `python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json` -> validate a future LLM request/response contract offline
+- `python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json` -> call the OpenAI Responses API and return a validated JSON artifact
 - default provider is `disabled` and returns a blocked result
-- `openai` is reserved but intentionally not implemented yet
+- `openai` requires `OPENAI_API_KEY`, uses `OPENAI_MODEL` when set, defaults to `gpt-5.4-mini`, and must remain no-write
 - adapter output is structured and must not directly edit content, backlog, manifests, or production state
 
 Content SEO opportunity report:

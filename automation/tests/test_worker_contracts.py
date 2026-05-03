@@ -8,6 +8,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from automation.io import load_json, write_json
 from automation.workers import editor, intake, intake_to_run, llm_adapter, reviewer, run_chain, scout, write_manifest
@@ -128,6 +129,73 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(code, 1)
             self.assertEqual(bad["state"], "blocked")
             self.assertIn("Response is missing expected key `risk_level`.", bad["errors"])
+
+    def test_llm_adapter_openai_provider_blocks_without_key(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            request_path = Path(tmp) / "request.json"
+            write_json(
+                request_path,
+                {
+                    "schema_version": 1,
+                    "request_id": "fixture-editor-brief",
+                    "worker_role": "editor",
+                    "task": "Return a structured draft note for an approved topic.",
+                    "prompt": "Use the supplied site memory and return JSON only.",
+                    "inputs": {"target_page_or_slug": "codes.html"},
+                    "expected_response_keys": ["summary", "risk_level", "next_action"],
+                },
+            )
+            with patch.dict("os.environ", {"OPENAI_API_KEY": ""}, clear=False):
+                code, blocked = llm_adapter.run_adapter(request_path, "openai", None)
+            self.assertEqual(code, 1)
+            self.assertEqual(blocked["state"], "blocked")
+            self.assertEqual(blocked["provider"], "openai")
+            self.assertTrue(any("OPENAI_API_KEY" in error for error in blocked["errors"]))
+
+    def test_llm_adapter_openai_body_and_response_extraction(self) -> None:
+        request = {
+            "schema_version": 1,
+            "request_id": "fixture-editor-brief",
+            "worker_role": "editor",
+            "task": "Return a structured draft note for an approved topic.",
+            "prompt": "Use the supplied site memory and return JSON only.",
+            "inputs": {"target_page_or_slug": "codes.html"},
+            "expected_response_keys": ["summary", "risk_level", "next_action"],
+        }
+        with patch.dict(
+            "os.environ",
+            {"OPENAI_MODEL": "gpt-5.4-mini", "OPENAI_MAX_OUTPUT_TOKENS": "500"},
+            clear=False,
+        ):
+            body = llm_adapter.openai_request_body(request)
+        self.assertEqual(body["model"], "gpt-5.4-mini")
+        self.assertEqual(body["max_output_tokens"], 500)
+        self.assertEqual(body["text"]["format"]["type"], "json_schema")
+        self.assertTrue(body["text"]["format"]["strict"])
+        self.assertEqual(body["text"]["format"]["schema"]["required"], ["summary", "risk_level", "next_action"])
+
+        payload = {
+            "id": "resp_fixture",
+            "model": "gpt-5.4-mini",
+            "output": [
+                {
+                    "type": "message",
+                    "content": [
+                        {
+                            "type": "output_text",
+                            "text": json.dumps(
+                                {
+                                    "summary": "Keep the page role narrow.",
+                                    "risk_level": "medium",
+                                    "next_action": "review",
+                                }
+                            ),
+                        }
+                    ],
+                }
+            ],
+        }
+        self.assertEqual(llm_adapter.openai_response_json(payload)["next_action"], "review")
 
     def test_scout_editor_reviewer_contract_shapes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
