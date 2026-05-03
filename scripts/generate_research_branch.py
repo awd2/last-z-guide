@@ -508,14 +508,14 @@ def render_page(data: dict) -> str:
         <section class="verification-note" aria-label="Verification and review">
             <p class="verification-note-title">Verification &amp; Review</p>
             <ul>
-                <li><strong>How this guide was verified:</strong> Based on in-game data, tested results, and cross-checks against community validation.</li>
+                <li><strong>Review basis:</strong> Branch totals were checked against the generated research data source, in-game value checks, and cumulative badge calculations.</li>
                 <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
-                <li><strong>Source pattern:</strong> In-game data + tested results + community validation.</li>
+                <li><strong>Use caution:</strong> badge costs, unlock requirements, node names, and branch prerequisites can change after research updates.</li>
             </ul>
         </section>
 
         <section class="disclaimer">
-            <p>Game mechanics and numbers may change with updates. This guide was last validated in March 2026.</p>
+            <p>Use this page as planning data before spending badges or saved resources, and confirm final values in-game before committing rare materials.</p>
         </section>
 {render_related(data["related_guides"])}
     </article>

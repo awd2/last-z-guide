@@ -10,6 +10,10 @@ from pathlib import Path
 from site_utils import ROOT, list_html_pages
 
 
+EXCLUDED = {
+    "news-preview.html",
+}
+
 ORG_COMMENT = "    <!-- Schema.org: Organization -->\n"
 ORG_SCHEMA = """    <script type="application/ld+json">
 {
@@ -64,6 +68,8 @@ def sync_page(path: Path) -> bool:
 def main() -> int:
     updated = 0
     for path in list_html_pages():
+        if path.name in EXCLUDED:
+            continue
         if sync_page(path):
             updated += 1
     print(f"Updated structured data on {updated} HTML files.")
