@@ -264,9 +264,9 @@ SHIELD_SAFETY_BLOCK = """        <section class="verification-note" aria-label="
 DAILY_UTILITY_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
             <p class="verification-note-title">Verification &amp; Review</p>
             <ul>
-                <li><strong>Review basis:</strong> Radar advice was checked against the current Radar workflow, task priority logic, refresh value, and daily event routing.</li>
-                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
-                <li><strong>Use caution:</strong> task pools, refresh value, rewards, and daily-event timing can change after updates.</li>
+                <li><strong>Review basis:</strong> Radar advice was checked against refresh timing, cap-loss risk, Sunday/Monday and Thursday/Friday Alliance Duel sync, and daily event routing.</li>
+                <li><strong>Last checked:</strong> March 2026 for radar timing and weekly event alignment.</li>
+                <li><strong>Watch for changes:</strong> task pools, refresh value, rewards, and daily-event timing can change after updates.</li>
             </ul>
         </section>
 
