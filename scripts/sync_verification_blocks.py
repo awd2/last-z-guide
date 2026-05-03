@@ -76,6 +76,36 @@ RESEARCH_SYSTEM_PAGES = {
     "tech.html",
 }
 
+HERO_HUB_PAGES = {
+    "heroes.html",
+}
+
+SPANISH_HERO_HUB_PAGES = {
+    "heroes-es.html",
+}
+
+HERO_PROFILE_PAGES = {
+    "queenie.html",
+    "yu-chan.html",
+}
+
+FORMATION_STRATEGY_PAGES = {
+    "formations.html",
+}
+
+FORMATION_POWER_PAGES = {
+    "formation-power.html",
+}
+
+PVP_TRAP_PAGES = {
+    "pvp.html",
+    "trap.html",
+}
+
+EQUIPMENT_GEAR_PAGES = {
+    "gear.html",
+}
+
 FULL_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
             <p class="verification-note-title">Verification &amp; Review</p>
             <ul>
@@ -231,6 +261,118 @@ RESEARCH_SYSTEM_DISCLAIMER = """        <section class="disclaimer">
         </section>
 """
 
+HERO_HUB_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Hero priorities were checked against current faction roles, troop matching, linked hero profiles, formation guidance, and PvP matchup logic.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> hero balance, server meta, faction prevalence, and new-season heroes can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+SPANISH_HERO_HUB_BLOCK = """        <section class="verification-note" aria-label="Verificación y revisión">
+            <p class="verification-note-title">Verificación y revisión</p>
+            <ul>
+                <li><strong>Base de revisión:</strong> Las prioridades de héroes se revisaron contra roles de facción, emparejamiento de tropas, guías de formación/PvP enlazadas y recomendaciones canónicas del sitio.</li>
+                <li><strong>Última revisión para el parche y contexto de temporada actuales:</strong> marzo de 2026.</li>
+                <li><strong>Ten cuidado:</strong> el balance de héroes, la meta del servidor, la popularidad de facciones y los héroes de nuevas temporadas pueden cambiar con actualizaciones.</li>
+            </ul>
+        </section>
+
+"""
+
+HERO_PROFILE_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Hero build advice was checked against visible skill text, faction role, troop alignment, exclusive talent effects, and linked formation guidance.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> skill values, talent effects, hero balance, and faction meta can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+FORMATION_STRATEGY_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Formation advice was checked against faction counters, 3+2 matchup logic, troop alignment, hero role coverage, and related PvP guidance.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> server faction mix, available heroes, new-season releases, and PvP meta can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+FORMATION_POWER_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Formation power guidance was checked against displayed power levers, same-faction bonuses, troop-capacity sources, research effects, and related formation/PvP pages.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> power formulas, faction bonuses, research effects, and Hall of Honor values can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+PVP_TRAP_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> PvP guidance was checked against scouting signals, faction-counter logic, formation matchup rules, shield discipline, and related SVS/trap guidance.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> server meta, shield timing, war rules, matchmaking, and troop-loss risk can change after updates or by server group.</li>
+            </ul>
+        </section>
+
+"""
+
+EQUIPMENT_GEAR_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
+            <p class="verification-note-title">Verification &amp; Review</p>
+            <ul>
+                <li><strong>Review basis:</strong> Gear advice was checked against equipment tiers, enhancement caps, promotion stages, Power Core use, mythic requirements, and main-formation priority.</li>
+                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
+                <li><strong>Use caution:</strong> gear costs, paid material availability, enhancement caps, and event/shop sources can change after updates.</li>
+            </ul>
+        </section>
+
+"""
+
+HERO_HUB_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this as a prioritization guide, then compare it against your built roster and server meta before spending fragments, books, gear, or exclusive items.</p>
+        </section>
+"""
+
+SPANISH_HERO_HUB_DISCLAIMER = """        <section class="disclaimer">
+            <p>Usa esta guía para priorizar héroes, pero compara la recomendación con tu formación ya construida y la meta de tu servidor antes de gastar fragmentos, libros o equipo.</p>
+        </section>
+"""
+
+HERO_PROFILE_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this as hero-build guidance, then confirm the current skill text and star/talent values in-game before committing rare hero resources.</p>
+        </section>
+"""
+
+FORMATION_STRATEGY_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this to choose formation logic, then test it against your server matchups and your strongest built heroes before changing faction investment.</p>
+        </section>
+"""
+
+FORMATION_POWER_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this to understand displayed formation power, but do not treat the power number as the only PvP goal; test matchups against your server meta.</p>
+        </section>
+"""
+
+PVP_TRAP_DISCLAIMER = """        <section class="disclaimer">
+            <p>Use this as PvP decision support, then scout, check live server conditions, and protect critical resources before attacking or setting a trap.</p>
+        </section>
+"""
+
+EQUIPMENT_GEAR_DISCLAIMER = """        <section class="disclaimer">
+            <p>Confirm current gear costs and upgrade caps in-game before spending Power Cores, alloys, mythic materials, or saved equipment resources.</p>
+        </section>
+"""
+
 
 def verification_block_for(page_name: str) -> str:
     if page_name in RESEARCH_BRANCH_PAGES:
@@ -251,6 +393,20 @@ def verification_block_for(page_name: str) -> str:
         return ARENA_SUPPORT_BLOCK
     if page_name in RESEARCH_SYSTEM_PAGES:
         return RESEARCH_SYSTEM_BLOCK
+    if page_name in HERO_HUB_PAGES:
+        return HERO_HUB_BLOCK
+    if page_name in SPANISH_HERO_HUB_PAGES:
+        return SPANISH_HERO_HUB_BLOCK
+    if page_name in HERO_PROFILE_PAGES:
+        return HERO_PROFILE_BLOCK
+    if page_name in FORMATION_STRATEGY_PAGES:
+        return FORMATION_STRATEGY_BLOCK
+    if page_name in FORMATION_POWER_PAGES:
+        return FORMATION_POWER_BLOCK
+    if page_name in PVP_TRAP_PAGES:
+        return PVP_TRAP_BLOCK
+    if page_name in EQUIPMENT_GEAR_PAGES:
+        return EQUIPMENT_GEAR_BLOCK
     return FULL_BLOCK
 
 
@@ -273,6 +429,20 @@ def disclaimer_for(page_name: str) -> str | None:
         return ARENA_SUPPORT_DISCLAIMER
     if page_name in RESEARCH_SYSTEM_PAGES:
         return RESEARCH_SYSTEM_DISCLAIMER
+    if page_name in HERO_HUB_PAGES:
+        return HERO_HUB_DISCLAIMER
+    if page_name in SPANISH_HERO_HUB_PAGES:
+        return SPANISH_HERO_HUB_DISCLAIMER
+    if page_name in HERO_PROFILE_PAGES:
+        return HERO_PROFILE_DISCLAIMER
+    if page_name in FORMATION_STRATEGY_PAGES:
+        return FORMATION_STRATEGY_DISCLAIMER
+    if page_name in FORMATION_POWER_PAGES:
+        return FORMATION_POWER_DISCLAIMER
+    if page_name in PVP_TRAP_PAGES:
+        return PVP_TRAP_DISCLAIMER
+    if page_name in EQUIPMENT_GEAR_PAGES:
+        return EQUIPMENT_GEAR_DISCLAIMER
     return None
 
 
@@ -302,6 +472,12 @@ def sync_page(path: Path) -> bool:
         text = re.sub(
             r'\n{2,}\s*<section class="related-guides">',
             '\n\n        <section class="related-guides">',
+            text,
+            count=1,
+        )
+        text = re.sub(
+            r'\n{2,}\s*<!-- Related Guides -->\s*<section class="related-guides">',
+            '\n\n        <!-- Related Guides -->\n        <section class="related-guides">',
             text,
             count=1,
         )
