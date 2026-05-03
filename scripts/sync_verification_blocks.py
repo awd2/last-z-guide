@@ -332,9 +332,9 @@ RESEARCH_SYSTEM_DISCLAIMER = """        <section class="disclaimer">
 HERO_HUB_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
             <p class="verification-note-title">Verification &amp; Review</p>
             <ul>
-                <li><strong>Review basis:</strong> Hero priorities were checked against current faction roles, troop matching, linked hero profiles, formation guidance, and PvP matchup logic.</li>
-                <li><strong>Last reviewed for the current patch and season context:</strong> March 2026.</li>
-                <li><strong>Use caution:</strong> hero balance, server meta, faction prevalence, and new-season heroes can change after updates.</li>
+                <li><strong>Last reviewed for Season 4 hero priorities and faction routing:</strong> March 2026.</li>
+                <li><strong>Checked against:</strong> faction roles, troop matching, 3rd-skill value, linked Queenie and Yu Chan profiles, formation guidance, PvP counter logic, and current hero-resource constraints.</li>
+                <li><strong>Changes to watch:</strong> new-season heroes, faction prevalence, hero balance, exclusive equipment timing, and server meta can change which heroes are safest to invest in first.</li>
             </ul>
         </section>
 
@@ -343,9 +343,9 @@ HERO_HUB_BLOCK = """        <section class="verification-note" aria-label="Verif
 SPANISH_HERO_HUB_BLOCK = """        <section class="verification-note" aria-label="Verificación y revisión">
             <p class="verification-note-title">Verificación y revisión</p>
             <ul>
-                <li><strong>Base de revisión:</strong> Las prioridades de héroes se revisaron contra roles de facción, emparejamiento de tropas, guías de formación/PvP enlazadas y recomendaciones canónicas del sitio.</li>
-                <li><strong>Última revisión para el parche y contexto de temporada actuales:</strong> marzo de 2026.</li>
-                <li><strong>Ten cuidado:</strong> el balance de héroes, la meta del servidor, la popularidad de facciones y los héroes de nuevas temporadas pueden cambiar con actualizaciones.</li>
+                <li><strong>Última revisión para prioridades de héroes de Temporada 4 y rutas de facción:</strong> marzo de 2026.</li>
+                <li><strong>Revisado contra:</strong> roles de facción, emparejamiento de tropas, valor de la 3.ª habilidad, perfiles enlazados de Queenie y Yu Chan, formación, lógica PvP y límites de recursos de héroes.</li>
+                <li><strong>Cambios a vigilar:</strong> nuevos héroes de temporada, popularidad de facciones, balance, equipo exclusivo y meta del servidor pueden cambiar qué héroes conviene potenciar primero.</li>
             </ul>
         </section>
 
@@ -407,12 +407,12 @@ EQUIPMENT_GEAR_BLOCK = """        <section class="verification-note" aria-label=
 """
 
 HERO_HUB_DISCLAIMER = """        <section class="disclaimer">
-            <p>Use this as a prioritization guide, then compare it against your built roster and server meta before spending fragments, books, gear, or exclusive items.</p>
+            <p>Use this tier list to choose a main faction and main five heroes, then compare it against your built roster and server meta before spending fragments, books, gear, or exclusive items.</p>
         </section>
 """
 
 SPANISH_HERO_HUB_DISCLAIMER = """        <section class="disclaimer">
-            <p>Usa esta guía para priorizar héroes, pero compara la recomendación con tu formación ya construida y la meta de tu servidor antes de gastar fragmentos, libros o equipo.</p>
+            <p>Usa esta tier list para elegir facción y cinco héroes principales, pero compárala con tu roster construido y la meta de tu servidor antes de gastar fragmentos, libros, equipo o piezas exclusivas.</p>
         </section>
 """
 
