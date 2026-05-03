@@ -173,6 +173,12 @@ def visible_main_text(raw_html: str) -> str:
         html,
         flags=re.I | re.S,
     )
+    html = re.sub(
+        r"</(?:p|li|td|th|tr|h[1-6]|div|section|article|ol|ul|table)>|<br\s*/?>",
+        ". ",
+        html,
+        flags=re.I,
+    )
     return strip_tags(html)
 
 
