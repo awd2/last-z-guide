@@ -205,6 +205,7 @@ python3 automation/pipeline.py worker-run-plan --topic-id <topic_id>
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name>
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
 python3 automation/pipeline.py content-seo-opportunities
+python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice
 python3 automation/pipeline.py bundle-run <run_id>
 python3 automation/pipeline.py run <topic_id>
@@ -261,6 +262,7 @@ python3 automation/pipeline.py worker-run-plan --topic-id codes-gsc-opportunity 
 python3 automation/pipeline.py worker-manifest --topic-id codes-gsc-opportunity --created-by oleg --dry-run --json
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider fixture --fixture automation/reports/example-llm-response.json --json
 python3 automation/pipeline.py content-seo-opportunities --json
+python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
 python3 automation/pipeline.py bundle-run 2026-04-22-season-alias-clarification
 python3 automation/pipeline.py bundle gift-center-ctr-pass
@@ -295,6 +297,7 @@ Lifecycle shorthand:
 - `worker-manifest` -> create a `planned` manifest from an approved Worker run-plan proposal
 - `llm-adapter` -> validate future LLM request/response contracts through a fail-closed provider adapter
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
+- `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
 - `content-voice` -> run a no-write audit for generic, mass-produced, or low-utility public content signals
 - `bundle-run` -> export a markdown review bundle from an existing run
 - `run` -> create and review the manifest in one step
@@ -303,6 +306,7 @@ Lifecycle shorthand:
 Scout discovery:
 
 - `python3 automation/workers/scout.py --json` -> generate reviewable topic proposals from `content/gsc/latest-gsc-agent-signals.json`
+- `python3 automation/workers/scout.py --signals content/bing/latest-bing-agent-signals.json --basename scout-topic-proposals-bing --json` -> generate reviewable topic proposals from Bing signals
 - output lives in `automation/reports/scout-topic-proposals.json` and `automation/reports/scout-topic-proposals.md`
 - operators decide which proposals become backlog items; Scout does not update the backlog automatically
 
@@ -360,6 +364,15 @@ Content SEO opportunity report:
 - `python3 automation/pipeline.py content-seo-opportunities --json` -> build a no-write page opportunity artifact from `content/gsc/latest-gsc-agent-signals.json`, `content_index.json`, page structure, and `sitemap.xml`
 - output lives in `automation/reports/content-seo-opportunities.json` and `automation/reports/content-seo-opportunities.md`
 - use it as planning context for future workers; it is not permission to edit high-risk pages or generated research HTML directly
+
+Bing weekly report:
+
+- `python3 automation/pipeline.py bing-report` -> fetch Bing Webmaster weekly query/page/page-query data
+- GitHub workflow: `.github/workflows/bing-weekly.yml`
+- required secrets: `BING_WEBMASTER_API_KEY`, `BING_SITE_URL`
+- optional env knobs: `BING_ROWS`, `BING_PAIR_PAGES`
+- output lives in `content/bing/latest-bing-report.md` and `content/bing/latest-bing-agent-signals.json`
+- use Bing as an additional search signal; compare with GSC and site memory before proposing content changes
 
 Content voice audit:
 

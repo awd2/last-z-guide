@@ -358,6 +358,11 @@ def cmd_content_seo_opportunities(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_bing_report() -> int:
+    print("\n== Bing Weekly Report ==", flush=True)
+    return subprocess.run([sys.executable, str(ROOT / "scripts" / "bing_weekly.py")], cwd=ROOT).returncode
+
+
 def cmd_content_voice(top: int, fail_on_high_risk: bool, as_json: bool) -> int:
     command = [
         sys.executable,
@@ -1537,6 +1542,11 @@ def build_parser() -> argparse.ArgumentParser:
     content_seo_parser.add_argument("--no-write", action="store_true", help="Build and print only; do not write artifacts.")
     content_seo_parser.add_argument("--json", action="store_true", help="Print the report summary as JSON.")
 
+    subparsers.add_parser(
+        "bing-report",
+        help="Fetch Bing Webmaster weekly report artifacts for humans and future agents.",
+    )
+
     content_voice_parser = subparsers.add_parser(
         "content-voice",
         help="Run a no-write audit for generic or low-utility public content signals.",
@@ -1635,6 +1645,8 @@ def main() -> int:
             args.no_write,
             args.json,
         )
+    if args.command == "bing-report":
+        return cmd_bing_report()
     if args.command == "content-voice":
         return cmd_content_voice(args.top, args.fail_on_high_risk, args.json)
 

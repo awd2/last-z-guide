@@ -116,6 +116,7 @@ Every worker must treat these files as source-of-truth context:
 Analytics-aware workers may also use:
 
 - `content/gsc/latest-gsc-agent-signals.json`
+- `content/bing/latest-bing-agent-signals.json`
 - GA4 / LLM referral reports when supplied by a human operator
 
 Existing run-state workers must use:
@@ -171,7 +172,7 @@ The first no-write implementation lives at:
 python3 automation/workers/scout.py --json
 ```
 
-It reads `content/gsc/latest-gsc-agent-signals.json` by default and writes:
+It reads `content/gsc/latest-gsc-agent-signals.json` by default and can also read Bing signals with `--signals content/bing/latest-bing-agent-signals.json`. It writes:
 
 - `automation/reports/scout-topic-proposals.json`
 - `automation/reports/scout-topic-proposals.md`
@@ -203,6 +204,7 @@ Required:
 Use when available:
 
 - `content/gsc/latest-gsc-agent-signals.json`
+- `content/bing/latest-bing-agent-signals.json`
 - current sitemap/search-index state
 - human-supplied notes or screenshots
 
@@ -482,7 +484,7 @@ The system may prepare artifacts before approval. It must not publish autonomous
 
 The current implementation is deterministic and no-write:
 
-1. `Scout` reads `content/gsc/latest-gsc-agent-signals.json`.
+1. `Scout` reads `content/gsc/latest-gsc-agent-signals.json` by default, or Bing agent signals when explicitly passed with `--signals`.
 2. `Scout` produces `topic_proposal` records into review artifacts.
 3. `Editor` turns one proposal into an `editor_brief` artifact.
 4. `Reviewer` gates the brief for site fit, risk, context, canonical claims, and next-stage readiness.

@@ -21,6 +21,7 @@ from automation.proposal_renderer import md_list
 
 
 DEFAULT_SIGNALS_PATH = ROOT / "content" / "gsc" / "latest-gsc-agent-signals.json"
+SUPPORTED_SIGNAL_TYPES = {"gsc_weekly_agent_signals", "bing_weekly_agent_signals"}
 REPORTS_DIR = ROOT / "automation" / "reports"
 
 HUB_ROUTES = {
@@ -56,10 +57,10 @@ def local_page(value: str) -> str:
 
 def load_signals(path: Path) -> dict[str, Any]:
     if not path.exists():
-        raise FileNotFoundError(f"GSC agent signals not found: {path}")
+        raise FileNotFoundError(f"Agent signals not found: {path}")
     payload = load_json(path)
-    if payload.get("report_type") != "gsc_weekly_agent_signals":
-        raise ValueError(f"Unsupported GSC signal report type: {payload.get('report_type')}")
+    if payload.get("report_type") not in SUPPORTED_SIGNAL_TYPES:
+        raise ValueError(f"Unsupported signal report type: {payload.get('report_type')}")
     return payload
 
 
@@ -151,9 +152,10 @@ def rising_queries_for_page(signals: dict[str, Any], filename: str) -> list[dict
 
 
 def evidence_for_page(signals: dict[str, Any], page_signal: dict[str, Any], filename: str) -> list[str]:
+    source_label = "Bing" if signals.get("report_type") == "bing_weekly_agent_signals" else "GSC"
     evidence = [
         (
-            f"GSC page signal: {filename} had {page_signal.get('impressions', 0):.0f} impressions, "
+            f"{source_label} page signal: {filename} had {page_signal.get('impressions', 0):.0f} impressions, "
             f"{page_signal.get('clicks', 0):.0f} clicks, {page_signal.get('ctr', 0) * 100:.2f}% CTR, "
             f"avg position {page_signal.get('position', 0):.2f}."
         )
@@ -201,6 +203,7 @@ def proposal_for_page(
         return None
 
     query_rows = query_rows_for_page(signals, filename)
+    source_label = "Bing" if signals.get("report_type") == "bing_weekly_agent_signals" else "GSC"
     claims = protected_claims_for_page(filename)
     impressions = float(page_signal.get("impressions", 0))
     ctr = float(page_signal.get("ctr", 0))
@@ -217,7 +220,7 @@ def proposal_for_page(
         "archetype_suggestion": page.archetype,
         "target_page_or_slug": filename,
         "source_type": "analytics",
-        "source_reference": f"GSC weekly {signals.get('generated_for')}: page opportunity and query-page signals",
+        "source_reference": f"{source_label} weekly {signals.get('generated_for')}: page opportunity and query-page signals",
         "confidence": confidence_for_signal(len(query_rows), impressions),
         "priority": priority_for_signal(impressions, ctr, position),
         "risk_level": risk_for_page(page.archetype, claims, impressions),
@@ -230,7 +233,7 @@ def proposal_for_page(
         },
         "constraints": [
             "Use existing page template and navigation patterns.",
-            "Treat GSC data as a signal, not proof that a rewrite is needed.",
+            f"Treat {source_label} data as a signal, not proof that a rewrite is needed.",
             *[f"Protect canonical claim `{claim}`." for claim in claims],
             *([f"Existing backlog history for this page: {', '.join(existing)}."] if existing else []),
         ],
@@ -342,8 +345,8 @@ def build_payload(signals_path: Path, limit: int, min_impressions: int) -> dict[
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate no-write Scout topic proposals from GSC agent signals.")
-    parser.add_argument("--signals", default=str(DEFAULT_SIGNALS_PATH), help="Path to latest-gsc-agent-signals.json.")
+    parser = argparse.ArgumentParser(description="Generate no-write Scout topic proposals from search performance agent signals.")
+    parser.add_argument("--signals", default=str(DEFAULT_SIGNALS_PATH), help="Path to GSC or Bing agent signals JSON.")
     parser.add_argument("--output-dir", default=str(REPORTS_DIR), help="Directory for Scout proposal artifacts.")
     parser.add_argument("--basename", default="scout-topic-proposals", help="Output basename without extension.")
     parser.add_argument("--limit", type=int, default=8, help="Maximum proposals to render.")

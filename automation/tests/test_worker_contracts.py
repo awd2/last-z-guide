@@ -11,6 +11,7 @@ from pathlib import Path
 
 from automation.io import load_json, write_json
 from automation.workers import editor, intake, intake_to_run, llm_adapter, reviewer, run_chain, scout, write_manifest
+from scripts import bing_weekly
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -70,6 +71,12 @@ def fixture_signals() -> dict:
             ]
         },
     }
+
+
+def fixture_bing_signals() -> dict:
+    payload = fixture_signals()
+    payload["report_type"] = "bing_weekly_agent_signals"
+    return payload
 
 
 class WorkerContractTests(unittest.TestCase):
@@ -155,6 +162,23 @@ class WorkerContractTests(unittest.TestCase):
             self.assertIn(review["verdict"], {"pass", "needs_human_review", "revise", "reject"})
             self.assertIn("python3 automation/pipeline.py checks --strict", review["required_checks"])
             self.assertTrue(review["human_approval_required"])
+
+    def test_scout_accepts_bing_agent_signal_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            signals_path = Path(tmp) / "bing-signals.json"
+            write_json(signals_path, fixture_bing_signals())
+
+            scout_payload = scout.build_payload(signals_path, limit=4, min_impressions=200)
+            self.assertEqual(scout_payload["report_type"], "scout_topic_proposals")
+            self.assertGreaterEqual(scout_payload["proposal_count"], 1)
+            proposal = scout_payload["proposals"][0]
+            self.assertIn("Bing weekly", proposal["source_reference"])
+            self.assertTrue(any("Treat Bing data as a signal" in item for item in proposal["constraints"]))
+
+    def test_bing_date_and_local_page_helpers(self) -> None:
+        self.assertEqual(bing_weekly.parse_bing_date("/Date(1316156400000-0700)/"), "2011-09-16")
+        self.assertEqual(bing_weekly.local_page_path("https://lastzguides.com/resources.html"), "resources.html")
+        self.assertEqual(bing_weekly.local_page_path("https://lastzguides.com/"), "index.html")
 
     def test_run_chain_writes_only_requested_artifacts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
