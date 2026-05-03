@@ -115,6 +115,7 @@ python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-b
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -128,6 +129,7 @@ python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by 
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
@@ -160,12 +162,14 @@ Automation artifacts live in:
 - `automation/reports/content-seo-opportunities.json`
 - `automation/reports/llm-scout-review.md`
 - `automation/reports/llm-scout-review-result.json`
+- `automation/reports/llm-editor-brief-<topic_id>.md`
+- `automation/reports/llm-editor-brief-<topic_id>-result.json`
 
 Future LLM worker contracts live in:
 
 - `automation/workers/README.md`
 
-That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout`, `Editor`, and `Reviewer` steps plus a chain runner, intake gate, run-plan proposal step, and LLM Scout review wrapper that turn weekly GSC/Bing agent signals into reviewable topic proposals, content briefs, readiness verdicts, explicit human-gated intake artifacts, draft run-plan proposals, and JSON-only LLM opportunity reviews.
+That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout`, `Editor`, and `Reviewer` steps plus a chain runner, intake gate, run-plan proposal step, LLM Scout review wrapper, and LLM Editor planning wrapper that turn weekly GSC/Bing agent signals into reviewable topic proposals, content briefs, readiness verdicts, explicit human-gated intake artifacts, draft run-plan proposals, JSON-only LLM opportunity reviews, and no-copy planning briefs.
 
 ## GSC Analytics Automation
 
@@ -204,6 +208,14 @@ python3 automation/pipeline.py llm-scout --provider openai --json
 ```
 
 This writes `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`. It is review context only; it does not edit content, backlog, manifests, PRs, or production state.
+
+For a no-write LLM Editor planning brief from one selected Scout opportunity, run:
+
+```bash
+python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
+```
+
+This writes `automation/reports/llm-editor-brief-<topic_id>-request.json`, `automation/reports/llm-editor-brief-<topic_id>-result.json`, and `automation/reports/llm-editor-brief-<topic_id>.md`. It is a planning brief only; it must not contain final user-visible page copy or applyable patch specs.
 
 ## Notes
 

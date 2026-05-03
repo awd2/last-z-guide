@@ -11,7 +11,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from automation.io import load_json, write_json
-from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_scout, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_scout, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -100,6 +100,51 @@ def fixture_llm_scout_response() -> dict:
             "rejected_or_monitor": [],
             "global_risks": ["Analytics can identify opportunity, but it must not force a broad rewrite."],
             "next_actions": ["Review the selected opportunity with the existing worker-chain command."],
+        }
+    }
+
+
+def fixture_llm_editor_response() -> dict:
+    return {
+        "response_json": {
+            "brief_summary": "Plan a narrow codes.html first-screen and route review without writing final page copy.",
+            "target_page_or_slug": "codes.html",
+            "page_role": "cornerstone-guide",
+            "primary_user_job": "Help players redeem Last Z codes through the correct Gift Center route.",
+            "first_screen_plan": "Clarify the redeem path and UID/mailbox expectations without merging setup or troubleshooting pages.",
+            "section_plan": [
+                {
+                    "section": "Quick Answer",
+                    "action": "Review whether the first screen directly answers active-code and Gift Center intent.",
+                    "reason": "The page is the Economy hub for code redemption.",
+                }
+            ],
+            "internal_link_plan": [
+                {
+                    "page": "gift-center-uid.html",
+                    "role": "downstream",
+                    "reason": "Route UID/setup details to the dedicated support page.",
+                }
+            ],
+            "protected_claims": ["gift-center-only-redeem-flow"],
+            "do_not_change": ["Do not absorb redeem-code-not-working.html troubleshooting into codes.html."],
+            "owner_questions": ["Has the prior Gift Center CTR pass already covered this first-screen issue?"],
+            "required_context_before_patch": [
+                "AGENTS.md",
+                "automation/memory/site_style_guide.md",
+                "automation/memory/page_archetypes.md",
+                "automation/memory/seo_llm_optimization.md",
+                "automation/memory/canonical_claims.json",
+                "automation/memory/content_index.json",
+                "automation/memory/entities.json",
+                "automation/memory/release_checklist.md",
+                "codes.html",
+            ],
+            "acceptance_checks": [
+                "python3 scripts/prepublish_check.py",
+                "python3 automation/pipeline.py checks --strict",
+            ],
+            "next_step": "Run deterministic Reviewer before any patch plan.",
         }
     }
 
@@ -250,6 +295,45 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "llm-scout-fixture-request.json").exists())
             self.assertTrue((tmp_path / "llm-scout-fixture-result.json").exists())
             self.assertTrue((tmp_path / "llm-scout-fixture.md").exists())
+
+    def test_llm_editor_builds_brief_from_llm_scout_fixture(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+
+            scout_code, scout_payload = llm_scout.run_llm_scout(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                basename="llm-scout-fixture",
+                provider="fixture",
+                fixture_path=scout_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(scout_code, 0)
+
+            editor_code, editor_payload = llm_editor.run_llm_editor(
+                scout_result_path=Path(scout_payload["result_path"]),
+                scout_request_path=Path(scout_payload["request_path"]),
+                topic_id="codes-gsc-opportunity",
+                output_dir=tmp_path,
+                basename="llm-editor-fixture",
+                provider="fixture",
+                fixture_path=editor_fixture_path,
+            )
+            self.assertEqual(editor_code, 0)
+            self.assertEqual(editor_payload["report_type"], "llm_editor_brief")
+            self.assertEqual(editor_payload["adapter_result"]["state"], "completed")
+            self.assertEqual(editor_payload["target_page_or_slug"], "codes.html")
+            self.assertEqual(editor_payload["adapter_result"]["response_json"]["page_role"], "cornerstone-guide")
+            self.assertTrue((tmp_path / "llm-editor-fixture-request.json").exists())
+            self.assertTrue((tmp_path / "llm-editor-fixture-result.json").exists())
+            self.assertTrue((tmp_path / "llm-editor-fixture.md").exists())
 
     def test_scout_editor_reviewer_contract_shapes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
