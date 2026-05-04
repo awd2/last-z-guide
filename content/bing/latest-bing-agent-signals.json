@@ -14,10 +14,10 @@
   "page_opportunities": [
     {
       "avg_click_position": -1.0,
-      "clicks": 23.0,
-      "ctr": 0.023541,
-      "date": "2026-04-24",
-      "impressions": 977.0,
+      "clicks": 32.0,
+      "ctr": 0.027658,
+      "date": "2026-05-01",
+      "impressions": 1157.0,
       "local_page": "index.html",
       "page": "https://lastzguides.com/",
       "position": 6.0,
@@ -25,35 +25,35 @@
     },
     {
       "avg_click_position": -1.0,
-      "clicks": 13.0,
-      "ctr": 0.075145,
-      "date": "2026-04-24",
-      "impressions": 173.0,
-      "local_page": "heroes.html",
-      "page": "https://lastzguides.com/heroes.html",
+      "clicks": 16.0,
+      "ctr": 0.089888,
+      "date": "2026-05-01",
+      "impressions": 178.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
       "position": 4.0,
+      "reason": "Bing page has high impressions with below-median CTR"
+    },
+    {
+      "avg_click_position": -1.0,
+      "clicks": 10.0,
+      "ctr": 0.08547,
+      "date": "2026-05-01",
+      "impressions": 117.0,
+      "local_page": "formations.html",
+      "page": "https://lastzguides.com/formations.html",
+      "position": 5.0,
       "reason": "Bing page has high impressions with below-median CTR"
     },
     {
       "avg_click_position": -1.0,
       "clicks": 9.0,
-      "ctr": 0.065693,
-      "date": "2026-04-24",
-      "impressions": 137.0,
-      "local_page": "alliance-duel.html",
-      "page": "https://lastzguides.com/alliance-duel.html",
+      "ctr": 0.084906,
+      "date": "2026-05-01",
+      "impressions": 106.0,
+      "local_page": "gear.html",
+      "page": "https://lastzguides.com/gear.html",
       "position": 4.0,
-      "reason": "Bing page has high impressions with below-median CTR"
-    },
-    {
-      "avg_click_position": -1.0,
-      "clicks": 8.0,
-      "ctr": 0.065041,
-      "date": "2026-04-24",
-      "impressions": 123.0,
-      "local_page": "canyon-clash.html",
-      "page": "https://lastzguides.com/canyon-clash.html",
-      "position": 2.0,
       "reason": "Bing page has high impressions with below-median CTR"
     }
   ],
@@ -83,16 +83,842 @@
     ],
     "quick_wins_positions_11_20": []
   },
-  "query_page_pairs": [],
+  "query_page_pairs": [
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 223.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 7.0,
+      "query": "last z"
+    },
+    {
+      "clicks": 1.0,
+      "ctr": 0.071429,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 14.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 3.0,
+      "query": "last z survival shooter guide"
+    },
+    {
+      "clicks": 7.0,
+      "ctr": 0.583333,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 12.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 1.0,
+      "query": "last z guide"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 12.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 7.0,
+      "query": "last z helper"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 10.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 8.0,
+      "query": "last z stress war"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 9.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 7.0,
+      "query": "last-z"
+    },
+    {
+      "clicks": 2.0,
+      "ctr": 0.222222,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 9.0,
+      "local_page": "heroes.html",
+      "page": "https://lastzguides.com/heroes.html",
+      "position": 5.0,
+      "query": "last z season 4"
+    },
+    {
+      "clicks": 1.0,
+      "ctr": 0.142857,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 7.0,
+      "local_page": "hq.html",
+      "page": "https://lastzguides.com/hq.html",
+      "position": 2.0,
+      "query": "last z hq upgrade requirements"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 7.0,
+      "local_page": "research.html",
+      "page": "https://lastzguides.com/research.html",
+      "position": 7.0,
+      "query": "last z guide"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 6.0,
+      "local_page": "hq.html",
+      "page": "https://lastzguides.com/hq.html",
+      "position": 3.0,
+      "query": "last z requirement for level 27 hq"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 6.0,
+      "local_page": "research.html",
+      "page": "https://lastzguides.com/research.html",
+      "position": 10.0,
+      "query": "last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 6.0,
+      "local_page": "canyon-clash.html",
+      "page": "https://lastzguides.com/canyon-clash.html",
+      "position": 1.0,
+      "query": "how the sys match opponent in canyon clash"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 5.0,
+      "local_page": "hq.html",
+      "page": "https://lastzguides.com/hq.html",
+      "position": 3.0,
+      "query": "last z headquarters upgrade requirements"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 5.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 7.0,
+      "query": "last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 5.0,
+      "query": "last z how to start a rally"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 10.0,
+      "query": "last z preparedness event guide"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 2.0,
+      "query": "last war z roses buff this week"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 7.0,
+      "query": "calendario de eventos forma\u00e7\u00e3o de herois alerta de last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "heroes.html",
+      "page": "https://lastzguides.com/heroes.html",
+      "position": 1.0,
+      "query": "who is the strongest hero in last z season 4?"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 7.0,
+      "query": "last z season 2 guide"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 4.0,
+      "query": "last war z roses buff this week"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 1.0,
+      "query": "last z preparedness event guide"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 2.0,
+      "query": "calendario de eventos forma\u00e7\u00e3o de herois alerta de last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "alliance-duel.html",
+      "page": "https://lastzguides.com/alliance-duel.html",
+      "position": 1.0,
+      "query": "last z alliance duel"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 4.0,
+      "local_page": "canyon-clash.html",
+      "page": "https://lastzguides.com/canyon-clash.html",
+      "position": 1.0,
+      "query": "last z canyon clash map"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 5.0,
+      "query": "last z survival shooter combat"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 5.0,
+      "query": "last z orange skill book uses guide"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 10.0,
+      "query": "where can i buy exclusive evelyn hero equipment in last z survival shooter"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 8.0,
+      "query": "lastz survival badges use"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 3.0,
+      "query": "xlast z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 4.0,
+      "query": "unable to loot zent vault in last z \"no more resources can be looted today\" troubleshoot"
+    },
+    {
+      "clicks": 1.0,
+      "ctr": 0.333333,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "hq.html",
+      "page": "https://lastzguides.com/hq.html",
+      "position": 1.0,
+      "query": "30-35 hq leveling last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "hq.html",
+      "page": "https://lastzguides.com/hq.html",
+      "position": 8.0,
+      "query": "most important buildings to upgrade in last z survival"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "hq.html",
+      "page": "https://lastzguides.com/hq.html",
+      "position": 9.0,
+      "query": "last z sala della gloria"
+    },
+    {
+      "clicks": 3.0,
+      "ctr": 1.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "research.html",
+      "page": "https://lastzguides.com/research.html",
+      "position": 4.0,
+      "query": "last z survival shooter lab research priority"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "heroes.html",
+      "page": "https://lastzguides.com/heroes.html",
+      "position": 7.0,
+      "query": "last z season 4 guide"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "heroes.html",
+      "page": "https://lastzguides.com/heroes.html",
+      "position": 1.0,
+      "query": "last z season 4 heroes"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "heroes.html",
+      "page": "https://lastzguides.com/heroes.html",
+      "position": 4.0,
+      "query": "last z-season 4 guide (s4)"
+    },
+    {
+      "clicks": 1.0,
+      "ctr": 0.333333,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 3.0,
+      "query": "full preparedness last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 4.0,
+      "query": "last z vs"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 2.0,
+      "query": "lista de alerta total do last z para pontuar calendario de eventos"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 5.0,
+      "query": "lista prepara\u00e7\u00e3o total last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "formations.html",
+      "page": "https://lastzguides.com/formations.html",
+      "position": 10.0,
+      "query": "lastz season 4 guide"
+    },
+    {
+      "clicks": 1.0,
+      "ctr": 0.333333,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "alliance-duel.html",
+      "page": "https://lastzguides.com/alliance-duel.html",
+      "position": 4.0,
+      "query": "lastz vs days"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "alliance-duel.html",
+      "page": "https://lastzguides.com/alliance-duel.html",
+      "position": 3.0,
+      "query": "alliance vs duel"
+    },
+    {
+      "clicks": 1.0,
+      "ctr": 0.333333,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "canyon-clash.html",
+      "page": "https://lastzguides.com/canyon-clash.html",
+      "position": 2.0,
+      "query": "canyon clash map"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "canyon-clash.html",
+      "page": "https://lastzguides.com/canyon-clash.html",
+      "position": 1.0,
+      "query": "last z canyon clash matching mechanism"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "daily.html",
+      "page": "https://lastzguides.com/daily.html",
+      "position": 8.0,
+      "query": "lista prepara\u00e7\u00e3o total last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 3.0,
+      "local_page": "vehicle-modification-cost.html",
+      "page": "https://lastzguides.com/vehicle-modification-cost.html",
+      "position": 7.0,
+      "query": "destroyer last z image"
+    },
+    {
+      "clicks": 1.0,
+      "ctr": 0.5,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 1.0,
+      "query": "last z strategy"
+    },
+    {
+      "clicks": 1.0,
+      "ctr": 0.5,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 4.0,
+      "query": "last z season 4 combat mastery guide reddit"
+    },
+    {
+      "clicks": 1.0,
+      "ctr": 0.5,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 4.0,
+      "query": "last z march queues"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 5.0,
+      "query": "last z survival"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 4.0,
+      "query": "last z reddit"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 9.0,
+      "query": "last z survival shooter comment ameliorer la puissance de mon \u00e9qui^pe"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 7.0,
+      "query": "last z survival shooter season 2 guide"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 8.0,
+      "query": "o que importante evoluir last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 6.0,
+      "query": "last z mastery cognitive boost"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 1.0,
+      "query": "last z growth strategy"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 4.0,
+      "query": "last z how to get s hero"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 6.0,
+      "query": "last z season 2"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 6.0,
+      "query": "last war z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 4.0,
+      "query": "last z survival shooter research guide reddit"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 6.0,
+      "query": "last z weekly roses 2026 - alliance buffs & schedule"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 3.0,
+      "query": "last z alliance centre 30 rss requirements"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 4.0,
+      "query": "last z season 2 guides"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 4.0,
+      "query": "last z war"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 7.0,
+      "query": "liliana last z"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 5.0,
+      "query": "last z score im schluchtenkampf erh\u00f6hen"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 7.0,
+      "query": "last z tools"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 5.0,
+      "query": "last z  survival shooter stagione 3 guida reddit"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 8.0,
+      "query": "last z vip zentrum"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 8.0,
+      "query": "last z season 2 heroes"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 8.0,
+      "query": "is upgrading the bookstore in last z survival shooter important"
+    },
+    {
+      "clicks": 0.0,
+      "ctr": 0.0,
+      "date": "2026-05-01",
+      "date_scope": "latest_week",
+      "impressions": 2.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 2.0,
+      "query": "last z important tips and tricks"
+    }
+  ],
   "report_type": "bing_weekly_agent_signals",
   "rows_limit": 250,
   "schema_version": 1,
   "summary": {
-    "ctr_median_pages_min_100_impressions": 0.076366,
+    "ctr_median_pages_min_100_impressions": 0.089888,
     "ctr_median_queries_min_25_impressions": 0.002967,
     "fetch_errors": [],
-    "page_rows": 20,
-    "query_page_rows": 0,
+    "page_rows": 22,
+    "query_page_rows": 675,
     "query_rows": 100
   },
   "trend_signals": {
@@ -130,8 +956,8 @@
         "ctr": 0.0,
         "date": "2026-05-01",
         "impressions": 8.0,
-        "position": 4.0,
-        "query": "calendario de eventos forma\u00e7\u00e3o de herois alerta de last z"
+        "position": 3.0,
+        "query": "last war z roses buff this week"
       },
       {
         "avg_click_position": -1.0,
@@ -139,8 +965,8 @@
         "ctr": 0.0,
         "date": "2026-05-01",
         "impressions": 8.0,
-        "position": 3.0,
-        "query": "last war z roses buff this week"
+        "position": 4.0,
+        "query": "calendario de eventos forma\u00e7\u00e3o de herois alerta de last z"
       },
       {
         "avg_click_position": -1.0,
@@ -175,15 +1001,6 @@
         "ctr": 0.25,
         "date": "2026-05-01",
         "impressions": 4.0,
-        "position": 5.0,
-        "query": "30-35 hq leveling last z"
-      },
-      {
-        "avg_click_position": -1.0,
-        "clicks": 1.0,
-        "ctr": 0.25,
-        "date": "2026-05-01",
-        "impressions": 4.0,
         "position": 4.0,
         "query": "last z steel"
       },
@@ -193,8 +1010,8 @@
         "ctr": 0.25,
         "date": "2026-05-01",
         "impressions": 4.0,
-        "position": 5.0,
-        "query": "last-z hero alliance duel"
+        "position": 3.0,
+        "query": "last z march queues"
       },
       {
         "avg_click_position": -1.0,
@@ -202,8 +1019,17 @@
         "ctr": 0.25,
         "date": "2026-05-01",
         "impressions": 4.0,
-        "position": 3.0,
-        "query": "last z march queues"
+        "position": 5.0,
+        "query": "30-35 hq leveling last z"
+      },
+      {
+        "avg_click_position": -1.0,
+        "clicks": 1.0,
+        "ctr": 0.25,
+        "date": "2026-05-01",
+        "impressions": 4.0,
+        "position": 5.0,
+        "query": "last-z hero alliance duel"
       },
       {
         "avg_click_position": -1.0,
@@ -220,8 +1046,8 @@
         "ctr": 0.333333,
         "date": "2026-05-01",
         "impressions": 3.0,
-        "position": 5.0,
-        "query": "last z thursday tasks"
+        "position": 3.0,
+        "query": "last z daily upgrades"
       },
       {
         "avg_click_position": -1.0,
@@ -238,8 +1064,8 @@
         "ctr": 0.333333,
         "date": "2026-05-01",
         "impressions": 3.0,
-        "position": 3.0,
-        "query": "last z daily upgrades"
+        "position": 7.0,
+        "query": "last z survival day 1 full preparedness guide"
       },
       {
         "avg_click_position": -1.0,
@@ -247,8 +1073,8 @@
         "ctr": 0.333333,
         "date": "2026-05-01",
         "impressions": 3.0,
-        "position": 7.0,
-        "query": "last z survival day 1 full preparedness guide"
+        "position": 3.0,
+        "query": "when the peace shield research open in last zombie shooter"
       },
       {
         "avg_click_position": -1.0,
@@ -265,8 +1091,8 @@
         "ctr": 0.333333,
         "date": "2026-05-01",
         "impressions": 3.0,
-        "position": 3.0,
-        "query": "when the peace shield research open in last zombie shooter"
+        "position": 5.0,
+        "query": "last z thursday tasks"
       },
       {
         "avg_click_position": -1.0,
@@ -283,8 +1109,8 @@
         "ctr": 0.5,
         "date": "2026-05-01",
         "impressions": 2.0,
-        "position": 5.0,
-        "query": "last z best defense"
+        "position": 2.0,
+        "query": "last z upgrade hq"
       },
       {
         "avg_click_position": -1.0,
@@ -301,8 +1127,8 @@
         "ctr": 0.5,
         "date": "2026-05-01",
         "impressions": 2.0,
-        "position": 2.0,
-        "query": "last z upgrade hq"
+        "position": 5.0,
+        "query": "last z best defense"
       },
       {
         "avg_click_position": -1.0,
@@ -320,7 +1146,7 @@
         "date": "2026-05-01",
         "impressions": 2.0,
         "position": 2.0,
-        "query": "last z hot events order"
+        "query": "list of heroes last z"
       }
     ],
     "rising_queries_latest_vs_previous_week": [
