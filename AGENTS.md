@@ -427,6 +427,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider o
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -442,6 +443,7 @@ python3 automation/workers/llm_adapter.py --request <request.json> --provider op
 python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
+python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
 python3 automation/reports/content_seo_opportunities.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
@@ -453,6 +455,8 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 `llm-editor` is the second live LLM worker wrapper. It creates a planning brief from one selected LLM Scout opportunity and deterministic Editor context. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
 
 `llm-reviewer` is the third live LLM worker wrapper. It reviews one LLM Editor planning brief for duplicate intent, cluster role fit, canonical claims, template safety, owner questions, and readiness. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
+
+`llm-worker-chain` runs the no-write live LLM Scout -> Editor -> Reviewer sequence and writes one summary artifact. It must preserve each stage's fail-closed behavior and must not write content, backlog entries, manifests, PRs, or production state.
 
 Machine-readable snapshots exist for:
 

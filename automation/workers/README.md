@@ -94,6 +94,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider o
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 ```
 
 It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter must not edit content, backlog, manifests, or production state.
@@ -106,6 +107,7 @@ python3 automation/workers/llm_adapter.py --request <request.json> --provider op
 python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
+python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
 ```
 
 `llm-scout` is the first live LLM worker wrapper. It builds deterministic Scout proposals from the latest GSC/Bing agent signals, sends a compact JSON-only review request through `llm_adapter`, and writes:
@@ -131,6 +133,19 @@ It must not generate final public page copy, patch specs, backlog entries, manif
 - `automation/reports/llm-reviewer-gate-<topic_id>.md`
 
 It checks duplicate intent, cluster role fit, canonical claims, template safety, owner questions, and readiness. It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state. High-risk cornerstone/home pages cannot receive a final content approval from this worker alone; owner approval remains required.
+
+`llm-worker-chain` runs the no-write live LLM sequence in one command:
+
+1. `llm-scout`
+2. `llm-editor`
+3. `llm-reviewer`
+
+It writes:
+
+- `automation/reports/llm-worker-chain-<topic_id>.json`
+- `automation/reports/llm-worker-chain-<topic_id>.md`
+
+The chain summary references each stage's request/result/markdown artifacts. If any stage fails or is blocked, the chain writes a blocked summary and stops before later stages. It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state.
 
 ## Shared Inputs
 
@@ -521,9 +536,10 @@ The current implementation is deterministic and no-write:
 3. `llm-scout` can review deterministic GSC/Bing proposals through the fail-closed LLM adapter and produce JSON/markdown opportunity review artifacts.
 4. `llm-editor` can turn one selected LLM Scout opportunity into a no-copy planning brief through the fail-closed LLM adapter.
 5. `llm-reviewer` can gate one LLM Editor planning brief for duplicate intent, cluster fit, canonical claims, template safety, owner questions, and readiness.
-6. `Editor` turns one proposal into an `editor_brief` artifact.
-7. `Reviewer` gates the brief for site fit, risk, context, canonical claims, and next-stage readiness.
-8. Operators decide which reviewed proposals become backlog items or patch-plan work.
-9. An approved run-plan may create a `planned` manifest through the manifest writer.
+6. `llm-worker-chain` can run the live no-write LLM Scout -> Editor -> Reviewer sequence and produce one compact owner-review summary.
+7. `Editor` turns one proposal into an `editor_brief` artifact.
+8. `Reviewer` gates the brief for site fit, risk, context, canonical claims, and next-stage readiness.
+9. Operators decide which reviewed proposals become backlog items or patch-plan work.
+10. An approved run-plan may create a `planned` manifest through the manifest writer.
 
 This keeps discovery useful without letting analytics noise become content churn.

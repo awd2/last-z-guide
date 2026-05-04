@@ -144,6 +144,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - checks duplicate intent, cluster role fit, canonical claims, template safety, owner questions, and readiness without applying changes
   - does not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state
 
+- `workers/llm_worker_chain.py`
+  - runs the no-write live LLM Scout -> Editor -> Reviewer sequence through `llm_adapter`
+  - writes one compact chain summary plus per-stage request/result/markdown artifacts
+  - fails closed when any stage is blocked or invalid
+  - does not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state
+
 - `checks/content_voice.py`
   - runs a no-write audit for generic, mass-produced, or low-utility writing signals
   - reports repeated trust boilerplate, generic phrases, long smooth paragraphs, and low specificity
@@ -228,6 +234,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider f
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice
@@ -244,6 +251,10 @@ python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
+python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
+python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
 python3 automation/reports/content_seo_opportunities.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
@@ -289,6 +300,7 @@ python3 automation/pipeline.py llm-adapter --request automation/reports/example-
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id codes-gsc-opportunity --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id codes-gsc-opportunity --provider openai --json
+python3 automation/pipeline.py llm-worker-chain --topic-id codes-gsc-opportunity --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -327,6 +339,7 @@ Lifecycle shorthand:
 - `llm-scout` -> run a no-write LLM review over deterministic Scout proposals from GSC/Bing agent signals
 - `llm-editor` -> run a no-write LLM planning brief from one selected LLM Scout opportunity
 - `llm-reviewer` -> run a no-write LLM review gate from one LLM Editor planning brief
+- `llm-worker-chain` -> run the no-write live LLM Scout -> Editor -> Reviewer sequence and write one owner-review summary
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
 - `content-voice` -> run a no-write audit for generic, mass-produced, or low-utility public content signals
@@ -411,6 +424,14 @@ LLM Reviewer gate:
 - default input uses `automation/reports/llm-editor-brief-<topic_id>-result.json` and `automation/reports/llm-editor-brief-<topic_id>-request.json`
 - output lives in `automation/reports/llm-reviewer-gate-<topic_id>-request.json`, `automation/reports/llm-reviewer-gate-<topic_id>-result.json`, and `automation/reports/llm-reviewer-gate-<topic_id>.md`
 - this is a gate artifact only; high-risk user-visible content changes still require owner approval and later proposal-only patch planning
+
+LLM worker chain:
+
+- `python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json` -> run the no-write live LLM Scout -> Editor -> Reviewer sequence
+- default input uses latest GSC/Bing agent signal files when present
+- output lives in `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md`
+- per-stage request/result/markdown artifacts are also written and referenced from the summary
+- this is an owner-review summary only; it must not write content, backlog entries, manifests, PRs, or production state
 
 Content SEO opportunity report:
 

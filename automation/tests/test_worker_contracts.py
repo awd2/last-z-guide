@@ -11,7 +11,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from automation.io import load_json, write_json
-from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_reviewer, llm_scout, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_reviewer, llm_scout, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -419,6 +419,45 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "llm-reviewer-fixture-request.json").exists())
             self.assertTrue((tmp_path / "llm-reviewer-fixture-result.json").exists())
             self.assertTrue((tmp_path / "llm-reviewer-fixture.md").exists())
+
+    def test_llm_worker_chain_runs_fixture_stages(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, fixture_llm_reviewer_response())
+
+            code, summary = llm_worker_chain.run_llm_worker_chain(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                provider="fixture",
+                topic_id="codes-gsc-opportunity",
+                basename="llm-worker-chain-fixture",
+                scout_basename="llm-worker-chain-scout-fixture",
+                editor_basename="llm-worker-chain-editor-fixture",
+                reviewer_basename="llm-worker-chain-reviewer-fixture",
+                scout_fixture_path=scout_fixture_path,
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["report_type"], "llm_worker_chain_summary")
+            self.assertEqual(summary["state"], "completed")
+            self.assertEqual(summary["source_topic_id"], "codes-gsc-opportunity")
+            self.assertEqual(summary["target_page_or_slug"], "codes.html")
+            self.assertEqual(summary["review_verdict"], "needs_human_review")
+            self.assertEqual(summary["stages"]["llm_scout"]["state"], "completed")
+            self.assertEqual(summary["stages"]["llm_editor"]["state"], "completed")
+            self.assertEqual(summary["stages"]["llm_reviewer"]["state"], "completed")
+            self.assertTrue((tmp_path / "llm-worker-chain-fixture.json").exists())
+            self.assertTrue((tmp_path / "llm-worker-chain-fixture.md").exists())
 
     def test_scout_editor_reviewer_contract_shapes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

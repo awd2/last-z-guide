@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-worker-chain-editor-codes-gsc-opportunity",
+  "worker_role": "editor",
+  "task": "Create a no-write Editor planning brief for one approved Scout opportunity.",
+  "prompt": "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. Do not write final public page copy, HTML, patch specs, or publishable text. Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, and owner approval gate. Treat analytics as signals, not proof. Return JSON only.",
+  "inputs": {
+    "source_llm_scout_result": "automation/reports/llm-worker-chain-scout-result.json",
+    "source_llm_scout_request": "automation/reports/llm-worker-chain-scout-request.json",
+    "selected_opportunity": {
+      "topic_id": "codes-gsc-opportunity",
+      "decision": "update_existing",
+      "rationale": "Strong page-level signal plus multiple low-CTR, high-impression gift-center queries indicate a real opportunity to improve match and first-screen usefulness on an existing cornerstone page. The page already has backlog history for CTR work, which makes this a good candidate for controlled refinement rather than new content.",
+      "player_value": "Helps users quickly find active redeem-code and gift-center login guidance, reducing friction for reward redemption and improving task completion.",
+      "duplication_risk": "Medium; gift-center intent can easily overlap with mailbox or rewards claims, so updates must preserve cluster separation and canonical claims.",
+      "priority": "high",
+      "risk_level": "high",
+      "next_step": "Owner review of proposed outline and claim boundaries before any content change is drafted.",
+      "claims_to_verify": [
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox",
+        "gift-center-cluster-role-separation"
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "codes-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+      "cluster": "Economy",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "codes.html",
+      "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "high",
+      "evidence": [
+        "GSC page signal: codes.html had 14781 impressions, 254 clicks, 1.72% CTR, avg position 6.55.",
+        "Low CTR query: `last z gift center` had 1548 impressions, 51 clicks, 3.29% CTR, position 7.25.",
+        "Low CTR query: `last z gift center login` had 511 impressions, 13 clicks, 2.54% CTR, position 6.04.",
+        "Low CTR query: `last-z.com gift center` had 276 impressions, 13 clicks, 4.71% CTR, position 6.25.",
+        "Rising query: `last z gift center` gained 350 impressions in the last 7-day comparison window."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
+        "cluster_owner": "Economy",
+        "expected_internal_route": [
+          "index.html",
+          "codes.html"
+        ],
+        "archetype_reason": "Existing page is `cornerstone-guide` in the `Economy` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed.",
+        "Protect canonical claim `gift-center-only-redeem-flow`.",
+        "Protect canonical claim `gift-rewards-mailbox`.",
+        "Protect canonical claim `gift-center-cluster-role-separation`.",
+        "Existing backlog history for this page: gift-center-ctr-pass:done."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ]
+    },
+    "deterministic_editor_brief": {
+      "target_page_or_slug": "codes.html",
+      "page_role": "cornerstone-guide",
+      "primary_query_family": "last z gift center",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `last z gift center` without changing `codes.html` into a different page role.",
+      "template_reference": "codes.html",
+      "required_sections": [
+        "Quick Answer",
+        "Best overall recommendation",
+        "Decision framework",
+        "Cluster route block",
+        "Related guides / FAQ"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html"
+        ],
+        "downstream": [
+          "diamond-reserve.html",
+          "events.html",
+          "f2p.html",
+          "lucky-discounter.html",
+          "start.html"
+        ],
+        "lateral": [
+          "gift-center-uid.html",
+          "redeem-code-not-working.html",
+          "resources.html"
+        ]
+      },
+      "protected_claims": [
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox"
+      ],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope.",
+        "Do not contradict canonical claim `gift-center-cluster-role-separation`.",
+        "Do not contradict canonical claim `gift-center-only-redeem-flow`.",
+        "Do not contradict canonical claim `gift-rewards-mailbox`."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "codes.html",
+        "index.html",
+        "gift-center-uid.html",
+        "redeem-code-not-working.html",
+        "resources.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on codes.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Redeem Codes (2026) — Active Codes, Gift Center Login, UID",
+        "h1": "Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+        "meta_description": "Active Last Z redeem codes, official Gift Center login, how to copy your UID, and the fastest fixes when a code does not work.",
+        "quick_answer": "How to redeem Last Z codes correctly: open the official Gift Center, copy your UID from Settings, paste the code exactly, and then collect rewards from your in-game mailbox.",
+        "data_lede": "",
+        "h2_headings": [
+          "Official Gift Center Login",
+          "Can I Redeem Last Z Codes on iPhone or Android?",
+          "How to Find Your UID in Last Z",
+          "How to Redeem Last Z Codes Step by Step",
+          "Active Last Z Codes (Verified)",
+          "Verification Protocol",
+          "Inactive Codes (Previously Active)",
+          "Important Notes"
+        ],
+        "internal_links": [
+          "about.html",
+          "contact.html",
+          "diamond-reserve.html",
+          "disclosure.html",
+          "events.html",
+          "f2p.html",
+          "gift-center-uid.html",
+          "https://lastzguides.com/codes.html",
+          "lucky-discounter.html",
+          "privacy.html",
+          "redeem-code-not-working.html",
+          "resources.html",
+          "start.html",
+          "terms.html"
+        ]
+      }
+    },
+    "guardrails": [
+      "No content files may be edited by this worker.",
+      "Do not generate final user-visible page copy.",
+      "Do not create a patch plan or Patch Spec.",
+      "Do not mutate backlog, manifests, PRs, or production state.",
+      "Owner approval is required before any user-visible content change."
+    ]
+  },
+  "expected_response_keys": [
+    "brief_summary",
+    "target_page_or_slug",
+    "page_role",
+    "primary_user_job",
+    "first_screen_plan",
+    "section_plan",
+    "internal_link_plan",
+    "protected_claims",
+    "do_not_change",
+    "owner_questions",
+    "required_context_before_patch",
+    "acceptance_checks",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "brief_summary": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Short no-write summary of the recommended content planning direction."
+      },
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "primary_user_job": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "first_screen_plan": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Planning guidance for the first screen. Do not write final public copy."
+      },
+      "section_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "section": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "action": {
+              "type": "string",
+              "maxLength": 350
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 350
+            }
+          },
+          "required": [
+            "section",
+            "action",
+            "reason"
+          ]
+        }
+      },
+      "internal_link_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "page": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "upstream",
+                "downstream",
+                "lateral"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 300
+            }
+          },
+          "required": [
+            "page",
+            "role",
+            "reason"
+          ]
+        }
+      },
+      "protected_claims": {
+        "type": "array",
+        "maxItems": 12,
+        "items": {
+          "type": "string",
+          "maxLength": 160
+        }
+      },
+      "do_not_change": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_patch": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "acceptance_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 350
+      }
+    },
+    "required": [
+      "brief_summary",
+      "target_page_or_slug",
+      "page_role",
+      "primary_user_job",
+      "first_screen_plan",
+      "section_plan",
+      "internal_link_plan",
+      "protected_claims",
+      "do_not_change",
+      "owner_questions",
+      "required_context_before_patch",
+      "acceptance_checks",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}

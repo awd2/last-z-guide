@@ -443,6 +443,59 @@ def cmd_llm_reviewer(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_worker_chain(
+    signals: list[str] | None,
+    topic_id: str | None,
+    provider: str,
+    output_dir: str | None,
+    basename: str | None,
+    scout_basename: str | None,
+    editor_basename: str | None,
+    reviewer_basename: str | None,
+    scout_fixture: str | None,
+    editor_fixture: str | None,
+    reviewer_fixture: str | None,
+    limit: int,
+    min_impressions: int,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_worker_chain.py"),
+        "--provider",
+        provider,
+        "--limit",
+        str(limit),
+        "--min-impressions",
+        str(min_impressions),
+    ]
+    for signal in signals or []:
+        command.extend(["--signals", signal])
+    if topic_id:
+        command.extend(["--topic-id", topic_id])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if scout_basename:
+        command.extend(["--scout-basename", scout_basename])
+    if editor_basename:
+        command.extend(["--editor-basename", editor_basename])
+    if reviewer_basename:
+        command.extend(["--reviewer-basename", reviewer_basename])
+    if scout_fixture:
+        command.extend(["--scout-fixture", scout_fixture])
+    if editor_fixture:
+        command.extend(["--editor-fixture", editor_fixture])
+    if reviewer_fixture:
+        command.extend(["--reviewer-fixture", reviewer_fixture])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Worker Chain ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_content_seo_opportunities(
     json_output: str | None,
     markdown_output: str | None,
@@ -1701,6 +1754,34 @@ def build_parser() -> argparse.ArgumentParser:
     llm_reviewer_parser.add_argument("--basename", help="Output basename without extension.")
     llm_reviewer_parser.add_argument("--json", action="store_true", help="Print the LLM Reviewer summary as JSON.")
 
+    llm_worker_chain_parser = subparsers.add_parser(
+        "llm-worker-chain",
+        help="Run the no-write live LLM Scout -> Editor -> Reviewer chain.",
+    )
+    llm_worker_chain_parser.add_argument(
+        "--signals",
+        action="append",
+        help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once.",
+    )
+    llm_worker_chain_parser.add_argument("--topic-id", help="Selected LLM Scout topic_id. Defaults to the first selected opportunity.")
+    llm_worker_chain_parser.add_argument(
+        "--provider",
+        default="disabled",
+        choices=["disabled", "fixture", "openai"],
+        help="Provider to use through llm_adapter for each LLM stage. Defaults to disabled/fail-closed.",
+    )
+    llm_worker_chain_parser.add_argument("--output-dir", help="Directory for LLM worker chain artifacts.")
+    llm_worker_chain_parser.add_argument("--basename", help="Chain summary basename without extension.")
+    llm_worker_chain_parser.add_argument("--scout-basename", help="LLM Scout output basename without extension.")
+    llm_worker_chain_parser.add_argument("--editor-basename", help="LLM Editor output basename without extension.")
+    llm_worker_chain_parser.add_argument("--reviewer-basename", help="LLM Reviewer output basename without extension.")
+    llm_worker_chain_parser.add_argument("--scout-fixture", help="Fixture response JSON for the Scout stage.")
+    llm_worker_chain_parser.add_argument("--editor-fixture", help="Fixture response JSON for the Editor stage.")
+    llm_worker_chain_parser.add_argument("--reviewer-fixture", help="Fixture response JSON for the Reviewer stage.")
+    llm_worker_chain_parser.add_argument("--limit", type=int, default=8, help="Maximum deterministic Scout proposals to review.")
+    llm_worker_chain_parser.add_argument("--min-impressions", type=int, default=200, help="Minimum page impressions for Scout proposals.")
+    llm_worker_chain_parser.add_argument("--json", action="store_true", help="Print the LLM worker chain summary as JSON.")
+
     content_seo_parser = subparsers.add_parser(
         "content-seo-opportunities",
         help="Build a no-write SEO/LLM content opportunity report.",
@@ -1837,6 +1918,23 @@ def main() -> int:
             args.fixture,
             args.output_dir,
             args.basename,
+            args.json,
+        )
+    if args.command == "llm-worker-chain":
+        return cmd_llm_worker_chain(
+            args.signals,
+            args.topic_id,
+            args.provider,
+            args.output_dir,
+            args.basename,
+            args.scout_basename,
+            args.editor_basename,
+            args.reviewer_basename,
+            args.scout_fixture,
+            args.editor_fixture,
+            args.reviewer_fixture,
+            args.limit,
+            args.min_impressions,
             args.json,
         )
     if args.command == "content-seo-opportunities":

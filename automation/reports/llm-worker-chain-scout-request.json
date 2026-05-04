@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-worker-chain-scout",
+  "worker_role": "scout",
+  "task": "Review deterministic Scout topic proposals and select only opportunities worth human review.",
+  "prompt": "Act as the LLM Scout reviewer for lastzguides.com. Use the deterministic proposals as signals, not proof. Prefer updates to existing pages unless there is a clearly distinct player job. Protect current templates, cluster roles, canonical claims, SEO/LLM search eligibility, and human approval gates. Reject thin, duplicate, speculative, or analytics-only ideas. Return JSON only.",
+  "inputs": {
+    "source_signal_files": [
+      "content/gsc/latest-gsc-agent-signals.json",
+      "content/bing/latest-bing-agent-signals.json"
+    ],
+    "proposal_count": 8,
+    "proposals": [
+      {
+        "topic_id": "alliance-duel-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+        "cluster": "Events",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "event-guide",
+        "target_page_or_slug": "alliance-duel.html",
+        "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "medium",
+        "evidence": [
+          "GSC page signal: alliance-duel.html had 7872 impressions, 403 clicks, 5.12% CTR, avg position 6.22."
+        ],
+        "site_fit": {
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vs schedule` searchers.",
+          "cluster_owner": "Events",
+          "expected_internal_route": [
+            "index.html",
+            "events.html",
+            "alliance-duel.html"
+          ],
+          "archetype_reason": "Existing page is `event-guide` in the `Events` cluster; Scout should prefer updating the existing page before proposing new content."
+        },
+        "constraints": [
+          "Use existing page template and navigation patterns.",
+          "Treat GSC data as a signal, not proof that a rewrite is needed."
+        ],
+        "reject_if": [
+          "The query intent is already better served by another canonical page.",
+          "The proposed change would blur cluster role separation.",
+          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      },
+      {
+        "topic_id": "codes-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+        "cluster": "Economy",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "codes.html",
+        "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "GSC page signal: codes.html had 14781 impressions, 254 clicks, 1.72% CTR, avg position 6.55.",
+          "Low CTR query: `last z gift center` had 1548 impressions, 51 clicks, 3.29% CTR, position 7.25.",
+          "Low CTR query: `last z gift center login` had 511 impressions, 13 clicks, 2.54% CTR, position 6.04.",
+          "Low CTR query: `last-z.com gift center` had 276 impressions, 13 clicks, 4.71% CTR, position 6.25.",
+          "Rising query: `last z gift center` gained 350 impressions in the last 7-day comparison window."
+        ],
+        "site_fit": {
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
+          "cluster_owner": "Economy",
+          "expected_internal_route": [
+            "index.html",
+            "codes.html"
+          ],
+          "archetype_reason": "Existing page is `cornerstone-guide` in the `Economy` cluster; Scout should prefer updating the existing page before proposing new content."
+        },
+        "constraints": [
+          "Use existing page template and navigation patterns.",
+          "Treat GSC data as a signal, not proof that a rewrite is needed.",
+          "Protect canonical claim `gift-center-only-redeem-flow`.",
+          "Protect canonical claim `gift-rewards-mailbox`.",
+          "Protect canonical claim `gift-center-cluster-role-separation`.",
+          "Existing backlog history for this page: gift-center-ctr-pass:done."
+        ],
+        "reject_if": [
+          "The query intent is already better served by another canonical page.",
+          "The proposed change would blur cluster role separation.",
+          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      },
+      {
+        "topic_id": "research-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
+        "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "GSC page signal: research.html had 11557 impressions, 519 clicks, 4.49% CTR, avg position 7.34.",
+          "Rising query: `urgent rescue last z` gained 13 impressions in the last 7-day comparison window."
+        ],
+        "site_fit": {
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z research guide` searchers.",
+          "cluster_owner": "Research",
+          "expected_internal_route": [
+            "index.html",
+            "research.html",
+            "research-costs.html"
+          ],
+          "archetype_reason": "Existing page is `cornerstone-guide` in the `Research` cluster; Scout should prefer updating the existing page before proposing new content."
+        },
+        "constraints": [
+          "Use existing page template and navigation patterns.",
+          "Treat GSC data as a signal, not proof that a rewrite is needed.",
+          "Protect canonical claim `research-best-mainline`.",
+          "Protect canonical claim `hero-training-cockpit-stop`.",
+          "Protect canonical claim `peace-shield-value`.",
+          "Protect canonical claim `research-atlas-role`."
+        ],
+        "reject_if": [
+          "The query intent is already better served by another canonical page.",
+          "The proposed change would blur cluster role separation.",
+          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      },
+      {
+        "topic_id": "vehicle-modification-cost-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Vehicle Modification Costs — Wrenches, Milestones, and Unlock Path",
+        "cluster": "Equipment",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cost-page",
+        "target_page_or_slug": "vehicle-modification-cost.html",
+        "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "medium",
+        "evidence": [
+          "GSC page signal: vehicle-modification-cost.html had 7946 impressions, 592 clicks, 7.45% CTR, avg position 5.64."
+        ],
+        "site_fit": {
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vehicle upgrade` searchers.",
+          "cluster_owner": "Equipment",
+          "expected_internal_route": [
+            "index.html",
+            "gear.html",
+            "vehicle-modification-cost.html"
+          ],
+          "archetype_reason": "Existing page is `cost-page` in the `Equipment` cluster; Scout should prefer updating the existing page before proposing new content."
+        },
+        "constraints": [
+          "Use existing page template and navigation patterns.",
+          "Treat GSC data as a signal, not proof that a rewrite is needed.",
+          "Protect canonical claim `alliance-recognition-utility-page`."
+        ],
+        "reject_if": [
+          "The query intent is already better served by another canonical page.",
+          "The proposed change would blur cluster role separation.",
+          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      },
+      {
+        "topic_id": "heroes-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Best Heroes Tier List — Season 4 Rankings by Faction",
+        "cluster": "Heroes",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "heroes.html",
+        "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+        "confidence": "medium",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "GSC page signal: heroes.html had 12912 impressions, 298 clicks, 2.31% CTR, avg position 7.98."
+        ],
+        "site_fit": {
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z season 4 heroes` searchers.",
+          "cluster_owner": "Heroes",
+          "expected_internal_route": [
+            "index.html",
+            "heroes.html"
+          ],
+          "archetype_reason": "Existing page is `cornerstone-guide` in the `Heroes` cluster; Scout should prefer updating the existing page before proposing new content."
+        },
+        "constraints": [
+          "Use existing page template and navigation patterns.",
+          "Treat GSC data as a signal, not proof that a rewrite is needed."
+        ],
+        "reject_if": [
+          "The query intent is already better served by another canonical page.",
+          "The proposed change would blur cluster role separation.",
+          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      },
+      {
+        "topic_id": "hq-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
+        "cluster": "Progression",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "hq.html",
+        "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+        "confidence": "medium",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "GSC page signal: hq.html had 11003 impressions, 288 clicks, 2.62% CTR, avg position 7.81."
+        ],
+        "site_fit": {
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy` searchers.",
+          "cluster_owner": "Progression",
+          "expected_internal_route": [
+            "index.html",
+            "start.html",
+            "hq.html"
+          ],
+          "archetype_reason": "Existing page is `cornerstone-guide` in the `Progression` cluster; Scout should prefer updating the existing page before proposing new content."
+        },
+        "constraints": [
+          "Use existing page template and navigation patterns.",
+          "Treat GSC data as a signal, not proof that a rewrite is needed."
+        ],
+        "reject_if": [
+          "The query intent is already better served by another canonical page.",
+          "The proposed change would blur cluster role separation.",
+          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      },
+      {
+        "topic_id": "power-guide-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Power Guide — How to Increase Combat Power Fast",
+        "cluster": "Progression",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "power-guide.html",
+        "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+        "confidence": "medium",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "GSC page signal: power-guide.html had 7797 impressions, 63 clicks, 0.81% CTR, avg position 7.69."
+        ],
+        "site_fit": {
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `Last Z Power Guide — How to Increase Combat Power Fast` searchers.",
+          "cluster_owner": "Progression",
+          "expected_internal_route": [
+            "index.html",
+            "start.html",
+            "power-guide.html"
+          ],
+          "archetype_reason": "Existing page is `cornerstone-guide` in the `Progression` cluster; Scout should prefer updating the existing page before proposing new content."
+        },
+        "constraints": [
+          "Use existing page template and navigation patterns.",
+          "Treat GSC data as a signal, not proof that a rewrite is needed."
+        ],
+        "reject_if": [
+          "The query intent is already better served by another canonical page.",
+          "The proposed change would blur cluster role separation.",
+          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      },
+      {
+        "topic_id": "tech-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Tech Guide — Best Research Path for F2P and Low Spenders",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "tech.html",
+        "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+        "confidence": "medium",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "GSC page signal: tech.html had 5489 impressions, 100 clicks, 1.82% CTR, avg position 7.19."
+        ],
+        "site_fit": {
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `Last Z Tech Guide — Best Research Path for F2P and Low Spenders` searchers.",
+          "cluster_owner": "Research",
+          "expected_internal_route": [
+            "index.html",
+            "research.html",
+            "research-costs.html",
+            "tech.html"
+          ],
+          "archetype_reason": "Existing page is `cornerstone-guide` in the `Research` cluster; Scout should prefer updating the existing page before proposing new content."
+        },
+        "constraints": [
+          "Use existing page template and navigation patterns.",
+          "Treat GSC data as a signal, not proof that a rewrite is needed.",
+          "Protect canonical claim `research-best-mainline`.",
+          "Protect canonical claim `hero-training-cockpit-stop`."
+        ],
+        "reject_if": [
+          "The query intent is already better served by another canonical page.",
+          "The proposed change would blur cluster role separation.",
+          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      }
+    ],
+    "guardrails": [
+      "No content files may be edited by Scout.",
+      "No backlog, manifest, PR, or production state may be changed by Scout.",
+      "User-visible content proposals require owner approval before any apply step.",
+      "Do not use archived Reddit/news experiments as inputs or targets.",
+      "Treat GSC and Bing as opportunity signals, not as instructions to rewrite pages."
+    ]
+  },
+  "expected_response_keys": [
+    "overview",
+    "selected_opportunities",
+    "rejected_or_monitor",
+    "global_risks",
+    "next_actions"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "overview": {
+        "type": "string",
+        "maxLength": 600,
+        "description": "Brief synthesis of the strongest content opportunities and why they matter."
+      },
+      "selected_opportunities": {
+        "type": "array",
+        "maxItems": 3,
+        "description": "Highest-value opportunities that are worth human review.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "topic_id": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "decision": {
+              "type": "string",
+              "enum": [
+                "update_existing",
+                "create_new",
+                "consolidate",
+                "monitor",
+                "reject"
+              ]
+            },
+            "rationale": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "player_value": {
+              "type": "string",
+              "maxLength": 400
+            },
+            "duplication_risk": {
+              "type": "string",
+              "maxLength": 350
+            },
+            "priority": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "risk_level": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "next_step": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "claims_to_verify": {
+              "type": "array",
+              "maxItems": 5,
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "topic_id",
+            "decision",
+            "rationale",
+            "player_value",
+            "duplication_risk",
+            "priority",
+            "risk_level",
+            "next_step",
+            "claims_to_verify"
+          ]
+        }
+      },
+      "rejected_or_monitor": {
+        "type": "array",
+        "maxItems": 5,
+        "description": "Opportunities that should not move forward now.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "topic_id": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 350
+            },
+            "future_trigger": {
+              "type": "string",
+              "maxLength": 250
+            }
+          },
+          "required": [
+            "topic_id",
+            "reason",
+            "future_trigger"
+          ]
+        }
+      },
+      "global_risks": {
+        "type": "array",
+        "maxItems": 5,
+        "items": {
+          "type": "string",
+          "maxLength": 300
+        }
+      },
+      "next_actions": {
+        "type": "array",
+        "maxItems": 5,
+        "items": {
+          "type": "string",
+          "maxLength": 300
+        }
+      }
+    },
+    "required": [
+      "overview",
+      "selected_opportunities",
+      "rejected_or_monitor",
+      "global_risks",
+      "next_actions"
+    ]
+  },
+  "max_output_tokens": 4000
+}

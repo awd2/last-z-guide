@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-04T10:41:14Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-worker-chain-editor-codes-gsc-opportunity",
+  "worker_role": "editor",
+  "request_path": "automation/reports/llm-worker-chain-editor-codes-gsc-opportunity-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "brief_summary": "Refine the existing cornerstone codes page to better answer “last z gift center” on the first screen while keeping the page in the redeem-codes cluster and preserving the official Gift Center login + UID + mailbox flow boundaries.",
+    "target_page_or_slug": "codes.html",
+    "page_role": "cornerstone-guide",
+    "primary_user_job": "Improve query-to-page match and first-screen usefulness for last z gift center searchers without changing the page into a different cluster role.",
+    "first_screen_plan": "Keep answer-first structure, but make the opening clearly orient users to the official Gift Center redeem path: state that codes are redeemed through the official Gift Center using UID, then point to the exact next action and the mailbox reward retrieval step. The first screen should reduce ambiguity for gift-center searchers, reinforce that this is the codes page, and avoid drifting into a standalone login hub or mailbox explainer.",
+    "section_plan": [
+      {
+        "section": "Quick Answer",
+        "action": "Tighten the opening to satisfy gift-center intent immediately with a concise redeem-path summary and next-step guidance.",
+        "reason": "This is the highest-impact place to improve query-page match and reduce pogo-sticking for gift-center searchers."
+      },
+      {
+        "section": "Best overall recommendation",
+        "action": "Keep the recommended path as the official redeem flow via Gift Center, with a short decision rule for when to use this page versus related guides.",
+        "reason": "Supports the task without changing page role and helps distinguish redeem flow from troubleshooting or UID lookup."
+      },
+      {
+        "section": "Decision framework",
+        "action": "Clarify when users should use the codes page, when to open the UID guide, and when to use the code-not-working guide.",
+        "reason": "Improves navigation and preserves cluster separation by routing users to the right supporting page."
+      },
+      {
+        "section": "Cluster route block",
+        "action": "Strengthen the internal route guidance so the page points to UID help, troubleshooting, and broader economy guides without duplicating those pages.",
+        "reason": "Helps the page function as a cornerstone hub while avoiding scope creep."
+      },
+      {
+        "section": "Related guides / FAQ",
+        "action": "Ensure related links and FAQ entries support the redeem-code task and adjacent help paths, not mailbox or reward-claim ownership claims.",
+        "reason": "Maintains canonical claim boundaries and gives users a clean path to downstream/lateral resources."
+      }
+    ],
+    "internal_link_plan": [
+      {
+        "page": "index.html",
+        "role": "upstream",
+        "reason": "Keep the path from the homepage into the cornerstone guide clear for users entering from site navigation."
+      },
+      {
+        "page": "gift-center-uid.html",
+        "role": "lateral",
+        "reason": "This is the closest support page for users who need to locate their UID before redeeming codes."
+      },
+      {
+        "page": "redeem-code-not-working.html",
+        "role": "lateral",
+        "reason": "This is the natural troubleshooting destination when code redemption fails."
+      },
+      {
+        "page": "resources.html",
+        "role": "lateral",
+        "reason": "Useful for broader help context and supporting references without overlapping core redeem instructions."
+      },
+      {
+        "page": "start.html",
+        "role": "downstream",
+        "reason": "Good for onboarding users who need a broader getting-started path after redeem-code intent is satisfied."
+      },
+      {
+        "page": "f2p.html",
+        "role": "downstream",
+        "reason": "Supports adjacent economy guidance for users exploring progression or resource planning after redemption."
+      },
+      {
+        "page": "events.html",
+        "role": "downstream",
+        "reason": "Relevant adjacent gameplay/loot context that may follow from redeem-code interest without duplicating the redeem flow."
+      },
+      {
+        "page": "diamond-reserve.html",
+        "role": "downstream",
+        "reason": "Broader economy adjacency that can support related resource-management intent."
+      }
+    ],
+    "protected_claims": [
+      "gift-center-cluster-role-separation",
+      "gift-center-only-redeem-flow",
+      "gift-rewards-mailbox"
+    ],
+    "do_not_change": [
+      "Do not publish or apply content changes from this brief automatically.",
+      "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+      "Do not create a new page when the Scout proposal recommends updating an existing page.",
+      "Do not use analytics signals as proof that a rewrite is required.",
+      "The query intent is already better served by another canonical page.",
+      "The proposed change would blur cluster role separation.",
+      "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope.",
+      "Do not contradict canonical claim `gift-center-cluster-role-separation`.",
+      "Do not contradict canonical claim `gift-center-only-redeem-flow`.",
+      "Do not contradict canonical claim `gift-rewards-mailbox`."
+    ],
+    "owner_questions": [
+      "Should the opening phrase explicitly include the Gift Center name in the first sentence, or keep it implied to avoid overfitting to one query variant?",
+      "Do you want the related-guides block to prioritize UID help or troubleshooting first?",
+      "Is the current quick answer phrasing already acceptable if only the surrounding framing is sharpened?",
+      "Are there any additional canonical claims tied to mailbox wording that should be reviewed before drafting copy?"
+    ],
+    "required_context_before_patch": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "codes.html",
+      "index.html",
+      "gift-center-uid.html",
+      "redeem-code-not-working.html",
+      "resources.html"
+    ],
+    "acceptance_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on codes.html"
+    ],
+    "next_step": "Owner review of the proposed first-screen framing, link boundaries, and canonical-claim guardrails before any content draft is attempted."
+  },
+  "usage": {
+    "input_tokens": 2403,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 1131,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 3534
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_0d938c512016e4320069f877c2b9248194980f605937ba42ff",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

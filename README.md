@@ -117,6 +117,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider o
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -132,6 +133,7 @@ python3 automation/workers/llm_adapter.py --request <request.json> --provider op
 python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
+python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
@@ -168,12 +170,14 @@ Automation artifacts live in:
 - `automation/reports/llm-editor-brief-<topic_id>-result.json`
 - `automation/reports/llm-reviewer-gate-<topic_id>.md`
 - `automation/reports/llm-reviewer-gate-<topic_id>-result.json`
+- `automation/reports/llm-worker-chain-<topic_id>.md`
+- `automation/reports/llm-worker-chain-<topic_id>.json`
 
 Future LLM worker contracts live in:
 
 - `automation/workers/README.md`
 
-That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout`, `Editor`, and `Reviewer` steps plus a chain runner, intake gate, run-plan proposal step, LLM Scout review wrapper, LLM Editor planning wrapper, and LLM Reviewer gate wrapper that turn weekly GSC/Bing agent signals into reviewable topic proposals, content briefs, readiness verdicts, explicit human-gated intake artifacts, draft run-plan proposals, JSON-only LLM opportunity reviews, no-copy planning briefs, and no-write review gates.
+That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout`, `Editor`, and `Reviewer` steps plus a chain runner, intake gate, run-plan proposal step, LLM Scout review wrapper, LLM Editor planning wrapper, LLM Reviewer gate wrapper, and live LLM worker-chain wrapper that turn weekly GSC/Bing agent signals into reviewable topic proposals, content briefs, readiness verdicts, explicit human-gated intake artifacts, draft run-plan proposals, JSON-only LLM opportunity reviews, no-copy planning briefs, no-write review gates, and one-command LLM chain summaries.
 
 ## GSC Analytics Automation
 
@@ -228,6 +232,14 @@ python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider ope
 ```
 
 This writes `automation/reports/llm-reviewer-gate-<topic_id>-request.json`, `automation/reports/llm-reviewer-gate-<topic_id>-result.json`, and `automation/reports/llm-reviewer-gate-<topic_id>.md`. It is a gate artifact only; it cannot approve high-risk user-visible changes without owner review.
+
+For the full no-write live LLM worker chain, run:
+
+```bash
+python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
+```
+
+This runs `llm-scout -> llm-editor -> llm-reviewer` and writes `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md` as a compact owner-review summary. It still cannot edit content, open PRs, or approve high-risk user-visible changes by itself.
 
 ## Notes
 
