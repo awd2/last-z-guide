@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_worker_chain_summary",
+  "generated_at": "2026-05-05T18:57:20Z",
+  "state": "completed",
+  "provider": "openai",
+  "source_topic_id": "research-gsc-opportunity",
+  "target_page_or_slug": "research.html",
+  "page_role": "cornerstone-guide",
+  "review_verdict": "needs_human_review",
+  "risk_level": "high",
+  "approved_next_stage": "none",
+  "owner_approval_required": true,
+  "errors": [],
+  "stages": {
+    "llm_scout": {
+      "state": "completed",
+      "provider": "openai",
+      "request_path": "automation/reports/llm-worker-chain-scout-request.json",
+      "result_path": "automation/reports/llm-worker-chain-scout-result.json",
+      "markdown_path": "automation/reports/llm-worker-chain-scout.md",
+      "errors": []
+    },
+    "llm_editor": {
+      "state": "completed",
+      "provider": "openai",
+      "request_path": "automation/reports/llm-worker-chain-editor-research-gsc-opportunity-request.json",
+      "result_path": "automation/reports/llm-worker-chain-editor-research-gsc-opportunity-result.json",
+      "markdown_path": "automation/reports/llm-worker-chain-editor-research-gsc-opportunity.md",
+      "errors": []
+    },
+    "llm_reviewer": {
+      "state": "completed",
+      "provider": "openai",
+      "request_path": "automation/reports/llm-worker-chain-reviewer-research-gsc-opportunity-request.json",
+      "result_path": "automation/reports/llm-worker-chain-reviewer-research-gsc-opportunity-result.json",
+      "markdown_path": "automation/reports/llm-worker-chain-reviewer-research-gsc-opportunity.md",
+      "errors": []
+    }
+  },
+  "safety": "No content, backlog, manifest, PR, or production files were modified by the LLM worker chain.",
+  "artifacts": {
+    "chain_json": "automation/reports/llm-worker-chain-research-gsc-opportunity.json",
+    "chain_markdown": "automation/reports/llm-worker-chain-research-gsc-opportunity.md"
+  }
+}

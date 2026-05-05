@@ -1,0 +1,471 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-worker-chain-reviewer-research-gsc-opportunity",
+  "worker_role": "reviewer",
+  "task": "Review one no-write LLM Editor planning brief for site fit, risk, and readiness.",
+  "prompt": "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. Do not write or rewrite public page copy. Do not create patch specs. Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, and deterministic QA readiness. Treat analytics as signals, not proof. Return JSON only.",
+  "inputs": {
+    "source_llm_editor_result": "automation/reports/llm-worker-chain-editor-research-gsc-opportunity-result.json",
+    "source_llm_editor_request": "automation/reports/llm-worker-chain-editor-research-gsc-opportunity-request.json",
+    "selected_opportunity": {
+      "topic_id": "research-gsc-opportunity",
+      "decision": "update_existing",
+      "rationale": "Research.html has enough volume to justify review, and the rising `last z research priority` query suggests a more specific intent is emerging. This is a good candidate for improving research-order guidance and priority framing without changing cluster structure.",
+      "player_value": "Helps players decide what research to prioritize first, especially early- and mid-game users trying to optimize progression.",
+      "duplication_risk": "Medium; research priority content could overlap with progression or economy guidance if not scoped carefully.",
+      "priority": "high",
+      "risk_level": "high",
+      "next_step": "Ask the Research owner to validate whether the page’s opening section clearly answers research-order questions before considering any content reshaping.",
+      "claims_to_verify": [
+        "Research page remains the best canonical target for research-order intent",
+        "Protected claims about mainline, cockpit stop, peace shield, and atlas role still hold",
+        "No alternate canonical page now better serves the query"
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "research-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+      "cluster": "Research",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
+      "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "high",
+      "evidence": [
+        "GSC page signal: research.html had 12710 impressions, 597 clicks, 4.70% CTR, avg position 7.27.",
+        "Rising query: `last z research priority` gained 11 impressions in the last 7-day comparison window."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z research guide` searchers.",
+        "cluster_owner": "Research",
+        "expected_internal_route": [
+          "index.html",
+          "research.html",
+          "research-costs.html"
+        ],
+        "archetype_reason": "Existing page is `cornerstone-guide` in the `Research` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed.",
+        "Protect canonical claim `research-best-mainline`.",
+        "Protect canonical claim `hero-training-cockpit-stop`.",
+        "Protect canonical claim `peace-shield-value`.",
+        "Protect canonical claim `research-atlas-role`."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ]
+    },
+    "deterministic_editor_context": {
+      "target_page_or_slug": "research.html",
+      "page_role": "cornerstone-guide",
+      "primary_query_family": "last z research priority",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z research guide` searchers.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `last z research priority` without changing `research.html` into a different page role.",
+      "template_reference": "research.html",
+      "required_sections": [
+        "Quick Answer",
+        "Best overall recommendation",
+        "Decision framework",
+        "Cluster route block",
+        "Related guides / FAQ"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html",
+          "research-costs.html"
+        ],
+        "downstream": [
+          "alliance-duel.html",
+          "hero-training-cost.html",
+          "hq.html",
+          "lucky-discounter.html",
+          "military-strategies-cost.html"
+        ],
+        "lateral": [
+          "tech.html",
+          "field-research.html",
+          "alliance-recognition-cost.html"
+        ]
+      },
+      "protected_claims": [
+        "hero-training-cockpit-stop",
+        "peace-shield-value",
+        "research-atlas-role",
+        "research-best-mainline"
+      ],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope.",
+        "Do not contradict canonical claim `hero-training-cockpit-stop`.",
+        "Do not contradict canonical claim `peace-shield-value`.",
+        "Do not contradict canonical claim `research-atlas-role`.",
+        "Do not contradict canonical claim `research-best-mainline`."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "research.html",
+        "index.html",
+        "research-costs.html",
+        "tech.html",
+        "field-research.html",
+        "alliance-recognition-cost.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on research.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Research Guide (2026) — Research Tree, Peace Shield, Urgent Rescue, T10 Order",
+        "h1": "Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+        "meta_description": "Step-by-step Last Z research tree guide: what to research first, how to unlock Peace Shield and Urgent Rescue, and the best path toward T10.",
+        "quick_answer": "Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies for efficient troop stats, Peace Shield for Urgent Rescue, then the shortest practical path toward UST and T10.",
+        "data_lede": "",
+        "h2_headings": [
+          "Quick Answer",
+          "Last Z Research Tree: Best Research Order",
+          "T10 Research Path: When to Push UST",
+          "Key Research Nodes (Quick Summary)",
+          "Research Priority Order",
+          "Research Tips from Top Players",
+          "Research Trees Unlock Order",
+          "Frequently Asked Questions"
+        ],
+        "internal_links": [
+          "about.html",
+          "alliance-duel.html",
+          "alliance-recognition-cost.html",
+          "contact.html",
+          "disclosure.html",
+          "field-research.html",
+          "hero-training-cost.html",
+          "hq.html",
+          "https://lastzguides.com/research.html",
+          "lucky-discounter.html",
+          "military-strategies-cost.html",
+          "peace-shield-cost.html",
+          "power-guide.html",
+          "privacy.html",
+          "pvp.html",
+          "research-costs.html",
+          "siege-to-seize-cost.html",
+          "steel.html",
+          "tech.html",
+          "terms.html"
+        ]
+      }
+    },
+    "llm_editor_brief": {
+      "brief_summary": "Refine the existing cornerstone research guide so the opening immediately answers research-order intent, while keeping the page in-role and preserving protected canonical claims. Emphasize a clear priority framework, then support it with a concise route through key nodes and related cluster pages.",
+      "target_page_or_slug": "research.html",
+      "page_role": "cornerstone-guide",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for last z research guide searchers who want the best research order.",
+      "first_screen_plan": "Keep the answer-first structure, but tighten the opening so it explicitly resolves the priority question in plain terms. The first screen should identify the recommended early research sequence, note the practical reason for that sequence, and point to the key decision split between general progression, Peace Shield timing, and the T10 path. Avoid expanding into deep explanations before the user gets the actionable answer. Do not change the page into a different cluster role or dilute the canonical mainline framing.",
+      "section_plan": [
+        {
+          "section": "Quick Answer",
+          "action": "Strengthen the opening response to directly satisfy research-priority intent with a clearer one-paragraph answer and a compact order summary.",
+          "reason": "This is the highest-impact area for query match and snippet usefulness."
+        },
+        {
+          "section": "Best overall recommendation",
+          "action": "Add or refine a concise recommendation block that explains when the default order applies and when a player might deviate.",
+          "reason": "Helps users decide whether to follow the mainline path or branch by progression stage."
+        },
+        {
+          "section": "Decision framework",
+          "action": "Structure the rationale around player stage, troop goals, defense needs, and whether to push toward T10 now or later.",
+          "reason": "Supports intent without overloading the first screen."
+        },
+        {
+          "section": "Cluster route block",
+          "action": "Keep a visible route to adjacent research and progression pages, especially economy, tech, and cost-related references.",
+          "reason": "Preserves cluster navigation and clarifies next-click paths."
+        },
+        {
+          "section": "Related guides / FAQ",
+          "action": "Trim or reorder FAQ entries so they resolve the most common research-order and Peace Shield timing questions sooner.",
+          "reason": "Improves scanability and aligns supporting content with search intent."
+        }
+      ],
+      "internal_link_plan": [
+        {
+          "page": "research-costs.html",
+          "role": "upstream",
+          "reason": "Supports users who need cost context after choosing a research order."
+        },
+        {
+          "page": "index.html",
+          "role": "upstream",
+          "reason": "Maintains canonical hub access and cluster entry context."
+        },
+        {
+          "page": "hero-training-cost.html",
+          "role": "downstream",
+          "reason": "Matches the early-game research priority path and reinforces the cockpit stop claim without expanding scope."
+        },
+        {
+          "page": "military-strategies-cost.html",
+          "role": "downstream",
+          "reason": "Supports the recommended stat-focused branch in the mainline order."
+        },
+        {
+          "page": "peace-shield-cost.html",
+          "role": "downstream",
+          "reason": "Directly relevant to the timing decision around protection and Urgent Rescue."
+        },
+        {
+          "page": "hq.html",
+          "role": "downstream",
+          "reason": "Helps tie research progression to account progression milestones."
+        },
+        {
+          "page": "lucky-discounter.html",
+          "role": "downstream",
+          "reason": "Useful for cost-efficient progression decisions without changing page role."
+        },
+        {
+          "page": "alliance-duel.html",
+          "role": "lateral",
+          "reason": "Provides adjacent strategic context for players balancing research with broader competition."
+        }
+      ],
+      "protected_claims": [
+        "hero-training-cockpit-stop",
+        "peace-shield-value",
+        "research-atlas-role",
+        "research-best-mainline"
+      ],
+      "do_not_change": [
+        "Do not change the existing page template, navigation pattern, or schema family.",
+        "Do not create a new page or re-home the intent to a different canonical target.",
+        "Do not contradict canonical claim hero-training-cockpit-stop.",
+        "Do not contradict canonical claim peace-shield-value.",
+        "Do not contradict canonical claim research-atlas-role.",
+        "Do not contradict canonical claim research-best-mainline.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "Do not blur cluster role separation between research, cost, and progression pages.",
+        "Do not publish or apply content changes from this brief automatically."
+      ],
+      "owner_questions": [
+        "Does the current opening answer the research-priority question in the first screen quickly enough for searchers?",
+        "Should the priority framing lean more toward general progression, defense timing, or T10 progression for the intended audience?",
+        "Are there any current FAQ items that should be elevated into the opening or decision framework instead?",
+        "Is any internal link emphasis missing for the current cluster route block?",
+        "Do any protected claims need exact wording verification before a content update is planned?"
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "research.html",
+        "index.html",
+        "research-costs.html",
+        "tech.html",
+        "field-research.html",
+        "alliance-recognition-cost.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on research.html"
+      ],
+      "next_step": "Ask the Research owner to validate whether the opening section already satisfies research-order intent well enough; if not, prepare a scoped update plan that preserves the current cornerstone role and protected claims."
+    },
+    "guardrails": [
+      "No content files may be edited by Reviewer.",
+      "No final public page copy may be generated.",
+      "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
+      "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
+      "Owner approval is required before any user-visible content change."
+    ]
+  },
+  "expected_response_keys": [
+    "target_page_or_slug",
+    "page_role",
+    "verdict",
+    "risk_level",
+    "approved_next_stage",
+    "blocking_issues",
+    "warnings",
+    "duplicate_intent_review",
+    "cluster_role_review",
+    "canonical_claim_review",
+    "template_safety_review",
+    "owner_approval_required",
+    "owner_questions",
+    "required_context_before_edit",
+    "required_checks",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "verdict": {
+        "type": "string",
+        "enum": [
+          "pass",
+          "needs_human_review",
+          "revise",
+          "reject"
+        ]
+      },
+      "risk_level": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "approved_next_stage": {
+        "type": "string",
+        "enum": [
+          "none",
+          "brief",
+          "patch_plan",
+          "proposal",
+          "approval",
+          "apply_preview"
+        ]
+      },
+      "blocking_issues": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "severity": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "issue": {
+              "type": "string",
+              "maxLength": 450
+            },
+            "required_fix": {
+              "type": "string",
+              "maxLength": 450
+            }
+          },
+          "required": [
+            "severity",
+            "issue",
+            "required_fix"
+          ]
+        }
+      },
+      "warnings": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 400
+        }
+      },
+      "duplicate_intent_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "cluster_role_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "canonical_claim_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "template_safety_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "owner_approval_required": {
+        "type": "boolean"
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_edit": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "required_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 450
+      }
+    },
+    "required": [
+      "target_page_or_slug",
+      "page_role",
+      "verdict",
+      "risk_level",
+      "approved_next_stage",
+      "blocking_issues",
+      "warnings",
+      "duplicate_intent_review",
+      "cluster_role_review",
+      "canonical_claim_review",
+      "template_safety_review",
+      "owner_approval_required",
+      "owner_questions",
+      "required_context_before_edit",
+      "required_checks",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}

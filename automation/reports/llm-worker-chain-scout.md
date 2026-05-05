@@ -1,4 +1,4 @@
-# LLM Scout Review - 2026-05-04T10:41:06Z
+# LLM Scout Review - 2026-05-05T18:57:32Z
 
 ## Overview
 
@@ -11,82 +11,84 @@
 
 ## LLM Summary
 
-The strongest opportunities are existing-page updates with clear search demand and acceptable template fit. The highest-value candidates are codes.html, alliance-duel.html, research.html, and hq.html because they combine meaningful GSC signals with established cluster roles and can likely improve query-to-page match without creating duplicate content. The remaining proposals are also viable for review, but some are higher risk due to canonical-claim constraints, especially the Economy and Research cornerstone pages, and should be handled carefully to avoid cluster role blur or scope creep.
+The strongest opportunities are updates to existing cornerstone or hub pages where search signals suggest a page-query mismatch or weak first-screen usefulness. The best human-review candidates are the Home hub, Economy codes page, Research cornerstone, and Progression HQ/power guides because they combine meaningful impression volume with clear canonical page ownership and low-to-moderate CTR. The Heroes, Equipment, and Events proposals are also viable but somewhat narrower; they should be reviewed only if the intended user job can be improved without blurring cluster roles.
 
 ## Selected Opportunities
+
+### index-bing-opportunity
+
+- Decision: `update_existing`
+- Priority: `high`
+- Risk: `high`
+- Player value: Helps new and returning players quickly find the right guide, improving navigation from broad `last z` searches into the site’s main sections.
+- Duplication risk: Medium; broad home-intent wording could overlap with cluster landing pages if it expands beyond hub-level routing.
+- Next step: Have the Home owner review whether the hero area, intro copy, and section routing better satisfy broad `last z` search intent without duplicating cluster-specific guides.
+
+Rationale:
+
+High-volume home hub with a clear broad-intent signal and rising query variants. This is a strong candidate for refining query-to-page alignment and first-screen usefulness while staying within the existing template and home cluster role.
+
+Claims to verify:
+- Bing signals reflect opportunity, not proof of rewrite need
+- The home page remains the best canonical target for broad intent
+- Any copy changes preserve cluster role separation
 
 ### codes-gsc-opportunity
 
 - Decision: `update_existing`
 - Priority: `high`
 - Risk: `high`
-- Player value: Helps users quickly find active redeem-code and gift-center login guidance, reducing friction for reward redemption and improving task completion.
-- Duplication risk: Medium; gift-center intent can easily overlap with mailbox or rewards claims, so updates must preserve cluster separation and canonical claims.
-- Next step: Owner review of proposed outline and claim boundaries before any content change is drafted.
+- Player value: Can reduce friction for players trying to redeem codes or understand gift-center login/redeem flow, which is a high-intent utility task.
+- Duplication risk: High; wording around gift center could easily overlap with mailbox/reward flow or other economy pages.
+- Next step: Have the Economy owner audit the first screen, headings, and intent signaling on codes.html while preserving the protected claims and the redeem-flow role boundaries.
 
 Rationale:
 
-Strong page-level signal plus multiple low-CTR, high-impression gift-center queries indicate a real opportunity to improve match and first-screen usefulness on an existing cornerstone page. The page already has backlog history for CTR work, which makes this a good candidate for controlled refinement rather than new content.
+Very strong impression volume and weak CTR on a canonical economy page, plus multiple gift-center queries showing mismatch. This looks like a high-value page-query fit opportunity, but it carries notable risk because of protected canonical claims and previous backlog work.
 
 Claims to verify:
-- gift-center-only-redeem-flow
-- gift-rewards-mailbox
-- gift-center-cluster-role-separation
-
-### alliance-duel-gsc-opportunity
-
-- Decision: `update_existing`
-- Priority: `high`
-- Risk: `medium`
-- Player value: Better supports players searching for Last Z vs schedule details and day-by-day planning for Alliance Duel.
-- Duplication risk: Low to medium; event-guide intent is distinct, but it must not become a general events hub or overlap with another canonical event page.
-- Next step: Human review should confirm that schedule intent is not already better served elsewhere and that edits stay within the existing event-guide template.
-
-Rationale:
-
-The page has strong impressions and a solid average position, suggesting it already attracts relevant traffic. Improving the schedule and strategy framing on the existing event guide is likely to help users with time-sensitive event planning without requiring a new page.
-
-Claims to verify:
-- None
+- Gift-center-only redeem flow must stay canonical
+- Mailbox/rewards claims must remain separate
+- Prior `gift-center-ctr-pass:done` work does not already resolve the issue
 
 ### research-gsc-opportunity
 
 - Decision: `update_existing`
 - Priority: `high`
 - Risk: `high`
-- Player value: Improves guidance for players looking for the best research order, peace-shield context, and progression planning.
-- Duplication risk: High; research content is prone to overlap with hero training, costs, and tech guidance, so role separation must be preserved carefully.
-- Next step: Verify whether the rescue-related signal belongs on research.html or another canonical page before outlining any change.
+- Player value: Helps players decide what research to prioritize first, especially early- and mid-game users trying to optimize progression.
+- Duplication risk: Medium; research priority content could overlap with progression or economy guidance if not scoped carefully.
+- Next step: Ask the Research owner to validate whether the page’s opening section clearly answers research-order questions before considering any content reshaping.
 
 Rationale:
 
-Research.html shows strong demand and the rising rescue-related query suggests adjacent intent worth reviewing. This looks like a meaningful refinement opportunity for searchers needing a clearer research path, but it must respect existing claim boundaries.
+Research.html has enough volume to justify review, and the rising `last z research priority` query suggests a more specific intent is emerging. This is a good candidate for improving research-order guidance and priority framing without changing cluster structure.
 
 Claims to verify:
-- research-best-mainline
-- hero-training-cockpit-stop
-- peace-shield-value
-- research-atlas-role
+- Research page remains the best canonical target for research-order intent
+- Protected claims about mainline, cockpit stop, peace shield, and atlas role still hold
+- No alternate canonical page now better serves the query
 
 ## Rejected Or Monitor
 
-- vehicle-modification-cost-gsc-opportunity: Worth monitoring, but the page already has a strong CTR and the opportunity is less clearly urgent than the top candidates. It may still merit a later review if query mix shifts further toward upgrade-cost intent. Future trigger: More low-CTR vehicle upgrade queries or a stronger impression-to-click imbalance on the same page.
-- heroes-gsc-opportunity: Potentially valid, but the signal is less specific than the top opportunities and the search intent could overlap with faction or season pages. Needs more query-level confirmation before prioritization. Future trigger: A clearer set of season 4 hero queries or faction-specific search demand tied to heroes.html.
-- hq-gsc-opportunity: Interesting existing-page opportunity, but the user job and query framing appear broad enough that it needs more intent validation before approval. Future trigger: Sustained growth in HQ upgrade queries with consistent long-tail requirements or path intent.
-- power-guide-gsc-opportunity: The page is very low CTR, but the proposal remains broad and needs more evidence that the intent is specifically combat-power guidance rather than a different progression topic. Future trigger: Improved query clustering around combat power increase and fast-path progression wording.
-- tech-gsc-opportunity: This is a plausible update target, but the intent is close to other research/progression materials and requires extra verification to avoid content overlap. Future trigger: Stable F2P/low-spender tech queries with distinct search phrasing that does not map cleanly to research.html or power-guide.html.
+- alliance-duel-gsc-opportunity: Worth monitoring, but the search signal is narrower and the user job appears more event-specific than the broadest high-value opportunities. Review only if intent is confirmed as schedule/strategy rather than another canonical event or mode page. Future trigger: If query volume grows or a distinct schedule-intent cluster appears in GSC.
+- vehicle-modification-cost-gsc-opportunity: Solid candidate, but the page already shows decent CTR and the change would need careful scoping around protected alliance-recognition utility claims. Lower urgency than the top three opportunities. Future trigger: If vehicle-upgrade queries strengthen or CTR falls further.
+- heroes-gsc-opportunity: Viable but less distinctive: the heroes page is broad and may overlap with other faction/tier-list content. Review only if the specific `season 4 heroes` intent is confirmed as the dominant need. Future trigger: If faction-specific hero queries increase or a clearer tier-list opportunity emerges.
+- hq-gsc-opportunity: Important page, but the request is already strongly title-matched and the evidence is mostly general low CTR rather than a distinct new user job. Monitor for stronger HQ-step queries before changing scope. Future trigger: If separate HQ requirement or fast-path queries rise materially.
+- power-guide-gsc-opportunity: This is the weakest CTR signal, but it is also the most generic progression advice and could overlap with HQ or heroes guidance. Better to monitor until a clearer sub-intent appears. Future trigger: If power-specific queries become more distinct or the page shows sustained decline.
 
 ## Global Risks
 
-- Analytics signals are directional only; they should not be treated as proof that a rewrite is required.
-- Several cornerstone pages carry canonical-claim protection, so small scope changes may still be risky if they blur cluster roles.
-- Gift center and research topics have notable duplication risk across related pages, which could harm canonical clarity.
-- No content or production changes are allowed at this stage, so all ideas require owner approval before any apply step.
+- Analytics signals are not proof of a rewrite need; changes still require owner approval.
+- Several proposals sit near protected canonical claims, so scope creep could blur cluster roles.
+- Broad-intent pages like Home, Research, and Progression can accidentally duplicate more specific cluster pages if rewritten too aggressively.
+- CTR improvements may come from better snippet alignment and first-screen clarity rather than structural changes; over-editing would be risky.
+- Archived Reddit/news experiments were not used, consistent with guardrails.
 
 ## Next Actions
 
-- Send the selected opportunities to the relevant cluster owners for human review.
-- For codes.html and research.html, verify canonical claim boundaries before any drafting.
-- For alliance-duel.html, confirm that schedule intent is not better served by another canonical events page.
-- Hold the other opportunities in monitor status until query-level evidence becomes more specific.
-- Do not apply any changes until owners explicitly approve scope and direction.
+- Route the selected opportunities to the relevant cluster owners for human review.
+- Verify canonical-page ownership and role separation before any implementation planning.
+- For each selected page, inspect query intent, current first-screen messaging, and whether a lighter template-safe update would suffice.
+- Confirm that protected claims remain intact for codes.html and research.html.
+- Use GSC/Bing as prioritization signals only; do not treat them as instructions to rewrite pages.

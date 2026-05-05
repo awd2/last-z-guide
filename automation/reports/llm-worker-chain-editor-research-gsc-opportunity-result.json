@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-05T18:57:39Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-worker-chain-editor-research-gsc-opportunity",
+  "worker_role": "editor",
+  "request_path": "automation/reports/llm-worker-chain-editor-research-gsc-opportunity-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "brief_summary": "Refine the existing cornerstone research guide so the opening immediately answers research-order intent, while keeping the page in-role and preserving protected canonical claims. Emphasize a clear priority framework, then support it with a concise route through key nodes and related cluster pages.",
+    "target_page_or_slug": "research.html",
+    "page_role": "cornerstone-guide",
+    "primary_user_job": "Improve query-to-page match and first-screen usefulness for last z research guide searchers who want the best research order.",
+    "first_screen_plan": "Keep the answer-first structure, but tighten the opening so it explicitly resolves the priority question in plain terms. The first screen should identify the recommended early research sequence, note the practical reason for that sequence, and point to the key decision split between general progression, Peace Shield timing, and the T10 path. Avoid expanding into deep explanations before the user gets the actionable answer. Do not change the page into a different cluster role or dilute the canonical mainline framing.",
+    "section_plan": [
+      {
+        "section": "Quick Answer",
+        "action": "Strengthen the opening response to directly satisfy research-priority intent with a clearer one-paragraph answer and a compact order summary.",
+        "reason": "This is the highest-impact area for query match and snippet usefulness."
+      },
+      {
+        "section": "Best overall recommendation",
+        "action": "Add or refine a concise recommendation block that explains when the default order applies and when a player might deviate.",
+        "reason": "Helps users decide whether to follow the mainline path or branch by progression stage."
+      },
+      {
+        "section": "Decision framework",
+        "action": "Structure the rationale around player stage, troop goals, defense needs, and whether to push toward T10 now or later.",
+        "reason": "Supports intent without overloading the first screen."
+      },
+      {
+        "section": "Cluster route block",
+        "action": "Keep a visible route to adjacent research and progression pages, especially economy, tech, and cost-related references.",
+        "reason": "Preserves cluster navigation and clarifies next-click paths."
+      },
+      {
+        "section": "Related guides / FAQ",
+        "action": "Trim or reorder FAQ entries so they resolve the most common research-order and Peace Shield timing questions sooner.",
+        "reason": "Improves scanability and aligns supporting content with search intent."
+      }
+    ],
+    "internal_link_plan": [
+      {
+        "page": "research-costs.html",
+        "role": "upstream",
+        "reason": "Supports users who need cost context after choosing a research order."
+      },
+      {
+        "page": "index.html",
+        "role": "upstream",
+        "reason": "Maintains canonical hub access and cluster entry context."
+      },
+      {
+        "page": "hero-training-cost.html",
+        "role": "downstream",
+        "reason": "Matches the early-game research priority path and reinforces the cockpit stop claim without expanding scope."
+      },
+      {
+        "page": "military-strategies-cost.html",
+        "role": "downstream",
+        "reason": "Supports the recommended stat-focused branch in the mainline order."
+      },
+      {
+        "page": "peace-shield-cost.html",
+        "role": "downstream",
+        "reason": "Directly relevant to the timing decision around protection and Urgent Rescue."
+      },
+      {
+        "page": "hq.html",
+        "role": "downstream",
+        "reason": "Helps tie research progression to account progression milestones."
+      },
+      {
+        "page": "lucky-discounter.html",
+        "role": "downstream",
+        "reason": "Useful for cost-efficient progression decisions without changing page role."
+      },
+      {
+        "page": "alliance-duel.html",
+        "role": "lateral",
+        "reason": "Provides adjacent strategic context for players balancing research with broader competition."
+      }
+    ],
+    "protected_claims": [
+      "hero-training-cockpit-stop",
+      "peace-shield-value",
+      "research-atlas-role",
+      "research-best-mainline"
+    ],
+    "do_not_change": [
+      "Do not change the existing page template, navigation pattern, or schema family.",
+      "Do not create a new page or re-home the intent to a different canonical target.",
+      "Do not contradict canonical claim hero-training-cockpit-stop.",
+      "Do not contradict canonical claim peace-shield-value.",
+      "Do not contradict canonical claim research-atlas-role.",
+      "Do not contradict canonical claim research-best-mainline.",
+      "Do not use analytics signals as proof that a rewrite is required.",
+      "Do not blur cluster role separation between research, cost, and progression pages.",
+      "Do not publish or apply content changes from this brief automatically."
+    ],
+    "owner_questions": [
+      "Does the current opening answer the research-priority question in the first screen quickly enough for searchers?",
+      "Should the priority framing lean more toward general progression, defense timing, or T10 progression for the intended audience?",
+      "Are there any current FAQ items that should be elevated into the opening or decision framework instead?",
+      "Is any internal link emphasis missing for the current cluster route block?",
+      "Do any protected claims need exact wording verification before a content update is planned?"
+    ],
+    "required_context_before_patch": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "research.html",
+      "index.html",
+      "research-costs.html",
+      "tech.html",
+      "field-research.html",
+      "alliance-recognition-cost.html"
+    ],
+    "acceptance_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on research.html"
+    ],
+    "next_step": "Ask the Research owner to validate whether the opening section already satisfies research-order intent well enough; if not, prepare a scoped update plan that preserves the current cornerstone role and protected claims."
+  },
+  "usage": {
+    "input_tokens": 2385,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 1083,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 3468
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_090396ba540cf1c70069fa3d9cbee88195920257ab3cd496b7",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

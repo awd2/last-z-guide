@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-05T18:57:45Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-worker-chain-reviewer-research-gsc-opportunity",
+  "worker_role": "reviewer",
+  "request_path": "automation/reports/llm-worker-chain-reviewer-research-gsc-opportunity-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "target_page_or_slug": "research.html",
+    "page_role": "cornerstone-guide",
+    "verdict": "needs_human_review",
+    "risk_level": "high",
+    "approved_next_stage": "none",
+    "blocking_issues": [
+      {
+        "severity": "high",
+        "issue": "High-risk cornerstone page opportunity cannot be advanced automatically without explicit owner review.",
+        "required_fix": "Obtain Research owner validation before any user-visible content change is planned or approved."
+      },
+      {
+        "severity": "high",
+        "issue": "The brief identifies overlap risk with progression and economy guidance, which could blur cluster role separation if scoped too broadly.",
+        "required_fix": "Confirm the update remains strictly within research-order intent and does not re-home adjacent intents from tech, field research, or cost pages."
+      },
+      {
+        "severity": "medium",
+        "issue": "Protected canonical claims must be verified against exact current wording before any edit planning proceeds.",
+        "required_fix": "Review canonical claim references for hero-training-cockpit-stop, peace-shield-value, research-atlas-role, and research-best-mainline in the source canon files."
+      }
+    ],
+    "warnings": [
+      "Analytics signals are suggestive but not proof of a rewrite need.",
+      "The page should remain in-role as a cornerstone guide and not become a different page type.",
+      "Template, navigation pattern, and schema family must remain unchanged.",
+      "No public copy or patch details should be generated at this stage."
+    ],
+    "duplicate_intent_review": "Low to medium duplication risk. The query intent is still appropriately served by research.html, but the brief could overlap with progression, economy, and defense-cost content if the scope widens beyond research-order guidance.",
+    "cluster_role_review": "Pass conditionally. Research.html remains the correct cornerstone target for research-order intent, but the update must preserve clear separation from cost, tech, and progression-support pages.",
+    "canonical_claim_review": "Conditional pass. The brief explicitly protects the required canonical claims and does not contradict them, but exact claim wording should be verified before any edit planning.",
+    "template_safety_review": "Pass. The brief respects the existing template, navigation pattern, and schema family, and does not request a page type change.",
+    "owner_approval_required": true,
+    "owner_questions": [
+      "Does the current opening answer the research-priority question in the first screen quickly enough for searchers?",
+      "Should the priority framing lean more toward general progression, defense timing, or T10 progression for the intended audience?",
+      "Are there any current FAQ items that should be elevated into the opening or decision framework instead?",
+      "Is any internal link emphasis missing for the current cluster route block?",
+      "Do any protected claims need exact wording verification before a content update is planned?"
+    ],
+    "required_context_before_edit": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "research.html",
+      "index.html",
+      "research-costs.html",
+      "tech.html",
+      "field-research.html",
+      "alliance-recognition-cost.html"
+    ],
+    "required_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on research.html"
+    ],
+    "next_step": "Request Research owner review to confirm scope, then prepare a narrowly scoped update plan only if the opening can be improved without changing page role or protected claims."
+  },
+  "usage": {
+    "input_tokens": 3758,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 689,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 4447
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_06ffdb130062f36c0069fa3da4087c819395706905e08f1ed9",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}
