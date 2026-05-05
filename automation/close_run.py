@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Close a QA-passed automation run with a final handoff summary."""
+"""Close a completed automation run with a final handoff summary."""
 
 from __future__ import annotations
 
@@ -17,6 +17,13 @@ from automation.io import load_run_manifest, write_run_manifest
 from automation.proposal_renderer import REPORTS_DIR, md_list, resolve_manifest_path
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def check_lines(manifest) -> list[str]:
     lines = []
     for name, result in manifest.checks.items():
@@ -30,6 +37,18 @@ def render_close_report(manifest, closed_at: str, note: str) -> str:
     apply_result = artifacts.get("apply_result", {})
     applied_operations = apply_result.get("applied_operations", [])
     generator_commands = apply_result.get("generator_commands", [])
+    closeout_type = "rejected_no_content_change" if manifest.status == "rejected" else "qa_passed"
+    scope_heading = "Rejected Candidate Scope" if manifest.status == "rejected" else "Applied Scope"
+    operations_heading = "Rejected Operations" if manifest.status == "rejected" else "Applied Operations"
+    release_rule = (
+        "- This run was closed after all proposal specs were rejected.\n"
+        "- No site files were edited by this run.\n"
+        "- This is not an autonomous production deployment."
+        if manifest.status == "rejected"
+        else "- This run is closed locally.\n"
+        "- This is not an autonomous production deployment.\n"
+        "- GitHub Pages deployment remains manual or governed by the repository's normal branch workflow."
+    )
 
     artifact_lines = []
     for label, context_key in [
@@ -51,14 +70,15 @@ def render_close_report(manifest, closed_at: str, note: str) -> str:
 
 - Summary: {manifest.summary}
 - Final status: `closed`
+- Closeout type: `{closeout_type}`
 - Closed at: `{closed_at}`
 - Human note: {note or "No extra note."}
 
-## Applied Scope
+## {scope_heading}
 
 {md_list(manifest.changed_files)}
 
-## Applied Operations
+## {operations_heading}
 
 {md_list(applied_operations)}
 
@@ -76,16 +96,14 @@ def render_close_report(manifest, closed_at: str, note: str) -> str:
 
 ## Release Rule
 
-- This run is closed locally.
-- This is not an autonomous production deployment.
-- GitHub Pages deployment remains manual or governed by the repository's normal branch workflow.
+{release_rule}
 """
 
 
 def close_run(path: Path, note: str):
     manifest = load_run_manifest(path)
-    if manifest.status != "qa_passed":
-        raise ValueError(f"Run must be qa_passed before close-run. Current status: {manifest.status}")
+    if manifest.status not in {"qa_passed", "rejected"}:
+        raise ValueError(f"Run must be qa_passed or rejected before close-run. Current status: {manifest.status}")
 
     closed_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     out_path = REPORTS_DIR / f"{manifest.run_id}.closed.md"
@@ -94,7 +112,7 @@ def close_run(path: Path, note: str):
 
     manifest.artifacts.setdefault("closeout", {})
     manifest.artifacts["closeout"] = {
-        "report_path": str(out_path.relative_to(ROOT)),
+        "report_path": display_path(out_path),
         "closed_at": closed_at,
         "note": note,
     }
@@ -116,8 +134,8 @@ def main() -> int:
         print(str(exc))
         return 1
 
-    print(f"Wrote {out_path.relative_to(ROOT)}")
-    print(f"Updated {manifest_path.relative_to(ROOT)}")
+    print(f"Wrote {display_path(out_path)}")
+    print(f"Updated {display_path(manifest_path)}")
     return 0
 
 

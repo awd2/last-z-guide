@@ -740,7 +740,7 @@ python3 automation/pipeline.py next-step <run_id> --json
 - `applied_pending_qa` -> strict checks + prepublish checks
 - `qa_passed` -> `close-run`
 - `closed` -> manual release decision or next backlog topic
-- `rejected` -> revise or close the run
+- `rejected` -> `close-run` if the rejected proposal needs no revision
 
 `next-step --json` gives the same lifecycle hint in machine-readable form.
 It now includes structured fields such as:
@@ -795,6 +795,8 @@ Lifecycle status after approval:
 `approved_for_apply` is not an automatic publishing state. It only means a
 future controlled apply step may use the approved specs as input. Rejected specs
 stay recorded in the manifest, but apply-preview and apply-approved ignore them.
+If all specs are rejected because the proposal is a reviewed no-op or should not
+move forward, use `close-run` to produce a final no-content-change handoff.
 
 `apply-preview` renders a no-write preview from approved Patch Spec v1 entries:
 
@@ -858,6 +860,13 @@ automation gate is green.
 
 ```bash
 python3 automation/pipeline.py close-run <run_id> --note "Human reviewed local page output."
+```
+
+It can also close a fully rejected proposal run when no content change should be
+applied:
+
+```bash
+python3 automation/pipeline.py close-run <run_id> --note "Proposal reviewed; no content change needed."
 ```
 
 The output lives at:

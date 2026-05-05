@@ -3,7 +3,7 @@
 ## Overview
 
 - Summary: Worker-approved intake for `codes.html` from `codes-gsc-opportunity`.
-- Status: `proposal_ready`
+- Status: `rejected`
 - Risk: `high`
 - Cluster: `Economy`
 - Target: `codes.html`
@@ -29,7 +29,7 @@
 - Generated page: `false`
 - Selector or anchor: `<title>, meta description, H1, first-screen block`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `rejected`
 - Generator command: `None`
 
 Before:
@@ -59,7 +59,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `<title>, meta description, H1, first-screen block`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `rejected`
 - Generator command: `None`
 
 Before:

@@ -516,7 +516,7 @@ Lifecycle currently:
 
 When `checks --strict --manifest <run_id>` passes after `apply-approved`, the run may advance from `applied_pending_qa` to `qa_passed`. `qa_passed` is still not an autonomous production publishing state.
 
-`close-run` closes a `qa_passed` run with a final handoff artifact. It must not deploy.
+`close-run` closes a `qa_passed` run, or a fully `rejected` proposal run that needs no content changes, with a final handoff artifact. It must not deploy.
 
 Whenever automation commands, lifecycle stages, manifest states, instructions, or operator workflows are added or changed, update the relevant documentation in the same change. At minimum, check:
 

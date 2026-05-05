@@ -74,7 +74,9 @@ merge or deploy decision.
 passed. It is still not an autonomous production publish state.
 
 `closed` means the local automation lifecycle is complete and a final closeout
-report exists. Deployment remains manual.
+report exists. Deployment remains manual. A run can be closed after `qa_passed`
+or after every proposal spec is rejected and no content change should be
+applied.
 
 `rejected` means every proposal spec was rejected and the run should be revised
 or closed before any content edits are created.

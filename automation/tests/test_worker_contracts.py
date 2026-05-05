@@ -12,6 +12,7 @@ from unittest.mock import patch
 
 from automation.io import load_json, write_json
 from automation.reports import llm_review_latest
+from automation import close_run
 from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
@@ -714,6 +715,41 @@ class WorkerContractTests(unittest.TestCase):
             code, duplicate_summary = write_manifest.write_manifest(run_plan_path, manifest_dir, "fixture", dry_run=False)
             self.assertEqual(code, 1)
             self.assertEqual(duplicate_summary["state"], "blocked")
+
+    def test_close_run_allows_rejected_no_content_change_runs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            manifest_path = tmp_path / "rejected-run.json"
+            write_json(
+                manifest_path,
+                {
+                    "run_id": "rejected-run",
+                    "created_at": "2026-05-05T00:00:00Z",
+                    "run_type": "update_existing",
+                    "status": "rejected",
+                    "risk_level": "high",
+                    "summary": "Proposal reviewed; no content change needed.",
+                    "inputs": {},
+                    "plan": {},
+                    "artifacts": {
+                        "proposal": {
+                            "report_path": "automation/reports/rejected-run.proposed.md",
+                        }
+                    },
+                    "changed_files": ["codes.html"],
+                    "checks": {},
+                },
+            )
+
+            with patch.object(close_run, "REPORTS_DIR", tmp_path / "reports"):
+                report_path = close_run.close_run(manifest_path, "No content change needed.")
+
+            manifest = load_json(manifest_path)
+            self.assertEqual(manifest["status"], "closed")
+            self.assertTrue(manifest["artifacts"]["closeout"]["report_path"].endswith("reports/rejected-run.closed.md"))
+            report = report_path.read_text(encoding="utf-8")
+            self.assertIn("Closeout type: `rejected_no_content_change`", report)
+            self.assertIn("No site files were edited by this run.", report)
 
 
 if __name__ == "__main__":
