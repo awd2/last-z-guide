@@ -63,6 +63,139 @@ def selected_topic_ids(scout_payload: dict[str, Any]) -> set[str]:
     }
 
 
+def normalized_priority(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    return text if text in {"high", "medium", "low"} else "medium"
+
+
+def normalized_risk(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    return text if text in {"high", "medium", "low"} else "high"
+
+
+def normalized_action(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    allowed = {"update_existing", "create_new", "consolidate", "monitor", "reject"}
+    return text if text in allowed else "update_existing"
+
+
+def selected_opportunity_from_decision(decision: dict[str, Any], topic: dict[str, Any]) -> dict[str, Any]:
+    note = str(decision.get("decision_note") or topic.get("notes") or "Owner-approved no-write worker-chain handoff.")
+    site_fit = topic.get("site_fit") if isinstance(topic.get("site_fit"), dict) else {}
+    return {
+        "topic_id": str(topic.get("topic_id", "")),
+        "decision": normalized_action(topic.get("recommended_action")),
+        "rationale": note[:500],
+        "player_value": str(topic.get("player_value") or site_fit.get("primary_user_job") or topic.get("title") or "")[:400],
+        "duplication_risk": str(
+            topic.get("duplication_risk")
+            or "Review against the current cluster role before any content proposal."
+        )[:350],
+        "priority": normalized_priority(topic.get("priority")),
+        "risk_level": normalized_risk(topic.get("risk_level")),
+        "next_step": "Run the no-write Editor and Reviewer stages from this approved decision snapshot.",
+        "claims_to_verify": topic.get("claims_to_verify", []) if isinstance(topic.get("claims_to_verify"), list) else [],
+    }
+
+
+def validate_decision_handoff(decision: dict[str, Any], topic_id: str | None) -> tuple[str, dict[str, Any]]:
+    if decision.get("report_type") != "llm_topic_decision":
+        raise ValueError("Decision handoff must point to an llm_topic_decision artifact.")
+    if decision.get("state") != "decision_recorded":
+        raise ValueError("Decision handoff is not recorded.")
+    if decision.get("decision_state") != "approved_for_chain" or not decision.get("allows_worker_chain"):
+        raise ValueError("Decision handoff is not approved_for_chain; worker chain cannot run.")
+    topic = decision.get("topic_snapshot")
+    if not isinstance(topic, dict):
+        raise ValueError("Decision handoff is missing topic_snapshot.")
+    decision_topic_id = str(decision.get("topic_id") or topic.get("topic_id") or "")
+    snapshot_topic_id = str(topic.get("topic_id") or "")
+    if not decision_topic_id or not snapshot_topic_id or decision_topic_id != snapshot_topic_id:
+        raise ValueError("Decision handoff topic_id does not match topic_snapshot.topic_id.")
+    if topic_id and topic_id != decision_topic_id:
+        raise ValueError(f"Requested topic `{topic_id}` does not match decision topic `{decision_topic_id}`.")
+    return decision_topic_id, topic
+
+
+def write_decision_replay_scout(
+    decision_path: Path,
+    output_dir: Path,
+    scout_basename: str,
+    topic_id: str | None,
+) -> tuple[str, dict[str, Any]]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    decision = load_json(decision_path)
+    source_topic_id, topic = validate_decision_handoff(decision, topic_id)
+    request_path = output_dir / f"{scout_basename}-request.json"
+    result_path = output_dir / f"{scout_basename}-result.json"
+    markdown_path = output_dir / f"{scout_basename}.md"
+    selected = selected_opportunity_from_decision(decision, topic)
+    request = {
+        "schema_version": 1,
+        "request_id": scout_basename,
+        "worker_role": "scout",
+        "task": "Replay one owner-approved LLM topic decision as the Scout handoff for the no-write worker chain.",
+        "prompt": (
+            "This is a deterministic replay artifact created from a human-approved topic decision. "
+            "No live Scout rerank is performed."
+        ),
+        "inputs": {
+            "source_decision": rel(decision_path),
+            "proposal_count": 1,
+            "proposals": [topic],
+            "guardrails": [
+                "Only approved_for_chain decisions may be replayed.",
+                "Replay does not approve public copy, patch specs, backlog edits, manifests, PRs, or deployment.",
+                "Owner approval remains required before any user-visible content change.",
+            ],
+        },
+        "expected_response_keys": [
+            "overview",
+            "selected_opportunities",
+            "rejected_or_monitor",
+            "global_risks",
+            "next_actions",
+        ],
+        "response_schema": llm_scout.SCOUT_RESPONSE_SCHEMA,
+        "max_output_tokens": 4000,
+    }
+    result = {
+        "state": "completed",
+        "provider": "decision_replay",
+        "request_id": scout_basename,
+        "response_json": {
+            "overview": f"Deterministic replay of owner-approved topic decision `{source_topic_id}`.",
+            "selected_opportunities": [selected],
+            "rejected_or_monitor": [],
+            "global_risks": [
+                "This handoff only authorizes the next no-write worker-chain stage.",
+                "It does not authorize content edits or publication.",
+            ],
+            "next_actions": ["Run the no-write Editor and Reviewer stages."],
+        },
+        "raw_response": None,
+        "errors": [],
+    }
+    payload = {
+        "schema_version": 1,
+        "report_type": "llm_scout_review",
+        "generated_at": now_utc(),
+        "source_signal_files": [],
+        "source_decision": rel(decision_path),
+        "source_proposal_count": 1,
+        "source_topic_ids": [source_topic_id],
+        "request_path": rel(request_path),
+        "result_path": rel(result_path),
+        "markdown_path": rel(markdown_path),
+        "adapter_result": result,
+        "safety": "No content, backlog, manifest, PR, or production files were modified by LLM Scout decision replay.",
+    }
+    write_json(request_path, request)
+    write_json(result_path, result)
+    markdown_path.write_text(llm_scout.render_markdown(payload), encoding="utf-8")
+    return source_topic_id, payload
+
+
 def stage_summary(payload: dict[str, Any] | None) -> dict[str, Any]:
     if not payload:
         return {
@@ -94,6 +227,7 @@ def response_json(payload: dict[str, Any] | None) -> dict[str, Any]:
 def build_summary(
     provider: str,
     topic_id: str | None,
+    decision_path: Path | None,
     scout_payload: dict[str, Any] | None,
     editor_payload: dict[str, Any] | None,
     reviewer_payload: dict[str, Any] | None,
@@ -111,6 +245,8 @@ def build_summary(
         "generated_at": generated_at,
         "state": chain_state,
         "provider": provider,
+        "handoff_source": "topic_decision" if decision_path else "live_scout",
+        "source_decision": rel(decision_path) if decision_path else None,
         "source_topic_id": source_topic_id,
         "target_page_or_slug": target,
         "page_role": editor_response.get("page_role", ""),
@@ -149,6 +285,8 @@ def render_markdown(summary: dict[str, Any], editor_response: dict[str, Any], re
         "",
         f"- State: `{summary.get('state')}`",
         f"- Provider: `{summary.get('provider')}`",
+        f"- Handoff source: `{summary.get('handoff_source')}`",
+        f"- Source decision: `{summary.get('source_decision')}`",
         f"- Target: `{summary.get('target_page_or_slug', '')}`",
         f"- Page role: `{summary.get('page_role', '')}`",
         f"- Review verdict: `{summary.get('review_verdict')}`",
@@ -249,6 +387,7 @@ def run_llm_worker_chain(
     reviewer_fixture_path: Path | None,
     limit: int,
     min_impressions: int,
+    decision_path: Path | None = None,
 ) -> tuple[int, dict[str, Any]]:
     generated_at = now_utc()
     errors: list[str] = []
@@ -257,27 +396,42 @@ def run_llm_worker_chain(
     reviewer_payload: dict[str, Any] | None = None
     selected_topic_id = topic_id
 
-    scout_code, scout_payload = llm_scout.run_llm_scout(
-        signal_paths=signal_paths,
-        output_dir=output_dir,
-        basename=scout_basename,
-        provider=provider,
-        fixture_path=scout_fixture_path,
-        limit=limit,
-        min_impressions=min_impressions,
-    )
-    if scout_code:
-        errors.append("LLM Scout stage failed; Editor and Reviewer were not run.")
-    else:
+    if decision_path:
         try:
-            selected_topic_id = selected_topic_id or first_selected_topic(scout_payload)
-        except ValueError as exc:
-            errors.append(str(exc))
-        if selected_topic_id and selected_topic_id not in selected_topic_ids(scout_payload):
-            errors.append(
-                f"Requested topic `{selected_topic_id}` was not selected by LLM Scout; "
-                "Editor and Reviewer were not run."
+            selected_topic_id, scout_payload = write_decision_replay_scout(
+                decision_path=decision_path,
+                output_dir=output_dir,
+                scout_basename=scout_basename,
+                topic_id=topic_id,
             )
+        except ValueError as exc:
+            try:
+                selected_topic_id = selected_topic_id or str(load_json(decision_path).get("topic_id") or "")
+            except Exception:
+                pass
+            errors.append(f"Decision handoff blocked: {exc}")
+    else:
+        scout_code, scout_payload = llm_scout.run_llm_scout(
+            signal_paths=signal_paths,
+            output_dir=output_dir,
+            basename=scout_basename,
+            provider=provider,
+            fixture_path=scout_fixture_path,
+            limit=limit,
+            min_impressions=min_impressions,
+        )
+        if scout_code:
+            errors.append("LLM Scout stage failed; Editor and Reviewer were not run.")
+        else:
+            try:
+                selected_topic_id = selected_topic_id or first_selected_topic(scout_payload)
+            except ValueError as exc:
+                errors.append(str(exc))
+            if selected_topic_id and selected_topic_id not in selected_topic_ids(scout_payload):
+                errors.append(
+                    f"Requested topic `{selected_topic_id}` was not selected by LLM Scout; "
+                    "Editor and Reviewer were not run."
+                )
 
     if not errors and selected_topic_id:
         editor_stage_basename = editor_basename or f"llm-worker-chain-editor-{selected_topic_id}"
@@ -319,6 +473,7 @@ def run_llm_worker_chain(
     summary = build_summary(
         provider=provider,
         topic_id=selected_topic_id,
+        decision_path=decision_path,
         scout_payload=scout_payload,
         editor_payload=editor_payload,
         reviewer_payload=reviewer_payload,
@@ -337,6 +492,10 @@ def main() -> int:
         "--signals",
         action="append",
         help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once. Defaults to latest GSC and Bing when present.",
+    )
+    parser.add_argument(
+        "--from-decision",
+        help="Path to an approved_for_chain llm-topic-decision-<topic_id>.json artifact. Replays the saved decision instead of rerunning Scout.",
     )
     parser.add_argument("--topic-id", help="Selected LLM Scout topic_id. Defaults to the first selected opportunity.")
     parser.add_argument("--output-dir", default=str(REPORTS_DIR), help="Directory for LLM worker chain artifacts.")
@@ -359,7 +518,8 @@ def main() -> int:
     args = parser.parse_args()
 
     signal_paths = [resolve_path(value) for value in args.signals] if args.signals else llm_scout.default_signal_paths()
-    if not signal_paths:
+    decision_path = resolve_path(args.from_decision) if args.from_decision else None
+    if not signal_paths and not decision_path:
         print("No Scout signal files were found.", file=sys.stderr)
         return 1
     output_dir = resolve_path(args.output_dir)
@@ -377,10 +537,13 @@ def main() -> int:
         reviewer_fixture_path=resolve_path(args.reviewer_fixture) if args.reviewer_fixture else None,
         limit=args.limit,
         min_impressions=args.min_impressions,
+        decision_path=decision_path,
     )
     output = {
         "state": summary["state"],
         "provider": summary["provider"],
+        "handoff_source": summary["handoff_source"],
+        "source_decision": summary["source_decision"],
         "source_topic_id": summary["source_topic_id"],
         "target_page_or_slug": summary["target_page_or_slug"],
         "review_verdict": summary["review_verdict"],

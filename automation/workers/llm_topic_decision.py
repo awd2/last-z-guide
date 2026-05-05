@@ -47,7 +47,7 @@ def find_topic(discovery: dict[str, Any], topic_id: str) -> dict[str, Any] | Non
 def next_actions_for(topic_id: str, decision_state: str) -> list[str]:
     if decision_state == "approved_for_chain":
         return [
-            f"Run the no-write LLM worker chain: python3 automation/pipeline.py llm-worker-chain --topic-id {topic_id} --provider openai --json",
+            f"Run the no-write LLM worker chain from this saved decision: python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-{topic_id}.json --provider openai --json",
             "Review the generated LLM Reviewer gate before any intake, run-plan, or public content proposal.",
             "Public content still requires exact text/spec proposal, explicit owner approval, and strict checks.",
         ]

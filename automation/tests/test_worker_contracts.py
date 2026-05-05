@@ -186,6 +186,50 @@ def fixture_llm_reviewer_response() -> dict:
     }
 
 
+def fixture_approved_topic_decision() -> dict:
+    proposal = {
+        "topic_id": "codes-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Redeem Codes",
+        "cluster": "Economy",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "codes.html",
+        "source_type": "analytics",
+        "source_reference": "GSC weekly fixture",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "status": "candidate",
+        "notes": "Codes has enough signal for a no-write worker-chain pass.",
+        "evidence": ["GSC page signal fixture."],
+        "site_fit": {
+            "primary_user_job": "Help players redeem Last Z codes through the correct Gift Center route.",
+            "cluster_owner": "Economy",
+            "expected_internal_route": ["index.html", "codes.html"],
+            "archetype_reason": "Existing codes hub owns code redemption intent.",
+        },
+        "constraints": ["Use existing page template."],
+        "reject_if": ["The query intent is already served."],
+        "claims_to_verify": ["gift-center-only-redeem-flow"],
+    }
+    return {
+        "schema_version": 1,
+        "report_type": "llm_topic_decision",
+        "generated_at": "2026-05-05T00:00:00Z",
+        "state": "decision_recorded",
+        "topic_id": "codes-gsc-opportunity",
+        "decision_state": "approved_for_chain",
+        "decided_by": "fixture",
+        "decision_note": "Approved for a no-write worker-chain pass only.",
+        "source_discovery": "automation/reports/llm-topic-discovery.json",
+        "topic_snapshot": proposal,
+        "allows_worker_chain": True,
+        "allows_content_edit": False,
+        "next_actions": ["Run no-write chain from decision."],
+        "errors": [],
+    }
+
+
 class WorkerContractTests(unittest.TestCase):
     def test_llm_adapter_fail_closed_and_fixture_provider(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -685,6 +729,77 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(summary["stages"]["llm_reviewer"]["state"], "completed")
             self.assertTrue((tmp_path / "llm-worker-chain-fixture.json").exists())
             self.assertTrue((tmp_path / "llm-worker-chain-fixture.md").exists())
+
+    def test_llm_worker_chain_replays_approved_topic_decision_without_scout_rerank(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            decision_path = tmp_path / "llm-topic-decision-codes-gsc-opportunity.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            write_json(decision_path, fixture_approved_topic_decision())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, fixture_llm_reviewer_response())
+
+            code, summary = llm_worker_chain.run_llm_worker_chain(
+                signal_paths=[],
+                output_dir=tmp_path,
+                provider="fixture",
+                topic_id=None,
+                basename="llm-worker-chain-fixture",
+                scout_basename="llm-worker-chain-scout-fixture",
+                editor_basename="llm-worker-chain-editor-fixture",
+                reviewer_basename="llm-worker-chain-reviewer-fixture",
+                scout_fixture_path=None,
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+                limit=4,
+                min_impressions=200,
+                decision_path=decision_path,
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["state"], "completed")
+            self.assertEqual(summary["handoff_source"], "topic_decision")
+            self.assertEqual(summary["source_topic_id"], "codes-gsc-opportunity")
+            self.assertEqual(summary["stages"]["llm_scout"]["provider"], "decision_replay")
+            self.assertEqual(summary["stages"]["llm_editor"]["state"], "completed")
+            self.assertEqual(summary["stages"]["llm_reviewer"]["state"], "completed")
+            self.assertTrue((tmp_path / "llm-worker-chain-scout-fixture-request.json").exists())
+            self.assertTrue((tmp_path / "llm-worker-chain-scout-fixture-result.json").exists())
+            self.assertTrue((tmp_path / "llm-worker-chain-fixture.json").exists())
+
+    def test_llm_worker_chain_blocks_monitor_topic_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            decision_path = tmp_path / "llm-topic-decision-codes-gsc-opportunity.json"
+            decision = fixture_approved_topic_decision()
+            decision["decision_state"] = "monitor"
+            decision["allows_worker_chain"] = False
+            write_json(decision_path, decision)
+
+            code, summary = llm_worker_chain.run_llm_worker_chain(
+                signal_paths=[],
+                output_dir=tmp_path,
+                provider="fixture",
+                topic_id=None,
+                basename="llm-worker-chain-fixture",
+                scout_basename="llm-worker-chain-scout-fixture",
+                editor_basename=None,
+                reviewer_basename=None,
+                scout_fixture_path=None,
+                editor_fixture_path=None,
+                reviewer_fixture_path=None,
+                limit=4,
+                min_impressions=200,
+                decision_path=decision_path,
+            )
+
+            self.assertEqual(code, 1)
+            self.assertEqual(summary["state"], "blocked")
+            self.assertEqual(summary["handoff_source"], "topic_decision")
+            self.assertEqual(summary["stages"]["llm_scout"]["state"], "not_run")
+            self.assertTrue(any("not approved_for_chain" in error for error in summary["errors"]))
+            self.assertTrue((tmp_path / "llm-worker-chain-fixture.json").exists())
 
     def test_llm_worker_chain_blocks_when_requested_topic_is_not_selected(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

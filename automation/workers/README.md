@@ -98,6 +98,7 @@ python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --json
@@ -116,6 +117,7 @@ python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state m
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
+python3 automation/workers/llm_worker_chain.py --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/workers/llm_intake.py --approved-by <name> --json
 ```
 
@@ -186,6 +188,14 @@ It checks duplicate intent, cluster role fit, canonical claims, template safety,
 1. `llm-scout`
 2. `llm-editor`
 3. `llm-reviewer`
+
+After the owner records `approved_for_chain`, use:
+
+```bash
+python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
+```
+
+This creates replay Scout artifacts from the saved decision snapshot instead of rerunning live Scout. The handoff blocks unless the decision artifact is `approved_for_chain`, and it still does not approve public copy, patch specs, backlog mutation, manifests, PRs, or deployment.
 
 It writes:
 

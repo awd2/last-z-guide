@@ -122,6 +122,7 @@ python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --json
@@ -265,6 +266,14 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 ```
 
 This runs `llm-scout -> llm-editor -> llm-reviewer` and writes `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md` as a compact owner-review summary. It still cannot edit content, open PRs, or approve high-risk user-visible changes by itself.
+
+After a topic has an owner decision of `approved_for_chain`, prefer the deterministic handoff:
+
+```bash
+python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
+```
+
+This replays the saved decision snapshot instead of rerunning Scout, so the approved topic cannot be lost by a later LLM rerank.
 
 To read the latest local chain summary without calling OpenAI again, run:
 

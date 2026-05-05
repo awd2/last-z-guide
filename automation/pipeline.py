@@ -451,6 +451,7 @@ def cmd_llm_reviewer(
 
 def cmd_llm_worker_chain(
     signals: list[str] | None,
+    from_decision: str | None,
     topic_id: str | None,
     provider: str,
     output_dir: str | None,
@@ -477,6 +478,8 @@ def cmd_llm_worker_chain(
     ]
     for signal in signals or []:
         command.extend(["--signals", signal])
+    if from_decision:
+        command.extend(["--from-decision", from_decision])
     if topic_id:
         command.extend(["--topic-id", topic_id])
     if output_dir:
@@ -1898,6 +1901,10 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once.",
     )
+    llm_worker_chain_parser.add_argument(
+        "--from-decision",
+        help="Path to an approved_for_chain llm-topic-decision-<topic_id>.json artifact. Replays the saved decision instead of rerunning Scout.",
+    )
     llm_worker_chain_parser.add_argument("--topic-id", help="Selected LLM Scout topic_id. Defaults to the first selected opportunity.")
     llm_worker_chain_parser.add_argument(
         "--provider",
@@ -2116,6 +2123,7 @@ def main() -> int:
     if args.command == "llm-worker-chain":
         return cmd_llm_worker_chain(
             args.signals,
+            args.from_decision,
             args.topic_id,
             args.provider,
             args.output_dir,

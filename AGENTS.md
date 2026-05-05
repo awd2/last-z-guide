@@ -432,6 +432,7 @@ python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --json
@@ -453,6 +454,7 @@ python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state m
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
+python3 automation/workers/llm_worker_chain.py --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/workers/llm_intake.py --approved-by <name> --json
 python3 automation/reports/llm_review_latest.py --json
 python3 automation/reports/content_seo_opportunities.py --json
@@ -473,7 +475,7 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 `llm-reviewer` is the third live LLM worker wrapper. It reviews one LLM Editor planning brief for duplicate intent, cluster role fit, canonical claims, template safety, owner questions, and readiness. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
 
-`llm-worker-chain` runs the no-write live LLM Scout -> Editor -> Reviewer sequence and writes one summary artifact. It must preserve each stage's fail-closed behavior and must not write content, backlog entries, manifests, PRs, or production state.
+`llm-worker-chain` runs the no-write live LLM Scout -> Editor -> Reviewer sequence and writes one summary artifact. Prefer `--from-decision automation/reports/llm-topic-decision-<topic_id>.json` after owner approval so the chain replays the saved `approved_for_chain` decision instead of rerunning Scout and changing the topic handoff. It must preserve each stage's fail-closed behavior and must not write content, backlog entries, manifests, PRs, or production state.
 
 GitHub workflow `.github/workflows/llm-worker-chain.yml` runs the same no-write chain on a schedule and by manual dispatch. It uploads artifacts only and must not commit reports, edit content, open PRs, or deploy.
 
