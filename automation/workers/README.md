@@ -95,6 +95,7 @@ python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-review-latest --json
 ```
 
 It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter must not edit content, backlog, manifests, or production state.
@@ -148,6 +149,8 @@ It writes:
 The chain summary references each stage's request/result/markdown artifacts. If any stage fails or is blocked, the chain writes a blocked summary and stops before later stages. It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state.
 
 The GitHub Actions wrapper `.github/workflows/llm-worker-chain.yml` runs this chain on a weekly schedule, by manual dispatch, or after path-limited LLM worker infrastructure pushes. It uploads artifacts only; it must not commit generated reports or mutate content.
+
+`llm-review-latest` is a read-only operator view over the latest local `llm-worker-chain-<topic_id>.json` summary. It extracts the Reviewer gate result, owner questions, blocking issues, required checks, and next step without calling an LLM provider.
 
 ## Shared Inputs
 

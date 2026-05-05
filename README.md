@@ -118,6 +118,7 @@ python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
+python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -134,6 +135,7 @@ python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
+python3 automation/reports/llm_review_latest.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
@@ -240,6 +242,14 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 ```
 
 This runs `llm-scout -> llm-editor -> llm-reviewer` and writes `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md` as a compact owner-review summary. It still cannot edit content, open PRs, or approve high-risk user-visible changes by itself.
+
+To read the latest local chain summary without calling OpenAI again, run:
+
+```bash
+python3 automation/pipeline.py llm-review-latest
+```
+
+This prints the target page, verdict, risk, owner questions, blocking issues, required checks, and next step. Use `--json` for machine-readable output.
 
 The same no-write chain is available in GitHub Actions:
 

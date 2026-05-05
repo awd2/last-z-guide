@@ -496,6 +496,23 @@ def cmd_llm_worker_chain(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_review_latest(
+    chain: str | None,
+    reports_dir: str | None,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "reports" / "llm_review_latest.py")]
+    if chain:
+        command.extend(["--chain", chain])
+    if reports_dir:
+        command.extend(["--reports-dir", reports_dir])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Latest Owner Review ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_content_seo_opportunities(
     json_output: str | None,
     markdown_output: str | None,
@@ -1782,6 +1799,14 @@ def build_parser() -> argparse.ArgumentParser:
     llm_worker_chain_parser.add_argument("--min-impressions", type=int, default=200, help="Minimum page impressions for Scout proposals.")
     llm_worker_chain_parser.add_argument("--json", action="store_true", help="Print the LLM worker chain summary as JSON.")
 
+    llm_review_latest_parser = subparsers.add_parser(
+        "llm-review-latest",
+        help="Read the latest no-write LLM worker chain owner-review summary.",
+    )
+    llm_review_latest_parser.add_argument("--chain", help="Path to a specific llm-worker-chain-<topic_id>.json summary.")
+    llm_review_latest_parser.add_argument("--reports-dir", help="Directory to search for LLM worker chain summaries.")
+    llm_review_latest_parser.add_argument("--json", action="store_true", help="Print the owner-review summary as JSON.")
+
     content_seo_parser = subparsers.add_parser(
         "content-seo-opportunities",
         help="Build a no-write SEO/LLM content opportunity report.",
@@ -1937,6 +1962,8 @@ def main() -> int:
             args.min_impressions,
             args.json,
         )
+    if args.command == "llm-review-latest":
+        return cmd_llm_review_latest(args.chain, args.reports_dir, args.json)
     if args.command == "content-seo-opportunities":
         return cmd_content_seo_opportunities(
             args.json_output,
