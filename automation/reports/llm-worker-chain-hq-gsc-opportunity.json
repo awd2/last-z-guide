@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_worker_chain_summary",
+  "generated_at": "2026-05-05T19:26:30Z",
+  "state": "blocked",
+  "provider": "openai",
+  "source_topic_id": "hq-gsc-opportunity",
+  "target_page_or_slug": "",
+  "page_role": "",
+  "review_verdict": null,
+  "risk_level": null,
+  "approved_next_stage": null,
+  "owner_approval_required": null,
+  "errors": [
+    "Requested topic `hq-gsc-opportunity` was not selected by LLM Scout; Editor and Reviewer were not run."
+  ],
+  "stages": {
+    "llm_scout": {
+      "state": "completed",
+      "provider": "openai",
+      "request_path": "automation/reports/llm-worker-chain-scout-request.json",
+      "result_path": "automation/reports/llm-worker-chain-scout-result.json",
+      "markdown_path": "automation/reports/llm-worker-chain-scout.md",
+      "errors": []
+    },
+    "llm_editor": {
+      "state": "not_run",
+      "provider": null,
+      "request_path": null,
+      "result_path": null,
+      "markdown_path": null,
+      "errors": []
+    },
+    "llm_reviewer": {
+      "state": "not_run",
+      "provider": null,
+      "request_path": null,
+      "result_path": null,
+      "markdown_path": null,
+      "errors": []
+    }
+  },
+  "safety": "No content, backlog, manifest, PR, or production files were modified by the LLM worker chain.",
+  "artifacts": {
+    "chain_json": "automation/reports/llm-worker-chain-hq-gsc-opportunity.json",
+    "chain_markdown": "automation/reports/llm-worker-chain-hq-gsc-opportunity.md"
+  }
+}

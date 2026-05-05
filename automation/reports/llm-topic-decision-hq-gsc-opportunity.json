@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_topic_decision",
+  "generated_at": "2026-05-05T19:27:19Z",
+  "state": "decision_recorded",
+  "topic_id": "hq-gsc-opportunity",
+  "decision_state": "monitor",
+  "decided_by": "oleg",
+  "decision_note": "Owner scope review plus repeated live LLM Scout: hq.html already has strong title/H1/meta, guide-verified copy, Quick Answer, HQ30/HQ35 path, requirement rule, steel phase, and links to the exact HQ construction cost table. The analytics signal is real but currently not specific enough to justify content intake on a high-risk Progression cornerstone. Monitor until HQ upgrade queries show stronger volume or a more specific requirement-level intent cluster.",
+  "source_discovery": "automation/reports/llm-topic-discovery-hq-scout.json",
+  "topic_snapshot": {
+    "topic_id": "hq-gsc-opportunity",
+    "title": "GSC opportunity review: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
+    "cluster": "Progression",
+    "recommended_action": "monitor",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "hq.html",
+    "source_type": "llm_scout",
+    "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+    "confidence": "medium",
+    "priority": "low",
+    "status": "monitor",
+    "notes": "Reasonable review candidate, but the title/intent appears broad and could overlap with progression/start content; better to monitor until query patterns become clearer. Future trigger: If HQ upgrade queries gain stronger volume or a more specific intent cluster emerges.",
+    "risk_level": "",
+    "player_value": "",
+    "duplication_risk": "",
+    "claims_to_verify": [],
+    "next_step": "If HQ upgrade queries gain stronger volume or a more specific intent cluster emerges.",
+    "evidence": [
+      "GSC page signal: hq.html had 12579 impressions, 338 clicks, 2.69% CTR, avg position 7.69."
+    ],
+    "site_fit": {
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy` searchers.",
+      "cluster_owner": "Progression",
+      "expected_internal_route": [
+        "index.html",
+        "start.html",
+        "hq.html"
+      ],
+      "archetype_reason": "Existing page is `cornerstone-guide` in the `Progression` cluster; Scout should prefer updating the existing page before proposing new content."
+    },
+    "constraints": [
+      "Use existing page template and navigation patterns.",
+      "Treat GSC data as a signal, not proof that a rewrite is needed."
+    ],
+    "reject_if": [
+      "The query intent is already better served by another canonical page.",
+      "The proposed change would blur cluster role separation.",
+      "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+    ],
+    "prior_review": null,
+    "human_approval_required": false,
+    "backlog_row_preview": {
+      "topic_id": "hq-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
+      "cluster": "Progression",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "hq.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+      "confidence": "medium",
+      "priority": "low",
+      "status": "monitor",
+      "notes": "Reasonable review candidate, but the title/intent appears broad and could overlap with progression/start content; better to monitor until query patterns become clearer. Future trigger: If HQ upgrade queries gain stronger volume or a more specific intent cluster emerges."
+    }
+  },
+  "allows_worker_chain": false,
+  "allows_content_edit": false,
+  "next_actions": [
+    "Keep this topic out of content intake for now.",
+    "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+    "Do not create public content edits from this topic decision."
+  ],
+  "errors": [],
+  "output_path": "automation/reports/llm-topic-decision-hq-gsc-opportunity.json",
+  "markdown_path": "automation/reports/llm-topic-decision-hq-gsc-opportunity.md",
+  "safety": "No content, backlog, manifest, PR, or production files were modified. This decision only controls whether a discovered topic may proceed to the next no-write worker stage."
+}
