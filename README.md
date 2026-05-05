@@ -241,6 +241,14 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 
 This runs `llm-scout -> llm-editor -> llm-reviewer` and writes `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md` as a compact owner-review summary. It still cannot edit content, open PRs, or approve high-risk user-visible changes by itself.
 
+The same no-write chain is available in GitHub Actions:
+
+- Workflow: `.github/workflows/llm-worker-chain.yml`
+- Schedule: weekly after the GSC/Bing report windows
+- Manual dispatch: optional `topic_id` and `model` inputs
+- Push trigger: path-limited to LLM worker infrastructure
+- Output: uploaded artifact only, no commits or PRs
+
 ## Notes
 
 - No CI or deploy changes are required.

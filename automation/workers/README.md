@@ -147,6 +147,8 @@ It writes:
 
 The chain summary references each stage's request/result/markdown artifacts. If any stage fails or is blocked, the chain writes a blocked summary and stops before later stages. It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state.
 
+The GitHub Actions wrapper `.github/workflows/llm-worker-chain.yml` runs this chain on a weekly schedule, by manual dispatch, or after path-limited LLM worker infrastructure pushes. It uploads artifacts only; it must not commit generated reports or mutate content.
+
 ## Shared Inputs
 
 Every worker must treat these files as source-of-truth context:

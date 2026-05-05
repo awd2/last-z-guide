@@ -150,6 +150,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - fails closed when any stage is blocked or invalid
   - does not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state
 
+- `.github/workflows/llm-worker-chain.yml`
+  - runs the no-write live LLM worker chain by manual dispatch and weekly schedule
+  - uploads artifacts from `automation/reports/llm-worker-chain-gha/`
+  - does not commit generated reports, edit content, open PRs, or deploy
+
 - `checks/content_voice.py`
   - runs a no-write audit for generic, mass-produced, or low-utility writing signals
   - reports repeated trust boilerplate, generic phrases, long smooth paragraphs, and low specificity
@@ -432,6 +437,15 @@ LLM worker chain:
 - output lives in `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md`
 - per-stage request/result/markdown artifacts are also written and referenced from the summary
 - this is an owner-review summary only; it must not write content, backlog entries, manifests, PRs, or production state
+
+LLM worker chain workflow:
+
+- `.github/workflows/llm-worker-chain.yml` -> run the same no-write chain in GitHub Actions
+- trigger modes: weekly schedule, manual dispatch, or path-limited LLM worker infrastructure push
+- required secret: `OPENAI_API_KEY`
+- optional manual inputs: `topic_id`, `model`
+- output is an uploaded workflow artifact named `llm-worker-chain-<run_number>`
+- this workflow intentionally does not commit reports to `main`
 
 Content SEO opportunity report:
 

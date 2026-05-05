@@ -458,6 +458,8 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 `llm-worker-chain` runs the no-write live LLM Scout -> Editor -> Reviewer sequence and writes one summary artifact. It must preserve each stage's fail-closed behavior and must not write content, backlog entries, manifests, PRs, or production state.
 
+GitHub workflow `.github/workflows/llm-worker-chain.yml` runs the same no-write chain on a schedule and by manual dispatch. It uploads artifacts only and must not commit reports, edit content, open PRs, or deploy.
+
 Machine-readable snapshots exist for:
 
 - `health --json`
