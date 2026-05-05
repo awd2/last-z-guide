@@ -12,7 +12,7 @@ from unittest.mock import patch
 
 from automation.io import load_json, write_json
 from automation.reports import llm_review_latest
-from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_reviewer, llm_scout, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -496,6 +496,49 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(review["recommended_operator_action"], "owner_review_required")
             markdown = llm_review_latest.render_markdown(review)
             self.assertIn("LLM Latest Owner Review", markdown)
+
+    def test_llm_intake_latest_bridges_to_run_plan(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, fixture_llm_reviewer_response())
+            code, summary = llm_worker_chain.run_llm_worker_chain(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                provider="fixture",
+                topic_id="codes-gsc-opportunity",
+                basename="llm-worker-chain-fixture",
+                scout_basename="llm-worker-chain-scout-fixture",
+                editor_basename="llm-worker-chain-editor-fixture",
+                reviewer_basename="llm-worker-chain-reviewer-fixture",
+                scout_fixture_path=scout_fixture_path,
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(code, 0)
+            chain_path = Path(summary["artifacts"]["chain_json"])
+
+            pending_intake = llm_intake.build_intake(chain_path, approved_by=None, note=None)
+            self.assertEqual(pending_intake["report_type"], "llm_worker_proposal_intake")
+            self.assertEqual(pending_intake["state"], "approval_required")
+            self.assertEqual(pending_intake["proposed_backlog_item"]["cluster"], "Economy")
+            self.assertEqual(pending_intake["proposed_backlog_item"]["recommended_action"], "update_existing")
+
+            approved_intake = llm_intake.build_intake(chain_path, approved_by="fixture", note="contract test")
+            self.assertEqual(approved_intake["state"], "approved_for_intake")
+            self.assertEqual(approved_intake["approved_by"], "fixture")
+            run_plan = intake_to_run.build_proposal(approved_intake, tmp_path / "llm-intake.json")
+            self.assertEqual(run_plan["state"], "run_plan_ready")
+            self.assertEqual(run_plan["proposed_manifest"]["status"], "planned")
+            self.assertEqual(run_plan["proposed_manifest"]["changed_files"], [])
 
     def test_scout_editor_reviewer_contract_shapes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

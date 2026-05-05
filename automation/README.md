@@ -150,6 +150,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - fails closed when any stage is blocked or invalid
   - does not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state
 
+- `workers/llm_intake.py`
+  - reads the latest or specified LLM worker-chain summary
+  - writes a no-write LLM intake artifact for owner approval
+  - stays in `approval_required` until `--approved-by` is supplied when owner review is required
+  - does not edit content, backlog, manifests, PRs, or production state
+
 - `.github/workflows/llm-worker-chain.yml`
   - runs the no-write live LLM worker chain by manual dispatch and weekly schedule
   - uploads artifacts from `automation/reports/llm-worker-chain-gha/`
@@ -241,6 +247,8 @@ python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider opena
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
+python3 automation/pipeline.py llm-intake-latest --json
+python3 automation/pipeline.py llm-intake-latest --approved-by <name> --json
 python3 automation/pipeline.py content-seo-opportunities
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice
@@ -261,6 +269,7 @@ python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
+python3 automation/workers/llm_intake.py --approved-by <name> --json
 python3 automation/reports/llm_review_latest.py --json
 python3 automation/reports/content_seo_opportunities.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
@@ -309,6 +318,8 @@ python3 automation/pipeline.py llm-editor --topic-id codes-gsc-opportunity --pro
 python3 automation/pipeline.py llm-reviewer --topic-id codes-gsc-opportunity --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id codes-gsc-opportunity --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
+python3 automation/pipeline.py llm-intake-latest --json
+python3 automation/pipeline.py llm-intake-latest --approved-by oleg --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -349,6 +360,7 @@ Lifecycle shorthand:
 - `llm-reviewer` -> run a no-write LLM review gate from one LLM Editor planning brief
 - `llm-worker-chain` -> run the no-write live LLM Scout -> Editor -> Reviewer sequence and write one owner-review summary
 - `llm-review-latest` -> read the latest local LLM worker chain summary without calling an LLM provider
+- `llm-intake-latest` -> bridge the latest LLM worker chain summary into a no-write, owner-gated intake artifact
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
 - `content-voice` -> run a no-write audit for generic, mass-produced, or low-utility public content signals
@@ -458,6 +470,14 @@ LLM latest owner review:
 - `--chain <path>` can read a specific `llm-worker-chain-<topic_id>.json`
 - output includes target page, verdict, risk, blocking issues, warnings, owner questions, required checks, and next step
 - this is read-only and does not call OpenAI or mutate files
+
+LLM intake latest:
+
+- `python3 automation/pipeline.py llm-intake-latest --json` -> write a no-change intake artifact from the latest local LLM worker chain summary
+- `python3 automation/pipeline.py llm-intake-latest --chain <path> --approved-by <name> --json` -> record owner approval for that intake artifact
+- output lives in `automation/reports/llm-intake-<topic_id>.json` and `.md`
+- approved intake can move into the existing run-plan proposal flow with `python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --json`
+- this step still does not edit content, backlog, manifests, PRs, or production state
 
 Content SEO opportunity report:
 

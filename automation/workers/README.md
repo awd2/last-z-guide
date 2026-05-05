@@ -96,6 +96,8 @@ python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider opena
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
+python3 automation/pipeline.py llm-intake-latest --json
+python3 automation/pipeline.py llm-intake-latest --approved-by <name> --json
 ```
 
 It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter must not edit content, backlog, manifests, or production state.
@@ -109,6 +111,7 @@ python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
+python3 automation/workers/llm_intake.py --approved-by <name> --json
 ```
 
 `llm-scout` is the first live LLM worker wrapper. It builds deterministic Scout proposals from the latest GSC/Bing agent signals, sends a compact JSON-only review request through `llm_adapter`, and writes:
@@ -151,6 +154,19 @@ The chain summary references each stage's request/result/markdown artifacts. If 
 The GitHub Actions wrapper `.github/workflows/llm-worker-chain.yml` runs this chain on a weekly schedule, by manual dispatch, or after path-limited LLM worker infrastructure pushes. It uploads artifacts only; it must not commit generated reports or mutate content.
 
 `llm-review-latest` is a read-only operator view over the latest local `llm-worker-chain-<topic_id>.json` summary. It extracts the Reviewer gate result, owner questions, blocking issues, required checks, and next step without calling an LLM provider.
+
+`llm-intake-latest` is the no-write bridge from LLM owner review to the existing controlled intake/run-plan flow. It reads the latest or specified `llm-worker-chain-<topic_id>.json`, writes:
+
+- `automation/reports/llm-intake-<topic_id>.json`
+- `automation/reports/llm-intake-<topic_id>.md`
+
+When owner approval is required, the intake artifact stays `approval_required` until rerun with `--approved-by <name>`. An approved LLM intake can be passed to the existing run-plan command with:
+
+```bash
+python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --json
+```
+
+This still does not edit public content, backlog files, manifests, PRs, or production state.
 
 ## Shared Inputs
 

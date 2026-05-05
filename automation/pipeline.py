@@ -513,6 +513,35 @@ def cmd_llm_review_latest(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_intake_latest(
+    chain: str | None,
+    reports_dir: str | None,
+    approved_by: str | None,
+    note: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "workers" / "llm_intake.py")]
+    if chain:
+        command.extend(["--chain", chain])
+    if reports_dir:
+        command.extend(["--reports-dir", reports_dir])
+    if approved_by:
+        command.extend(["--approved-by", approved_by])
+    if note:
+        command.extend(["--note", note])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Intake Latest ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_content_seo_opportunities(
     json_output: str | None,
     markdown_output: str | None,
@@ -1807,6 +1836,18 @@ def build_parser() -> argparse.ArgumentParser:
     llm_review_latest_parser.add_argument("--reports-dir", help="Directory to search for LLM worker chain summaries.")
     llm_review_latest_parser.add_argument("--json", action="store_true", help="Print the owner-review summary as JSON.")
 
+    llm_intake_latest_parser = subparsers.add_parser(
+        "llm-intake-latest",
+        help="Generate a no-write intake artifact from the latest LLM worker chain.",
+    )
+    llm_intake_latest_parser.add_argument("--chain", help="Path to a specific llm-worker-chain-<topic_id>.json summary.")
+    llm_intake_latest_parser.add_argument("--reports-dir", help="Directory to search for LLM worker chain summaries.")
+    llm_intake_latest_parser.add_argument("--approved-by", help="Human approver name or handle.")
+    llm_intake_latest_parser.add_argument("--note", help="Optional approval note.")
+    llm_intake_latest_parser.add_argument("--output-dir", help="Directory for LLM intake artifacts.")
+    llm_intake_latest_parser.add_argument("--basename", help="Output basename without extension.")
+    llm_intake_latest_parser.add_argument("--json", action="store_true", help="Print the LLM intake summary as JSON.")
+
     content_seo_parser = subparsers.add_parser(
         "content-seo-opportunities",
         help="Build a no-write SEO/LLM content opportunity report.",
@@ -1964,6 +2005,16 @@ def main() -> int:
         )
     if args.command == "llm-review-latest":
         return cmd_llm_review_latest(args.chain, args.reports_dir, args.json)
+    if args.command == "llm-intake-latest":
+        return cmd_llm_intake_latest(
+            args.chain,
+            args.reports_dir,
+            args.approved_by,
+            args.note,
+            args.output_dir,
+            args.basename,
+            args.json,
+        )
     if args.command == "content-seo-opportunities":
         return cmd_content_seo_opportunities(
             args.json_output,
