@@ -2,7 +2,7 @@
   "run_id": "2026-05-05-codes-gsc-opportunity-llm-approved-intake",
   "created_at": "2026-05-05T18:09:19Z",
   "run_type": "update_existing",
-  "status": "planned",
+  "status": "reviewed",
   "risk_level": "high",
   "summary": "Worker-approved intake for `codes.html` from `codes-gsc-opportunity`.",
   "inputs": {
@@ -58,8 +58,26 @@
       "created_at": "2026-05-05T18:17:50Z",
       "created_by": "oleg",
       "safety": "Created planned run manifest only; no content files were modified."
+    },
+    "review_context": {
+      "canonical_claim_ids": [
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox"
+      ],
+      "related_filenames": [
+        "codes.html"
+      ]
     }
   },
   "changed_files": [],
-  "checks": {}
+  "checks": {},
+  "review": {
+    "verdict": "needs_human_review",
+    "open_questions": [
+      "Does this run need human approval before any content drafting or merge?"
+    ],
+    "next_action": "review_human",
+    "reviewer_notes": "Deterministic review scaffold complete. The run should explicitly respect these canonical claims: gift-center-cluster-role-separation, gift-center-only-redeem-flow, gift-rewards-mailbox."
+  }
 }
