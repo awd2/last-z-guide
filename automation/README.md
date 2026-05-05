@@ -131,6 +131,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - writes request/result/markdown artifacts for human review
   - does not mutate backlog, manifests, content, PRs, or production state
 
+- `workers/llm_topic_discovery.py`
+  - reads one LLM Scout request/result pair
+  - converts selected opportunities into backlog-shaped topic discovery proposals
+  - writes no-write JSON/markdown artifacts for owner review
+  - does not mutate `topic_backlog.csv`, manifests, content, PRs, or production state
+
 - `workers/llm_editor.py`
   - reads one selected LLM Scout opportunity and deterministic Editor context
   - sends a JSON-only planning brief request through `llm_adapter`
@@ -244,6 +250,7 @@ python3 automation/pipeline.py worker-run-plan --intake <intake.json> --basename
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name>
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -267,6 +274,7 @@ python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
@@ -433,6 +441,13 @@ LLM Scout review:
 - default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
 - output lives in `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`
 - this is a no-write opportunity review; selected topics still require deterministic Editor/Reviewer steps and human approval before content work
+
+LLM topic discovery:
+
+- `python3 automation/pipeline.py llm-topic-discovery --json` -> convert selected LLM Scout opportunities into backlog-shaped topic proposals for owner review
+- default input uses `automation/reports/llm-scout-review-result.json` and `automation/reports/llm-scout-review-request.json`
+- output lives in `automation/reports/llm-topic-discovery.json` and `automation/reports/llm-topic-discovery.md`
+- this is a no-write bridge; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
 
 LLM Editor planning brief:
 

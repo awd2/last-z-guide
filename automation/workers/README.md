@@ -92,6 +92,7 @@ The current LLM provider adapter is fail-closed and artifact-only:
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -108,6 +109,7 @@ The lower-level helper remains available at:
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
@@ -121,6 +123,17 @@ python3 automation/workers/llm_intake.py --approved-by <name> --json
 - `automation/reports/llm-scout-review.md`
 
 It does not mutate backlog, manifests, content, PRs, or production state. Selected opportunities remain review context only until a human approves the deterministic worker chain and any later content proposal.
+
+`llm-topic-discovery` is the no-write bridge from LLM Scout selection to
+owner-reviewed topic intake. It reads one LLM Scout request/result pair and
+writes backlog-shaped proposals:
+
+- `automation/reports/llm-topic-discovery.json`
+- `automation/reports/llm-topic-discovery.md`
+
+It does not mutate `topic_backlog.csv`, manifests, content, PRs, or production
+state. The output is a review artifact only; a human still chooses whether a
+topic should enter the worker chain, backlog, or monitoring queue.
 
 `llm-editor` is the second live LLM worker wrapper. It reads one selected LLM Scout opportunity, combines it with deterministic Editor context, sends a JSON-only planning request through `llm_adapter`, and writes:
 

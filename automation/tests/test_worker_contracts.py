@@ -13,7 +13,7 @@ from unittest.mock import patch
 from automation.io import load_json, write_json
 from automation.reports import llm_review_latest
 from automation import close_run
-from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -332,6 +332,56 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "llm-scout-fixture-request.json").exists())
             self.assertTrue((tmp_path / "llm-scout-fixture-result.json").exists())
             self.assertTrue((tmp_path / "llm-scout-fixture.md").exists())
+
+    def test_llm_topic_discovery_creates_backlog_shaped_no_write_artifact(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            scout_request_path = tmp_path / "llm-scout-review-request.json"
+            scout_result_path = tmp_path / "llm-scout-review-result.json"
+            write_json(
+                scout_request_path,
+                {
+                    "inputs": {
+                        "proposals": [
+                            {
+                                "topic_id": "codes-gsc-opportunity",
+                                "title": "GSC opportunity review: Last Z Redeem Codes",
+                                "cluster": "Economy",
+                                "recommended_action": "update_existing",
+                                "archetype_suggestion": "cornerstone-guide",
+                                "target_page_or_slug": "codes.html",
+                                "source_reference": "GSC weekly fixture",
+                                "confidence": "high",
+                                "priority": "high",
+                                "risk_level": "high",
+                                "evidence": ["GSC page signal fixture."],
+                                "site_fit": {"expected_internal_route": ["index.html", "codes.html"]},
+                                "constraints": ["Use existing page template."],
+                                "reject_if": ["The query intent is already served."],
+                            }
+                        ]
+                    }
+                },
+            )
+            write_json(scout_result_path, {"state": "completed", **fixture_llm_scout_response()})
+
+            with patch.object(llm_topic_discovery, "MANIFESTS_DIR", tmp_path / "manifests"):
+                code, payload = llm_topic_discovery.run_topic_discovery(
+                    scout_result_path=scout_result_path,
+                    scout_request_path=scout_request_path,
+                    output_dir=tmp_path,
+                    basename="topic-discovery-fixture",
+                )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(payload["state"], "topic_discovery_ready")
+            self.assertEqual(payload["topic_count"], 1)
+            topic = payload["topics"][0]
+            self.assertEqual(topic["topic_id"], "codes-gsc-opportunity")
+            self.assertEqual(topic["backlog_row_preview"]["target_page_or_slug"], "codes.html")
+            self.assertTrue(topic["human_approval_required"])
+            self.assertTrue((tmp_path / "topic-discovery-fixture.json").exists())
+            self.assertTrue((tmp_path / "topic-discovery-fixture.md").exists())
 
     def test_llm_editor_builds_brief_from_llm_scout_fixture(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
