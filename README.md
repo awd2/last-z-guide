@@ -117,6 +117,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider f
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
+python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -184,7 +185,7 @@ Future LLM worker contracts live in:
 
 - `automation/workers/README.md`
 
-That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout`, `Editor`, and `Reviewer` steps plus a chain runner, intake gate, run-plan proposal step, LLM Scout review wrapper, LLM Editor planning wrapper, LLM Reviewer gate wrapper, and live LLM worker-chain wrapper that turn weekly GSC/Bing agent signals into reviewable topic proposals, content briefs, readiness verdicts, explicit human-gated intake artifacts, draft run-plan proposals, JSON-only LLM opportunity reviews, no-copy planning briefs, no-write review gates, and one-command LLM chain summaries.
+That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout`, `Editor`, and `Reviewer` steps plus a chain runner, intake gate, run-plan proposal step, LLM Scout review wrapper, LLM topic discovery/decision gates, LLM Editor planning wrapper, LLM Reviewer gate wrapper, and live LLM worker-chain wrapper that turn weekly GSC/Bing agent signals into reviewable topic proposals, content briefs, readiness verdicts, explicit human-gated intake artifacts, draft run-plan proposals, JSON-only LLM opportunity reviews, durable owner topic decisions, no-copy planning briefs, no-write review gates, and one-command LLM chain summaries.
 
 ## GSC Analytics Automation
 
@@ -223,6 +224,14 @@ python3 automation/pipeline.py llm-scout --provider openai --json
 ```
 
 This writes `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`. It is review context only; it does not edit content, backlog, manifests, PRs, or production state.
+
+For a durable no-write owner decision on one discovered topic, run:
+
+```bash
+python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
+```
+
+Use `approved_for_chain`, `monitor`, or `rejected`. This writes `automation/reports/llm-topic-decision-<topic_id>.json` and `.md`; it does not approve public content edits.
 
 For a no-write LLM Editor planning brief from one selected Scout opportunity, run:
 

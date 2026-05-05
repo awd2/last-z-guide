@@ -427,6 +427,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider f
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
+python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -446,6 +447,8 @@ python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by 
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_topic_discovery.py --json
+python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
@@ -458,6 +461,10 @@ python3 -m unittest discover -s automation/tests -p 'test_*.py'
 The `openai` LLM adapter provider is live but still no-write and fail-closed. It requires `OPENAI_API_KEY`, uses `OPENAI_MODEL` when set, defaults to `gpt-5.4-mini`, and returns only validated JSON artifacts. It must not edit content, backlog, manifests, or production state.
 
 `llm-scout` is the first live LLM worker wrapper. It reviews deterministic Scout proposals from GSC/Bing agent signals through `llm_adapter`, writes request/result/markdown artifacts, and must not edit content, backlog, manifests, PRs, or production state.
+
+`llm-topic-discovery` converts selected LLM Scout opportunities into backlog-shaped topic proposals for owner review. It must not edit `topic_backlog.csv`, manifests, content, PRs, or production state.
+
+`llm-topic-decision` records an owner decision for one LLM topic discovery proposal. `approved_for_chain` only allows the next no-write worker chain; `monitor` and `rejected` keep the topic out of intake. It must not approve public copy, patch specs, backlog edits, manifests, PRs, or production state.
 
 `llm-editor` is the second live LLM worker wrapper. It creates a planning brief from one selected LLM Scout opportunity and deterministic Editor context. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
 

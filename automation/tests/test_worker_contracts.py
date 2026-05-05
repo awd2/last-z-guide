@@ -13,7 +13,7 @@ from unittest.mock import patch
 from automation.io import load_json, write_json
 from automation.reports import llm_review_latest
 from automation import close_run
-from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -382,6 +382,51 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue(topic["human_approval_required"])
             self.assertTrue((tmp_path / "topic-discovery-fixture.json").exists())
             self.assertTrue((tmp_path / "topic-discovery-fixture.md").exists())
+
+    def test_llm_topic_decision_records_owner_monitor_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            discovery_path = tmp_path / "topic-discovery-fixture.json"
+            write_json(
+                discovery_path,
+                {
+                    "schema_version": 1,
+                    "report_type": "llm_topic_discovery",
+                    "state": "topic_discovery_ready",
+                    "topics": [
+                        {
+                            "topic_id": "research-gsc-opportunity",
+                            "title": "GSC opportunity review: Last Z Research Guide",
+                            "cluster": "Research",
+                            "recommended_action": "update_existing",
+                            "target_page_or_slug": "research.html",
+                            "priority": "high",
+                            "risk_level": "high",
+                            "status": "candidate",
+                            "notes": "Owner scope review required.",
+                        }
+                    ],
+                },
+            )
+
+            code, payload = llm_topic_decision.run_topic_decision(
+                discovery_path=discovery_path,
+                topic_id="research-gsc-opportunity",
+                decision_state="monitor",
+                decided_by="fixture",
+                note="Current cornerstone page already satisfies the opportunity.",
+                output_dir=tmp_path,
+                basename=None,
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(payload["report_type"], "llm_topic_decision")
+            self.assertEqual(payload["state"], "decision_recorded")
+            self.assertEqual(payload["decision_state"], "monitor")
+            self.assertFalse(payload["allows_worker_chain"])
+            self.assertFalse(payload["allows_content_edit"])
+            self.assertTrue((tmp_path / "llm-topic-decision-research-gsc-opportunity.json").exists())
+            self.assertTrue((tmp_path / "llm-topic-decision-research-gsc-opportunity.md").exists())
 
     def test_llm_editor_builds_brief_from_llm_scout_fixture(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

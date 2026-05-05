@@ -571,6 +571,41 @@ def cmd_llm_topic_discovery(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_topic_decision(
+    discovery: str | None,
+    topic_id: str,
+    state: str,
+    decided_by: str,
+    note: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_topic_decision.py"),
+        "--topic-id",
+        topic_id,
+        "--state",
+        state,
+        "--decided-by",
+        decided_by,
+    ]
+    if discovery:
+        command.extend(["--discovery", discovery])
+    if note:
+        command.extend(["--note", note])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Topic Decision ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_content_seo_opportunities(
     json_output: str | None,
     markdown_output: str | None,
@@ -1889,6 +1924,24 @@ def build_parser() -> argparse.ArgumentParser:
     llm_topic_discovery_parser.add_argument("--basename", help="Output basename without extension.")
     llm_topic_discovery_parser.add_argument("--json", action="store_true", help="Print the topic discovery summary as JSON.")
 
+    llm_topic_decision_parser = subparsers.add_parser(
+        "llm-topic-decision",
+        help="Record an owner decision for one LLM topic discovery proposal.",
+    )
+    llm_topic_decision_parser.add_argument("--discovery", help="Path to llm-topic-discovery.json.")
+    llm_topic_decision_parser.add_argument("--topic-id", required=True, help="Discovered topic_id to decide.")
+    llm_topic_decision_parser.add_argument(
+        "--state",
+        required=True,
+        choices=["approved_for_chain", "monitor", "rejected"],
+        help="Owner decision for this topic.",
+    )
+    llm_topic_decision_parser.add_argument("--decided-by", required=True, help="Human owner/operator name or handle.")
+    llm_topic_decision_parser.add_argument("--note", help="Optional decision note.")
+    llm_topic_decision_parser.add_argument("--output-dir", help="Directory for decision artifacts.")
+    llm_topic_decision_parser.add_argument("--basename", help="Output basename without extension.")
+    llm_topic_decision_parser.add_argument("--json", action="store_true", help="Print the topic decision summary as JSON.")
+
     content_seo_parser = subparsers.add_parser(
         "content-seo-opportunities",
         help="Build a no-write SEO/LLM content opportunity report.",
@@ -2060,6 +2113,17 @@ def main() -> int:
         return cmd_llm_topic_discovery(
             args.scout_result,
             args.scout_request,
+            args.output_dir,
+            args.basename,
+            args.json,
+        )
+    if args.command == "llm-topic-decision":
+        return cmd_llm_topic_decision(
+            args.discovery,
+            args.topic_id,
+            args.state,
+            args.decided_by,
+            args.note,
             args.output_dir,
             args.basename,
             args.json,

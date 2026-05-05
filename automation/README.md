@@ -137,6 +137,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - writes no-write JSON/markdown artifacts for owner review
   - does not mutate `topic_backlog.csv`, manifests, content, PRs, or production state
 
+- `workers/llm_topic_decision.py`
+  - records the owner decision for one LLM topic discovery proposal
+  - supports `approved_for_chain`, `monitor`, and `rejected`
+  - writes no-write JSON/markdown artifacts for durable topic routing
+  - does not mutate `topic_backlog.csv`, manifests, content, PRs, or production state
+
 - `workers/llm_editor.py`
   - reads one selected LLM Scout opportunity and deterministic Editor context
   - sends a JSON-only planning brief request through `llm_adapter`
@@ -251,6 +257,7 @@ python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-b
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
+python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -275,6 +282,7 @@ python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by 
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
+python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
@@ -366,6 +374,8 @@ Lifecycle shorthand:
 - `worker-manifest` -> create a `planned` manifest from an approved Worker run-plan proposal
 - `llm-adapter` -> validate future LLM request/response contracts through a fail-closed provider adapter
 - `llm-scout` -> run a no-write LLM review over deterministic Scout proposals from GSC/Bing agent signals
+- `llm-topic-discovery` -> convert selected LLM Scout opportunities into no-write topic proposals
+- `llm-topic-decision` -> record an owner decision for one discovered topic
 - `llm-editor` -> run a no-write LLM planning brief from one selected LLM Scout opportunity
 - `llm-reviewer` -> run a no-write LLM review gate from one LLM Editor planning brief
 - `llm-worker-chain` -> run the no-write live LLM Scout -> Editor -> Reviewer sequence and write one owner-review summary
@@ -448,6 +458,15 @@ LLM topic discovery:
 - default input uses `automation/reports/llm-scout-review-result.json` and `automation/reports/llm-scout-review-request.json`
 - output lives in `automation/reports/llm-topic-discovery.json` and `automation/reports/llm-topic-discovery.md`
 - this is a no-write bridge; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
+
+LLM topic decision:
+
+- `python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json` -> record an owner decision for one discovered topic
+- `--state approved_for_chain` allows only the next no-write `llm-worker-chain` step
+- `--state monitor` keeps the topic out of intake until materially new evidence appears
+- `--state rejected` blocks the topic unless the owner explicitly reopens it
+- output lives in `automation/reports/llm-topic-decision-<topic_id>.json` and `.md`
+- this is a no-write decision artifact; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
 
 LLM Editor planning brief:
 

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_topic_decision",
+  "generated_at": "2026-05-05T19:13:33Z",
+  "state": "decision_recorded",
+  "topic_id": "research-gsc-opportunity",
+  "decision_state": "monitor",
+  "decided_by": "oleg",
+  "decision_note": "Owner scope review: current research.html already satisfies the broad GSC opportunity. Keep this topic out of content intake unless materially new query evidence points to a narrow, concrete improvement.",
+  "source_discovery": "automation/reports/llm-topic-discovery.json",
+  "topic_snapshot": {
+    "topic_id": "research-gsc-opportunity",
+    "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+    "cluster": "Research",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "research.html",
+    "source_type": "llm_scout",
+    "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+    "confidence": "high",
+    "priority": "high",
+    "status": "candidate",
+    "notes": "Research.html shows strong impressions but middling CTR, and the rising rescue-related query suggests an adjacent, high-value intent to test against the current page framing. This is a solid human-review candidate because it could improve navigation to the correct research path without creating a duplicate guide.",
+    "risk_level": "high",
+    "player_value": "Helps players find the best research order, peace shield guidance, and T10 progression path more quickly.",
+    "duplication_risk": "Medium; rescue-intent coverage could blur Research cluster boundaries if it begins to absorb battle or event content.",
+    "claims_to_verify": [
+      "Whether `urgent rescue last z` belongs on research.html or a different canonical page.",
+      "Whether protected claims `research-best-mainline`, `hero-training-cockpit-stop`, `peace-shield-value`, and `research-atlas-role` remain true after updates."
+    ],
+    "next_step": "Review whether the page intro and section ordering can address search intent better while preserving Research cluster roles and protected claims.",
+    "evidence": [
+      "GSC page signal: research.html had 11557 impressions, 519 clicks, 4.49% CTR, avg position 7.34.",
+      "Rising query: `urgent rescue last z` gained 13 impressions in the last 7-day comparison window."
+    ],
+    "site_fit": {
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z research guide` searchers.",
+      "cluster_owner": "Research",
+      "expected_internal_route": [
+        "index.html",
+        "research.html",
+        "research-costs.html"
+      ],
+      "archetype_reason": "Existing page is `cornerstone-guide` in the `Research` cluster; Scout should prefer updating the existing page before proposing new content."
+    },
+    "constraints": [
+      "Use existing page template and navigation patterns.",
+      "Treat GSC data as a signal, not proof that a rewrite is needed.",
+      "Protect canonical claim `research-best-mainline`.",
+      "Protect canonical claim `hero-training-cockpit-stop`.",
+      "Protect canonical claim `peace-shield-value`.",
+      "Protect canonical claim `research-atlas-role`."
+    ],
+    "reject_if": [
+      "The query intent is already better served by another canonical page.",
+      "The proposed change would blur cluster role separation.",
+      "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+    ],
+    "prior_review": null,
+    "human_approval_required": true,
+    "backlog_row_preview": {
+      "topic_id": "research-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+      "cluster": "Research",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "status": "candidate",
+      "notes": "Research.html shows strong impressions but middling CTR, and the rising rescue-related query suggests an adjacent, high-value intent to test against the current page framing. This is a solid human-review candidate because it could improve navigation to the correct research path without creating a duplicate guide."
+    }
+  },
+  "allows_worker_chain": false,
+  "allows_content_edit": false,
+  "next_actions": [
+    "Keep this topic out of content intake for now.",
+    "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+    "Do not create public content edits from this topic decision."
+  ],
+  "errors": [],
+  "output_path": "automation/reports/llm-topic-decision-research-gsc-opportunity.json",
+  "markdown_path": "automation/reports/llm-topic-decision-research-gsc-opportunity.md",
+  "safety": "No content, backlog, manifest, PR, or production files were modified. This decision only controls whether a discovered topic may proceed to the next no-write worker stage."
+}
