@@ -272,6 +272,8 @@ def cmd_worker_intake(
 def cmd_worker_run_plan(
     topic_id: str | None,
     intake: str | None,
+    output_dir: str | None,
+    basename: str | None,
     as_json: bool,
 ) -> int:
     command = [sys.executable, str(AUTOMATION_DIR / "workers" / "intake_to_run.py")]
@@ -279,6 +281,10 @@ def cmd_worker_run_plan(
         command.extend(["--topic-id", topic_id])
     if intake:
         command.extend(["--intake", intake])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
     if as_json:
         command.append("--json")
         return subprocess.run(command, cwd=ROOT).returncode
@@ -1709,6 +1715,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     worker_run_plan_parser.add_argument("--topic-id", help="Topic id used to infer the default intake path.")
     worker_run_plan_parser.add_argument("--intake", help="Path to worker-intake-<topic_id>.json.")
+    worker_run_plan_parser.add_argument("--output-dir", help="Directory for run-plan proposal artifacts.")
+    worker_run_plan_parser.add_argument("--basename", help="Output basename without extension.")
     worker_run_plan_parser.add_argument("--json", action="store_true", help="Print the run-plan summary as JSON.")
 
     worker_manifest_parser = subparsers.add_parser(
@@ -1941,7 +1949,7 @@ def main() -> int:
     if args.command == "worker-intake":
         return cmd_worker_intake(args.topic_id, args.chain, args.approved_by, args.note, args.json)
     if args.command == "worker-run-plan":
-        return cmd_worker_run_plan(args.topic_id, args.intake, args.json)
+        return cmd_worker_run_plan(args.topic_id, args.intake, args.output_dir, args.basename, args.json)
     if args.command == "worker-manifest":
         return cmd_worker_manifest(
             args.topic_id,

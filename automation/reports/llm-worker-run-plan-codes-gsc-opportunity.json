@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "report_type": "worker_intake_run_plan",
+  "generated_at": "2026-05-05T18:09:19Z",
+  "source_intake_file": "automation/reports/llm-intake-codes-gsc-opportunity.json",
+  "source_topic_id": "codes-gsc-opportunity",
+  "target_page_or_slug": "codes.html",
+  "state": "run_plan_ready",
+  "blockers": [],
+  "warnings": [
+    "Approved intake is high risk; later patch planning must stay narrow and human-reviewed."
+  ],
+  "proposed_backlog_item": {
+    "topic_id": "codes-gsc-opportunity-llm-approved-intake",
+    "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+    "cluster": "Economy",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "codes.html",
+    "source_type": "analytics",
+    "source_reference": "LLM worker chain review: codes-gsc-opportunity",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review."
+  },
+  "proposed_manifest": {
+    "run_id": "2026-05-05-codes-gsc-opportunity-llm-approved-intake",
+    "created_at": "2026-05-05T18:09:19Z",
+    "run_type": "update_existing",
+    "status": "planned",
+    "risk_level": "high",
+    "summary": "Worker-approved intake for `codes.html` from `codes-gsc-opportunity`.",
+    "inputs": {
+      "topic_id": "codes-gsc-opportunity-llm-approved-intake",
+      "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+      "cluster": "Economy",
+      "source_type": "analytics",
+      "source_reference": "LLM worker chain review: codes-gsc-opportunity",
+      "confidence": "high",
+      "priority": "high",
+      "status": "backlog",
+      "approved_by": "oleg",
+      "approval_note": "Owner approved moving this LLM opportunity into no-write run-plan intake; no content changes approved."
+    },
+    "plan": {
+      "topic_id": "codes-gsc-opportunity-llm-approved-intake",
+      "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+      "cluster": "Economy",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "codes.html",
+      "source_type": "analytics",
+      "source_reference": "LLM worker chain review: codes-gsc-opportunity",
+      "confidence": "high",
+      "priority": "high",
+      "status": "backlog",
+      "risk_level": "high",
+      "plan_summary": "Prepare a controlled content run for `codes.html` from an approved Worker intake artifact.",
+      "memory_files": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md"
+      ],
+      "related_pages": [
+        "codes.html"
+      ],
+      "deterministic_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict"
+      ],
+      "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review."
+    },
+    "artifacts": {
+      "worker_intake": "automation/reports/llm-intake-codes-gsc-opportunity.json",
+      "source_chain": "automation/reports/llm-worker-chain-codes-gsc-opportunity.json"
+    },
+    "changed_files": [],
+    "checks": {},
+    "review": null
+  },
+  "next_actions": [
+    "Review proposed_manifest before creating any actual manifest file.",
+    "If accepted, create `automation/manifests/2026-05-05-codes-gsc-opportunity-llm-approved-intake.json` from proposed_manifest.",
+    "Then continue with: python3 automation/pipeline.py review 2026-05-05-codes-gsc-opportunity-llm-approved-intake"
+  ],
+  "safety": "No content, backlog, or manifest files were modified by this run-plan proposal."
+}

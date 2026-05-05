@@ -240,6 +240,7 @@ python3 automation/pipeline.py close-run <run_id>
 python3 automation/pipeline.py worker-chain --topic-id <topic_id>
 python3 automation/pipeline.py worker-intake --topic-id <topic_id>
 python3 automation/pipeline.py worker-run-plan --topic-id <topic_id>
+python3 automation/pipeline.py worker-run-plan --intake <intake.json> --basename <basename> --json
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name>
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
 python3 automation/pipeline.py llm-scout --provider openai --json
@@ -310,6 +311,7 @@ python3 automation/pipeline.py close-run 2026-04-22-research-cluster-nav --note 
 python3 automation/pipeline.py worker-chain --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py worker-intake --topic-id codes-gsc-opportunity --json
 python3 automation/pipeline.py worker-run-plan --topic-id codes-gsc-opportunity --json
+python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-codes-gsc-opportunity.json --basename llm-worker-run-plan-codes-gsc-opportunity --json
 python3 automation/pipeline.py worker-manifest --topic-id codes-gsc-opportunity --created-by oleg --dry-run --json
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider fixture --fixture automation/reports/example-llm-response.json --json
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider openai --json
@@ -476,7 +478,7 @@ LLM intake latest:
 - `python3 automation/pipeline.py llm-intake-latest --json` -> write a no-change intake artifact from the latest local LLM worker chain summary
 - `python3 automation/pipeline.py llm-intake-latest --chain <path> --approved-by <name> --json` -> record owner approval for that intake artifact
 - output lives in `automation/reports/llm-intake-<topic_id>.json` and `.md`
-- approved intake can move into the existing run-plan proposal flow with `python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --json`
+- approved intake can move into the existing run-plan proposal flow with `python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --basename llm-worker-run-plan-<topic_id> --json`
 - this step still does not edit content, backlog, manifests, PRs, or production state
 
 Content SEO opportunity report:

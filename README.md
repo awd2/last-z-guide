@@ -111,6 +111,7 @@ python3 automation/pipeline.py close-run <run_id>
 python3 automation/pipeline.py worker-chain --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-intake --topic-id <topic_id> --json
 python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json
+python3 automation/pipeline.py worker-run-plan --intake <intake.json> --basename <basename> --json
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json

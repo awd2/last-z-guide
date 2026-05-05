@@ -164,6 +164,7 @@ When owner approval is required, the intake artifact stays `approval_required` u
 
 ```bash
 python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --json
+python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --basename llm-worker-run-plan-<topic_id> --json
 ```
 
 This still does not edit public content, backlog files, manifests, PRs, or production state.

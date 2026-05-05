@@ -2,12 +2,12 @@
 
 ## Status
 
-- State: `approval_required`
+- State: `approved_for_intake`
 - Target: `codes.html`
 - Review verdict: `needs_human_review`
 - Risk: `high`
 - Approved next stage: `none`
-- Approved by: ``
+- Approved by: `oleg`
 - Safety: no content, backlog, manifest, PR, or production files were modified by this LLM intake bridge.
 
 ## Blockers
@@ -20,7 +20,6 @@
 - High-risk opportunity; keep the future proposal narrow and owner-reviewed.
 - LLM Reviewer did not approve an automatic next stage; human approval is required.
 - Owner questions must be answered before any public content proposal is written.
-- Owner approval is required before this LLM opportunity can become run intake.
 
 ## Owner Questions
 
@@ -72,5 +71,6 @@ Keep answer-first structure, but make the opening clearly orient users to the of
 
 ## Next Actions
 
-- Human reviews the LLM latest owner review and answers owner questions.
-- If approved, run: python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-codes-gsc-opportunity.json --approved-by <name> --json
+- Review this intake artifact before converting it into a run-plan proposal.
+- Run: python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-codes-gsc-opportunity.json --json
+- Do not write public content until a later proposal artifact receives explicit owner approval.
