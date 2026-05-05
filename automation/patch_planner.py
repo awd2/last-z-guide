@@ -256,6 +256,8 @@ def main() -> int:
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     manifest_path = resolve_manifest_path(args.manifest)
     manifest = load_run_manifest(manifest_path)
+    if manifest.status == "draft_brief_ready":
+        manifest.status = "patch_plan_ready"
 
     patch_plan, markdown = build_patch_plan(manifest)
     out_path = REPORTS_DIR / f"{manifest.run_id}.patch.md"
@@ -265,8 +267,6 @@ def main() -> int:
     manifest.artifacts["patch_plan"] = patch_plan
     manifest.artifacts["patch_plan"]["report_path"] = str(out_path.relative_to(ROOT))
     manifest.changed_files = list(patch_plan.get("changed_files", []))
-    if manifest.status == "draft_brief_ready":
-        manifest.status = "patch_plan_ready"
     write_run_manifest(manifest_path, manifest)
 
     print(f"Wrote {out_path.relative_to(ROOT)}")
