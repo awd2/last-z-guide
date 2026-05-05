@@ -1,16 +1,13 @@
 {
   "schema_version": 1,
   "report_type": "llm_topic_decisions_summary",
-  "generated_at": "2026-05-05T19:52:52Z",
+  "generated_at": "2026-05-05T19:58:31Z",
   "decision_count": 4,
   "counts_by_state": {
-    "approved_for_chain": 1,
-    "monitor": 3
+    "monitor": 4
   },
-  "allowed_worker_chain_count": 1,
-  "allowed_worker_chain_topics": [
-    "hq-gsc-opportunity"
-  ],
+  "allowed_worker_chain_count": 0,
+  "allowed_worker_chain_topics": [],
   "content_edit_allowed_count": 0,
   "decisions": [
     {
@@ -36,20 +33,20 @@
     },
     {
       "topic_id": "hq-gsc-opportunity",
-      "decision_state": "approved_for_chain",
+      "decision_state": "monitor",
       "decided_by": "oleg",
-      "generated_at": "2026-05-05T19:52:43Z",
+      "generated_at": "2026-05-05T19:58:24Z",
       "target_page_or_slug": "hq.html",
       "cluster": "Progression",
       "risk_level": "",
       "priority": "low",
-      "allows_worker_chain": true,
+      "allows_worker_chain": false,
       "allows_content_edit": false,
-      "decision_note": "Owner approved this topic for one no-write LLM worker-chain replay only. This does not approve public content edits, patch specs, PRs, or deployment.",
+      "decision_note": "No-write LLM worker chain and HQ canonical verification are complete. hq.html remains the canonical HQ upgrade strategy page, but public cleanup requires separate owner approval before any content proposal or edit.",
       "next_actions": [
-        "Run the no-write LLM worker chain from this saved decision: python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-hq-gsc-opportunity.json --provider openai --json",
-        "Review the generated LLM Reviewer gate before any intake, run-plan, or public content proposal.",
-        "Public content still requires exact text/spec proposal, explicit owner approval, and strict checks."
+        "Keep this topic out of content intake for now.",
+        "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+        "Do not create public content edits from this topic decision."
       ],
       "source_discovery": "automation/reports/llm-topic-discovery-hq-scout.json",
       "artifact_path": "automation/reports/llm-topic-decision-hq-gsc-opportunity.json",

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "report_type": "hq_owner_clarification",
+  "generated_at": "2026-05-05",
+  "source_topic_id": "hq-gsc-opportunity",
+  "target_page_or_slug": "hq.html",
+  "state": "clarification_complete",
+  "canonical_target_decision": "hq.html remains canonical for HQ upgrade strategy",
+  "recommended_next_stage": "owner_approval_required_for_small_content_cleanup_proposal",
+  "content_edit_allowed": false,
+  "role_map": {
+    "hq.html": "canonical HQ upgrade strategy, HQ30/HQ35 path, steel phase, Sophia, requirements rule, Alliance Duel completion timing",
+    "hq-construction-cost.html": "exact HQ cost and prerequisite table",
+    "start.html": "beginner first steps and early mistake avoidance",
+    "early-game-optimization.html": "first 3-7 day optimization and HQ/Lab awareness",
+    "base-building-order.html": "shelter building order and prerequisite cycle support page",
+    "shooter-stages.html": "shooter stage mechanics and progression loop support"
+  },
+  "issues_found": [
+    {
+      "severity": "high",
+      "file": "hq.html",
+      "issue": "Corrupted or typo sentence: `Clubely costs anything`.",
+      "proposed_direction": "Replace with a concrete early-phase cost statement or remove the bullet."
+    },
+    {
+      "severity": "medium",
+      "file": "hq.html",
+      "issue": "Building terminology uses `Assault Camp` while site/table terminology uses `Assaulter Camp`.",
+      "proposed_direction": "Use `Assaulter Camp` consistently."
+    },
+    {
+      "severity": "high",
+      "file": "hq.html",
+      "issue": "T11 language is speculative or too strong for public guidance without owner/source confirmation.",
+      "proposed_direction": "Soften, qualify as future-looking/server-dependent, or remove."
+    },
+    {
+      "severity": "high",
+      "file": "hq.html",
+      "issue": "Steel source priority conflicts with `steel.html`.",
+      "proposed_direction": "Align with `steel.html`: Tyrant rallies first, orange bounties as high-value/scaling source, other sources as support."
+    },
+    {
+      "severity": "medium",
+      "file": "hq.html",
+      "issue": "Requirement pattern wording implies HQ8-35 pattern, while `hq-construction-cost.html` shows HQ31-35 differently.",
+      "proposed_direction": "Clarify HQ8-30 Lab + second requirement versus HQ31-35 table-based requirements."
+    },
+    {
+      "severity": "medium",
+      "file": "hq.html",
+      "issue": "Several absolute claims should be owner-confirmed before any future public edit.",
+      "proposed_direction": "Keep only owner-approved strong claims or qualify them by stage/server context."
+    }
+  ],
+  "safety": "No public content, patch specs, backlog rows, manifests, PRs, or production files were modified by this pass."
+}

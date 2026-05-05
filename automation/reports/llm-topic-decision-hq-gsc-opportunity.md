@@ -3,24 +3,24 @@
 ## Decision
 
 - State: `decision_recorded`
-- Decision: `approved_for_chain`
+- Decision: `monitor`
 - Decided by: `oleg`
 - Source discovery: `automation/reports/llm-topic-discovery-hq-scout.json`
 - Source decision: `automation/reports/llm-topic-decision-hq-gsc-opportunity.json`
-- Allows worker chain: `true`
+- Allows worker chain: `false`
 - Allows content edit: `false`
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
 Decision note:
 
-Owner approved this topic for one no-write LLM worker-chain replay only. This does not approve public content edits, patch specs, PRs, or deployment.
+No-write LLM worker chain and HQ canonical verification are complete. hq.html remains the canonical HQ upgrade strategy page, but public cleanup requires separate owner approval before any content proposal or edit.
 
 Previous decision:
 
 - Source: `automation/reports/llm-topic-decision-hq-gsc-opportunity.json`
-- Decision: `monitor`
+- Decision: `approved_for_chain`
 - Decided by: `oleg`
-- Generated at: `2026-05-05T19:27:19Z`
+- Generated at: `2026-05-05T19:52:43Z`
 
 ## Topic Snapshot
 
@@ -38,6 +38,6 @@ Reasonable review candidate, but the title/intent appears broad and could overla
 
 ## Next Actions
 
-- Run the no-write LLM worker chain from this saved decision: python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-hq-gsc-opportunity.json --provider openai --json
-- Review the generated LLM Reviewer gate before any intake, run-plan, or public content proposal.
-- Public content still requires exact text/spec proposal, explicit owner approval, and strict checks.
+- Keep this topic out of content intake for now.
+- Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.
+- Do not create public content edits from this topic decision.
