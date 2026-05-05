@@ -126,16 +126,18 @@ python3 automation/workers/llm_intake.py --approved-by <name> --json
 
 It does not mutate backlog, manifests, content, PRs, or production state. Selected opportunities remain review context only until a human approves the deterministic worker chain and any later content proposal.
 
-`llm-topic-discovery` is the no-write bridge from LLM Scout selection to
-owner-reviewed topic intake. It reads one LLM Scout request/result pair and
-writes backlog-shaped proposals:
+`llm-topic-discovery` is the no-write bridge from LLM Scout selection and
+monitoring output to owner-reviewed topic intake. It reads one LLM Scout
+request/result pair and writes backlog-shaped proposals:
 
 - `automation/reports/llm-topic-discovery.json`
 - `automation/reports/llm-topic-discovery.md`
 
 It does not mutate `topic_backlog.csv`, manifests, content, PRs, or production
 state. The output is a review artifact only; a human still chooses whether a
-topic should enter the worker chain, backlog, or monitoring queue.
+topic should enter the worker chain, backlog, or monitoring queue. Topics from
+LLM Scout's `rejected_or_monitor` list are preserved as `monitor` proposals so
+owner decisions can still be recorded durably.
 
 `llm-topic-decision` records that human choice as a durable no-write artifact.
 It reads `automation/reports/llm-topic-discovery.json` by default and writes:
@@ -586,7 +588,7 @@ The current implementation is deterministic and no-write:
 1. `Scout` reads `content/gsc/latest-gsc-agent-signals.json` by default, or Bing agent signals when explicitly passed with `--signals`.
 2. `Scout` produces `topic_proposal` records into review artifacts.
 3. `llm-scout` can review deterministic GSC/Bing proposals through the fail-closed LLM adapter and produce JSON/markdown opportunity review artifacts.
-4. `llm-topic-discovery` converts selected LLM Scout opportunities into backlog-shaped owner-review proposals.
+4. `llm-topic-discovery` converts selected and monitored LLM Scout opportunities into backlog-shaped owner-review proposals.
 5. `llm-topic-decision` records whether each discovered topic is `approved_for_chain`, `monitor`, or `rejected`.
 6. `llm-editor` can turn one selected LLM Scout opportunity into a no-copy planning brief through the fail-closed LLM adapter.
 7. `llm-reviewer` can gate one LLM Editor planning brief for duplicate intent, cluster fit, canonical claims, template safety, owner questions, and readiness.

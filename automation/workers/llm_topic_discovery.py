@@ -55,6 +55,37 @@ def selected_opportunities(scout_result: dict[str, Any]) -> list[dict[str, Any]]
     return selected if isinstance(selected, list) else []
 
 
+def monitored_opportunities(scout_result: dict[str, Any]) -> list[dict[str, Any]]:
+    response = scout_result.get("response_json")
+    if not isinstance(response, dict):
+        return []
+    monitored = response.get("rejected_or_monitor", [])
+    if not isinstance(monitored, list):
+        return []
+    return [
+        {
+            "topic_id": item.get("topic_id", ""),
+            "decision": "monitor",
+            "rationale": " ".join(
+                value
+                for value in [
+                    str(item.get("reason", "")).strip(),
+                    f"Future trigger: {item.get('future_trigger')}" if item.get("future_trigger") else "",
+                ]
+                if value
+            ),
+            "player_value": "",
+            "duplication_risk": "",
+            "priority": "low",
+            "risk_level": "",
+            "next_step": str(item.get("future_trigger", "")).strip(),
+            "claims_to_verify": [],
+        }
+        for item in monitored
+        if item.get("topic_id")
+    ]
+
+
 def existing_topic_review(topic_id: str) -> dict[str, Any] | None:
     if not MANIFESTS_DIR.exists():
         return None
@@ -196,7 +227,7 @@ def build_discovery(
         return 1, payload
 
     topics: list[dict[str, Any]] = []
-    for selected in selected_opportunities(scout_result):
+    for selected in selected_opportunities(scout_result) + monitored_opportunities(scout_result):
         topic_id = str(selected.get("topic_id", ""))
         deterministic = source_index.get(topic_id)
         if not deterministic:

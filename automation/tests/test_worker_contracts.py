@@ -383,6 +383,73 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "topic-discovery-fixture.json").exists())
             self.assertTrue((tmp_path / "topic-discovery-fixture.md").exists())
 
+    def test_llm_topic_discovery_includes_monitor_topics(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            scout_request_path = tmp_path / "llm-scout-review-request.json"
+            scout_result_path = tmp_path / "llm-scout-review-result.json"
+            write_json(
+                scout_request_path,
+                {
+                    "inputs": {
+                        "proposals": [
+                            {
+                                "topic_id": "index-bing-opportunity",
+                                "title": "Bing opportunity review: Last Z Guides",
+                                "cluster": "Home",
+                                "recommended_action": "update_existing",
+                                "archetype_suggestion": "home-hub",
+                                "target_page_or_slug": "index.html",
+                                "source_reference": "Bing weekly fixture",
+                                "confidence": "high",
+                                "priority": "high",
+                                "risk_level": "high",
+                                "evidence": ["Bing page signal fixture."],
+                                "site_fit": {"expected_internal_route": ["index.html"]},
+                                "constraints": ["Use existing page template."],
+                                "reject_if": ["The query intent is too broad."],
+                            }
+                        ]
+                    }
+                },
+            )
+            write_json(
+                scout_result_path,
+                {
+                    "state": "completed",
+                    "response_json": {
+                        "overview": "Monitor homepage for now.",
+                        "selected_opportunities": [],
+                        "rejected_or_monitor": [
+                            {
+                                "topic_id": "index-bing-opportunity",
+                                "reason": "Homepage signal is useful but too broad for a rewrite.",
+                                "future_trigger": "Promote if repeated Bing/GSC signals stay stable.",
+                            }
+                        ],
+                        "global_risks": [],
+                        "next_actions": [],
+                    },
+                },
+            )
+
+            with patch.object(llm_topic_discovery, "MANIFESTS_DIR", tmp_path / "manifests"):
+                code, payload = llm_topic_discovery.run_topic_discovery(
+                    scout_result_path=scout_result_path,
+                    scout_request_path=scout_request_path,
+                    output_dir=tmp_path,
+                    basename="topic-discovery-fixture",
+                )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(payload["topic_count"], 1)
+            topic = payload["topics"][0]
+            self.assertEqual(topic["topic_id"], "index-bing-opportunity")
+            self.assertEqual(topic["status"], "monitor")
+            self.assertEqual(topic["recommended_action"], "monitor")
+            self.assertFalse(topic["human_approval_required"])
+            self.assertIn("Homepage signal is useful", topic["notes"])
+
     def test_llm_topic_decision_records_owner_monitor_gate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

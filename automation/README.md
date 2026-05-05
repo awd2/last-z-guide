@@ -133,7 +133,7 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
 
 - `workers/llm_topic_discovery.py`
   - reads one LLM Scout request/result pair
-  - converts selected opportunities into backlog-shaped topic discovery proposals
+  - converts selected and monitored opportunities into backlog-shaped topic discovery proposals
   - writes no-write JSON/markdown artifacts for owner review
   - does not mutate `topic_backlog.csv`, manifests, content, PRs, or production state
 
@@ -454,7 +454,7 @@ LLM Scout review:
 
 LLM topic discovery:
 
-- `python3 automation/pipeline.py llm-topic-discovery --json` -> convert selected LLM Scout opportunities into backlog-shaped topic proposals for owner review
+- `python3 automation/pipeline.py llm-topic-discovery --json` -> convert selected and monitored LLM Scout opportunities into backlog-shaped topic proposals for owner review
 - default input uses `automation/reports/llm-scout-review-result.json` and `automation/reports/llm-scout-review-request.json`
 - output lives in `automation/reports/llm-topic-discovery.json` and `automation/reports/llm-topic-discovery.md`
 - this is a no-write bridge; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
