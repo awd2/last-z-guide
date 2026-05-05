@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-worker-chain-reviewer-hq-gsc-opportunity",
+  "worker_role": "reviewer",
+  "task": "Review one no-write LLM Editor planning brief for site fit, risk, and readiness.",
+  "prompt": "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. Do not write or rewrite public page copy. Do not create patch specs. Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, and deterministic QA readiness. Treat analytics as signals, not proof. Return JSON only.",
+  "inputs": {
+    "source_llm_editor_result": "automation/reports/llm-worker-chain-editor-hq-gsc-opportunity-result.json",
+    "source_llm_editor_request": "automation/reports/llm-worker-chain-editor-hq-gsc-opportunity-request.json",
+    "selected_opportunity": {
+      "topic_id": "hq-gsc-opportunity",
+      "decision": "monitor",
+      "rationale": "Owner approved this topic for one no-write LLM worker-chain replay only. This does not approve public content edits, patch specs, PRs, or deployment.",
+      "player_value": "Improve query-to-page match and first-screen usefulness for `Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy` searchers.",
+      "duplication_risk": "Review against the current cluster role before any content proposal.",
+      "priority": "low",
+      "risk_level": "high",
+      "next_step": "Run the no-write Editor and Reviewer stages from this approved decision snapshot.",
+      "claims_to_verify": []
+    },
+    "deterministic_proposal": {
+      "topic_id": "hq-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
+      "cluster": "Progression",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "hq.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+      "confidence": "medium",
+      "priority": "low",
+      "status": "monitor",
+      "notes": "Reasonable review candidate, but the title/intent appears broad and could overlap with progression/start content; better to monitor until query patterns become clearer. Future trigger: If HQ upgrade queries gain stronger volume or a more specific intent cluster emerges.",
+      "risk_level": "",
+      "player_value": "",
+      "duplication_risk": "",
+      "claims_to_verify": [],
+      "next_step": "If HQ upgrade queries gain stronger volume or a more specific intent cluster emerges.",
+      "evidence": [
+        "GSC page signal: hq.html had 12579 impressions, 338 clicks, 2.69% CTR, avg position 7.69."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy` searchers.",
+        "cluster_owner": "Progression",
+        "expected_internal_route": [
+          "index.html",
+          "start.html",
+          "hq.html"
+        ],
+        "archetype_reason": "Existing page is `cornerstone-guide` in the `Progression` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ],
+      "prior_review": null,
+      "human_approval_required": false,
+      "backlog_row_preview": {
+        "topic_id": "hq-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
+        "cluster": "Progression",
+        "recommended_action": "monitor",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "hq.html",
+        "source_type": "llm_scout",
+        "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+        "confidence": "medium",
+        "priority": "low",
+        "status": "monitor",
+        "notes": "Reasonable review candidate, but the title/intent appears broad and could overlap with progression/start content; better to monitor until query patterns become clearer. Future trigger: If HQ upgrade queries gain stronger volume or a more specific intent cluster emerges."
+      }
+    },
+    "deterministic_editor_context": {
+      "target_page_or_slug": "hq.html",
+      "page_role": "cornerstone-guide",
+      "primary_query_family": "Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy` searchers.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy` without changing `hq.html` into a different page role.",
+      "template_reference": "start.html",
+      "required_sections": [
+        "Quick Answer",
+        "Best overall recommendation",
+        "Decision framework",
+        "Cluster route block",
+        "Related guides / FAQ"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html",
+          "start.html"
+        ],
+        "downstream": [
+          "alliance-duel.html",
+          "arena.html",
+          "emergency-hospital-cost.html",
+          "furylord.html",
+          "heroes.html"
+        ],
+        "lateral": [
+          "early-game-optimization.html",
+          "base-building-order.html",
+          "shooter-stages.html"
+        ]
+      },
+      "protected_claims": [],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "hq.html",
+        "start.html",
+        "index.html",
+        "early-game-optimization.html",
+        "base-building-order.html",
+        "shooter-stages.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on hq.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z HQ Upgrade Guide (2026) — Requirements, Fast Path to HQ 30/35",
+        "h1": "Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
+        "meta_description": "Best HQ strategy for Last Z: rush early levels, upgrade required buildings only, push efficiently to HQ30, and prepare steel for HQ31-35.",
+        "quick_answer": "Best Last Z HQ upgrade path for most players: rush early levels, upgrade only required buildings, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.",
+        "data_lede": "",
+        "h2_headings": [
+          "Watch the Full Video",
+          "Why HQ Level Matters: Hero Level Cap and Progression",
+          "Sophia — The Queen of Construction",
+          "Fastest HQ Upgrade Path: Levels 1-35",
+          "Steel — The New Resource",
+          "Alliance Duel Day 2 Strategy",
+          "Construction Speed Setup",
+          "HQ Upgrade Requirements: What Buildings Actually Matter"
+        ],
+        "internal_links": [
+          "about.html",
+          "alliance-duel.html",
+          "arena.html",
+          "contact.html",
+          "disclosure.html",
+          "emergency-hospital-cost.html",
+          "furylord.html",
+          "heroes.html",
+          "hq-construction-cost.html",
+          "https://lastzguides.com/hq.html",
+          "leveling.html",
+          "power-guide.html",
+          "privacy.html",
+          "research.html",
+          "resources.html",
+          "steel.html",
+          "terms.html",
+          "tyrant.html"
+        ]
+      }
+    },
+    "llm_editor_brief": {
+      "brief_summary": "Keep hq.html as the cornerstone progression guide, but tighten the opening to answer the HQ upgrade query immediately, then structure the page around fast-path leveling, required-building decisions, and the HQ30→35 steel phase without shifting cluster role.",
+      "target_page_or_slug": "hq.html",
+      "page_role": "cornerstone-guide",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy searchers.",
+      "first_screen_plan": "Preserve answer-first layout. The first screen should immediately confirm the page solves HQ upgrade requirements and fast-path strategy, then signal the split between early rush progression and the heavier HQ31–35 steel phase. Keep the existing template and avoid introducing a different content mission or persona. The opening should help users decide whether to rush, what to upgrade now, and when the guide changes after HQ30.",
+      "section_plan": [
+        {
+          "section": "Quick Answer",
+          "action": "Keep it as the immediate answer block and make sure it names the best overall HQ path, the required-building rule, and the HQ30/35 split.",
+          "reason": "This is the highest-intent section and should resolve the query before users scroll."
+        },
+        {
+          "section": "Best overall recommendation",
+          "action": "Frame the recommended route as a practical default for most players, with clear conditions for when to deviate.",
+          "reason": "Searchers need a concise decision, not just raw requirements."
+        },
+        {
+          "section": "Decision framework",
+          "action": "Organize the choice points by early-game speed, required upgrade dependencies, and whether the player is pre- or post-HQ30.",
+          "reason": "The query implies planning tradeoffs, so this section should reduce ambiguity."
+        },
+        {
+          "section": "Cluster route block",
+          "action": "Keep the internal route block and ensure it points to adjacent progression topics instead of replacing the page’s role.",
+          "reason": "Supports navigation while protecting cluster separation."
+        },
+        {
+          "section": "Related guides / FAQ",
+          "action": "Use this area to connect HQ strategy with adjacent progression questions and common follow-ups.",
+          "reason": "Improves satisfaction and internal pathing without overexpanding the cornerstone guide."
+        }
+      ],
+      "internal_link_plan": [
+        {
+          "page": "index.html",
+          "role": "upstream",
+          "reason": "Entry point for broader site navigation and progression discovery."
+        },
+        {
+          "page": "start.html",
+          "role": "upstream",
+          "reason": "Matches the upstream route and supports users who are still orienting early progression choices."
+        },
+        {
+          "page": "early-game-optimization.html",
+          "role": "lateral",
+          "reason": "Adjacent planning topic for players deciding how aggressively to progress before HQ milestones."
+        },
+        {
+          "page": "base-building-order.html",
+          "role": "lateral",
+          "reason": "Useful companion for upgrade sequencing and building priority decisions."
+        },
+        {
+          "page": "shooter-stages.html",
+          "role": "lateral",
+          "reason": "Related progression-adjacent content that can answer broader early-game route questions."
+        },
+        {
+          "page": "alliance-duel.html",
+          "role": "downstream",
+          "reason": "Specific tactical follow-up that benefits players after understanding HQ progression timing."
+        },
+        {
+          "page": "arena.html",
+          "role": "downstream",
+          "reason": "Downstream optimization topic for players who have moved beyond core HQ planning."
+        },
+        {
+          "page": "emergency-hospital-cost.html",
+          "role": "downstream",
+          "reason": "Supporting guide for a concrete building-cost or upgrade concern likely encountered during HQ planning."
+        }
+      ],
+      "protected_claims": [],
+      "do_not_change": [
+        "Do not alter the page into a start-page replacement or broader onboarding guide.",
+        "Do not change the existing page template, navigation pattern, or schema family.",
+        "Do not remove the cornerstone-guide role or blur the Progression cluster boundary.",
+        "Do not create a new page or split the topic into multiple pages.",
+        "Do not introduce unverifiable claims about HQ requirements, costs, or timings without canonical source confirmation.",
+        "Do not use analytics metrics as proof that a rewrite is required."
+      ],
+      "owner_questions": [
+        "Should the opening answer explicitly mention HQ30 as the main breakpoint, or keep that detail deeper in the page?",
+        "Do you want the decision framework to lean more toward speed-rush guidance or resource-efficiency guidance?",
+        "Are there any canonical HQ requirement details that must remain verbatim in the requirements section?"
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "hq.html",
+        "start.html",
+        "index.html",
+        "early-game-optimization.html",
+        "base-building-order.html",
+        "shooter-stages.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on hq.html"
+      ],
+      "next_step": "Run the no-write Editor and Reviewer stages against hq.html, verifying that the first screen answers the query immediately and that internal links preserve the Progression cluster routing."
+    },
+    "guardrails": [
+      "No content files may be edited by Reviewer.",
+      "No final public page copy may be generated.",
+      "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
+      "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
+      "Owner approval is required before any user-visible content change."
+    ]
+  },
+  "expected_response_keys": [
+    "target_page_or_slug",
+    "page_role",
+    "verdict",
+    "risk_level",
+    "approved_next_stage",
+    "blocking_issues",
+    "warnings",
+    "duplicate_intent_review",
+    "cluster_role_review",
+    "canonical_claim_review",
+    "template_safety_review",
+    "owner_approval_required",
+    "owner_questions",
+    "required_context_before_edit",
+    "required_checks",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "verdict": {
+        "type": "string",
+        "enum": [
+          "pass",
+          "needs_human_review",
+          "revise",
+          "reject"
+        ]
+      },
+      "risk_level": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "approved_next_stage": {
+        "type": "string",
+        "enum": [
+          "none",
+          "brief",
+          "patch_plan",
+          "proposal",
+          "approval",
+          "apply_preview"
+        ]
+      },
+      "blocking_issues": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "severity": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "issue": {
+              "type": "string",
+              "maxLength": 450
+            },
+            "required_fix": {
+              "type": "string",
+              "maxLength": 450
+            }
+          },
+          "required": [
+            "severity",
+            "issue",
+            "required_fix"
+          ]
+        }
+      },
+      "warnings": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 400
+        }
+      },
+      "duplicate_intent_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "cluster_role_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "canonical_claim_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "template_safety_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "owner_approval_required": {
+        "type": "boolean"
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_edit": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "required_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 450
+      }
+    },
+    "required": [
+      "target_page_or_slug",
+      "page_role",
+      "verdict",
+      "risk_level",
+      "approved_next_stage",
+      "blocking_issues",
+      "warnings",
+      "duplicate_intent_review",
+      "cluster_role_review",
+      "canonical_claim_review",
+      "template_safety_review",
+      "owner_approval_required",
+      "owner_questions",
+      "required_context_before_edit",
+      "required_checks",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}

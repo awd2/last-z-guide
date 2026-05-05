@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-05T19:53:59Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-worker-chain-reviewer-hq-gsc-opportunity",
+  "worker_role": "reviewer",
+  "request_path": "automation/reports/llm-worker-chain-reviewer-hq-gsc-opportunity-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "target_page_or_slug": "hq.html",
+    "page_role": "cornerstone-guide",
+    "verdict": "needs_human_review",
+    "risk_level": "high",
+    "approved_next_stage": "none",
+    "blocking_issues": [
+      {
+        "severity": "high",
+        "issue": "The opportunity is explicitly flagged as low-priority/monitor-only and the current query appears possibly better served by another canonical page, so the brief does not justify advancing beyond review.",
+        "required_fix": "Obtain owner confirmation that hq.html remains the correct canonical target for this query family before any edit or proposal work."
+      },
+      {
+        "severity": "high",
+        "issue": "Cluster role separation is at risk: the brief aims to improve HQ guidance while preserving a cornerstone progression role, but the intent may overlap with start/onboarding and adjacent progression pages.",
+        "required_fix": "Verify against content index and canonical page mapping that hq.html should stay the primary HQ strategy destination and will not blur into start.html or other progression pages."
+      },
+      {
+        "severity": "medium",
+        "issue": "Canonical HQ requirement claims are not verified in the brief, yet the planned edit would likely depend on specific requirements, costs, and timing statements.",
+        "required_fix": "Cross-check canonical claims and source-backed HQ requirements before any content change is drafted."
+      },
+      {
+        "severity": "medium",
+        "issue": "Template and schema safety cannot be fully confirmed from the planning brief alone, even though the request says to preserve the existing template and navigation pattern.",
+        "required_fix": "Run the deterministic QA checks and confirm no template, schema family, or navigation pattern changes are needed."
+      }
+    ],
+    "warnings": [
+      "Analytics signals are present but are not proof that a rewrite is required.",
+      "The brief is no-write only; no public copy, patch specs, or backlog artifacts should be produced from this review.",
+      "The requested first-screen improvement is directionally consistent with the page role, but the scope may still be too close to a broader onboarding or progression hub.",
+      "Owner approval is required before any user-visible change on a cornerstone page."
+    ],
+    "duplicate_intent_review": "Potential overlap exists with start.html and general progression content. The query looks HQ-specific, but the brief itself acknowledges that the title/intent is broad and could overlap with onboarding/progression search intent. Do not advance until canonical intent ownership is confirmed.",
+    "cluster_role_review": "Page is correctly labeled cornerstone-guide in the Progression cluster, and the proposed adjustment preserves that role in principle. However, the requested opening-answer rewrite could pull the page toward a broader planning hub if not tightly constrained to HQ strategy only.",
+    "canonical_claim_review": "No protected claims are listed, but HQ requirements, costs, and timing statements are likely factual claims that must be verified against canonical sources before editing. Treat any exact upgrade thresholds or resource requirements as requiring source confirmation.",
+    "template_safety_review": "Safe to keep the existing template and nav pattern only if the change remains within the current answer-first structure and does not alter schema family or page archetype. The brief does not provide enough evidence to approve template safety beyond no-write planning.",
+    "owner_approval_required": true,
+    "owner_questions": [
+      "Should hq.html remain the canonical page for HQ upgrade strategy, or is another progression page the better canonical match?",
+      "Should the opening answer explicitly foreground HQ30 as the main breakpoint, or keep that detail secondary?",
+      "Do any HQ requirement/cost/timing details need to be locked to canonical wording before editing?",
+      "Is the desired emphasis closer to speed-rush guidance or resource-efficiency guidance for this page?"
+    ],
+    "required_context_before_edit": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "hq.html",
+      "start.html",
+      "index.html",
+      "early-game-optimization.html",
+      "base-building-order.html",
+      "shooter-stages.html"
+    ],
+    "required_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on hq.html"
+    ],
+    "next_step": "Pause for owner clarification and canonical-source verification; if confirmed, run the no-write reviewer/editor QA path before any proposal or edit stage."
+  },
+  "usage": {
+    "input_tokens": 3835,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 861,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 4696
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_01b48ca0b500a4b70069fa4ace7d188196a52ad83a2ec72567",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

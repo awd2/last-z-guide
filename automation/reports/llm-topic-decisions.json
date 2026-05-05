@@ -1,13 +1,16 @@
 {
   "schema_version": 1,
   "report_type": "llm_topic_decisions_summary",
-  "generated_at": "2026-05-05T19:33:52Z",
+  "generated_at": "2026-05-05T19:52:52Z",
   "decision_count": 4,
   "counts_by_state": {
-    "monitor": 4
+    "approved_for_chain": 1,
+    "monitor": 3
   },
-  "allowed_worker_chain_count": 0,
-  "allowed_worker_chain_topics": [],
+  "allowed_worker_chain_count": 1,
+  "allowed_worker_chain_topics": [
+    "hq-gsc-opportunity"
+  ],
   "content_edit_allowed_count": 0,
   "decisions": [
     {
@@ -33,20 +36,20 @@
     },
     {
       "topic_id": "hq-gsc-opportunity",
-      "decision_state": "monitor",
+      "decision_state": "approved_for_chain",
       "decided_by": "oleg",
-      "generated_at": "2026-05-05T19:27:19Z",
+      "generated_at": "2026-05-05T19:52:43Z",
       "target_page_or_slug": "hq.html",
       "cluster": "Progression",
       "risk_level": "",
       "priority": "low",
-      "allows_worker_chain": false,
+      "allows_worker_chain": true,
       "allows_content_edit": false,
-      "decision_note": "Owner scope review plus repeated live LLM Scout: hq.html already has strong title/H1/meta, guide-verified copy, Quick Answer, HQ30/HQ35 path, requirement rule, steel phase, and links to the exact HQ construction cost table. The analytics signal is real but currently not specific enough to justify content intake on a high-risk Progression cornerstone. Monitor until HQ upgrade queries show stronger volume or a more specific requirement-level intent cluster.",
+      "decision_note": "Owner approved this topic for one no-write LLM worker-chain replay only. This does not approve public content edits, patch specs, PRs, or deployment.",
       "next_actions": [
-        "Keep this topic out of content intake for now.",
-        "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
-        "Do not create public content edits from this topic decision."
+        "Run the no-write LLM worker chain from this saved decision: python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-hq-gsc-opportunity.json --provider openai --json",
+        "Review the generated LLM Reviewer gate before any intake, run-plan, or public content proposal.",
+        "Public content still requires exact text/spec proposal, explicit owner approval, and strict checks."
       ],
       "source_discovery": "automation/reports/llm-topic-discovery-hq-scout.json",
       "artifact_path": "automation/reports/llm-topic-decision-hq-gsc-opportunity.json",

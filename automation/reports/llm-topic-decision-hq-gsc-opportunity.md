@@ -3,16 +3,24 @@
 ## Decision
 
 - State: `decision_recorded`
-- Decision: `monitor`
+- Decision: `approved_for_chain`
 - Decided by: `oleg`
 - Source discovery: `automation/reports/llm-topic-discovery-hq-scout.json`
-- Allows worker chain: `false`
+- Source decision: `automation/reports/llm-topic-decision-hq-gsc-opportunity.json`
+- Allows worker chain: `true`
 - Allows content edit: `false`
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
 Decision note:
 
-Owner scope review plus repeated live LLM Scout: hq.html already has strong title/H1/meta, guide-verified copy, Quick Answer, HQ30/HQ35 path, requirement rule, steel phase, and links to the exact HQ construction cost table. The analytics signal is real but currently not specific enough to justify content intake on a high-risk Progression cornerstone. Monitor until HQ upgrade queries show stronger volume or a more specific requirement-level intent cluster.
+Owner approved this topic for one no-write LLM worker-chain replay only. This does not approve public content edits, patch specs, PRs, or deployment.
+
+Previous decision:
+
+- Source: `automation/reports/llm-topic-decision-hq-gsc-opportunity.json`
+- Decision: `monitor`
+- Decided by: `oleg`
+- Generated at: `2026-05-05T19:27:19Z`
 
 ## Topic Snapshot
 
@@ -30,6 +38,6 @@ Reasonable review candidate, but the title/intent appears broad and could overla
 
 ## Next Actions
 
-- Keep this topic out of content intake for now.
-- Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.
-- Do not create public content edits from this topic decision.
+- Run the no-write LLM worker chain from this saved decision: python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-hq-gsc-opportunity.json --provider openai --json
+- Review the generated LLM Reviewer gate before any intake, run-plan, or public content proposal.
+- Public content still requires exact text/spec proposal, explicit owner approval, and strict checks.
