@@ -118,6 +118,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider o
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -232,6 +233,14 @@ python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state 
 ```
 
 Use `approved_for_chain`, `monitor`, or `rejected`. This writes `automation/reports/llm-topic-decision-<topic_id>.json` and `.md`; it does not approve public content edits.
+
+To see the current decision state across all discovered topics, run:
+
+```bash
+python3 automation/pipeline.py llm-topic-decisions --json
+```
+
+This writes `automation/reports/llm-topic-decisions.json` and `.md`.
 
 For a no-write LLM Editor planning brief from one selected Scout opportunity, run:
 

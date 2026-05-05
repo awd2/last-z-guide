@@ -606,6 +606,29 @@ def cmd_llm_topic_decision(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_topic_decisions(
+    reports_dir: str | None,
+    json_output: str | None,
+    markdown_output: str | None,
+    no_write: bool,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "reports" / "llm_topic_decisions.py")]
+    if reports_dir:
+        command.extend(["--reports-dir", reports_dir])
+    if json_output:
+        command.extend(["--json-output", json_output])
+    if markdown_output:
+        command.extend(["--markdown-output", markdown_output])
+    if no_write:
+        command.append("--no-write")
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Topic Decisions ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_content_seo_opportunities(
     json_output: str | None,
     markdown_output: str | None,
@@ -1942,6 +1965,16 @@ def build_parser() -> argparse.ArgumentParser:
     llm_topic_decision_parser.add_argument("--basename", help="Output basename without extension.")
     llm_topic_decision_parser.add_argument("--json", action="store_true", help="Print the topic decision summary as JSON.")
 
+    llm_topic_decisions_parser = subparsers.add_parser(
+        "llm-topic-decisions",
+        help="Build a consolidated no-write report for LLM topic decisions.",
+    )
+    llm_topic_decisions_parser.add_argument("--reports-dir", help="Directory containing llm-topic-decision-*.json files.")
+    llm_topic_decisions_parser.add_argument("--json-output", help="Path for the consolidated JSON artifact.")
+    llm_topic_decisions_parser.add_argument("--markdown-output", help="Path for the consolidated markdown artifact.")
+    llm_topic_decisions_parser.add_argument("--no-write", action="store_true", help="Build and print only; do not write artifacts.")
+    llm_topic_decisions_parser.add_argument("--json", action="store_true", help="Print the topic decisions summary as JSON.")
+
     content_seo_parser = subparsers.add_parser(
         "content-seo-opportunities",
         help="Build a no-write SEO/LLM content opportunity report.",
@@ -2126,6 +2159,14 @@ def main() -> int:
             args.note,
             args.output_dir,
             args.basename,
+            args.json,
+        )
+    if args.command == "llm-topic-decisions":
+        return cmd_llm_topic_decisions(
+            args.reports_dir,
+            args.json_output,
+            args.markdown_output,
+            args.no_write,
             args.json,
         )
     if args.command == "content-seo-opportunities":

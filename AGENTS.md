@@ -428,6 +428,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider o
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -462,9 +463,11 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 `llm-scout` is the first live LLM worker wrapper. It reviews deterministic Scout proposals from GSC/Bing agent signals through `llm_adapter`, writes request/result/markdown artifacts, and must not edit content, backlog, manifests, PRs, or production state.
 
-`llm-topic-discovery` converts selected LLM Scout opportunities into backlog-shaped topic proposals for owner review. It must not edit `topic_backlog.csv`, manifests, content, PRs, or production state.
+`llm-topic-discovery` converts selected and monitored LLM Scout opportunities into backlog-shaped topic proposals for owner review. It must not edit `topic_backlog.csv`, manifests, content, PRs, or production state.
 
 `llm-topic-decision` records an owner decision for one LLM topic discovery proposal. `approved_for_chain` only allows the next no-write worker chain; `monitor` and `rejected` keep the topic out of intake. It must not approve public copy, patch specs, backlog edits, manifests, PRs, or production state.
+
+`llm-topic-decisions` consolidates all LLM topic decision artifacts into one read-only operator report. It must not approve content edits or mutate backlog, manifests, PRs, or production state.
 
 `llm-editor` is the second live LLM worker wrapper. It creates a planning brief from one selected LLM Scout opportunity and deterministic Editor context. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
 

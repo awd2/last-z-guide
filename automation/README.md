@@ -143,6 +143,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - writes no-write JSON/markdown artifacts for durable topic routing
   - does not mutate `topic_backlog.csv`, manifests, content, PRs, or production state
 
+- `reports/llm_topic_decisions.py`
+  - consolidates all LLM topic decision artifacts into one operator summary
+  - shows which topics, if any, are currently allowed for the next no-write worker chain
+  - does not mutate `topic_backlog.csv`, manifests, content, PRs, or production state
+
 - `workers/llm_editor.py`
   - reads one selected LLM Scout opportunity and deterministic Editor context
   - sends a JSON-only planning brief request through `llm_adapter`
@@ -258,6 +263,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider f
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -467,6 +473,12 @@ LLM topic decision:
 - `--state rejected` blocks the topic unless the owner explicitly reopens it
 - output lives in `automation/reports/llm-topic-decision-<topic_id>.json` and `.md`
 - this is a no-write decision artifact; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
+
+LLM topic decisions summary:
+
+- `python3 automation/pipeline.py llm-topic-decisions --json` -> consolidate all `llm-topic-decision-*.json` artifacts
+- output lives in `automation/reports/llm-topic-decisions.json` and `.md`
+- this report is read-only over decision artifacts; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
 
 LLM Editor planning brief:
 

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_topic_decisions_summary",
+  "generated_at": "2026-05-05T19:33:52Z",
+  "decision_count": 4,
+  "counts_by_state": {
+    "monitor": 4
+  },
+  "allowed_worker_chain_count": 0,
+  "allowed_worker_chain_topics": [],
+  "content_edit_allowed_count": 0,
+  "decisions": [
+    {
+      "topic_id": "heroes-gsc-opportunity",
+      "decision_state": "monitor",
+      "decided_by": "oleg",
+      "generated_at": "2026-05-05T19:20:02Z",
+      "target_page_or_slug": "heroes.html",
+      "cluster": "Heroes",
+      "risk_level": "high",
+      "priority": "high",
+      "allows_worker_chain": false,
+      "allows_content_edit": false,
+      "decision_note": "Owner scope review plus live LLM Scout: heroes.html is a plausible cornerstone opportunity, but current evidence is thinner than stronger GSC/Bing opportunities and the page already has strong Season 4/faction first-screen coverage. Keep in monitoring until a specific hero, faction, or season query pattern becomes persistent.",
+      "next_actions": [
+        "Keep this topic out of content intake for now.",
+        "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+        "Do not create public content edits from this topic decision."
+      ],
+      "source_discovery": "automation/reports/llm-topic-discovery.json",
+      "artifact_path": "automation/reports/llm-topic-decision-heroes-gsc-opportunity.json",
+      "markdown_path": "automation/reports/llm-topic-decision-heroes-gsc-opportunity.md"
+    },
+    {
+      "topic_id": "hq-gsc-opportunity",
+      "decision_state": "monitor",
+      "decided_by": "oleg",
+      "generated_at": "2026-05-05T19:27:19Z",
+      "target_page_or_slug": "hq.html",
+      "cluster": "Progression",
+      "risk_level": "",
+      "priority": "low",
+      "allows_worker_chain": false,
+      "allows_content_edit": false,
+      "decision_note": "Owner scope review plus repeated live LLM Scout: hq.html already has strong title/H1/meta, guide-verified copy, Quick Answer, HQ30/HQ35 path, requirement rule, steel phase, and links to the exact HQ construction cost table. The analytics signal is real but currently not specific enough to justify content intake on a high-risk Progression cornerstone. Monitor until HQ upgrade queries show stronger volume or a more specific requirement-level intent cluster.",
+      "next_actions": [
+        "Keep this topic out of content intake for now.",
+        "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+        "Do not create public content edits from this topic decision."
+      ],
+      "source_discovery": "automation/reports/llm-topic-discovery-hq-scout.json",
+      "artifact_path": "automation/reports/llm-topic-decision-hq-gsc-opportunity.json",
+      "markdown_path": "automation/reports/llm-topic-decision-hq-gsc-opportunity.md"
+    },
+    {
+      "topic_id": "index-bing-opportunity",
+      "decision_state": "monitor",
+      "decided_by": "oleg",
+      "generated_at": "2026-05-05T19:24:12Z",
+      "target_page_or_slug": "index.html",
+      "cluster": "Home",
+      "risk_level": "",
+      "priority": "low",
+      "allows_worker_chain": false,
+      "allows_content_edit": false,
+      "decision_note": "Owner scope review plus live LLM Scout: index.html already works as a broad home-hub with clear routing into progression, research, heroes, events, PvP, and economy. Bing signal is useful, but query data is still broad/sparse and live Scout placed this topic in monitoring. Keep out of content intake until repeated Bing/GSC evidence shows a stable navigation-query pattern or homepage underperformance relative to other hubs.",
+      "next_actions": [
+        "Keep this topic out of content intake for now.",
+        "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+        "Do not create public content edits from this topic decision."
+      ],
+      "source_discovery": "automation/reports/llm-topic-discovery-worker-chain-scout.json",
+      "artifact_path": "automation/reports/llm-topic-decision-index-bing-opportunity.json",
+      "markdown_path": "automation/reports/llm-topic-decision-index-bing-opportunity.md"
+    },
+    {
+      "topic_id": "research-gsc-opportunity",
+      "decision_state": "monitor",
+      "decided_by": "oleg",
+      "generated_at": "2026-05-05T19:13:33Z",
+      "target_page_or_slug": "research.html",
+      "cluster": "Research",
+      "risk_level": "high",
+      "priority": "high",
+      "allows_worker_chain": false,
+      "allows_content_edit": false,
+      "decision_note": "Owner scope review: current research.html already satisfies the broad GSC opportunity. Keep this topic out of content intake unless materially new query evidence points to a narrow, concrete improvement.",
+      "next_actions": [
+        "Keep this topic out of content intake for now.",
+        "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+        "Do not create public content edits from this topic decision."
+      ],
+      "source_discovery": "automation/reports/llm-topic-discovery.json",
+      "artifact_path": "automation/reports/llm-topic-decision-research-gsc-opportunity.json",
+      "markdown_path": "automation/reports/llm-topic-decision-research-gsc-opportunity.md"
+    }
+  ],
+  "safety": "No content, backlog, manifest, PR, or production files were modified by this report."
+}
