@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_topic_decision",
+  "generated_at": "2026-05-05T19:20:02Z",
+  "state": "decision_recorded",
+  "topic_id": "heroes-gsc-opportunity",
+  "decision_state": "monitor",
+  "decided_by": "oleg",
+  "decision_note": "Owner scope review plus live LLM Scout: heroes.html is a plausible cornerstone opportunity, but current evidence is thinner than stronger GSC/Bing opportunities and the page already has strong Season 4/faction first-screen coverage. Keep in monitoring until a specific hero, faction, or season query pattern becomes persistent.",
+  "source_discovery": "automation/reports/llm-topic-discovery.json",
+  "topic_snapshot": {
+    "topic_id": "heroes-gsc-opportunity",
+    "title": "GSC opportunity review: Last Z Best Heroes Tier List — Season 4 Rankings by Faction",
+    "cluster": "Heroes",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "heroes.html",
+    "source_type": "llm_scout",
+    "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+    "confidence": "medium",
+    "priority": "high",
+    "status": "candidate",
+    "notes": "Heroes.html has substantial impressions but low CTR, indicating a likely query-to-page mismatch or weak snippet/intro performance. A scoped cornerstone refresh could better satisfy season-specific hero tier-list searches while staying within the current page archetype.",
+    "risk_level": "high",
+    "player_value": "Helps players quickly identify the best heroes and faction rankings for the current season.",
+    "duplication_risk": "Medium; tier-list framing can overlap with other hero or faction pages if the scope expands too broadly.",
+    "claims_to_verify": [
+      "Whether `last z season 4 heroes` is best answered by heroes.html.",
+      "Whether the page can remain the canonical hero cornerstone without crossing into faction-specific duplication."
+    ],
+    "next_step": "Have the owner confirm whether the title, intro, and top-of-page content can better reflect seasonal hero ranking intent without creating a redundant hero guide.",
+    "evidence": [
+      "GSC page signal: heroes.html had 12912 impressions, 298 clicks, 2.31% CTR, avg position 7.98."
+    ],
+    "site_fit": {
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z season 4 heroes` searchers.",
+      "cluster_owner": "Heroes",
+      "expected_internal_route": [
+        "index.html",
+        "heroes.html"
+      ],
+      "archetype_reason": "Existing page is `cornerstone-guide` in the `Heroes` cluster; Scout should prefer updating the existing page before proposing new content."
+    },
+    "constraints": [
+      "Use existing page template and navigation patterns.",
+      "Treat GSC data as a signal, not proof that a rewrite is needed."
+    ],
+    "reject_if": [
+      "The query intent is already better served by another canonical page.",
+      "The proposed change would blur cluster role separation.",
+      "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+    ],
+    "prior_review": null,
+    "human_approval_required": true,
+    "backlog_row_preview": {
+      "topic_id": "heroes-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Best Heroes Tier List — Season 4 Rankings by Faction",
+      "cluster": "Heroes",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "heroes.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-04-30: page opportunity and query-page signals",
+      "confidence": "medium",
+      "priority": "high",
+      "status": "candidate",
+      "notes": "Heroes.html has substantial impressions but low CTR, indicating a likely query-to-page mismatch or weak snippet/intro performance. A scoped cornerstone refresh could better satisfy season-specific hero tier-list searches while staying within the current page archetype."
+    }
+  },
+  "allows_worker_chain": false,
+  "allows_content_edit": false,
+  "next_actions": [
+    "Keep this topic out of content intake for now.",
+    "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+    "Do not create public content edits from this topic decision."
+  ],
+  "errors": [],
+  "output_path": "automation/reports/llm-topic-decision-heroes-gsc-opportunity.json",
+  "markdown_path": "automation/reports/llm-topic-decision-heroes-gsc-opportunity.md",
+  "safety": "No content, backlog, manifest, PR, or production files were modified. This decision only controls whether a discovered topic may proceed to the next no-write worker stage."
+}

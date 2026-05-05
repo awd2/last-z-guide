@@ -556,6 +556,43 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "llm-worker-chain-fixture.json").exists())
             self.assertTrue((tmp_path / "llm-worker-chain-fixture.md").exists())
 
+    def test_llm_worker_chain_blocks_when_requested_topic_is_not_selected(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, fixture_llm_reviewer_response())
+
+            code, summary = llm_worker_chain.run_llm_worker_chain(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                provider="fixture",
+                topic_id="heroes-gsc-opportunity",
+                basename="llm-worker-chain-fixture",
+                scout_basename="llm-worker-chain-scout-fixture",
+                editor_basename="llm-worker-chain-editor-fixture",
+                reviewer_basename="llm-worker-chain-reviewer-fixture",
+                scout_fixture_path=scout_fixture_path,
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+
+            self.assertEqual(code, 1)
+            self.assertEqual(summary["state"], "blocked")
+            self.assertEqual(summary["source_topic_id"], "heroes-gsc-opportunity")
+            self.assertEqual(summary["stages"]["llm_scout"]["state"], "completed")
+            self.assertEqual(summary["stages"]["llm_editor"]["state"], "not_run")
+            self.assertTrue(any("was not selected by LLM Scout" in error for error in summary["errors"]))
+            self.assertTrue((tmp_path / "llm-worker-chain-fixture.json").exists())
+            self.assertTrue((tmp_path / "llm-worker-chain-fixture.md").exists())
+
     def test_llm_review_latest_reads_chain_summary(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

@@ -49,6 +49,20 @@ def first_selected_topic(scout_payload: dict[str, Any]) -> str:
     return str(topic_id)
 
 
+def selected_topic_ids(scout_payload: dict[str, Any]) -> set[str]:
+    response = scout_payload.get("adapter_result", {}).get("response_json")
+    if not isinstance(response, dict):
+        return set()
+    selected = response.get("selected_opportunities", [])
+    if not isinstance(selected, list):
+        return set()
+    return {
+        str(item.get("topic_id", ""))
+        for item in selected
+        if item.get("topic_id")
+    }
+
+
 def stage_summary(payload: dict[str, Any] | None) -> dict[str, Any]:
     if not payload:
         return {
@@ -259,32 +273,47 @@ def run_llm_worker_chain(
             selected_topic_id = selected_topic_id or first_selected_topic(scout_payload)
         except ValueError as exc:
             errors.append(str(exc))
+        if selected_topic_id and selected_topic_id not in selected_topic_ids(scout_payload):
+            errors.append(
+                f"Requested topic `{selected_topic_id}` was not selected by LLM Scout; "
+                "Editor and Reviewer were not run."
+            )
 
     if not errors and selected_topic_id:
         editor_stage_basename = editor_basename or f"llm-worker-chain-editor-{selected_topic_id}"
-        editor_code, editor_payload = llm_editor.run_llm_editor(
-            scout_result_path=resolve_path(str(scout_payload["result_path"])),
-            scout_request_path=resolve_path(str(scout_payload["request_path"])),
-            topic_id=selected_topic_id,
-            output_dir=output_dir,
-            basename=editor_stage_basename,
-            provider=provider,
-            fixture_path=editor_fixture_path,
-        )
-        if editor_code:
+        try:
+            editor_code, editor_payload = llm_editor.run_llm_editor(
+                scout_result_path=resolve_path(str(scout_payload["result_path"])),
+                scout_request_path=resolve_path(str(scout_payload["request_path"])),
+                topic_id=selected_topic_id,
+                output_dir=output_dir,
+                basename=editor_stage_basename,
+                provider=provider,
+                fixture_path=editor_fixture_path,
+            )
+        except ValueError as exc:
+            editor_code = 1
+            editor_payload = None
+            errors.append(f"LLM Editor stage blocked: {exc}")
+        if editor_code and not any(error.startswith("LLM Editor stage blocked:") for error in errors):
             errors.append("LLM Editor stage failed; Reviewer was not run.")
 
     if not errors and editor_payload:
         reviewer_stage_basename = reviewer_basename or f"llm-worker-chain-reviewer-{selected_topic_id}"
-        reviewer_code, reviewer_payload = llm_reviewer.run_llm_reviewer(
-            editor_result_path=resolve_path(str(editor_payload["result_path"])),
-            editor_request_path=resolve_path(str(editor_payload["request_path"])),
-            output_dir=output_dir,
-            basename=reviewer_stage_basename,
-            provider=provider,
-            fixture_path=reviewer_fixture_path,
-        )
-        if reviewer_code:
+        try:
+            reviewer_code, reviewer_payload = llm_reviewer.run_llm_reviewer(
+                editor_result_path=resolve_path(str(editor_payload["result_path"])),
+                editor_request_path=resolve_path(str(editor_payload["request_path"])),
+                output_dir=output_dir,
+                basename=reviewer_stage_basename,
+                provider=provider,
+                fixture_path=reviewer_fixture_path,
+            )
+        except ValueError as exc:
+            reviewer_code = 1
+            reviewer_payload = None
+            errors.append(f"LLM Reviewer stage blocked: {exc}")
+        if reviewer_code and not any(error.startswith("LLM Reviewer stage blocked:") for error in errors):
             errors.append("LLM Reviewer stage failed.")
 
     summary = build_summary(
