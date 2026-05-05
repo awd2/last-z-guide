@@ -428,6 +428,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider o
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
 python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-approved-handoffs --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
@@ -468,7 +469,7 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 `llm-topic-discovery` converts selected and monitored LLM Scout opportunities into backlog-shaped topic proposals for owner review. It must not edit `topic_backlog.csv`, manifests, content, PRs, or production state.
 
-`llm-topic-decision` records an owner decision for one LLM topic discovery proposal. `approved_for_chain` only allows the next no-write worker chain; `monitor` and `rejected` keep the topic out of intake. It must not approve public copy, patch specs, backlog edits, manifests, PRs, or production state.
+`llm-topic-decision` records an owner decision for one LLM topic discovery proposal. It may also rerecord an existing decision through `--from-decision` to move a saved topic from `monitor` or `rejected` to `approved_for_chain` without manual JSON edits. `approved_for_chain` only allows the next no-write worker chain; `monitor` and `rejected` keep the topic out of intake. It must not approve public copy, patch specs, backlog edits, manifests, PRs, or production state.
 
 `llm-topic-decisions` consolidates all LLM topic decision artifacts into one read-only operator report. It must not approve content edits or mutate backlog, manifests, PRs, or production state.
 

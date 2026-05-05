@@ -576,7 +576,8 @@ def cmd_llm_topic_discovery(
 
 def cmd_llm_topic_decision(
     discovery: str | None,
-    topic_id: str,
+    from_decision: str | None,
+    topic_id: str | None,
     state: str,
     decided_by: str,
     note: str | None,
@@ -587,15 +588,17 @@ def cmd_llm_topic_decision(
     command = [
         sys.executable,
         str(AUTOMATION_DIR / "workers" / "llm_topic_decision.py"),
-        "--topic-id",
-        topic_id,
         "--state",
         state,
         "--decided-by",
         decided_by,
     ]
+    if topic_id:
+        command.extend(["--topic-id", topic_id])
     if discovery:
         command.extend(["--discovery", discovery])
+    if from_decision:
+        command.extend(["--from-decision", from_decision])
     if note:
         command.extend(["--note", note])
     if output_dir:
@@ -1979,7 +1982,8 @@ def build_parser() -> argparse.ArgumentParser:
         help="Record an owner decision for one LLM topic discovery proposal.",
     )
     llm_topic_decision_parser.add_argument("--discovery", help="Path to llm-topic-discovery.json.")
-    llm_topic_decision_parser.add_argument("--topic-id", required=True, help="Discovered topic_id to decide.")
+    llm_topic_decision_parser.add_argument("--from-decision", help="Path to an existing llm-topic-decision-<topic_id>.json artifact to rerecord.")
+    llm_topic_decision_parser.add_argument("--topic-id", help="Discovered topic_id to decide. Required unless --from-decision is supplied.")
     llm_topic_decision_parser.add_argument(
         "--state",
         required=True,
@@ -2194,6 +2198,7 @@ def main() -> int:
     if args.command == "llm-topic-decision":
         return cmd_llm_topic_decision(
             args.discovery,
+            args.from_decision,
             args.topic_id,
             args.state,
             args.decided_by,

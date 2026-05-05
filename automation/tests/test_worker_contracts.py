@@ -539,6 +539,66 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "llm-topic-decision-research-gsc-opportunity.json").exists())
             self.assertTrue((tmp_path / "llm-topic-decision-research-gsc-opportunity.md").exists())
 
+    def test_llm_topic_decision_rerecords_from_prior_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            discovery_path = tmp_path / "topic-discovery-fixture.json"
+            write_json(
+                discovery_path,
+                {
+                    "schema_version": 1,
+                    "report_type": "llm_topic_discovery",
+                    "state": "topic_discovery_ready",
+                    "topics": [
+                        {
+                            "topic_id": "research-gsc-opportunity",
+                            "title": "GSC opportunity review: Last Z Research Guide",
+                            "cluster": "Research",
+                            "recommended_action": "update_existing",
+                            "target_page_or_slug": "research.html",
+                            "priority": "high",
+                            "risk_level": "high",
+                            "status": "candidate",
+                            "notes": "Owner scope review required.",
+                        }
+                    ],
+                },
+            )
+            monitor_code, monitor_payload = llm_topic_decision.run_topic_decision(
+                discovery_path=discovery_path,
+                topic_id="research-gsc-opportunity",
+                decision_state="monitor",
+                decided_by="fixture",
+                note="Monitor first.",
+                output_dir=tmp_path,
+                basename=None,
+            )
+            self.assertEqual(monitor_code, 0)
+            prior_path = tmp_path / "llm-topic-decision-research-gsc-opportunity.json"
+            self.assertTrue(prior_path.exists())
+
+            approve_code, approve_payload = llm_topic_decision.run_topic_decision(
+                discovery_path=discovery_path,
+                topic_id=None,
+                decision_state="approved_for_chain",
+                decided_by="fixture",
+                note="Owner approved no-write chain replay.",
+                output_dir=tmp_path,
+                basename=None,
+                from_decision_path=prior_path,
+            )
+
+            self.assertEqual(approve_code, 0)
+            self.assertEqual(approve_payload["decision_state"], "approved_for_chain")
+            self.assertTrue(approve_payload["allows_worker_chain"])
+            self.assertFalse(approve_payload["allows_content_edit"])
+            self.assertEqual(approve_payload["previous_decision"]["decision_state"], "monitor")
+            self.assertEqual(approve_payload["topic_snapshot"], monitor_payload["topic_snapshot"])
+            self.assertIn("--from-decision", approve_payload["next_actions"][0])
+            written = load_json(prior_path)
+            self.assertEqual(written["decision_state"], "approved_for_chain")
+            self.assertEqual(written["previous_decision"]["decision_state"], "monitor")
+
     def test_llm_topic_decisions_summary_reports_allowed_topics(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

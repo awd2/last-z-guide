@@ -267,6 +267,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider f
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
 python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-approved-handoffs --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
@@ -474,10 +475,12 @@ LLM topic discovery:
 LLM topic decision:
 
 - `python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json` -> record an owner decision for one discovered topic
+- `python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json` -> rerecord an existing saved decision without manual JSON edits
 - `--state approved_for_chain` allows only the next no-write `llm-worker-chain` step
 - `--state monitor` keeps the topic out of intake until materially new evidence appears
 - `--state rejected` blocks the topic unless the owner explicitly reopens it
 - output lives in `automation/reports/llm-topic-decision-<topic_id>.json` and `.md`
+- `--from-decision` preserves the saved topic snapshot and records the prior state in `previous_decision`
 - this is a no-write decision artifact; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
 
 LLM topic decisions summary:

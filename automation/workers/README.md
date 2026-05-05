@@ -94,6 +94,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider o
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
 python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-approved-handoffs --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
@@ -157,6 +158,15 @@ Supported decisions are:
 
 This decision artifact does not approve public copy, patch specs, backlog
 mutation, manifest creation, PRs, or deployment.
+
+To reopen or approve a saved decision without editing JSON manually, use:
+
+```bash
+python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
+```
+
+This preserves the saved `topic_snapshot`, writes the new decision artifact,
+and records the previous state in `previous_decision`.
 
 `llm-topic-decisions` consolidates the decision artifacts into one operator
 summary:

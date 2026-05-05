@@ -118,6 +118,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider o
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
 python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-approved-handoffs --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
@@ -235,6 +236,14 @@ python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state 
 ```
 
 Use `approved_for_chain`, `monitor`, or `rejected`. This writes `automation/reports/llm-topic-decision-<topic_id>.json` and `.md`; it does not approve public content edits.
+
+To reopen or approve an existing saved decision without editing JSON manually, run:
+
+```bash
+python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
+```
+
+This preserves the saved topic snapshot and records the previous decision in `previous_decision`.
 
 To see the current decision state across all discovered topics, run:
 
