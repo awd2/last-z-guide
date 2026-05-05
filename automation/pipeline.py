@@ -632,6 +632,26 @@ def cmd_llm_topic_decisions(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_approved_handoffs(
+    reports_dir: str | None,
+    provider: str,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "reports" / "llm_approved_handoffs.py"),
+        "--provider",
+        provider,
+    ]
+    if reports_dir:
+        command.extend(["--reports-dir", reports_dir])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Approved Handoffs ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_content_seo_opportunities(
     json_output: str | None,
     markdown_output: str | None,
@@ -1982,6 +2002,19 @@ def build_parser() -> argparse.ArgumentParser:
     llm_topic_decisions_parser.add_argument("--no-write", action="store_true", help="Build and print only; do not write artifacts.")
     llm_topic_decisions_parser.add_argument("--json", action="store_true", help="Print the topic decisions summary as JSON.")
 
+    llm_approved_handoffs_parser = subparsers.add_parser(
+        "llm-approved-handoffs",
+        help="Show approved LLM topic decisions ready for deterministic worker-chain replay.",
+    )
+    llm_approved_handoffs_parser.add_argument("--reports-dir", help="Directory containing llm-topic-decision-*.json files.")
+    llm_approved_handoffs_parser.add_argument(
+        "--provider",
+        default="openai",
+        choices=["fixture", "openai"],
+        help="Provider to include in printed worker-chain commands.",
+    )
+    llm_approved_handoffs_parser.add_argument("--json", action="store_true", help="Print approved handoffs as JSON.")
+
     content_seo_parser = subparsers.add_parser(
         "content-seo-opportunities",
         help="Build a no-write SEO/LLM content opportunity report.",
@@ -2177,6 +2210,8 @@ def main() -> int:
             args.no_write,
             args.json,
         )
+    if args.command == "llm-approved-handoffs":
+        return cmd_llm_approved_handoffs(args.reports_dir, args.provider, args.json)
     if args.command == "content-seo-opportunities":
         return cmd_content_seo_opportunities(
             args.json_output,

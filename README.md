@@ -119,6 +119,7 @@ python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decisions --json
+python3 automation/pipeline.py llm-approved-handoffs --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -242,6 +243,14 @@ python3 automation/pipeline.py llm-topic-decisions --json
 ```
 
 This writes `automation/reports/llm-topic-decisions.json` and `.md`.
+
+To list only topic decisions that are currently approved for deterministic worker-chain replay, run:
+
+```bash
+python3 automation/pipeline.py llm-approved-handoffs --json
+```
+
+This is read-only and prints ready-to-run `llm-worker-chain --from-decision ...` commands.
 
 For a no-write LLM Editor planning brief from one selected Scout opportunity, run:
 

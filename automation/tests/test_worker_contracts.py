@@ -11,7 +11,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from automation.io import load_json, write_json
-from automation.reports import llm_review_latest, llm_topic_decisions
+from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
 from automation import close_run
 from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
@@ -601,6 +601,64 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue(json_path.exists())
             self.assertTrue(markdown_path.exists())
             self.assertIn("LLM Topic Decisions", markdown_path.read_text())
+
+    def test_llm_approved_handoffs_lists_replay_commands(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            write_json(
+                tmp_path / "llm-topic-decision-a.json",
+                {
+                    "report_type": "llm_topic_decision",
+                    "topic_id": "a",
+                    "decision_state": "monitor",
+                    "decided_by": "fixture",
+                    "generated_at": "2026-05-05T00:00:00Z",
+                    "allows_worker_chain": False,
+                    "allows_content_edit": False,
+                    "decision_note": "Monitor only.",
+                    "next_actions": ["Do not edit content."],
+                    "source_discovery": "fixture.json",
+                    "markdown_path": "a.md",
+                    "topic_snapshot": {
+                        "target_page_or_slug": "a.html",
+                        "cluster": "A",
+                        "risk_level": "high",
+                        "priority": "low",
+                    },
+                },
+            )
+            write_json(
+                tmp_path / "llm-topic-decision-b.json",
+                {
+                    "report_type": "llm_topic_decision",
+                    "topic_id": "b",
+                    "decision_state": "approved_for_chain",
+                    "decided_by": "fixture",
+                    "generated_at": "2026-05-05T00:00:00Z",
+                    "allows_worker_chain": True,
+                    "allows_content_edit": False,
+                    "decision_note": "No-write chain only.",
+                    "next_actions": ["Run no-write chain."],
+                    "source_discovery": "fixture.json",
+                    "markdown_path": "b.md",
+                    "topic_snapshot": {
+                        "target_page_or_slug": "b.html",
+                        "cluster": "B",
+                        "risk_level": "high",
+                        "priority": "high",
+                    },
+                },
+            )
+
+            view = llm_approved_handoffs.build_view(tmp_path, provider="fixture")
+            self.assertEqual(view["approved_handoff_count"], 1)
+            self.assertEqual(view["handoffs"][0]["topic_id"], "b")
+            self.assertIn("--from-decision", view["handoffs"][0]["worker_chain_command"])
+            self.assertIn("--provider fixture", view["handoffs"][0]["worker_chain_command"])
+            self.assertIn("llm-topic-decision-b.json", view["handoffs"][0]["worker_chain_command"])
+            markdown = llm_approved_handoffs.render_markdown(view)
+            self.assertIn("LLM Approved Handoffs", markdown)
+            self.assertIn("llm-worker-chain", markdown)
 
     def test_llm_editor_builds_brief_from_llm_scout_fixture(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

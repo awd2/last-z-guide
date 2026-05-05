@@ -148,6 +148,10 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - shows which topics, if any, are currently allowed for the next no-write worker chain
   - does not mutate `topic_backlog.csv`, manifests, content, PRs, or production state
 
+- `reports/llm_approved_handoffs.py`
+  - prints only `approved_for_chain` decisions with ready deterministic `llm-worker-chain --from-decision ...` commands
+  - does not mutate `topic_backlog.csv`, manifests, content, PRs, or production state
+
 - `workers/llm_editor.py`
   - reads one selected LLM Scout opportunity and deterministic Editor context
   - sends a JSON-only planning brief request through `llm_adapter`
@@ -264,6 +268,7 @@ python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decisions --json
+python3 automation/pipeline.py llm-approved-handoffs --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -480,6 +485,12 @@ LLM topic decisions summary:
 - `python3 automation/pipeline.py llm-topic-decisions --json` -> consolidate all `llm-topic-decision-*.json` artifacts
 - output lives in `automation/reports/llm-topic-decisions.json` and `.md`
 - this report is read-only over decision artifacts; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
+
+LLM approved handoffs:
+
+- `python3 automation/pipeline.py llm-approved-handoffs --json` -> list only decisions that are currently `approved_for_chain`
+- prints ready deterministic `llm-worker-chain --from-decision ...` commands
+- this view is read-only; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
 
 LLM Editor planning brief:
 

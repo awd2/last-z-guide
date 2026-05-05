@@ -429,6 +429,7 @@ python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decisions --json
+python3 automation/pipeline.py llm-approved-handoffs --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -470,6 +471,8 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 `llm-topic-decision` records an owner decision for one LLM topic discovery proposal. `approved_for_chain` only allows the next no-write worker chain; `monitor` and `rejected` keep the topic out of intake. It must not approve public copy, patch specs, backlog edits, manifests, PRs, or production state.
 
 `llm-topic-decisions` consolidates all LLM topic decision artifacts into one read-only operator report. It must not approve content edits or mutate backlog, manifests, PRs, or production state.
+
+`llm-approved-handoffs` is a read-only operator view over `approved_for_chain` decisions. It prints ready-to-run deterministic `llm-worker-chain --from-decision ...` commands and must not approve content edits or mutate backlog, manifests, PRs, or production state.
 
 `llm-editor` is the second live LLM worker wrapper. It creates a planning brief from one selected LLM Scout opportunity and deterministic Editor context. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
 

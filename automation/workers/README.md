@@ -95,6 +95,7 @@ python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decisions --json
+python3 automation/pipeline.py llm-approved-handoffs --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -166,6 +167,11 @@ summary:
 It shows current counts by decision state and which topics, if any, are allowed
 to proceed to the next no-write worker chain. It does not approve content edits
 or mutate backlog, manifests, PRs, or production state.
+
+`llm-approved-handoffs` is a read-only operator view over the same decision
+artifacts. It lists only topics currently approved for chain replay and prints
+ready `llm-worker-chain --from-decision ...` commands. It does not approve
+content edits or mutate backlog, manifests, PRs, or production state.
 
 `llm-editor` is the second live LLM worker wrapper. It reads one selected LLM Scout opportunity, combines it with deterministic Editor context, sends a JSON-only planning request through `llm_adapter`, and writes:
 
