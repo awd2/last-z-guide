@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "report_type": "hq_content_cleanup_proposal",
+  "generated_at": "2026-05-06",
+  "target_page_or_slug": "hq.html",
+  "state": "proposal_ready_owner_approval_required",
+  "content_edit_allowed": false,
+  "scope": "small public content cleanup proposal only; no HTML edited",
+  "proposed_change_count": 7,
+  "proposal_markdown": "automation/reports/hq-content-cleanup-proposal.md",
+  "requires_owner_approval_before_apply": true,
+  "proposed_changes": [
+    "Fix corrupted early-phase bullet.",
+    "Normalize Assaulter Camp terminology.",
+    "Clarify HQ8-30 vs HQ31-35 requirements.",
+    "Align steel source priority with steel.html.",
+    "Soften unconfirmed T11 claims.",
+    "Make HQ31-35 timer wording less absolute.",
+    "Soften strongest Sophia wording while preserving recommendation."
+  ],
+  "acceptance_checks": [
+    "python3 scripts/prepublish_check.py --fix",
+    "python3 scripts/prepublish_check.py",
+    "python3 automation/pipeline.py checks --strict",
+    "manual review: visible FAQ and JSON-LD FAQ answers match",
+    "manual review: no template/schema family drift"
+  ],
+  "safety": "No public content, patch specs, backlog rows, manifests, PRs, or production files were modified by this proposal."
+}
