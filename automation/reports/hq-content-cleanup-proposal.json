@@ -17,6 +17,15 @@
       "proposal_impact": "Do not add Tyrant as a Steel source in hq.html. Treat existing site pages that describe Tyrant as a Steel source as follow-up correction candidates."
     }
   ],
+  "follow_up_correction_candidates": [
+    "hq.html",
+    "steel.html",
+    "tyrant.html",
+    "resources.html",
+    "gear.html",
+    "pvp.html",
+    "index.html"
+  ],
   "proposed_changes": [
     "Fix corrupted early-phase bullet.",
     "Normalize Assaulter Camp terminology.",

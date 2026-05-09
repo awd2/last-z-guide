@@ -36,6 +36,16 @@ Proposal impact:
 - Keep Tyrant guidance separate as an alliance event / Power Core progression topic unless future in-game evidence proves Steel was added to Tyrant rewards on a specific server stage.
 - Treat current site pages that call Tyrant a Steel source as follow-up correction candidates.
 
+Follow-up correction candidates found in public HTML:
+
+- `hq.html` — FAQ answer currently lists Tyrant rallies as the main Steel source.
+- `steel.html` — title/meta/H1/body currently positions Tyrant as a Steel source.
+- `tyrant.html` — title/schema/body/FAQ currently describes Tyrant as a Steel reward source.
+- `resources.html` — Steel section and FAQ currently list Tyrant as the main Steel source.
+- `gear.html` — equipment section currently says Tyrant gives free Steel and Power Core materials.
+- `pvp.html` — quick operational checklist currently says Tyrant provides Steel.
+- `index.html` — Steel guide card currently routes steel intent through Tyrant wording.
+
 ## Proposed Changes
 
 ### 1. Fix corrupted early-phase bullet
