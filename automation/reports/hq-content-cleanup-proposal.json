@@ -9,11 +9,19 @@
   "proposed_change_count": 7,
   "proposal_markdown": "automation/reports/hq-content-cleanup-proposal.md",
   "requires_owner_approval_before_apply": true,
+  "research_updates": [
+    {
+      "date": "2026-05-09",
+      "topic": "Tyrant and Steel",
+      "finding": "Owner in-game check says Tyrant does not award Steel. External Tyrant reward references emphasize Power Cores, vouchers, alloy, speedups, hero EXP, and normal resources rather than Steel.",
+      "proposal_impact": "Do not add Tyrant as a Steel source in hq.html. Treat existing site pages that describe Tyrant as a Steel source as follow-up correction candidates."
+    }
+  ],
   "proposed_changes": [
     "Fix corrupted early-phase bullet.",
     "Normalize Assaulter Camp terminology.",
     "Clarify HQ8-30 vs HQ31-35 requirements.",
-    "Align steel source priority with steel.html.",
+    "Correct steel source priority without adding Tyrant.",
     "Soften unconfirmed T11 claims.",
     "Make HQ31-35 timer wording less absolute.",
     "Soften strongest Sophia wording while preserving recommendation."
@@ -23,7 +31,8 @@
     "python3 scripts/prepublish_check.py",
     "python3 automation/pipeline.py checks --strict",
     "manual review: visible FAQ and JSON-LD FAQ answers match",
-    "manual review: no template/schema family drift"
+    "manual review: no template/schema family drift",
+    "manual review: no new hq.html text describes Tyrant as a Steel source"
   ],
   "safety": "No public content, patch specs, backlog rows, manifests, PRs, or production files were modified by this proposal."
 }

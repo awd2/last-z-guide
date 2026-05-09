@@ -17,6 +17,25 @@ Goal:
 
 Approval required before applying.
 
+## Research Update: Tyrant and Steel
+
+Updated: 2026-05-09
+
+Owner in-game check: Tyrant does not award Steel.
+
+External cross-check:
+
+- `last-z.wiki/events/the-tyrant/` lists Tyrant rewards as Enhancement Alloy, speedups, Hero Exp, Zent, Food, Wood, Electricity, Gift Vouchers, and related reward tiers; it does not list Steel in the visible Tyrant reward tables.
+- `ztools.co.uk/bcem` describes Tyrant as a Power Cores and decoration shop voucher event.
+- `lastz.info/the-tyrant-basics/` explains Tyrant execution, timing, offline engagement, and rally behavior, but does not identify Tyrant as a Steel source.
+- Some SEO/commercial pages do claim Tyrant produces Steel, but they conflict with the more specific reward references above and with the owner in-game check.
+
+Proposal impact:
+
+- Do not add Tyrant as a Steel source in `hq.html`.
+- Keep Tyrant guidance separate as an alliance event / Power Core progression topic unless future in-game evidence proves Steel was added to Tyrant rewards on a specific server stage.
+- Treat current site pages that call Tyrant a Steel source as follow-up correction candidates.
+
 ## Proposed Changes
 
 ### 1. Fix corrupted early-phase bullet
@@ -94,7 +113,7 @@ Reason:
 - The cost table shows HQ31-35 differently from the HQ8-30 Lab + second-building pattern.
 - This reduces risk of misleading players about late requirements.
 
-### 4. Align steel source priority with `steel.html`
+### 4. Correct steel source priority without adding Tyrant
 
 Current steel source list:
 
@@ -113,11 +132,11 @@ Proposed steel source list:
 
 ```html
 <ul>
-    <li><strong><a href="tyrant.html">Tyrant rallies</a></strong> — main repeatable steel source for most alliances</li>
     <li><strong>Orange Bounties</strong> — high steel per bounty in late game</li>
     <li><strong>Steel Mine and steel nodes</strong> — steady daily income once unlocked</li>
     <li><strong>Hub Shop and seasonal rewards</strong> — useful supporting sources</li>
     <li><strong><a href="furylord.html">Furylord</a></strong> — event source when active</li>
+    <li><strong>HQ31-35 launch event</strong> — temporary steel boost when available on your server</li>
 </ul>
 ```
 
@@ -133,7 +152,7 @@ Proposed section heading and text:
 
 ```html
 <h3>Steel Is Only One Bottleneck</h3>
-<p>Steel adds pressure after HQ30, but it is not the only HQ31-35 blocker. Tyrant rallies, orange bounties, mines or nodes, and events build your steel supply over time.</p>
+<p>Steel adds pressure after HQ30, but it is not the only HQ31-35 blocker. Orange bounties, the Steel Mine, steel nodes, the Hub Shop, Furylord, and server events build your steel supply over time.</p>
 <p><strong>The other bottleneck:</strong> speedups. Long construction timers can stop progress even when your steel plan is on track.</p>
 ```
 
@@ -146,7 +165,7 @@ Current key tip:
 Proposed key tip:
 
 ```html
-<li><strong>Tyrant first, orange bounties next</strong> — keep repeatable steel sources active</li>
+<li><strong>Orange bounties and steel nodes</strong> — keep repeatable steel sources active</li>
 ```
 
 Current FAQ answer:
@@ -158,19 +177,20 @@ Current FAQ answer:
 Proposed FAQ answer:
 
 ```html
-<p>Steel only appears after HQ30 once HQ31-35 is active on your server. Best sources are <a href="tyrant.html">Tyrant rallies</a> first, then orange bounties, steel mine or nodes, hub shop, Furylord, and seasonal rewards.</p>
+<p>Steel only appears after HQ30 once HQ31-35 is active on your server. Best sources are orange bounties, Steel Mine or steel nodes, Hub Shop, Furylord, seasonal rewards, and any active HQ31-35 launch event. Do not count Tyrant as a steel source unless your live reward screen shows steel.</p>
 ```
 
 Matching JSON-LD FAQ answer should use the same text without HTML link markup:
 
 ```json
-"Steel only appears after HQ30 once HQ31-35 is active on your server. Best sources are Tyrant rallies first, then orange bounties, steel mine or nodes, hub shop, Furylord, and seasonal rewards."
+"Steel only appears after HQ30 once HQ31-35 is active on your server. Best sources are orange bounties, Steel Mine or steel nodes, Hub Shop, Furylord, seasonal rewards, and any active HQ31-35 launch event. Do not count Tyrant as a steel source unless your live reward screen shows steel."
 ```
 
 Reason:
 
-- `steel.html` already defines Tyrant as the main steel engine.
-- `hq.html` should route to and align with that canonical steel page, not contradict it.
+- Owner in-game check says Tyrant does not award Steel.
+- More specific external Tyrant reward references list Power Core / voucher / resource-style rewards, not Steel.
+- `hq.html` should avoid repeating unsupported Tyrant-to-Steel claims. `steel.html`, `tyrant.html`, `resources.html`, and `gear.html` should be handled as follow-up correction candidates before any site-wide Steel update is applied.
 
 ### 5. Soften unconfirmed T11 claims
 
@@ -330,7 +350,8 @@ Manual review:
 
 - confirm visible FAQ and JSON-LD FAQ answers match
 - confirm no template/schema family drift
-- confirm `hq.html` still links to `hq-construction-cost.html`, `steel.html`, and `tyrant.html`
+- confirm `hq.html` still links to `hq-construction-cost.html` and `steel.html`
+- confirm no new `hq.html` text describes Tyrant as a Steel source
 
 ## Approval Gate
 
