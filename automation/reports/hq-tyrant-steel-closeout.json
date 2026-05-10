@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "report_type": "hq_tyrant_steel_closeout",
+  "generated_at": "2026-05-10",
+  "state": "closed",
+  "public_content_changed": false,
+  "closeout_markdown": "automation/reports/hq-tyrant-steel-closeout.md",
+  "closed_commits": [
+    {
+      "commit": "663ef23",
+      "message": "fix: clean up HQ progression guidance"
+    },
+    {
+      "commit": "b59f27f",
+      "message": "fix: correct Tyrant and steel guidance"
+    }
+  ],
+  "scope_closed": [
+    "hq.html",
+    "steel.html",
+    "tyrant.html",
+    "resources.html",
+    "gear.html",
+    "pvp.html",
+    "index.html"
+  ],
+  "verification": [
+    "python3 scripts/prepublish_check.py --fix",
+    "python3 scripts/prepublish_check.py",
+    "python3 automation/pipeline.py checks --strict",
+    "git diff --check",
+    "text scan for old Tyrant-as-Steel-source claims"
+  ],
+  "result": "The HQ / Tyrant / Steel consistency hardening block is complete. Tyrant is no longer described as a confirmed Steel source, and Steel guidance now routes through confirmed or safer steel planning sources.",
+  "residual_risks": [
+    "Live rewards can change by server stage or future update.",
+    "Third-party pages still conflict with the owner in-game check.",
+    "Exact Steel income values from bounties, nodes, shops, Furylord, and launch events need ongoing validation."
+  ],
+  "recommended_next_step": "Return to LLM worker infrastructure with proposal-first, owner-approval, deterministic-check guardrails."
+}
