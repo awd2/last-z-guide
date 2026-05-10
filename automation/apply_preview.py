@@ -52,6 +52,8 @@ REDEEM_FAILURE_SORTING_CALLOUT = (
     "</p>"
 )
 
+SAFE_EXACT_REPLACE_OPERATION = "safe_exact_replace"
+
 
 def approved_specs(manifest) -> list[dict[str, Any]]:
     patch_plan = (manifest.artifacts or {}).get("patch_plan", {})
@@ -95,6 +97,12 @@ def diff_block(title: str, before: str, after: str) -> str:
 - {before}
 + {after}
 ```"""
+
+
+def exact_replace_values(spec: dict[str, Any]) -> tuple[str | None, str | None]:
+    old = spec.get("exact_old")
+    new = spec.get("exact_new")
+    return (old if isinstance(old, str) else None, new if isinstance(new, str) else None)
 
 
 def target_label(target_page: str) -> str:
@@ -193,6 +201,26 @@ def preview_for_spec(spec: dict[str, Any], target_page: str) -> dict[str, Any]:
         preview = meta_preview_for_target(source_file) or "Manual metadata preview required."
         if preview.startswith("Manual"):
             warnings.append("No deterministic metadata preview template exists for this target yet.")
+
+    elif operation == SAFE_EXACT_REPLACE_OPERATION:
+        action = "safe_exact_replace"
+        old, new = exact_replace_values(spec)
+        if not old or not new:
+            warnings.append("Missing `exact_old` or `exact_new`; apply-approved will fail closed.")
+            preview = "Manual exact replacement preview unavailable."
+        else:
+            text = read_text(path)
+            old_count = text.count(old)
+            new_count = text.count(new)
+            if old_count != 1:
+                warnings.append(f"`exact_old` occurs {old_count} time(s); apply-approved requires exactly one match.")
+            if old_count == 0 and new_count == 1:
+                warnings.append("`exact_new` already appears once and `exact_old` is absent; apply-approved will treat this as already applied.")
+            if spec.get("is_generated"):
+                warnings.append("Generated sources are not allowed for safe_exact_replace.")
+            if spec.get("source_type") != "html_file":
+                warnings.append("safe_exact_replace currently supports only `html_file` sources.")
+            preview = diff_block(str(spec.get("selector_or_anchor") or "exact replacement"), old, new)
 
     elif operation == "first_screen_update":
         action = "replace_first_screen_answer"

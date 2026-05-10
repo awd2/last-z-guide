@@ -53,6 +53,8 @@ TARGET_OPERATION_SUPPORT = {
     },
 }
 
+SAFE_EXACT_REPLACE_OPERATION = "safe_exact_replace"
+
 GENERIC_HTML_RELATED_CARD_SUPPORT = {
     ("alliance-recognition-cost.html", "research-costs.html"),
     ("diamond-reserve.html", "codes.html"),
@@ -108,17 +110,91 @@ def replace_once(text: str, old: str, new: str, applied: list[str], label: str) 
     return text.replace(old, new, 1)
 
 
+def exact_replace_texts(spec: dict[str, Any]) -> tuple[str, str]:
+    old = spec.get("exact_old")
+    new = spec.get("exact_new")
+    if not isinstance(old, str) or not old:
+        raise ValueError("safe_exact_replace requires a non-empty `exact_old` string.")
+    if not isinstance(new, str) or not new:
+        raise ValueError("safe_exact_replace requires a non-empty `exact_new` string.")
+    if old == new:
+        raise ValueError("safe_exact_replace requires different `exact_old` and `exact_new` strings.")
+    return old, new
+
+
+def source_path(source_file: str) -> Path:
+    path = Path(source_file)
+    if path.is_absolute() or ".." in path.parts:
+        raise ValueError(f"Unsafe source path for safe_exact_replace: {source_file}")
+    resolved = (ROOT / path).resolve()
+    try:
+        resolved.relative_to(ROOT.resolve())
+    except ValueError as exc:
+        raise ValueError(f"Source path escapes repository root: {source_file}") from exc
+    return resolved
+
+
+def validate_safe_exact_replace_spec(source_file: str, spec: dict[str, Any]) -> None:
+    exact_replace_texts(spec)
+    if spec.get("is_generated"):
+        raise ValueError(f"safe_exact_replace refuses generated source files: {source_file}")
+    if spec.get("source_type") != "html_file":
+        raise ValueError(f"safe_exact_replace only supports html_file sources: {source_file}")
+    if Path(source_file).suffix != ".html":
+        raise ValueError(f"safe_exact_replace only supports HTML files: {source_file}")
+    output_file = str(spec.get("output_file") or "")
+    target_file = str(spec.get("target_file") or "")
+    if output_file != source_file or target_file != source_file:
+        raise ValueError(
+            "safe_exact_replace requires target_file, source_of_truth_file, and output_file "
+            f"to match for {source_file}."
+        )
+    source_path(source_file)
+
+
+def apply_safe_exact_replace(source_file: str, spec: dict[str, Any]) -> tuple[list[str], list[str]]:
+    old, new = exact_replace_texts(spec)
+    path = source_path(source_file)
+    if not path.exists():
+        raise ValueError(f"safe_exact_replace source file not found: {source_file}")
+
+    text = path.read_text(encoding="utf-8")
+    old_count = text.count(old)
+    new_count = text.count(new)
+    selector = str(spec.get("selector_or_anchor") or "exact")
+    label = f"{source_file}:safe_exact_replace:{selector}"
+
+    if old_count == 1:
+        path.write_text(text.replace(old, new, 1), encoding="utf-8")
+        return [label], []
+    if old_count == 0 and new_count == 1:
+        return [], [f"{label}:already_applied"]
+    if old_count == 0:
+        raise ValueError(f"safe_exact_replace old text not found in {source_file}: {selector}")
+    raise ValueError(f"safe_exact_replace old text is ambiguous in {source_file}: {selector} ({old_count} matches)")
+
+
 def target_card(target_page: str) -> dict[str, str]:
     return TARGET_CARDS.get(target_page, {"href": target_page, "label": target_page})
 
 
 def validate_supported_specs(grouped: dict[str, list[dict[str, Any]]], target_page: str) -> None:
     for source_file, source_specs in grouped.items():
+        non_exact_specs = []
+        for spec in source_specs:
+            if spec.get("operation_type") == SAFE_EXACT_REPLACE_OPERATION:
+                validate_safe_exact_replace_spec(source_file, spec)
+            else:
+                non_exact_specs.append(spec)
+
+        if not non_exact_specs:
+            continue
+
         supported = TARGET_OPERATION_SUPPORT.get(source_file)
         if supported is not None:
             unsupported = [
                 str(spec.get("operation_type"))
-                for spec in source_specs
+                for spec in non_exact_specs
                 if spec.get("operation_type") not in supported
             ]
             if unsupported:
@@ -128,7 +204,7 @@ def validate_supported_specs(grouped: dict[str, list[dict[str, Any]]], target_pa
                 )
             continue
 
-        for spec in source_specs:
+        for spec in non_exact_specs:
             operation = spec.get("operation_type")
             source_type = spec.get("source_type")
             if operation != "internal_link_addition":
@@ -533,6 +609,7 @@ def render_report(manifest, applied: list[str], skipped: list[str], generators: 
 ## Safety Rule
 
 - Only approved Patch Spec v1 entries were considered.
+- `safe_exact_replace` specs replace exact owner-approved before/after snippets only.
 - Generated research pages were changed through JSON source files and regenerated.
 - This is still not a production publish step.
 
@@ -567,14 +644,28 @@ def apply_approved(path: Path):
     validate_supported_specs(grouped, target_page)
 
     for source_file, source_specs in grouped.items():
+        exact_specs = [
+            spec for spec in source_specs if spec.get("operation_type") == SAFE_EXACT_REPLACE_OPERATION
+        ]
+        for spec in exact_specs:
+            source_applied, source_skipped = apply_safe_exact_replace(source_file, spec)
+            applied.extend(source_applied)
+            skipped.extend(source_skipped)
+
+        remaining_specs = [
+            spec for spec in source_specs if spec.get("operation_type") != SAFE_EXACT_REPLACE_OPERATION
+        ]
+        if not remaining_specs:
+            continue
+
         handler = SPECIALIZED_APPLY_HANDLERS.get(source_file)
         if handler is not None:
-            source_applied, source_skipped = handler(source_specs)
+            source_applied, source_skipped = handler(remaining_specs)
             applied.extend(source_applied)
             skipped.extend(source_skipped)
             continue
 
-        for spec in source_specs:
+        for spec in remaining_specs:
             operation = spec.get("operation_type")
             source_type = spec.get("source_type")
             if operation != "internal_link_addition":

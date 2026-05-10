@@ -902,6 +902,10 @@ entries. It is intentionally narrower than a general writing worker:
 
 - HTML edits are limited to known safe metadata, first-screen, and related-link
   templates
+- `safe_exact_replace` is the only generic content-side operation. It requires
+  exact owner-approved `exact_old` and `exact_new` strings, only supports
+  non-generated HTML files, requires the old string to appear exactly once, and
+  fails closed instead of guessing when the source has drifted.
 - every apply route must map to a specialized deterministic handler or an
   explicitly allowlisted generic related-link route
 - generated research branch pages are edited through their JSON source files
@@ -912,6 +916,27 @@ entries. It is intentionally narrower than a general writing worker:
   in the apply result artifact
 - the manifest moves to `applied_pending_qa`
 - production publishing is still manual and still requires green checks
+
+Minimal `safe_exact_replace` Patch Spec shape:
+
+```json
+{
+  "target_file": "example.html",
+  "source_of_truth_file": "example.html",
+  "output_file": "example.html",
+  "source_type": "html_file",
+  "is_generated": false,
+  "operation_type": "safe_exact_replace",
+  "selector_or_anchor": "<title>",
+  "approval_state": "approved",
+  "exact_old": "<title>Old approved-before text</title>",
+  "exact_new": "<title>New owner-approved text</title>"
+}
+```
+
+This operation is for mechanically applying reviewed text. It is not an LLM
+writing step and must not be used with paraphrased summaries or desired-after
+notes.
 
 When strict manifest checks pass after apply:
 

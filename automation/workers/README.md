@@ -270,6 +270,10 @@ All workers must follow these rules:
 
 - No production publishing.
 - No direct content edits unless the worker is a later approved apply worker.
+- Generic content application is limited to `safe_exact_replace`: exact
+  owner-approved `exact_old` -> `exact_new` snippets in one non-generated HTML
+  file. Workers must not treat summaries, desired-after notes, or LLM prose as
+  applyable content.
 - No live LLM provider calls unless they go through the fail-closed adapter and have explicit configuration.
 - No new page unless the page has a distinct user job and a clear cluster route.
 - No generated research branch edits through generated HTML; use JSON source + generator.

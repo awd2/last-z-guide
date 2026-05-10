@@ -118,6 +118,8 @@ and `released`, but those are not implemented states yet.
   - reports, briefs, or generated files produced by the run
   - proposal artifacts may include `approval_state`, `approval_updated_at`, and
     `approval_note` fields for rendered Patch Spec v1 entries
+  - approved exact-replacement Patch Spec v1 entries may include `exact_old`
+    and `exact_new`, but only for `operation_type: safe_exact_replace`
   - apply preview artifacts may include `approved_specs_count`, `generated_at`,
     and `preview_items`
   - apply result artifacts may include `applied_operations`,
@@ -166,3 +168,18 @@ This writer is intentionally narrow:
 - it refuses to overwrite an existing manifest
 - it writes only `automation/manifests/<run_id>.json`
 - it does not edit content, backlog, or production state
+
+## Safe Exact Replacement
+
+`safe_exact_replace` is the generic apply operation for future approved public
+copy changes. It is deliberately mechanical:
+
+- `approval_state` must be `approved`
+- `exact_old` and `exact_new` must be non-empty strings
+- `target_file`, `source_of_truth_file`, and `output_file` must match
+- the source must be a non-generated `html_file`
+- the old snippet must occur exactly once
+- missing or duplicate old snippets are hard failures
+
+This lets the pipeline apply exact owner-approved snippets without giving the
+apply step permission to draft, paraphrase, or infer content.

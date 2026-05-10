@@ -525,6 +525,8 @@ Lifecycle currently:
 
 `apply-approved` may edit source files, but only from approved Patch Spec v1 entries and only through conservative deterministic templates. Unsupported approved operations must fail loudly instead of being silently skipped. Generated research branch pages must still be edited through JSON source files and regenerated.
 
+`safe_exact_replace` is the only generic content-side apply operation. It may replace an exact owner-approved `exact_old` snippet with an exact owner-approved `exact_new` snippet, but only when the old snippet appears exactly once in a non-generated HTML source file and `target_file`, `source_of_truth_file`, and `output_file` all match. It must fail closed on missing text, duplicate matches, generated files, unsafe paths, or unsupported source types. It must not generate or infer public copy.
+
 `content-seo-opportunities` is a no-write report that combines GSC signals, content index memory, page structure, metadata, trust signals, and generated-page boundaries. It is planning context only and must not be treated as automatic approval to edit high-risk pages.
 
 `bing-report` fetches Bing Webmaster weekly buckets into `content/bing/latest-bing-report.md` and `content/bing/latest-bing-agent-signals.json`. Bing signals are planning context only. Compare them with GSC/site memory before proposing content changes, and never treat Bing impressions or query drift as automatic approval to edit.

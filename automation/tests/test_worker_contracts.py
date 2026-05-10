@@ -12,7 +12,7 @@ from unittest.mock import patch
 
 from automation.io import load_json, write_json
 from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
-from automation import close_run
+from automation import apply_approved, apply_preview, close_run
 from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
@@ -231,6 +231,115 @@ def fixture_approved_topic_decision() -> dict:
 
 
 class WorkerContractTests(unittest.TestCase):
+    def test_safe_exact_replace_apply_and_preview(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            page_path = tmp_path / "sample.html"
+            manifest_path = tmp_path / "manifest.json"
+            reports_dir = tmp_path / "reports"
+            page_path.write_text("<html><title>Old Title</title><h1>Old Title</h1></html>", encoding="utf-8")
+            write_json(
+                manifest_path,
+                {
+                    "run_id": "fixture-safe-exact-replace",
+                    "created_at": "2026-05-10T00:00:00Z",
+                    "run_type": "update_existing",
+                    "status": "approved_for_apply",
+                    "risk_level": "medium",
+                    "summary": "Fixture exact replacement.",
+                    "inputs": {},
+                    "plan": {"target_page_or_slug": "sample.html"},
+                    "artifacts": {
+                        "patch_plan": {
+                            "patch_specs": [
+                                {
+                                    "target_file": "sample.html",
+                                    "source_of_truth_file": "sample.html",
+                                    "output_file": "sample.html",
+                                    "source_type": "html_file",
+                                    "is_generated": False,
+                                    "operation_type": "safe_exact_replace",
+                                    "selector_or_anchor": "<title>",
+                                    "approval_state": "approved",
+                                    "exact_old": "<title>Old Title</title>",
+                                    "exact_new": "<title>New Title</title>",
+                                    "validation_commands": ["python3 scripts/prepublish_check.py"],
+                                }
+                            ]
+                        }
+                    },
+                    "changed_files": ["sample.html"],
+                    "checks": {},
+                    "review": {
+                        "verdict": "needs_human_review",
+                        "open_questions": [],
+                        "next_action": "apply",
+                        "reviewer_notes": "",
+                    },
+                },
+            )
+
+            with patch.object(apply_preview, "ROOT", tmp_path), patch.object(apply_preview, "REPORTS_DIR", reports_dir):
+                preview_path, preview_items = apply_preview.render_apply_preview(manifest_path)
+            self.assertTrue(preview_path.exists())
+            self.assertEqual(preview_items[0]["preview_action"], "safe_exact_replace")
+            self.assertEqual(preview_items[0]["warnings"], [])
+
+            with patch.object(apply_approved, "ROOT", tmp_path), patch.object(apply_approved, "REPORTS_DIR", reports_dir):
+                result_path, applied, skipped, generators = apply_approved.apply_approved(manifest_path)
+
+            self.assertTrue(result_path.exists())
+            self.assertIn("<title>New Title</title>", page_path.read_text(encoding="utf-8"))
+            self.assertEqual(applied, ["sample.html:safe_exact_replace:<title>"])
+            self.assertEqual(skipped, [])
+            self.assertEqual(generators, [])
+            manifest = load_json(manifest_path)
+            self.assertEqual(manifest["status"], "applied_pending_qa")
+
+    def test_safe_exact_replace_fails_on_ambiguous_old_text(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            page_path = tmp_path / "sample.html"
+            manifest_path = tmp_path / "manifest.json"
+            page_path.write_text("<p>Repeat me</p><p>Repeat me</p>", encoding="utf-8")
+            write_json(
+                manifest_path,
+                {
+                    "run_id": "fixture-safe-exact-replace-ambiguous",
+                    "created_at": "2026-05-10T00:00:00Z",
+                    "run_type": "update_existing",
+                    "status": "approved_for_apply",
+                    "risk_level": "medium",
+                    "summary": "Fixture ambiguous exact replacement.",
+                    "inputs": {},
+                    "plan": {"target_page_or_slug": "sample.html"},
+                    "artifacts": {
+                        "patch_plan": {
+                            "patch_specs": [
+                                {
+                                    "target_file": "sample.html",
+                                    "source_of_truth_file": "sample.html",
+                                    "output_file": "sample.html",
+                                    "source_type": "html_file",
+                                    "is_generated": False,
+                                    "operation_type": "safe_exact_replace",
+                                    "selector_or_anchor": "paragraph",
+                                    "approval_state": "approved",
+                                    "exact_old": "<p>Repeat me</p>",
+                                    "exact_new": "<p>Replace me</p>",
+                                }
+                            ]
+                        }
+                    },
+                    "changed_files": ["sample.html"],
+                    "checks": {},
+                },
+            )
+
+            with patch.object(apply_approved, "ROOT", tmp_path):
+                with self.assertRaisesRegex(ValueError, "ambiguous"):
+                    apply_approved.apply_approved(manifest_path)
+
     def test_llm_adapter_fail_closed_and_fixture_provider(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
