@@ -12,7 +12,8 @@ from unittest.mock import patch
 
 from automation.io import load_json, write_json
 from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
-from automation import apply_approved, apply_preview, close_run
+from automation import apply_approved, apply_preview, close_run, patch_planner, proposal_renderer
+from automation.source_resolver import SourceResolution
 from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
@@ -231,6 +232,81 @@ def fixture_approved_topic_decision() -> dict:
 
 
 class WorkerContractTests(unittest.TestCase):
+    def test_patch_planner_emits_safe_exact_replace_spec_from_exact_proposal(self) -> None:
+        source = SourceResolution(
+            target_file="sample.html",
+            source_of_truth_file="sample.html",
+            output_file="sample.html",
+            source_type="html_file",
+            is_generated=False,
+            generator_command=None,
+            edit_policy="Edit the target file directly.",
+        )
+        proposal = {
+            "file": "sample.html",
+            "change_type": "first_screen_update",
+            "reason": "Apply owner-reviewed exact text.",
+            "selector_or_anchor": ".guide-verified",
+            "exact_old": "<p>Old approved-before copy.</p>",
+            "exact_new": "<p>New owner-approved copy.</p>",
+        }
+
+        with patch.object(patch_planner, "resolve_source", return_value=source):
+            specs = patch_planner.build_patch_specs(
+                [proposal],
+                canonical_ids=[],
+                deterministic_checks=["python3 scripts/prepublish_check.py"],
+            )
+
+        self.assertEqual(len(specs), 1)
+        spec = specs[0]
+        self.assertEqual(spec["operation_type"], "safe_exact_replace")
+        self.assertEqual(spec["selector_or_anchor"], ".guide-verified")
+        self.assertEqual(spec["exact_old"], "<p>Old approved-before copy.</p>")
+        self.assertEqual(spec["exact_new"], "<p>New owner-approved copy.</p>")
+        self.assertTrue(spec["human_approval_required"])
+
+    def test_proposal_renderer_shows_exact_replace_candidate(self) -> None:
+        manifest = type(
+            "ManifestFixture",
+            (),
+            {
+                "artifacts": {
+                    "patch_plan": {
+                        "target_page_or_slug": "sample.html",
+                        "patch_specs": [
+                            {
+                                "target_file": "sample.html",
+                                "source_of_truth_file": "sample.html",
+                                "output_file": "sample.html",
+                                "source_type": "html_file",
+                                "is_generated": False,
+                                "generator_command": None,
+                                "operation_type": "safe_exact_replace",
+                                "selector_or_anchor": ".guide-verified",
+                                "required_preconditions": [],
+                                "proposed_change_summary": "Apply exact approved copy.",
+                                "canonical_claims_to_protect": [],
+                                "validation_commands": [],
+                                "human_approval_required": True,
+                                "exact_old": "<p>Old approved-before copy.</p>",
+                                "exact_new": "<p>New owner-approved copy.</p>",
+                            }
+                        ],
+                    }
+                },
+                "plan": {"target_page_or_slug": "sample.html"},
+            },
+        )()
+
+        rendered = proposal_renderer.build_rendered_specs(manifest)
+
+        self.assertEqual(rendered[0]["operation_type"], "safe_exact_replace")
+        self.assertEqual(rendered[0]["selector_or_anchor"], ".guide-verified")
+        self.assertIn("Exact approved replacement candidate", rendered[0]["suggested_content"])
+        self.assertIn("<p>Old approved-before copy.</p>", rendered[0]["suggested_content"])
+        self.assertIn("<p>New owner-approved copy.</p>", rendered[0]["suggested_content"])
+
     def test_safe_exact_replace_apply_and_preview(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

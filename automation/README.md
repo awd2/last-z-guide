@@ -827,6 +827,15 @@ Patch plans include `Patch Spec v1` entries with:
 - validation commands
 - explicit human approval requirement
 
+When a proposed change already contains exact before/after strings, `patch-plan`
+may emit a `safe_exact_replace` Patch Spec instead of a broad
+`first_screen_update` or `meta_refresh` placeholder. This is allowed only when:
+
+- `exact_old` and `exact_new` are present
+- the source is a non-generated HTML file
+- `target_file`, `source_of_truth_file`, and `output_file` all match
+- the spec still requires owner approval before apply
+
 `propose` reads Patch Spec v1 entries and renders a human-reviewable proposed
 edit report at:
 

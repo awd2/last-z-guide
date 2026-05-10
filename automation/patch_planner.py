@@ -18,6 +18,7 @@ from automation.source_resolver import resolve_source
 
 REPORTS_DIR = ROOT / "automation" / "reports"
 MANIFESTS_DIR = ROOT / "automation" / "manifests"
+SAFE_EXACT_REPLACE_OPERATION = "safe_exact_replace"
 
 
 def resolve_manifest_path(value: str) -> Path:
@@ -35,6 +36,22 @@ def md_list(items: list[str]) -> str:
 
 def claim_lookup() -> dict[str, object]:
     return {claim.id: claim for claim in load_canonical_claims()}
+
+
+def has_exact_replacement(proposal: dict[str, object]) -> bool:
+    return bool(proposal.get("exact_old")) or bool(proposal.get("exact_new"))
+
+
+def exact_replacement_values(proposal: dict[str, object]) -> tuple[str, str]:
+    old = proposal.get("exact_old")
+    new = proposal.get("exact_new")
+    if not isinstance(old, str) or not old:
+        raise ValueError("Exact replacement proposals require a non-empty `exact_old` string.")
+    if not isinstance(new, str) or not new:
+        raise ValueError("Exact replacement proposals require a non-empty `exact_new` string.")
+    if old == new:
+        raise ValueError("Exact replacement proposals require different `exact_old` and `exact_new` strings.")
+    return old, new
 
 
 def propose_change_types(manifest) -> list[dict[str, object]]:
@@ -121,28 +138,52 @@ def build_patch_specs(
         ]
         if source.generator_command and source.generator_command not in validation_commands:
             validation_commands.insert(0, source.generator_command)
-
-        specs.append(
-            {
-                "target_file": target_file,
-                "source_of_truth_file": source.source_of_truth_file,
-                "output_file": source.output_file,
-                "source_type": source.source_type,
-                "is_generated": source.is_generated,
-                "generator_command": source.generator_command,
-                "operation_type": str(proposal["change_type"]),
-                "selector_or_anchor": "manual_review_required",
-                "required_preconditions": [
-                    source.edit_policy,
-                    "Read the target/source file before editing.",
-                    "Protect the canonical claims listed on this patch spec.",
-                ],
-                "proposed_change_summary": str(proposal["reason"]),
-                "canonical_claims_to_protect": canonical_ids,
-                "validation_commands": validation_commands,
-                "human_approval_required": True,
+        operation_type = str(proposal["change_type"])
+        exact_fields: dict[str, object] = {}
+        if has_exact_replacement(proposal) or operation_type == SAFE_EXACT_REPLACE_OPERATION:
+            old, new = exact_replacement_values(proposal)
+            if source.is_generated or source.source_type != "html_file":
+                raise ValueError(f"safe_exact_replace requires a non-generated HTML source: {target_file}")
+            if (
+                source.source_of_truth_file != target_file
+                or source.output_file != target_file
+                or source.target_file != target_file
+            ):
+                raise ValueError(
+                    "safe_exact_replace requires target_file, source_of_truth_file, and output_file "
+                    f"to match: {target_file}"
+                )
+            operation_type = SAFE_EXACT_REPLACE_OPERATION
+            exact_fields = {
+                "exact_old": old,
+                "exact_new": new,
             }
-        )
+
+        spec = {
+            "target_file": target_file,
+            "source_of_truth_file": source.source_of_truth_file,
+            "output_file": source.output_file,
+            "source_type": source.source_type,
+            "is_generated": source.is_generated,
+            "generator_command": source.generator_command,
+            "operation_type": operation_type,
+            "selector_or_anchor": str(proposal.get("selector_or_anchor") or "manual_review_required"),
+            "required_preconditions": [
+                source.edit_policy,
+                "Read the target/source file before editing.",
+                "Protect the canonical claims listed on this patch spec.",
+            ],
+            "proposed_change_summary": str(proposal["reason"]),
+            "canonical_claims_to_protect": canonical_ids,
+            "validation_commands": validation_commands,
+            "human_approval_required": True,
+        }
+        if exact_fields:
+            spec.update(exact_fields)
+            spec["required_preconditions"].append(
+                "Show exact_old and exact_new to the owner before approval."
+            )
+        specs.append(spec)
     return specs
 
 

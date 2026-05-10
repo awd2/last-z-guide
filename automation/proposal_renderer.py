@@ -22,6 +22,7 @@ from automation.io import load_run_manifest, write_run_manifest
 
 REPORTS_DIR = ROOT / "automation" / "reports"
 MANIFESTS_DIR = ROOT / "automation" / "manifests"
+SAFE_EXACT_REPLACE_OPERATION = "safe_exact_replace"
 
 
 def resolve_manifest_path(value: str) -> Path:
@@ -35,6 +36,10 @@ def md_list(items: list[str]) -> str:
     if not items:
         return "- None"
     return "\n".join(f"- {item}" for item in items)
+
+
+def diff_lines(prefix: str, value: str) -> str:
+    return "\n".join(f"{prefix} {line}" for line in value.splitlines() or [""])
 
 
 def strip_tags(value: str) -> str:
@@ -96,6 +101,8 @@ def source_context(source_file: str) -> dict[str, Any]:
 def infer_anchor(spec: dict[str, Any], context: dict[str, Any]) -> str:
     operation = spec.get("operation_type", "")
     source = spec.get("source_of_truth_file", "")
+    if operation == SAFE_EXACT_REPLACE_OPERATION:
+        return str(spec.get("selector_or_anchor") or "exact approved snippet")
     if (
         source == "start.html"
         and operation == "first_screen_update"
@@ -157,6 +164,11 @@ def desired_after_summary(spec: dict[str, Any], run_target: str) -> str:
     source = spec.get("source_of_truth_file", "")
     source_type = spec.get("source_type", "")
     topic = target_topic_label(run_target)
+    if operation == SAFE_EXACT_REPLACE_OPERATION:
+        return (
+            "Replace the exact old snippet with the exact new snippet only after owner approval. "
+            "The apply step must fail closed if the source text has drifted or appears more than once."
+        )
     if run_target == "codes.html":
         if source == "codes.html" and operation == "first_screen_update":
             return (
@@ -231,6 +243,17 @@ def desired_after_summary(spec: dict[str, Any], run_target: str) -> str:
 def suggested_content(spec: dict[str, Any], run_target: str) -> str:
     operation = spec.get("operation_type", "")
     source = spec.get("source_of_truth_file", "")
+    if operation == SAFE_EXACT_REPLACE_OPERATION:
+        old = spec.get("exact_old")
+        new = spec.get("exact_new")
+        if not isinstance(old, str) or not isinstance(new, str):
+            return "Missing exact_old or exact_new; this spec is not applyable."
+        return f"""Exact approved replacement candidate:
+
+```diff
+{diff_lines("-", old)}
+{diff_lines("+", new)}
+```"""
     if run_target == "codes.html" and source == "codes.html" and operation == "first_screen_update":
         return """Replace the current `guide-verified` paragraph with:
 
@@ -306,6 +329,8 @@ def suggested_content(spec: dict[str, Any], run_target: str) -> str:
 
 def risk_level(spec: dict[str, Any]) -> str:
     if spec.get("is_generated"):
+        return "medium"
+    if spec.get("operation_type") == SAFE_EXACT_REPLACE_OPERATION:
         return "medium"
     if spec.get("operation_type") in {"meta_refresh", "first_screen_update"}:
         return "medium"

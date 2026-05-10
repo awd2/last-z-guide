@@ -274,6 +274,9 @@ All workers must follow these rules:
   owner-approved `exact_old` -> `exact_new` snippets in one non-generated HTML
   file. Workers must not treat summaries, desired-after notes, or LLM prose as
   applyable content.
+- If a future worker proposes exact public copy, it may pass exact
+  `exact_old` and `exact_new` strings into Patch Spec v1. That still creates
+  only a proposal; owner approval is required before `apply-approved`.
 - No live LLM provider calls unless they go through the fail-closed adapter and have explicit configuration.
 - No new page unless the page has a distinct user job and a clear cluster route.
 - No generated research branch edits through generated HTML; use JSON source + generator.

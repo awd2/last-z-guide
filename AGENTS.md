@@ -519,6 +519,8 @@ Lifecycle currently:
 
 `propose` renders human-reviewable proposed edits from Patch Spec v1 entries. It must not edit site content.
 
+Patch plans may emit `safe_exact_replace` specs only when they contain exact `exact_old` and `exact_new` strings for a non-generated HTML file. These specs are still proposal-only until explicit owner approval.
+
 `approval` records human approval decisions for proposal specs. `approved_for_apply` is still not an autonomous publishing state; it only gates a future controlled manual apply or safe apply worker.
 
 `apply-preview` renders a no-write preview from approved specs. It may write manifest/report artifacts, but it must not edit site content.
