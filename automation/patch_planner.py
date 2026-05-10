@@ -54,6 +54,34 @@ def exact_replacement_values(proposal: dict[str, object]) -> tuple[str, str]:
     return old, new
 
 
+def plan_exact_replacements(plan: dict[str, object]) -> list[dict[str, object]]:
+    replacements = plan.get("exact_replacements", [])
+    if not isinstance(replacements, list):
+        raise ValueError("`plan.exact_replacements` must be a list when present.")
+
+    target = str(plan.get("target_page_or_slug", ""))
+    proposals: list[dict[str, object]] = []
+    for index, item in enumerate(replacements, start=1):
+        if not isinstance(item, dict):
+            raise ValueError(f"`plan.exact_replacements[{index}]` must be an object.")
+        file = str(item.get("file") or item.get("target_file") or target)
+        change_type = str(item.get("change_type") or "safe_exact_replace")
+        if not file:
+            raise ValueError(f"`plan.exact_replacements[{index}]` requires `file` or a target page.")
+        old, new = exact_replacement_values(item)
+        proposals.append(
+            {
+                "file": file,
+                "change_type": change_type,
+                "reason": str(item.get("reason") or "Apply exact owner-reviewed before/after text."),
+                "selector_or_anchor": str(item.get("selector_or_anchor") or f"exact_replacement_{index}"),
+                "exact_old": old,
+                "exact_new": new,
+            }
+        )
+    return proposals
+
+
 def propose_change_types(manifest) -> list[dict[str, object]]:
     plan = manifest.plan or {}
     inputs = manifest.inputs or {}
@@ -64,22 +92,31 @@ def propose_change_types(manifest) -> list[dict[str, object]]:
     )
 
     proposals: list[dict[str, object]] = []
+    exact_proposals = plan_exact_replacements(plan)
+    proposals.extend(exact_proposals)
+    exact_covered_changes = {
+        (str(proposal["file"]), str(proposal["change_type"]))
+        for proposal in exact_proposals
+        if str(proposal["change_type"]) != SAFE_EXACT_REPLACE_OPERATION
+    }
 
     if target:
-        proposals.append(
-            {
-                "file": target,
-                "change_type": "first_screen_update",
-                "reason": "Align the opening answer with the run summary, target intent, and cluster role.",
-            }
-        )
-        proposals.append(
-            {
-                "file": target,
-                "change_type": "meta_refresh",
-                "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
-            }
-        )
+        if (str(target), "first_screen_update") not in exact_covered_changes:
+            proposals.append(
+                {
+                    "file": target,
+                    "change_type": "first_screen_update",
+                    "reason": "Align the opening answer with the run summary, target intent, and cluster role.",
+                }
+            )
+        if (str(target), "meta_refresh") not in exact_covered_changes:
+            proposals.append(
+                {
+                    "file": target,
+                    "change_type": "meta_refresh",
+                    "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+                }
+            )
 
     if archetype in {"atlas-page", "support-guide", "cornerstone-guide"} and target:
         if any(page != target for page in related_pages):
@@ -112,9 +149,10 @@ def propose_change_types(manifest) -> list[dict[str, object]]:
         )
 
     unique: list[dict[str, object]] = []
-    seen: set[tuple[str, str]] = set()
+    seen: set[tuple[str, str, str]] = set()
     for proposal in proposals:
-        key = (str(proposal["file"]), str(proposal["change_type"]))
+        selector = str(proposal.get("selector_or_anchor") or "") if has_exact_replacement(proposal) else ""
+        key = (str(proposal["file"]), str(proposal["change_type"]), selector)
         if key in seen:
             continue
         seen.add(key)

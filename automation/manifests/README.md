@@ -56,6 +56,11 @@ proposal already contains exact `exact_old` and `exact_new` strings for a
 single non-generated HTML source file. The spec still starts as proposed and
 cannot be applied until owner approval records `approval_state: approved`.
 
+Run manifests may carry proposal-only exact snippets in
+`plan.exact_replacements`. `patch-plan` converts those snippets into
+`safe_exact_replace` Patch Spec v1 entries, while preserving the normal human
+approval and apply-preview gates.
+
 `proposal_ready` is the current stop point. It means the run has proposed edits
 and now needs human review before any site files are edited.
 

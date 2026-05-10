@@ -48,7 +48,8 @@ def proposed_manifest(intake: dict[str, Any], generated_at: str) -> dict[str, An
     topic_id = str(backlog.get("topic_id") or intake.get("source_topic_id", "worker-topic"))
     run_id = build_run_id(topic_id, generated_at)
     target = backlog.get("target_page_or_slug", intake.get("target_page_or_slug", ""))
-    return {
+    exact_replacements = intake.get("exact_replacements", [])
+    manifest = {
         "run_id": run_id,
         "created_at": generated_at,
         "run_type": backlog.get("recommended_action", ""),
@@ -106,6 +107,9 @@ def proposed_manifest(intake: dict[str, Any], generated_at: str) -> dict[str, An
         "checks": {},
         "review": None,
     }
+    if exact_replacements:
+        manifest["plan"]["exact_replacements"] = exact_replacements
+    return manifest
 
 
 def proposal_state(intake: dict[str, Any]) -> tuple[str, list[str], list[str]]:
@@ -189,6 +193,7 @@ def render_markdown(proposal: dict[str, Any]) -> str:
                 f"- Risk: `{manifest['risk_level']}`",
                 f"- Summary: {manifest['summary']}",
                 f"- Target: `{manifest['plan']['target_page_or_slug']}`",
+                f"- Exact replacements: {len(manifest['plan'].get('exact_replacements', []))}",
                 "",
             ]
         )

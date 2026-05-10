@@ -266,6 +266,80 @@ class WorkerContractTests(unittest.TestCase):
         self.assertEqual(spec["exact_new"], "<p>New owner-approved copy.</p>")
         self.assertTrue(spec["human_approval_required"])
 
+    def test_patch_planner_uses_manifest_exact_replacements_without_generic_duplicate(self) -> None:
+        manifest = type(
+            "ManifestFixture",
+            (),
+            {
+                "plan": {
+                    "target_page_or_slug": "sample.html",
+                    "archetype_suggestion": "support-guide",
+                    "exact_replacements": [
+                        {
+                            "file": "sample.html",
+                            "change_type": "first_screen_update",
+                            "selector_or_anchor": ".guide-verified",
+                            "exact_old": "<p>Old approved-before copy.</p>",
+                            "exact_new": "<p>New owner-approved copy.</p>",
+                        }
+                    ],
+                },
+                "inputs": {},
+                "artifacts": {},
+            },
+        )()
+
+        proposals = patch_planner.propose_change_types(manifest)
+
+        matching = [
+            proposal
+            for proposal in proposals
+            if proposal["file"] == "sample.html" and proposal["change_type"] == "first_screen_update"
+        ]
+        self.assertEqual(len(matching), 1)
+        self.assertEqual(matching[0]["exact_old"], "<p>Old approved-before copy.</p>")
+        self.assertTrue(any(proposal["change_type"] == "meta_refresh" for proposal in proposals))
+
+    def test_worker_run_plan_preserves_exact_replacements_from_intake(self) -> None:
+        intake = {
+            "state": "approved_for_intake",
+            "source_topic_id": "sample-topic",
+            "target_page_or_slug": "sample.html",
+            "risk_level": "medium",
+            "approved_by": "fixture",
+            "approval_note": "Approved for run-plan only.",
+            "proposed_backlog_item": {
+                "topic_id": "sample-topic",
+                "title": "Sample exact proposal",
+                "cluster": "Site",
+                "recommended_action": "update_existing",
+                "archetype_suggestion": "support-guide",
+                "target_page_or_slug": "sample.html",
+                "source_type": "fixture",
+                "source_reference": "fixture",
+                "confidence": "high",
+                "priority": "medium",
+                "status": "candidate",
+                "notes": "Fixture exact replacement.",
+            },
+            "exact_replacements": [
+                {
+                    "file": "sample.html",
+                    "change_type": "first_screen_update",
+                    "selector_or_anchor": ".guide-verified",
+                    "exact_old": "<p>Old approved-before copy.</p>",
+                    "exact_new": "<p>New owner-approved copy.</p>",
+                }
+            ],
+        }
+
+        proposal = intake_to_run.build_proposal(intake, Path("automation/reports/fixture-intake.json"))
+
+        self.assertEqual(proposal["state"], "run_plan_ready")
+        exact = proposal["proposed_manifest"]["plan"]["exact_replacements"]
+        self.assertEqual(len(exact), 1)
+        self.assertEqual(exact[0]["exact_new"], "<p>New owner-approved copy.</p>")
+
     def test_proposal_renderer_shows_exact_replace_candidate(self) -> None:
         manifest = type(
             "ManifestFixture",

@@ -277,6 +277,8 @@ All workers must follow these rules:
 - If a future worker proposes exact public copy, it may pass exact
   `exact_old` and `exact_new` strings into Patch Spec v1. That still creates
   only a proposal; owner approval is required before `apply-approved`.
+- Approved intake/run-plan artifacts may carry exact snippets as
+  `plan.exact_replacements`. This is a handoff format, not content approval.
 - No live LLM provider calls unless they go through the fail-closed adapter and have explicit configuration.
 - No new page unless the page has a distinct user job and a clear cluster route.
 - No generated research branch edits through generated HTML; use JSON source + generator.

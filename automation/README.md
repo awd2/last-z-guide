@@ -438,6 +438,9 @@ Worker run-plan proposal:
 - `python3 automation/pipeline.py worker-run-plan --topic-id <topic_id> --json` -> generate a no-write run-plan proposal from one Worker intake artifact
 - output lives in `automation/reports/worker-run-plan-<topic_id>.json` and `automation/reports/worker-run-plan-<topic_id>.md`
 - if intake is not `approved_for_intake`, the run-plan artifact is blocked and contains no `proposed_manifest`
+- if the approved intake includes `exact_replacements`, they are copied into
+  `proposed_manifest.plan.exact_replacements` as proposal-only data for later
+  Patch Spec rendering
 
 Worker approved manifest writer:
 
@@ -835,6 +838,22 @@ may emit a `safe_exact_replace` Patch Spec instead of a broad
 - the source is a non-generated HTML file
 - `target_file`, `source_of_truth_file`, and `output_file` all match
 - the spec still requires owner approval before apply
+
+Future Worker run-plan artifacts may pass exact snippets through
+`plan.exact_replacements`:
+
+```json
+{
+  "file": "example.html",
+  "change_type": "first_screen_update",
+  "selector_or_anchor": ".guide-verified",
+  "exact_old": "<p>Old approved-before text.</p>",
+  "exact_new": "<p>New owner-approved text.</p>"
+}
+```
+
+This is still no-write proposal data. It only becomes applyable after
+`propose`, explicit owner `approval`, `apply-preview`, and `apply-approved`.
 
 `propose` reads Patch Spec v1 entries and renders a human-reviewable proposed
 edit report at:

@@ -521,6 +521,8 @@ Lifecycle currently:
 
 Patch plans may emit `safe_exact_replace` specs only when they contain exact `exact_old` and `exact_new` strings for a non-generated HTML file. These specs are still proposal-only until explicit owner approval.
 
+Future worker/run-plan artifacts may carry exact snippets through `plan.exact_replacements`. This field is allowed only as proposal data; it does not approve copy or bypass `propose`, `approval`, `apply-preview`, `apply-approved`, or strict QA.
+
 `approval` records human approval decisions for proposal specs. `approved_for_apply` is still not an autonomous publishing state; it only gates a future controlled manual apply or safe apply worker.
 
 `apply-preview` renders a no-write preview from approved specs. It may write manifest/report artifacts, but it must not edit site content.
