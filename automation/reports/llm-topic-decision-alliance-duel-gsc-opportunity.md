@@ -3,17 +3,24 @@
 ## Decision
 
 - State: `decision_recorded`
-- Decision: `approved_for_chain`
+- Decision: `monitor`
 - Decided by: `oleg`
 - Source discovery: `automation/reports/llm-topic-discovery.json`
-- Source decision: ``
-- Allows worker chain: `true`
+- Source decision: `automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json`
+- Allows worker chain: `false`
 - Allows content edit: `false`
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
 Decision note:
 
-Owner approved no-write chain for this Events candidate only. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing.
+Closed locally through run 2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake. Keep this topic out of approved handoffs unless materially new GSC/Bing/query evidence appears. This does not approve public copy or any new content changes.
+
+Previous decision:
+
+- Source: `automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json`
+- Decision: `approved_for_chain`
+- Decided by: `oleg`
+- Generated at: `2026-05-10T08:08:03Z`
 
 ## Topic Snapshot
 
@@ -31,6 +38,6 @@ High-impression event page with a clear query intent around schedule and VS stra
 
 ## Next Actions
 
-- Run the no-write LLM worker chain from this saved decision: python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json --provider openai --json
-- Review the generated LLM Reviewer gate before any intake, run-plan, or public content proposal.
-- Public content still requires exact text/spec proposal, explicit owner approval, and strict checks.
+- Keep this topic out of content intake for now.
+- Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.
+- Do not create public content edits from this topic decision.

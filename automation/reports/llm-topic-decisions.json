@@ -1,15 +1,36 @@
 {
   "schema_version": 1,
   "report_type": "llm_topic_decisions_summary",
-  "generated_at": "2026-05-05T19:58:31Z",
-  "decision_count": 4,
+  "generated_at": "2026-05-10T09:39:03Z",
+  "decision_count": 5,
   "counts_by_state": {
-    "monitor": 4
+    "monitor": 5
   },
   "allowed_worker_chain_count": 0,
   "allowed_worker_chain_topics": [],
   "content_edit_allowed_count": 0,
   "decisions": [
+    {
+      "topic_id": "alliance-duel-gsc-opportunity",
+      "decision_state": "monitor",
+      "decided_by": "oleg",
+      "generated_at": "2026-05-10T09:38:49Z",
+      "target_page_or_slug": "alliance-duel.html",
+      "cluster": "Events",
+      "risk_level": "medium",
+      "priority": "high",
+      "allows_worker_chain": false,
+      "allows_content_edit": false,
+      "decision_note": "Closed locally through run 2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake. Keep this topic out of approved handoffs unless materially new GSC/Bing/query evidence appears. This does not approve public copy or any new content changes.",
+      "next_actions": [
+        "Keep this topic out of content intake for now.",
+        "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+        "Do not create public content edits from this topic decision."
+      ],
+      "source_discovery": "automation/reports/llm-topic-discovery.json",
+      "artifact_path": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json",
+      "markdown_path": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.md"
+    },
     {
       "topic_id": "heroes-gsc-opportunity",
       "decision_state": "monitor",

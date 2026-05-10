@@ -1,13 +1,25 @@
 {
   "schema_version": 1,
   "report_type": "llm_topic_decision",
-  "generated_at": "2026-05-10T08:08:03Z",
+  "generated_at": "2026-05-10T09:38:49Z",
   "state": "decision_recorded",
   "topic_id": "alliance-duel-gsc-opportunity",
-  "decision_state": "approved_for_chain",
+  "decision_state": "monitor",
   "decided_by": "oleg",
-  "decision_note": "Owner approved no-write chain for this Events candidate only. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing.",
+  "decision_note": "Closed locally through run 2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake. Keep this topic out of approved handoffs unless materially new GSC/Bing/query evidence appears. This does not approve public copy or any new content changes.",
   "source_discovery": "automation/reports/llm-topic-discovery.json",
+  "source_decision": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json",
+  "previous_decision": {
+    "source_path": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json",
+    "generated_at": "2026-05-10T08:08:03Z",
+    "state": "decision_recorded",
+    "topic_id": "alliance-duel-gsc-opportunity",
+    "decision_state": "approved_for_chain",
+    "decided_by": "oleg",
+    "decision_note": "Owner approved no-write chain for this Events candidate only. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing.",
+    "allows_worker_chain": true,
+    "allows_content_edit": false
+  },
   "topic_snapshot": {
     "topic_id": "alliance-duel-gsc-opportunity",
     "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
@@ -69,12 +81,12 @@
       "notes": "High-impression event page with a clear query intent around schedule and VS strategy. This is a good candidate for a scoped update to improve query-to-page match without creating new content."
     }
   },
-  "allows_worker_chain": true,
+  "allows_worker_chain": false,
   "allows_content_edit": false,
   "next_actions": [
-    "Run the no-write LLM worker chain from this saved decision: python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json --provider openai --json",
-    "Review the generated LLM Reviewer gate before any intake, run-plan, or public content proposal.",
-    "Public content still requires exact text/spec proposal, explicit owner approval, and strict checks."
+    "Keep this topic out of content intake for now.",
+    "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+    "Do not create public content edits from this topic decision."
   ],
   "errors": [],
   "output_path": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json",

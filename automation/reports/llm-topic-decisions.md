@@ -1,14 +1,35 @@
-# LLM Topic Decisions - 2026-05-05T19:58:31Z
+# LLM Topic Decisions - 2026-05-10T09:39:03Z
 
 ## Overview
 
-- Decisions: 4
-- Counts by state: `{"monitor": 4}`
+- Decisions: 5
+- Counts by state: `{"monitor": 5}`
 - Topics currently allowed for worker chain: 0
 - Topics currently allowed for content edit: 0
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
 ## Decisions
+
+### alliance-duel-gsc-opportunity
+
+- Decision: `monitor`
+- Target: `alliance-duel.html`
+- Cluster: `Events`
+- Priority: `high`
+- Risk: `medium`
+- Allows worker chain: `false`
+- Allows content edit: `false`
+- Artifact: `automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json`
+
+Decision note:
+
+Closed locally through run 2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake. Keep this topic out of approved handoffs unless materially new GSC/Bing/query evidence appears. This does not approve public copy or any new content changes.
+
+Next actions:
+
+- Keep this topic out of content intake for now.
+- Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.
+- Do not create public content edits from this topic decision.
 
 ### heroes-gsc-opportunity
 
