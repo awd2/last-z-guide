@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "report_type": "tyrant_steel_sitewide_correction_proposal",
+  "generated_at": "2026-05-10",
+  "state": "proposal_ready_owner_approval_required",
+  "content_edit_allowed": false,
+  "scope": "sitewide public content correction proposal only; no HTML edited",
+  "proposal_markdown": "automation/reports/tyrant-steel-sitewide-correction-proposal.md",
+  "requires_owner_approval_before_apply": true,
+  "target_files": [
+    "steel.html",
+    "tyrant.html",
+    "resources.html",
+    "gear.html",
+    "pvp.html",
+    "index.html"
+  ],
+  "research_basis": {
+    "owner_in_game_check": "Tyrant does not award Steel.",
+    "external_sources_checked": [
+      "https://last-z.wiki/events/the-tyrant/",
+      "https://ztools.co.uk/wiki/",
+      "https://lastz.info/the-tyrant-basics/"
+    ],
+    "finding": "Specific Tyrant reward references emphasize alliance/personal damage rewards, Power Cores, Enhancement Alloy, speedups, Hero EXP, normal resources, Gift Vouchers, and diamonds. They do not support treating Tyrant as a confirmed Steel source."
+  },
+  "proposed_file_changes": [
+    {
+      "file": "steel.html",
+      "summary": "Remove Tyrant from Steel title/meta/H1/quick answer/source list/FAQ and position confirmed Steel sources as bounties, Steel Mine/nodes, Hub Shop, Furylord, events, and launch rewards."
+    },
+    {
+      "file": "tyrant.html",
+      "summary": "Reposition Tyrant as alliance rally / damage-tier / Power Core event, not Steel reward source."
+    },
+    {
+      "file": "resources.html",
+      "summary": "Correct Steel source quick answer, source tables, How to Get Steel section, and FAQ."
+    },
+    {
+      "file": "gear.html",
+      "summary": "Remove Steel from Tyrant Power Core tip."
+    },
+    {
+      "file": "pvp.html",
+      "summary": "Remove Steel claim from Tyrant boss-fight checklist."
+    },
+    {
+      "file": "index.html",
+      "summary": "Correct home cards for Tyrant and Steel so they route distinct intents."
+    }
+  ],
+  "acceptance_checks": [
+    "python3 scripts/prepublish_check.py --fix",
+    "python3 scripts/prepublish_check.py",
+    "python3 automation/pipeline.py checks --strict",
+    "manual review: visible FAQ and JSON-LD FAQ answers match on steel.html, tyrant.html, and resources.html",
+    "manual review: no page says Tyrant is a confirmed Steel source",
+    "manual review: home cards still route to tyrant.html and steel.html with distinct page roles"
+  ],
+  "safety": "No public content, patch specs, backlog rows, manifests, PRs, or production files were modified by this proposal."
+}
