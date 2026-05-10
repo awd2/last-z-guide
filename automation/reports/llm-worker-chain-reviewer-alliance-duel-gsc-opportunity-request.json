@@ -1,0 +1,473 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-worker-chain-reviewer-alliance-duel-gsc-opportunity",
+  "worker_role": "reviewer",
+  "task": "Review one no-write LLM Editor planning brief for site fit, risk, and readiness.",
+  "prompt": "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. Do not write or rewrite public page copy. Do not create patch specs. Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, and deterministic QA readiness. Treat analytics as signals, not proof. Use plain ASCII English only. Return JSON only.",
+  "inputs": {
+    "source_llm_editor_result": "automation/reports/llm-worker-chain-editor-alliance-duel-gsc-opportunity-result.json",
+    "source_llm_editor_request": "automation/reports/llm-worker-chain-editor-alliance-duel-gsc-opportunity-request.json",
+    "selected_opportunity": {
+      "topic_id": "alliance-duel-gsc-opportunity",
+      "decision": "update_existing",
+      "rationale": "Owner approved no-write chain for this Events candidate only. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing.",
+      "player_value": "Helps players quickly find event timing, day-by-day plan, and matchup guidance on the existing guide.",
+      "duplication_risk": "Medium. The topic could overlap with other event or schedule pages if cluster separation is not kept strict.",
+      "priority": "high",
+      "risk_level": "medium",
+      "next_step": "Run the no-write Editor and Reviewer stages from this approved decision snapshot.",
+      "claims_to_verify": [
+        "The current page remains the best canonical fit for schedule-related intent.",
+        "The update can be done without turning the page into a broader event hub.",
+        "No protected claims or cluster role boundaries are crossed."
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "alliance-duel-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+      "cluster": "Events",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "event-guide",
+      "target_page_or_slug": "alliance-duel.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "status": "candidate",
+      "notes": "High-impression event page with a clear query intent around schedule and VS strategy. This is a good candidate for a scoped update to improve query-to-page match without creating new content.",
+      "risk_level": "medium",
+      "player_value": "Helps players quickly find event timing, day-by-day plan, and matchup guidance on the existing guide.",
+      "duplication_risk": "Medium. The topic could overlap with other event or schedule pages if cluster separation is not kept strict.",
+      "claims_to_verify": [
+        "The current page remains the best canonical fit for schedule-related intent.",
+        "The update can be done without turning the page into a broader event hub.",
+        "No protected claims or cluster role boundaries are crossed."
+      ],
+      "next_step": "Human review should confirm the page is still the best canonical home for this intent and define a narrow update scope.",
+      "evidence": [
+        "GSC page signal: alliance-duel.html had 8212 impressions, 378 clicks, 4.60% CTR, avg position 6.26."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vs schedule` searchers.",
+        "cluster_owner": "Events",
+        "expected_internal_route": [
+          "index.html",
+          "events.html",
+          "alliance-duel.html"
+        ],
+        "archetype_reason": "Existing page is `event-guide` in the `Events` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ],
+      "prior_review": null,
+      "human_approval_required": true,
+      "backlog_row_preview": {
+        "topic_id": "alliance-duel-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+        "cluster": "Events",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "event-guide",
+        "target_page_or_slug": "alliance-duel.html",
+        "source_type": "llm_scout",
+        "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+        "confidence": "high",
+        "priority": "high",
+        "status": "candidate",
+        "notes": "High-impression event page with a clear query intent around schedule and VS strategy. This is a good candidate for a scoped update to improve query-to-page match without creating new content."
+      }
+    },
+    "deterministic_editor_context": {
+      "target_page_or_slug": "alliance-duel.html",
+      "page_role": "event-guide",
+      "primary_query_family": "last z vs schedule",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vs schedule` searchers.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `last z vs schedule` without changing `alliance-duel.html` into a different page role.",
+      "template_reference": "alliance-duel.html",
+      "required_sections": [
+        "Quick Answer",
+        "Schedule or timing block",
+        "Best strategy",
+        "Rewards and tradeoffs",
+        "Related event links"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html",
+          "events.html"
+        ],
+        "downstream": [
+          "alliance-recognition-cost.html",
+          "heroes.html",
+          "lucky-discounter.html",
+          "power-guide.html",
+          "radar.html"
+        ],
+        "lateral": [
+          "alliance-duel-rewards.html",
+          "canyon-clash.html",
+          "zombie-siege.html"
+        ]
+      },
+      "protected_claims": [],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "alliance-duel.html",
+        "index.html",
+        "events.html",
+        "alliance-duel-rewards.html",
+        "canyon-clash.html",
+        "zombie-siege.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on alliance-duel.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Alliance Duel Guide (2026) — Schedule, Day 1–6 Plan, VS Strategy",
+        "h1": "Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+        "meta_description": "Complete Last Z Alliance Duel schedule: Day 1–6 plan, when to use speed-ups, how VS schedule works, and the best F2P strategy for more weekly chests.",
+        "quick_answer": "Best Last Z Alliance Duel schedule for most players: Day 1 Vehicle, Day 2 Building, Day 3 Research, Day 4 Heroes, Day 5 Training, Day 6 Combat — and you should only use the matching speed-ups on the correct day.",
+        "data_lede": "",
+        "h2_headings": [
+          "Last Z Alliance Duel Schedule: Core Strategy",
+          "Alliance Recognition Research: Why It Matters Early",
+          "Alliance Duel Day 1–6 Schedule",
+          "Weekly Rewards Potential",
+          "Key Takeaways",
+          "Frequently Asked Questions",
+          "Related Guides"
+        ],
+        "internal_links": [
+          "about.html",
+          "alliance-duel-rewards.html",
+          "alliance-recognition-cost.html",
+          "contact.html",
+          "disclosure.html",
+          "events.html",
+          "heroes.html",
+          "https://lastzguides.com/alliance-duel.html",
+          "lucky-discounter.html",
+          "power-guide.html",
+          "privacy.html",
+          "radar.html",
+          "svs.html",
+          "terms.html"
+        ]
+      }
+    },
+    "llm_editor_brief": {
+      "brief_summary": "Keep alliance-duel.html as the canonical event-guide page, but sharpen the opening to answer last z vs schedule search intent immediately and keep the update narrowly scoped to schedule, best strategy, rewards, and related event routing.",
+      "target_page_or_slug": "alliance-duel.html",
+      "page_role": "event-guide",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for last z vs schedule searchers.",
+      "first_screen_plan": "Preserve the answer-first layout. Make the first screen clearly state the day-by-day Alliance Duel schedule and the key rule that players should spend only matching speed-ups on the matching day. Keep the opening focused on schedule, strategy, and weekly value so the page satisfies the query without changing its role into a broader event hub. Avoid adding unrelated event context or new promises.",
+      "section_plan": [
+        {
+          "section": "Quick Answer",
+          "action": "Tighten the first-answer framing so it directly resolves last z vs schedule intent with the Day 1 to Day 6 pattern and the matching speed-up rule.",
+          "reason": "The current page already has a quick answer, but the opening should better match the target query and improve first-screen utility."
+        },
+        {
+          "section": "Schedule or timing block",
+          "action": "Keep the Day 1 to Day 6 plan prominent and easy to scan, with a clear schedule order and any timing logic already supported by the page.",
+          "reason": "Schedule intent is the main search driver, so the timing block should carry the strongest query match."
+        },
+        {
+          "section": "Best strategy",
+          "action": "Keep the VS strategy guidance narrow and practical, centered on when to hold, spend, or save resources by day.",
+          "reason": "Users want actionable guidance tied to the schedule, not a generic event overview."
+        },
+        {
+          "section": "Rewards and tradeoffs",
+          "action": "Retain a compact explanation of weekly chest potential, F2P tradeoffs, and why matching tasks matter.",
+          "reason": "This preserves player value while supporting the decision logic behind the schedule."
+        },
+        {
+          "section": "Frequently Asked Questions",
+          "action": "Keep only questions that support schedule, speed-up use, and day selection intent; avoid expanding into unrelated event mechanics.",
+          "reason": "FAQ should reinforce the canonical query match without broadening scope."
+        },
+        {
+          "section": "Related event links",
+          "action": "Keep the related links section and align it to adjacent event guides only.",
+          "reason": "This supports navigation and cluster separation while keeping the page focused."
+        }
+      ],
+      "internal_link_plan": [
+        {
+          "page": "events.html",
+          "role": "upstream",
+          "reason": "Primary hub for the Events cluster and a natural entry point to this guide."
+        },
+        {
+          "page": "index.html",
+          "role": "upstream",
+          "reason": "Site root path for broad discovery and cluster routing."
+        },
+        {
+          "page": "alliance-duel-rewards.html",
+          "role": "lateral",
+          "reason": "Closest sibling topic for reward-focused follow-up without changing the main page role."
+        },
+        {
+          "page": "canyon-clash.html",
+          "role": "lateral",
+          "reason": "Adjacent event guide that supports related event navigation within the same cluster."
+        },
+        {
+          "page": "zombie-siege.html",
+          "role": "lateral",
+          "reason": "Another event guide to preserve cluster navigation and avoid isolation."
+        },
+        {
+          "page": "alliance-recognition-cost.html",
+          "role": "downstream",
+          "reason": "Useful deeper follow-up for players who need progression or cost context after the schedule overview."
+        },
+        {
+          "page": "heroes.html",
+          "role": "downstream",
+          "reason": "Supports hero-related planning that can influence event preparation."
+        },
+        {
+          "page": "lucky-discounter.html",
+          "role": "downstream",
+          "reason": "Relevant for resource management and spending decisions tied to event planning."
+        }
+      ],
+      "protected_claims": [],
+      "do_not_change": [
+        "Do not change the existing page template, navigation pattern, or schema family.",
+        "Do not turn alliance-duel.html into an event hub or cluster index.",
+        "Do not create a new page or split the topic into a different canonical page.",
+        "Do not make analytics-based claims that the page must be rewritten.",
+        "Do not alter canonical claims, site-wide routing, or approval gates.",
+        "Do not write publishable copy, HTML, or patch specs in this planning brief."
+      ],
+      "owner_questions": [
+        "Is the existing Quick Answer wording enough to satisfy last z vs schedule intent, or should the first sentence be sharpened further?",
+        "Do you want the Schedule or timing block to emphasize Day 1 to Day 6 order only, or also call out any timing caveats already present on the page?",
+        "Should the Related Guides section keep the current sibling set, or should any links be reduced to preserve tighter cluster separation?"
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "alliance-duel.html",
+        "index.html",
+        "events.html",
+        "alliance-duel-rewards.html",
+        "canyon-clash.html",
+        "zombie-siege.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on alliance-duel.html"
+      ],
+      "next_step": "Run the no-write Editor and Reviewer stages from this approved decision snapshot, then confirm the opening answer and related links stay within the existing event-guide scope."
+    },
+    "guardrails": [
+      "No content files may be edited by Reviewer.",
+      "No final public page copy may be generated.",
+      "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
+      "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
+      "Owner approval is required before any user-visible content change.",
+      "Use plain ASCII English only in every string field."
+    ]
+  },
+  "expected_response_keys": [
+    "target_page_or_slug",
+    "page_role",
+    "verdict",
+    "risk_level",
+    "approved_next_stage",
+    "blocking_issues",
+    "warnings",
+    "duplicate_intent_review",
+    "cluster_role_review",
+    "canonical_claim_review",
+    "template_safety_review",
+    "owner_approval_required",
+    "owner_questions",
+    "required_context_before_edit",
+    "required_checks",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "verdict": {
+        "type": "string",
+        "enum": [
+          "pass",
+          "needs_human_review",
+          "revise",
+          "reject"
+        ]
+      },
+      "risk_level": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "approved_next_stage": {
+        "type": "string",
+        "enum": [
+          "none",
+          "brief",
+          "patch_plan",
+          "proposal",
+          "approval",
+          "apply_preview"
+        ]
+      },
+      "blocking_issues": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "severity": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "issue": {
+              "type": "string",
+              "maxLength": 450
+            },
+            "required_fix": {
+              "type": "string",
+              "maxLength": 450
+            }
+          },
+          "required": [
+            "severity",
+            "issue",
+            "required_fix"
+          ]
+        }
+      },
+      "warnings": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 400
+        }
+      },
+      "duplicate_intent_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "cluster_role_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "canonical_claim_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "template_safety_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "owner_approval_required": {
+        "type": "boolean"
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_edit": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "required_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 450
+      }
+    },
+    "required": [
+      "target_page_or_slug",
+      "page_role",
+      "verdict",
+      "risk_level",
+      "approved_next_stage",
+      "blocking_issues",
+      "warnings",
+      "duplicate_intent_review",
+      "cluster_role_review",
+      "canonical_claim_review",
+      "template_safety_review",
+      "owner_approval_required",
+      "owner_questions",
+      "required_context_before_edit",
+      "required_checks",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}

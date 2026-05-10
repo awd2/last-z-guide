@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_topic_decision",
+  "generated_at": "2026-05-10T08:08:03Z",
+  "state": "decision_recorded",
+  "topic_id": "alliance-duel-gsc-opportunity",
+  "decision_state": "approved_for_chain",
+  "decided_by": "oleg",
+  "decision_note": "Owner approved no-write chain for this Events candidate only. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing.",
+  "source_discovery": "automation/reports/llm-topic-discovery.json",
+  "topic_snapshot": {
+    "topic_id": "alliance-duel-gsc-opportunity",
+    "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+    "cluster": "Events",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "event-guide",
+    "target_page_or_slug": "alliance-duel.html",
+    "source_type": "llm_scout",
+    "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+    "confidence": "high",
+    "priority": "high",
+    "status": "candidate",
+    "notes": "High-impression event page with a clear query intent around schedule and VS strategy. This is a good candidate for a scoped update to improve query-to-page match without creating new content.",
+    "risk_level": "medium",
+    "player_value": "Helps players quickly find event timing, day-by-day plan, and matchup guidance on the existing guide.",
+    "duplication_risk": "Medium. The topic could overlap with other event or schedule pages if cluster separation is not kept strict.",
+    "claims_to_verify": [
+      "The current page remains the best canonical fit for schedule-related intent.",
+      "The update can be done without turning the page into a broader event hub.",
+      "No protected claims or cluster role boundaries are crossed."
+    ],
+    "next_step": "Human review should confirm the page is still the best canonical home for this intent and define a narrow update scope.",
+    "evidence": [
+      "GSC page signal: alliance-duel.html had 8212 impressions, 378 clicks, 4.60% CTR, avg position 6.26."
+    ],
+    "site_fit": {
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vs schedule` searchers.",
+      "cluster_owner": "Events",
+      "expected_internal_route": [
+        "index.html",
+        "events.html",
+        "alliance-duel.html"
+      ],
+      "archetype_reason": "Existing page is `event-guide` in the `Events` cluster; Scout should prefer updating the existing page before proposing new content."
+    },
+    "constraints": [
+      "Use existing page template and navigation patterns.",
+      "Treat GSC data as a signal, not proof that a rewrite is needed."
+    ],
+    "reject_if": [
+      "The query intent is already better served by another canonical page.",
+      "The proposed change would blur cluster role separation.",
+      "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+    ],
+    "prior_review": null,
+    "human_approval_required": true,
+    "backlog_row_preview": {
+      "topic_id": "alliance-duel-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+      "cluster": "Events",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "event-guide",
+      "target_page_or_slug": "alliance-duel.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "status": "candidate",
+      "notes": "High-impression event page with a clear query intent around schedule and VS strategy. This is a good candidate for a scoped update to improve query-to-page match without creating new content."
+    }
+  },
+  "allows_worker_chain": true,
+  "allows_content_edit": false,
+  "next_actions": [
+    "Run the no-write LLM worker chain from this saved decision: python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json --provider openai --json",
+    "Review the generated LLM Reviewer gate before any intake, run-plan, or public content proposal.",
+    "Public content still requires exact text/spec proposal, explicit owner approval, and strict checks."
+  ],
+  "errors": [],
+  "output_path": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json",
+  "markdown_path": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.md",
+  "safety": "No content, backlog, manifest, PR, or production files were modified. This decision only controls whether a discovered topic may proceed to the next no-write worker stage."
+}

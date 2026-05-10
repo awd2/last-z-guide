@@ -5,39 +5,43 @@
   "task": "Replay one owner-approved LLM topic decision as the Scout handoff for the no-write worker chain.",
   "prompt": "This is a deterministic replay artifact created from a human-approved topic decision. No live Scout rerank is performed.",
   "inputs": {
-    "source_decision": "automation/reports/llm-topic-decision-hq-gsc-opportunity.json",
+    "source_decision": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json",
     "proposal_count": 1,
     "proposals": [
       {
-        "topic_id": "hq-gsc-opportunity",
-        "title": "GSC opportunity review: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
-        "cluster": "Progression",
-        "recommended_action": "monitor",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "hq.html",
+        "topic_id": "alliance-duel-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+        "cluster": "Events",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "event-guide",
+        "target_page_or_slug": "alliance-duel.html",
         "source_type": "llm_scout",
         "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
-        "confidence": "medium",
-        "priority": "low",
-        "status": "monitor",
-        "notes": "Reasonable review candidate, but the title/intent appears broad and could overlap with progression/start content; better to monitor until query patterns become clearer. Future trigger: If HQ upgrade queries gain stronger volume or a more specific intent cluster emerges.",
-        "risk_level": "",
-        "player_value": "",
-        "duplication_risk": "",
-        "claims_to_verify": [],
-        "next_step": "If HQ upgrade queries gain stronger volume or a more specific intent cluster emerges.",
+        "confidence": "high",
+        "priority": "high",
+        "status": "candidate",
+        "notes": "High-impression event page with a clear query intent around schedule and VS strategy. This is a good candidate for a scoped update to improve query-to-page match without creating new content.",
+        "risk_level": "medium",
+        "player_value": "Helps players quickly find event timing, day-by-day plan, and matchup guidance on the existing guide.",
+        "duplication_risk": "Medium. The topic could overlap with other event or schedule pages if cluster separation is not kept strict.",
+        "claims_to_verify": [
+          "The current page remains the best canonical fit for schedule-related intent.",
+          "The update can be done without turning the page into a broader event hub.",
+          "No protected claims or cluster role boundaries are crossed."
+        ],
+        "next_step": "Human review should confirm the page is still the best canonical home for this intent and define a narrow update scope.",
         "evidence": [
-          "GSC page signal: hq.html had 12579 impressions, 338 clicks, 2.69% CTR, avg position 7.69."
+          "GSC page signal: alliance-duel.html had 8212 impressions, 378 clicks, 4.60% CTR, avg position 6.26."
         ],
         "site_fit": {
-          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy` searchers.",
-          "cluster_owner": "Progression",
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vs schedule` searchers.",
+          "cluster_owner": "Events",
           "expected_internal_route": [
             "index.html",
-            "start.html",
-            "hq.html"
+            "events.html",
+            "alliance-duel.html"
           ],
-          "archetype_reason": "Existing page is `cornerstone-guide` in the `Progression` cluster; Scout should prefer updating the existing page before proposing new content."
+          "archetype_reason": "Existing page is `event-guide` in the `Events` cluster; Scout should prefer updating the existing page before proposing new content."
         },
         "constraints": [
           "Use existing page template and navigation patterns.",
@@ -49,20 +53,20 @@
           "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
         ],
         "prior_review": null,
-        "human_approval_required": false,
+        "human_approval_required": true,
         "backlog_row_preview": {
-          "topic_id": "hq-gsc-opportunity",
-          "title": "GSC opportunity review: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
-          "cluster": "Progression",
-          "recommended_action": "monitor",
-          "archetype_suggestion": "cornerstone-guide",
-          "target_page_or_slug": "hq.html",
+          "topic_id": "alliance-duel-gsc-opportunity",
+          "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+          "cluster": "Events",
+          "recommended_action": "update_existing",
+          "archetype_suggestion": "event-guide",
+          "target_page_or_slug": "alliance-duel.html",
           "source_type": "llm_scout",
           "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
-          "confidence": "medium",
-          "priority": "low",
-          "status": "monitor",
-          "notes": "Reasonable review candidate, but the title/intent appears broad and could overlap with progression/start content; better to monitor until query patterns become clearer. Future trigger: If HQ upgrade queries gain stronger volume or a more specific intent cluster emerges."
+          "confidence": "high",
+          "priority": "high",
+          "status": "candidate",
+          "notes": "High-impression event page with a clear query intent around schedule and VS strategy. This is a good candidate for a scoped update to improve query-to-page match without creating new content."
         }
       }
     ],

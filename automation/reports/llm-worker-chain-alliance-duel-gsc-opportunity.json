@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_worker_chain_summary",
+  "generated_at": "2026-05-10T08:09:13Z",
+  "state": "completed",
+  "provider": "openai",
+  "handoff_source": "topic_decision",
+  "source_decision": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json",
+  "source_topic_id": "alliance-duel-gsc-opportunity",
+  "target_page_or_slug": "alliance-duel.html",
+  "page_role": "event-guide",
+  "review_verdict": "pass",
+  "risk_level": "medium",
+  "approved_next_stage": "approval",
+  "owner_approval_required": true,
+  "errors": [],
+  "stages": {
+    "llm_scout": {
+      "state": "completed",
+      "provider": "decision_replay",
+      "request_path": "automation/reports/llm-worker-chain-scout-request.json",
+      "result_path": "automation/reports/llm-worker-chain-scout-result.json",
+      "markdown_path": "automation/reports/llm-worker-chain-scout.md",
+      "errors": []
+    },
+    "llm_editor": {
+      "state": "completed",
+      "provider": "openai",
+      "request_path": "automation/reports/llm-worker-chain-editor-alliance-duel-gsc-opportunity-request.json",
+      "result_path": "automation/reports/llm-worker-chain-editor-alliance-duel-gsc-opportunity-result.json",
+      "markdown_path": "automation/reports/llm-worker-chain-editor-alliance-duel-gsc-opportunity.md",
+      "errors": []
+    },
+    "llm_reviewer": {
+      "state": "completed",
+      "provider": "openai",
+      "request_path": "automation/reports/llm-worker-chain-reviewer-alliance-duel-gsc-opportunity-request.json",
+      "result_path": "automation/reports/llm-worker-chain-reviewer-alliance-duel-gsc-opportunity-result.json",
+      "markdown_path": "automation/reports/llm-worker-chain-reviewer-alliance-duel-gsc-opportunity.md",
+      "errors": []
+    }
+  },
+  "safety": "No content, backlog, manifest, PR, or production files were modified by the LLM worker chain.",
+  "artifacts": {
+    "chain_json": "automation/reports/llm-worker-chain-alliance-duel-gsc-opportunity.json",
+    "chain_markdown": "automation/reports/llm-worker-chain-alliance-duel-gsc-opportunity.md"
+  }
+}

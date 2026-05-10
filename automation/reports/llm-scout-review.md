@@ -1,90 +1,100 @@
-# LLM Scout Review - 2026-05-03T11:26:41Z
+# LLM Scout Review - 2026-05-10T08:07:33Z
 
 ## Overview
 
 - State: `completed`
 - Provider: `openai`
 - Source proposals: 8
+- Ready for chain: 3
+- Monitor only: 5
 - Request: `automation/reports/llm-scout-review-request.json`
 - Result: `automation/reports/llm-scout-review-result.json`
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
 ## LLM Summary
 
-The strongest opportunities are existing-page updates for high-impression cornerstone pages where query intent appears close to current cluster roles: codes, research, heroes, hq, and tech. These are worth human review because they can likely improve query-to-page match and first-screen usefulness without creating new pages. The event guide and vehicle cost pages are also valid update candidates, but with lower relative urgency due to better current CTR or narrower scope. No proposal clearly justifies a new page; all should stay within existing templates and canonical roles pending owner sign-
+The strongest opportunities are the existing-page updates for high-impression pages with low or moderate CTR in core clusters: codes.html, research.html, hq.html, power-guide.html, and heroes.html. These are worth human review because the query-page signals suggest material mismatch or weak first-screen utility, but all must stay within current templates, cluster roles, and protected canonical claims. index.html also shows a broad homepage signal, but it is more sensitive and higher risk because it can blur navigation and cluster separation.
 
 ## Selected Opportunities
+
+### alliance-duel-gsc-opportunity
+
+- Decision: `update_existing`
+- Ready for chain: `true`
+- Priority: `high`
+- Risk: `medium`
+- Player value: Helps players quickly find event timing, day-by-day plan, and matchup guidance on the existing guide.
+- Duplication risk: Medium. The topic could overlap with other event or schedule pages if cluster separation is not kept strict.
+- Next step: Human review should confirm the page is still the best canonical home for this intent and define a narrow update scope.
+
+Rationale:
+
+High-impression event page with a clear query intent around schedule and VS strategy. This is a good candidate for a scoped update to improve query-to-page match without creating new content.
+
+Claims to verify:
+- The current page remains the best canonical fit for schedule-related intent.
+- The update can be done without turning the page into a broader event hub.
+- No protected claims or cluster role boundaries are crossed.
 
 ### codes-gsc-opportunity
 
 - Decision: `update_existing`
+- Ready for chain: `true`
 - Priority: `high`
 - Risk: `high`
-- Player value: Faster access to gift center login, redeem flow, and UID guidance from the main redeem-codes entry page.
-- Duplication risk: Medium; gift-center intent could overlap with other Economy pages if the rewrite expands beyond the canonical redeem flow.
-- Next step: Have the page owner review whether the first screen, headings, and snippet alignment can better answer gift-center queries without altering cluster separation.
+- Player value: Improves navigation for users searching redeem codes, gift center login, and UID-related redemption help.
+- Duplication risk: High. The page must not duplicate mailbox or alternate redeem-flow explanations and must preserve canonical claim boundaries.
+- Next step: Human review should verify the existing page can absorb the query intent while preserving protected claims and role separation.
 
 Rationale:
 
-High impressions with weak CTR on a cornerstone Economy page and multiple related gift-center queries suggest a meaningful existing-page optimization opportunity. The intent appears close to the current canonical role, so this is a strong candidate for a scoped update rather than new content.
+This is a strong existing-page candidate because the page already gets substantial impressions and the low CTR queries point to gift center and redeem flow intent. It should be reviewed carefully as a cornerstone update, but it is not obviously a new page need.
 
 Claims to verify:
-- Whether `last z gift center` intent is fully served by codes.html as the canonical page.
-- Whether protected claims `gift-center-only-redeem-flow`, `gift-rewards-mailbox`, and `gift-center-cluster-role-separation` remain intact after any change.
-- Whether the prior `gift-center-ctr-pass:done` history already exhausted the safest optimization surface.
+- gift-center-only-redeem-flow
+- gift-rewards-mailbox
+- gift-center-cluster-role-separation
+- The existing page still owns this intent better than any other canonical page.
 
-### research-gsc-opportunity
+### index-bing-opportunity
 
 - Decision: `update_existing`
+- Ready for chain: `true`
 - Priority: `high`
 - Risk: `high`
-- Player value: Helps players find the best research order, peace shield guidance, and T10 progression path more quickly.
-- Duplication risk: Medium; rescue-intent coverage could blur Research cluster boundaries if it begins to absorb battle or event content.
-- Next step: Review whether the page intro and section ordering can address search intent better while preserving Research cluster roles and protected claims.
+- Player value: Improves the entry point for broad searchers looking for the site, guides, and navigation to major clusters.
+- Duplication risk: High. Homepage edits can easily blur the role of cluster landing pages and over-expand the page scope.
+- Next step: Human review should decide whether the homepage can be tightened for clarity without becoming a duplicate guide or cluster hub.
 
 Rationale:
 
-Research.html shows strong impressions but middling CTR, and the rising rescue-related query suggests an adjacent, high-value intent to test against the current page framing. This is a solid human-review candidate because it could improve navigation to the correct research path without creating a duplicate guide.
+The homepage shows weak CTR on broad brand queries and rising interest in guide-style queries. This is worth review because the home page may need better first-screen clarity and routing, but changes must stay narrowly focused.
 
 Claims to verify:
-- Whether `urgent rescue last z` belongs on research.html or a different canonical page.
-- Whether protected claims `research-best-mainline`, `hero-training-cockpit-stop`, `peace-shield-value`, and `research-atlas-role` remain true after updates.
-
-### heroes-gsc-opportunity
-
-- Decision: `update_existing`
-- Priority: `high`
-- Risk: `high`
-- Player value: Helps players quickly identify the best heroes and faction rankings for the current season.
-- Duplication risk: Medium; tier-list framing can overlap with other hero or faction pages if the scope expands too broadly.
-- Next step: Have the owner confirm whether the title, intro, and top-of-page content can better reflect seasonal hero ranking intent without creating a redundant hero guide.
-
-Rationale:
-
-Heroes.html has substantial impressions but low CTR, indicating a likely query-to-page mismatch or weak snippet/intro performance. A scoped cornerstone refresh could better satisfy season-specific hero tier-list searches while staying within the current page archetype.
-
-Claims to verify:
-- Whether `last z season 4 heroes` is best answered by heroes.html.
-- Whether the page can remain the canonical hero cornerstone without crossing into faction-specific duplication.
+- The homepage is still the right canonical entry point for broad brand intent.
+- Any update can preserve navigation hierarchy and cluster separation.
+- The change will not duplicate content owned by other hubs or guides.
 
 ## Rejected Or Monitor
 
-- vehicle-modification-cost-gsc-opportunity: Worth monitoring but lower urgency than the core cornerstone opportunities because current CTR is already comparatively stronger and the page appears more narrowly scoped. Future trigger: Revisit if vehicle upgrade queries continue rising or CTR drops further despite stable rankings.
-- hq-gsc-opportunity: This is a viable update_existing candidate, but the query framing already appears more explicit and may require careful scope control; keep for human review only if capacity remains after higher-priority pages. Future trigger: Revisit if HQ upgrade queries rise further or if search intent shifts toward a clearer HQ 30/35 path.
-- power-guide-gsc-opportunity: CTR is extremely low, which signals opportunity, but the proposal is comparatively less specific about the underlying player job and may overlap with broader progression content; monitor until intent is clearer. Future trigger: Revisit if queries around combat power growth become more distinct and page-to-query alignment can be validated.
-- tech-gsc-opportunity: A valid existing-page candidate, but the current evidence is less compelling than the stronger cornerstone opportunities and the query set may overlap with research guidance. Future trigger: Revisit if F2P/low-spender research-path queries accelerate or if tech-specific intent separates from general Research content.
-- alliance-duel-gsc-opportunity: The event-guide update is plausible, but the evidence is less clearly tied to a unique unmet job than the highest-priority cornerstone pages. Future trigger: Revisit around the next event cycle or if schedule-related queries become more dominant.
+- research-gsc-opportunity: Worth monitoring but not selected over other stronger existing-page opportunities. It is a valid cornerstone update candidate, yet the evidence is thinner than the top picks and should wait for a more specific intent or stronger query pattern. Future trigger: Select if query trends become more specific around research priority, peace shield, or mainline path intent.
+- vehicle-modification-cost-gsc-opportunity: Useful existing-page candidate, but lower urgency than the strongest selected opportunities and more constrained by protected claim separation. Future trigger: Select if vehicle upgrade intent continues to rise or if a clearer cost-related query cluster emerges.
+- heroes-gsc-opportunity: Reasonable cornerstone page opportunity, but the evidence is moderate and the page may need broader intent validation before human review proceeds. Future trigger: Select if season-specific hero ranking queries continue rising or if CTR remains weak across the cluster.
+- hq-gsc-opportunity: Worth monitoring, but the query intent is currently too close to a broad progression guide to justify selection ahead of stronger opportunities. Future trigger: Select if HQ upgrade and requirement queries show clearer separation from other progression pages.
+- power-guide-gsc-opportunity: The very low CTR suggests a possible mismatch, but the topic is still analytics-led and needs stronger intent confirmation before review. Future trigger: Select if combat power queries grow or if search intent becomes more explicit around fast power gain.
 
 ## Global Risks
 
-- Several proposals are high-risk because they touch cornerstone pages; any update must preserve cluster role separation and protected canonical claims.
-- GSC and Bing signals should be treated as directional only; they do not prove that a rewrite is needed or that a specific query should be targeted.
-- There is moderate duplication risk if any cornerstone page begins absorbing adjacent intents from neighboring clusters.
-- No proposal should be implemented without owner approval and without checking whether another canonical page already serves the intent better.
+- Analytics signals are not proof of a rewrite need, so updates must stay conservative and scoped.
+- Homepage and cornerstone page changes can easily blur cluster role separation if handled too broadly.
+- Protected canonical claims must be preserved, especially for economy and research topics.
+- No monitor-only or rejected topics should advance into editor, reviewer, intake, run-plan, or content proposal workflows.
+- Do not infer new content needs from archived Reddit or news experiments.
 
 ## Next Actions
 
-- Route the selected opportunities to the respective cluster owners for human review.
-- Ask owners to verify query intent, canonical role separation, and protected claims before any content change is designed.
-- For each selected page, assess whether the improvement can be limited to title, intro, section ordering, and first-screen usefulness within the existing template.
-- Keep all non-selected opportunities in monitoring until new query patterns or stronger intent evidence emerges.
+- Send the selected existing-page opportunities to human review with strict scope notes.
+- Verify each selected page is still the best canonical match for the target intent.
+- For codes.html and research.html, confirm protected claims and cluster boundaries before any apply step.
+- For index.html, define a minimal homepage update that improves routing without duplicating cluster hubs.
+- Keep all non-selected topics in monitor status until stronger intent evidence appears.

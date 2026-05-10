@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-10T08:09:24Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-worker-chain-reviewer-alliance-duel-gsc-opportunity",
+  "worker_role": "reviewer",
+  "request_path": "automation/reports/llm-worker-chain-reviewer-alliance-duel-gsc-opportunity-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "target_page_or_slug": "alliance-duel.html",
+    "page_role": "event-guide",
+    "verdict": "pass",
+    "risk_level": "medium",
+    "approved_next_stage": "approval",
+    "blocking_issues": [],
+    "warnings": [
+      "Analytics should remain a signal only, not proof of a rewrite need.",
+      "Keep the update narrowly scoped so the page does not drift into a broader event hub.",
+      "Related links should stay within the Events cluster and avoid introducing new intent overlap."
+    ],
+    "duplicate_intent_review": "Low to medium risk. The query family overlaps with other event and schedule pages, but the plan keeps the page as the canonical schedule guide rather than creating a new page or hub.",
+    "cluster_role_review": "Pass. The brief preserves alliance-duel.html as an event-guide and does not change cluster ownership or routing.",
+    "canonical_claim_review": "Pass. The brief does not assert new canonical claims and respects the note that another canonical page may better serve some adjacent intent. No protected claims are introduced.",
+    "template_safety_review": "Pass. The brief keeps the existing template, navigation pattern, and schema family unchanged, which is within scope for a no-write review.",
+    "owner_approval_required": true,
+    "owner_questions": [
+      "Should the opening sentence be sharpened beyond the current quick answer to better match last z vs schedule intent?",
+      "Should the schedule block emphasize only the Day 1 to Day 6 order, or also retain any existing timing caveats?",
+      "Should the related guides set be trimmed further to reduce any cluster overlap risk?"
+    ],
+    "required_context_before_edit": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "alliance-duel.html",
+      "index.html",
+      "events.html",
+      "alliance-duel-rewards.html",
+      "canyon-clash.html",
+      "zombie-siege.html"
+    ],
+    "required_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on alliance-duel.html"
+    ],
+    "next_step": "Run deterministic no-write editor and reviewer QA only after owner confirms the narrow scope, then verify first-screen answer and internal links against the existing event-guide role."
+  },
+  "usage": {
+    "input_tokens": 4015,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 490,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 4505
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_0aeede3b121ed00b006a003d311e788190b434ac80a36a0f7c",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

@@ -3,18 +3,22 @@
   "provider": "decision_replay",
   "request_id": "llm-worker-chain-scout",
   "response_json": {
-    "overview": "Deterministic replay of owner-approved topic decision `hq-gsc-opportunity`.",
+    "overview": "Deterministic replay of owner-approved topic decision `alliance-duel-gsc-opportunity`.",
     "selected_opportunities": [
       {
-        "topic_id": "hq-gsc-opportunity",
-        "decision": "monitor",
-        "rationale": "Owner approved this topic for one no-write LLM worker-chain replay only. This does not approve public content edits, patch specs, PRs, or deployment.",
-        "player_value": "Improve query-to-page match and first-screen usefulness for `Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy` searchers.",
-        "duplication_risk": "Review against the current cluster role before any content proposal.",
-        "priority": "low",
-        "risk_level": "high",
+        "topic_id": "alliance-duel-gsc-opportunity",
+        "decision": "update_existing",
+        "rationale": "Owner approved no-write chain for this Events candidate only. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing.",
+        "player_value": "Helps players quickly find event timing, day-by-day plan, and matchup guidance on the existing guide.",
+        "duplication_risk": "Medium. The topic could overlap with other event or schedule pages if cluster separation is not kept strict.",
+        "priority": "high",
+        "risk_level": "medium",
         "next_step": "Run the no-write Editor and Reviewer stages from this approved decision snapshot.",
-        "claims_to_verify": []
+        "claims_to_verify": [
+          "The current page remains the best canonical fit for schedule-related intent.",
+          "The update can be done without turning the page into a broader event hub.",
+          "No protected claims or cluster role boundaries are crossed."
+        ]
       }
     ],
     "rejected_or_monitor": [],
