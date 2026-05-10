@@ -72,6 +72,8 @@ It reads `automation/reports/worker-run-plan-<topic_id>.json` and writes:
 
 It only writes when the run-plan state is `run_plan_ready` and the proposed manifest validates against the run manifest schema. It does not edit content files, backlog files, or production state. Use `--dry-run` to validate the target manifest path without writing.
 
+After a staged manifest is created, `brief`, `patch-plan`, and `propose` can read that manifest path directly and write reports to a custom `--output-dir`. This keeps fixture or staging e2e checks outside `automation/reports` while preserving the normal lifecycle.
+
 The lower-level helper remains available at:
 
 ```bash

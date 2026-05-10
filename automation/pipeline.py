@@ -132,25 +132,25 @@ def cmd_review(run_id: str) -> int:
     )
 
 
-def cmd_brief(run_id: str) -> int:
-    return run_step(
-        "Editor Brief",
-        [sys.executable, str(AUTOMATION_DIR / "editor.py"), run_id],
-    )
+def cmd_brief(run_id: str, output_dir: str | None) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "editor.py"), run_id]
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    return run_step("Editor Brief", command)
 
 
-def cmd_patch_plan(run_id: str) -> int:
-    return run_step(
-        "Patch Plan",
-        [sys.executable, str(AUTOMATION_DIR / "patch_planner.py"), run_id],
-    )
+def cmd_patch_plan(run_id: str, output_dir: str | None) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "patch_planner.py"), run_id]
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    return run_step("Patch Plan", command)
 
 
-def cmd_propose(run_id: str) -> int:
-    return run_step(
-        "Proposal Renderer",
-        [sys.executable, str(AUTOMATION_DIR / "proposal_renderer.py"), run_id],
-    )
+def cmd_propose(run_id: str, output_dir: str | None) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "proposal_renderer.py"), run_id]
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    return run_step("Proposal Renderer", command)
 
 
 def cmd_approval(
@@ -1725,19 +1725,22 @@ def build_parser() -> argparse.ArgumentParser:
         "brief",
         help="Create a brief-only editor artifact from an existing reviewed manifest.",
     )
-    brief_parser.add_argument("run_id", help="Run manifest basename without .json")
+    brief_parser.add_argument("run_id", help="Run manifest path or basename without .json")
+    brief_parser.add_argument("--output-dir", help="Directory for the brief artifact.")
 
     patch_parser = subparsers.add_parser(
         "patch-plan",
         help="Create a proposal-only patch plan from an existing draft brief run.",
     )
-    patch_parser.add_argument("run_id", help="Run manifest basename without .json")
+    patch_parser.add_argument("run_id", help="Run manifest path or basename without .json")
+    patch_parser.add_argument("--output-dir", help="Directory for the patch-plan report.")
 
     propose_parser = subparsers.add_parser(
         "propose",
         help="Render human-reviewable proposed edits from Patch Spec v1.",
     )
-    propose_parser.add_argument("run_id", help="Run manifest basename without .json")
+    propose_parser.add_argument("run_id", help="Run manifest path or basename without .json")
+    propose_parser.add_argument("--output-dir", help="Directory for the proposal report.")
 
     approval_parser = subparsers.add_parser(
         "approval",
@@ -2079,11 +2082,11 @@ def main() -> int:
     if args.command == "review":
         return cmd_review(args.run_id)
     if args.command == "brief":
-        return cmd_brief(args.run_id)
+        return cmd_brief(args.run_id, args.output_dir)
     if args.command == "patch-plan":
-        return cmd_patch_plan(args.run_id)
+        return cmd_patch_plan(args.run_id, args.output_dir)
     if args.command == "propose":
-        return cmd_propose(args.run_id)
+        return cmd_propose(args.run_id, args.output_dir)
     if args.command == "approval":
         return cmd_approval(
             args.run_id,

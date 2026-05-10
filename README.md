@@ -191,6 +191,8 @@ Future LLM worker contracts live in:
 
 That contract layer defines the planned `Scout -> Editor -> Reviewer` flow. The first implemented workers are no-write `Scout`, `Editor`, and `Reviewer` steps plus a chain runner, intake gate, run-plan proposal step, LLM Scout review wrapper, LLM topic discovery/decision gates, LLM Editor planning wrapper, LLM Reviewer gate wrapper, and live LLM worker-chain wrapper that turn weekly GSC/Bing agent signals into reviewable topic proposals, content briefs, readiness verdicts, explicit human-gated intake artifacts, draft run-plan proposals, JSON-only LLM opportunity reviews, durable owner topic decisions, no-copy planning briefs, no-write review gates, and one-command LLM chain summaries.
 
+For staged Worker e2e checks, `brief`, `patch-plan`, and `propose` can read a manifest path and write reports to a custom `--output-dir`, so fixture runs do not need to dirty `automation/reports`.
+
 ## GSC Analytics Automation
 
 The weekly GSC workflow writes:

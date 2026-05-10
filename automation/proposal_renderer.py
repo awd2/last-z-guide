@@ -32,6 +32,15 @@ def resolve_manifest_path(value: str) -> Path:
     return MANIFESTS_DIR / f"{value}.json"
 
 
+def resolve_path(value: str) -> Path:
+    path = Path(value)
+    return path if path.is_absolute() else ROOT / path
+
+
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT) if path.is_relative_to(ROOT) else path)
+
+
 def md_list(items: list[str]) -> str:
     if not items:
         return "- None"
@@ -424,19 +433,19 @@ Validation:
 """
 
 
-def render_proposal(path: Path):
+def render_proposal(path: Path, output_dir: Path = REPORTS_DIR):
     manifest = load_run_manifest(path)
     if manifest.status == "patch_plan_ready":
         manifest.status = "proposal_ready"
     rendered_specs = build_rendered_specs(manifest)
     markdown = render_markdown(manifest, rendered_specs)
-    out_path = REPORTS_DIR / f"{manifest.run_id}.proposed.md"
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = output_dir / f"{manifest.run_id}.proposed.md"
+    output_dir.mkdir(parents=True, exist_ok=True)
     out_path.write_text(markdown, encoding="utf-8")
 
     manifest.artifacts.setdefault("proposal", {})
     manifest.artifacts["proposal"] = {
-        "report_path": str(out_path.relative_to(ROOT)),
+        "report_path": rel(out_path),
         "rendered_specs": rendered_specs,
     }
     write_run_manifest(path, manifest)
@@ -446,13 +455,15 @@ def render_proposal(path: Path):
 def main() -> int:
     parser = argparse.ArgumentParser(description="Render human-reviewable edit proposals from a run manifest.")
     parser.add_argument("manifest", help="Manifest path or basename without .json")
+    parser.add_argument("--output-dir", default=str(REPORTS_DIR), help="Directory for the proposal report.")
     args = parser.parse_args()
 
     manifest_path = resolve_manifest_path(args.manifest)
-    out_path, rendered_specs = render_proposal(manifest_path)
-    print(f"Wrote {out_path.relative_to(ROOT)}")
+    output_dir = resolve_path(args.output_dir)
+    out_path, rendered_specs = render_proposal(manifest_path, output_dir)
+    print(f"Wrote {rel(out_path)}")
     print(f"Rendered specs: {len(rendered_specs)}")
-    print(f"Updated {manifest_path.relative_to(ROOT)}")
+    print(f"Updated {rel(manifest_path)}")
     return 0
 
 

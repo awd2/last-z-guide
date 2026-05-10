@@ -377,6 +377,7 @@ Lifecycle shorthand:
 - `brief` -> create a brief-only editor artifact and move the run to `draft_brief_ready`
 - `patch-plan` -> create a proposal-only patch artifact and move the run to `patch_plan_ready`
 - `propose` -> render human-reviewable proposed edits and move the run to `proposal_ready`
+- `brief`, `patch-plan`, and `propose` also accept a manifest path plus `--output-dir <dir>` for staged Worker e2e checks outside `automation/reports`
 - `approval` -> record human approval decisions for proposal specs; still does not edit site content
 - `apply-preview` -> render a no-write preview from approved specs and move the run to `apply_preview_ready`
 - `apply-approved` -> apply approved specs with conservative deterministic templates and move the run to `applied_pending_qa`
@@ -554,6 +555,7 @@ LLM intake latest:
 - draft `exact_replacements` can be carried into the intake artifact as proposal-only data, but they are not content approval
 - approved intake can move into the existing run-plan proposal flow with `python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --basename llm-worker-run-plan-<topic_id> --json`
 - this step still does not edit content, backlog, manifests, PRs, or production state
+- after `worker-manifest`, staged e2e tests can keep artifacts outside the repo reports directory with `brief <manifest-path> --output-dir <dir>`, `patch-plan <manifest-path> --output-dir <dir>`, and `propose <manifest-path> --output-dir <dir>`
 
 Content SEO opportunity report:
 

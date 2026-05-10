@@ -23,6 +23,10 @@ def manifest_path(value: str) -> Path:
     return ROOT / "automation" / "manifests" / f"{value}.json"
 
 
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT) if path.is_relative_to(ROOT) else path)
+
+
 def collect_related_filenames(manifest) -> set[str]:
     filenames = set(manifest.changed_files)
     plan = manifest.plan or {}
@@ -113,7 +117,7 @@ def main() -> int:
     matched_claim_ids = manifest.artifacts.get("review_context", {}).get("canonical_claim_ids", [])
     review = manifest.review
 
-    print(f"Updated {path.relative_to(ROOT)}")
+    print(f"Updated {rel(path)}")
     print(f"Status: {manifest.status}")
     print(f"Verdict: {review.verdict if review else 'unknown'}")
     print(f"Canonical claims: {len(matched_claim_ids)}")

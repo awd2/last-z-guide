@@ -26,6 +26,15 @@ def resolve_manifest_path(value: str) -> Path:
     return MANIFESTS_DIR / f"{value}.json"
 
 
+def resolve_path(value: str) -> Path:
+    path = Path(value)
+    return path if path.is_absolute() else ROOT / path
+
+
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT) if path.is_relative_to(ROOT) else path)
+
+
 def claim_lookup() -> dict[str, object]:
     return {claim.id: claim for claim in load_canonical_claims()}
 
@@ -204,23 +213,25 @@ def build_brief(manifest) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Export a brief-only editor artifact from a reviewed run manifest.")
     parser.add_argument("manifest", help="Manifest path or basename without .json")
+    parser.add_argument("--output-dir", default=str(REPORTS_DIR), help="Directory for the brief artifact.")
     args = parser.parse_args()
 
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    output_dir = resolve_path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
     path = resolve_manifest_path(args.manifest)
     manifest = load_run_manifest(path)
 
-    out_path = REPORTS_DIR / f"{manifest.run_id}.brief.md"
+    out_path = output_dir / f"{manifest.run_id}.brief.md"
     out_path.write_text(build_brief(manifest), encoding="utf-8")
 
     manifest.artifacts.setdefault("editor", {})
-    manifest.artifacts["editor"]["brief_path"] = str(out_path.relative_to(ROOT))
+    manifest.artifacts["editor"]["brief_path"] = rel(out_path)
     if manifest.status == "reviewed":
         manifest.status = "draft_brief_ready"
     write_run_manifest(path, manifest)
 
-    print(f"Wrote {out_path.relative_to(ROOT)}")
-    print(f"Updated {path.relative_to(ROOT)}")
+    print(f"Wrote {rel(out_path)}")
+    print(f"Updated {rel(path)}")
     print(f"Status: {manifest.status}")
     return 0
 

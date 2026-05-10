@@ -28,6 +28,15 @@ def resolve_manifest_path(value: str) -> Path:
     return MANIFESTS_DIR / f"{value}.json"
 
 
+def resolve_path(value: str) -> Path:
+    path = Path(value)
+    return path if path.is_absolute() else ROOT / path
+
+
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT) if path.is_relative_to(ROOT) else path)
+
+
 def md_list(items: list[str]) -> str:
     if not items:
         return "- None"
@@ -330,26 +339,28 @@ def build_patch_plan(manifest) -> tuple[dict[str, object], str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Export a proposal-only patch plan from a draft brief run.")
     parser.add_argument("manifest", help="Manifest path or basename without .json")
+    parser.add_argument("--output-dir", default=str(REPORTS_DIR), help="Directory for the patch-plan report.")
     args = parser.parse_args()
 
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    output_dir = resolve_path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
     manifest_path = resolve_manifest_path(args.manifest)
     manifest = load_run_manifest(manifest_path)
     if manifest.status == "draft_brief_ready":
         manifest.status = "patch_plan_ready"
 
     patch_plan, markdown = build_patch_plan(manifest)
-    out_path = REPORTS_DIR / f"{manifest.run_id}.patch.md"
+    out_path = output_dir / f"{manifest.run_id}.patch.md"
     out_path.write_text(markdown, encoding="utf-8")
 
     manifest.artifacts.setdefault("patch_plan", {})
     manifest.artifacts["patch_plan"] = patch_plan
-    manifest.artifacts["patch_plan"]["report_path"] = str(out_path.relative_to(ROOT))
+    manifest.artifacts["patch_plan"]["report_path"] = rel(out_path)
     manifest.changed_files = list(patch_plan.get("changed_files", []))
     write_run_manifest(manifest_path, manifest)
 
-    print(f"Wrote {out_path.relative_to(ROOT)}")
-    print(f"Updated {manifest_path.relative_to(ROOT)}")
+    print(f"Wrote {rel(out_path)}")
+    print(f"Updated {rel(manifest_path)}")
     print(f"Status: {manifest.status}")
     return 0
 
