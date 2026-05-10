@@ -233,7 +233,7 @@ The GitHub Actions wrapper `.github/workflows/llm-worker-chain.yml` runs this ch
 - `automation/reports/llm-intake-<topic_id>.json`
 - `automation/reports/llm-intake-<topic_id>.md`
 
-When owner approval is required, the intake artifact stays `approval_required` until rerun with `--approved-by <name>`. If owner questions are present, `--note` is also required. This approval is intake-only: it allows the existing run-plan/proposal flow, but it does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing. Draft `exact_replacements` may be carried into intake for later run-plan/proposal handling, but they remain proposal-only until the exact public diff is shown and approved.
+When owner approval is required, the intake artifact stays `approval_required` until rerun with `--approved-by <name>`. If owner questions are present, `--note` is also required. If the Reviewer used `blocking_issues` for owner-confirmation items, `--resolve-reviewer-blockers` can downgrade them to intake warnings only when `--approved-by` and `--note` are both present. This approval is intake-only: it allows the existing run-plan/proposal flow, but it does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing. Draft `exact_replacements` may be carried into intake for later run-plan/proposal handling, but they remain proposal-only until the exact public diff is shown and approved.
 
 An approved LLM intake can be passed to the existing run-plan command with:
 

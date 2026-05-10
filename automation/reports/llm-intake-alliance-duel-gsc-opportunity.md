@@ -4,9 +4,9 @@
 
 - State: `approved_for_intake`
 - Target: `alliance-duel.html`
-- Review verdict: `pass`
+- Review verdict: `needs_human_review`
 - Risk: `medium`
-- Approved next stage: `approval`
+- Approved next stage: `brief`
 - Approved by: `oleg`
 - Approval scope: `intake_only_no_content_edits`
 - Content edit approved: `false`
@@ -17,6 +17,7 @@
 
 - Approval is intake-only: it allows conversion into the existing run-plan/proposal flow.
 - Approval does not approve public page copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing.
+- Any carried exact_replacements are proposal-only data and still require propose, owner approval, apply-preview, apply-approved, and strict QA.
 - Any future public content change still requires exact proposed text/diff and explicit owner approval.
 - Future content proposals must still pass deterministic checks before closeout.
 
@@ -26,23 +27,26 @@
 
 ## Warnings
 
+- LLM Reviewer blocking issues were owner-resolved for intake only; public content is still not approved.
 - Owner questions must be answered before any public content proposal is written.
 
 ## Owner Questions
 
-- Should the opening sentence be sharpened beyond the current quick answer to better match last z vs schedule intent?
-- Should the schedule block emphasize only the Day 1 to Day 6 order, or also retain any existing timing caveats?
-- Should the related guides set be trimmed further to reduce any cluster overlap risk?
+- Is alliance-duel.html still the best canonical home for last z vs schedule intent, or should another Events page own the primary query?
+- Should the update stay limited to the first screen and related links, or is a deeper schedule and FAQ refinement approved?
+- Are there any cluster boundary concerns with linking to or from rewards and recognition detail pages?
+- Should Full Preparedness timing be emphasized on the first screen or kept lower on the page?
 
 ## Reviewer Blocking Issues
 
-- None
+- medium: The brief is directionally consistent, but canonical ownership for last z vs schedule intent is not fully proven from the provided context alone. Required fix: Have an owner confirm alliance-duel.html remains the best canonical home before any scoped content work is drafted.
+- medium: Cluster separation could blur if the update expands beyond the first screen and compact schedule framing. Required fix: Keep the scope limited to answer-first opening, schedule block, strategy, rewards tradeoffs, and related links only, with no hub-style expansion.
 
 ## Reviewer Warnings
 
-- Analytics should remain a signal only, not proof of a rewrite need.
-- Keep the update narrowly scoped so the page does not drift into a broader event hub.
-- Related links should stay within the Events cluster and avoid introducing new intent overlap.
+- Analytics signals are supportive but not proof of rewrite need.
+- No exact_replacements were provided, so there is no replacement safety candidate to approve.
+- The page already has a strong event-guide role, so changes must stay narrow to avoid role drift.
 
 ## Proposed Backlog Item
 
@@ -61,11 +65,16 @@
 
 ## Editor Brief Summary
 
-Keep alliance-duel.html as the canonical event-guide page, but sharpen the opening to answer last z vs schedule search intent immediately and keep the update narrowly scoped to schedule, best strategy, rewards, and related event routing.
+Keep the existing event-guide page and improve only the opening answer, schedule framing, and related-link usefulness for last z vs schedule intent. Do not broaden the page into a hub or change the cluster role.
 
 ## First-Screen Plan
 
-Preserve the answer-first layout. Make the first screen clearly state the day-by-day Alliance Duel schedule and the key rule that players should spend only matching speed-ups on the matching day. Keep the opening focused on schedule, strategy, and weekly value so the page satisfies the query without changing its role into a broader event hub. Avoid adding unrelated event context or new promises.
+Preserve the answer-first structure. Make the opening clearly state the Day 1 to Day 6 VS schedule and the main timing rule, then point users to the best matching action for the day. Keep the page anchored to alliance duel schedule intent, not general event browsing. The first screen should answer who this is for, what the weekly rotation is, and when to commit bigger actions using Full Preparedness timing, without changing the page role or introducing a broader event overview.
+
+## Draft Exact Replacements
+
+- Count: `0`
+- Scope: proposal-only data; no public content edit is approved here.
 
 ## Required Checks
 

@@ -529,6 +529,7 @@ def cmd_llm_intake_latest(
     note: str | None,
     output_dir: str | None,
     basename: str | None,
+    resolve_reviewer_blockers: bool,
     as_json: bool,
 ) -> int:
     command = [sys.executable, str(AUTOMATION_DIR / "workers" / "llm_intake.py")]
@@ -544,6 +545,8 @@ def cmd_llm_intake_latest(
         command.extend(["--output-dir", output_dir])
     if basename:
         command.extend(["--basename", basename])
+    if resolve_reviewer_blockers:
+        command.append("--resolve-reviewer-blockers")
     if as_json:
         command.append("--json")
         return subprocess.run(command, cwd=ROOT).returncode
@@ -1966,6 +1969,11 @@ def build_parser() -> argparse.ArgumentParser:
     llm_intake_latest_parser.add_argument("--reports-dir", help="Directory to search for LLM worker chain summaries.")
     llm_intake_latest_parser.add_argument("--approved-by", help="Human approver name or handle.")
     llm_intake_latest_parser.add_argument("--note", help="Optional approval note.")
+    llm_intake_latest_parser.add_argument(
+        "--resolve-reviewer-blockers",
+        action="store_true",
+        help="Allow owner-confirmed Reviewer blocking issues to become intake warnings. Requires --approved-by and --note.",
+    )
     llm_intake_latest_parser.add_argument("--output-dir", help="Directory for LLM intake artifacts.")
     llm_intake_latest_parser.add_argument("--basename", help="Output basename without extension.")
     llm_intake_latest_parser.add_argument("--json", action="store_true", help="Print the LLM intake summary as JSON.")
@@ -2188,6 +2196,7 @@ def main() -> int:
             args.note,
             args.output_dir,
             args.basename,
+            args.resolve_reviewer_blockers,
             args.json,
         )
     if args.command == "llm-topic-discovery":

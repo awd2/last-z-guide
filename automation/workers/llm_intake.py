@@ -123,10 +123,12 @@ def intake_state(
     review: dict[str, Any],
     approved_by: str | None,
     note: str | None,
+    resolve_reviewer_blockers: bool = False,
 ) -> tuple[str, list[str], list[str]]:
     blockers: list[str] = []
     warnings: list[str] = []
     verdict = review.get("review_verdict")
+    reviewer_blocking_issues = review.get("blocking_issues", [])
 
     if review.get("state") != "completed":
         blockers.append("LLM worker chain is not completed; rerun or inspect the chain before intake.")
@@ -134,10 +136,15 @@ def intake_state(
         blockers.append(f"LLM worker chain error: {error}")
     if verdict in {"revise", "reject"}:
         blockers.append(f"LLM Reviewer verdict is `{verdict}`; revise or reject before intake.")
-    if review.get("blocking_issues"):
+    if reviewer_blocking_issues and not resolve_reviewer_blockers:
         blockers.append("LLM Reviewer returned blocking issues; resolve them before LLM intake.")
+    if reviewer_blocking_issues and resolve_reviewer_blockers and (not approved_by or not note):
+        blockers.append("Resolving LLM Reviewer blocking issues requires --approved-by and --note.")
     if blockers:
         return "blocked", blockers, warnings
+
+    if reviewer_blocking_issues and resolve_reviewer_blockers:
+        warnings.append("LLM Reviewer blocking issues were owner-resolved for intake only; public content is still not approved.")
 
     if review.get("risk_level") == "high":
         warnings.append("High-risk opportunity; keep the future proposal narrow and owner-reviewed.")
@@ -187,6 +194,7 @@ def build_intake(
     chain_path: Path,
     approved_by: str | None,
     note: str | None,
+    resolve_reviewer_blockers: bool = False,
 ) -> dict[str, Any]:
     chain = load_json(chain_path)
     review = llm_review_latest.build_review(chain_path)
@@ -194,7 +202,7 @@ def build_intake(
     scout_proposal = scout_request_proposal(chain, topic_id)
     scout_opportunity = scout_selected_opportunity(chain, topic_id)
     exact_replacements = editor_exact_replacements(chain)
-    state, blockers, warnings = intake_state(review, approved_by, note)
+    state, blockers, warnings = intake_state(review, approved_by, note, resolve_reviewer_blockers)
     intake = {
         "schema_version": 1,
         "report_type": "llm_worker_proposal_intake",
@@ -210,6 +218,7 @@ def build_intake(
         "public_content_change_allowed": False,
         "requires_owner_answers": bool(review.get("owner_questions")),
         "owner_answers_recorded": bool(note),
+        "reviewer_blockers_resolved_by_owner": bool(resolve_reviewer_blockers and review.get("blocking_issues")),
         "approval_guardrails": APPROVAL_GUARDRAILS,
         "review_verdict": review.get("review_verdict", ""),
         "risk_level": review.get("risk_level", ""),
@@ -324,8 +333,9 @@ def run_llm_intake_latest(
     approved_by: str | None,
     note: str | None,
     basename: str | None,
+    resolve_reviewer_blockers: bool,
 ) -> tuple[int, dict[str, Any]]:
-    intake = build_intake(chain_path, approved_by, note)
+    intake = build_intake(chain_path, approved_by, note, resolve_reviewer_blockers)
     json_path, md_path = write_outputs(intake, output_dir, basename)
     intake["next_actions"] = next_actions_for(intake["state"], intake["source_topic_id"], rel(json_path))
     write_json(json_path, intake)
@@ -348,6 +358,11 @@ def main() -> int:
     parser.add_argument("--reports-dir", default=str(REPORTS_DIR), help="Directory to search for LLM worker chain summaries.")
     parser.add_argument("--approved-by", help="Human approver name or handle.")
     parser.add_argument("--note", help="Optional approval note.")
+    parser.add_argument(
+        "--resolve-reviewer-blockers",
+        action="store_true",
+        help="Allow owner-confirmed Reviewer blocking issues to become intake warnings. Requires --approved-by and --note.",
+    )
     parser.add_argument("--output-dir", default=str(REPORTS_DIR), help="Directory for LLM intake artifacts.")
     parser.add_argument("--basename", help="Output basename without extension.")
     parser.add_argument("--json", action="store_true", help="Print a machine-readable summary.")
@@ -362,6 +377,7 @@ def main() -> int:
         approved_by=args.approved_by,
         note=args.note,
         basename=args.basename,
+        resolve_reviewer_blockers=args.resolve_reviewer_blockers,
     )
     if args.json:
         print(json.dumps(summary, indent=2))

@@ -21,6 +21,7 @@
 - Risk: `medium`
 - Summary: Worker-approved intake for `alliance-duel.html` from `alliance-duel-gsc-opportunity`.
 - Target: `alliance-duel.html`
+- Exact replacements: 0
 
 ## Next Actions
 

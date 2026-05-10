@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "worker_intake_run_plan",
-  "generated_at": "2026-05-10T08:16:29Z",
+  "generated_at": "2026-05-10T09:26:49Z",
   "source_intake_file": "automation/reports/llm-intake-alliance-duel-gsc-opportunity.json",
   "source_topic_id": "alliance-duel-gsc-opportunity",
   "target_page_or_slug": "alliance-duel.html",
@@ -24,7 +24,7 @@
   },
   "proposed_manifest": {
     "run_id": "2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake",
-    "created_at": "2026-05-10T08:16:29Z",
+    "created_at": "2026-05-10T09:26:49Z",
     "run_type": "update_existing",
     "status": "planned",
     "risk_level": "medium",
@@ -39,7 +39,7 @@
       "priority": "high",
       "status": "backlog",
       "approved_by": "oleg",
-      "approval_note": "Owner answers for no-write intake only: sharpen the opening for last z vs schedule intent; keep Day 1-6 order plus existing timing caveats; trim related guides only if the later proposal finds obvious overlap. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing."
+      "approval_note": "Owner confirms alliance-duel.html remains canonical for last z vs schedule intent. Scope is narrow: first-screen schedule framing, compact strategy timing, and related links only; no Events hub expansion and no public copy approved yet."
     },
     "plan": {
       "topic_id": "alliance-duel-gsc-opportunity-llm-approved-intake",

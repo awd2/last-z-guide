@@ -128,6 +128,7 @@ python3 automation/pipeline.py llm-worker-chain --from-decision automation/repor
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
+python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answers>" --resolve-reviewer-blockers --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json

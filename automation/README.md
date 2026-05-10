@@ -551,6 +551,7 @@ LLM intake latest:
 - `python3 automation/pipeline.py llm-intake-latest --chain <path> --approved-by <name> --note "<owner answer / approval scope>" --json` -> record intake-only owner approval for that artifact
 - output lives in `automation/reports/llm-intake-<topic_id>.json` and `.md`
 - if the LLM Reviewer left owner questions, `--note` is required before the intake can become `approved_for_intake`
+- if the LLM Reviewer used `blocking_issues` for owner-confirmation items, add `--resolve-reviewer-blockers` only with `--approved-by` and `--note`; this downgrades them to intake warnings and still does not approve public copy
 - approval is scoped to intake/run-plan only; it does not approve public copy, patch specs, backlog mutation, manifests, PRs, deployment, or production publishing
 - draft `exact_replacements` can be carried into the intake artifact as proposal-only data, but they are not content approval
 - approved intake can move into the existing run-plan proposal flow with `python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --basename llm-worker-run-plan-<topic_id> --json`

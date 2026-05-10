@@ -1534,6 +1534,17 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(approved_intake["state"], "blocked")
             self.assertIn("LLM Reviewer returned blocking issues; resolve them before LLM intake.", approved_intake["blockers"])
 
+            resolved_intake = llm_intake.build_intake(
+                chain_path,
+                approved_by="fixture",
+                note="Owner resolved source verification for intake only.",
+                resolve_reviewer_blockers=True,
+            )
+            self.assertEqual(resolved_intake["state"], "approved_for_intake")
+            self.assertTrue(resolved_intake["reviewer_blockers_resolved_by_owner"])
+            self.assertFalse(resolved_intake["content_edit_approved"])
+            self.assertTrue(any("owner-resolved for intake only" in item for item in resolved_intake["warnings"]))
+
     def test_scout_editor_reviewer_contract_shapes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
