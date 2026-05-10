@@ -23,6 +23,8 @@ from automation.workers import llm_adapter, scout
 REPORTS_DIR = ROOT / "automation" / "reports"
 DEFAULT_GSC_SIGNALS = ROOT / "content" / "gsc" / "latest-gsc-agent-signals.json"
 DEFAULT_BING_SIGNALS = ROOT / "content" / "bing" / "latest-bing-agent-signals.json"
+READY_DECISIONS = {"update_existing", "create_new", "consolidate"}
+MONITOR_DECISIONS = {"monitor", "reject"}
 
 
 SCOUT_RESPONSE_SCHEMA: dict[str, Any] = {
@@ -169,6 +171,41 @@ def compact_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def normalized_decision(value: Any) -> str:
+    decision = str(value or "").strip().lower()
+    return decision if decision in READY_DECISIONS | MONITOR_DECISIONS else ""
+
+
+def is_ready_for_chain(item: dict[str, Any]) -> bool:
+    return normalized_decision(item.get("decision")) in READY_DECISIONS and str(item.get("priority", "")).lower() != "low"
+
+
+def ready_topic_ids(response: dict[str, Any]) -> list[str]:
+    selected = response.get("selected_opportunities", [])
+    if not isinstance(selected, list):
+        return []
+    return [
+        str(item.get("topic_id", ""))
+        for item in selected
+        if item.get("topic_id") and is_ready_for_chain(item)
+    ]
+
+
+def monitor_only_topic_ids(response: dict[str, Any]) -> list[str]:
+    ids: list[str] = []
+    selected = response.get("selected_opportunities", [])
+    if isinstance(selected, list):
+        ids.extend(
+            str(item.get("topic_id", ""))
+            for item in selected
+            if item.get("topic_id") and not is_ready_for_chain(item)
+        )
+    rejected_or_monitor = response.get("rejected_or_monitor", [])
+    if isinstance(rejected_or_monitor, list):
+        ids.extend(str(item.get("topic_id", "")) for item in rejected_or_monitor if item.get("topic_id"))
+    return ids
+
+
 def build_request(
     source_proposals: list[dict[str, Any]],
     signal_paths: list[Path],
@@ -183,7 +220,9 @@ def build_request(
             "Act as the LLM Scout reviewer for lastzguides.com. Use the deterministic proposals as signals, "
             "not proof. Prefer updates to existing pages unless there is a clearly distinct player job. "
             "Protect current templates, cluster roles, canonical claims, SEO/LLM search eligibility, and human approval gates. "
-            "Reject thin, duplicate, speculative, or analytics-only ideas. Return JSON only."
+            "Reject thin, duplicate, speculative, or analytics-only ideas. Put monitor/reject decisions in rejected_or_monitor, "
+            "not selected_opportunities. Only select update_existing, create_new, or consolidate opportunities that are ready for "
+            "human review and a later proposal-only workflow. Use plain ASCII English only. Return JSON only."
         ),
         "inputs": {
             "source_signal_files": [rel(path) for path in signal_paths],
@@ -195,6 +234,8 @@ def build_request(
                 "User-visible content proposals require owner approval before any apply step.",
                 "Do not use archived Reddit/news experiments as inputs or targets.",
                 "Treat GSC and Bing as opportunity signals, not as instructions to rewrite pages.",
+                "Monitor-only and reject topics must not advance to Editor, Reviewer, intake, run-plan, or content proposal.",
+                "Use plain ASCII English only in every string field.",
             ],
         },
         "expected_response_keys": [
@@ -224,6 +265,9 @@ def validate_scout_response(result: dict[str, Any], source_topic_ids: set[str]) 
         topic_id = str(item.get("topic_id", ""))
         if topic_id not in source_topic_ids:
             errors.append(f"Selected topic `{topic_id}` was not present in deterministic Scout proposals.")
+        decision = normalized_decision(item.get("decision"))
+        if decision in MONITOR_DECISIONS:
+            errors.append(f"Selected topic `{topic_id}` has monitor/reject decision `{decision}`; move it to rejected_or_monitor.")
     for item in monitor if isinstance(monitor, list) else []:
         topic_id = str(item.get("topic_id", ""))
         if topic_id and topic_id not in source_topic_ids:
@@ -242,6 +286,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- State: `{result.get('state')}`",
         f"- Provider: `{result.get('provider')}`",
         f"- Source proposals: {payload['source_proposal_count']}",
+        f"- Ready for chain: {len(payload.get('ready_topic_ids', []))}",
+        f"- Monitor only: {len(payload.get('monitor_only_topic_ids', []))}",
         f"- Request: `{payload['request_path']}`",
         f"- Result: `{payload['result_path']}`",
         "- Safety: no content, backlog, manifest, PR, or production files were modified.",
@@ -268,6 +314,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
                         f"### {item.get('topic_id', '')}",
                         "",
                         f"- Decision: `{item.get('decision', '')}`",
+                        f"- Ready for chain: `{str(is_ready_for_chain(item)).lower()}`",
                         f"- Priority: `{item.get('priority', '')}`",
                         f"- Risk: `{item.get('risk_level', '')}`",
                         f"- Player value: {item.get('player_value', '')}",
@@ -325,6 +372,8 @@ def run_llm_scout(
         "source_signal_files": [rel(path) for path in signal_paths],
         "source_proposal_count": len(source_proposals),
         "source_topic_ids": [proposal.get("topic_id", "") for proposal in source_proposals],
+        "ready_topic_ids": ready_topic_ids(result.get("response_json") or {}),
+        "monitor_only_topic_ids": monitor_only_topic_ids(result.get("response_json") or {}),
         "request_path": rel(request_path),
         "result_path": rel(result_path),
         "markdown_path": rel(markdown_path),

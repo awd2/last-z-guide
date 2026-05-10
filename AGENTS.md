@@ -463,9 +463,9 @@ python3 automation/reports/content_seo_opportunities.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
-The `openai` LLM adapter provider is live but still no-write and fail-closed. It requires `OPENAI_API_KEY`, uses `OPENAI_MODEL` when set, defaults to `gpt-5.4-mini`, and returns only validated JSON artifacts. It must not edit content, backlog, manifests, or production state.
+The `openai` LLM adapter provider is live but still no-write and fail-closed. It requires `OPENAI_API_KEY`, uses `OPENAI_MODEL` when set, defaults to `gpt-5.4-mini`, and returns only validated plain-ASCII JSON artifacts. It must not edit content, backlog, manifests, or production state.
 
-`llm-scout` is the first live LLM worker wrapper. It reviews deterministic Scout proposals from GSC/Bing agent signals through `llm_adapter`, writes request/result/markdown artifacts, and must not edit content, backlog, manifests, PRs, or production state.
+`llm-scout` is the first live LLM worker wrapper. It reviews deterministic Scout proposals from GSC/Bing agent signals through `llm_adapter`, writes request/result/markdown artifacts, and must not edit content, backlog, manifests, PRs, or production state. Monitor-only and reject decisions belong in `rejected_or_monitor`, not selected handoffs.
 
 `llm-topic-discovery` converts selected and monitored LLM Scout opportunities into backlog-shaped topic proposals for owner review. It must not edit `topic_backlog.csv`, manifests, content, PRs, or production state.
 
@@ -479,7 +479,7 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 `llm-reviewer` is the third live LLM worker wrapper. It reviews one LLM Editor planning brief for duplicate intent, cluster role fit, canonical claims, template safety, owner questions, and readiness. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
 
-`llm-worker-chain` runs the no-write live LLM Scout -> Editor -> Reviewer sequence and writes one summary artifact. Prefer `--from-decision automation/reports/llm-topic-decision-<topic_id>.json` after owner approval so the chain replays the saved `approved_for_chain` decision instead of rerunning Scout and changing the topic handoff. It must preserve each stage's fail-closed behavior and must not write content, backlog entries, manifests, PRs, or production state.
+`llm-worker-chain` runs the no-write live LLM Scout -> Editor -> Reviewer sequence and writes one summary artifact. Prefer `--from-decision automation/reports/llm-topic-decision-<topic_id>.json` after owner approval so the chain replays the saved `approved_for_chain` decision instead of rerunning Scout and changing the topic handoff. Live Scout handoffs may advance only `ready_for_chain` opportunities: `update_existing`, `create_new`, or `consolidate` with non-low priority. Monitor-only, reject, and low-priority topics must stop before Editor/Reviewer. It must preserve each stage's fail-closed behavior and must not write content, backlog entries, manifests, PRs, or production state.
 
 GitHub workflow `.github/workflows/llm-worker-chain.yml` runs the same no-write chain on a schedule and by manual dispatch. It uploads artifacts only and must not commit reports, edit content, open PRs, or deploy.
 

@@ -49,6 +49,18 @@ def first_selected_topic(scout_payload: dict[str, Any]) -> str:
     return str(topic_id)
 
 
+def first_ready_topic(scout_payload: dict[str, Any]) -> str:
+    response = scout_payload.get("adapter_result", {}).get("response_json")
+    if not isinstance(response, dict):
+        raise ValueError("LLM Scout did not return response_json.")
+    ready = llm_scout.ready_topic_ids(response)
+    if not ready:
+        raise ValueError(
+            "LLM Scout returned no ready-for-chain opportunities; monitor-only topics were not advanced."
+        )
+    return ready[0]
+
+
 def selected_topic_ids(scout_payload: dict[str, Any]) -> set[str]:
     response = scout_payload.get("adapter_result", {}).get("response_json")
     if not isinstance(response, dict):
@@ -61,6 +73,13 @@ def selected_topic_ids(scout_payload: dict[str, Any]) -> set[str]:
         for item in selected
         if item.get("topic_id")
     }
+
+
+def ready_topic_ids(scout_payload: dict[str, Any]) -> set[str]:
+    response = scout_payload.get("adapter_result", {}).get("response_json")
+    if not isinstance(response, dict):
+        return set()
+    return set(llm_scout.ready_topic_ids(response))
 
 
 def normalized_priority(value: Any) -> str:
@@ -424,13 +443,18 @@ def run_llm_worker_chain(
             errors.append("LLM Scout stage failed; Editor and Reviewer were not run.")
         else:
             try:
-                selected_topic_id = selected_topic_id or first_selected_topic(scout_payload)
+                selected_topic_id = selected_topic_id or first_ready_topic(scout_payload)
             except ValueError as exc:
                 errors.append(str(exc))
             if selected_topic_id and selected_topic_id not in selected_topic_ids(scout_payload):
                 errors.append(
                     f"Requested topic `{selected_topic_id}` was not selected by LLM Scout; "
                     "Editor and Reviewer were not run."
+                )
+            elif selected_topic_id and selected_topic_id not in ready_topic_ids(scout_payload):
+                errors.append(
+                    f"Requested topic `{selected_topic_id}` is not ready_for_chain; "
+                    "monitor-only or low-priority opportunities cannot run Editor and Reviewer."
                 )
 
     if not errors and selected_topic_id:

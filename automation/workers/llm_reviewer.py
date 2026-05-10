@@ -163,7 +163,7 @@ def build_request(
             "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. "
             "Do not write or rewrite public page copy. Do not create patch specs. "
             "Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, "
-            "and deterministic QA readiness. Treat analytics as signals, not proof. Return JSON only."
+            "and deterministic QA readiness. Treat analytics as signals, not proof. Use plain ASCII English only. Return JSON only."
         ),
         "inputs": {
             "source_llm_editor_result": rel(editor_result_path),
@@ -178,6 +178,7 @@ def build_request(
                 "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
                 "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
                 "Owner approval is required before any user-visible content change.",
+                "Use plain ASCII English only in every string field.",
             ],
         },
         "expected_response_keys": [

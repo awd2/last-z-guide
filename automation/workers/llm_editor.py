@@ -180,7 +180,7 @@ def build_request(
             "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. "
             "Do not write final public page copy, HTML, patch specs, or publishable text. "
             "Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, "
-            "and owner approval gate. Treat analytics as signals, not proof. Return JSON only."
+            "and owner approval gate. Treat analytics as signals, not proof. Use plain ASCII English only. Return JSON only."
         ),
         "inputs": {
             "source_llm_scout_result": rel(scout_result_path),
@@ -208,6 +208,7 @@ def build_request(
                 "Do not create a patch plan or Patch Spec.",
                 "Do not mutate backlog, manifests, PRs, or production state.",
                 "Owner approval is required before any user-visible content change.",
+                "Use plain ASCII English only in every string field.",
             ],
         },
         "expected_response_keys": [

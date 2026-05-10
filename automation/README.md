@@ -457,13 +457,14 @@ LLM adapter:
 - `python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json` -> call the OpenAI Responses API and return a validated JSON artifact
 - default provider is `disabled` and returns a blocked result
 - `openai` requires `OPENAI_API_KEY`, uses `OPENAI_MODEL` when set, defaults to `gpt-5.4-mini`, and must remain no-write
-- adapter output is structured and must not directly edit content, backlog, manifests, or production state
+- adapter output is structured, plain ASCII English, and must not directly edit content, backlog, manifests, or production state
 
 LLM Scout review:
 
 - `python3 automation/pipeline.py llm-scout --provider openai --json` -> review deterministic GSC/Bing Scout proposals with the live OpenAI provider
 - default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
 - output lives in `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`
+- Scout must put `monitor` and `reject` decisions in `rejected_or_monitor`; selected opportunities are allowed to advance only when they are `update_existing`, `create_new`, or `consolidate` with non-low priority
 - this is a no-write opportunity review; selected topics still require deterministic Editor/Reviewer steps and human approval before content work
 
 LLM topic discovery:
@@ -515,6 +516,7 @@ LLM worker chain:
 - `python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json` -> run the no-write live LLM Scout -> Editor -> Reviewer sequence
 - `python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json` -> replay one saved `approved_for_chain` decision as the deterministic chain handoff
 - default input uses latest GSC/Bing agent signal files when present
+- live Scout handoffs advance only `ready_for_chain` opportunities; monitor-only, reject, or low-priority selected topics stop before Editor/Reviewer
 - output lives in `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md`
 - per-stage request/result/markdown artifacts are also written and referenced from the summary
 - `--from-decision` skips live Scout rerank and blocks unless the decision artifact is `approved_for_chain`

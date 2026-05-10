@@ -227,7 +227,7 @@ For a no-write LLM Scout review over the latest GSC and Bing agent signals, run:
 python3 automation/pipeline.py llm-scout --provider openai --json
 ```
 
-This writes `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`. It is review context only; it does not edit content, backlog, manifests, PRs, or production state.
+This writes `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`. It is review context only; it does not edit content, backlog, manifests, PRs, or production state. Monitor/reject outcomes stay out of selected chain handoffs.
 
 For a durable no-write owner decision on one discovered topic, run:
 
@@ -283,7 +283,7 @@ For the full no-write live LLM worker chain, run:
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 ```
 
-This runs `llm-scout -> llm-editor -> llm-reviewer` and writes `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md` as a compact owner-review summary. It still cannot edit content, open PRs, or approve high-risk user-visible changes by itself.
+This runs `llm-scout -> llm-editor -> llm-reviewer` and writes `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md` as a compact owner-review summary. It advances only `ready_for_chain` topics, and still cannot edit content, open PRs, or approve high-risk user-visible changes by itself.
 
 After a topic has an owner decision of `approved_for_chain`, prefer the deterministic handoff:
 

@@ -106,7 +106,7 @@ python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
 
-It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter must not edit content, backlog, manifests, or production state.
+It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter requires plain ASCII English output and must not edit content, backlog, manifests, or production state.
 
 The lower-level helper remains available at:
 
@@ -129,7 +129,7 @@ python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner ans
 - `automation/reports/llm-scout-review-result.json`
 - `automation/reports/llm-scout-review.md`
 
-It does not mutate backlog, manifests, content, PRs, or production state. Selected opportunities remain review context only until a human approves the deterministic worker chain and any later content proposal.
+It does not mutate backlog, manifests, content, PRs, or production state. `monitor` and `reject` decisions belong in `rejected_or_monitor`, not `selected_opportunities`. Selected opportunities remain review context only until a human approves the deterministic worker chain and any later content proposal.
 
 `llm-topic-discovery` is the no-write bridge from LLM Scout selection and
 monitoring output to owner-reviewed topic intake. It reads one LLM Scout
@@ -218,7 +218,7 @@ It writes:
 - `automation/reports/llm-worker-chain-<topic_id>.json`
 - `automation/reports/llm-worker-chain-<topic_id>.md`
 
-The chain summary references each stage's request/result/markdown artifacts. If any stage fails or is blocked, the chain writes a blocked summary and stops before later stages. It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state.
+The chain summary references each stage's request/result/markdown artifacts. If any stage fails or is blocked, the chain writes a blocked summary and stops before later stages. Live Scout handoffs advance only `ready_for_chain` opportunities: `update_existing`, `create_new`, or `consolidate` with non-low priority. Monitor-only, reject, or low-priority selected topics are blocked before Editor/Reviewer. It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state.
 
 The GitHub Actions wrapper `.github/workflows/llm-worker-chain.yml` runs this chain on a weekly schedule, by manual dispatch, or after path-limited LLM worker infrastructure pushes. It uploads artifacts only; it must not commit generated reports or mutate content.
 

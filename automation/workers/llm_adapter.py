@@ -133,7 +133,25 @@ def normalize_fixture_response(payload: dict[str, Any]) -> dict[str, Any]:
 
 def validate_response(request: dict[str, Any], response_json: dict[str, Any]) -> list[str]:
     expected = request.get("expected_response_keys", [])
-    return [f"Response is missing expected key `{key}`." for key in expected if key not in response_json]
+    errors = [f"Response is missing expected key `{key}`." for key in expected if key not in response_json]
+    errors.extend(non_ascii_response_errors(response_json))
+    return errors
+
+
+def non_ascii_response_errors(value: Any, path: str = "response_json") -> list[str]:
+    errors: list[str] = []
+    if isinstance(value, str):
+        if not value.isascii():
+            errors.append(f"Response field `{path}` must use plain ASCII English only.")
+        return errors
+    if isinstance(value, list):
+        for index, item in enumerate(value):
+            errors.extend(non_ascii_response_errors(item, f"{path}[{index}]"))
+        return errors
+    if isinstance(value, dict):
+        for key, item in value.items():
+            errors.extend(non_ascii_response_errors(item, f"{path}.{key}"))
+    return errors
 
 
 def safe_schema_name(request_id: str) -> str:
@@ -172,7 +190,8 @@ def openai_prompt_input(request: dict[str, Any]) -> list[dict[str, str]]:
     system = (
         "You are a constrained LLM worker inside the lastzguides.com automation pipeline. "
         "Return only JSON that matches the provided schema. Do not include markdown. "
-        "Do not claim files were edited. Do not propose publication. Treat analytics as signals, not proof."
+        "Use plain ASCII English only in every string field. Do not claim files were edited. "
+        "Do not propose publication. Treat analytics as signals, not proof."
     )
     user = {
         "task": request["task"],

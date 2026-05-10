@@ -280,6 +280,22 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(bad["state"], "blocked")
             self.assertIn("Response is missing expected key `risk_level`.", bad["errors"])
 
+            non_ascii_fixture_path = tmp_path / "non-ascii-response.json"
+            write_json(
+                non_ascii_fixture_path,
+                {
+                    "response_json": {
+                        "summary": "Use HQ30->35 planning, but avoid odd glyphs like →.",
+                        "risk_level": "medium",
+                        "next_action": "review",
+                    }
+                },
+            )
+            code, non_ascii = llm_adapter.run_adapter(request_path, "fixture", non_ascii_fixture_path)
+            self.assertEqual(code, 1)
+            self.assertEqual(non_ascii["state"], "blocked")
+            self.assertTrue(any("plain ASCII English" in error for error in non_ascii["errors"]))
+
     def test_llm_adapter_openai_provider_blocks_without_key(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             request_path = Path(tmp) / "request.json"
@@ -376,6 +392,30 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "llm-scout-fixture-request.json").exists())
             self.assertTrue((tmp_path / "llm-scout-fixture-result.json").exists())
             self.assertTrue((tmp_path / "llm-scout-fixture.md").exists())
+
+    def test_llm_scout_blocks_monitor_decision_in_selected_opportunities(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            fixture_path = tmp_path / "llm-scout-response.json"
+            response = fixture_llm_scout_response()
+            response["response_json"]["selected_opportunities"][0]["decision"] = "monitor"
+            write_json(signals_path, fixture_signals())
+            write_json(fixture_path, response)
+
+            code, payload = llm_scout.run_llm_scout(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                basename="llm-scout-fixture",
+                provider="fixture",
+                fixture_path=fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+
+            self.assertEqual(code, 1)
+            self.assertEqual(payload["adapter_result"]["state"], "blocked")
+            self.assertTrue(any("move it to rejected_or_monitor" in error for error in payload["adapter_result"]["errors"]))
 
     def test_llm_topic_discovery_creates_backlog_shaped_no_write_artifact(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -955,6 +995,42 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue(any("was not selected by LLM Scout" in error for error in summary["errors"]))
             self.assertTrue((tmp_path / "llm-worker-chain-fixture.json").exists())
             self.assertTrue((tmp_path / "llm-worker-chain-fixture.md").exists())
+
+    def test_llm_worker_chain_blocks_low_priority_selected_topic_before_editor(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            scout_response = fixture_llm_scout_response()
+            scout_response["response_json"]["selected_opportunities"][0]["priority"] = "low"
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, scout_response)
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, fixture_llm_reviewer_response())
+
+            code, summary = llm_worker_chain.run_llm_worker_chain(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                provider="fixture",
+                topic_id=None,
+                basename="llm-worker-chain-fixture",
+                scout_basename="llm-worker-chain-scout-fixture",
+                editor_basename="llm-worker-chain-editor-fixture",
+                reviewer_basename="llm-worker-chain-reviewer-fixture",
+                scout_fixture_path=scout_fixture_path,
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+
+            self.assertEqual(code, 1)
+            self.assertEqual(summary["state"], "blocked")
+            self.assertEqual(summary["stages"]["llm_scout"]["state"], "completed")
+            self.assertEqual(summary["stages"]["llm_editor"]["state"], "not_run")
+            self.assertTrue(any("no ready-for-chain opportunities" in error for error in summary["errors"]))
 
     def test_llm_review_latest_reads_chain_summary(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
