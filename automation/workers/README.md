@@ -191,13 +191,15 @@ content edits or mutate backlog, manifests, PRs, or production state.
 
 It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state. It is planning context only until deterministic review and owner approval.
 
+The Editor schema may include `exact_replacements`, but only as draft proposal data. Each item must be target-only, include literal `exact_old` and `exact_new` strings, and set `owner_approval_required: true`. These candidates do not approve copy, create Patch Specs, edit files, or skip the later `propose -> approval -> apply-preview -> apply-approved -> strict QA` flow.
+
 `llm-reviewer` is the third live LLM worker wrapper. It reads one LLM Editor planning brief, sends a JSON-only review-gate request through `llm_adapter`, and writes:
 
 - `automation/reports/llm-reviewer-gate-<topic_id>-request.json`
 - `automation/reports/llm-reviewer-gate-<topic_id>-result.json`
 - `automation/reports/llm-reviewer-gate-<topic_id>.md`
 
-It checks duplicate intent, cluster role fit, canonical claims, template safety, owner questions, and readiness. It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state. High-risk cornerstone/home pages cannot receive a final content approval from this worker alone; owner approval remains required.
+It checks duplicate intent, cluster role fit, canonical claims, template safety, draft exact replacement safety, owner questions, and readiness. It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state. High-risk cornerstone/home pages cannot receive a final content approval from this worker alone; owner approval remains required. If Editor `exact_replacements` are present, Reviewer must keep owner approval required and cannot advance them directly to `apply-preview`.
 
 `llm-worker-chain` runs the no-write live LLM sequence in one command:
 
@@ -229,7 +231,7 @@ The GitHub Actions wrapper `.github/workflows/llm-worker-chain.yml` runs this ch
 - `automation/reports/llm-intake-<topic_id>.json`
 - `automation/reports/llm-intake-<topic_id>.md`
 
-When owner approval is required, the intake artifact stays `approval_required` until rerun with `--approved-by <name>`. If owner questions are present, `--note` is also required. This approval is intake-only: it allows the existing run-plan/proposal flow, but it does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing.
+When owner approval is required, the intake artifact stays `approval_required` until rerun with `--approved-by <name>`. If owner questions are present, `--note` is also required. This approval is intake-only: it allows the existing run-plan/proposal flow, but it does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing. Draft `exact_replacements` may be carried into intake for later run-plan/proposal handling, but they remain proposal-only until the exact public diff is shown and approved.
 
 An approved LLM intake can be passed to the existing run-plan command with:
 

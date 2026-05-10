@@ -25,6 +25,33 @@ DEFAULT_LLM_SCOUT_RESULT = REPORTS_DIR / "llm-scout-review-result.json"
 DEFAULT_LLM_SCOUT_REQUEST = REPORTS_DIR / "llm-scout-review-request.json"
 
 
+EXACT_REPLACEMENT_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "file": {"type": "string", "maxLength": 160},
+        "change_type": {
+            "type": "string",
+            "enum": ["safe_exact_replace", "first_screen_update", "meta_refresh"],
+        },
+        "selector_or_anchor": {"type": "string", "maxLength": 180},
+        "exact_old": {"type": "string", "maxLength": 4000},
+        "exact_new": {"type": "string", "maxLength": 4000},
+        "reason": {"type": "string", "maxLength": 400},
+        "owner_approval_required": {"type": "boolean"},
+    },
+    "required": [
+        "file",
+        "change_type",
+        "selector_or_anchor",
+        "exact_old",
+        "exact_new",
+        "reason",
+        "owner_approval_required",
+    ],
+}
+
+
 EDITOR_RESPONSE_SCHEMA: dict[str, Any] = {
     "type": "object",
     "additionalProperties": False,
@@ -95,6 +122,12 @@ EDITOR_RESPONSE_SCHEMA: dict[str, Any] = {
             "maxItems": 10,
             "items": {"type": "string", "maxLength": 220},
         },
+        "exact_replacements": {
+            "type": "array",
+            "maxItems": 6,
+            "items": EXACT_REPLACEMENT_SCHEMA,
+            "description": "Optional draft exact replacement candidates. These are proposal-only and still require owner approval.",
+        },
         "next_step": {"type": "string", "maxLength": 350},
     },
     "required": [
@@ -110,9 +143,13 @@ EDITOR_RESPONSE_SCHEMA: dict[str, Any] = {
         "owner_questions",
         "required_context_before_patch",
         "acceptance_checks",
+        "exact_replacements",
         "next_step",
     ],
 }
+
+
+ALLOWED_EXACT_CHANGE_TYPES = {"safe_exact_replace", "first_screen_update", "meta_refresh"}
 
 
 def now_utc() -> str:
@@ -178,9 +215,12 @@ def build_request(
         "task": "Create a no-write Editor planning brief for one approved Scout opportunity.",
         "prompt": (
             "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. "
-            "Do not write final public page copy, HTML, patch specs, or publishable text. "
+            "Do not write final public page copy, HTML, or patch specs. "
             "Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, "
-            "and owner approval gate. Treat analytics as signals, not proof. Use plain ASCII English only. Return JSON only."
+            "and owner approval gate. Treat analytics as signals, not proof. Normally return exact_replacements as an empty array. "
+            "Only include exact_replacements when the deterministic context contains enough current source text to copy exact_old literally "
+            "and the replacement is narrow enough for later owner review. exact_replacements are draft proposal data only, not approval, "
+            "not a Patch Spec, and not permission to edit files. Use plain ASCII English only. Return JSON only."
         ),
         "inputs": {
             "source_llm_scout_result": rel(scout_result_path),
@@ -206,6 +246,8 @@ def build_request(
                 "No content files may be edited by this worker.",
                 "Do not generate final user-visible page copy.",
                 "Do not create a patch plan or Patch Spec.",
+                "exact_replacements, when present, are proposal-only candidates that still require propose + owner approval + apply-approved.",
+                "Every exact_replacements item must set owner_approval_required to true.",
                 "Do not mutate backlog, manifests, PRs, or production state.",
                 "Owner approval is required before any user-visible content change.",
                 "Use plain ASCII English only in every string field.",
@@ -224,6 +266,7 @@ def build_request(
             "owner_questions",
             "required_context_before_patch",
             "acceptance_checks",
+            "exact_replacements",
             "next_step",
         ],
         "response_schema": EDITOR_RESPONSE_SCHEMA,
@@ -245,6 +288,31 @@ def validate_editor_response(result: dict[str, Any], topic_id: str, deterministi
     for path in deterministic_brief.get("required_context_before_patch", [])[:5]:
         if path not in response.get("required_context_before_patch", []):
             errors.append(f"LLM Editor omitted required context `{path}`.")
+    errors.extend(validate_exact_replacements(response, target))
+    return errors
+
+
+def validate_exact_replacements(response: dict[str, Any], target: str) -> list[str]:
+    errors: list[str] = []
+    replacements = response.get("exact_replacements")
+    if not isinstance(replacements, list):
+        return ["LLM Editor exact_replacements must be a list."]
+    for index, item in enumerate(replacements, start=1):
+        label = f"exact_replacements[{index}]"
+        if not isinstance(item, dict):
+            errors.append(f"LLM Editor {label} must be an object.")
+            continue
+        if item.get("file") != target:
+            errors.append(f"LLM Editor {label}.file must match target `{target}`.")
+        if item.get("change_type") not in ALLOWED_EXACT_CHANGE_TYPES:
+            errors.append(f"LLM Editor {label}.change_type is unsupported.")
+        if item.get("owner_approval_required") is not True:
+            errors.append(f"LLM Editor {label} must set owner_approval_required to true.")
+        for key in ["selector_or_anchor", "exact_old", "exact_new", "reason"]:
+            if not str(item.get(key, "")).strip():
+                errors.append(f"LLM Editor {label}.{key} must be non-empty.")
+        if str(item.get("exact_old", "")).strip() == str(item.get("exact_new", "")).strip():
+            errors.append(f"LLM Editor {label}.exact_new must differ from exact_old.")
     return errors
 
 
@@ -268,6 +336,10 @@ def render_markdown(payload: dict[str, Any]) -> str:
     if result.get("errors"):
         lines.extend(["## Errors", "", md_list(result["errors"]), ""])
     if response:
+        exact_lines = [
+            f"{item.get('change_type', '')} `{item.get('file', '')}` at `{item.get('selector_or_anchor', '')}`; owner approval required: `{str(item.get('owner_approval_required')).lower()}`"
+            for item in response.get("exact_replacements", [])
+        ]
         lines.extend(
             [
                 "## Brief Summary",
@@ -311,6 +383,12 @@ def render_markdown(payload: dict[str, Any]) -> str:
                 "## Acceptance Checks",
                 "",
                 md_list([f"`{check}`" for check in response.get("acceptance_checks", [])]),
+                "",
+                "## Draft Exact Replacements",
+                "",
+                "Proposal-only candidates. They do not approve copy, create Patch Specs, edit files, or bypass owner review.",
+                "",
+                md_list(exact_lines),
                 "",
                 "## Next Step",
                 "",

@@ -267,7 +267,7 @@ For a no-write LLM Editor planning brief from one selected Scout opportunity, ru
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 ```
 
-This writes `automation/reports/llm-editor-brief-<topic_id>-request.json`, `automation/reports/llm-editor-brief-<topic_id>-result.json`, and `automation/reports/llm-editor-brief-<topic_id>.md`. It is a planning brief only; it must not contain final user-visible page copy or applyable patch specs.
+This writes `automation/reports/llm-editor-brief-<topic_id>-request.json`, `automation/reports/llm-editor-brief-<topic_id>-result.json`, and `automation/reports/llm-editor-brief-<topic_id>.md`. It is a planning brief only; it must not contain final user-visible page copy or applyable patch specs. Optional `exact_replacements` are draft proposal data only and require later owner approval.
 
 For a no-write LLM Reviewer gate from one LLM Editor brief, run:
 
@@ -275,7 +275,7 @@ For a no-write LLM Reviewer gate from one LLM Editor brief, run:
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 ```
 
-This writes `automation/reports/llm-reviewer-gate-<topic_id>-request.json`, `automation/reports/llm-reviewer-gate-<topic_id>-result.json`, and `automation/reports/llm-reviewer-gate-<topic_id>.md`. It is a gate artifact only; it cannot approve high-risk user-visible changes without owner review.
+This writes `automation/reports/llm-reviewer-gate-<topic_id>-request.json`, `automation/reports/llm-reviewer-gate-<topic_id>-result.json`, and `automation/reports/llm-reviewer-gate-<topic_id>.md`. It is a gate artifact only; it cannot approve high-risk user-visible changes without owner review or advance LLM exact replacements directly to apply.
 
 For the full no-write live LLM worker chain, run:
 

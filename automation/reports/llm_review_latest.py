@@ -71,6 +71,9 @@ def build_review(chain_path: Path) -> dict[str, Any]:
     chain = load_json(chain_path)
     editor = load_stage_response(chain, "llm_editor")
     reviewer = load_stage_response(chain, "llm_reviewer")
+    exact_replacements = editor.get("exact_replacements", [])
+    if not isinstance(exact_replacements, list):
+        exact_replacements = []
     return {
         "schema_version": 1,
         "report_type": "llm_latest_owner_review",
@@ -87,6 +90,8 @@ def build_review(chain_path: Path) -> dict[str, Any]:
         "recommended_operator_action": recommended_operator_action(chain, reviewer),
         "brief_summary": editor.get("brief_summary", ""),
         "first_screen_plan": editor.get("first_screen_plan", ""),
+        "exact_replacements_count": len(exact_replacements),
+        "exact_replacement_review": reviewer.get("exact_replacement_review", ""),
         "blocking_issues": reviewer.get("blocking_issues", []),
         "warnings": reviewer.get("warnings", []),
         "owner_questions": reviewer.get("owner_questions", []),
@@ -121,6 +126,7 @@ def render_markdown(review: dict[str, Any]) -> str:
         f"- Risk: `{review.get('risk_level')}`",
         f"- Approved next stage: `{review.get('approved_next_stage')}`",
         f"- Owner approval required: `{str(review.get('owner_approval_required')).lower()}`",
+        f"- Draft exact replacements: `{review.get('exact_replacements_count', 0)}`",
         f"- Recommended operator action: `{review.get('recommended_operator_action')}`",
         f"- Source chain: `{review.get('source_chain_path')}`",
         "- Safety: read-only; no content, backlog, manifest, PR, or production files were modified.",
@@ -141,6 +147,10 @@ def render_markdown(review: dict[str, Any]) -> str:
             "## First-Screen Plan",
             "",
             review.get("first_screen_plan", ""),
+            "",
+            "## Exact Replacement Review",
+            "",
+            review.get("exact_replacement_review", ""),
             "",
             "## Blocking Issues",
             "",

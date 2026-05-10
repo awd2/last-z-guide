@@ -147,6 +147,7 @@ def fixture_llm_editor_response() -> dict:
                 "python3 scripts/prepublish_check.py",
                 "python3 automation/pipeline.py checks --strict",
             ],
+            "exact_replacements": [],
             "next_step": "Run deterministic Reviewer before any patch plan.",
         }
     }
@@ -168,6 +169,7 @@ def fixture_llm_reviewer_response() -> dict:
             "cluster_role_review": "The plan preserves codes.html as the redeem-codes hub.",
             "canonical_claim_review": "The official Gift Center, UID, and mailbox claims remain protected.",
             "template_safety_review": "The brief does not request template, schema, or navigation replacement.",
+            "exact_replacement_review": "The Editor did not include exact replacement candidates.",
             "owner_approval_required": True,
             "owner_questions": ["Should this move to a human-reviewed proposal artifact?"],
             "required_context_before_edit": [
@@ -1107,6 +1109,110 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "llm-reviewer-fixture-request.json").exists())
             self.assertTrue((tmp_path / "llm-reviewer-fixture-result.json").exists())
             self.assertTrue((tmp_path / "llm-reviewer-fixture.md").exists())
+
+    def test_llm_editor_blocks_unapproved_exact_replacement_candidate(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            editor_response = fixture_llm_editor_response()
+            editor_response["response_json"]["exact_replacements"] = [
+                {
+                    "file": "codes.html",
+                    "change_type": "first_screen_update",
+                    "selector_or_anchor": ".guide-verified",
+                    "exact_old": "<p>Old current copy.</p>",
+                    "exact_new": "<p>Draft replacement copy.</p>",
+                    "reason": "Test proposal-only exact replacement.",
+                    "owner_approval_required": False,
+                }
+            ]
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, editor_response)
+
+            scout_code, scout_payload = llm_scout.run_llm_scout(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                basename="llm-scout-fixture",
+                provider="fixture",
+                fixture_path=scout_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(scout_code, 0)
+
+            editor_code, editor_payload = llm_editor.run_llm_editor(
+                scout_result_path=Path(scout_payload["result_path"]),
+                scout_request_path=Path(scout_payload["request_path"]),
+                topic_id="codes-gsc-opportunity",
+                output_dir=tmp_path,
+                basename="llm-editor-fixture",
+                provider="fixture",
+                fixture_path=editor_fixture_path,
+            )
+            self.assertEqual(editor_code, 1)
+            self.assertEqual(editor_payload["adapter_result"]["state"], "blocked")
+            self.assertTrue(
+                any("owner_approval_required" in error for error in editor_payload["adapter_result"]["errors"])
+            )
+
+    def test_llm_exact_replacements_reach_intake_as_proposal_only(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            editor_response = fixture_llm_editor_response()
+            editor_response["response_json"]["exact_replacements"] = [
+                {
+                    "file": "codes.html",
+                    "change_type": "first_screen_update",
+                    "selector_or_anchor": ".guide-verified",
+                    "exact_old": "<p>Old current copy.</p>",
+                    "exact_new": "<p>Draft replacement copy.</p>",
+                    "reason": "Test proposal-only exact replacement.",
+                    "owner_approval_required": True,
+                }
+            ]
+            reviewer_response = fixture_llm_reviewer_response()
+            reviewer_response["response_json"]["exact_replacement_review"] = (
+                "One narrow target-only candidate is present and still requires proposal and owner approval."
+            )
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, editor_response)
+            write_json(reviewer_fixture_path, reviewer_response)
+
+            code, summary = llm_worker_chain.run_llm_worker_chain(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                provider="fixture",
+                topic_id="codes-gsc-opportunity",
+                basename="llm-worker-chain-fixture",
+                scout_basename="llm-worker-chain-scout-fixture",
+                editor_basename="llm-worker-chain-editor-fixture",
+                reviewer_basename="llm-worker-chain-reviewer-fixture",
+                scout_fixture_path=scout_fixture_path,
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["exact_replacements_count"], 1)
+            chain_path = Path(summary["artifacts"]["chain_json"])
+            review = llm_review_latest.build_review(chain_path)
+            self.assertEqual(review["exact_replacements_count"], 1)
+
+            approved_intake = llm_intake.build_intake(chain_path, approved_by="fixture", note="contract test")
+            self.assertEqual(approved_intake["state"], "approved_for_intake")
+            self.assertFalse(approved_intake["content_edit_approved"])
+            self.assertEqual(approved_intake["exact_replacements_count"], 1)
+            run_plan = intake_to_run.build_proposal(approved_intake, tmp_path / "llm-intake.json")
+            self.assertEqual(len(run_plan["proposed_manifest"]["plan"]["exact_replacements"]), 1)
 
     def test_llm_worker_chain_runs_fixture_stages(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

@@ -63,6 +63,11 @@ REVIEWER_RESPONSE_SCHEMA: dict[str, Any] = {
         "cluster_role_review": {"type": "string", "maxLength": 700},
         "canonical_claim_review": {"type": "string", "maxLength": 700},
         "template_safety_review": {"type": "string", "maxLength": 700},
+        "exact_replacement_review": {
+            "type": "string",
+            "maxLength": 700,
+            "description": "Review of any Editor exact_replacements. Empty-array Editor briefs still need a short no-candidate note.",
+        },
         "owner_approval_required": {"type": "boolean"},
         "owner_questions": {
             "type": "array",
@@ -93,6 +98,7 @@ REVIEWER_RESPONSE_SCHEMA: dict[str, Any] = {
         "cluster_role_review",
         "canonical_claim_review",
         "template_safety_review",
+        "exact_replacement_review",
         "owner_approval_required",
         "owner_questions",
         "required_context_before_edit",
@@ -163,7 +169,9 @@ def build_request(
             "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. "
             "Do not write or rewrite public page copy. Do not create patch specs. "
             "Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, "
-            "and deterministic QA readiness. Treat analytics as signals, not proof. Use plain ASCII English only. Return JSON only."
+            "draft exact replacement safety, and deterministic QA readiness. Treat analytics as signals, not proof. "
+            "If the Editor includes exact_replacements, review whether they are narrow, target-only, literal exact_old/exact_new candidates "
+            "with owner_approval_required=true. Do not approve apply_preview from an LLM-only exact replacement. Use plain ASCII English only. Return JSON only."
         ),
         "inputs": {
             "source_llm_editor_result": rel(editor_result_path),
@@ -176,6 +184,8 @@ def build_request(
                 "No content files may be edited by Reviewer.",
                 "No final public page copy may be generated.",
                 "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
+                "Editor exact_replacements are proposal-only candidates; they do not approve copy or bypass propose/approval/apply-approved.",
+                "If exact_replacements are present, owner_approval_required must remain true.",
                 "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
                 "Owner approval is required before any user-visible content change.",
                 "Use plain ASCII English only in every string field.",
@@ -193,6 +203,7 @@ def build_request(
             "cluster_role_review",
             "canonical_claim_review",
             "template_safety_review",
+            "exact_replacement_review",
             "owner_approval_required",
             "owner_questions",
             "required_context_before_edit",
@@ -223,6 +234,12 @@ def validate_reviewer_response(result: dict[str, Any], request: dict[str, Any]) 
         errors.append("LLM Reviewer cannot return `pass` for a high-risk cornerstone/home page; use `needs_human_review` or stricter.")
     if page_role in HIGH_RISK_PAGE_ROLES and response.get("approved_next_stage") not in {"none", "brief", "patch_plan", "proposal", "approval"}:
         errors.append("LLM Reviewer approved an unsafe next stage for a high-risk page.")
+    exact_replacements = editor_brief.get("exact_replacements", [])
+    if exact_replacements:
+        if response.get("approved_next_stage") == "apply_preview":
+            errors.append("LLM Reviewer cannot approve `apply_preview` from LLM exact_replacements; use proposal/approval first.")
+        if not str(response.get("exact_replacement_review", "")).strip():
+            errors.append("LLM Reviewer must review Editor exact_replacements when they are present.")
     for required in ["python3 scripts/prepublish_check.py", "python3 automation/pipeline.py checks --strict"]:
         if required not in response.get("required_checks", []):
             errors.append(f"LLM Reviewer omitted required check `{required}`.")
@@ -285,6 +302,10 @@ def render_markdown(payload: dict[str, Any]) -> str:
                 "## Template Safety Review",
                 "",
                 response.get("template_safety_review", ""),
+                "",
+                "## Exact Replacement Review",
+                "",
+                response.get("exact_replacement_review", ""),
                 "",
                 "## Owner Questions",
                 "",

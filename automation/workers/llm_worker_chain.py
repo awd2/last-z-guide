@@ -255,6 +255,9 @@ def build_summary(
 ) -> dict[str, Any]:
     reviewer_response = response_json(reviewer_payload)
     editor_response = response_json(editor_payload)
+    exact_replacements = editor_response.get("exact_replacements", [])
+    if not isinstance(exact_replacements, list):
+        exact_replacements = []
     source_topic_id = topic_id or (editor_payload or {}).get("source_topic_id", "")
     target = (reviewer_payload or {}).get("target_page_or_slug") or (editor_payload or {}).get("target_page_or_slug", "")
     chain_state = "completed" if not errors and reviewer_payload else "blocked"
@@ -273,6 +276,7 @@ def build_summary(
         "risk_level": reviewer_response.get("risk_level"),
         "approved_next_stage": reviewer_response.get("approved_next_stage"),
         "owner_approval_required": reviewer_response.get("owner_approval_required"),
+        "exact_replacements_count": len(exact_replacements),
         "errors": errors,
         "stages": {
             "llm_scout": stage_summary(scout_payload),
@@ -312,6 +316,7 @@ def render_markdown(summary: dict[str, Any], editor_response: dict[str, Any], re
         f"- Risk: `{summary.get('risk_level')}`",
         f"- Approved next stage: `{summary.get('approved_next_stage')}`",
         f"- Owner approval required: `{str(summary.get('owner_approval_required')).lower()}`",
+        f"- Draft exact replacements: `{summary.get('exact_replacements_count', 0)}`",
         "- Safety: no content, backlog, manifest, PR, or production files were modified.",
         "",
         "## Stage Artifacts",
@@ -331,6 +336,10 @@ def render_markdown(summary: dict[str, Any], editor_response: dict[str, Any], re
                 "## First-Screen Plan",
                 "",
                 editor_response.get("first_screen_plan", ""),
+                "",
+                "## Draft Exact Replacements",
+                "",
+                f"Count: `{len(editor_response.get('exact_replacements', []) if isinstance(editor_response.get('exact_replacements', []), list) else [])}`",
                 "",
             ]
         )

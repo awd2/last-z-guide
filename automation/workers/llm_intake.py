@@ -25,6 +25,7 @@ REPORTS_DIR = ROOT / "automation" / "reports"
 APPROVAL_GUARDRAILS = [
     "Approval is intake-only: it allows conversion into the existing run-plan/proposal flow.",
     "Approval does not approve public page copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing.",
+    "Any carried exact_replacements are proposal-only data and still require propose, owner approval, apply-preview, apply-approved, and strict QA.",
     "Any future public content change still requires exact proposed text/diff and explicit owner approval.",
     "Future content proposals must still pass deterministic checks before closeout.",
 ]
@@ -74,6 +75,14 @@ def scout_selected_opportunity(chain: dict[str, Any], topic_id: str) -> dict[str
         if opportunity.get("topic_id") == topic_id:
             return opportunity
     return {}
+
+
+def editor_exact_replacements(chain: dict[str, Any]) -> list[dict[str, Any]]:
+    editor_response = llm_review_latest.load_stage_response(chain, "llm_editor")
+    replacements = editor_response.get("exact_replacements", [])
+    if not isinstance(replacements, list):
+        return []
+    return [item for item in replacements if isinstance(item, dict)]
 
 
 def issue_line(item: dict[str, Any]) -> str:
@@ -184,6 +193,7 @@ def build_intake(
     topic_id = str(review.get("source_topic_id") or "llm-topic")
     scout_proposal = scout_request_proposal(chain, topic_id)
     scout_opportunity = scout_selected_opportunity(chain, topic_id)
+    exact_replacements = editor_exact_replacements(chain)
     state, blockers, warnings = intake_state(review, approved_by, note)
     intake = {
         "schema_version": 1,
@@ -212,6 +222,8 @@ def build_intake(
         "required_checks": review.get("required_checks", []),
         "editor_brief_summary": review.get("brief_summary", ""),
         "first_screen_plan": review.get("first_screen_plan", ""),
+        "exact_replacements": exact_replacements,
+        "exact_replacements_count": len(exact_replacements),
         "proposed_backlog_item": proposed_backlog_item(review, scout_proposal, scout_opportunity),
         "source_artifacts": {
             "llm_review_latest": review,
@@ -278,6 +290,11 @@ def render_markdown(intake: dict[str, Any]) -> str:
         "## First-Screen Plan",
         "",
         intake.get("first_screen_plan", ""),
+        "",
+        "## Draft Exact Replacements",
+        "",
+        f"- Count: `{intake.get('exact_replacements_count', 0)}`",
+        "- Scope: proposal-only data; no public content edit is approved here.",
         "",
         "## Required Checks",
         "",

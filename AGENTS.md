@@ -475,9 +475,9 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 `llm-approved-handoffs` is a read-only operator view over `approved_for_chain` decisions. It prints ready-to-run deterministic `llm-worker-chain --from-decision ...` commands and must not approve content edits or mutate backlog, manifests, PRs, or production state.
 
-`llm-editor` is the second live LLM worker wrapper. It creates a planning brief from one selected LLM Scout opportunity and deterministic Editor context. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
+`llm-editor` is the second live LLM worker wrapper. It creates a planning brief from one selected LLM Scout opportunity and deterministic Editor context. It may include `exact_replacements` only as draft proposal data with `owner_approval_required: true`; this does not approve copy, create Patch Specs, edit files, or bypass the proposal/approval/apply lifecycle. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
 
-`llm-reviewer` is the third live LLM worker wrapper. It reviews one LLM Editor planning brief for duplicate intent, cluster role fit, canonical claims, template safety, owner questions, and readiness. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
+`llm-reviewer` is the third live LLM worker wrapper. It reviews one LLM Editor planning brief for duplicate intent, cluster role fit, canonical claims, template safety, draft exact replacement safety, owner questions, and readiness. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state. It cannot advance LLM exact replacements directly to `apply-preview`.
 
 `llm-worker-chain` runs the no-write live LLM Scout -> Editor -> Reviewer sequence and writes one summary artifact. Prefer `--from-decision automation/reports/llm-topic-decision-<topic_id>.json` after owner approval so the chain replays the saved `approved_for_chain` decision instead of rerunning Scout and changing the topic handoff. Live Scout handoffs may advance only `ready_for_chain` opportunities: `update_existing`, `create_new`, or `consolidate` with non-low priority. Monitor-only, reject, and low-priority topics must stop before Editor/Reviewer. It must preserve each stage's fail-closed behavior and must not write content, backlog entries, manifests, PRs, or production state.
 
@@ -485,7 +485,7 @@ GitHub workflow `.github/workflows/llm-worker-chain.yml` runs the same no-write 
 
 `llm-review-latest` reads the latest local LLM worker chain summary and renders a compact owner-review view. It is read-only and must not call an LLM provider, edit content, or mutate repository state.
 
-`llm-intake-latest` bridges a latest or specified LLM worker chain summary into a no-write, owner-gated intake artifact. It may record `--approved-by <name>` in the artifact, but approval is intake-only and does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing. If the LLM Reviewer left owner questions, `--note` is required before intake can become `approved_for_intake`. Approved LLM intake must still move through the existing run-plan/proposal lifecycle before any public content edit.
+`llm-intake-latest` bridges a latest or specified LLM worker chain summary into a no-write, owner-gated intake artifact. It may carry draft `exact_replacements` into intake as proposal-only data, but it may record `--approved-by <name>` only as intake approval. Approval is intake-only and does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing. If the LLM Reviewer left owner questions, `--note` is required before intake can become `approved_for_intake`. Approved LLM intake must still move through the existing run-plan/proposal lifecycle before any public content edit.
 
 Machine-readable snapshots exist for:
 

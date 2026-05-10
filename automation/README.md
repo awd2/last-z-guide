@@ -506,6 +506,7 @@ LLM Editor planning brief:
 - default input uses `automation/reports/llm-scout-review-result.json` and `automation/reports/llm-scout-review-request.json`
 - output lives in `automation/reports/llm-editor-brief-<topic_id>-request.json`, `automation/reports/llm-editor-brief-<topic_id>-result.json`, and `automation/reports/llm-editor-brief-<topic_id>.md`
 - this must not generate final public page copy or patch specs; it only prepares planning context for deterministic Reviewer and later owner-approved proposals
+- optional `exact_replacements` are draft proposal data only; every item must set `owner_approval_required: true` and still needs the later proposal/approval/apply lifecycle
 
 LLM Reviewer gate:
 
@@ -513,6 +514,7 @@ LLM Reviewer gate:
 - default input uses `automation/reports/llm-editor-brief-<topic_id>-result.json` and `automation/reports/llm-editor-brief-<topic_id>-request.json`
 - output lives in `automation/reports/llm-reviewer-gate-<topic_id>-request.json`, `automation/reports/llm-reviewer-gate-<topic_id>-result.json`, and `automation/reports/llm-reviewer-gate-<topic_id>.md`
 - this is a gate artifact only; high-risk user-visible content changes still require owner approval and later proposal-only patch planning
+- if Editor `exact_replacements` are present, Reviewer must review them and cannot advance them directly to `apply-preview`
 
 LLM worker chain:
 
@@ -549,6 +551,7 @@ LLM intake latest:
 - output lives in `automation/reports/llm-intake-<topic_id>.json` and `.md`
 - if the LLM Reviewer left owner questions, `--note` is required before the intake can become `approved_for_intake`
 - approval is scoped to intake/run-plan only; it does not approve public copy, patch specs, backlog mutation, manifests, PRs, deployment, or production publishing
+- draft `exact_replacements` can be carried into the intake artifact as proposal-only data, but they are not content approval
 - approved intake can move into the existing run-plan proposal flow with `python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --basename llm-worker-run-plan-<topic_id> --json`
 - this step still does not edit content, backlog, manifests, PRs, or production state
 
