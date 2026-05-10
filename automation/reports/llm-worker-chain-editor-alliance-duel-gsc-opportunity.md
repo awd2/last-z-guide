@@ -12,31 +12,32 @@
 
 ## Brief Summary
 
-Keep alliance-duel.html as the canonical event-guide page, but sharpen the opening to answer last z vs schedule search intent immediately and keep the update narrowly scoped to schedule, best strategy, rewards, and related event routing.
+Keep the existing event-guide page and improve only the opening answer, schedule framing, and related-link usefulness for last z vs schedule intent. Do not broaden the page into a hub or change the cluster role.
 
 ## First-Screen Plan
 
-Preserve the answer-first layout. Make the first screen clearly state the day-by-day Alliance Duel schedule and the key rule that players should spend only matching speed-ups on the matching day. Keep the opening focused on schedule, strategy, and weekly value so the page satisfies the query without changing its role into a broader event hub. Avoid adding unrelated event context or new promises.
+Preserve the answer-first structure. Make the opening clearly state the Day 1 to Day 6 VS schedule and the main timing rule, then point users to the best matching action for the day. Keep the page anchored to alliance duel schedule intent, not general event browsing. The first screen should answer who this is for, what the weekly rotation is, and when to commit bigger actions using Full Preparedness timing, without changing the page role or introducing a broader event overview.
 
 ## Section Plan
 
-- Quick Answer: Tighten the first-answer framing so it directly resolves last z vs schedule intent with the Day 1 to Day 6 pattern and the matching speed-up rule. Reason: The current page already has a quick answer, but the opening should better match the target query and improve first-screen utility.
-- Schedule or timing block: Keep the Day 1 to Day 6 plan prominent and easy to scan, with a clear schedule order and any timing logic already supported by the page. Reason: Schedule intent is the main search driver, so the timing block should carry the strongest query match.
-- Best strategy: Keep the VS strategy guidance narrow and practical, centered on when to hold, spend, or save resources by day. Reason: Users want actionable guidance tied to the schedule, not a generic event overview.
-- Rewards and tradeoffs: Retain a compact explanation of weekly chest potential, F2P tradeoffs, and why matching tasks matter. Reason: This preserves player value while supporting the decision logic behind the schedule.
-- Frequently Asked Questions: Keep only questions that support schedule, speed-up use, and day selection intent; avoid expanding into unrelated event mechanics. Reason: FAQ should reinforce the canonical query match without broadening scope.
-- Related event links: Keep the related links section and align it to adjacent event guides only. Reason: This supports navigation and cluster separation while keeping the page focused.
+- Quick Answer: Tighten the opening so it directly answers the schedule query and summarizes the day-by-day rotation plus the main timing rule. Reason: The current page already has answer-first structure, but the query match needs to be more explicit for last z vs schedule searchers.
+- Schedule or timing block: Keep a compact Day 1 to Day 6 timing block with clear labels for each day and the recommended action type. Reason: This is the core intent for the page and supports fast scanning.
+- Best strategy: Clarify the spend-when-matching-day rule and the idea of saving bigger actions for Full Preparedness windows. Reason: This improves usefulness without expanding scope beyond the existing event guide.
+- Rewards and tradeoffs: Keep the rewards discussion focused on weekly value and tradeoffs of skipping non-matching days. Reason: Users need decision support, but the page should remain a schedule guide, not a rewards hub.
+- Related event links: Audit the related links so they reinforce the Events cluster and point to closely related pages only. Reason: This preserves cluster separation and helps internal routing.
+- Frequently Asked Questions: Ensure FAQs answer common schedule questions, timing questions, and what to do if a player cannot hit every day. Reason: FAQ content can capture long-tail schedule intent while staying on-topic.
+- Related Guides: Keep only lateral or downstream event-related links that support the same user job. Reason: Prevents the page from drifting into unrelated guide territory.
 
 ## Internal Link Plan
 
-- upstream `events.html`: Primary hub for the Events cluster and a natural entry point to this guide.
-- upstream `index.html`: Site root path for broad discovery and cluster routing.
-- lateral `alliance-duel-rewards.html`: Closest sibling topic for reward-focused follow-up without changing the main page role.
-- lateral `canyon-clash.html`: Adjacent event guide that supports related event navigation within the same cluster.
-- lateral `zombie-siege.html`: Another event guide to preserve cluster navigation and avoid isolation.
-- downstream `alliance-recognition-cost.html`: Useful deeper follow-up for players who need progression or cost context after the schedule overview.
-- downstream `heroes.html`: Supports hero-related planning that can influence event preparation.
-- downstream `lucky-discounter.html`: Relevant for resource management and spending decisions tied to event planning.
+- upstream `index.html`: Homepage is a natural top-level route into the Events cluster.
+- upstream `events.html`: Events hub supports discovery while keeping cluster structure intact.
+- lateral `alliance-duel-rewards.html`: Close sibling page for users who want rewards detail after reading the schedule.
+- lateral `canyon-clash.html`: Nearby event guide that may satisfy adjacent event intent without duplicating this page.
+- lateral `zombie-siege.html`: Another event guide in the same cluster for related event browsing.
+- downstream `alliance-recognition-cost.html`: Supportive detail page for players planning event spend and recognition timing.
+- downstream `heroes.html`: Useful supporting system page when the schedule involves hero-focused actions.
+- downstream `lucky-discounter.html`: Potentially relevant planning page for spending efficiency during event windows.
 
 ## Protected Claims
 
@@ -44,18 +45,19 @@ Preserve the answer-first layout. Make the first screen clearly state the day-by
 
 ## Do Not Change
 
-- Do not change the existing page template, navigation pattern, or schema family.
-- Do not turn alliance-duel.html into an event hub or cluster index.
-- Do not create a new page or split the topic into a different canonical page.
-- Do not make analytics-based claims that the page must be rewritten.
-- Do not alter canonical claims, site-wide routing, or approval gates.
-- Do not write publishable copy, HTML, or patch specs in this planning brief.
+- Do not change the existing page template, navigation pattern, or schema family without separate approval.
+- Do not create a new page when the Scout proposal recommends updating an existing page.
+- Do not broaden alliance-duel.html into a generic event hub.
+- Do not use analytics signals as proof that a rewrite is required.
+- Do not change canonical cluster separation between Events pages and adjacent guide pages.
+- Do not publish or apply content changes from this brief automatically.
 
 ## Owner Questions
 
-- Is the existing Quick Answer wording enough to satisfy last z vs schedule intent, or should the first sentence be sharpened further?
-- Do you want the Schedule or timing block to emphasize Day 1 to Day 6 order only, or also call out any timing caveats already present on the page?
-- Should the Related Guides section keep the current sibling set, or should any links be reduced to preserve tighter cluster separation?
+- Is alliance-duel.html still the best canonical home for last z vs schedule intent, or should another Events page own the primary query?
+- Should the update stay limited to the first screen and related links, or is a deeper schedule and FAQ refinement approved?
+- Are there any cluster boundary concerns with linking to or from rewards and recognition detail pages?
+- Should Full Preparedness timing be emphasized on the first screen or kept lower on the page?
 
 ## Required Context Before Patch
 
@@ -80,6 +82,12 @@ Preserve the answer-first layout. Make the first screen clearly state the day-by
 - `python3 automation/pipeline.py checks --strict`
 - `manual review: first-screen answer and internal links on alliance-duel.html`
 
+## Draft Exact Replacements
+
+Proposal-only candidates. They do not approve copy, create Patch Specs, edit files, or bypass owner review.
+
+- None
+
 ## Next Step
 
-Run the no-write Editor and Reviewer stages from this approved decision snapshot, then confirm the opening answer and related links stay within the existing event-guide scope.
+Run the no-write Editor and Reviewer stages on alliance-duel.html, then ask the owner to approve any narrow first-screen or link-only adjustment before any content patch is drafted.

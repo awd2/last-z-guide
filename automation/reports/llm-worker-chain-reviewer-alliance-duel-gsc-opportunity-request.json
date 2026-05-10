@@ -3,7 +3,7 @@
   "request_id": "llm-worker-chain-reviewer-alliance-duel-gsc-opportunity",
   "worker_role": "reviewer",
   "task": "Review one no-write LLM Editor planning brief for site fit, risk, and readiness.",
-  "prompt": "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. Do not write or rewrite public page copy. Do not create patch specs. Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, and deterministic QA readiness. Treat analytics as signals, not proof. Use plain ASCII English only. Return JSON only.",
+  "prompt": "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. Do not write or rewrite public page copy. Do not create patch specs. Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, draft exact replacement safety, and deterministic QA readiness. Treat analytics as signals, not proof. If the Editor includes exact_replacements, review whether they are narrow, target-only, literal exact_old/exact_new candidates with owner_approval_required=true. Do not approve apply_preview from an LLM-only exact replacement. Use plain ASCII English only. Return JSON only.",
   "inputs": {
     "source_llm_editor_result": "automation/reports/llm-worker-chain-editor-alliance-duel-gsc-opportunity-result.json",
     "source_llm_editor_request": "automation/reports/llm-worker-chain-editor-alliance-duel-gsc-opportunity-request.json",
@@ -147,10 +147,10 @@
         "manual review: first-screen answer and internal links on alliance-duel.html"
       ],
       "current_page_snapshot": {
-        "title": "Last Z Alliance Duel Guide (2026) — Schedule, Day 1–6 Plan, VS Strategy",
-        "h1": "Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
-        "meta_description": "Complete Last Z Alliance Duel schedule: Day 1–6 plan, when to use speed-ups, how VS schedule works, and the best F2P strategy for more weekly chests.",
-        "quick_answer": "Best Last Z Alliance Duel schedule for most players: Day 1 Vehicle, Day 2 Building, Day 3 Research, Day 4 Heroes, Day 5 Training, Day 6 Combat — and you should only use the matching speed-ups on the correct day.",
+        "title": "Last Z Alliance Duel Schedule (2026) — Day 1–6 VS Guide and Strategy",
+        "h1": "Last Z Alliance Duel Schedule and VS Guide — Day 1–6 Plan",
+        "meta_description": "Use this Last Z Alliance Duel schedule to follow the Day 1–6 VS rotation, match speed-ups to each day, sync Full Preparedness, and plan weekly rewards.",
+        "quick_answer": "Best Last Z Alliance Duel / VS schedule for most players: Day 1 Vehicle, Day 2 Building, Day 3 Research, Day 4 Heroes, Day 5 Training, Day 6 Combat — spend only on the matching day, and time your biggest actions with Full Preparedness at Apocalypse Time 08:00 or 20:00 when you can.",
         "data_lede": "",
         "h2_headings": [
           "Last Z Alliance Duel Schedule: Core Strategy",
@@ -180,98 +180,104 @@
       }
     },
     "llm_editor_brief": {
-      "brief_summary": "Keep alliance-duel.html as the canonical event-guide page, but sharpen the opening to answer last z vs schedule search intent immediately and keep the update narrowly scoped to schedule, best strategy, rewards, and related event routing.",
+      "brief_summary": "Keep the existing event-guide page and improve only the opening answer, schedule framing, and related-link usefulness for last z vs schedule intent. Do not broaden the page into a hub or change the cluster role.",
       "target_page_or_slug": "alliance-duel.html",
       "page_role": "event-guide",
       "primary_user_job": "Improve query-to-page match and first-screen usefulness for last z vs schedule searchers.",
-      "first_screen_plan": "Preserve the answer-first layout. Make the first screen clearly state the day-by-day Alliance Duel schedule and the key rule that players should spend only matching speed-ups on the matching day. Keep the opening focused on schedule, strategy, and weekly value so the page satisfies the query without changing its role into a broader event hub. Avoid adding unrelated event context or new promises.",
+      "first_screen_plan": "Preserve the answer-first structure. Make the opening clearly state the Day 1 to Day 6 VS schedule and the main timing rule, then point users to the best matching action for the day. Keep the page anchored to alliance duel schedule intent, not general event browsing. The first screen should answer who this is for, what the weekly rotation is, and when to commit bigger actions using Full Preparedness timing, without changing the page role or introducing a broader event overview.",
       "section_plan": [
         {
           "section": "Quick Answer",
-          "action": "Tighten the first-answer framing so it directly resolves last z vs schedule intent with the Day 1 to Day 6 pattern and the matching speed-up rule.",
-          "reason": "The current page already has a quick answer, but the opening should better match the target query and improve first-screen utility."
+          "action": "Tighten the opening so it directly answers the schedule query and summarizes the day-by-day rotation plus the main timing rule.",
+          "reason": "The current page already has answer-first structure, but the query match needs to be more explicit for last z vs schedule searchers."
         },
         {
           "section": "Schedule or timing block",
-          "action": "Keep the Day 1 to Day 6 plan prominent and easy to scan, with a clear schedule order and any timing logic already supported by the page.",
-          "reason": "Schedule intent is the main search driver, so the timing block should carry the strongest query match."
+          "action": "Keep a compact Day 1 to Day 6 timing block with clear labels for each day and the recommended action type.",
+          "reason": "This is the core intent for the page and supports fast scanning."
         },
         {
           "section": "Best strategy",
-          "action": "Keep the VS strategy guidance narrow and practical, centered on when to hold, spend, or save resources by day.",
-          "reason": "Users want actionable guidance tied to the schedule, not a generic event overview."
+          "action": "Clarify the spend-when-matching-day rule and the idea of saving bigger actions for Full Preparedness windows.",
+          "reason": "This improves usefulness without expanding scope beyond the existing event guide."
         },
         {
           "section": "Rewards and tradeoffs",
-          "action": "Retain a compact explanation of weekly chest potential, F2P tradeoffs, and why matching tasks matter.",
-          "reason": "This preserves player value while supporting the decision logic behind the schedule."
-        },
-        {
-          "section": "Frequently Asked Questions",
-          "action": "Keep only questions that support schedule, speed-up use, and day selection intent; avoid expanding into unrelated event mechanics.",
-          "reason": "FAQ should reinforce the canonical query match without broadening scope."
+          "action": "Keep the rewards discussion focused on weekly value and tradeoffs of skipping non-matching days.",
+          "reason": "Users need decision support, but the page should remain a schedule guide, not a rewards hub."
         },
         {
           "section": "Related event links",
-          "action": "Keep the related links section and align it to adjacent event guides only.",
-          "reason": "This supports navigation and cluster separation while keeping the page focused."
+          "action": "Audit the related links so they reinforce the Events cluster and point to closely related pages only.",
+          "reason": "This preserves cluster separation and helps internal routing."
+        },
+        {
+          "section": "Frequently Asked Questions",
+          "action": "Ensure FAQs answer common schedule questions, timing questions, and what to do if a player cannot hit every day.",
+          "reason": "FAQ content can capture long-tail schedule intent while staying on-topic."
+        },
+        {
+          "section": "Related Guides",
+          "action": "Keep only lateral or downstream event-related links that support the same user job.",
+          "reason": "Prevents the page from drifting into unrelated guide territory."
         }
       ],
       "internal_link_plan": [
         {
-          "page": "events.html",
-          "role": "upstream",
-          "reason": "Primary hub for the Events cluster and a natural entry point to this guide."
-        },
-        {
           "page": "index.html",
           "role": "upstream",
-          "reason": "Site root path for broad discovery and cluster routing."
+          "reason": "Homepage is a natural top-level route into the Events cluster."
+        },
+        {
+          "page": "events.html",
+          "role": "upstream",
+          "reason": "Events hub supports discovery while keeping cluster structure intact."
         },
         {
           "page": "alliance-duel-rewards.html",
           "role": "lateral",
-          "reason": "Closest sibling topic for reward-focused follow-up without changing the main page role."
+          "reason": "Close sibling page for users who want rewards detail after reading the schedule."
         },
         {
           "page": "canyon-clash.html",
           "role": "lateral",
-          "reason": "Adjacent event guide that supports related event navigation within the same cluster."
+          "reason": "Nearby event guide that may satisfy adjacent event intent without duplicating this page."
         },
         {
           "page": "zombie-siege.html",
           "role": "lateral",
-          "reason": "Another event guide to preserve cluster navigation and avoid isolation."
+          "reason": "Another event guide in the same cluster for related event browsing."
         },
         {
           "page": "alliance-recognition-cost.html",
           "role": "downstream",
-          "reason": "Useful deeper follow-up for players who need progression or cost context after the schedule overview."
+          "reason": "Supportive detail page for players planning event spend and recognition timing."
         },
         {
           "page": "heroes.html",
           "role": "downstream",
-          "reason": "Supports hero-related planning that can influence event preparation."
+          "reason": "Useful supporting system page when the schedule involves hero-focused actions."
         },
         {
           "page": "lucky-discounter.html",
           "role": "downstream",
-          "reason": "Relevant for resource management and spending decisions tied to event planning."
+          "reason": "Potentially relevant planning page for spending efficiency during event windows."
         }
       ],
       "protected_claims": [],
       "do_not_change": [
-        "Do not change the existing page template, navigation pattern, or schema family.",
-        "Do not turn alliance-duel.html into an event hub or cluster index.",
-        "Do not create a new page or split the topic into a different canonical page.",
-        "Do not make analytics-based claims that the page must be rewritten.",
-        "Do not alter canonical claims, site-wide routing, or approval gates.",
-        "Do not write publishable copy, HTML, or patch specs in this planning brief."
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not broaden alliance-duel.html into a generic event hub.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "Do not change canonical cluster separation between Events pages and adjacent guide pages.",
+        "Do not publish or apply content changes from this brief automatically."
       ],
       "owner_questions": [
-        "Is the existing Quick Answer wording enough to satisfy last z vs schedule intent, or should the first sentence be sharpened further?",
-        "Do you want the Schedule or timing block to emphasize Day 1 to Day 6 order only, or also call out any timing caveats already present on the page?",
-        "Should the Related Guides section keep the current sibling set, or should any links be reduced to preserve tighter cluster separation?"
+        "Is alliance-duel.html still the best canonical home for last z vs schedule intent, or should another Events page own the primary query?",
+        "Should the update stay limited to the first screen and related links, or is a deeper schedule and FAQ refinement approved?",
+        "Are there any cluster boundary concerns with linking to or from rewards and recognition detail pages?",
+        "Should Full Preparedness timing be emphasized on the first screen or kept lower on the page?"
       ],
       "required_context_before_patch": [
         "AGENTS.md",
@@ -294,12 +300,15 @@
         "python3 automation/pipeline.py checks --strict",
         "manual review: first-screen answer and internal links on alliance-duel.html"
       ],
-      "next_step": "Run the no-write Editor and Reviewer stages from this approved decision snapshot, then confirm the opening answer and related links stay within the existing event-guide scope."
+      "exact_replacements": [],
+      "next_step": "Run the no-write Editor and Reviewer stages on alliance-duel.html, then ask the owner to approve any narrow first-screen or link-only adjustment before any content patch is drafted."
     },
     "guardrails": [
       "No content files may be edited by Reviewer.",
       "No final public page copy may be generated.",
       "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
+      "Editor exact_replacements are proposal-only candidates; they do not approve copy or bypass propose/approval/apply-approved.",
+      "If exact_replacements are present, owner_approval_required must remain true.",
       "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
       "Owner approval is required before any user-visible content change.",
       "Use plain ASCII English only in every string field."
@@ -317,6 +326,7 @@
     "cluster_role_review",
     "canonical_claim_review",
     "template_safety_review",
+    "exact_replacement_review",
     "owner_approval_required",
     "owner_questions",
     "required_context_before_edit",
@@ -418,6 +428,11 @@
         "type": "string",
         "maxLength": 700
       },
+      "exact_replacement_review": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Review of any Editor exact_replacements. Empty-array Editor briefs still need a short no-candidate note."
+      },
       "owner_approval_required": {
         "type": "boolean"
       },
@@ -462,6 +477,7 @@
       "cluster_role_review",
       "canonical_claim_review",
       "template_safety_review",
+      "exact_replacement_review",
       "owner_approval_required",
       "owner_questions",
       "required_context_before_edit",

@@ -12,42 +12,48 @@
 
 ## Verdict
 
-- Verdict: `pass`
+- Verdict: `needs_human_review`
 - Risk: `medium`
-- Approved next stage: `approval`
+- Approved next stage: `brief`
 - Owner approval required: `true`
 
 ## Blocking Issues
 
-- None
+- medium: The brief is directionally consistent, but canonical ownership for last z vs schedule intent is not fully proven from the provided context alone. Required fix: Have an owner confirm alliance-duel.html remains the best canonical home before any scoped content work is drafted.
+- medium: Cluster separation could blur if the update expands beyond the first screen and compact schedule framing. Required fix: Keep the scope limited to answer-first opening, schedule block, strategy, rewards tradeoffs, and related links only, with no hub-style expansion.
 
 ## Warnings
 
-- Analytics should remain a signal only, not proof of a rewrite need.
-- Keep the update narrowly scoped so the page does not drift into a broader event hub.
-- Related links should stay within the Events cluster and avoid introducing new intent overlap.
+- Analytics signals are supportive but not proof of rewrite need.
+- No exact_replacements were provided, so there is no replacement safety candidate to approve.
+- The page already has a strong event-guide role, so changes must stay narrow to avoid role drift.
 
 ## Duplicate Intent Review
 
-Low to medium risk. The query family overlaps with other event and schedule pages, but the plan keeps the page as the canonical schedule guide rather than creating a new page or hub.
+Medium duplication risk remains because schedule and event-intent pages in the Events cluster may overlap. The current brief reduces this risk by staying on a single event guide, but owner confirmation is still needed.
 
 ## Cluster Role Review
 
-Pass. The brief preserves alliance-duel.html as an event-guide and does not change cluster ownership or routing.
+Pass for a narrow update. The proposed work stays within event-guide scope if it does not become a generic event hub or cross into rewards or recognition hub behavior.
 
 ## Canonical Claim Review
 
-Pass. The brief does not assert new canonical claims and respects the note that another canonical page may better serve some adjacent intent. No protected claims are introduced.
+Tentative pass. The claim that this is the best canonical fit is not fully established by analytics alone and should be owner-confirmed before editing.
 
 ## Template Safety Review
 
-Pass. The brief keeps the existing template, navigation pattern, and schema family unchanged, which is within scope for a no-write review.
+Pass. The brief explicitly avoids template, navigation, and schema family changes, which is aligned with the guardrails.
+
+## Exact Replacement Review
+
+No exact_replacements provided in the brief. No candidate exact-old/exact-new pair to review.
 
 ## Owner Questions
 
-- Should the opening sentence be sharpened beyond the current quick answer to better match last z vs schedule intent?
-- Should the schedule block emphasize only the Day 1 to Day 6 order, or also retain any existing timing caveats?
-- Should the related guides set be trimmed further to reduce any cluster overlap risk?
+- Is alliance-duel.html still the best canonical home for last z vs schedule intent, or should another Events page own the primary query?
+- Should the update stay limited to the first screen and related links, or is a deeper schedule and FAQ refinement approved?
+- Are there any cluster boundary concerns with linking to or from rewards and recognition detail pages?
+- Should Full Preparedness timing be emphasized on the first screen or kept lower on the page?
 
 ## Required Context Before Edit
 
@@ -74,4 +80,4 @@ Pass. The brief keeps the existing template, navigation pattern, and schema fami
 
 ## Next Step
 
-Run deterministic no-write editor and reviewer QA only after owner confirms the narrow scope, then verify first-screen answer and internal links against the existing event-guide role.
+Request owner confirmation on canonical fit and scope, then run the no-write Editor and Reviewer stages only if the narrow first-screen plus related-links adjustment remains approved.

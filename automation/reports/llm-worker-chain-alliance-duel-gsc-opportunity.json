@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_worker_chain_summary",
-  "generated_at": "2026-05-10T08:09:13Z",
+  "generated_at": "2026-05-10T09:23:17Z",
   "state": "completed",
   "provider": "openai",
   "handoff_source": "topic_decision",
@@ -9,10 +9,11 @@
   "source_topic_id": "alliance-duel-gsc-opportunity",
   "target_page_or_slug": "alliance-duel.html",
   "page_role": "event-guide",
-  "review_verdict": "pass",
+  "review_verdict": "needs_human_review",
   "risk_level": "medium",
-  "approved_next_stage": "approval",
+  "approved_next_stage": "brief",
   "owner_approval_required": true,
+  "exact_replacements_count": 0,
   "errors": [],
   "stages": {
     "llm_scout": {

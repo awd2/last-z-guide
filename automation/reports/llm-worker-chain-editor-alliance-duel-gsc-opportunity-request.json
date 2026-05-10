@@ -3,7 +3,7 @@
   "request_id": "llm-worker-chain-editor-alliance-duel-gsc-opportunity",
   "worker_role": "editor",
   "task": "Create a no-write Editor planning brief for one approved Scout opportunity.",
-  "prompt": "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. Do not write final public page copy, HTML, patch specs, or publishable text. Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, and owner approval gate. Treat analytics as signals, not proof. Use plain ASCII English only. Return JSON only.",
+  "prompt": "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. Do not write final public page copy, HTML, or patch specs. Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, and owner approval gate. Treat analytics as signals, not proof. Normally return exact_replacements as an empty array. Only include exact_replacements when the deterministic context contains enough current source text to copy exact_old literally and the replacement is narrow enough for later owner review. exact_replacements are draft proposal data only, not approval, not a Patch Spec, and not permission to edit files. Use plain ASCII English only. Return JSON only.",
   "inputs": {
     "source_llm_scout_result": "automation/reports/llm-worker-chain-scout-result.json",
     "source_llm_scout_request": "automation/reports/llm-worker-chain-scout-request.json",
@@ -147,10 +147,10 @@
         "manual review: first-screen answer and internal links on alliance-duel.html"
       ],
       "current_page_snapshot": {
-        "title": "Last Z Alliance Duel Guide (2026) — Schedule, Day 1–6 Plan, VS Strategy",
-        "h1": "Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
-        "meta_description": "Complete Last Z Alliance Duel schedule: Day 1–6 plan, when to use speed-ups, how VS schedule works, and the best F2P strategy for more weekly chests.",
-        "quick_answer": "Best Last Z Alliance Duel schedule for most players: Day 1 Vehicle, Day 2 Building, Day 3 Research, Day 4 Heroes, Day 5 Training, Day 6 Combat — and you should only use the matching speed-ups on the correct day.",
+        "title": "Last Z Alliance Duel Schedule (2026) — Day 1–6 VS Guide and Strategy",
+        "h1": "Last Z Alliance Duel Schedule and VS Guide — Day 1–6 Plan",
+        "meta_description": "Use this Last Z Alliance Duel schedule to follow the Day 1–6 VS rotation, match speed-ups to each day, sync Full Preparedness, and plan weekly rewards.",
+        "quick_answer": "Best Last Z Alliance Duel / VS schedule for most players: Day 1 Vehicle, Day 2 Building, Day 3 Research, Day 4 Heroes, Day 5 Training, Day 6 Combat — spend only on the matching day, and time your biggest actions with Full Preparedness at Apocalypse Time 08:00 or 20:00 when you can.",
         "data_lede": "",
         "h2_headings": [
           "Last Z Alliance Duel Schedule: Core Strategy",
@@ -183,6 +183,8 @@
       "No content files may be edited by this worker.",
       "Do not generate final user-visible page copy.",
       "Do not create a patch plan or Patch Spec.",
+      "exact_replacements, when present, are proposal-only candidates that still require propose + owner approval + apply-approved.",
+      "Every exact_replacements item must set owner_approval_required to true.",
       "Do not mutate backlog, manifests, PRs, or production state.",
       "Owner approval is required before any user-visible content change.",
       "Use plain ASCII English only in every string field."
@@ -201,6 +203,7 @@
     "owner_questions",
     "required_context_before_patch",
     "acceptance_checks",
+    "exact_replacements",
     "next_step"
   ],
   "response_schema": {
@@ -327,6 +330,57 @@
           "maxLength": 220
         }
       },
+      "exact_replacements": {
+        "type": "array",
+        "maxItems": 6,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "file": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "change_type": {
+              "type": "string",
+              "enum": [
+                "safe_exact_replace",
+                "first_screen_update",
+                "meta_refresh"
+              ]
+            },
+            "selector_or_anchor": {
+              "type": "string",
+              "maxLength": 180
+            },
+            "exact_old": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "exact_new": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 400
+            },
+            "owner_approval_required": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "change_type",
+            "selector_or_anchor",
+            "exact_old",
+            "exact_new",
+            "reason",
+            "owner_approval_required"
+          ]
+        },
+        "description": "Optional draft exact replacement candidates. These are proposal-only and still require owner approval."
+      },
       "next_step": {
         "type": "string",
         "maxLength": 350
@@ -345,6 +399,7 @@
       "owner_questions",
       "required_context_before_patch",
       "acceptance_checks",
+      "exact_replacements",
       "next_step"
     ]
   },
