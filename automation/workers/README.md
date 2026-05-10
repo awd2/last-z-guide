@@ -94,6 +94,7 @@ The current LLM provider adapter is fail-closed and artifact-only:
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -116,6 +117,7 @@ The lower-level helper remains available at:
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
@@ -132,6 +134,15 @@ python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner ans
 - `automation/reports/llm-scout-review.md`
 
 It does not mutate backlog, manifests, content, PRs, or production state. `monitor` and `reject` decisions belong in `rejected_or_monitor`, not `selected_opportunities`. Selected opportunities remain review context only until a human approves the deterministic worker chain and any later content proposal.
+
+`llm-candidate-refresh` is the scheduled no-write candidate generation wrapper. It runs LLM Scout, converts the Scout result into topic discovery proposals, and writes:
+
+- `automation/reports/llm-candidate-refresh.json`
+- `automation/reports/llm-candidate-refresh.md`
+- referenced Scout request/result/markdown artifacts
+- referenced topic discovery JSON/markdown artifacts
+
+It prepares candidate and monitor topics for owner review. It does not record owner decisions, mutate `topic_backlog.csv`, create manifests, edit content, open PRs, or deploy. The GitHub Actions wrapper `.github/workflows/llm-candidate-refresh.yml` runs the same no-write refresh by weekly schedule and manual dispatch, uploads artifacts only, and does not commit generated reports.
 
 `llm-topic-discovery` is the no-write bridge from LLM Scout selection and
 monitoring output to owner-reviewed topic intake. It reads one LLM Scout
@@ -640,13 +651,14 @@ The current implementation is deterministic and no-write:
 1. `Scout` reads `content/gsc/latest-gsc-agent-signals.json` by default, or Bing agent signals when explicitly passed with `--signals`.
 2. `Scout` produces `topic_proposal` records into review artifacts.
 3. `llm-scout` can review deterministic GSC/Bing proposals through the fail-closed LLM adapter and produce JSON/markdown opportunity review artifacts.
-4. `llm-topic-discovery` converts selected and monitored LLM Scout opportunities into backlog-shaped owner-review proposals.
-5. `llm-topic-decision` records whether each discovered topic is `approved_for_chain`, `monitor`, or `rejected`.
-6. `llm-editor` can turn one selected LLM Scout opportunity into a no-copy planning brief through the fail-closed LLM adapter.
-7. `llm-reviewer` can gate one LLM Editor planning brief for duplicate intent, cluster fit, canonical claims, template safety, owner questions, and readiness.
-8. `llm-worker-chain` can run the live no-write LLM Scout -> Editor -> Reviewer sequence and produce one compact owner-review summary.
-9. `Editor` turns one proposal into an `editor_brief` artifact.
-10. `Reviewer` gates the brief for site fit, risk, context, canonical claims, and next-stage readiness.
+4. `llm-candidate-refresh` can run LLM Scout plus topic discovery in one scheduled no-write candidate generation step.
+5. `llm-topic-discovery` converts selected and monitored LLM Scout opportunities into backlog-shaped owner-review proposals.
+6. `llm-topic-decision` records whether each discovered topic is `approved_for_chain`, `monitor`, or `rejected`.
+7. `llm-editor` can turn one selected LLM Scout opportunity into a no-copy planning brief through the fail-closed LLM adapter.
+8. `llm-reviewer` can gate one LLM Editor planning brief for duplicate intent, cluster fit, canonical claims, template safety, owner questions, and readiness.
+9. `llm-worker-chain` can run the live no-write LLM Scout -> Editor -> Reviewer sequence and produce one compact owner-review summary.
+10. `Editor` turns one proposal into an `editor_brief` artifact.
+11. `Reviewer` gates the brief for site fit, risk, context, canonical claims, and next-stage readiness.
 11. Operators decide which reviewed proposals become backlog items or patch-plan work.
 12. An approved run-plan may create a `planned` manifest through the manifest writer.
 

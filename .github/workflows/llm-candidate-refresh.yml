@@ -1,0 +1,90 @@
+name: LLM candidate refresh
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "OpenAI model for no-write candidate refresh."
+        required: false
+        default: "gpt-5.4-mini"
+  schedule:
+    - cron: "20 7 * * 1"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/llm-candidate-refresh.yml"
+      - "automation/pipeline.py"
+      - "automation/workers/llm_*.py"
+      - "automation/workers/README.md"
+
+concurrency:
+  group: llm-candidate-refresh-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Run no-write LLM candidate refresh
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ github.event.inputs.model || 'gpt-5.4-mini' }}
+        run: |
+          set -euo pipefail
+          mkdir -p automation/reports/llm-candidate-refresh-gha
+          python3 automation/pipeline.py llm-candidate-refresh \
+            --provider openai \
+            --output-dir automation/reports/llm-candidate-refresh-gha \
+            --json | tee automation/reports/llm-candidate-refresh-gha/run-summary.json
+
+      - name: Write job summary
+        if: always()
+        run: |
+          {
+            echo "## LLM Candidate Refresh"
+            echo
+            echo "- Mode: no-write"
+            echo "- Output directory: \`automation/reports/llm-candidate-refresh-gha\`"
+            echo "- Content/backlog/manifests/PRs modified: \`false\`"
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+
+          summary_path = Path("automation/reports/llm-candidate-refresh-gha/run-summary.json")
+          if not summary_path.exists():
+              print("No run summary was written.")
+              raise SystemExit(0)
+          data = json.loads(summary_path.read_text())
+          print(f"- State: `{data.get('state')}`")
+          print(f"- Candidate topics: `{data.get('candidate_topic_count')}`")
+          print(f"- Monitor topics: `{data.get('monitor_topic_count')}`")
+          print(f"- Topic discovery: `{data.get('topic_discovery_markdown')}`")
+          if data.get("candidate_topic_ids"):
+              print("- Candidate topic ids:")
+              for topic_id in data["candidate_topic_ids"]:
+                  print(f"  - `{topic_id}`")
+          PY
+
+      - name: Upload LLM candidate refresh artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-candidate-refresh-${{ github.run_number }}
+          path: automation/reports/llm-candidate-refresh-gha/
+          if-no-files-found: error

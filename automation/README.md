@@ -132,6 +132,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - writes request/result/markdown artifacts for human review
   - does not mutate backlog, manifests, content, PRs, or production state
 
+- `workers/llm_candidate_refresh.py`
+  - runs the no-write LLM Scout review plus LLM topic discovery bridge in one command
+  - writes a compact candidate refresh summary for owner review
+  - does not record owner decisions, mutate backlog, manifests, content, PRs, or production state
+
 - `workers/llm_topic_discovery.py`
   - reads one LLM Scout request/result pair
   - converts selected and monitored opportunities into backlog-shaped topic discovery proposals
@@ -182,6 +187,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - runs the no-write live LLM worker chain by manual dispatch and weekly schedule
   - uploads artifacts from `automation/reports/llm-worker-chain-gha/`
   - does not commit generated reports, edit content, open PRs, or deploy
+
+- `.github/workflows/llm-candidate-refresh.yml`
+  - runs the no-write LLM candidate refresh by manual dispatch and weekly schedule after analytics report jobs
+  - uploads artifacts from `automation/reports/llm-candidate-refresh-gha/`
+  - does not commit generated reports, record owner decisions, edit content, open PRs, or deploy
 
 - `checks/content_voice.py`
   - runs a no-write audit for generic, mass-produced, or low-utility writing signals
@@ -266,6 +276,7 @@ python3 automation/pipeline.py worker-run-plan --intake <intake.json> --basename
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name>
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -295,6 +306,7 @@ python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
@@ -346,6 +358,7 @@ python3 automation/pipeline.py worker-manifest --topic-id codes-gsc-opportunity 
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider fixture --fixture automation/reports/example-llm-response.json --json
 python3 automation/pipeline.py llm-adapter --request automation/reports/example-llm-request.json --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id codes-gsc-opportunity --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id codes-gsc-opportunity --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id codes-gsc-opportunity --provider openai --json
@@ -389,6 +402,7 @@ Lifecycle shorthand:
 - `worker-manifest` -> create a `planned` manifest from an approved Worker run-plan proposal
 - `llm-adapter` -> validate future LLM request/response contracts through a fail-closed provider adapter
 - `llm-scout` -> run a no-write LLM review over deterministic Scout proposals from GSC/Bing agent signals
+- `llm-candidate-refresh` -> run no-write LLM Scout plus topic discovery and write owner-review candidate artifacts
 - `llm-topic-discovery` -> convert selected LLM Scout opportunities into no-write topic proposals
 - `llm-topic-decision` -> record an owner decision for one discovered topic
 - `llm-editor` -> run a no-write LLM planning brief from one selected LLM Scout opportunity
@@ -471,6 +485,14 @@ LLM Scout review:
 - Scout must put `monitor` and `reject` decisions in `rejected_or_monitor`; selected opportunities are allowed to advance only when they are `update_existing`, `create_new`, or `consolidate` with non-low priority
 - this is a no-write opportunity review; selected topics still require deterministic Editor/Reviewer steps and human approval before content work
 
+LLM candidate refresh:
+
+- `python3 automation/pipeline.py llm-candidate-refresh --provider openai --json` -> run LLM Scout plus topic discovery in one no-write command
+- default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
+- output lives in `automation/reports/llm-candidate-refresh.json`, `automation/reports/llm-candidate-refresh.md`, and the referenced Scout/discovery artifacts
+- this is the scheduled candidate-generation layer: it prepares topics for owner review but does not approve them
+- it must not edit content, mutate `topic_backlog.csv`, create manifests, record topic decisions, open PRs, or deploy
+
 LLM topic discovery:
 
 - `python3 automation/pipeline.py llm-topic-discovery --json` -> convert selected and monitored LLM Scout opportunities into backlog-shaped topic proposals for owner review
@@ -527,6 +549,15 @@ LLM worker chain:
 - per-stage request/result/markdown artifacts are also written and referenced from the summary
 - `--from-decision` skips live Scout rerank and blocks unless the decision artifact is `approved_for_chain`
 - this is an owner-review summary only; it must not write content, backlog entries, manifests, PRs, or production state
+
+LLM candidate refresh workflow:
+
+- `.github/workflows/llm-candidate-refresh.yml` -> refresh candidate topic artifacts in GitHub Actions
+- trigger modes: weekly schedule, manual dispatch, or path-limited LLM worker infrastructure push
+- required secret: `OPENAI_API_KEY`
+- optional manual input: `model`
+- output is an uploaded workflow artifact named `llm-candidate-refresh-<run_number>`
+- this workflow intentionally does not commit reports, record owner decisions, edit content, open PRs, or deploy
 
 LLM worker chain workflow:
 

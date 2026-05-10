@@ -14,7 +14,7 @@ from automation.io import load_json, write_json
 from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, close_run, patch_planner, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -727,6 +727,40 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue(topic["human_approval_required"])
             self.assertTrue((tmp_path / "topic-discovery-fixture.json").exists())
             self.assertTrue((tmp_path / "topic-discovery-fixture.md").exists())
+
+    def test_llm_candidate_refresh_runs_scout_and_topic_discovery_no_write(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            fixture_path = tmp_path / "llm-scout-response.json"
+            write_json(signals_path, fixture_signals())
+            write_json(fixture_path, fixture_llm_scout_response())
+
+            with patch.object(llm_topic_discovery, "MANIFESTS_DIR", tmp_path / "manifests"):
+                code, payload = llm_candidate_refresh.run_candidate_refresh(
+                    signal_paths=[signals_path],
+                    output_dir=tmp_path,
+                    basename="llm-candidate-refresh-fixture",
+                    scout_basename="llm-candidate-refresh-scout",
+                    discovery_basename="llm-candidate-refresh-topic-discovery",
+                    provider="fixture",
+                    fixture_path=fixture_path,
+                    limit=4,
+                    min_impressions=200,
+                )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(payload["report_type"], "llm_candidate_refresh")
+            self.assertEqual(payload["state"], "candidate_refresh_ready")
+            self.assertEqual(payload["candidate_topic_ids"], ["codes-gsc-opportunity"])
+            self.assertFalse(payload["allows_content_edit"])
+            self.assertFalse(payload["allows_backlog_mutation"])
+            self.assertFalse(payload["allows_manifest_mutation"])
+            self.assertFalse(payload["allows_pr_or_deploy"])
+            self.assertTrue((tmp_path / "llm-candidate-refresh-fixture.json").exists())
+            self.assertTrue((tmp_path / "llm-candidate-refresh-fixture.md").exists())
+            self.assertTrue((tmp_path / "llm-candidate-refresh-scout-result.json").exists())
+            self.assertTrue((tmp_path / "llm-candidate-refresh-topic-discovery.json").exists())
 
     def test_llm_topic_discovery_includes_monitor_topics(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

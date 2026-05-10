@@ -379,6 +379,47 @@ def cmd_llm_scout(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_candidate_refresh(
+    signals: list[str] | None,
+    provider: str,
+    fixture: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    scout_basename: str | None,
+    discovery_basename: str | None,
+    limit: int,
+    min_impressions: int,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_candidate_refresh.py"),
+        "--provider",
+        provider,
+        "--limit",
+        str(limit),
+        "--min-impressions",
+        str(min_impressions),
+    ]
+    for signal_path in signals or []:
+        command.extend(["--signals", signal_path])
+    if fixture:
+        command.extend(["--fixture", fixture])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if scout_basename:
+        command.extend(["--scout-basename", scout_basename])
+    if discovery_basename:
+        command.extend(["--discovery-basename", discovery_basename])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Candidate Refresh ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_editor(
     scout_result: str | None,
     scout_request: str | None,
@@ -1885,6 +1926,35 @@ def build_parser() -> argparse.ArgumentParser:
     )
     llm_scout_parser.add_argument("--json", action="store_true", help="Print the LLM Scout summary as JSON.")
 
+    llm_candidate_refresh_parser = subparsers.add_parser(
+        "llm-candidate-refresh",
+        help="Run no-write LLM Scout plus topic discovery to refresh owner-review candidate topics.",
+    )
+    llm_candidate_refresh_parser.add_argument(
+        "--signals",
+        action="append",
+        help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once.",
+    )
+    llm_candidate_refresh_parser.add_argument(
+        "--provider",
+        default="disabled",
+        choices=["disabled", "fixture", "openai"],
+        help="Provider to use through llm_adapter. Defaults to disabled/fail-closed.",
+    )
+    llm_candidate_refresh_parser.add_argument("--fixture", help="Fixture response JSON for offline provider tests.")
+    llm_candidate_refresh_parser.add_argument("--output-dir", help="Directory for candidate refresh artifacts.")
+    llm_candidate_refresh_parser.add_argument("--basename", help="Refresh summary basename without extension.")
+    llm_candidate_refresh_parser.add_argument("--scout-basename", help="LLM Scout output basename without extension.")
+    llm_candidate_refresh_parser.add_argument("--discovery-basename", help="Topic discovery output basename without extension.")
+    llm_candidate_refresh_parser.add_argument("--limit", type=int, default=8, help="Maximum deterministic proposals to review.")
+    llm_candidate_refresh_parser.add_argument(
+        "--min-impressions",
+        type=int,
+        default=200,
+        help="Minimum page impressions for deterministic Scout proposals.",
+    )
+    llm_candidate_refresh_parser.add_argument("--json", action="store_true", help="Print the candidate refresh summary as JSON.")
+
     llm_editor_parser = subparsers.add_parser(
         "llm-editor",
         help="Run a no-write LLM Editor planning brief from one selected LLM Scout opportunity.",
@@ -2142,6 +2212,19 @@ def main() -> int:
             args.fixture,
             args.output_dir,
             args.basename,
+            args.limit,
+            args.min_impressions,
+            args.json,
+        )
+    if args.command == "llm-candidate-refresh":
+        return cmd_llm_candidate_refresh(
+            args.signals,
+            args.provider,
+            args.fixture,
+            args.output_dir,
+            args.basename,
+            args.scout_basename,
+            args.discovery_basename,
             args.limit,
             args.min_impressions,
             args.json,

@@ -426,6 +426,7 @@ python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-b
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -451,6 +452,7 @@ python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by 
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
@@ -467,6 +469,8 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 `llm-scout` is the first live LLM worker wrapper. It reviews deterministic Scout proposals from GSC/Bing agent signals through `llm_adapter`, writes request/result/markdown artifacts, and must not edit content, backlog, manifests, PRs, or production state. Monitor-only and reject decisions belong in `rejected_or_monitor`, not selected handoffs.
 
+`llm-candidate-refresh` is the scheduled no-write candidate generation step. It runs LLM Scout, converts the result into topic discovery proposals, and writes a compact owner-review summary. It must not record owner decisions, edit content, mutate `topic_backlog.csv`, create manifests, open PRs, or deploy.
+
 `llm-topic-discovery` converts selected and monitored LLM Scout opportunities into backlog-shaped topic proposals for owner review. It must not edit `topic_backlog.csv`, manifests, content, PRs, or production state.
 
 `llm-topic-decision` records an owner decision for one LLM topic discovery proposal. It may also rerecord an existing decision through `--from-decision` to move a saved topic from `monitor` or `rejected` to `approved_for_chain` without manual JSON edits. `approved_for_chain` only allows the next no-write worker chain; `monitor` and `rejected` keep the topic out of intake. It must not approve public copy, patch specs, backlog edits, manifests, PRs, or production state.
@@ -480,6 +484,8 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 `llm-reviewer` is the third live LLM worker wrapper. It reviews one LLM Editor planning brief for duplicate intent, cluster role fit, canonical claims, template safety, draft exact replacement safety, owner questions, and readiness. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state. It cannot advance LLM exact replacements directly to `apply-preview`.
 
 `llm-worker-chain` runs the no-write live LLM Scout -> Editor -> Reviewer sequence and writes one summary artifact. Prefer `--from-decision automation/reports/llm-topic-decision-<topic_id>.json` after owner approval so the chain replays the saved `approved_for_chain` decision instead of rerunning Scout and changing the topic handoff. Live Scout handoffs may advance only `ready_for_chain` opportunities: `update_existing`, `create_new`, or `consolidate` with non-low priority. Monitor-only, reject, and low-priority topics must stop before Editor/Reviewer. It must preserve each stage's fail-closed behavior and must not write content, backlog entries, manifests, PRs, or production state.
+
+GitHub workflow `.github/workflows/llm-candidate-refresh.yml` runs weekly and by manual dispatch to refresh no-write candidate topic artifacts from GSC/Bing signals. It uploads artifacts only and must not commit reports, record owner decisions, edit content, open PRs, or deploy.
 
 GitHub workflow `.github/workflows/llm-worker-chain.yml` runs the same no-write chain on a schedule and by manual dispatch. It uploads artifacts only and must not commit reports, edit content, open PRs, or deploy.
 
