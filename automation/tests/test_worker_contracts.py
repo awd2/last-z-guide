@@ -1025,16 +1025,73 @@ class WorkerContractTests(unittest.TestCase):
             pending_intake = llm_intake.build_intake(chain_path, approved_by=None, note=None)
             self.assertEqual(pending_intake["report_type"], "llm_worker_proposal_intake")
             self.assertEqual(pending_intake["state"], "approval_required")
+            self.assertEqual(pending_intake["approval_scope"], "none")
+            self.assertFalse(pending_intake["content_edit_approved"])
+            self.assertFalse(pending_intake["public_content_change_allowed"])
             self.assertEqual(pending_intake["proposed_backlog_item"]["cluster"], "Economy")
             self.assertEqual(pending_intake["proposed_backlog_item"]["recommended_action"], "update_existing")
+
+            incomplete_approval = llm_intake.build_intake(chain_path, approved_by="fixture", note=None)
+            self.assertEqual(incomplete_approval["state"], "approval_required")
+            self.assertIn(
+                "Approval note is required when the LLM Reviewer left owner questions.",
+                incomplete_approval["warnings"],
+            )
 
             approved_intake = llm_intake.build_intake(chain_path, approved_by="fixture", note="contract test")
             self.assertEqual(approved_intake["state"], "approved_for_intake")
             self.assertEqual(approved_intake["approved_by"], "fixture")
+            self.assertEqual(approved_intake["approval_scope"], "intake_only_no_content_edits")
+            self.assertFalse(approved_intake["content_edit_approved"])
+            self.assertFalse(approved_intake["public_content_change_allowed"])
+            self.assertTrue(approved_intake["requires_owner_answers"])
+            self.assertTrue(approved_intake["owner_answers_recorded"])
+            self.assertTrue(any("Approval is intake-only" in item for item in approved_intake["approval_guardrails"]))
             run_plan = intake_to_run.build_proposal(approved_intake, tmp_path / "llm-intake.json")
             self.assertEqual(run_plan["state"], "run_plan_ready")
             self.assertEqual(run_plan["proposed_manifest"]["status"], "planned")
             self.assertEqual(run_plan["proposed_manifest"]["changed_files"], [])
+
+    def test_llm_intake_blocks_reviewer_blocking_issues(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            reviewer_response = fixture_llm_reviewer_response()
+            reviewer_response["response_json"]["blocking_issues"] = [
+                {
+                    "severity": "high",
+                    "issue": "The plan needs source verification before intake.",
+                    "required_fix": "Resolve the source gap before owner intake approval.",
+                }
+            ]
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, reviewer_response)
+            code, summary = llm_worker_chain.run_llm_worker_chain(
+                signal_paths=[signals_path],
+                output_dir=tmp_path,
+                provider="fixture",
+                topic_id="codes-gsc-opportunity",
+                basename="llm-worker-chain-fixture",
+                scout_basename="llm-worker-chain-scout-fixture",
+                editor_basename="llm-worker-chain-editor-fixture",
+                reviewer_basename="llm-worker-chain-reviewer-fixture",
+                scout_fixture_path=scout_fixture_path,
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(code, 0)
+            chain_path = Path(summary["artifacts"]["chain_json"])
+
+            approved_intake = llm_intake.build_intake(chain_path, approved_by="fixture", note="contract test")
+            self.assertEqual(approved_intake["state"], "blocked")
+            self.assertIn("LLM Reviewer returned blocking issues; resolve them before LLM intake.", approved_intake["blockers"])
 
     def test_scout_editor_reviewer_contract_shapes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

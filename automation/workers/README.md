@@ -45,7 +45,7 @@ It reads `automation/reports/worker-chain-<topic_id>.json` and writes:
 - `automation/reports/worker-intake-<topic_id>.json`
 - `automation/reports/worker-intake-<topic_id>.md`
 
-If the worker review requires human approval, intake remains `approval_required` until rerun with `--approved-by <name>`.
+If the worker review requires human approval, intake remains `approval_required` until rerun with `--approved-by <name>`. If the LLM Reviewer left owner questions, rerun with `--approved-by <name> --note "<owner answer / approval scope>"`; the note is required before LLM intake can become `approved_for_intake`.
 
 The current no-write run-plan proposal step is:
 
@@ -103,7 +103,7 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
-python3 automation/pipeline.py llm-intake-latest --approved-by <name> --json
+python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
 
 It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter must not edit content, backlog, manifests, or production state.
@@ -120,7 +120,7 @@ python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
-python3 automation/workers/llm_intake.py --approved-by <name> --json
+python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
 
 `llm-scout` is the first live LLM worker wrapper. It builds deterministic Scout proposals from the latest GSC/Bing agent signals, sends a compact JSON-only review request through `llm_adapter`, and writes:
@@ -229,7 +229,9 @@ The GitHub Actions wrapper `.github/workflows/llm-worker-chain.yml` runs this ch
 - `automation/reports/llm-intake-<topic_id>.json`
 - `automation/reports/llm-intake-<topic_id>.md`
 
-When owner approval is required, the intake artifact stays `approval_required` until rerun with `--approved-by <name>`. An approved LLM intake can be passed to the existing run-plan command with:
+When owner approval is required, the intake artifact stays `approval_required` until rerun with `--approved-by <name>`. If owner questions are present, `--note` is also required. This approval is intake-only: it allows the existing run-plan/proposal flow, but it does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing.
+
+An approved LLM intake can be passed to the existing run-plan command with:
 
 ```bash
 python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-<topic_id>.json --json

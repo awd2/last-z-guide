@@ -22,6 +22,13 @@ from automation.reports import llm_review_latest
 
 REPORTS_DIR = ROOT / "automation" / "reports"
 
+APPROVAL_GUARDRAILS = [
+    "Approval is intake-only: it allows conversion into the existing run-plan/proposal flow.",
+    "Approval does not approve public page copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing.",
+    "Any future public content change still requires exact proposed text/diff and explicit owner approval.",
+    "Future content proposals must still pass deterministic checks before closeout.",
+]
+
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -106,6 +113,7 @@ def proposed_backlog_item(
 def intake_state(
     review: dict[str, Any],
     approved_by: str | None,
+    note: str | None,
 ) -> tuple[str, list[str], list[str]]:
     blockers: list[str] = []
     warnings: list[str] = []
@@ -117,11 +125,11 @@ def intake_state(
         blockers.append(f"LLM worker chain error: {error}")
     if verdict in {"revise", "reject"}:
         blockers.append(f"LLM Reviewer verdict is `{verdict}`; revise or reject before intake.")
+    if review.get("blocking_issues"):
+        blockers.append("LLM Reviewer returned blocking issues; resolve them before LLM intake.")
     if blockers:
         return "blocked", blockers, warnings
 
-    if review.get("blocking_issues"):
-        warnings.append("LLM Reviewer returned blocking issues; owner approval is required before intake.")
     if review.get("risk_level") == "high":
         warnings.append("High-risk opportunity; keep the future proposal narrow and owner-reviewed.")
     if review.get("approved_next_stage") in {None, "", "none"}:
@@ -136,7 +144,16 @@ def intake_state(
     if not approved_by and verdict == "needs_human_review":
         warnings.append("Reviewer requested human review before intake.")
         return "approval_required", blockers, warnings
+    if approved_by and review.get("owner_questions") and not note:
+        warnings.append("Approval note is required when the LLM Reviewer left owner questions.")
+        return "approval_required", blockers, warnings
     return "approved_for_intake", blockers, warnings
+
+
+def approval_scope(approved_by: str | None) -> str:
+    if approved_by:
+        return "intake_only_no_content_edits"
+    return "none"
 
 
 def next_actions_for(state: str, topic_id: str, intake_path: str | None = None) -> list[str]:
@@ -148,7 +165,7 @@ def next_actions_for(state: str, topic_id: str, intake_path: str | None = None) 
     if state == "approval_required":
         return [
             "Human reviews the LLM latest owner review and answers owner questions.",
-            f"If approved, run: python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-{topic_id}.json --approved-by <name> --json",
+            f"If approved, run: python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-{topic_id}.json --approved-by <name> --note \"<owner answer / approval scope>\" --json",
         ]
     return [
         "Review this intake artifact before converting it into a run-plan proposal.",
@@ -167,7 +184,7 @@ def build_intake(
     topic_id = str(review.get("source_topic_id") or "llm-topic")
     scout_proposal = scout_request_proposal(chain, topic_id)
     scout_opportunity = scout_selected_opportunity(chain, topic_id)
-    state, blockers, warnings = intake_state(review, approved_by)
+    state, blockers, warnings = intake_state(review, approved_by, note)
     intake = {
         "schema_version": 1,
         "report_type": "llm_worker_proposal_intake",
@@ -178,6 +195,12 @@ def build_intake(
         "state": state,
         "approved_by": approved_by,
         "approval_note": note,
+        "approval_scope": approval_scope(approved_by),
+        "content_edit_approved": False,
+        "public_content_change_allowed": False,
+        "requires_owner_answers": bool(review.get("owner_questions")),
+        "owner_answers_recorded": bool(note),
+        "approval_guardrails": APPROVAL_GUARDRAILS,
         "review_verdict": review.get("review_verdict", ""),
         "risk_level": review.get("risk_level", ""),
         "approved_next_stage": review.get("approved_next_stage", ""),
@@ -215,7 +238,14 @@ def render_markdown(intake: dict[str, Any]) -> str:
         f"- Risk: `{intake['risk_level']}`",
         f"- Approved next stage: `{intake['approved_next_stage']}`",
         f"- Approved by: `{intake['approved_by'] or ''}`",
+        f"- Approval scope: `{intake['approval_scope']}`",
+        f"- Content edit approved: `{str(intake['content_edit_approved']).lower()}`",
+        f"- Public content change allowed: `{str(intake['public_content_change_allowed']).lower()}`",
         "- Safety: no content, backlog, manifest, PR, or production files were modified by this LLM intake bridge.",
+        "",
+        "## Approval Guardrails",
+        "",
+        md_list(intake["approval_guardrails"]),
         "",
         "## Blockers",
         "",

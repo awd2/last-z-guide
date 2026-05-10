@@ -127,7 +127,7 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
-python3 automation/pipeline.py llm-intake-latest --approved-by <name> --json
+python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -144,7 +144,7 @@ python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
-python3 automation/workers/llm_intake.py --approved-by <name> --json
+python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/reports/llm_review_latest.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```

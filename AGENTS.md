@@ -437,7 +437,7 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
-python3 automation/pipeline.py llm-intake-latest --approved-by <name> --json
+python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities --json
 python3 automation/pipeline.py bing-report
 python3 automation/pipeline.py content-voice --json
@@ -457,7 +457,7 @@ python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
-python3 automation/workers/llm_intake.py --approved-by <name> --json
+python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/reports/llm_review_latest.py --json
 python3 automation/reports/content_seo_opportunities.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
@@ -485,7 +485,7 @@ GitHub workflow `.github/workflows/llm-worker-chain.yml` runs the same no-write 
 
 `llm-review-latest` reads the latest local LLM worker chain summary and renders a compact owner-review view. It is read-only and must not call an LLM provider, edit content, or mutate repository state.
 
-`llm-intake-latest` bridges a latest or specified LLM worker chain summary into a no-write, owner-gated intake artifact. It may record `--approved-by <name>` in the artifact, but it must not edit content, backlog files, manifests, PRs, or production state. Approved LLM intake must still move through the existing run-plan/proposal lifecycle before any public content edit.
+`llm-intake-latest` bridges a latest or specified LLM worker chain summary into a no-write, owner-gated intake artifact. It may record `--approved-by <name>` in the artifact, but approval is intake-only and does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing. If the LLM Reviewer left owner questions, `--note` is required before intake can become `approved_for_intake`. Approved LLM intake must still move through the existing run-plan/proposal lifecycle before any public content edit.
 
 Machine-readable snapshots exist for:
 
