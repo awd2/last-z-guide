@@ -3,7 +3,7 @@
 ## Overview
 
 - Summary: Worker-approved intake for `alliance-duel.html` from `alliance-duel-gsc-opportunity`.
-- Status: `proposal_ready`
+- Status: `approved_for_apply`
 - Risk: `medium`
 - Cluster: `Events`
 - Target: `alliance-duel.html`
@@ -29,7 +29,7 @@
 - Generated page: `false`
 - Selector or anchor: `<title>, meta description, H1, first-screen block`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:
@@ -55,7 +55,7 @@ Validation:
 - Generated page: `false`
 - Selector or anchor: `<title>, meta description, H1, first-screen block`
 - Risk: `medium`
-- Approval state: `proposed`
+- Approval state: `approved`
 - Generator command: `None`
 
 Before:
@@ -72,4 +72,3 @@ Validation:
 - python3 automation/pipeline.py checks --strict
 - python3 automation/checks/changed_pages_report.py --manifest <run_id>
 - python3 automation/pipeline.py checks
-

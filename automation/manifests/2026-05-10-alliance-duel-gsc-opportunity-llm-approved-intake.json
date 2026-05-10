@@ -2,7 +2,7 @@
   "run_id": "2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake",
   "created_at": "2026-05-10T08:16:29Z",
   "run_type": "update_existing",
-  "status": "proposal_ready",
+  "status": "closed",
   "risk_level": "medium",
   "summary": "Worker-approved intake for `alliance-duel.html` from `alliance-duel-gsc-opportunity`.",
   "inputs": {
@@ -107,7 +107,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-10T08:26:29Z",
+          "approval_note": "Owner approved exact content proposal 2026-05-10; applying manually because deterministic apply-approved does not support first_screen_update/meta_refresh."
         },
         {
           "target_file": "alliance-duel.html",
@@ -131,7 +134,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-10T08:26:29Z",
+          "approval_note": "Owner approved exact content proposal 2026-05-10; applying manually because deterministic apply-approved does not support first_screen_update/meta_refresh."
         }
       ],
       "changed_files": [
@@ -175,11 +181,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-10T08:26:29Z",
+          "approval_note": "Owner approved exact content proposal 2026-05-10; applying manually because deterministic apply-approved does not support first_screen_update/meta_refresh.",
           "before_summary": "title: Last Z Alliance Duel Guide (2026) — Schedule, Day 1–6 Plan, VS Strategy | h1: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy | meta: Complete Last Z Alliance Duel schedule: Day 1–6 plan, when to use speed-ups, how VS schedule works, and the best F2P strategy for more weekly chests. | verified: Best Alliance Duel plan for most players: follow the Day 1–6 schedule, match speed-ups to the right day, sync with Full Preparedness, and prioritize Alliance Recognition for long-term rewards.",
           "desired_after_summary": "Opening answer matches the page role for alliance-duel.html, gives the exact setup answer quickly, and avoids drifting into a broader hub page.",
           "suggested_content": "",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "alliance-duel.html",
@@ -204,19 +212,46 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-10T08:26:29Z",
+          "approval_note": "Owner approved exact content proposal 2026-05-10; applying manually because deterministic apply-approved does not support first_screen_update/meta_refresh.",
           "before_summary": "title: Last Z Alliance Duel Guide (2026) — Schedule, Day 1–6 Plan, VS Strategy | h1: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy | meta: Complete Last Z Alliance Duel schedule: Day 1–6 plan, when to use speed-ups, how VS schedule works, and the best F2P strategy for more weekly chests. | verified: Best Alliance Duel plan for most players: follow the Day 1–6 schedule, match speed-ups to the right day, sync with Full Preparedness, and prioritize Alliance Recognition for long-term rewards.",
           "desired_after_summary": "Title, H1, and meta description use the same exact intent: alliance-duel.html.",
           "suggested_content": "",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         }
       ]
+    },
+    "apply_result": {
+      "report_path": "automation/reports/2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake.apply-result.md",
+      "applied_at": "2026-05-10T08:26:41Z",
+      "applied_operations": [
+        "manual:first_screen_update:alliance-duel.html",
+        "manual:meta_refresh:alliance-duel.html"
+      ],
+      "skipped_operations": [],
+      "generator_commands": [],
+      "note": "Owner approved the exact content proposal. Changes were applied manually because deterministic apply-approved does not support first_screen_update or meta_refresh operations."
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake.closed.md",
+      "closed_at": "2026-05-10T08:27:06Z",
+      "note": "Owner approved exact Alliance Duel schedule/content intent changes. Manual apply was used for first-screen/meta operations, followed by strict QA."
     }
   },
   "changed_files": [
     "alliance-duel.html"
   ],
-  "checks": {},
+  "checks": {
+    "automation_checks_strict": {
+      "status": "pass",
+      "notes": "Search visibility check passed. | Checked content consistency on 56 public pages: 0 failure(s), 0 warning(s), 7 allowed context(s). | Content consistency check passed. | Checked SEO/LLM alignment on 63 memory pages: 0 alignment warning(s), 0 cannibalization warning(s). | SEO/LLM alignment check passed. | Automation checks passed."
+    },
+    "changed_pages_report": {
+      "status": "pass",
+      "notes": "same-cluster inbound links: 6 | expected hubs: index.html, events.html | linked from hubs: index.html, events.html"
+    }
+  },
   "review": {
     "verdict": "needs_human_review",
     "open_questions": [
