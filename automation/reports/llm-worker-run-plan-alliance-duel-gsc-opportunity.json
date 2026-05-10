@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "report_type": "worker_intake_run_plan",
+  "generated_at": "2026-05-10T08:16:29Z",
+  "source_intake_file": "automation/reports/llm-intake-alliance-duel-gsc-opportunity.json",
+  "source_topic_id": "alliance-duel-gsc-opportunity",
+  "target_page_or_slug": "alliance-duel.html",
+  "state": "run_plan_ready",
+  "blockers": [],
+  "warnings": [],
+  "proposed_backlog_item": {
+    "topic_id": "alliance-duel-gsc-opportunity-llm-approved-intake",
+    "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+    "cluster": "Events",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "event-guide",
+    "target_page_or_slug": "alliance-duel.html",
+    "source_type": "llm_scout",
+    "source_reference": "LLM worker chain review: alliance-duel-gsc-opportunity",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review."
+  },
+  "proposed_manifest": {
+    "run_id": "2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake",
+    "created_at": "2026-05-10T08:16:29Z",
+    "run_type": "update_existing",
+    "status": "planned",
+    "risk_level": "medium",
+    "summary": "Worker-approved intake for `alliance-duel.html` from `alliance-duel-gsc-opportunity`.",
+    "inputs": {
+      "topic_id": "alliance-duel-gsc-opportunity-llm-approved-intake",
+      "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+      "cluster": "Events",
+      "source_type": "llm_scout",
+      "source_reference": "LLM worker chain review: alliance-duel-gsc-opportunity",
+      "confidence": "high",
+      "priority": "high",
+      "status": "backlog",
+      "approved_by": "oleg",
+      "approval_note": "Owner answers for no-write intake only: sharpen the opening for last z vs schedule intent; keep Day 1-6 order plus existing timing caveats; trim related guides only if the later proposal finds obvious overlap. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing."
+    },
+    "plan": {
+      "topic_id": "alliance-duel-gsc-opportunity-llm-approved-intake",
+      "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+      "cluster": "Events",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "event-guide",
+      "target_page_or_slug": "alliance-duel.html",
+      "source_type": "llm_scout",
+      "source_reference": "LLM worker chain review: alliance-duel-gsc-opportunity",
+      "confidence": "high",
+      "priority": "high",
+      "status": "backlog",
+      "risk_level": "medium",
+      "plan_summary": "Prepare a controlled content run for `alliance-duel.html` from an approved Worker intake artifact.",
+      "memory_files": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md"
+      ],
+      "related_pages": [
+        "alliance-duel.html"
+      ],
+      "deterministic_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict"
+      ],
+      "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review."
+    },
+    "artifacts": {
+      "worker_intake": "automation/reports/llm-intake-alliance-duel-gsc-opportunity.json",
+      "source_chain": "automation/reports/llm-worker-chain-alliance-duel-gsc-opportunity.json"
+    },
+    "changed_files": [],
+    "checks": {},
+    "review": null
+  },
+  "next_actions": [
+    "Review proposed_manifest before creating any actual manifest file.",
+    "If accepted, create `automation/manifests/2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake.json` from proposed_manifest.",
+    "Then continue with: python3 automation/pipeline.py review 2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake"
+  ],
+  "safety": "No content, backlog, or manifest files were modified by this run-plan proposal."
+}

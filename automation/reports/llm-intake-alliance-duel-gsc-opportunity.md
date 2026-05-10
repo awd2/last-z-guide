@@ -2,13 +2,13 @@
 
 ## Status
 
-- State: `approval_required`
+- State: `approved_for_intake`
 - Target: `alliance-duel.html`
 - Review verdict: `pass`
 - Risk: `medium`
 - Approved next stage: `approval`
-- Approved by: ``
-- Approval scope: `none`
+- Approved by: `oleg`
+- Approval scope: `intake_only_no_content_edits`
 - Content edit approved: `false`
 - Public content change allowed: `false`
 - Safety: no content, backlog, manifest, PR, or production files were modified by this LLM intake bridge.
@@ -27,7 +27,6 @@
 ## Warnings
 
 - Owner questions must be answered before any public content proposal is written.
-- Owner approval is required before this LLM opportunity can become run intake.
 
 ## Owner Questions
 
@@ -76,5 +75,6 @@ Preserve the answer-first layout. Make the first screen clearly state the day-by
 
 ## Next Actions
 
-- Human reviews the LLM latest owner review and answers owner questions.
-- If approved, run: python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-alliance-duel-gsc-opportunity.json --approved-by <name> --note "<owner answer / approval scope>" --json
+- Review this intake artifact before converting it into a run-plan proposal.
+- Run: python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-alliance-duel-gsc-opportunity.json --json
+- Do not write public content until a later proposal artifact receives explicit owner approval.

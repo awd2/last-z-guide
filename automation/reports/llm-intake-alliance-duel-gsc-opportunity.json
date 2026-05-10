@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
   "report_type": "llm_worker_proposal_intake",
-  "generated_at": "2026-05-10T08:09:44Z",
+  "generated_at": "2026-05-10T08:16:25Z",
   "source_chain_file": "automation/reports/llm-worker-chain-alliance-duel-gsc-opportunity.json",
   "source_topic_id": "alliance-duel-gsc-opportunity",
   "target_page_or_slug": "alliance-duel.html",
-  "state": "approval_required",
-  "approved_by": null,
-  "approval_note": null,
-  "approval_scope": "none",
+  "state": "approved_for_intake",
+  "approved_by": "oleg",
+  "approval_note": "Owner answers for no-write intake only: sharpen the opening for last z vs schedule intent; keep Day 1-6 order plus existing timing caveats; trim related guides only if the later proposal finds obvious overlap. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing.",
+  "approval_scope": "intake_only_no_content_edits",
   "content_edit_approved": false,
   "public_content_change_allowed": false,
   "requires_owner_answers": true,
-  "owner_answers_recorded": false,
+  "owner_answers_recorded": true,
   "approval_guardrails": [
     "Approval is intake-only: it allows conversion into the existing run-plan/proposal flow.",
     "Approval does not approve public page copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing.",
@@ -24,8 +24,7 @@
   "approved_next_stage": "approval",
   "blockers": [],
   "warnings": [
-    "Owner questions must be answered before any public content proposal is written.",
-    "Owner approval is required before this LLM opportunity can become run intake."
+    "Owner questions must be answered before any public content proposal is written."
   ],
   "owner_questions": [
     "Should the opening sentence be sharpened beyond the current quick answer to better match last z vs schedule intent?",
@@ -154,8 +153,9 @@
     }
   },
   "next_actions": [
-    "Human reviews the LLM latest owner review and answers owner questions.",
-    "If approved, run: python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-alliance-duel-gsc-opportunity.json --approved-by <name> --note \"<owner answer / approval scope>\" --json"
+    "Review this intake artifact before converting it into a run-plan proposal.",
+    "Run: python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-intake-alliance-duel-gsc-opportunity.json --json",
+    "Do not write public content until a later proposal artifact receives explicit owner approval."
   ],
   "safety": "No content, backlog, manifest, PR, or production files were modified by this LLM intake bridge."
 }

@@ -1,0 +1,228 @@
+{
+  "run_id": "2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake",
+  "created_at": "2026-05-10T08:16:29Z",
+  "run_type": "update_existing",
+  "status": "proposal_ready",
+  "risk_level": "medium",
+  "summary": "Worker-approved intake for `alliance-duel.html` from `alliance-duel-gsc-opportunity`.",
+  "inputs": {
+    "topic_id": "alliance-duel-gsc-opportunity-llm-approved-intake",
+    "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+    "cluster": "Events",
+    "source_type": "llm_scout",
+    "source_reference": "LLM worker chain review: alliance-duel-gsc-opportunity",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "approved_by": "oleg",
+    "approval_note": "Owner answers for no-write intake only: sharpen the opening for last z vs schedule intent; keep Day 1-6 order plus existing timing caveats; trim related guides only if the later proposal finds obvious overlap. This does not approve public copy, patch specs, content edits, backlog mutation, manifests, PRs, deployment, or production publishing."
+  },
+  "plan": {
+    "topic_id": "alliance-duel-gsc-opportunity-llm-approved-intake",
+    "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+    "cluster": "Events",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "event-guide",
+    "target_page_or_slug": "alliance-duel.html",
+    "source_type": "llm_scout",
+    "source_reference": "LLM worker chain review: alliance-duel-gsc-opportunity",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "risk_level": "medium",
+    "plan_summary": "Prepare a controlled content run for `alliance-duel.html` from an approved Worker intake artifact.",
+    "memory_files": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md"
+    ],
+    "related_pages": [
+      "alliance-duel.html"
+    ],
+    "deterministic_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict"
+    ],
+    "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review."
+  },
+  "artifacts": {
+    "worker_intake": "automation/reports/llm-intake-alliance-duel-gsc-opportunity.json",
+    "source_chain": "automation/reports/llm-worker-chain-alliance-duel-gsc-opportunity.json",
+    "worker_run_plan": "automation/reports/llm-worker-run-plan-alliance-duel-gsc-opportunity.json",
+    "worker_manifest_writer": {
+      "created_at": "2026-05-10T08:16:57Z",
+      "created_by": "oleg",
+      "safety": "Created planned run manifest only; no content files were modified."
+    },
+    "review_context": {
+      "canonical_claim_ids": [],
+      "related_filenames": [
+        "alliance-duel.html"
+      ]
+    },
+    "editor": {
+      "brief_path": "automation/reports/2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake.brief.md"
+    },
+    "patch_plan": {
+      "target_page_or_slug": "alliance-duel.html",
+      "archetype_suggestion": "event-guide",
+      "recommended_action": "update_existing",
+      "proposed_changes": [
+        {
+          "file": "alliance-duel.html",
+          "change_type": "first_screen_update",
+          "reason": "Align the opening answer with the run summary, target intent, and cluster role."
+        },
+        {
+          "file": "alliance-duel.html",
+          "change_type": "meta_refresh",
+          "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent."
+        }
+      ],
+      "patch_specs": [
+        {
+          "target_file": "alliance-duel.html",
+          "source_of_truth_file": "alliance-duel.html",
+          "output_file": "alliance-duel.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "alliance-duel.html",
+          "source_of_truth_file": "alliance-duel.html",
+          "output_file": "alliance-duel.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        }
+      ],
+      "changed_files": [
+        "alliance-duel.html"
+      ],
+      "source_files": [
+        "alliance-duel.html"
+      ],
+      "canonical_claim_ids": [],
+      "deterministic_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+        "python3 automation/pipeline.py checks"
+      ],
+      "report_path": "automation/reports/2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake.patch.md"
+    },
+    "proposal": {
+      "report_path": "automation/reports/2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake.proposed.md",
+      "rendered_specs": [
+        {
+          "target_file": "alliance-duel.html",
+          "source_of_truth_file": "alliance-duel.html",
+          "output_file": "alliance-duel.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Alliance Duel Guide (2026) — Schedule, Day 1–6 Plan, VS Strategy | h1: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy | meta: Complete Last Z Alliance Duel schedule: Day 1–6 plan, when to use speed-ups, how VS schedule works, and the best F2P strategy for more weekly chests. | verified: Best Alliance Duel plan for most players: follow the Day 1–6 schedule, match speed-ups to the right day, sync with Full Preparedness, and prioritize Alliance Recognition for long-term rewards.",
+          "desired_after_summary": "Opening answer matches the page role for alliance-duel.html, gives the exact setup answer quickly, and avoids drifting into a broader hub page.",
+          "suggested_content": "",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "alliance-duel.html",
+          "source_of_truth_file": "alliance-duel.html",
+          "output_file": "alliance-duel.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Alliance Duel Guide (2026) — Schedule, Day 1–6 Plan, VS Strategy | h1: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy | meta: Complete Last Z Alliance Duel schedule: Day 1–6 plan, when to use speed-ups, how VS schedule works, and the best F2P strategy for more weekly chests. | verified: Best Alliance Duel plan for most players: follow the Day 1–6 schedule, match speed-ups to the right day, sync with Full Preparedness, and prioritize Alliance Recognition for long-term rewards.",
+          "desired_after_summary": "Title, H1, and meta description use the same exact intent: alliance-duel.html.",
+          "suggested_content": "",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        }
+      ]
+    }
+  },
+  "changed_files": [
+    "alliance-duel.html"
+  ],
+  "checks": {},
+  "review": {
+    "verdict": "needs_human_review",
+    "open_questions": [
+      "No canonical claims matched automatically. Should the claim layer be expanded for this topic?"
+    ],
+    "next_action": "review_human",
+    "reviewer_notes": "Deterministic review scaffold complete. No canonical claims matched automatically, so this run should be reviewed carefully before drafting content."
+  }
+}
