@@ -7,154 +7,154 @@
   ],
   "comparison_windows": {
     "last_7_days": {
-      "end": "2026-05-03",
-      "start": "2026-04-27"
+      "end": "2026-05-10",
+      "start": "2026-05-04"
     },
     "previous_7_days": {
-      "end": "2026-04-26",
-      "start": "2026-04-20"
+      "end": "2026-05-03",
+      "start": "2026-04-27"
     }
   },
   "date_range": {
     "days": 28,
-    "end": "2026-05-03",
-    "start": "2026-04-06"
+    "end": "2026-05-10",
+    "start": "2026-04-13"
   },
-  "generated_for": "2026-05-03",
+  "generated_for": "2026-05-10",
   "page_opportunities": [
     {
-      "clicks": 503.0,
-      "ctr": 0.020825,
-      "impressions": 24154.0,
+      "clicks": 586.0,
+      "ctr": 0.01764,
+      "impressions": 33220.0,
       "local_page": "codes.html",
       "page": "https://lastzguides.com/codes.html",
-      "position": 6.4587,
+      "position": 6.1125,
       "reason": "high impressions with below-median CTR"
     },
     {
-      "clicks": 325.0,
-      "ctr": 0.02298,
-      "impressions": 14143.0,
+      "clicks": 343.0,
+      "ctr": 0.022369,
+      "impressions": 15334.0,
       "local_page": "heroes.html",
       "page": "https://lastzguides.com/heroes.html",
-      "position": 7.9429,
+      "position": 7.927,
       "reason": "high impressions with below-median CTR"
     },
     {
-      "clicks": 597.0,
-      "ctr": 0.046971,
-      "impressions": 12710.0,
-      "local_page": "research.html",
-      "page": "https://lastzguides.com/research.html",
-      "position": 7.274,
-      "reason": "high impressions with below-median CTR"
-    },
-    {
-      "clicks": 338.0,
-      "ctr": 0.02687,
-      "impressions": 12579.0,
+      "clicks": 394.0,
+      "ctr": 0.025725,
+      "impressions": 15316.0,
       "local_page": "hq.html",
       "page": "https://lastzguides.com/hq.html",
-      "position": 7.6945,
+      "position": 7.5556,
       "reason": "high impressions with below-median CTR"
     },
     {
-      "clicks": 78.0,
-      "ctr": 0.00901,
-      "impressions": 8657.0,
+      "clicks": 670.0,
+      "ctr": 0.049196,
+      "impressions": 13619.0,
+      "local_page": "research.html",
+      "page": "https://lastzguides.com/research.html",
+      "position": 7.1631,
+      "reason": "high impressions with below-median CTR"
+    },
+    {
+      "clicks": 823.0,
+      "ctr": 0.07518,
+      "impressions": 10947.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 6.6436,
+      "reason": "high impressions with below-median CTR"
+    },
+    {
+      "clicks": 92.0,
+      "ctr": 0.00972,
+      "impressions": 9465.0,
       "local_page": "power-guide.html",
       "page": "https://lastzguides.com/power-guide.html",
-      "position": 7.6051,
+      "position": 7.5339,
       "reason": "high impressions with below-median CTR"
     },
     {
-      "clicks": 378.0,
-      "ctr": 0.04603,
-      "impressions": 8212.0,
+      "clicks": 407.0,
+      "ctr": 0.045399,
+      "impressions": 8965.0,
       "local_page": "alliance-duel.html",
       "page": "https://lastzguides.com/alliance-duel.html",
-      "position": 6.2551,
+      "position": 6.1865,
       "reason": "high impressions with below-median CTR"
     },
     {
-      "clicks": 573.0,
-      "ctr": 0.072367,
-      "impressions": 7918.0,
+      "clicks": 480.0,
+      "ctr": 0.065583,
+      "impressions": 7319.0,
       "local_page": "vehicle-modification-cost.html",
       "page": "https://lastzguides.com/vehicle-modification-cost.html",
-      "position": 5.6854,
+      "position": 5.8235,
       "reason": "high impressions with below-median CTR"
     },
     {
-      "clicks": 122.0,
-      "ctr": 0.019605,
-      "impressions": 6223.0,
+      "clicks": 134.0,
+      "ctr": 0.019242,
+      "impressions": 6964.0,
       "local_page": "tech.html",
       "page": "https://lastzguides.com/tech.html",
-      "position": 7.1845,
+      "position": 7.1119,
       "reason": "high impressions with below-median CTR"
     },
     {
-      "clicks": 421.0,
-      "ctr": 0.072712,
-      "impressions": 5790.0,
+      "clicks": 439.0,
+      "ctr": 0.066144,
+      "impressions": 6637.0,
       "local_page": "events.html",
       "page": "https://lastzguides.com/events.html",
-      "position": 5.8271,
+      "position": 5.7134,
       "reason": "high impressions with below-median CTR"
     },
     {
-      "clicks": 96.0,
-      "ctr": 0.024121,
-      "impressions": 3980.0,
-      "local_page": "canyon-clash.html",
-      "page": "https://lastzguides.com/canyon-clash.html",
-      "position": 7.1545,
-      "reason": "high impressions with below-median CTR"
-    },
-    {
-      "clicks": 84.0,
-      "ctr": 0.021418,
-      "impressions": 3922.0,
+      "clicks": 106.0,
+      "ctr": 0.024634,
+      "impressions": 4303.0,
       "local_page": "gear.html",
       "page": "https://lastzguides.com/gear.html",
-      "position": 6.9243,
+      "position": 6.815,
+      "reason": "high impressions with below-median CTR"
+    },
+    {
+      "clicks": 100.0,
+      "ctr": 0.023674,
+      "impressions": 4224.0,
+      "local_page": "canyon-clash.html",
+      "page": "https://lastzguides.com/canyon-clash.html",
+      "position": 7.0071,
+      "reason": "high impressions with below-median CTR"
+    },
+    {
+      "clicks": 136.0,
+      "ctr": 0.034872,
+      "impressions": 3900.0,
+      "local_page": "svs.html",
+      "page": "https://lastzguides.com/svs.html",
+      "position": 6.1215,
       "reason": "high impressions with below-median CTR"
     },
     {
       "clicks": 174.0,
-      "ctr": 0.048226,
-      "impressions": 3608.0,
+      "ctr": 0.046215,
+      "impressions": 3765.0,
       "local_page": "farm-account.html",
       "page": "https://lastzguides.com/farm-account.html",
-      "position": 5.541,
+      "position": 5.4011,
       "reason": "high impressions with below-median CTR"
     },
     {
-      "clicks": 130.0,
-      "ctr": 0.036293,
-      "impressions": 3582.0,
-      "local_page": "svs.html",
-      "page": "https://lastzguides.com/svs.html",
-      "position": 6.2426,
-      "reason": "high impressions with below-median CTR"
-    },
-    {
-      "clicks": 68.0,
-      "ctr": 0.023735,
-      "impressions": 2865.0,
-      "local_page": "formations.html",
-      "page": "https://lastzguides.com/formations.html",
-      "position": 7.1543,
-      "reason": "high impressions with below-median CTR"
-    },
-    {
-      "clicks": 68.0,
-      "ctr": 0.025,
-      "impressions": 2720.0,
-      "local_page": "formation-power.html",
-      "page": "https://lastzguides.com/formation-power.html",
-      "position": 6.6114,
+      "clicks": 32.0,
+      "ctr": 0.009384,
+      "impressions": 3410.0,
+      "local_page": "tips.html",
+      "page": "https://lastzguides.com/tips.html",
+      "position": 7.407,
       "reason": "high impressions with below-median CTR"
     }
   ],
@@ -163,329 +163,329 @@
     "high_impressions_low_clicks": [
       {
         "clicks": 2.0,
-        "ctr": 0.003317,
-        "impressions": 603.0,
-        "position": 8.5075,
+        "ctr": 0.003049,
+        "impressions": 656.0,
+        "position": 8.4131,
         "query": "https://last-z.com/giftcenter/#/login"
       },
       {
         "clicks": 4.0,
-        "ctr": 0.007519,
-        "impressions": 532.0,
-        "position": 7.6898,
+        "ctr": 0.006861,
+        "impressions": 583.0,
+        "position": 7.6621,
         "query": "https last z com giftcenter /#/ login"
       },
       {
-        "clicks": 5.0,
-        "ctr": 0.014706,
-        "impressions": 340.0,
-        "position": 9.0118,
-        "query": "last z hq requirements"
+        "clicks": 4.0,
+        "ctr": 0.012862,
+        "impressions": 311.0,
+        "position": 8.0096,
+        "query": "canyon clash last z"
       },
       {
         "clicks": 4.0,
-        "ctr": 0.017699,
-        "impressions": 226.0,
-        "position": 6.323,
-        "query": "last z com gift center /#/ login"
+        "ctr": 0.013158,
+        "impressions": 304.0,
+        "position": 9.0625,
+        "query": "last z hq requirements"
       },
       {
-        "clicks": 3.0,
-        "ctr": 0.014851,
-        "impressions": 202.0,
-        "position": 7.599,
-        "query": "last z gift code login"
+        "clicks": 5.0,
+        "ctr": 0.022222,
+        "impressions": 225.0,
+        "position": 6.2356,
+        "query": "last z com gift center /#/ login"
       }
     ],
     "low_ctr_good_positions": [
       {
-        "clicks": 104.0,
-        "ctr": 0.034121,
-        "impressions": 3048.0,
-        "position": 6.9787,
+        "clicks": 113.0,
+        "ctr": 0.036748,
+        "impressions": 3075.0,
+        "position": 6.8348,
         "query": "last z gift center"
       },
       {
-        "clicks": 44.0,
-        "ctr": 0.045881,
-        "impressions": 959.0,
-        "position": 5.562,
+        "clicks": 43.0,
+        "ctr": 0.045599,
+        "impressions": 943.0,
+        "position": 5.4093,
         "query": "last z gift center login"
       },
       {
         "clicks": 2.0,
-        "ctr": 0.003317,
-        "impressions": 603.0,
-        "position": 8.5075,
+        "ctr": 0.003049,
+        "impressions": 656.0,
+        "position": 8.4131,
         "query": "https://last-z.com/giftcenter/#/login"
       },
       {
         "clicks": 4.0,
-        "ctr": 0.007519,
-        "impressions": 532.0,
-        "position": 7.6898,
+        "ctr": 0.006861,
+        "impressions": 583.0,
+        "position": 7.6621,
         "query": "https last z com giftcenter /#/ login"
       },
       {
-        "clicks": 20.0,
-        "ctr": 0.03992,
-        "impressions": 501.0,
-        "position": 6.8882,
+        "clicks": 23.0,
+        "ctr": 0.041441,
+        "impressions": 555.0,
+        "position": 6.3676,
         "query": "lastz gift center"
       },
       {
-        "clicks": 20.0,
-        "ctr": 0.042373,
-        "impressions": 472.0,
-        "position": 6.2161,
+        "clicks": 22.0,
+        "ctr": 0.045929,
+        "impressions": 479.0,
+        "position": 6.0042,
         "query": "last-z.com gift center"
       },
       {
-        "clicks": 5.0,
-        "ctr": 0.014706,
-        "impressions": 340.0,
-        "position": 9.0118,
-        "query": "last z hq requirements"
-      },
-      {
         "clicks": 10.0,
-        "ctr": 0.029155,
-        "impressions": 343.0,
-        "position": 6.3265,
-        "query": "https //last-z.com/gift center/#/login"
-      },
-      {
-        "clicks": 7.0,
-        "ctr": 0.023649,
-        "impressions": 296.0,
-        "position": 7.4527,
-        "query": "https last z com giftcenter login"
-      },
-      {
-        "clicks": 7.0,
-        "ctr": 0.023891,
-        "impressions": 293.0,
-        "position": 8.0,
-        "query": "canyon clash last z"
-      },
-      {
-        "clicks": 9.0,
-        "ctr": 0.030928,
-        "impressions": 291.0,
-        "position": 8.8522,
+        "ctr": 0.025316,
+        "impressions": 395.0,
+        "position": 8.9013,
         "query": "last z research tree"
       },
       {
-        "clicks": 4.0,
-        "ctr": 0.017699,
-        "impressions": 226.0,
-        "position": 6.323,
-        "query": "last z com gift center /#/ login"
+        "clicks": 13.0,
+        "ctr": 0.037249,
+        "impressions": 349.0,
+        "position": 6.2521,
+        "query": "https //last-z.com/gift center/#/login"
       },
       {
-        "clicks": 6.0,
-        "ctr": 0.026432,
-        "impressions": 227.0,
-        "position": 7.8106,
-        "query": "lastz.com gift center"
-      },
-      {
-        "clicks": 3.0,
-        "ctr": 0.014851,
-        "impressions": 202.0,
-        "position": 7.599,
+        "clicks": 10.0,
+        "ctr": 0.029762,
+        "impressions": 336.0,
+        "position": 6.9792,
         "query": "last z gift code login"
       },
       {
         "clicks": 7.0,
-        "ctr": 0.035354,
-        "impressions": 198.0,
-        "position": 8.0101,
-        "query": "last z canyon clash"
+        "ctr": 0.022082,
+        "impressions": 317.0,
+        "position": 7.3249,
+        "query": "https last z com giftcenter login"
+      },
+      {
+        "clicks": 4.0,
+        "ctr": 0.012862,
+        "impressions": 311.0,
+        "position": 8.0096,
+        "query": "canyon clash last z"
+      },
+      {
+        "clicks": 4.0,
+        "ctr": 0.013158,
+        "impressions": 304.0,
+        "position": 9.0625,
+        "query": "last z hq requirements"
+      },
+      {
+        "clicks": 9.0,
+        "ctr": 0.038961,
+        "impressions": 231.0,
+        "position": 7.4199,
+        "query": "lastz.com gift center"
+      },
+      {
+        "clicks": 8.0,
+        "ctr": 0.035088,
+        "impressions": 228.0,
+        "position": 7.8246,
+        "query": "last z hq 31-35 requirements"
+      },
+      {
+        "clicks": 5.0,
+        "ctr": 0.022222,
+        "impressions": 225.0,
+        "position": 6.2356,
+        "query": "last z com gift center /#/ login"
       }
     ],
     "quick_wins_positions_11_20": []
   },
   "query_page_pairs": [
     {
-      "clicks": 284.0,
-      "ctr": 0.646925,
-      "impressions": 439.0,
+      "clicks": 291.0,
+      "ctr": 0.661364,
+      "impressions": 440.0,
       "local_page": "index.html",
       "page": "https://lastzguides.com/",
-      "position": 1.2642,
+      "position": 1.1727,
       "query": "last z guide"
     },
     {
-      "clicks": 104.0,
-      "ctr": 0.034121,
-      "impressions": 3048.0,
+      "clicks": 113.0,
+      "ctr": 0.03676,
+      "impressions": 3074.0,
       "local_page": "codes.html",
       "page": "https://lastzguides.com/codes.html",
-      "position": 6.9787,
+      "position": 6.8334,
       "query": "last z gift center"
     },
     {
-      "clicks": 104.0,
-      "ctr": 0.436975,
-      "impressions": 238.0,
+      "clicks": 110.0,
+      "ctr": 0.415094,
+      "impressions": 265.0,
       "local_page": "lucky-discounter.html",
       "page": "https://lastzguides.com/lucky-discounter.html",
-      "position": 1.6933,
+      "position": 1.5849,
       "query": "last z lucky discounter"
     },
     {
-      "clicks": 89.0,
-      "ctr": 0.247222,
-      "impressions": 360.0,
+      "clicks": 106.0,
+      "ctr": 0.266332,
+      "impressions": 398.0,
       "local_page": "research.html",
       "page": "https://lastzguides.com/research.html",
-      "position": 4.5528,
+      "position": 3.9422,
       "query": "last z research guide"
     },
     {
       "clicks": 66.0,
-      "ctr": 0.267206,
-      "impressions": 247.0,
+      "ctr": 0.283262,
+      "impressions": 233.0,
       "local_page": "alliance-duel.html",
       "page": "https://lastzguides.com/alliance-duel.html",
-      "position": 2.3725,
+      "position": 2.2833,
       "query": "last z vs schedule"
     },
     {
-      "clicks": 64.0,
-      "ctr": 0.193939,
-      "impressions": 330.0,
+      "clicks": 66.0,
+      "ctr": 0.20625,
+      "impressions": 320.0,
       "local_page": "lucky-discounter.html",
       "page": "https://lastzguides.com/lucky-discounter.html",
-      "position": 2.5848,
+      "position": 2.5812,
       "query": "lucky discounter last z"
     },
     {
-      "clicks": 54.0,
-      "ctr": 0.228814,
-      "impressions": 236.0,
-      "local_page": "heroes.html",
-      "page": "https://lastzguides.com/heroes.html",
-      "position": 3.7924,
-      "query": "last z season 4 heroes"
-    },
-    {
-      "clicks": 52.0,
-      "ctr": 0.429752,
-      "impressions": 121.0,
+      "clicks": 59.0,
+      "ctr": 0.430657,
+      "impressions": 137.0,
       "local_page": "events.html",
       "page": "https://lastzguides.com/events.html",
-      "position": 1.8512,
+      "position": 1.8321,
       "query": "last z event calendar"
     },
     {
       "clicks": 51.0,
-      "ctr": 0.232877,
-      "impressions": 219.0,
+      "ctr": 0.223684,
+      "impressions": 228.0,
       "local_page": "index.html",
       "page": "https://lastzguides.com/",
-      "position": 3.8447,
+      "position": 3.614,
       "query": "last z research"
     },
     {
-      "clicks": 47.0,
-      "ctr": 0.376,
-      "impressions": 125.0,
+      "clicks": 51.0,
+      "ctr": 0.383459,
+      "impressions": 133.0,
       "local_page": "yu-chan.html",
       "page": "https://lastzguides.com/yu-chan.html",
-      "position": 1.144,
+      "position": 1.0827,
       "query": "yu chan last z"
     },
     {
-      "clicks": 46.0,
-      "ctr": 0.741935,
-      "impressions": 62.0,
+      "clicks": 48.0,
+      "ctr": 0.230769,
+      "impressions": 208.0,
+      "local_page": "heroes.html",
+      "page": "https://lastzguides.com/heroes.html",
+      "position": 3.3221,
+      "query": "last z season 4 heroes"
+    },
+    {
+      "clicks": 44.0,
+      "ctr": 0.407407,
+      "impressions": 108.0,
+      "local_page": "alliance-recognition-cost.html",
+      "page": "https://lastzguides.com/alliance-recognition-cost.html",
+      "position": 1.6296,
+      "query": "last z alliance recognition badge cost"
+    },
+    {
+      "clicks": 44.0,
+      "ctr": 0.210526,
+      "impressions": 209.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 2.8469,
+      "query": "last z hot events schedule"
+    },
+    {
+      "clicks": 42.0,
+      "ctr": 0.045405,
+      "impressions": 925.0,
+      "local_page": "codes.html",
+      "page": "https://lastzguides.com/codes.html",
+      "position": 5.4605,
+      "query": "last z gift center login"
+    },
+    {
+      "clicks": 37.0,
+      "ctr": 0.74,
+      "impressions": 50.0,
       "local_page": "index.html",
       "page": "https://lastzguides.com/",
       "position": 1.0,
       "query": "last z guides"
     },
     {
-      "clicks": 43.0,
-      "ctr": 0.044932,
-      "impressions": 957.0,
-      "local_page": "codes.html",
-      "page": "https://lastzguides.com/codes.html",
-      "position": 5.559,
-      "query": "last z gift center login"
-    },
-    {
-      "clicks": 43.0,
-      "ctr": 0.241573,
-      "impressions": 178.0,
-      "local_page": "events.html",
-      "page": "https://lastzguides.com/events.html",
-      "position": 2.7472,
-      "query": "last z hot events schedule"
-    },
-    {
-      "clicks": 38.0,
-      "ctr": 0.703704,
-      "impressions": 54.0,
-      "local_page": "index.html",
-      "page": "https://lastzguides.com/",
-      "position": 1.1111,
-      "query": "lastz guide"
-    },
-    {
-      "clicks": 33.0,
-      "ctr": 0.226027,
-      "impressions": 146.0,
-      "local_page": "research.html",
-      "page": "https://lastzguides.com/research.html",
-      "position": 4.1644,
-      "query": "last z research priority"
-    },
-    {
-      "clicks": 30.0,
-      "ctr": 0.121457,
-      "impressions": 247.0,
-      "local_page": "alliance-recognition-cost.html",
-      "page": "https://lastzguides.com/alliance-recognition-cost.html",
-      "position": 4.7166,
-      "query": "alliance recognition last z"
-    },
-    {
-      "clicks": 30.0,
-      "ctr": 0.32967,
-      "impressions": 91.0,
-      "local_page": "alliance-recognition-cost.html",
-      "page": "https://lastzguides.com/alliance-recognition-cost.html",
-      "position": 1.6593,
-      "query": "last z alliance recognition badge cost"
-    },
-    {
-      "clicks": 30.0,
-      "ctr": 0.23622,
+      "clicks": 34.0,
+      "ctr": 0.267717,
       "impressions": 127.0,
       "local_page": "lucky-discounter.html",
       "page": "https://lastzguides.com/lucky-discounter.html",
-      "position": 2.0866,
+      "position": 2.0394,
       "query": "last z lucky discounter schedule"
     },
     {
-      "clicks": 26.0,
-      "ctr": 0.240741,
-      "impressions": 108.0,
-      "local_page": "gacha-go.html",
-      "page": "https://lastzguides.com/gacha-go.html",
-      "position": 2.4444,
-      "query": "gacha go last z"
+      "clicks": 33.0,
+      "ctr": 0.22,
+      "impressions": 150.0,
+      "local_page": "research.html",
+      "page": "https://lastzguides.com/research.html",
+      "position": 3.98,
+      "query": "last z research priority"
     },
     {
-      "clicks": 24.0,
-      "ctr": 0.1875,
-      "impressions": 128.0,
+      "clicks": 32.0,
+      "ctr": 0.744186,
+      "impressions": 43.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 1.0465,
+      "query": "lastz guide"
+    },
+    {
+      "clicks": 31.0,
+      "ctr": 0.21831,
+      "impressions": 142.0,
       "local_page": "alliance-duel.html",
       "page": "https://lastzguides.com/alliance-duel.html",
-      "position": 2.8125,
+      "position": 2.6479,
       "query": "last z alliance duel schedule"
+    },
+    {
+      "clicks": 28.0,
+      "ctr": 0.112903,
+      "impressions": 248.0,
+      "local_page": "alliance-recognition-cost.html",
+      "page": "https://lastzguides.com/alliance-recognition-cost.html",
+      "position": 4.5685,
+      "query": "alliance recognition last z"
+    },
+    {
+      "clicks": 26.0,
+      "ctr": 0.247619,
+      "impressions": 105.0,
+      "local_page": "gacha-go.html",
+      "page": "https://lastzguides.com/gacha-go.html",
+      "position": 2.1905,
+      "query": "gacha go last z"
     },
     {
       "clicks": 24.0,
@@ -493,242 +493,233 @@
       "impressions": 76.0,
       "local_page": "gacha-go.html",
       "page": "https://lastzguides.com/gacha-go.html",
-      "position": 2.1447,
+      "position": 1.9342,
       "query": "last z gacha go"
     },
     {
-      "clicks": 22.0,
-      "ctr": 0.44,
-      "impressions": 50.0,
-      "local_page": "vehicle-modification-cost.html",
-      "page": "https://lastzguides.com/vehicle-modification-cost.html",
-      "position": 1.78,
-      "query": "last z vehicle upgrade cost"
-    },
-    {
-      "clicks": 20.0,
-      "ctr": 0.235294,
-      "impressions": 85.0,
+      "clicks": 23.0,
+      "ctr": 0.277108,
+      "impressions": 83.0,
       "local_page": "alliance-recognition-cost.html",
       "page": "https://lastzguides.com/alliance-recognition-cost.html",
-      "position": 2.8588,
+      "position": 2.494,
       "query": "alliance recognition last z badges"
     },
     {
-      "clicks": 20.0,
-      "ctr": 0.246914,
-      "impressions": 81.0,
-      "local_page": "events.html",
-      "page": "https://lastzguides.com/events.html",
-      "position": 2.4815,
-      "query": "last z event rotation"
+      "clicks": 23.0,
+      "ctr": 0.45098,
+      "impressions": 51.0,
+      "local_page": "yu-chan.html",
+      "page": "https://lastzguides.com/yu-chan.html",
+      "position": 1.0392,
+      "query": "last z yu chan"
     },
     {
-      "clicks": 20.0,
-      "ctr": 0.204082,
-      "impressions": 98.0,
+      "clicks": 22.0,
+      "ctr": 0.205607,
+      "impressions": 107.0,
       "local_page": "research.html",
       "page": "https://lastzguides.com/research.html",
-      "position": 5.4796,
+      "position": 4.5701,
       "query": "last z research"
     },
     {
-      "clicks": 20.0,
-      "ctr": 0.190476,
-      "impressions": 105.0,
-      "local_page": "heroes.html",
-      "page": "https://lastzguides.com/heroes.html",
-      "position": 4.4381,
-      "query": "last z s4 heroes"
-    },
-    {
-      "clicks": 20.0,
-      "ctr": 0.042373,
-      "impressions": 472.0,
+      "clicks": 22.0,
+      "ctr": 0.045929,
+      "impressions": 479.0,
       "local_page": "codes.html",
       "page": "https://lastzguides.com/codes.html",
-      "position": 6.2161,
+      "position": 6.0042,
       "query": "last-z.com gift center"
     },
     {
-      "clicks": 20.0,
-      "ctr": 0.03992,
-      "impressions": 501.0,
+      "clicks": 22.0,
+      "ctr": 0.03964,
+      "impressions": 555.0,
       "local_page": "codes.html",
       "page": "https://lastzguides.com/codes.html",
-      "position": 6.8882,
+      "position": 6.3676,
       "query": "lastz gift center"
     },
     {
-      "clicks": 19.0,
-      "ctr": 0.292308,
-      "impressions": 65.0,
+      "clicks": 20.0,
+      "ctr": 0.289855,
+      "impressions": 69.0,
+      "local_page": "alliance-recognition-cost.html",
+      "page": "https://lastzguides.com/alliance-recognition-cost.html",
+      "position": 2.5072,
+      "query": "last z alliance recognition badges"
+    },
+    {
+      "clicks": 20.0,
+      "ctr": 0.298507,
+      "impressions": 67.0,
       "local_page": "queenie.html",
       "page": "https://lastzguides.com/queenie.html",
-      "position": 1.4154,
+      "position": 1.2537,
       "query": "last z queenie"
     },
     {
+      "clicks": 20.0,
+      "ctr": 0.444444,
+      "impressions": 45.0,
+      "local_page": "vehicle-modification-cost.html",
+      "page": "https://lastzguides.com/vehicle-modification-cost.html",
+      "position": 3.0222,
+      "query": "last z wrench calculator"
+    },
+    {
       "clicks": 19.0,
-      "ctr": 0.475,
-      "impressions": 40.0,
+      "ctr": 0.063545,
+      "impressions": 299.0,
+      "local_page": "index.html",
+      "page": "https://lastzguides.com/",
+      "position": 8.1672,
+      "query": "last z research guide"
+    },
+    {
+      "clicks": 19.0,
+      "ctr": 0.44186,
+      "impressions": 43.0,
       "local_page": "research.html",
       "page": "https://lastzguides.com/research.html",
-      "position": 2.1,
+      "position": 1.6977,
       "query": "last z urgent rescue"
     },
     {
       "clicks": 19.0,
-      "ctr": 0.358491,
-      "impressions": 53.0,
-      "local_page": "vehicle-modification-cost.html",
-      "page": "https://lastzguides.com/vehicle-modification-cost.html",
-      "position": 4.4717,
-      "query": "last z wrench requirements"
-    },
-    {
-      "clicks": 18.0,
-      "ctr": 0.272727,
-      "impressions": 66.0,
-      "local_page": "lucky-discounter.html",
-      "page": "https://lastzguides.com/lucky-discounter.html",
-      "position": 1.9697,
-      "query": "last z survival shooter lucky discounter"
-    },
-    {
-      "clicks": 18.0,
-      "ctr": 0.219512,
-      "impressions": 82.0,
-      "local_page": "vehicle-modification-cost.html",
-      "page": "https://lastzguides.com/vehicle-modification-cost.html",
-      "position": 4.1951,
-      "query": "last z vehicle upgrade"
-    },
-    {
-      "clicks": 18.0,
-      "ctr": 0.439024,
-      "impressions": 41.0,
-      "local_page": "vehicle-modification-cost.html",
-      "page": "https://lastzguides.com/vehicle-modification-cost.html",
-      "position": 3.4146,
-      "query": "last z wrench calculator"
-    },
-    {
-      "clicks": 17.0,
-      "ctr": 0.257576,
-      "impressions": 66.0,
-      "local_page": "events.html",
-      "page": "https://lastzguides.com/events.html",
-      "position": 3.9242,
-      "query": "last z weekly events"
-    },
-    {
-      "clicks": 16.0,
-      "ctr": 0.103226,
-      "impressions": 155.0,
-      "local_page": "alliance-recognition-cost.html",
-      "page": "https://lastzguides.com/alliance-recognition-cost.html",
-      "position": 3.7032,
-      "query": "last z alliance recognition"
-    },
-    {
-      "clicks": 16.0,
-      "ctr": 0.4,
-      "impressions": 40.0,
-      "local_page": "yu-chan.html",
-      "page": "https://lastzguides.com/yu-chan.html",
-      "position": 1.1,
-      "query": "last z yu chan"
-    },
-    {
-      "clicks": 16.0,
-      "ctr": 0.5,
-      "impressions": 32.0,
+      "ctr": 0.678571,
+      "impressions": 28.0,
       "local_page": "index.html",
       "page": "https://lastzguides.com/",
       "position": 1.0,
       "query": "lastzguides.com"
     },
     {
+      "clicks": 18.0,
+      "ctr": 0.233766,
+      "impressions": 77.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 2.5844,
+      "query": "last z event rotation"
+    },
+    {
+      "clicks": 17.0,
+      "ctr": 0.182796,
+      "impressions": 93.0,
+      "local_page": "heroes.html",
+      "page": "https://lastzguides.com/heroes.html",
+      "position": 3.8602,
+      "query": "last z s4 heroes"
+    },
+    {
+      "clicks": 17.0,
+      "ctr": 0.459459,
+      "impressions": 37.0,
+      "local_page": "vehicle-modification-cost.html",
+      "page": "https://lastzguides.com/vehicle-modification-cost.html",
+      "position": 3.3243,
+      "query": "last z wrench requirements"
+    },
+    {
+      "clicks": 16.0,
+      "ctr": 0.192771,
+      "impressions": 83.0,
+      "local_page": "field-research.html",
+      "page": "https://lastzguides.com/field-research.html",
+      "position": 3.3373,
+      "query": "last z field research"
+    },
+    {
+      "clicks": 16.0,
+      "ctr": 0.231884,
+      "impressions": 69.0,
+      "local_page": "vehicle-modification-cost.html",
+      "page": "https://lastzguides.com/vehicle-modification-cost.html",
+      "position": 3.9565,
+      "query": "last z vehicle upgrade"
+    },
+    {
+      "clicks": 16.0,
+      "ctr": 0.168421,
+      "impressions": 95.0,
+      "local_page": "queenie.html",
+      "page": "https://lastzguides.com/queenie.html",
+      "position": 2.0632,
+      "query": "queenie last z"
+    },
+    {
       "clicks": 15.0,
-      "ctr": 0.07732,
-      "impressions": 194.0,
+      "ctr": 0.076531,
+      "impressions": 196.0,
       "local_page": "codes.html",
       "page": "https://lastzguides.com/codes.html",
-      "position": 6.4433,
+      "position": 6.4439,
       "query": "https//last-z.com/gift center/#/login"
     },
     {
       "clicks": 15.0,
-      "ctr": 0.234375,
-      "impressions": 64.0,
+      "ctr": 0.104895,
+      "impressions": 143.0,
       "local_page": "alliance-recognition-cost.html",
       "page": "https://lastzguides.com/alliance-recognition-cost.html",
-      "position": 2.7812,
-      "query": "last z alliance recognition badges"
+      "position": 3.6434,
+      "query": "last z alliance recognition"
     },
     {
-      "clicks": 14.0,
-      "ctr": 0.150538,
+      "clicks": 15.0,
+      "ctr": 0.16129,
       "impressions": 93.0,
-      "local_page": "alliance-duel.html",
-      "page": "https://lastzguides.com/alliance-duel.html",
-      "position": 4.043,
-      "query": "alliance duel last z"
-    },
-    {
-      "clicks": 14.0,
-      "ctr": 0.145833,
-      "impressions": 96.0,
       "local_page": "farm-account.html",
       "page": "https://lastzguides.com/farm-account.html",
-      "position": 2.8438,
+      "position": 2.6774,
       "query": "last z farm account"
     },
     {
-      "clicks": 14.0,
-      "ctr": 0.189189,
-      "impressions": 74.0,
-      "local_page": "field-research.html",
-      "page": "https://lastzguides.com/field-research.html",
-      "position": 3.5405,
-      "query": "last z field research"
+      "clicks": 15.0,
+      "ctr": 0.357143,
+      "impressions": 42.0,
+      "local_page": "vehicle-modification-cost.html",
+      "page": "https://lastzguides.com/vehicle-modification-cost.html",
+      "position": 1.7857,
+      "query": "last z vehicle upgrade cost"
+    },
+    {
+      "clicks": 15.0,
+      "ctr": 0.217391,
+      "impressions": 69.0,
+      "local_page": "events.html",
+      "page": "https://lastzguides.com/events.html",
+      "position": 3.7826,
+      "query": "last z weekly events"
     },
     {
       "clicks": 14.0,
-      "ctr": 0.56,
-      "impressions": 25.0,
-      "local_page": "index.html",
-      "page": "https://lastzguides.com/",
-      "position": 2.84,
-      "query": "lastzguides"
-    },
-    {
-      "clicks": 13.0,
-      "ctr": 0.142857,
-      "impressions": 91.0,
-      "local_page": "alliance-duel.html",
-      "page": "https://lastzguides.com/alliance-duel.html",
-      "position": 3.5165,
-      "query": "last z alliance duel"
-    },
-    {
-      "clicks": 13.0,
-      "ctr": 0.171053,
-      "impressions": 76.0,
+      "ctr": 0.181818,
+      "impressions": 77.0,
       "local_page": "farm-account.html",
       "page": "https://lastzguides.com/farm-account.html",
-      "position": 3.0921,
+      "position": 2.6364,
       "query": "last z farm account guide"
     },
     {
+      "clicks": 14.0,
+      "ctr": 0.254545,
+      "impressions": 55.0,
+      "local_page": "research.html",
+      "page": "https://lastzguides.com/research.html",
+      "position": 2.1636,
+      "query": "urgent rescue last z"
+    },
+    {
       "clicks": 13.0,
-      "ctr": 0.052,
-      "impressions": 250.0,
-      "local_page": "index.html",
-      "page": "https://lastzguides.com/",
-      "position": 8.288,
-      "query": "last z research guide"
+      "ctr": 0.236364,
+      "impressions": 55.0,
+      "local_page": "lucky-discounter.html",
+      "page": "https://lastzguides.com/lucky-discounter.html",
+      "position": 2.0364,
+      "query": "last z survival shooter lucky discounter"
     },
     {
       "clicks": 12.0,
@@ -736,415 +727,424 @@
       "impressions": 41.0,
       "local_page": "gacha-go.html",
       "page": "https://lastzguides.com/gacha-go.html",
-      "position": 1.8293,
+      "position": 1.7805,
       "query": "gacha go event last z"
     },
     {
       "clicks": 12.0,
-      "ctr": 0.086957,
-      "impressions": 138.0,
+      "ctr": 0.034483,
+      "impressions": 348.0,
       "local_page": "codes.html",
       "page": "https://lastzguides.com/codes.html",
-      "position": 6.0725,
-      "query": "last z.com gift center"
+      "position": 6.2443,
+      "query": "https //last-z.com/gift center/#/login"
     },
     {
       "clicks": 12.0,
-      "ctr": 0.226415,
-      "impressions": 53.0,
-      "local_page": "research.html",
-      "page": "https://lastzguides.com/research.html",
-      "position": 2.566,
-      "query": "urgent rescue last z"
+      "ctr": 0.342857,
+      "impressions": 35.0,
+      "local_page": "svs.html",
+      "page": "https://lastzguides.com/svs.html",
+      "position": 3.2571,
+      "query": "last z svs guide"
+    },
+    {
+      "clicks": 12.0,
+      "ctr": 0.087591,
+      "impressions": 137.0,
+      "local_page": "codes.html",
+      "page": "https://lastzguides.com/codes.html",
+      "position": 6.0511,
+      "query": "last z.com gift center"
     }
   ],
   "report_type": "gsc_weekly_agent_signals",
   "rows_limit": 250,
   "schema_version": 1,
   "summary": {
-    "ctr_median_queries_min_50_impressions": 0.075697,
-    "page_rows": 87,
+    "ctr_median_queries_min_50_impressions": 0.075302,
+    "page_rows": 88,
     "query_page_rows": 250,
     "query_rows": 250
   },
   "trend_signals": {
     "new_queries_last_7_days": [
       {
-        "clicks": 4.0,
-        "ctr": 0.012195,
-        "impressions": 328.0,
-        "position": 7.4543,
-        "query": "https last z com giftcenter /#/ login"
-      },
-      {
-        "clicks": 10.0,
-        "ctr": 0.036232,
-        "impressions": 276.0,
-        "position": 5.8442,
-        "query": "https //last-z.com/gift center/#/login"
-      },
-      {
-        "clicks": 7.0,
-        "ctr": 0.032864,
-        "impressions": 213.0,
-        "position": 7.0704,
-        "query": "https last z com giftcenter login"
-      },
-      {
-        "clicks": 15.0,
-        "ctr": 0.097403,
-        "impressions": 154.0,
-        "position": 5.8182,
-        "query": "https//last-z.com/gift center/#/login"
-      },
-      {
         "clicks": 2.0,
-        "ctr": 0.014706,
-        "impressions": 136.0,
-        "position": 7.4485,
-        "query": "last z gift code login"
+        "ctr": 0.052632,
+        "impressions": 38.0,
+        "position": 5.4474,
+        "query": "url=https //last-z.com/gift center/#/login"
       },
       {
-        "clicks": 1.0,
-        "ctr": 0.010204,
-        "impressions": 98.0,
-        "position": 7.0,
-        "query": "last z code https //last-z.com/giftcenter/#/login"
+        "clicks": 0.0,
+        "ctr": 0.0,
+        "impressions": 36.0,
+        "position": 4.4167,
+        "query": "\"goldbar\" \"last z survival shooter\""
       },
       {
-        "clicks": 3.0,
-        "ctr": 0.03125,
-        "impressions": 96.0,
-        "position": 6.7292,
-        "query": "last z com gift center"
+        "clicks": 0.0,
+        "ctr": 0.0,
+        "impressions": 35.0,
+        "position": 3.6857,
+        "query": "\"2026iscomming\" \"last z survival shooter\""
       },
       {
-        "clicks": 3.0,
-        "ctr": 0.031915,
-        "impressions": 94.0,
-        "position": 7.2128,
-        "query": "last z gift centre"
-      },
-      {
-        "clicks": 1.0,
-        "ctr": 0.013699,
-        "impressions": 73.0,
-        "position": 6.2329,
-        "query": "last z com giftcenter /#/ login"
-      },
-      {
-        "clicks": 3.0,
-        "ctr": 0.05,
-        "impressions": 60.0,
-        "position": 6.2333,
-        "query": "last-z gift center"
-      },
-      {
-        "clicks": 9.0,
-        "ctr": 0.155172,
-        "impressions": 58.0,
-        "position": 5.2414,
-        "query": "http//last-z.com/gift center/#/login"
-      },
-      {
-        "clicks": 5.0,
-        "ctr": 0.09434,
-        "impressions": 53.0,
-        "position": 6.2264,
-        "query": "http //last-z.com/gift center/#/login"
-      },
-      {
-        "clicks": 2.0,
-        "ctr": 0.039216,
-        "impressions": 51.0,
-        "position": 7.9216,
-        "query": "last z hq 31-35 requirements"
-      },
-      {
-        "clicks": 2.0,
-        "ctr": 0.039216,
-        "impressions": 51.0,
-        "position": 5.4706,
-        "query": "last-z/gift center/#/login"
-      },
-      {
-        "clicks": 3.0,
-        "ctr": 0.071429,
-        "impressions": 42.0,
-        "position": 9.6667,
-        "query": "last z code"
-      },
-      {
-        "clicks": 1.0,
-        "ctr": 0.03125,
+        "clicks": 0.0,
+        "ctr": 0.0,
         "impressions": 32.0,
-        "position": 7.4688,
-        "query": "last z gift center codes"
+        "position": 3.5938,
+        "query": "\"2026iscomming\" \"last z: survival shooter\""
+      },
+      {
+        "clicks": 0.0,
+        "ctr": 0.0,
+        "impressions": 28.0,
+        "position": 1.8571,
+        "query": "\"2026iscomming\" \"expired\" \"last z\""
       },
       {
         "clicks": 1.0,
-        "ctr": 0.03125,
-        "impressions": 32.0,
-        "position": 3.6875,
-        "query": "lastz com giftcenter /#/ login"
-      },
-      {
-        "clicks": 4.0,
-        "ctr": 0.129032,
-        "impressions": 31.0,
-        "position": 5.129,
-        "query": "last z hq 31 requirements"
-      },
-      {
-        "clicks": 1.0,
-        "ctr": 0.034483,
-        "impressions": 29.0,
-        "position": 5.5172,
-        "query": "@all https://last-z.com/giftcenter/#/login"
-      },
-      {
-        "clicks": 2.0,
-        "ctr": 0.074074,
-        "impressions": 27.0,
-        "position": 4.5926,
-        "query": "last z giftcenter"
-      },
-      {
-        "clicks": 4.0,
-        "ctr": 0.166667,
+        "ctr": 0.041667,
         "impressions": 24.0,
-        "position": 3.75,
-        "query": "lastz giftcenter"
-      },
-      {
-        "clicks": 3.0,
-        "ctr": 0.125,
-        "impressions": 24.0,
-        "position": 7.125,
-        "query": "last z gift code may 2026"
+        "position": 8.6667,
+        "query": "last z code einl\u00f6sen"
       },
       {
         "clicks": 1.0,
         "ctr": 0.043478,
         "impressions": 23.0,
-        "position": 9.2609,
-        "query": "last z hq"
+        "position": 5.3478,
+        "query": "last z zombie siege strategy"
       },
       {
         "clicks": 1.0,
         "ctr": 0.045455,
         "impressions": 22.0,
-        "position": 4.3636,
-        "query": "last z zombie siege strategy"
+        "position": 9.7273,
+        "query": "last z gift codes may 2026"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.045455,
+        "impressions": 22.0,
+        "position": 8.0455,
+        "query": "last z peace shield"
+      },
+      {
+        "clicks": 3.0,
+        "ctr": 0.142857,
+        "impressions": 21.0,
+        "position": 7.381,
+        "query": "last z season 4 guide"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.052632,
+        "impressions": 19.0,
+        "position": 5.1579,
+        "query": "last z zombie siege"
+      },
+      {
+        "clicks": 3.0,
+        "ctr": 0.166667,
+        "impressions": 18.0,
+        "position": 3.5556,
+        "query": "steel age research last z"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.055556,
+        "impressions": 18.0,
+        "position": 7.8889,
+        "query": "last z technologies"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.058824,
+        "impressions": 17.0,
+        "position": 6.0588,
+        "query": "elite modifier last z"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.058824,
+        "impressions": 17.0,
+        "position": 8.0,
+        "query": "last z survival shooter hq upgrade requirements"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.058824,
+        "impressions": 17.0,
+        "position": 7.7059,
+        "query": "last z: survival shooter hq 31-35 requirements"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.066667,
+        "impressions": 15.0,
+        "position": 5.8667,
+        "query": "last z elite modifier"
       },
       {
         "clicks": 2.0,
-        "ctr": 0.095238,
-        "impressions": 21.0,
-        "position": 4.7143,
-        "query": "mythic equipment last z"
+        "ctr": 0.142857,
+        "impressions": 14.0,
+        "position": 4.0714,
+        "query": "last z vs"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.071429,
+        "impressions": 14.0,
+        "position": 7.1429,
+        "query": "last z level 31 hq requirements"
+      },
+      {
+        "clicks": 0.0,
+        "ctr": 0.0,
+        "impressions": 14.0,
+        "position": 2.6429,
+        "query": "\"2026iscomming\" \"last z\" official"
+      },
+      {
+        "clicks": 2.0,
+        "ctr": 0.153846,
+        "impressions": 13.0,
+        "position": 7.3846,
+        "query": "last z codes may 2026"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.076923,
+        "impressions": 13.0,
+        "position": 6.8462,
+        "query": "last z gift code march 2026"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.076923,
+        "impressions": 13.0,
+        "position": 8.9231,
+        "query": "last z rally square upgrade"
+      },
+      {
+        "clicks": 3.0,
+        "ctr": 0.25,
+        "impressions": 12.0,
+        "position": 8.1667,
+        "query": "last z all research trees"
+      },
+      {
+        "clicks": 2.0,
+        "ctr": 0.166667,
+        "impressions": 12.0,
+        "position": 1.6667,
+        "query": "lucky discounter event last z"
       }
     ],
     "rising_queries_last_7_vs_previous_7": [
       {
-        "clicks": 85.0,
-        "ctr": 0.038219,
-        "delta_impressions": 1703.0,
-        "impressions": 2224.0,
-        "position": 6.6565,
-        "query": "last z gift center"
-      },
-      {
-        "clicks": 39.0,
-        "ctr": 0.058296,
-        "delta_impressions": 504.0,
-        "impressions": 669.0,
-        "position": 4.9865,
-        "query": "last z gift center login"
-      },
-      {
         "clicks": 1.0,
-        "ctr": 0.002451,
-        "delta_impressions": 252.0,
-        "impressions": 408.0,
-        "position": 8.527,
-        "query": "https://last-z.com/giftcenter/#/login"
-      },
-      {
-        "clicks": 18.0,
-        "ctr": 0.053412,
-        "delta_impressions": 241.0,
-        "impressions": 337.0,
-        "position": 6.3947,
-        "query": "lastz gift center"
-      },
-      {
-        "clicks": 17.0,
-        "ctr": 0.053459,
-        "delta_impressions": 208.0,
-        "impressions": 318.0,
-        "position": 5.8239,
-        "query": "last-z.com gift center"
-      },
-      {
-        "clicks": 1.0,
-        "ctr": 0.006993,
-        "delta_impressions": 85.0,
-        "impressions": 143.0,
-        "position": 5.8462,
-        "query": "last z com gift center /#/ login"
-      },
-      {
-        "clicks": 10.0,
-        "ctr": 0.102041,
-        "delta_impressions": 67.0,
-        "impressions": 98.0,
-        "position": 5.6224,
-        "query": "last z.com gift center"
-      },
-      {
-        "clicks": 3.0,
-        "ctr": 0.026786,
-        "delta_impressions": 56.0,
-        "impressions": 112.0,
-        "position": 7.5179,
-        "query": "lastz.com gift center"
-      },
-      {
-        "clicks": 1.0,
-        "ctr": 0.011111,
-        "delta_impressions": 44.0,
-        "impressions": 90.0,
-        "position": 8.2,
-        "query": "canyon clash last z"
-      },
-      {
-        "clicks": 1.0,
-        "ctr": 0.015152,
-        "delta_impressions": 30.0,
-        "impressions": 66.0,
-        "position": 8.9697,
-        "query": "last z hq requirements"
-      },
-      {
-        "clicks": 2.0,
-        "ctr": 0.05,
-        "delta_impressions": 26.0,
-        "impressions": 40.0,
-        "position": 7.925,
-        "query": "gift center last z"
-      },
-      {
-        "clicks": 1.0,
-        "ctr": 0.038462,
-        "delta_impressions": 23.0,
-        "impressions": 26.0,
-        "position": 7.9615,
-        "query": "1. https //last-z.com/giftcenter/#/login"
-      },
-      {
-        "clicks": 1.0,
-        "ctr": 0.02,
-        "delta_impressions": 19.0,
-        "impressions": 50.0,
-        "position": 5.02,
-        "query": "advanced mod license last z"
+        "ctr": 0.013333,
+        "delta_impressions": 49.0,
+        "impressions": 75.0,
+        "position": 9.16,
+        "query": "last z hq upgrade requirements"
       },
       {
         "clicks": 9.0,
-        "ctr": 0.290323,
-        "delta_impressions": 13.0,
-        "impressions": 31.0,
-        "position": 1.7097,
-        "query": "last z alliance recognition badge cost"
-      },
-      {
-        "clicks": 11.0,
-        "ctr": 0.268293,
-        "delta_impressions": 11.0,
-        "impressions": 41.0,
-        "position": 3.4634,
-        "query": "last z research priority"
+        "ctr": 0.310345,
+        "delta_impressions": 16.0,
+        "impressions": 29.0,
+        "position": 1.7586,
+        "query": "gacha go last z"
       },
       {
         "clicks": 1.0,
-        "ctr": 0.020408,
-        "delta_impressions": 11.0,
-        "impressions": 49.0,
-        "position": 8.4694,
-        "query": "last z canyon clash"
+        "ctr": 0.009259,
+        "delta_impressions": 16.0,
+        "impressions": 108.0,
+        "position": 9.0185,
+        "query": "last z research tree"
       },
       {
         "clicks": 3.0,
-        "ctr": 0.083333,
-        "delta_impressions": 9.0,
-        "impressions": 36.0,
-        "position": 3.5556,
-        "query": "last z alliance recognition"
+        "ctr": 0.06,
+        "delta_impressions": 15.0,
+        "impressions": 50.0,
+        "position": 8.66,
+        "query": "last z gift code may 2026"
+      },
+      {
+        "clicks": 28.0,
+        "ctr": 0.282828,
+        "delta_impressions": 11.0,
+        "impressions": 99.0,
+        "position": 3.3131,
+        "query": "last z research guide"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.010417,
+        "delta_impressions": 10.0,
+        "impressions": 96.0,
+        "position": 8.875,
+        "query": "last z hq requirements"
       },
       {
         "clicks": 4.0,
-        "ctr": 0.2,
+        "ctr": 0.056338,
         "delta_impressions": 8.0,
-        "impressions": 20.0,
-        "position": 2.0,
-        "query": "last z survival shooter lucky discounter"
+        "impressions": 71.0,
+        "position": 6.8451,
+        "query": "last z hq 31-35 requirements"
       },
       {
         "clicks": 3.0,
-        "ctr": 0.15,
+        "ctr": 0.136364,
+        "delta_impressions": 8.0,
+        "impressions": 22.0,
+        "position": 3.5,
+        "query": "how to create farm account in last z survival shooter"
+      },
+      {
+        "clicks": 3.0,
+        "ctr": 0.05,
+        "delta_impressions": 8.0,
+        "impressions": 60.0,
+        "position": 8.3333,
+        "query": "last z canyon clash"
+      },
+      {
+        "clicks": 2.0,
+        "ctr": 0.1,
         "delta_impressions": 8.0,
         "impressions": 20.0,
-        "position": 5.25,
-        "query": "lastz research"
-      },
-      {
-        "clicks": 13.0,
-        "ctr": 0.270833,
-        "delta_impressions": 6.0,
-        "impressions": 48.0,
-        "position": 2.7083,
-        "query": "last z hot events schedule"
-      },
-      {
-        "clicks": 8.0,
-        "ctr": 0.333333,
-        "delta_impressions": 6.0,
-        "impressions": 24.0,
-        "position": 2.2083,
-        "query": "alliance recognition last z badges"
+        "position": 14.3,
+        "query": "last z gift code"
       },
       {
         "clicks": 2.0,
-        "ctr": 0.046512,
-        "delta_impressions": 6.0,
-        "impressions": 43.0,
-        "position": 4.3953,
-        "query": "last z advanced mod license"
-      },
-      {
-        "clicks": 2.0,
-        "ctr": 0.117647,
-        "delta_impressions": 6.0,
-        "impressions": 17.0,
-        "position": 7.0,
-        "query": "lucky chest last z"
-      },
-      {
-        "clicks": 1.0,
-        "ctr": 0.038462,
-        "delta_impressions": 6.0,
-        "impressions": 26.0,
-        "position": 4.3462,
-        "query": "last z mythic equipment"
+        "ctr": 0.153846,
+        "delta_impressions": 8.0,
+        "impressions": 13.0,
+        "position": 1.8462,
+        "query": "last z urgent rescue"
       },
       {
         "clicks": 2.0,
         "ctr": 0.222222,
-        "delta_impressions": 5.0,
+        "delta_impressions": 7.0,
         "impressions": 9.0,
-        "position": 4.3333,
-        "query": "last z survival shooter hot events schedule"
+        "position": 2.4444,
+        "query": "last z survival shooter event calendar"
+      },
+      {
+        "clicks": 5.0,
+        "ctr": 0.294118,
+        "delta_impressions": 6.0,
+        "impressions": 17.0,
+        "position": 1.8824,
+        "query": "last z gacha go"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.125,
+        "delta_impressions": 6.0,
+        "impressions": 8.0,
+        "position": 8.5,
+        "query": "last z full preparedness"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.090909,
+        "delta_impressions": 6.0,
+        "impressions": 11.0,
+        "position": 10.6364,
+        "query": "last z gift code may"
+      },
+      {
+        "clicks": 7.0,
+        "ctr": 0.049296,
+        "delta_impressions": 5.0,
+        "impressions": 142.0,
+        "position": 6.2254,
+        "query": "last z gift code login"
+      },
+      {
+        "clicks": 4.0,
+        "ctr": 0.4,
+        "delta_impressions": 4.0,
+        "impressions": 10.0,
+        "position": 3.8,
+        "query": "last z alliance recognition research"
+      },
+      {
+        "clicks": 1.0,
+        "ctr": 0.032258,
+        "delta_impressions": 4.0,
+        "impressions": 31.0,
+        "position": 8.8387,
+        "query": "last z hq"
+      },
+      {
+        "clicks": 7.0,
+        "ctr": 0.411765,
+        "delta_impressions": 3.0,
+        "impressions": 17.0,
+        "position": 1.0588,
+        "query": "last z yu chan"
+      },
+      {
+        "clicks": 6.0,
+        "ctr": 1.0,
+        "delta_impressions": 3.0,
+        "impressions": 6.0,
+        "position": 1.0,
+        "query": "lastzguides.com"
+      },
+      {
+        "clicks": 4.0,
+        "ctr": 0.2,
+        "delta_impressions": 3.0,
+        "impressions": 20.0,
+        "position": 2.25,
+        "query": "last z farm account guide"
+      },
+      {
+        "clicks": 4.0,
+        "ctr": 0.133333,
+        "delta_impressions": 3.0,
+        "impressions": 30.0,
+        "position": 4.5333,
+        "query": "last z survival shooter research guide"
+      },
+      {
+        "clicks": 2.0,
+        "ctr": 0.222222,
+        "delta_impressions": 3.0,
+        "impressions": 9.0,
+        "position": 2.7778,
+        "query": "last z event cycle"
+      },
+      {
+        "clicks": 2.0,
+        "ctr": 0.285714,
+        "delta_impressions": 3.0,
+        "impressions": 7.0,
+        "position": 4.2857,
+        "query": "last z survival shooter farm account"
+      },
+      {
+        "clicks": 2.0,
+        "ctr": 0.153846,
+        "delta_impressions": 3.0,
+        "impressions": 13.0,
+        "position": 1.6923,
+        "query": "urgent rescue last z"
       }
     ]
   }
