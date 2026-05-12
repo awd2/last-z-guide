@@ -95,6 +95,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider f
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
+python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -119,6 +120,7 @@ python3 automation/workers/llm_adapter.py --request <request.json> --provider fi
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
+python3 automation/workers/llm_auto_review_queue.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/workers/llm_run_approved_handoffs.py --provider openai --json
@@ -144,7 +146,7 @@ It does not mutate backlog, manifests, content, PRs, or production state. `monit
 - referenced Scout request/result/markdown artifacts
 - referenced topic discovery JSON/markdown artifacts
 
-It prepares candidate and monitor topics for owner review. It does not record owner decisions, mutate `topic_backlog.csv`, create manifests, edit content, open PRs, or deploy. The GitHub Actions wrapper `.github/workflows/llm-candidate-refresh.yml` runs the same no-write refresh by weekly schedule and manual dispatch, uploads artifacts only, and does not commit generated reports.
+It prepares candidate and monitor topics for owner review. It does not record owner decisions, mutate `topic_backlog.csv`, create manifests, edit content, open PRs, or deploy. The GitHub Actions wrapper `.github/workflows/llm-candidate-refresh.yml` runs the same no-write refresh by weekly schedule and manual dispatch, uploads artifacts only, and does not commit generated reports. The higher-throughput `.github/workflows/llm-auto-review-queue.yml` runs daily and may commit only queue report artifacts under `automation/reports/llm-auto-review-queue/`.
 
 `llm-topic-discovery` is the no-write bridge from LLM Scout selection and
 monitoring output to owner-reviewed topic intake. It reads one LLM Scout
@@ -205,6 +207,14 @@ current chain summary already exists for the decision, it skips the handoff
 unless `--include-current` is supplied. It does not run live Scout reranking,
 approve public copy, mutate backlog, create manifests, edit content, open PRs,
 or deploy.
+
+`llm-auto-review-queue` is the higher-throughput no-write automation layer. It
+runs candidate refresh, scores candidate topics, auto-runs the top candidates
+through Editor and Reviewer, and writes one consolidated owner-review queue. It
+skips topics with existing completed chain summaries unless `--include-existing`
+is supplied. This reduces owner involvement to reviewing ready queue packages,
+but it still does not approve public copy, mutate backlog, create manifests,
+edit content, open PRs, or deploy.
 
 `llm-editor` is the second live LLM worker wrapper. It reads one selected LLM Scout opportunity, combines it with deterministic Editor context, sends a JSON-only planning request through `llm_adapter`, and writes:
 

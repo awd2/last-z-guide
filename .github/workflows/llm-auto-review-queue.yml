@@ -1,0 +1,129 @@
+name: LLM auto review queue
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "OpenAI model for the no-write auto-review queue."
+        required: false
+        default: "gpt-5.4-mini"
+      max_chains:
+        description: "Maximum top candidates to auto-review."
+        required: false
+        default: "3"
+      include_existing:
+        description: "Rerun topics that already have completed chain summaries."
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    - cron: "20 8 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/llm-auto-review-queue.yml"
+      - "automation/pipeline.py"
+      - "automation/workers/llm_*.py"
+      - "automation/reports/llm_*.py"
+      - "content/gsc/latest-gsc-agent-signals.json"
+      - "content/bing/latest-bing-agent-signals.json"
+
+concurrency:
+  group: llm-auto-review-queue-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  queue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Run no-write LLM auto review queue
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ github.event.inputs.model || 'gpt-5.4-mini' }}
+          MAX_CHAINS: ${{ github.event.inputs.max_chains || '3' }}
+          INCLUDE_EXISTING: ${{ github.event.inputs.include_existing || 'false' }}
+        run: |
+          set -euo pipefail
+          cmd=(
+            python3 automation/pipeline.py llm-auto-review-queue
+            --provider openai
+            --output-dir automation/reports/llm-auto-review-queue
+            --max-chains "$MAX_CHAINS"
+            --json
+          )
+          if [[ "$INCLUDE_EXISTING" == "true" ]]; then
+            cmd+=(--include-existing)
+          fi
+          "${cmd[@]}" | tee automation/reports/llm-auto-review-queue/run-summary.json
+
+      - name: Write job summary
+        if: always()
+        run: |
+          {
+            echo "## LLM Auto Review Queue"
+            echo
+            echo "- Mode: no-write"
+            echo "- Output directory: \`automation/reports/llm-auto-review-queue\`"
+            echo "- Content/backlog/manifests/PRs modified: \`false\`"
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+
+          summary_path = Path("automation/reports/llm-auto-review-queue/run-summary.json")
+          if not summary_path.exists():
+              print("No run summary was written.")
+              raise SystemExit(0)
+          data = json.loads(summary_path.read_text())
+          print(f"- State: `{data.get('state')}`")
+          print(f"- Candidate topics: `{data.get('candidate_topic_count')}`")
+          print(f"- Queued topics: `{data.get('queued_topic_count')}`")
+          print(f"- Completed items: `{data.get('completed_item_count')}`")
+          print(f"- Failed items: `{data.get('failed_item_count')}`")
+          print(f"- Skipped existing: `{data.get('skipped_existing_count')}`")
+          print(f"- Queue markdown: `{data.get('markdown_path')}`")
+          PY
+
+      - name: Upload LLM auto review queue artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-auto-review-queue-${{ github.run_number }}
+          path: automation/reports/llm-auto-review-queue/
+          if-no-files-found: error
+
+      - name: Commit queue artifacts (if changed)
+        if: success()
+        run: |
+          if [[ -n "$(git status --porcelain automation/reports/llm-auto-review-queue)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add automation/reports/llm-auto-review-queue
+            git commit -m "chore(llm): auto review queue"
+            for i in 1 2 3; do
+              git pull --rebase origin main
+              if git push; then
+                exit 0
+              fi
+              sleep 2
+            done
+            exit 1
+          else
+            echo "No queue artifact changes."
+          fi
+

@@ -117,6 +117,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider f
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
+python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -245,6 +246,14 @@ python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
 
 This runs LLM Scout plus topic discovery and writes `automation/reports/llm-candidate-refresh.json`, `automation/reports/llm-candidate-refresh.md`, and referenced Scout/discovery artifacts. It prepares topics for owner review only; it does not record owner decisions, edit content, mutate backlog/manifests, open PRs, or deploy.
 
+For a consolidated no-write queue that automatically reviews the strongest candidates:
+
+```bash
+python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
+```
+
+This runs candidate refresh, scores candidate topics, auto-runs the top Editor/Reviewer chains, and writes `automation/reports/llm-auto-review-queue/llm-auto-review-queue.md`. It skips topics that already have completed chain summaries. It still does not approve public copy, edit content, mutate backlog/manifests, open PRs, or deploy.
+
 For a durable no-write owner decision on one discovered topic, run:
 
 ```bash
@@ -331,6 +340,15 @@ The same no-write chain is available in GitHub Actions:
 - Schedule: weekly after the GSC/Bing report windows
 - Manual dispatch: optional `model` input
 - Output: uploaded candidate refresh artifact only, no commits, decisions, content edits, or PRs
+
+The consolidated no-write queue is available in GitHub Actions:
+
+- Workflow: `.github/workflows/llm-auto-review-queue.yml`
+- Schedule: daily
+- Manual dispatch: optional `model`, `max_chains`, and `include_existing` inputs
+- Push trigger: signal files and LLM worker infrastructure
+- Output: uploaded artifact plus committed `automation/reports/llm-auto-review-queue/` report artifacts only
+- Content/backlog/manifests/PRs/deploy modified: `false`
 
 The owner-approved no-write handoff runner is also available in GitHub Actions:
 

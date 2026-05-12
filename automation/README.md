@@ -163,6 +163,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - skips decisions that already have a current completed chain summary unless explicitly told to rerun
   - does not run live Scout reranking, mutate backlog, create manifests, edit content, open PRs, or deploy
 
+- `workers/llm_auto_review_queue.py`
+  - runs candidate refresh, scores candidate topics, and auto-runs the top no-write Editor/Reviewer chains
+  - writes one consolidated owner-review queue artifact
+  - skips topics with existing completed chain summaries unless explicitly told to rerun
+  - does not approve public copy, mutate backlog, create manifests, edit content, open PRs, or deploy
+
 - `workers/llm_editor.py`
   - reads one selected LLM Scout opportunity and deterministic Editor context
   - sends a JSON-only planning brief request through `llm_adapter`
@@ -192,6 +198,12 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - runs pending owner-approved no-write worker-chain handoffs by manual dispatch or committed decision artifact push
   - uploads artifacts from `automation/reports/llm-worker-chain-gha/`
   - does not commit generated reports, edit content, open PRs, or deploy
+
+- `.github/workflows/llm-auto-review-queue.yml`
+  - runs the no-write auto-review queue daily, by manual dispatch, or after signal-file pushes
+  - uploads artifacts from `automation/reports/llm-auto-review-queue/`
+  - may commit only queue report artifacts
+  - does not edit content, backlog, manifests, PRs, or production state
 
 - `.github/workflows/llm-candidate-refresh.yml`
   - runs the no-write LLM candidate refresh by manual dispatch and weekly schedule after analytics report jobs
@@ -282,6 +294,7 @@ python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-b
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
+python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -409,6 +422,7 @@ Lifecycle shorthand:
 - `llm-adapter` -> validate future LLM request/response contracts through a fail-closed provider adapter
 - `llm-scout` -> run a no-write LLM review over deterministic Scout proposals from GSC/Bing agent signals
 - `llm-candidate-refresh` -> run no-write LLM Scout plus topic discovery and write owner-review candidate artifacts
+- `llm-auto-review-queue` -> score candidates and auto-run top no-write Editor/Reviewer chains into one queue
 - `llm-topic-discovery` -> convert selected LLM Scout opportunities into no-write topic proposals
 - `llm-topic-decision` -> record an owner decision for one discovered topic
 - `llm-approved-handoffs` -> list owner-approved decisions ready for no-write chain replay
@@ -501,6 +515,15 @@ LLM candidate refresh:
 - this is the scheduled candidate-generation layer: it prepares topics for owner review but does not approve them
 - it must not edit content, mutate `topic_backlog.csv`, create manifests, record topic decisions, open PRs, or deploy
 
+LLM auto review queue:
+
+- `python3 automation/pipeline.py llm-auto-review-queue --provider openai --json` -> run candidate refresh, score candidates, and auto-review the top candidates through no-write Editor/Reviewer chains
+- default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
+- output lives in `automation/reports/llm-auto-review-queue/`
+- this is the consolidated owner-review layer: it reduces manual step-by-step approval by presenting ready queue items
+- it skips topics with existing completed chain summaries unless `--include-existing` is supplied
+- it must not approve public copy, mutate `topic_backlog.csv`, create manifests, edit content, open PRs, or deploy
+
 LLM topic discovery:
 
 - `python3 automation/pipeline.py llm-topic-discovery --json` -> convert selected and monitored LLM Scout opportunities into backlog-shaped topic proposals for owner review
@@ -576,6 +599,16 @@ LLM candidate refresh workflow:
 - optional manual input: `model`
 - output is an uploaded workflow artifact named `llm-candidate-refresh-<run_number>`
 - this workflow intentionally does not commit reports, record owner decisions, edit content, open PRs, or deploy
+
+LLM auto review queue workflow:
+
+- `.github/workflows/llm-auto-review-queue.yml` -> run the consolidated no-write queue in GitHub Actions
+- trigger modes: daily schedule, manual dispatch, signal-file push, or path-limited LLM worker infrastructure push
+- required secret: `OPENAI_API_KEY`
+- optional manual inputs: `model`, `max_chains`, `include_existing`
+- output is an uploaded workflow artifact named `llm-auto-review-queue-<run_number>`
+- it may commit only `automation/reports/llm-auto-review-queue/` report artifacts
+- this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 
 LLM worker chain workflow:
 

@@ -420,6 +420,53 @@ def cmd_llm_candidate_refresh(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_auto_review_queue(
+    signals: list[str] | None,
+    output_dir: str | None,
+    basename: str | None,
+    provider: str,
+    scout_fixture: str | None,
+    editor_fixture: str | None,
+    reviewer_fixture: str | None,
+    limit: int,
+    min_impressions: int,
+    max_chains: int,
+    include_existing: bool,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_auto_review_queue.py"),
+        "--provider",
+        provider,
+        "--limit",
+        str(limit),
+        "--min-impressions",
+        str(min_impressions),
+        "--max-chains",
+        str(max_chains),
+    ]
+    for signal_path in signals or []:
+        command.extend(["--signals", signal_path])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if scout_fixture:
+        command.extend(["--scout-fixture", scout_fixture])
+    if editor_fixture:
+        command.extend(["--editor-fixture", editor_fixture])
+    if reviewer_fixture:
+        command.extend(["--reviewer-fixture", reviewer_fixture])
+    if include_existing:
+        command.append("--include-existing")
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Auto Review Queue ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_editor(
     scout_result: str | None,
     scout_request: str | None,
@@ -1993,6 +2040,36 @@ def build_parser() -> argparse.ArgumentParser:
     )
     llm_candidate_refresh_parser.add_argument("--json", action="store_true", help="Print the candidate refresh summary as JSON.")
 
+    llm_auto_review_queue_parser = subparsers.add_parser(
+        "llm-auto-review-queue",
+        help="Run candidate refresh and auto-review top candidates through no-write Editor/Reviewer.",
+    )
+    llm_auto_review_queue_parser.add_argument(
+        "--signals",
+        action="append",
+        help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once.",
+    )
+    llm_auto_review_queue_parser.add_argument(
+        "--provider",
+        default="disabled",
+        choices=["disabled", "fixture", "openai"],
+        help="Provider passed to LLM stages. Defaults to disabled/fail-closed.",
+    )
+    llm_auto_review_queue_parser.add_argument("--output-dir", help="Directory for auto-review queue artifacts.")
+    llm_auto_review_queue_parser.add_argument("--basename", help="Queue summary basename.")
+    llm_auto_review_queue_parser.add_argument("--scout-fixture", help="Fixture response JSON for offline Scout tests.")
+    llm_auto_review_queue_parser.add_argument("--editor-fixture", help="Fixture response JSON for offline Editor tests.")
+    llm_auto_review_queue_parser.add_argument("--reviewer-fixture", help="Fixture response JSON for offline Reviewer tests.")
+    llm_auto_review_queue_parser.add_argument("--limit", type=int, default=8, help="Maximum deterministic Scout proposals to review.")
+    llm_auto_review_queue_parser.add_argument("--min-impressions", type=int, default=200, help="Minimum page impressions for Scout proposals.")
+    llm_auto_review_queue_parser.add_argument("--max-chains", type=int, default=3, help="Maximum top candidates to auto-review.")
+    llm_auto_review_queue_parser.add_argument(
+        "--include-existing",
+        action="store_true",
+        help="Rerun topics that already have completed chain summaries.",
+    )
+    llm_auto_review_queue_parser.add_argument("--json", action="store_true", help="Print the auto-review queue summary as JSON.")
+
     llm_editor_parser = subparsers.add_parser(
         "llm-editor",
         help="Run a no-write LLM Editor planning brief from one selected LLM Scout opportunity.",
@@ -2288,6 +2365,21 @@ def main() -> int:
             args.discovery_basename,
             args.limit,
             args.min_impressions,
+            args.json,
+        )
+    if args.command == "llm-auto-review-queue":
+        return cmd_llm_auto_review_queue(
+            args.signals,
+            args.output_dir,
+            args.basename,
+            args.provider,
+            args.scout_fixture,
+            args.editor_fixture,
+            args.reviewer_fixture,
+            args.limit,
+            args.min_impressions,
+            args.max_chains,
+            args.include_existing,
             args.json,
         )
     if args.command == "llm-editor":
