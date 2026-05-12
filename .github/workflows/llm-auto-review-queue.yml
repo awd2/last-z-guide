@@ -58,6 +58,7 @@ jobs:
           INCLUDE_EXISTING: ${{ github.event.inputs.include_existing || 'false' }}
         run: |
           set -euo pipefail
+          mkdir -p automation/reports/llm-auto-review-queue
           cmd=(
             python3 automation/pipeline.py llm-auto-review-queue
             --provider openai
@@ -126,4 +127,3 @@ jobs:
           else
             echo "No queue artifact changes."
           fi
-
