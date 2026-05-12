@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-auto-review-editor-index-gsc-opportunity",
+  "worker_role": "editor",
+  "task": "Create a no-write Editor planning brief for one approved Scout opportunity.",
+  "prompt": "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. Do not write final public page copy, HTML, or patch specs. Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, and owner approval gate. Treat analytics as signals, not proof. Normally return exact_replacements as an empty array. Only include exact_replacements when the deterministic context contains enough current source text to copy exact_old literally and the replacement is narrow enough for later owner review. exact_replacements are draft proposal data only, not approval, not a Patch Spec, and not permission to edit files. Use plain ASCII English only. Return JSON only.",
+  "inputs": {
+    "source_llm_scout_result": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json",
+    "source_llm_scout_request": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
+    "selected_opportunity": {
+      "topic_id": "index-gsc-opportunity",
+      "decision": "update_existing",
+      "rationale": "The home hub has meaningful traffic and a rising branded/research query signal. Since it is the existing home page, it is a suitable candidate for a limited update_existing review rather than a new page.",
+      "player_value": "Clearer entry point for new and returning users, better routing into research and related hub pages, and improved brand-query handling.",
+      "duplication_risk": "Low, because home hub intent is naturally broad, but it must not absorb cluster-specific content.",
+      "priority": "high",
+      "risk_level": "high",
+      "next_step": "Request human review to determine whether the homepage can better surface research and site navigation without weakening the home role.",
+      "claims_to_verify": [
+        "Whether the homepage is currently the best canonical answer for the rising research-guide query.",
+        "Whether any proposed additions would blur hub versus cluster-page responsibilities.",
+        "Whether the existing template can support the needed navigation emphasis."
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "index-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy",
+      "cluster": "Home",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "home-hub",
+      "target_page_or_slug": "index.html",
+      "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "high",
+      "evidence": [
+        "GSC page signal: index.html had 10947 impressions, 823 clicks, 7.52% CTR, avg position 6.64.",
+        "Rising query: `last z research guide` gained 11 impressions in the last 7-day comparison window.",
+        "Rising query: `lastzguides.com` gained 3 impressions in the last 7-day comparison window."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z guide` searchers.",
+        "cluster_owner": "Home",
+        "expected_internal_route": [
+          "index.html"
+        ],
+        "archetype_reason": "Existing page is `home-hub` in the `Home` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed.",
+        "Existing backlog history for this page: research-atlas-home-promotion:done."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ]
+    },
+    "deterministic_editor_brief": {
+      "target_page_or_slug": "index.html",
+      "page_role": "home-hub",
+      "primary_query_family": "last z research guide",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z guide` searchers.",
+      "first_screen_answer": "Add a concise answer-first opening for `last z research guide` that states the useful player action, then routes readers to the correct section or adjacent guide.",
+      "template_reference": "index.html",
+      "required_sections": [
+        "First-screen site routing answer",
+        "Primary cluster cards",
+        "Featured exact-answer links",
+        "Freshness and trust signals"
+      ],
+      "internal_links": {
+        "upstream": [],
+        "downstream": [
+          "alliance-duel-rewards.html",
+          "alliance-duel.html",
+          "alliance-recognition-cost.html",
+          "arena.html",
+          "base-building-order.html"
+        ],
+        "lateral": []
+      },
+      "protected_claims": [],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "index.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on index.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Guides (2026) — Research, Events, HQ, Heroes, and F2P Strategy",
+        "h1": "Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy",
+        "meta_description": "Last Z guides for research order, HQ upgrades, events, heroes, formations, resource planning, and F2P progression. Start with the strongest pages for your current goal.",
+        "quick_answer": "",
+        "data_lede": "",
+        "source_snippets": {
+          "title_tag": "<title>Last Z Guides (2026) — Research, Events, HQ, Heroes, and F2P Strategy</title>",
+          "meta_description_tag": "<meta name=\"description\" content=\"Last Z guides for research order, HQ upgrades, events, heroes, formations, resource planning, and F2P progression. Start with the strongest pages for your current goal.\">",
+          "og_title_tag": "<meta property=\"og:title\" content=\"Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy\">",
+          "og_description_tag": "<meta property=\"og:description\" content=\"Research order, HQ upgrades, events, heroes, resources, and F2P strategy for Last Z players who want the strongest starting pages fast.\">",
+          "twitter_title_tag": "<meta name=\"twitter:title\" content=\"Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy\">",
+          "twitter_description_tag": "<meta name=\"twitter:description\" content=\"Research order, HQ upgrades, events, heroes, resources, and F2P strategy for Last Z players who want the strongest starting pages fast.\">",
+          "h1_tag": "<h1>Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy</h1>",
+          "home_hero_block": "<header class=\"hero\">\n        <h1>Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy</h1>\n        <img src=\"https://static.wikia.nocookie.net/catlantida/images/9/9d/Logo-transp.png\"\n             alt=\"Last Z: Survival Shooter\"\n             class=\"logo\"\n             width=\"200\"\n             height=\"200\"\n             decoding=\"async\"\n             fetchpriority=\"high\">\n\n        <p>Use this hub to jump to the right Last Z guide: research order, HQ upgrades, events, heroes, formations, resources, and F2P progression.</p>\n    </header>",
+          "home_featured_header": "<div class=\"home-featured-header\">\n                <h2 id=\"featured-guides\">Featured Guides</h2>\n                <p>Start with the page that matches your current goal.</p>\n            </div>",
+          "home_paths_header": "<div class=\"home-featured-header\">\n                <h2 id=\"starting-paths\">Best Starting Paths</h2>\n                <p>Choose the route that matches your current goal.</p>\n            </div>"
+        },
+        "h2_headings": [
+          "Featured Guides",
+          "Research Priority",
+          "Alliance Duel",
+          "HQ Upgrade Guide",
+          "Heroes Tier List",
+          "F2P Guide",
+          "Events Schedule",
+          "Best Starting Paths"
+        ],
+        "internal_links": [
+          "about.html",
+          "alliance-duel-rewards.html",
+          "alliance-duel.html",
+          "alliance-recognition-cost.html",
+          "arena.html",
+          "base-building-order.html",
+          "canyon-clash.html",
+          "codes.html",
+          "contact.html",
+          "daily.html",
+          "diamond-reserve.html",
+          "disclosure.html",
+          "early-game-optimization.html",
+          "emergency-hospital-cost.html",
+          "events.html",
+          "f2p.html",
+          "farm-account.html",
+          "field-research.html",
+          "formation-power.html",
+          "formations.html"
+        ]
+      }
+    },
+    "guardrails": [
+      "No content files may be edited by this worker.",
+      "Do not generate final user-visible page copy.",
+      "Do not create a patch plan or Patch Spec.",
+      "Use current_page_snapshot.source_snippets as the preferred source for exact_old values.",
+      "exact_old must copy a current target-file snippet literally and must match the target file exactly once.",
+      "exact_replacements, when present, are proposal-only candidates that still require propose + owner approval + apply-approved.",
+      "Every exact_replacements item must set owner_approval_required to true.",
+      "Do not mutate backlog, manifests, PRs, or production state.",
+      "Owner approval is required before any user-visible content change.",
+      "Use plain ASCII English only in every string field."
+    ]
+  },
+  "expected_response_keys": [
+    "brief_summary",
+    "target_page_or_slug",
+    "page_role",
+    "primary_user_job",
+    "first_screen_plan",
+    "section_plan",
+    "internal_link_plan",
+    "protected_claims",
+    "do_not_change",
+    "owner_questions",
+    "required_context_before_patch",
+    "acceptance_checks",
+    "exact_replacements",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "brief_summary": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Short no-write summary of the recommended content planning direction."
+      },
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "primary_user_job": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "first_screen_plan": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Planning guidance for the first screen. Do not write final public copy."
+      },
+      "section_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "section": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "action": {
+              "type": "string",
+              "maxLength": 350
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 350
+            }
+          },
+          "required": [
+            "section",
+            "action",
+            "reason"
+          ]
+        }
+      },
+      "internal_link_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "page": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "upstream",
+                "downstream",
+                "lateral"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 300
+            }
+          },
+          "required": [
+            "page",
+            "role",
+            "reason"
+          ]
+        }
+      },
+      "protected_claims": {
+        "type": "array",
+        "maxItems": 12,
+        "items": {
+          "type": "string",
+          "maxLength": 160
+        }
+      },
+      "do_not_change": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_patch": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "acceptance_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "exact_replacements": {
+        "type": "array",
+        "maxItems": 6,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "file": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "change_type": {
+              "type": "string",
+              "enum": [
+                "safe_exact_replace",
+                "first_screen_update",
+                "meta_refresh"
+              ]
+            },
+            "selector_or_anchor": {
+              "type": "string",
+              "maxLength": 180
+            },
+            "exact_old": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "exact_new": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 400
+            },
+            "owner_approval_required": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "change_type",
+            "selector_or_anchor",
+            "exact_old",
+            "exact_new",
+            "reason",
+            "owner_approval_required"
+          ]
+        },
+        "description": "Optional draft exact replacement candidates. These are proposal-only and still require owner approval."
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 350
+      }
+    },
+    "required": [
+      "brief_summary",
+      "target_page_or_slug",
+      "page_role",
+      "primary_user_job",
+      "first_screen_plan",
+      "section_plan",
+      "internal_link_plan",
+      "protected_claims",
+      "do_not_change",
+      "owner_questions",
+      "required_context_before_patch",
+      "acceptance_checks",
+      "exact_replacements",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}

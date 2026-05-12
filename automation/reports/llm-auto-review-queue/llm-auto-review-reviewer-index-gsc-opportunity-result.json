@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-12T18:35:58Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-auto-review-reviewer-index-gsc-opportunity",
+  "worker_role": "reviewer",
+  "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-reviewer-index-gsc-opportunity-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "target_page_or_slug": "index.html",
+    "page_role": "home-hub",
+    "verdict": "needs_human_review",
+    "risk_level": "high",
+    "approved_next_stage": "brief",
+    "blocking_issues": [
+      {
+        "severity": "high",
+        "issue": "The target is a cornerstone home hub page with high risk. The brief suggests a limited update, but the change could still affect cluster role boundaries and first-screen routing behavior.",
+        "required_fix": "Obtain explicit owner review confirming that only narrow routing and emphasis changes are allowed, and that home-hub scope will not expand into research-guide depth."
+      },
+      {
+        "severity": "high",
+        "issue": "Duplicate intent is plausible with field-research.html and adjacent progression guides. The homepage is not clearly the best canonical answer for the research-guide query if the user wants deep research guidance.",
+        "required_fix": "Verify that the home page should remain the canonical entry point for this query family and confirm the exact first-click destination for research-intent visitors."
+      },
+      {
+        "severity": "high",
+        "issue": "The brief includes no exact_replacements, but the suggested first-screen change still needs human approval because it may alter visible homepage copy and above-the-fold routing.",
+        "required_fix": "Have the owner approve the proposed direction before any user-visible homepage copy is drafted or applied."
+      }
+    ],
+    "warnings": [
+      "GSC impressions and CTR are only signals, not proof that a rewrite is required.",
+      "The brief is directionally safe but still high risk because it touches a home-hub page.",
+      "The reviewer should confirm that template, navigation pattern, and schema family remain unchanged.",
+      "Manual QA is required for first-screen answer quality and internal links on index.html."
+    ],
+    "duplicate_intent_review": "Moderate risk. The query family 'last z research guide' may be better served by a dedicated research page such as field-research.html, while the homepage should stay a routing hub.",
+    "cluster_role_review": "Acceptable only if the page remains a hub. The homepage should route users to cluster pages, not absorb research-guide content or blur hub versus guide roles.",
+    "canonical_claim_review": "Safe for now. No protected claims are listed, but any new freshness, trust, or performance wording must avoid unsupported claims.",
+    "template_safety_review": "Safe if the existing template and navigation pattern are preserved exactly. No schema or layout changes should be attempted in this brief.",
+    "exact_replacement_review": "No exact_replacements were provided. There are no candidate literal swaps to review, so no exact-replacement approval path is applicable.",
+    "owner_approval_required": true,
+    "owner_questions": [
+      "Should the homepage explicitly mention research routing, or should it remain broader to preserve the home-hub role?",
+      "Which downstream guide should be the primary first click for research-intent visitors: field-research.html or another canonical page?",
+      "Is it acceptable to reorder featured cards, or should only copy and emphasis change within the existing layout?",
+      "Are there any approved trust or freshness cues that can be reused on the home page?"
+    ],
+    "required_context_before_edit": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "index.html"
+    ],
+    "required_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on index.html"
+    ],
+    "next_step": "Request human review to confirm whether a limited homepage update can improve research routing without weakening the home-hub role. If approved, proceed only to a narrow brief or patch plan, not to apply_preview."
+  },
+  "usage": {
+    "input_tokens": 3956,
+    "input_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "output_tokens": 751,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 4707
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_0d08bc4e669bd359006a03730722a08195b226f1ee790ab489",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

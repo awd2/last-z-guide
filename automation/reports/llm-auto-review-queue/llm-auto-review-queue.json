@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_auto_review_queue",
+  "generated_at": "2026-05-12T18:35:58Z",
+  "state": "queue_ready",
+  "provider": "openai",
+  "source_signal_files": [
+    "content/gsc/latest-gsc-agent-signals.json",
+    "content/bing/latest-bing-agent-signals.json"
+  ],
+  "candidate_refresh_path": "automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.json",
+  "candidate_refresh_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.md",
+  "topic_discovery_path": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
+  "topic_discovery_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md",
+  "candidate_topic_count": 1,
+  "queued_topic_count": 1,
+  "completed_item_count": 1,
+  "failed_item_count": 0,
+  "skipped_existing_count": 0,
+  "deferred_count": 0,
+  "max_chains": 3,
+  "include_existing": false,
+  "queue_items": [
+    {
+      "topic_id": "index-gsc-opportunity",
+      "target_page_or_slug": "index.html",
+      "cluster": "Home",
+      "priority": "high",
+      "risk_level": "high",
+      "score": 83,
+      "score_reasons": [
+        "priority:high=45",
+        "confidence:high=20",
+        "risk:high=0",
+        "action:update_existing=8",
+        "candidate_status=10"
+      ],
+      "status": "completed",
+      "review_verdict": "needs_human_review",
+      "approved_next_stage": "brief",
+      "owner_approval_required": true,
+      "chain_json": "automation/reports/llm-auto-review-queue/llm-worker-chain-index-gsc-opportunity.json",
+      "chain_markdown": "automation/reports/llm-auto-review-queue/llm-worker-chain-index-gsc-opportunity.md",
+      "errors": []
+    }
+  ],
+  "skipped_topics": [],
+  "errors": [],
+  "output_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",
+  "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.md",
+  "allows_content_edit": false,
+  "allows_backlog_mutation": false,
+  "allows_manifest_mutation": false,
+  "allows_pr_or_deploy": false,
+  "next_actions": [
+    "Review queue_items and open the referenced chain markdown for the best candidate.",
+    "Approve only final public content diffs, not this queue artifact.",
+    "If a queue item is worth drafting, move it through llm-intake-latest and the existing run-plan/proposal lifecycle."
+  ],
+  "safety": "No content, backlog, manifest, PR, or production files were modified."
+}

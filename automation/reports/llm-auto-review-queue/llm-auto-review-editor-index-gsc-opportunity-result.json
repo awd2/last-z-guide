@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-12T18:35:51Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-auto-review-editor-index-gsc-opportunity",
+  "worker_role": "editor",
+  "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-index-gsc-opportunity-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "brief_summary": "Refine the home hub so the first screen answers the rising research-guide intent immediately, then routes users into the correct cluster page or related guide without changing the site structure or home-hub role.",
+    "target_page_or_slug": "index.html",
+    "page_role": "home-hub",
+    "primary_user_job": "Improve query-to-page match and first-screen usefulness for last z guide searchers.",
+    "first_screen_plan": "Keep the hero and template intact, but make the opening more answer-first: state the immediate user action for research-guide seekers, then point them to the best next destination within the existing hub structure. The first screen should clarify that the homepage is a routing page, not a deep research article, and should surface the most relevant nearby guide path without adding cluster-specific depth.",
+    "section_plan": [
+      {
+        "section": "First-screen site routing answer",
+        "action": "Tighten the opening so it quickly answers what a research-guide visitor should do next and directs them to the most relevant page.",
+        "reason": "The query signal suggests users want fast routing, not a full rewrite; this improves usability while preserving hub intent."
+      },
+      {
+        "section": "Primary cluster cards",
+        "action": "Reorder or emphasize the most relevant cluster cards so research and core progression paths are easier to find above the fold or near it.",
+        "reason": "A home hub should surface the highest-value paths without taking on the content role of those destination pages."
+      },
+      {
+        "section": "Featured exact-answer links",
+        "action": "Ensure the featured links point to the most exact-answer destinations for common starting intents, especially research and adjacent progression topics.",
+        "reason": "This strengthens query-to-destination matching while keeping the home page broad and navigational."
+      },
+      {
+        "section": "Freshness and trust signals",
+        "action": "Keep any existing freshness or credibility cues lightweight and hub-appropriate, avoiding new claims that would need verification or expand the page scope.",
+        "reason": "The page should feel current and trustworthy without becoming a claim-heavy guide page."
+      }
+    ],
+    "internal_link_plan": [
+      {
+        "page": "field-research.html",
+        "role": "downstream",
+        "reason": "Likely the most direct research destination for users who arrive on the hub with a research-guide intent."
+      },
+      {
+        "page": "base-building-order.html",
+        "role": "downstream",
+        "reason": "Supports adjacent early progression intent without overlapping the hub's role."
+      },
+      {
+        "page": "early-game-optimization.html",
+        "role": "downstream",
+        "reason": "Useful adjacent path for players who need a broader starting guide after the hub routes them."
+      },
+      {
+        "page": "f2p.html",
+        "role": "downstream",
+        "reason": "Keeps the home hub useful for budget-conscious players while maintaining cluster separation."
+      },
+      {
+        "page": "events.html",
+        "role": "downstream",
+        "reason": "Provides another common hub destination for users who need timing and progression context."
+      }
+    ],
+    "protected_claims": [],
+    "do_not_change": [
+      "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+      "Do not create a new page when the Scout proposal recommends updating an existing page.",
+      "Do not blur hub versus cluster-page responsibilities.",
+      "Do not add unsupported performance, ranking, or freshness claims.",
+      "Do not treat analytics as proof that a rewrite is required."
+    ],
+    "owner_questions": [
+      "Should the first screen explicitly mention research routing, or should it stay broader to protect the home-hub role?",
+      "Which downstream guide should be the primary first click for research-intent visitors: field-research.html or another canonical page?",
+      "Is it acceptable to reorder featured cards, or should only copy and emphasis change within the existing layout?",
+      "Are there any trust or freshness cues already approved for the home page that can be reused here?"
+    ],
+    "required_context_before_patch": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "index.html"
+    ],
+    "acceptance_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on index.html"
+    ],
+    "exact_replacements": [],
+    "next_step": "Request human review to confirm whether a limited homepage update can better surface research routing and related cluster links without weakening the home hub role."
+  },
+  "usage": {
+    "input_tokens": 2990,
+    "input_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "output_tokens": 871,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 3861
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_01253d1364060f09006a0372ff40b481938b76775688897dc0",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

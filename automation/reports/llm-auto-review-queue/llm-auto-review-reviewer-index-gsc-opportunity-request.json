@@ -1,0 +1,433 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-auto-review-reviewer-index-gsc-opportunity",
+  "worker_role": "reviewer",
+  "task": "Review one no-write LLM Editor planning brief for site fit, risk, and readiness.",
+  "prompt": "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. Do not write or rewrite public page copy. Do not create patch specs. Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, draft exact replacement safety, and deterministic QA readiness. Treat analytics as signals, not proof. If the Editor includes exact_replacements, review whether they are narrow, target-only, literal exact_old/exact_new candidates with owner_approval_required=true. Do not approve apply_preview from an LLM-only exact replacement. Use plain ASCII English only. Return JSON only.",
+  "inputs": {
+    "source_llm_editor_result": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-index-gsc-opportunity-result.json",
+    "source_llm_editor_request": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-index-gsc-opportunity-request.json",
+    "selected_opportunity": {
+      "topic_id": "index-gsc-opportunity",
+      "decision": "update_existing",
+      "rationale": "The home hub has meaningful traffic and a rising branded/research query signal. Since it is the existing home page, it is a suitable candidate for a limited update_existing review rather than a new page.",
+      "player_value": "Clearer entry point for new and returning users, better routing into research and related hub pages, and improved brand-query handling.",
+      "duplication_risk": "Low, because home hub intent is naturally broad, but it must not absorb cluster-specific content.",
+      "priority": "high",
+      "risk_level": "high",
+      "next_step": "Request human review to determine whether the homepage can better surface research and site navigation without weakening the home role.",
+      "claims_to_verify": [
+        "Whether the homepage is currently the best canonical answer for the rising research-guide query.",
+        "Whether any proposed additions would blur hub versus cluster-page responsibilities.",
+        "Whether the existing template can support the needed navigation emphasis."
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "index-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy",
+      "cluster": "Home",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "home-hub",
+      "target_page_or_slug": "index.html",
+      "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "high",
+      "evidence": [
+        "GSC page signal: index.html had 10947 impressions, 823 clicks, 7.52% CTR, avg position 6.64.",
+        "Rising query: `last z research guide` gained 11 impressions in the last 7-day comparison window.",
+        "Rising query: `lastzguides.com` gained 3 impressions in the last 7-day comparison window."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z guide` searchers.",
+        "cluster_owner": "Home",
+        "expected_internal_route": [
+          "index.html"
+        ],
+        "archetype_reason": "Existing page is `home-hub` in the `Home` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed.",
+        "Existing backlog history for this page: research-atlas-home-promotion:done."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ]
+    },
+    "deterministic_editor_context": {
+      "target_page_or_slug": "index.html",
+      "page_role": "home-hub",
+      "primary_query_family": "last z research guide",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z guide` searchers.",
+      "first_screen_answer": "Add a concise answer-first opening for `last z research guide` that states the useful player action, then routes readers to the correct section or adjacent guide.",
+      "template_reference": "index.html",
+      "required_sections": [
+        "First-screen site routing answer",
+        "Primary cluster cards",
+        "Featured exact-answer links",
+        "Freshness and trust signals"
+      ],
+      "internal_links": {
+        "upstream": [],
+        "downstream": [
+          "alliance-duel-rewards.html",
+          "alliance-duel.html",
+          "alliance-recognition-cost.html",
+          "arena.html",
+          "base-building-order.html"
+        ],
+        "lateral": []
+      },
+      "protected_claims": [],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "index.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on index.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Guides (2026) — Research, Events, HQ, Heroes, and F2P Strategy",
+        "h1": "Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy",
+        "meta_description": "Last Z guides for research order, HQ upgrades, events, heroes, formations, resource planning, and F2P progression. Start with the strongest pages for your current goal.",
+        "quick_answer": "",
+        "data_lede": "",
+        "source_snippets": {
+          "title_tag": "<title>Last Z Guides (2026) — Research, Events, HQ, Heroes, and F2P Strategy</title>",
+          "meta_description_tag": "<meta name=\"description\" content=\"Last Z guides for research order, HQ upgrades, events, heroes, formations, resource planning, and F2P progression. Start with the strongest pages for your current goal.\">",
+          "og_title_tag": "<meta property=\"og:title\" content=\"Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy\">",
+          "og_description_tag": "<meta property=\"og:description\" content=\"Research order, HQ upgrades, events, heroes, resources, and F2P strategy for Last Z players who want the strongest starting pages fast.\">",
+          "twitter_title_tag": "<meta name=\"twitter:title\" content=\"Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy\">",
+          "twitter_description_tag": "<meta name=\"twitter:description\" content=\"Research order, HQ upgrades, events, heroes, resources, and F2P strategy for Last Z players who want the strongest starting pages fast.\">",
+          "h1_tag": "<h1>Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy</h1>",
+          "home_hero_block": "<header class=\"hero\">\n        <h1>Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy</h1>\n        <img src=\"https://static.wikia.nocookie.net/catlantida/images/9/9d/Logo-transp.png\"\n             alt=\"Last Z: Survival Shooter\"\n             class=\"logo\"\n             width=\"200\"\n             height=\"200\"\n             decoding=\"async\"\n             fetchpriority=\"high\">\n\n        <p>Use this hub to jump to the right Last Z guide: research order, HQ upgrades, events, heroes, formations, resources, and F2P progression.</p>\n    </header>",
+          "home_featured_header": "<div class=\"home-featured-header\">\n                <h2 id=\"featured-guides\">Featured Guides</h2>\n                <p>Start with the page that matches your current goal.</p>\n            </div>",
+          "home_paths_header": "<div class=\"home-featured-header\">\n                <h2 id=\"starting-paths\">Best Starting Paths</h2>\n                <p>Choose the route that matches your current goal.</p>\n            </div>"
+        },
+        "h2_headings": [
+          "Featured Guides",
+          "Research Priority",
+          "Alliance Duel",
+          "HQ Upgrade Guide",
+          "Heroes Tier List",
+          "F2P Guide",
+          "Events Schedule",
+          "Best Starting Paths"
+        ],
+        "internal_links": [
+          "about.html",
+          "alliance-duel-rewards.html",
+          "alliance-duel.html",
+          "alliance-recognition-cost.html",
+          "arena.html",
+          "base-building-order.html",
+          "canyon-clash.html",
+          "codes.html",
+          "contact.html",
+          "daily.html",
+          "diamond-reserve.html",
+          "disclosure.html",
+          "early-game-optimization.html",
+          "emergency-hospital-cost.html",
+          "events.html",
+          "f2p.html",
+          "farm-account.html",
+          "field-research.html",
+          "formation-power.html",
+          "formations.html"
+        ]
+      }
+    },
+    "llm_editor_brief": {
+      "brief_summary": "Refine the home hub so the first screen answers the rising research-guide intent immediately, then routes users into the correct cluster page or related guide without changing the site structure or home-hub role.",
+      "target_page_or_slug": "index.html",
+      "page_role": "home-hub",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for last z guide searchers.",
+      "first_screen_plan": "Keep the hero and template intact, but make the opening more answer-first: state the immediate user action for research-guide seekers, then point them to the best next destination within the existing hub structure. The first screen should clarify that the homepage is a routing page, not a deep research article, and should surface the most relevant nearby guide path without adding cluster-specific depth.",
+      "section_plan": [
+        {
+          "section": "First-screen site routing answer",
+          "action": "Tighten the opening so it quickly answers what a research-guide visitor should do next and directs them to the most relevant page.",
+          "reason": "The query signal suggests users want fast routing, not a full rewrite; this improves usability while preserving hub intent."
+        },
+        {
+          "section": "Primary cluster cards",
+          "action": "Reorder or emphasize the most relevant cluster cards so research and core progression paths are easier to find above the fold or near it.",
+          "reason": "A home hub should surface the highest-value paths without taking on the content role of those destination pages."
+        },
+        {
+          "section": "Featured exact-answer links",
+          "action": "Ensure the featured links point to the most exact-answer destinations for common starting intents, especially research and adjacent progression topics.",
+          "reason": "This strengthens query-to-destination matching while keeping the home page broad and navigational."
+        },
+        {
+          "section": "Freshness and trust signals",
+          "action": "Keep any existing freshness or credibility cues lightweight and hub-appropriate, avoiding new claims that would need verification or expand the page scope.",
+          "reason": "The page should feel current and trustworthy without becoming a claim-heavy guide page."
+        }
+      ],
+      "internal_link_plan": [
+        {
+          "page": "field-research.html",
+          "role": "downstream",
+          "reason": "Likely the most direct research destination for users who arrive on the hub with a research-guide intent."
+        },
+        {
+          "page": "base-building-order.html",
+          "role": "downstream",
+          "reason": "Supports adjacent early progression intent without overlapping the hub's role."
+        },
+        {
+          "page": "early-game-optimization.html",
+          "role": "downstream",
+          "reason": "Useful adjacent path for players who need a broader starting guide after the hub routes them."
+        },
+        {
+          "page": "f2p.html",
+          "role": "downstream",
+          "reason": "Keeps the home hub useful for budget-conscious players while maintaining cluster separation."
+        },
+        {
+          "page": "events.html",
+          "role": "downstream",
+          "reason": "Provides another common hub destination for users who need timing and progression context."
+        }
+      ],
+      "protected_claims": [],
+      "do_not_change": [
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not blur hub versus cluster-page responsibilities.",
+        "Do not add unsupported performance, ranking, or freshness claims.",
+        "Do not treat analytics as proof that a rewrite is required."
+      ],
+      "owner_questions": [
+        "Should the first screen explicitly mention research routing, or should it stay broader to protect the home-hub role?",
+        "Which downstream guide should be the primary first click for research-intent visitors: field-research.html or another canonical page?",
+        "Is it acceptable to reorder featured cards, or should only copy and emphasis change within the existing layout?",
+        "Are there any trust or freshness cues already approved for the home page that can be reused here?"
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "index.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on index.html"
+      ],
+      "exact_replacements": [],
+      "next_step": "Request human review to confirm whether a limited homepage update can better surface research routing and related cluster links without weakening the home hub role."
+    },
+    "guardrails": [
+      "No content files may be edited by Reviewer.",
+      "No final public page copy may be generated.",
+      "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
+      "Editor exact_replacements are proposal-only candidates; they do not approve copy or bypass propose/approval/apply-approved.",
+      "If exact_replacements are present, owner_approval_required must remain true.",
+      "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
+      "Owner approval is required before any user-visible content change.",
+      "Use plain ASCII English only in every string field."
+    ]
+  },
+  "expected_response_keys": [
+    "target_page_or_slug",
+    "page_role",
+    "verdict",
+    "risk_level",
+    "approved_next_stage",
+    "blocking_issues",
+    "warnings",
+    "duplicate_intent_review",
+    "cluster_role_review",
+    "canonical_claim_review",
+    "template_safety_review",
+    "exact_replacement_review",
+    "owner_approval_required",
+    "owner_questions",
+    "required_context_before_edit",
+    "required_checks",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "verdict": {
+        "type": "string",
+        "enum": [
+          "pass",
+          "needs_human_review",
+          "revise",
+          "reject"
+        ]
+      },
+      "risk_level": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "approved_next_stage": {
+        "type": "string",
+        "enum": [
+          "none",
+          "brief",
+          "patch_plan",
+          "proposal",
+          "approval",
+          "apply_preview"
+        ]
+      },
+      "blocking_issues": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "severity": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "issue": {
+              "type": "string",
+              "maxLength": 450
+            },
+            "required_fix": {
+              "type": "string",
+              "maxLength": 450
+            }
+          },
+          "required": [
+            "severity",
+            "issue",
+            "required_fix"
+          ]
+        }
+      },
+      "warnings": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 400
+        }
+      },
+      "duplicate_intent_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "cluster_role_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "canonical_claim_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "template_safety_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "exact_replacement_review": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Review of any Editor exact_replacements. Empty-array Editor briefs still need a short no-candidate note."
+      },
+      "owner_approval_required": {
+        "type": "boolean"
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_edit": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "required_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 450
+      }
+    },
+    "required": [
+      "target_page_or_slug",
+      "page_role",
+      "verdict",
+      "risk_level",
+      "approved_next_stage",
+      "blocking_issues",
+      "warnings",
+      "duplicate_intent_review",
+      "cluster_role_review",
+      "canonical_claim_review",
+      "template_safety_review",
+      "exact_replacement_review",
+      "owner_approval_required",
+      "owner_questions",
+      "required_context_before_edit",
+      "required_checks",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}
