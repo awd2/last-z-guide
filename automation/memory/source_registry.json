@@ -24,7 +24,7 @@
       "id": "official-google-play",
       "name": "Last Z: Survival Shooter on Google Play",
       "base_url": "https://play.google.com",
-      "status": "proposed",
+      "status": "approved",
       "source_type": "official_store",
       "trust_level": "high",
       "allowed_uses": [
@@ -49,7 +49,7 @@
       "id": "official-apple-app-store",
       "name": "Last Z: Survival Shooter on Apple App Store",
       "base_url": "https://apps.apple.com",
-      "status": "proposed",
+      "status": "approved",
       "source_type": "official_store",
       "trust_level": "high",
       "allowed_uses": [
@@ -74,7 +74,7 @@
       "id": "official-functap-store",
       "name": "FunTap Last Z store and Gift Center",
       "base_url": "https://www.last-z.com",
-      "status": "proposed",
+      "status": "approved",
       "source_type": "official_service",
       "trust_level": "high",
       "allowed_uses": [
@@ -97,9 +97,9 @@
       "id": "stresswar-lastz-reference",
       "name": "StressWar Last Z reference pages",
       "base_url": "https://lastz.stresswar.com",
-      "status": "proposed",
+      "status": "approved",
       "source_type": "competitor_reference",
-      "trust_level": "medium",
+      "trust_level": "high",
       "allowed_uses": [
         "topic_discovery",
         "cross_validation"
@@ -111,7 +111,7 @@
       ],
       "crawl_policy": "explicit_url_only",
       "freshness_window_days": 90,
-      "notes": "Previously used as a research-reference source. Keep proposed until the owner explicitly approves it for automated external discovery.",
+      "notes": "Owner-approved high-trust reference source for research/topic discovery and cross-validation. Do not copy wording; exact mechanics still need corroboration before public copy.",
       "discovery_queries": [],
       "topic_seeds": []
     },
@@ -119,7 +119,7 @@
       "id": "fandom-last-z-wiki",
       "name": "Last Z: Survival Shooter Wiki on Fandom",
       "base_url": "https://last-z-survival-shooter.fandom.com",
-      "status": "proposed",
+      "status": "approved",
       "source_type": "community_wiki",
       "trust_level": "medium",
       "allowed_uses": [
@@ -144,9 +144,9 @@
       "id": "lastzwiki-reference",
       "name": "LastZWiki.com reference pages",
       "base_url": "https://lastzwiki.com",
-      "status": "proposed",
+      "status": "approved",
       "source_type": "community_reference",
-      "trust_level": "medium",
+      "trust_level": "high",
       "allowed_uses": [
         "topic_discovery",
         "cross_validation"
@@ -158,7 +158,7 @@
       ],
       "crawl_policy": "explicit_url_only",
       "freshness_window_days": 90,
-      "notes": "Unofficial reference/wiki-style site. Useful for topic and entity discovery; every mechanic/cost claim needs independent verification.",
+      "notes": "Owner-approved high-trust reference/wiki-style site. Useful for topic and entity discovery; every mechanic/cost claim still needs independent verification before public copy.",
       "discovery_queries": [
         "site:lastzwiki.com/en Last Z guide heroes research"
       ],
@@ -168,7 +168,7 @@
       "id": "last-z-wiki-reference",
       "name": "last-z.wiki reference pages",
       "base_url": "https://www.last-z.wiki",
-      "status": "proposed",
+      "status": "approved",
       "source_type": "community_reference",
       "trust_level": "medium",
       "allowed_uses": [
@@ -185,6 +185,106 @@
       "notes": "Unofficial wiki/reference site with apparent data-oriented pages. Use as a discovery and second-source candidate only; verify exact mechanics before public copy.",
       "discovery_queries": [
         "site:last-z.wiki Last Z heroes events research cost"
+      ],
+      "topic_seeds": []
+    },
+    {
+      "id": "lastz-command-center-one",
+      "name": "Last Z Command Center",
+      "base_url": "https://lastz-command-center-one.vercel.app",
+      "status": "approved",
+      "source_type": "community_tool",
+      "trust_level": "high",
+      "allowed_uses": [
+        "topic_discovery",
+        "cross_validation",
+        "source_triage"
+      ],
+      "disallowed_uses": [
+        "copy_visible_text",
+        "single_source_fact_claims",
+        "autonomous_content_edits"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Owner-approved high-trust community tool/source. Use for topic discovery and cross-validation signals; do not treat tool output as public-copy approval.",
+      "discovery_queries": [
+        "site:lastz-command-center-one.vercel.app Last Z"
+      ],
+      "topic_seeds": []
+    },
+    {
+      "id": "lastz-fandom-reference",
+      "name": "Last Z Wiki on Fandom",
+      "base_url": "https://lastz.fandom.com",
+      "status": "approved",
+      "source_type": "community_wiki",
+      "trust_level": "high",
+      "allowed_uses": [
+        "topic_discovery",
+        "entity_discovery",
+        "cross_validation"
+      ],
+      "disallowed_uses": [
+        "copy_visible_text",
+        "single_source_fact_claims",
+        "autonomous_content_edits"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Owner-approved high-trust Fandom wiki source. Use for topic/entity discovery and cross-validation; verify mechanics before public copy.",
+      "discovery_queries": [
+        "site:lastz.fandom.com Last Z heroes research events"
+      ],
+      "topic_seeds": []
+    },
+    {
+      "id": "packsify-last-z-gear-guide",
+      "name": "Packsify Last Z gear guide",
+      "base_url": "https://www.packsify.com",
+      "status": "approved",
+      "source_type": "guide_site",
+      "trust_level": "medium",
+      "allowed_uses": [
+        "topic_discovery",
+        "cross_validation",
+        "source_triage"
+      ],
+      "disallowed_uses": [
+        "copy_visible_text",
+        "single_source_fact_claims",
+        "autonomous_content_edits"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Owner-approved medium-trust gear-guide source. Use for equipment-topic discovery and cross-validation only; do not copy article wording.",
+      "discovery_queries": [
+        "site:packsify.com/blogs/last-z-gear-guide-how-to-use-and-upgrade-equipment Last Z gear guide"
+      ],
+      "topic_seeds": []
+    },
+    {
+      "id": "mmediamreza-last-z-reference",
+      "name": "MMediaMreza Last Z reference pages",
+      "base_url": "https://mmediamreza.com",
+      "status": "approved",
+      "source_type": "guide_site",
+      "trust_level": "medium",
+      "allowed_uses": [
+        "topic_discovery",
+        "cross_validation",
+        "source_triage"
+      ],
+      "disallowed_uses": [
+        "copy_visible_text",
+        "single_source_fact_claims",
+        "autonomous_content_edits"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Owner-approved medium-trust guide/reference source. Use for topic discovery and cross-validation only; verify specific claims before public copy.",
+      "discovery_queries": [
+        "site:mmediamreza.com Last Z Survival Shooter"
       ],
       "topic_seeds": []
     },

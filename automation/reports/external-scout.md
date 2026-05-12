@@ -1,12 +1,12 @@
-# External Scout - 2026-05-12T19:22:15Z
+# External Scout - 2026-05-12T19:29:39Z
 
 ## Outcome
 
 - State: `source_approval_needed`
 - Registry: `automation/memory/source_registry.json`
-- Included sources: `0`
+- Included sources: `11`
 - Candidate proposals: `0`
-- Proposed sources awaiting owner review: `10`
+- Proposed sources awaiting owner review: `3`
 - Allows content edit: `false`
 - Allows backlog mutation: `false`
 - Allows manifest mutation: `false`
@@ -14,55 +14,6 @@
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
 ## Source Review Queue
-
-### official-google-play
-
-- Name: Last Z: Survival Shooter on Google Play
-- Base URL: `https://play.google.com`
-- Trust level: `high`
-- Notes: Official app-store listing. Good for official description, developer identity, app availability, update cadence, and broad feature framing; not enough for detailed mechanics or costs.
-
-### official-apple-app-store
-
-- Name: Last Z: Survival Shooter on Apple App Store
-- Base URL: `https://apps.apple.com`
-- Trust level: `high`
-- Notes: Official iOS listing. Useful for official metadata, version/update context, app category, and broad game framing; not enough for detailed mechanics or costs.
-
-### official-functap-store
-
-- Name: FunTap Last Z store and Gift Center
-- Base URL: `https://www.last-z.com`
-- Trust level: `high`
-- Notes: Official-looking Last Z service domain used for Gift Center and store flow validation. Use only to verify official redeem/store routing, not game mechanics.
-
-### stresswar-lastz-reference
-
-- Name: StressWar Last Z reference pages
-- Base URL: `https://lastz.stresswar.com`
-- Trust level: `medium`
-- Notes: Previously used as a research-reference source. Keep proposed until the owner explicitly approves it for automated external discovery.
-
-### fandom-last-z-wiki
-
-- Name: Last Z: Survival Shooter Wiki on Fandom
-- Base URL: `https://last-z-survival-shooter.fandom.com`
-- Trust level: `medium`
-- Notes: Community wiki. Useful for entity/topic discovery and rough cross-checking. Public claims must be verified elsewhere because wiki pages can be incomplete, outdated, or user-edited.
-
-### lastzwiki-reference
-
-- Name: LastZWiki.com reference pages
-- Base URL: `https://lastzwiki.com`
-- Trust level: `medium`
-- Notes: Unofficial reference/wiki-style site. Useful for topic and entity discovery; every mechanic/cost claim needs independent verification.
-
-### last-z-wiki-reference
-
-- Name: last-z.wiki reference pages
-- Base URL: `https://www.last-z.wiki`
-- Trust level: `medium`
-- Notes: Unofficial wiki/reference site with apparent data-oriented pages. Use as a discovery and second-source candidate only; verify exact mechanics before public copy.
 
 ### lastzsurvivalshooter-guides
 
