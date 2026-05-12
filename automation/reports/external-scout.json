@@ -1,14 +1,671 @@
 {
   "schema_version": 1,
   "report_type": "external_scout",
-  "generated_at": "2026-05-12T19:29:39Z",
-  "state": "source_approval_needed",
+  "generated_at": "2026-05-12T19:38:31Z",
+  "state": "external_scout_ready",
   "registry_path": "automation/memory/source_registry.json",
   "include_proposed": false,
   "approved_or_included_source_count": 11,
-  "candidate_proposal_count": 0,
+  "candidate_proposal_count": 10,
+  "source_query_task_count": 10,
   "source_review_count": 3,
-  "candidate_proposals": [],
+  "candidate_proposals": [
+    {
+      "topic_id": "external-gift-center-official-flow-validation",
+      "title": "External source opportunity: official Gift Center and store flow validation",
+      "cluster": "Economy",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "support-guide",
+      "target_page_or_slug": "gift-center-uid.html",
+      "source_type": "external",
+      "source_reference": "official-functap-store: https://www.last-z.com",
+      "source_id": "official-functap-store",
+      "source_name": "FunTap Last Z store and Gift Center",
+      "source_urls": [
+        "https://www.last-z.com"
+      ],
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "medium",
+      "status": "candidate",
+      "notes": "Use to validate official flow only, not in-game economy or reward claims.",
+      "evidence": [
+        "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
+        "cluster_owner": "Economy",
+        "expected_internal_route": [
+          "index.html",
+          "gift-center-uid.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "gift-center-only-redeem-flow",
+        "uid-required-for-gift-center"
+      ],
+      "cross_validation_status": "owner_approved_source_needs_live_check",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    },
+    {
+      "topic_id": "external-hq-and-progression-reference-cross-check",
+      "title": "External source opportunity: HQ and progression requirement cross-check",
+      "cluster": "Progression",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "hq.html",
+      "source_type": "external",
+      "source_reference": "lastzwiki-reference: https://lastzwiki.com",
+      "source_id": "lastzwiki-reference",
+      "source_name": "LastZWiki.com reference pages",
+      "source_urls": [
+        "https://lastzwiki.com"
+      ],
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "high",
+      "status": "candidate",
+      "notes": "Do not publish exact requirements from one source without corroboration.",
+      "evidence": [
+        "Owner-approved wiki/reference source can reveal HQ and progression planning gaps.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Verify HQ requirement planning, construction dependencies, and progression-route coverage against reference data.",
+        "cluster_owner": "Progression",
+        "expected_internal_route": [
+          "index.html",
+          "hq.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "hq_requirements",
+        "hq_resource_costs",
+        "hq31_35_progression"
+      ],
+      "cross_validation_status": "needs_second_source_or_owner_check",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    },
+    {
+      "topic_id": "external-research-costs-external-cross-check",
+      "title": "External source opportunity: research cost and branch coverage cross-check",
+      "cluster": "Research",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "atlas-page",
+      "target_page_or_slug": "research-costs.html",
+      "source_type": "external",
+      "source_reference": "stresswar-lastz-reference: https://lastz.stresswar.com",
+      "source_id": "stresswar-lastz-reference",
+      "source_name": "StressWar Last Z reference pages",
+      "source_urls": [
+        "https://lastz.stresswar.com/research"
+      ],
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "high",
+      "status": "candidate",
+      "notes": "Do not hand-edit generated research pages; validate against JSON sources and generator output.",
+      "evidence": [
+        "Owner-approved research reference source can reveal branch coverage gaps and cost/name drift.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Catch missing research branches, cost-table drift, and branch naming conflicts before players rely on outdated planning.",
+        "cluster_owner": "Research",
+        "expected_internal_route": [
+          "index.html",
+          "research-costs.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "research_branch_costs",
+        "research_branch_unlocks",
+        "t10_path_order"
+      ],
+      "cross_validation_status": "needs_second_source_or_data_file_check",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    },
+    {
+      "topic_id": "external-gear-guide-cross-check",
+      "title": "External source opportunity: gear guide coverage cross-check",
+      "cluster": "Equipment",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "gear.html",
+      "source_type": "external",
+      "source_reference": "packsify-last-z-gear-guide: https://www.packsify.com",
+      "source_id": "packsify-last-z-gear-guide",
+      "source_name": "Packsify Last Z gear guide",
+      "source_urls": [
+        "https://www.packsify.com/blogs/last-z-gear-guide-how-to-use-and-upgrade-equipment"
+      ],
+      "confidence": "medium",
+      "priority": "high",
+      "risk_level": "medium",
+      "status": "candidate",
+      "notes": "Do not copy article wording; only use as topic discovery and validation context.",
+      "evidence": [
+        "Owner-approved gear guide can reveal equipment topics or terminology to cross-check.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Find equipment-guide coverage gaps around gear use, upgrade order, and terminology.",
+        "cluster_owner": "Equipment",
+        "expected_internal_route": [
+          "index.html",
+          "gear.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "gear_upgrade_order",
+        "equipment_terms",
+        "gear_materials"
+      ],
+      "cross_validation_status": "needs_second_source",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    },
+    {
+      "topic_id": "external-calculator-and-tool-gap-review",
+      "title": "External source opportunity: calculator and planning-tool gap review",
+      "cluster": "Site",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "site-page",
+      "target_page_or_slug": "index.html",
+      "source_type": "external",
+      "source_reference": "lastz-command-center-one: https://lastz-command-center-one.vercel.app",
+      "source_id": "lastz-command-center-one",
+      "source_name": "Last Z Command Center",
+      "source_urls": [
+        "https://lastz-command-center-one.vercel.app"
+      ],
+      "confidence": "medium",
+      "priority": "medium",
+      "risk_level": "medium",
+      "status": "monitor",
+      "notes": "Monitor-only until owner decides whether tool pages fit the site strategy.",
+      "evidence": [
+        "Owner-approved community tool may reveal calculator-style jobs not covered by static guides.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Decide whether players would benefit from a calculator/tool page or whether current guide pages already solve the job.",
+        "cluster_owner": "Site",
+        "expected_internal_route": [
+          "index.html",
+          "index.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "tool_gap",
+        "calculator_player_job"
+      ],
+      "cross_validation_status": "needs_owner_product_decision",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    },
+    {
+      "topic_id": "external-events-and-season-source-cross-check",
+      "title": "External source opportunity: event and season coverage cross-check",
+      "cluster": "Events",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "events.html",
+      "source_type": "external",
+      "source_reference": "last-z-wiki-reference: https://www.last-z.wiki",
+      "source_id": "last-z-wiki-reference",
+      "source_name": "last-z.wiki reference pages",
+      "source_urls": [
+        "https://www.last-z.wiki"
+      ],
+      "confidence": "medium",
+      "priority": "medium",
+      "risk_level": "high",
+      "status": "candidate",
+      "notes": "Season naming conflicts must preserve the site's canonical newer-server interpretation unless owner approves a change.",
+      "evidence": [
+        "Reference pages may surface event or season naming differences that need validation against canonical site memory.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Compare event naming, rotation coverage, and season references against approved external references.",
+        "cluster_owner": "Events",
+        "expected_internal_route": [
+          "index.html",
+          "events.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "event_names",
+        "event_rotation",
+        "season_2_winter_vs_desert"
+      ],
+      "cross_validation_status": "needs_second_source",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    },
+    {
+      "topic_id": "external-general-guide-gap-cross-check",
+      "title": "External source opportunity: general guide gap cross-check",
+      "cluster": "Site",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "site-page",
+      "target_page_or_slug": "index.html",
+      "source_type": "external",
+      "source_reference": "mmediamreza-last-z-reference: https://mmediamreza.com",
+      "source_id": "mmediamreza-last-z-reference",
+      "source_name": "MMediaMreza Last Z reference pages",
+      "source_urls": [
+        "https://mmediamreza.com"
+      ],
+      "confidence": "medium",
+      "priority": "medium",
+      "risk_level": "medium",
+      "status": "monitor",
+      "notes": "Monitor-only until a specific player job and target page are identified.",
+      "evidence": [
+        "Owner-approved medium-trust source can be used to discover guide topics that need mapping to existing clusters.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Identify broad guide-topic gaps from an approved external guide/reference source without creating duplicate intent pages.",
+        "cluster_owner": "Site",
+        "expected_internal_route": [
+          "index.html",
+          "index.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "new_topic_fit",
+        "duplicate_intent_risk"
+      ],
+      "cross_validation_status": "needs_source_triage",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    },
+    {
+      "topic_id": "external-hero-and-event-entity-cross-check",
+      "title": "External source opportunity: Fandom entity and event cross-check",
+      "cluster": "Heroes",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "heroes.html",
+      "source_type": "external",
+      "source_reference": "lastz-fandom-reference: https://lastz.fandom.com",
+      "source_id": "lastz-fandom-reference",
+      "source_name": "Last Z Wiki on Fandom",
+      "source_urls": [
+        "https://lastz.fandom.com"
+      ],
+      "confidence": "medium",
+      "priority": "medium",
+      "risk_level": "high",
+      "status": "candidate",
+      "notes": "Use entities.json as the local canonical registry before proposing visible copy.",
+      "evidence": [
+        "Owner-approved Fandom source can surface alternate naming or missing entities for review.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Cross-check hero, event, and entity naming against current site memory before future content expansion.",
+        "cluster_owner": "Heroes",
+        "expected_internal_route": [
+          "index.html",
+          "heroes.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "entity_aliases",
+        "hero_names",
+        "event_names"
+      ],
+      "cross_validation_status": "needs_second_source",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    },
+    {
+      "topic_id": "external-hero-entity-coverage-cross-check",
+      "title": "External source opportunity: hero roster and entity coverage cross-check",
+      "cluster": "Heroes",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "heroes.html",
+      "source_type": "external",
+      "source_reference": "fandom-last-z-wiki: https://last-z-survival-shooter.fandom.com",
+      "source_id": "fandom-last-z-wiki",
+      "source_name": "Last Z: Survival Shooter Wiki on Fandom",
+      "source_urls": [
+        "https://last-z-survival-shooter.fandom.com"
+      ],
+      "confidence": "medium",
+      "priority": "medium",
+      "risk_level": "high",
+      "status": "candidate",
+      "notes": "Ranking changes remain high-risk and require owner-approved visible text.",
+      "evidence": [
+        "Community wiki can surface hero/entity names that need comparison against entities.json and current hero pages.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Identify missing hero entities, naming conflicts, and outdated hero coverage without changing rankings automatically.",
+        "cluster_owner": "Heroes",
+        "expected_internal_route": [
+          "index.html",
+          "heroes.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "hero_entity_names",
+        "season_hero_mapping",
+        "hero_tier_claims"
+      ],
+      "cross_validation_status": "needs_second_source",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    },
+    {
+      "topic_id": "external-official-store-metadata-cross-check",
+      "title": "External source opportunity: official app metadata and update-cadence cross-check",
+      "cluster": "Site",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "site-page",
+      "target_page_or_slug": "about.html",
+      "source_type": "external",
+      "source_reference": "official-google-play: https://play.google.com",
+      "source_id": "official-google-play",
+      "source_name": "Last Z: Survival Shooter on Google Play",
+      "source_urls": [
+        "https://play.google.com/store/apps/details?id=com.global.lastz"
+      ],
+      "confidence": "medium",
+      "priority": "medium",
+      "risk_level": "medium",
+      "status": "monitor",
+      "notes": "Monitor-only metadata validation. Do not turn store copy into guide copy.",
+      "evidence": [
+        "Official store listings can validate app identity, broad feature framing, and update cadence but not detailed mechanics.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Keep official app identity, platform availability, and broad game framing aligned with store listings.",
+        "cluster_owner": "Site",
+        "expected_internal_route": [
+          "index.html",
+          "about.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "claims_to_verify": [
+        "official_app_identity",
+        "store_listing_metadata"
+      ],
+      "cross_validation_status": "needs_second_source",
+      "copying_risk": "high if the future draft follows source wording; use only the player job and independently verified facts."
+    }
+  ],
+  "source_query_tasks": [
+    {
+      "task_id": "official-google-play-query-1",
+      "source_id": "official-google-play",
+      "source_name": "Last Z: Survival Shooter on Google Play",
+      "base_url": "https://play.google.com",
+      "trust_level": "high",
+      "query": "site:play.google.com/store/apps/details Last Z Survival Shooter",
+      "allowed_uses": [
+        "official_metadata",
+        "topic_discovery",
+        "cross_validation"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 30,
+      "notes": "Official app-store listing. Good for official description, developer identity, app availability, update cadence, and broad feature framing; not enough for detailed mechanics or costs."
+    },
+    {
+      "task_id": "official-apple-app-store-query-1",
+      "source_id": "official-apple-app-store",
+      "source_name": "Last Z: Survival Shooter on Apple App Store",
+      "base_url": "https://apps.apple.com",
+      "trust_level": "high",
+      "query": "site:apps.apple.com Last Z Survival Shooter",
+      "allowed_uses": [
+        "official_metadata",
+        "topic_discovery",
+        "cross_validation"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 30,
+      "notes": "Official iOS listing. Useful for official metadata, version/update context, app category, and broad game framing; not enough for detailed mechanics or costs."
+    },
+    {
+      "task_id": "official-functap-store-query-1",
+      "source_id": "official-functap-store",
+      "source_name": "FunTap Last Z store and Gift Center",
+      "base_url": "https://www.last-z.com",
+      "trust_level": "high",
+      "query": "site:last-z.com giftCenter Last Z",
+      "allowed_uses": [
+        "official_service_validation",
+        "cross_validation"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 30,
+      "notes": "Official-looking Last Z service domain used for Gift Center and store flow validation. Use only to verify official redeem/store routing, not game mechanics."
+    },
+    {
+      "task_id": "fandom-last-z-wiki-query-1",
+      "source_id": "fandom-last-z-wiki",
+      "source_name": "Last Z: Survival Shooter Wiki on Fandom",
+      "base_url": "https://last-z-survival-shooter.fandom.com",
+      "trust_level": "medium",
+      "query": "site:last-z-survival-shooter.fandom.com Last Z heroes research events",
+      "allowed_uses": [
+        "topic_discovery",
+        "entity_discovery",
+        "cross_validation"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Community wiki. Useful for entity/topic discovery and rough cross-checking. Public claims must be verified elsewhere because wiki pages can be incomplete, outdated, or user-edited."
+    },
+    {
+      "task_id": "lastzwiki-reference-query-1",
+      "source_id": "lastzwiki-reference",
+      "source_name": "LastZWiki.com reference pages",
+      "base_url": "https://lastzwiki.com",
+      "trust_level": "high",
+      "query": "site:lastzwiki.com/en Last Z guide heroes research",
+      "allowed_uses": [
+        "topic_discovery",
+        "cross_validation"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Owner-approved high-trust reference/wiki-style site. Useful for topic and entity discovery; every mechanic/cost claim still needs independent verification before public copy."
+    },
+    {
+      "task_id": "last-z-wiki-reference-query-1",
+      "source_id": "last-z-wiki-reference",
+      "source_name": "last-z.wiki reference pages",
+      "base_url": "https://www.last-z.wiki",
+      "trust_level": "medium",
+      "query": "site:last-z.wiki Last Z heroes events research cost",
+      "allowed_uses": [
+        "topic_discovery",
+        "cross_validation"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Unofficial wiki/reference site with apparent data-oriented pages. Use as a discovery and second-source candidate only; verify exact mechanics before public copy."
+    },
+    {
+      "task_id": "lastz-command-center-one-query-1",
+      "source_id": "lastz-command-center-one",
+      "source_name": "Last Z Command Center",
+      "base_url": "https://lastz-command-center-one.vercel.app",
+      "trust_level": "high",
+      "query": "site:lastz-command-center-one.vercel.app Last Z",
+      "allowed_uses": [
+        "topic_discovery",
+        "cross_validation",
+        "source_triage"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Owner-approved high-trust community tool/source. Use for topic discovery and cross-validation signals; do not treat tool output as public-copy approval."
+    },
+    {
+      "task_id": "lastz-fandom-reference-query-1",
+      "source_id": "lastz-fandom-reference",
+      "source_name": "Last Z Wiki on Fandom",
+      "base_url": "https://lastz.fandom.com",
+      "trust_level": "high",
+      "query": "site:lastz.fandom.com Last Z heroes research events",
+      "allowed_uses": [
+        "topic_discovery",
+        "entity_discovery",
+        "cross_validation"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Owner-approved high-trust Fandom wiki source. Use for topic/entity discovery and cross-validation; verify mechanics before public copy."
+    },
+    {
+      "task_id": "packsify-last-z-gear-guide-query-1",
+      "source_id": "packsify-last-z-gear-guide",
+      "source_name": "Packsify Last Z gear guide",
+      "base_url": "https://www.packsify.com",
+      "trust_level": "medium",
+      "query": "site:packsify.com/blogs/last-z-gear-guide-how-to-use-and-upgrade-equipment Last Z gear guide",
+      "allowed_uses": [
+        "topic_discovery",
+        "cross_validation",
+        "source_triage"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Owner-approved medium-trust gear-guide source. Use for equipment-topic discovery and cross-validation only; do not copy article wording."
+    },
+    {
+      "task_id": "mmediamreza-last-z-reference-query-1",
+      "source_id": "mmediamreza-last-z-reference",
+      "source_name": "MMediaMreza Last Z reference pages",
+      "base_url": "https://mmediamreza.com",
+      "trust_level": "medium",
+      "query": "site:mmediamreza.com Last Z Survival Shooter",
+      "allowed_uses": [
+        "topic_discovery",
+        "cross_validation",
+        "source_triage"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Owner-approved medium-trust guide/reference source. Use for topic discovery and cross-validation only; verify specific claims before public copy."
+    }
+  ],
   "source_review_queue": [
     {
       "source_id": "lastzsurvivalshooter-guides",
@@ -41,7 +698,7 @@
   "allows_pr_or_deploy": false,
   "next_actions": [
     "Approve or reject proposed sources before using them in scheduled discovery.",
-    "Add explicit topic_seeds or approved search tooling before expecting external topic candidates.",
+    "Run approved source_query_tasks through a future search worker before converting them into public-facing claims.",
     "Pass this JSON to llm-scout with --external-proposals when candidate_proposals are ready.",
     "Public content edits still require exact proposed text, owner approval, apply-preview, apply-approved, and strict QA."
   ],

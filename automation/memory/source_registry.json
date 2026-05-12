@@ -43,7 +43,32 @@
       "discovery_queries": [
         "site:play.google.com/store/apps/details Last Z Survival Shooter"
       ],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "official-store-metadata-cross-check",
+          "title": "External source opportunity: official app metadata and update-cadence cross-check",
+          "cluster": "Site",
+          "recommended_action": "monitor",
+          "archetype_suggestion": "site-page",
+          "target_page_or_slug": "about.html",
+          "priority": "medium",
+          "confidence": "medium",
+          "risk_level": "medium",
+          "primary_user_job": "Keep official app identity, platform availability, and broad game framing aligned with store listings.",
+          "source_urls": [
+            "https://play.google.com/store/apps/details?id=com.global.lastz"
+          ],
+          "evidence": [
+            "Official store listings can validate app identity, broad feature framing, and update cadence but not detailed mechanics."
+          ],
+          "claims_to_verify": [
+            "official_app_identity",
+            "store_listing_metadata"
+          ],
+          "cross_validation_status": "needs_second_source",
+          "notes": "Monitor-only metadata validation. Do not turn store copy into guide copy."
+        }
+      ]
     },
     {
       "id": "official-apple-app-store",
@@ -91,7 +116,32 @@
       "discovery_queries": [
         "site:last-z.com giftCenter Last Z"
       ],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "gift-center-official-flow-validation",
+          "title": "External source opportunity: official Gift Center and store flow validation",
+          "cluster": "Economy",
+          "recommended_action": "update_existing",
+          "archetype_suggestion": "support-guide",
+          "target_page_or_slug": "gift-center-uid.html",
+          "priority": "high",
+          "confidence": "high",
+          "risk_level": "medium",
+          "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
+          "source_urls": [
+            "https://www.last-z.com"
+          ],
+          "evidence": [
+            "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation."
+          ],
+          "claims_to_verify": [
+            "gift-center-only-redeem-flow",
+            "uid-required-for-gift-center"
+          ],
+          "cross_validation_status": "owner_approved_source_needs_live_check",
+          "notes": "Use to validate official flow only, not in-game economy or reward claims."
+        }
+      ]
     },
     {
       "id": "stresswar-lastz-reference",
@@ -113,7 +163,33 @@
       "freshness_window_days": 90,
       "notes": "Owner-approved high-trust reference source for research/topic discovery and cross-validation. Do not copy wording; exact mechanics still need corroboration before public copy.",
       "discovery_queries": [],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "research-costs-external-cross-check",
+          "title": "External source opportunity: research cost and branch coverage cross-check",
+          "cluster": "Research",
+          "recommended_action": "update_existing",
+          "archetype_suggestion": "atlas-page",
+          "target_page_or_slug": "research-costs.html",
+          "priority": "high",
+          "confidence": "high",
+          "risk_level": "high",
+          "primary_user_job": "Catch missing research branches, cost-table drift, and branch naming conflicts before players rely on outdated planning.",
+          "source_urls": [
+            "https://lastz.stresswar.com/research"
+          ],
+          "evidence": [
+            "Owner-approved research reference source can reveal branch coverage gaps and cost/name drift."
+          ],
+          "claims_to_verify": [
+            "research_branch_costs",
+            "research_branch_unlocks",
+            "t10_path_order"
+          ],
+          "cross_validation_status": "needs_second_source_or_data_file_check",
+          "notes": "Do not hand-edit generated research pages; validate against JSON sources and generator output."
+        }
+      ]
     },
     {
       "id": "fandom-last-z-wiki",
@@ -138,7 +214,33 @@
       "discovery_queries": [
         "site:last-z-survival-shooter.fandom.com Last Z heroes research events"
       ],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "hero-entity-coverage-cross-check",
+          "title": "External source opportunity: hero roster and entity coverage cross-check",
+          "cluster": "Heroes",
+          "recommended_action": "update_existing",
+          "archetype_suggestion": "cornerstone-guide",
+          "target_page_or_slug": "heroes.html",
+          "priority": "medium",
+          "confidence": "medium",
+          "risk_level": "high",
+          "primary_user_job": "Identify missing hero entities, naming conflicts, and outdated hero coverage without changing rankings automatically.",
+          "source_urls": [
+            "https://last-z-survival-shooter.fandom.com"
+          ],
+          "evidence": [
+            "Community wiki can surface hero/entity names that need comparison against entities.json and current hero pages."
+          ],
+          "claims_to_verify": [
+            "hero_entity_names",
+            "season_hero_mapping",
+            "hero_tier_claims"
+          ],
+          "cross_validation_status": "needs_second_source",
+          "notes": "Ranking changes remain high-risk and require owner-approved visible text."
+        }
+      ]
     },
     {
       "id": "lastzwiki-reference",
@@ -162,7 +264,33 @@
       "discovery_queries": [
         "site:lastzwiki.com/en Last Z guide heroes research"
       ],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "hq-and-progression-reference-cross-check",
+          "title": "External source opportunity: HQ and progression requirement cross-check",
+          "cluster": "Progression",
+          "recommended_action": "update_existing",
+          "archetype_suggestion": "cornerstone-guide",
+          "target_page_or_slug": "hq.html",
+          "priority": "high",
+          "confidence": "high",
+          "risk_level": "high",
+          "primary_user_job": "Verify HQ requirement planning, construction dependencies, and progression-route coverage against reference data.",
+          "source_urls": [
+            "https://lastzwiki.com"
+          ],
+          "evidence": [
+            "Owner-approved wiki/reference source can reveal HQ and progression planning gaps."
+          ],
+          "claims_to_verify": [
+            "hq_requirements",
+            "hq_resource_costs",
+            "hq31_35_progression"
+          ],
+          "cross_validation_status": "needs_second_source_or_owner_check",
+          "notes": "Do not publish exact requirements from one source without corroboration."
+        }
+      ]
     },
     {
       "id": "last-z-wiki-reference",
@@ -186,7 +314,33 @@
       "discovery_queries": [
         "site:last-z.wiki Last Z heroes events research cost"
       ],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "events-and-season-source-cross-check",
+          "title": "External source opportunity: event and season coverage cross-check",
+          "cluster": "Events",
+          "recommended_action": "update_existing",
+          "archetype_suggestion": "cornerstone-guide",
+          "target_page_or_slug": "events.html",
+          "priority": "medium",
+          "confidence": "medium",
+          "risk_level": "high",
+          "primary_user_job": "Compare event naming, rotation coverage, and season references against approved external references.",
+          "source_urls": [
+            "https://www.last-z.wiki"
+          ],
+          "evidence": [
+            "Reference pages may surface event or season naming differences that need validation against canonical site memory."
+          ],
+          "claims_to_verify": [
+            "event_names",
+            "event_rotation",
+            "season_2_winter_vs_desert"
+          ],
+          "cross_validation_status": "needs_second_source",
+          "notes": "Season naming conflicts must preserve the site's canonical newer-server interpretation unless owner approves a change."
+        }
+      ]
     },
     {
       "id": "lastz-command-center-one",
@@ -211,7 +365,32 @@
       "discovery_queries": [
         "site:lastz-command-center-one.vercel.app Last Z"
       ],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "calculator-and-tool-gap-review",
+          "title": "External source opportunity: calculator and planning-tool gap review",
+          "cluster": "Site",
+          "recommended_action": "monitor",
+          "archetype_suggestion": "site-page",
+          "target_page_or_slug": "index.html",
+          "priority": "medium",
+          "confidence": "medium",
+          "risk_level": "medium",
+          "primary_user_job": "Decide whether players would benefit from a calculator/tool page or whether current guide pages already solve the job.",
+          "source_urls": [
+            "https://lastz-command-center-one.vercel.app"
+          ],
+          "evidence": [
+            "Owner-approved community tool may reveal calculator-style jobs not covered by static guides."
+          ],
+          "claims_to_verify": [
+            "tool_gap",
+            "calculator_player_job"
+          ],
+          "cross_validation_status": "needs_owner_product_decision",
+          "notes": "Monitor-only until owner decides whether tool pages fit the site strategy."
+        }
+      ]
     },
     {
       "id": "lastz-fandom-reference",
@@ -236,7 +415,33 @@
       "discovery_queries": [
         "site:lastz.fandom.com Last Z heroes research events"
       ],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "hero-and-event-entity-cross-check",
+          "title": "External source opportunity: Fandom entity and event cross-check",
+          "cluster": "Heroes",
+          "recommended_action": "update_existing",
+          "archetype_suggestion": "cornerstone-guide",
+          "target_page_or_slug": "heroes.html",
+          "priority": "medium",
+          "confidence": "medium",
+          "risk_level": "high",
+          "primary_user_job": "Cross-check hero, event, and entity naming against current site memory before future content expansion.",
+          "source_urls": [
+            "https://lastz.fandom.com"
+          ],
+          "evidence": [
+            "Owner-approved Fandom source can surface alternate naming or missing entities for review."
+          ],
+          "claims_to_verify": [
+            "entity_aliases",
+            "hero_names",
+            "event_names"
+          ],
+          "cross_validation_status": "needs_second_source",
+          "notes": "Use entities.json as the local canonical registry before proposing visible copy."
+        }
+      ]
     },
     {
       "id": "packsify-last-z-gear-guide",
@@ -261,7 +466,33 @@
       "discovery_queries": [
         "site:packsify.com/blogs/last-z-gear-guide-how-to-use-and-upgrade-equipment Last Z gear guide"
       ],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "gear-guide-cross-check",
+          "title": "External source opportunity: gear guide coverage cross-check",
+          "cluster": "Equipment",
+          "recommended_action": "update_existing",
+          "archetype_suggestion": "cornerstone-guide",
+          "target_page_or_slug": "gear.html",
+          "priority": "high",
+          "confidence": "medium",
+          "risk_level": "medium",
+          "primary_user_job": "Find equipment-guide coverage gaps around gear use, upgrade order, and terminology.",
+          "source_urls": [
+            "https://www.packsify.com/blogs/last-z-gear-guide-how-to-use-and-upgrade-equipment"
+          ],
+          "evidence": [
+            "Owner-approved gear guide can reveal equipment topics or terminology to cross-check."
+          ],
+          "claims_to_verify": [
+            "gear_upgrade_order",
+            "equipment_terms",
+            "gear_materials"
+          ],
+          "cross_validation_status": "needs_second_source",
+          "notes": "Do not copy article wording; only use as topic discovery and validation context."
+        }
+      ]
     },
     {
       "id": "mmediamreza-last-z-reference",
@@ -286,7 +517,32 @@
       "discovery_queries": [
         "site:mmediamreza.com Last Z Survival Shooter"
       ],
-      "topic_seeds": []
+      "topic_seeds": [
+        {
+          "topic_id": "general-guide-gap-cross-check",
+          "title": "External source opportunity: general guide gap cross-check",
+          "cluster": "Site",
+          "recommended_action": "monitor",
+          "archetype_suggestion": "site-page",
+          "target_page_or_slug": "index.html",
+          "priority": "medium",
+          "confidence": "medium",
+          "risk_level": "medium",
+          "primary_user_job": "Identify broad guide-topic gaps from an approved external guide/reference source without creating duplicate intent pages.",
+          "source_urls": [
+            "https://mmediamreza.com"
+          ],
+          "evidence": [
+            "Owner-approved medium-trust source can be used to discover guide topics that need mapping to existing clusters."
+          ],
+          "claims_to_verify": [
+            "new_topic_fit",
+            "duplicate_intent_risk"
+          ],
+          "cross_validation_status": "needs_source_triage",
+          "notes": "Monitor-only until a specific player job and target page are identified."
+        }
+      ]
     },
     {
       "id": "lastzsurvivalshooter-guides",

@@ -168,6 +168,30 @@ def candidate_sources(payload: dict[str, Any], include_proposed: bool) -> list[d
     ]
 
 
+def source_query_tasks(sources: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    tasks: list[dict[str, Any]] = []
+    for source in sources:
+        source_id = str(source.get("id", ""))
+        for index, query in enumerate(source.get("discovery_queries", []), start=1):
+            if not isinstance(query, str) or not query.strip():
+                continue
+            tasks.append(
+                {
+                    "task_id": f"{source_id}-query-{index}",
+                    "source_id": source_id,
+                    "source_name": source.get("name", ""),
+                    "base_url": source.get("base_url", ""),
+                    "trust_level": source.get("trust_level", ""),
+                    "query": query.strip(),
+                    "allowed_uses": source.get("allowed_uses", []),
+                    "crawl_policy": source.get("crawl_policy", ""),
+                    "freshness_window_days": source.get("freshness_window_days", 0),
+                    "notes": source.get("notes", ""),
+                }
+            )
+    return tasks
+
+
 def build_external_scout(
     registry_path: Path,
     output_dir: Path,
@@ -220,6 +244,7 @@ def build_external_scout(
             if not isinstance(seed, dict):
                 continue
             proposals.append(normalize_seed(seed, source, content_pages))
+    query_tasks = source_query_tasks(sources)
     proposals.sort(
         key=lambda item: (
             {"high": 0, "medium": 1, "low": 2}.get(str(item.get("priority")), 3),
@@ -240,8 +265,10 @@ def build_external_scout(
         "include_proposed": include_proposed,
         "approved_or_included_source_count": len(sources),
         "candidate_proposal_count": len(proposals),
+        "source_query_task_count": len(query_tasks),
         "source_review_count": len(proposed_sources),
         "candidate_proposals": proposals,
+        "source_query_tasks": query_tasks,
         "source_review_queue": proposed_sources,
         "errors": [],
         "output_path": rel(json_path),
@@ -252,7 +279,7 @@ def build_external_scout(
         "allows_pr_or_deploy": False,
         "next_actions": [
             "Approve or reject proposed sources before using them in scheduled discovery.",
-            "Add explicit topic_seeds or approved search tooling before expecting external topic candidates.",
+            "Run approved source_query_tasks through a future search worker before converting them into public-facing claims.",
             "Pass this JSON to llm-scout with --external-proposals when candidate_proposals are ready.",
             "Public content edits still require exact proposed text, owner approval, apply-preview, apply-approved, and strict QA.",
         ],
@@ -272,6 +299,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Registry: `{payload.get('registry_path', '')}`",
         f"- Included sources: `{payload.get('approved_or_included_source_count', 0)}`",
         f"- Candidate proposals: `{payload.get('candidate_proposal_count', 0)}`",
+        f"- Source query tasks: `{payload.get('source_query_task_count', 0)}`",
         f"- Proposed sources awaiting owner review: `{payload.get('source_review_count', 0)}`",
         "- Allows content edit: `false`",
         "- Allows backlog mutation: `false`",
@@ -322,6 +350,15 @@ def render_markdown(payload: dict[str, Any]) -> str:
                 "",
             ]
         )
+    if payload.get("source_query_tasks"):
+        lines.extend(["## Source Query Tasks", ""])
+        for task in payload["source_query_tasks"]:
+            lines.extend(
+                [
+                    f"- `{task.get('task_id', '')}` ({task.get('trust_level', '')}): {task.get('query', '')}",
+                ]
+            )
+        lines.append("")
     lines.extend(["## Next Actions", "", md_list(payload.get("next_actions", [])), ""])
     return "\n".join(lines)
 

@@ -149,6 +149,7 @@ def fixture_external_source_registry() -> dict:
                         "claims_to_verify": ["hq_upgrade_requirements"],
                     }
                 ],
+                "discovery_queries": ["site:example.com Last Z HQ requirements"],
             }
         ],
     }
@@ -895,6 +896,7 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(payload["report_type"], "external_scout")
             self.assertEqual(payload["state"], "external_scout_ready")
             self.assertEqual(payload["candidate_proposal_count"], 1)
+            self.assertEqual(payload["source_query_task_count"], 1)
             proposal = payload["candidate_proposals"][0]
             self.assertEqual(proposal["topic_id"], "external-hq-upgrade-requirements")
             self.assertEqual(proposal["source_type"], "external")
