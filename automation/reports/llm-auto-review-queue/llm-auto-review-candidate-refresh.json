@@ -1,13 +1,14 @@
 {
   "schema_version": 1,
   "report_type": "llm_candidate_refresh",
-  "generated_at": "2026-05-12T18:35:43Z",
+  "generated_at": "2026-05-12T19:14:41Z",
   "state": "candidate_refresh_ready",
   "provider": "openai",
   "source_signal_files": [
     "content/gsc/latest-gsc-agent-signals.json",
     "content/bing/latest-bing-agent-signals.json"
   ],
+  "external_proposal_files": [],
   "source_proposal_count": 8,
   "candidate_topic_count": 1,
   "monitor_topic_count": 7,

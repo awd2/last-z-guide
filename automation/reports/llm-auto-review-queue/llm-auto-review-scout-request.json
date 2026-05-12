@@ -9,6 +9,7 @@
       "content/gsc/latest-gsc-agent-signals.json",
       "content/bing/latest-bing-agent-signals.json"
     ],
+    "external_proposal_files": [],
     "proposal_count": 8,
     "proposals": [
       {
@@ -305,6 +306,9 @@
       "User-visible content proposals require owner approval before any apply step.",
       "Do not use archived Reddit/news experiments as inputs or targets.",
       "Treat GSC and Bing as opportunity signals, not as instructions to rewrite pages.",
+      "Treat external-source proposals as discovery and cross-validation signals, not as copy sources.",
+      "Do not use a single external source as proof for public mechanic, cost, reward, season, or event claims.",
+      "Reject external-source ideas that cannot be verified or would copy competitor wording.",
       "Monitor-only and reject topics must not advance to Editor, Reviewer, intake, run-plan, or content proposal.",
       "Use plain ASCII English only in every string field."
     ]
