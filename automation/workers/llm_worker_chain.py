@@ -441,6 +441,7 @@ def run_llm_worker_chain(
     else:
         scout_code, scout_payload = llm_scout.run_llm_scout(
             signal_paths=signal_paths,
+            external_proposal_paths=[],
             output_dir=output_dir,
             basename=scout_basename,
             provider=provider,

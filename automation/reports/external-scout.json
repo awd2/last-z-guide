@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "report_type": "external_scout",
+  "generated_at": "2026-05-12T19:12:08Z",
+  "state": "source_approval_needed",
+  "registry_path": "automation/memory/source_registry.json",
+  "include_proposed": false,
+  "approved_or_included_source_count": 0,
+  "candidate_proposal_count": 0,
+  "source_review_count": 1,
+  "candidate_proposals": [],
+  "source_review_queue": [
+    {
+      "source_id": "stresswar-lastz-reference",
+      "name": "StressWar Last Z reference pages",
+      "base_url": "https://lastz.stresswar.com",
+      "trust_level": "medium",
+      "notes": "Previously used as a research-reference source. Keep proposed until the owner explicitly approves it for automated external discovery."
+    }
+  ],
+  "errors": [],
+  "output_path": "automation/reports/external-scout.json",
+  "markdown_path": "automation/reports/external-scout.md",
+  "allows_content_edit": false,
+  "allows_backlog_mutation": false,
+  "allows_manifest_mutation": false,
+  "allows_pr_or_deploy": false,
+  "next_actions": [
+    "Approve or reject proposed sources before using them in scheduled discovery.",
+    "Add explicit topic_seeds or approved search tooling before expecting external topic candidates.",
+    "Pass this JSON to llm-scout with --external-proposals when candidate_proposals are ready.",
+    "Public content edits still require exact proposed text, owner approval, apply-preview, apply-approved, and strict QA."
+  ],
+  "safety": "No content, backlog, manifest, PR, or production files were modified by External Scout."
+}

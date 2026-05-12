@@ -47,6 +47,10 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - shared registry of core game entities and aliases
   - keeps terminology stable across planning, writing, and review
 
+- `source_registry.json`
+  - approved/proposed external sources for topic discovery and claim cross-validation
+  - keeps competitor/reference sources owner-gated and prevents single-source public claims
+
 - `topic_backlog.csv`
   - intake backlog for candidate topics, updates, and known opportunities
   - should become the working input for the future Scout / Planner layer
@@ -128,12 +132,14 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
 
 - `workers/llm_scout.py`
   - builds deterministic Scout proposals from latest GSC/Bing agent signals
+  - can also accept External Scout candidate proposal artifacts
   - sends a compact JSON-only Scout review request through `llm_adapter`
   - writes request/result/markdown artifacts for human review
   - does not mutate backlog, manifests, content, PRs, or production state
 
 - `workers/llm_candidate_refresh.py`
   - runs the no-write LLM Scout review plus LLM topic discovery bridge in one command
+  - can merge External Scout proposals with GSC/Bing proposals before LLM Scout review
   - writes a compact candidate refresh summary for owner review
   - does not record owner decisions, mutate backlog, manifests, content, PRs, or production state
 
@@ -165,9 +171,16 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
 
 - `workers/llm_auto_review_queue.py`
   - runs candidate refresh, scores candidate topics, and auto-runs the top no-write Editor/Reviewer chains
+  - can include External Scout proposals when passed through `--external-proposals`
   - writes one consolidated owner-review queue artifact
   - skips topics with existing completed chain summaries unless explicitly told to rerun
   - does not approve public copy, mutate backlog, create manifests, edit content, open PRs, or deploy
+
+- `workers/external_scout.py`
+  - reads `memory/source_registry.json`
+  - emits no-write external topic candidates from approved source/topic seeds
+  - records proposed sources that still need owner approval before scheduled discovery use
+  - does not crawl broadly, copy competitor text, mutate backlog/manifests, edit content, open PRs, or deploy
 
 - `workers/llm_editor.py`
   - reads one selected LLM Scout opportunity and deterministic Editor context
@@ -292,9 +305,13 @@ python3 automation/pipeline.py worker-run-plan --topic-id <topic_id>
 python3 automation/pipeline.py worker-run-plan --intake <intake.json> --basename <basename> --json
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name>
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
+python3 automation/pipeline.py external-scout --json
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
+python3 automation/pipeline.py llm-candidate-refresh --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
+python3 automation/pipeline.py llm-auto-review-queue --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -324,7 +341,9 @@ python3 automation/workers/intake.py --topic-id <topic_id> --json
 python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
+python3 automation/workers/external_scout.py --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_scout.py --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
@@ -420,7 +439,8 @@ Lifecycle shorthand:
 - `worker-run-plan` -> generate a no-write run-plan proposal from a Worker intake artifact
 - `worker-manifest` -> create a `planned` manifest from an approved Worker run-plan proposal
 - `llm-adapter` -> validate future LLM request/response contracts through a fail-closed provider adapter
-- `llm-scout` -> run a no-write LLM review over deterministic Scout proposals from GSC/Bing agent signals
+- `external-scout` -> create no-write external source/topic proposal artifacts from the approved source registry
+- `llm-scout` -> run a no-write LLM review over deterministic Scout proposals from GSC/Bing and optional External Scout signals
 - `llm-candidate-refresh` -> run no-write LLM Scout plus topic discovery and write owner-review candidate artifacts
 - `llm-auto-review-queue` -> score candidates and auto-run top no-write Editor/Reviewer chains into one queue
 - `llm-topic-discovery` -> convert selected LLM Scout opportunities into no-write topic proposals
@@ -502,6 +522,8 @@ LLM adapter:
 LLM Scout review:
 
 - `python3 automation/pipeline.py llm-scout --provider openai --json` -> review deterministic GSC/Bing Scout proposals with the live OpenAI provider
+- `python3 automation/pipeline.py external-scout --json` -> create a no-write external source report from `automation/memory/source_registry.json`
+- `python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json` -> merge External Scout proposals into LLM Scout review
 - default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
 - output lives in `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`
 - Scout must put `monitor` and `reject` decisions in `rejected_or_monitor`; selected opportunities are allowed to advance only when they are `update_existing`, `create_new`, or `consolidate` with non-low priority
@@ -510,6 +532,7 @@ LLM Scout review:
 LLM candidate refresh:
 
 - `python3 automation/pipeline.py llm-candidate-refresh --provider openai --json` -> run LLM Scout plus topic discovery in one no-write command
+- `python3 automation/pipeline.py llm-candidate-refresh --external-proposals automation/reports/external-scout.json --provider openai --json` -> include External Scout proposals in the candidate refresh
 - default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
 - output lives in `automation/reports/llm-candidate-refresh.json`, `automation/reports/llm-candidate-refresh.md`, and the referenced Scout/discovery artifacts
 - this is the scheduled candidate-generation layer: it prepares topics for owner review but does not approve them
@@ -518,6 +541,7 @@ LLM candidate refresh:
 LLM auto review queue:
 
 - `python3 automation/pipeline.py llm-auto-review-queue --provider openai --json` -> run candidate refresh, score candidates, and auto-review the top candidates through no-write Editor/Reviewer chains
+- `python3 automation/pipeline.py llm-auto-review-queue --external-proposals automation/reports/external-scout.json --provider openai --json` -> include External Scout proposals in the consolidated queue
 - default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
 - output lives in `automation/reports/llm-auto-review-queue/`
 - this is the consolidated owner-review layer: it reduces manual step-by-step approval by presenting ready queue items

@@ -115,9 +115,13 @@ python3 automation/pipeline.py worker-run-plan --intake <intake.json> --basename
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
+python3 automation/pipeline.py external-scout --json
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
+python3 automation/pipeline.py llm-candidate-refresh --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
+python3 automation/pipeline.py llm-auto-review-queue --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -144,7 +148,9 @@ python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
+python3 automation/workers/external_scout.py --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_scout.py --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
@@ -238,13 +244,21 @@ python3 automation/pipeline.py llm-scout --provider openai --json
 
 This writes `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`. It is review context only; it does not edit content, backlog, manifests, PRs, or production state. Monitor/reject outcomes stay out of selected chain handoffs.
 
+For no-write external source discovery from the approved source registry:
+
+```bash
+python3 automation/pipeline.py external-scout --json
+```
+
+This reads `automation/memory/source_registry.json` and writes `automation/reports/external-scout.json` / `.md`. External sources are topic-discovery and cross-validation signals only; they must not be used to copy competitor wording or prove public claims from one source.
+
 For scheduled-style candidate generation from current GSC/Bing signals:
 
 ```bash
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
 ```
 
-This runs LLM Scout plus topic discovery and writes `automation/reports/llm-candidate-refresh.json`, `automation/reports/llm-candidate-refresh.md`, and referenced Scout/discovery artifacts. It prepares topics for owner review only; it does not record owner decisions, edit content, mutate backlog/manifests, open PRs, or deploy.
+This runs LLM Scout plus topic discovery and writes `automation/reports/llm-candidate-refresh.json`, `automation/reports/llm-candidate-refresh.md`, and referenced Scout/discovery artifacts. Use `--external-proposals automation/reports/external-scout.json` to include approved External Scout proposals. It prepares topics for owner review only; it does not record owner decisions, edit content, mutate backlog/manifests, open PRs, or deploy.
 
 For a consolidated no-write queue that automatically reviews the strongest candidates:
 
@@ -252,7 +266,7 @@ For a consolidated no-write queue that automatically reviews the strongest candi
 python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
 ```
 
-This runs candidate refresh, scores candidate topics, auto-runs the top Editor/Reviewer chains, and writes `automation/reports/llm-auto-review-queue/llm-auto-review-queue.md`. It skips topics that already have completed chain summaries. It still does not approve public copy, edit content, mutate backlog/manifests, open PRs, or deploy.
+This runs candidate refresh, scores candidate topics, auto-runs the top Editor/Reviewer chains, and writes `automation/reports/llm-auto-review-queue/llm-auto-review-queue.md`. Use `--external-proposals automation/reports/external-scout.json` to include approved External Scout proposals. It skips topics that already have completed chain summaries. It still does not approve public copy, edit content, mutate backlog/manifests, open PRs, or deploy.
 
 For a durable no-write owner decision on one discovered topic, run:
 

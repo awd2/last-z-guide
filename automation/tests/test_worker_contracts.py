@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, patch_planner, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, external_scout, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -107,6 +107,73 @@ def fixture_llm_scout_response() -> dict:
             "rejected_or_monitor": [],
             "global_risks": ["Analytics can identify opportunity, but it must not force a broad rewrite."],
             "next_actions": ["Review the selected opportunity with the existing worker-chain command."],
+        }
+    }
+
+
+def fixture_external_source_registry() -> dict:
+    return {
+        "schema_version": 1,
+        "updated_at": "2026-05-12",
+        "policy": {
+            "purpose": "Fixture external sources.",
+            "forbidden_uses": ["copy_visible_text"],
+        },
+        "sources": [
+            {
+                "id": "fixture-lastz-reference",
+                "name": "Fixture Last Z Reference",
+                "base_url": "https://example.com",
+                "status": "approved",
+                "source_type": "competitor_reference",
+                "trust_level": "medium",
+                "allowed_uses": ["topic_discovery", "cross_validation"],
+                "disallowed_uses": ["copy_visible_text", "single_source_fact_claims"],
+                "crawl_policy": "explicit_url_only",
+                "freshness_window_days": 30,
+                "notes": "Fixture only.",
+                "discovery_queries": [],
+                "topic_seeds": [
+                    {
+                        "topic_id": "hq-upgrade-requirements",
+                        "title": "External opportunity: HQ upgrade requirements",
+                        "cluster": "Progression",
+                        "recommended_action": "update_existing",
+                        "archetype_suggestion": "support-guide",
+                        "target_page_or_slug": "hq.html",
+                        "priority": "high",
+                        "confidence": "medium",
+                        "risk_level": "high",
+                        "source_urls": ["https://example.com/last-z/hq"],
+                        "evidence": ["Competitor coverage suggests players compare HQ upgrade requirements."],
+                        "claims_to_verify": ["hq_upgrade_requirements"],
+                    }
+                ],
+            }
+        ],
+    }
+
+
+def fixture_external_llm_scout_response() -> dict:
+    return {
+        "response_json": {
+            "overview": "External source signal is worth human review only as a verification-backed update.",
+            "selected_opportunities": [
+                {
+                    "topic_id": "external-hq-upgrade-requirements",
+                    "decision": "update_existing",
+                    "rationale": "The source indicates a player job around HQ upgrade requirements that can be reviewed against existing site structure.",
+                    "player_value": "Players can avoid misleading HQ upgrade planning if requirements are clearer.",
+                    "duplication_risk": "Medium; keep it on the existing HQ page if that page owns the intent.",
+                    "priority": "high",
+                    "risk_level": "high",
+                    "next_step": "Run no-write Editor/Reviewer and verify claims before public copy.",
+                    "claims_to_verify": ["hq_upgrade_requirements"],
+                }
+            ],
+            "rejected_or_monitor": [],
+            "global_risks": ["External sources are discovery signals, not proof."],
+            "next_actions": ["Require owner approval before any public content proposal."],
         }
     }
 
@@ -768,6 +835,7 @@ class WorkerContractTests(unittest.TestCase):
 
             code, payload = llm_scout.run_llm_scout(
                 signal_paths=[signals_path],
+                external_proposal_paths=[],
                 output_dir=tmp_path,
                 basename="llm-scout-fixture",
                 provider="fixture",
@@ -796,6 +864,7 @@ class WorkerContractTests(unittest.TestCase):
 
             code, payload = llm_scout.run_llm_scout(
                 signal_paths=[signals_path],
+                external_proposal_paths=[],
                 output_dir=tmp_path,
                 basename="llm-scout-fixture",
                 provider="fixture",
@@ -807,6 +876,64 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(code, 1)
             self.assertEqual(payload["adapter_result"]["state"], "blocked")
             self.assertTrue(any("move it to rejected_or_monitor" in error for error in payload["adapter_result"]["errors"]))
+
+    def test_external_scout_writes_no_write_candidate_proposals(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            registry_path = tmp_path / "source-registry.json"
+            write_json(registry_path, fixture_external_source_registry())
+
+            code, payload = external_scout.build_external_scout(
+                registry_path=registry_path,
+                output_dir=tmp_path,
+                basename="external-scout-fixture",
+                include_proposed=False,
+                limit=4,
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(payload["report_type"], "external_scout")
+            self.assertEqual(payload["state"], "external_scout_ready")
+            self.assertEqual(payload["candidate_proposal_count"], 1)
+            proposal = payload["candidate_proposals"][0]
+            self.assertEqual(proposal["topic_id"], "external-hq-upgrade-requirements")
+            self.assertEqual(proposal["source_type"], "external")
+            self.assertEqual(proposal["cross_validation_status"], "needs_second_source")
+            self.assertFalse(payload["allows_content_edit"])
+            self.assertTrue((tmp_path / "external-scout-fixture.json").exists())
+            self.assertTrue((tmp_path / "external-scout-fixture.md").exists())
+
+    def test_llm_scout_accepts_external_scout_proposals(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            registry_path = tmp_path / "source-registry.json"
+            external_path = tmp_path / "external-scout-fixture.json"
+            fixture_path = tmp_path / "llm-scout-response.json"
+            write_json(registry_path, fixture_external_source_registry())
+            write_json(fixture_path, fixture_external_llm_scout_response())
+            external_scout.build_external_scout(
+                registry_path=registry_path,
+                output_dir=tmp_path,
+                basename="external-scout-fixture",
+                include_proposed=False,
+                limit=4,
+            )
+
+            code, payload = llm_scout.run_llm_scout(
+                signal_paths=[],
+                external_proposal_paths=[external_path],
+                output_dir=tmp_path,
+                basename="llm-scout-external-fixture",
+                provider="fixture",
+                fixture_path=fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(payload["source_proposal_count"], 1)
+            self.assertEqual(payload["external_proposal_count"], 1)
+            self.assertEqual(payload["ready_topic_ids"], ["external-hq-upgrade-requirements"])
 
     def test_llm_topic_discovery_creates_backlog_shaped_no_write_artifact(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -869,6 +996,7 @@ class WorkerContractTests(unittest.TestCase):
             with patch.object(llm_topic_discovery, "MANIFESTS_DIR", tmp_path / "manifests"):
                 code, payload = llm_candidate_refresh.run_candidate_refresh(
                     signal_paths=[signals_path],
+                    external_proposal_paths=[],
                     output_dir=tmp_path,
                     basename="llm-candidate-refresh-fixture",
                     scout_basename="llm-candidate-refresh-scout",
@@ -1249,6 +1377,7 @@ class WorkerContractTests(unittest.TestCase):
             ):
                 code, summary = llm_auto_review_queue.run_auto_review_queue(
                     signal_paths=[signals_path],
+                    external_proposal_paths=[],
                     output_dir=tmp_path,
                     basename="llm-auto-review-queue-fixture",
                     provider="fixture",
@@ -1277,6 +1406,7 @@ class WorkerContractTests(unittest.TestCase):
             ):
                 second_code, second_summary = llm_auto_review_queue.run_auto_review_queue(
                     signal_paths=[signals_path],
+                    external_proposal_paths=[],
                     output_dir=tmp_path,
                     basename="llm-auto-review-queue-fixture-2",
                     provider="fixture",
@@ -1306,6 +1436,7 @@ class WorkerContractTests(unittest.TestCase):
 
             scout_code, scout_payload = llm_scout.run_llm_scout(
                 signal_paths=[signals_path],
+                external_proposal_paths=[],
                 output_dir=tmp_path,
                 basename="llm-scout-fixture",
                 provider="fixture",
@@ -1347,6 +1478,7 @@ class WorkerContractTests(unittest.TestCase):
 
             scout_code, scout_payload = llm_scout.run_llm_scout(
                 signal_paths=[signals_path],
+                external_proposal_paths=[],
                 output_dir=tmp_path,
                 basename="llm-scout-fixture",
                 provider="fixture",
@@ -1407,6 +1539,7 @@ class WorkerContractTests(unittest.TestCase):
 
             scout_code, scout_payload = llm_scout.run_llm_scout(
                 signal_paths=[signals_path],
+                external_proposal_paths=[],
                 output_dir=tmp_path,
                 basename="llm-scout-fixture",
                 provider="fixture",

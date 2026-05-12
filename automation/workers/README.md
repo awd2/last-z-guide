@@ -93,9 +93,13 @@ The current LLM provider adapter is fail-closed and artifact-only:
 ```bash
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
+python3 automation/pipeline.py external-scout --json
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
+python3 automation/pipeline.py llm-candidate-refresh --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
+python3 automation/pipeline.py llm-auto-review-queue --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -118,7 +122,9 @@ The lower-level helper remains available at:
 ```bash
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
+python3 automation/workers/external_scout.py --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_scout.py --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_auto_review_queue.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
@@ -131,7 +137,9 @@ python3 automation/workers/llm_worker_chain.py --from-decision automation/report
 python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
 
-`llm-scout` is the first live LLM worker wrapper. It builds deterministic Scout proposals from the latest GSC/Bing agent signals, sends a compact JSON-only review request through `llm_adapter`, and writes:
+`external-scout` is the no-write external source discovery layer. It reads `automation/memory/source_registry.json`, emits candidate proposals from approved source/topic seeds, and records proposed sources that still need owner approval. It must not crawl broadly, copy competitor wording, use one external source as proof for public claims, mutate backlog/manifests, edit content, open PRs, or deploy. External claims are discovery and cross-validation signals only.
+
+`llm-scout` is the first live LLM worker wrapper. It builds deterministic Scout proposals from the latest GSC/Bing agent signals and optional External Scout proposal artifacts, sends a compact JSON-only review request through `llm_adapter`, and writes:
 
 - `automation/reports/llm-scout-review-request.json`
 - `automation/reports/llm-scout-review-result.json`
@@ -139,7 +147,7 @@ python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner ans
 
 It does not mutate backlog, manifests, content, PRs, or production state. `monitor` and `reject` decisions belong in `rejected_or_monitor`, not `selected_opportunities`. Selected opportunities remain review context only until a human approves the deterministic worker chain and any later content proposal.
 
-`llm-candidate-refresh` is the scheduled no-write candidate generation wrapper. It runs LLM Scout, converts the Scout result into topic discovery proposals, and writes:
+`llm-candidate-refresh` is the scheduled no-write candidate generation wrapper. It runs LLM Scout, can merge External Scout proposals through `--external-proposals`, converts the Scout result into topic discovery proposals, and writes:
 
 - `automation/reports/llm-candidate-refresh.json`
 - `automation/reports/llm-candidate-refresh.md`
@@ -209,7 +217,8 @@ approve public copy, mutate backlog, create manifests, edit content, open PRs,
 or deploy.
 
 `llm-auto-review-queue` is the higher-throughput no-write automation layer. It
-runs candidate refresh, scores candidate topics, auto-runs the top candidates
+runs candidate refresh, can merge External Scout proposals through
+`--external-proposals`, scores candidate topics, auto-runs the top candidates
 through Editor and Reviewer, and writes one consolidated owner-review queue. It
 skips topics with existing completed chain summaries unless `--include-existing`
 is supplied. This reduces owner involvement to reviewing ready queue packages,

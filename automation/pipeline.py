@@ -346,6 +346,7 @@ def cmd_llm_adapter(
 
 def cmd_llm_scout(
     signals: list[str] | None,
+    external_proposals: list[str] | None,
     provider: str,
     fixture: str | None,
     output_dir: str | None,
@@ -366,6 +367,8 @@ def cmd_llm_scout(
     ]
     for signal_path in signals or []:
         command.extend(["--signals", signal_path])
+    for proposal_path in external_proposals or []:
+        command.extend(["--external-proposals", proposal_path])
     if fixture:
         command.extend(["--fixture", fixture])
     if output_dir:
@@ -381,6 +384,7 @@ def cmd_llm_scout(
 
 def cmd_llm_candidate_refresh(
     signals: list[str] | None,
+    external_proposals: list[str] | None,
     provider: str,
     fixture: str | None,
     output_dir: str | None,
@@ -403,6 +407,8 @@ def cmd_llm_candidate_refresh(
     ]
     for signal_path in signals or []:
         command.extend(["--signals", signal_path])
+    for proposal_path in external_proposals or []:
+        command.extend(["--external-proposals", proposal_path])
     if fixture:
         command.extend(["--fixture", fixture])
     if output_dir:
@@ -422,6 +428,7 @@ def cmd_llm_candidate_refresh(
 
 def cmd_llm_auto_review_queue(
     signals: list[str] | None,
+    external_proposals: list[str] | None,
     output_dir: str | None,
     basename: str | None,
     provider: str,
@@ -448,6 +455,8 @@ def cmd_llm_auto_review_queue(
     ]
     for signal_path in signals or []:
         command.extend(["--signals", signal_path])
+    for proposal_path in external_proposals or []:
+        command.extend(["--external-proposals", proposal_path])
     if output_dir:
         command.extend(["--output-dir", output_dir])
     if basename:
@@ -464,6 +473,35 @@ def cmd_llm_auto_review_queue(
         command.append("--json")
         return subprocess.run(command, cwd=ROOT).returncode
     print("\n== LLM Auto Review Queue ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
+def cmd_external_scout(
+    registry: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    include_proposed: bool,
+    limit: int,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "external_scout.py"),
+        "--limit",
+        str(limit),
+    ]
+    if registry:
+        command.extend(["--registry", registry])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if include_proposed:
+        command.append("--include-proposed")
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== External Scout ==", flush=True)
     return subprocess.run(command, cwd=ROOT).returncode
 
 
@@ -1994,6 +2032,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once.",
     )
     llm_scout_parser.add_argument(
+        "--external-proposals",
+        action="append",
+        help="Path to an External Scout JSON artifact with candidate_proposals. Can be supplied more than once.",
+    )
+    llm_scout_parser.add_argument(
         "--provider",
         default="disabled",
         choices=["disabled", "fixture", "openai"],
@@ -2019,6 +2062,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--signals",
         action="append",
         help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once.",
+    )
+    llm_candidate_refresh_parser.add_argument(
+        "--external-proposals",
+        action="append",
+        help="Path to an External Scout JSON artifact with candidate_proposals. Can be supplied more than once.",
     )
     llm_candidate_refresh_parser.add_argument(
         "--provider",
@@ -2050,6 +2098,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once.",
     )
     llm_auto_review_queue_parser.add_argument(
+        "--external-proposals",
+        action="append",
+        help="Path to an External Scout JSON artifact with candidate_proposals. Can be supplied more than once.",
+    )
+    llm_auto_review_queue_parser.add_argument(
         "--provider",
         default="disabled",
         choices=["disabled", "fixture", "openai"],
@@ -2069,6 +2122,21 @@ def build_parser() -> argparse.ArgumentParser:
         help="Rerun topics that already have completed chain summaries.",
     )
     llm_auto_review_queue_parser.add_argument("--json", action="store_true", help="Print the auto-review queue summary as JSON.")
+
+    external_scout_parser = subparsers.add_parser(
+        "external-scout",
+        help="Run no-write external source scout from source_registry.json.",
+    )
+    external_scout_parser.add_argument("--registry", help="Path to source_registry.json.")
+    external_scout_parser.add_argument("--output-dir", help="Directory for External Scout artifacts.")
+    external_scout_parser.add_argument("--basename", help="Output basename without extension.")
+    external_scout_parser.add_argument(
+        "--include-proposed",
+        action="store_true",
+        help="Include proposed sources for manual testing only.",
+    )
+    external_scout_parser.add_argument("--limit", type=int, default=12, help="Maximum external candidate proposals.")
+    external_scout_parser.add_argument("--json", action="store_true", help="Print the External Scout summary as JSON.")
 
     llm_editor_parser = subparsers.add_parser(
         "llm-editor",
@@ -2346,6 +2414,7 @@ def main() -> int:
     if args.command == "llm-scout":
         return cmd_llm_scout(
             args.signals,
+            args.external_proposals,
             args.provider,
             args.fixture,
             args.output_dir,
@@ -2357,6 +2426,7 @@ def main() -> int:
     if args.command == "llm-candidate-refresh":
         return cmd_llm_candidate_refresh(
             args.signals,
+            args.external_proposals,
             args.provider,
             args.fixture,
             args.output_dir,
@@ -2370,6 +2440,7 @@ def main() -> int:
     if args.command == "llm-auto-review-queue":
         return cmd_llm_auto_review_queue(
             args.signals,
+            args.external_proposals,
             args.output_dir,
             args.basename,
             args.provider,
@@ -2380,6 +2451,15 @@ def main() -> int:
             args.min_impressions,
             args.max_chains,
             args.include_existing,
+            args.json,
+        )
+    if args.command == "external-scout":
+        return cmd_external_scout(
+            args.registry,
+            args.output_dir,
+            args.basename,
+            args.include_proposed,
+            args.limit,
             args.json,
         )
     if args.command == "llm-editor":

@@ -152,6 +152,38 @@ def build_source_proposals(signal_paths: list[Path], limit: int, min_impressions
     return proposals[:limit]
 
 
+def load_external_proposals(paths: list[Path]) -> list[dict[str, Any]]:
+    proposals: list[dict[str, Any]] = []
+    for path in paths:
+        payload = load_json(path)
+        if payload.get("report_type") != "external_scout":
+            raise ValueError(f"Unsupported external proposals report type in {rel(path)}: {payload.get('report_type')}")
+        for proposal in payload.get("candidate_proposals", []):
+            if not isinstance(proposal, dict):
+                continue
+            proposals.append(proposal)
+    return proposals
+
+
+def merge_proposals(source_proposals: list[dict[str, Any]], external_proposals: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
+    merged: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    for proposal in source_proposals + external_proposals:
+        key = proposal_key(proposal)
+        if key in seen:
+            continue
+        merged.append(proposal)
+        seen.add(key)
+    merged.sort(
+        key=lambda item: (
+            {"high": 0, "medium": 1, "low": 2}.get(str(item.get("priority")), 3),
+            {"high": 0, "medium": 1, "low": 2}.get(str(item.get("confidence")), 3),
+            str(item.get("topic_id", "")),
+        )
+    )
+    return merged[:limit]
+
+
 def compact_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
     return {
         "topic_id": proposal.get("topic_id", ""),
@@ -209,6 +241,7 @@ def monitor_only_topic_ids(response: dict[str, Any]) -> list[str]:
 def build_request(
     source_proposals: list[dict[str, Any]],
     signal_paths: list[Path],
+    external_proposal_paths: list[Path],
     request_id: str,
 ) -> dict[str, Any]:
     return {
@@ -226,6 +259,7 @@ def build_request(
         ),
         "inputs": {
             "source_signal_files": [rel(path) for path in signal_paths],
+            "external_proposal_files": [rel(path) for path in external_proposal_paths],
             "proposal_count": len(source_proposals),
             "proposals": [compact_proposal(proposal) for proposal in source_proposals],
             "guardrails": [
@@ -234,6 +268,9 @@ def build_request(
                 "User-visible content proposals require owner approval before any apply step.",
                 "Do not use archived Reddit/news experiments as inputs or targets.",
                 "Treat GSC and Bing as opportunity signals, not as instructions to rewrite pages.",
+                "Treat external-source proposals as discovery and cross-validation signals, not as copy sources.",
+                "Do not use a single external source as proof for public mechanic, cost, reward, season, or event claims.",
+                "Reject external-source ideas that cannot be verified or would copy competitor wording.",
                 "Monitor-only and reject topics must not advance to Editor, Reviewer, intake, run-plan, or content proposal.",
                 "Use plain ASCII English only in every string field.",
             ],
@@ -343,6 +380,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
 
 def run_llm_scout(
     signal_paths: list[Path],
+    external_proposal_paths: list[Path],
     output_dir: Path,
     basename: str,
     provider: str,
@@ -352,11 +390,13 @@ def run_llm_scout(
 ) -> tuple[int, dict[str, Any]]:
     output_dir.mkdir(parents=True, exist_ok=True)
     source_proposals = build_source_proposals(signal_paths, limit=limit, min_impressions=min_impressions)
+    external_proposals = load_external_proposals(external_proposal_paths) if external_proposal_paths else []
+    source_proposals = merge_proposals(source_proposals, external_proposals, limit=limit)
     request_path = output_dir / f"{basename}-request.json"
     result_path = output_dir / f"{basename}-result.json"
     markdown_path = output_dir / f"{basename}.md"
 
-    request = build_request(source_proposals, signal_paths, request_id=basename)
+    request = build_request(source_proposals, signal_paths, external_proposal_paths, request_id=basename)
     write_json(request_path, request)
     code, result = llm_adapter.run_adapter(request_path, provider, fixture_path)
     validation_errors = validate_scout_response(result, {str(proposal["topic_id"]) for proposal in source_proposals})
@@ -370,7 +410,9 @@ def run_llm_scout(
         "report_type": "llm_scout_review",
         "generated_at": now_utc(),
         "source_signal_files": [rel(path) for path in signal_paths],
+        "external_proposal_files": [rel(path) for path in external_proposal_paths],
         "source_proposal_count": len(source_proposals),
+        "external_proposal_count": len(external_proposals),
         "source_topic_ids": [proposal.get("topic_id", "") for proposal in source_proposals],
         "ready_topic_ids": ready_topic_ids(result.get("response_json") or {}),
         "monitor_only_topic_ids": monitor_only_topic_ids(result.get("response_json") or {}),
@@ -391,6 +433,11 @@ def main() -> int:
         action="append",
         help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once. Defaults to latest GSC and Bing when present.",
     )
+    parser.add_argument(
+        "--external-proposals",
+        action="append",
+        help="Path to an External Scout JSON artifact with candidate_proposals. Can be supplied more than once.",
+    )
     parser.add_argument("--output-dir", default=str(REPORTS_DIR), help="Directory for LLM Scout artifacts.")
     parser.add_argument("--basename", default="llm-scout-review", help="Output basename without extension.")
     parser.add_argument(
@@ -406,14 +453,16 @@ def main() -> int:
     args = parser.parse_args()
 
     signal_paths = [resolve_path(value) for value in args.signals] if args.signals else default_signal_paths()
-    if not signal_paths:
-        print("No Scout signal files were found.", file=sys.stderr)
+    external_proposal_paths = [resolve_path(value) for value in args.external_proposals or []]
+    if not signal_paths and not external_proposal_paths:
+        print("No Scout signal files or external proposal files were found.", file=sys.stderr)
         return 1
     output_dir = resolve_path(args.output_dir)
     fixture_path = resolve_path(args.fixture) if args.fixture else None
 
     code, payload = run_llm_scout(
         signal_paths=signal_paths,
+        external_proposal_paths=external_proposal_paths,
         output_dir=output_dir,
         basename=args.basename,
         provider=args.provider,

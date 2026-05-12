@@ -79,6 +79,8 @@ Use these files as explicit authorities for different concerns:
   - archetype map
 - `automation/memory/entities.json`
   - canonical entity names and aliases
+- `automation/memory/source_registry.json`
+  - approved/proposed external sources for topic discovery and claim cross-validation
 - `automation/memory/release_checklist.md`
   - merge/readiness gate
 - `automation/README.md`
@@ -106,6 +108,8 @@ Load these when the task specifically needs them:
   - when cluster membership, page inventory, or archetype mapping matters
 - [automation/memory/entities.json](/Users/oleg/Projects/claude-playground/automation/memory/entities.json)
   - when terminology, aliases, or entity naming matters
+- [automation/memory/source_registry.json](/Users/oleg/Projects/claude-playground/automation/memory/source_registry.json)
+  - when the task touches competitor/source discovery, external validation, or web-source intake
 - [automation/memory/release_checklist.md](/Users/oleg/Projects/claude-playground/automation/memory/release_checklist.md)
   - when evaluating merge-readiness, SEO/publishing quality, or final QA
 - [automation/README.md](/Users/oleg/Projects/claude-playground/automation/README.md)
@@ -426,9 +430,13 @@ python3 automation/pipeline.py worker-run-plan --intake <intake.json> --basename
 python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-by <name> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
+python3 automation/pipeline.py external-scout --json
 python3 automation/pipeline.py llm-scout --provider openai --json
+python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
+python3 automation/pipeline.py llm-candidate-refresh --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
+python3 automation/pipeline.py llm-auto-review-queue --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-topic-discovery --json
 python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
@@ -454,7 +462,9 @@ python3 automation/workers/intake_to_run.py --topic-id <topic_id> --json
 python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by <name> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
+python3 automation/workers/external_scout.py --json
 python3 automation/workers/llm_scout.py --provider openai --json
+python3 automation/workers/llm_scout.py --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_auto_review_queue.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
@@ -472,11 +482,13 @@ python3 -m unittest discover -s automation/tests -p 'test_*.py'
 
 The `openai` LLM adapter provider is live but still no-write and fail-closed. It requires `OPENAI_API_KEY`, uses `OPENAI_MODEL` when set, defaults to `gpt-5.4-mini`, and returns only validated plain-ASCII JSON artifacts. It must not edit content, backlog, manifests, or production state.
 
-`llm-scout` is the first live LLM worker wrapper. It reviews deterministic Scout proposals from GSC/Bing agent signals through `llm_adapter`, writes request/result/markdown artifacts, and must not edit content, backlog, manifests, PRs, or production state. Monitor-only and reject decisions belong in `rejected_or_monitor`, not selected handoffs.
+`external-scout` is the no-write external source discovery layer. It reads `automation/memory/source_registry.json`, emits candidate proposals from approved source/topic seeds, and records proposed sources that still need owner approval. External sources are discovery and cross-validation signals only: they must not be used to copy competitor wording, prove public claims from one source, mutate backlog/manifests, edit content, open PRs, or deploy. Public claims found externally still require canonical-memory checks, cross-validation, exact proposed text, and explicit owner approval.
 
-`llm-candidate-refresh` is the scheduled no-write candidate generation step. It runs LLM Scout, converts the result into topic discovery proposals, and writes a compact owner-review summary. It must not record owner decisions, edit content, mutate `topic_backlog.csv`, create manifests, open PRs, or deploy.
+`llm-scout` is the first live LLM worker wrapper. It reviews deterministic Scout proposals from GSC/Bing agent signals and optional External Scout proposals through `llm_adapter`, writes request/result/markdown artifacts, and must not edit content, backlog, manifests, PRs, or production state. Monitor-only and reject decisions belong in `rejected_or_monitor`, not selected handoffs.
 
-`llm-auto-review-queue` runs candidate refresh, scores candidate topics, and automatically runs the top no-write Editor/Reviewer chains into one consolidated owner-review queue. It skips topics that already have completed chain summaries unless `--include-existing` is supplied. It must not approve public copy, mutate backlog, create manifests, edit content, open PRs, or deploy.
+`llm-candidate-refresh` is the scheduled no-write candidate generation step. It runs LLM Scout, converts the result into topic discovery proposals, and writes a compact owner-review summary. It may accept External Scout proposal artifacts through `--external-proposals`. It must not record owner decisions, edit content, mutate `topic_backlog.csv`, create manifests, open PRs, or deploy.
+
+`llm-auto-review-queue` runs candidate refresh, scores candidate topics, and automatically runs the top no-write Editor/Reviewer chains into one consolidated owner-review queue. It may accept External Scout proposal artifacts through `--external-proposals`. It skips topics that already have completed chain summaries unless `--include-existing` is supplied. It must not approve public copy, mutate backlog, create manifests, edit content, open PRs, or deploy.
 
 `llm-topic-discovery` converts selected and monitored LLM Scout opportunities into backlog-shaped topic proposals for owner review. It must not edit `topic_backlog.csv`, manifests, content, PRs, or production state.
 

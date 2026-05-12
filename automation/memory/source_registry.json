@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-05-12",
+  "policy": {
+    "purpose": "Approved and proposed external sources for no-write topic discovery and claim cross-validation.",
+    "default_allowed_uses": [
+      "topic_discovery",
+      "cross_validation",
+      "source_triage"
+    ],
+    "forbidden_uses": [
+      "copy_visible_text",
+      "single_source_fact_claims",
+      "autonomous_content_edits",
+      "autonomous_publication"
+    ],
+    "minimum_public_claim_standard": "Any new player-facing mechanic, cost, season, event, or reward claim found externally must be verified against site memory, canonical claims, and at least one additional reliable source or explicit owner confirmation before it can be proposed as public copy.",
+    "copyright_policy": "External sources are discovery signals only. Do not paraphrase unique wording from competitors; use them to identify player jobs, missing topics, and claims that need independent verification.",
+    "crawl_policy": "No broad crawling by default. Use explicit URLs, approved search queries, or hosted search tools only when the source entry allows it.",
+    "owner_gate": "Changing a source from proposed to approved requires owner approval. Public content changes from external evidence still require exact proposed text and owner approval."
+  },
+  "sources": [
+    {
+      "id": "stresswar-lastz-reference",
+      "name": "StressWar Last Z reference pages",
+      "base_url": "https://lastz.stresswar.com",
+      "status": "proposed",
+      "source_type": "competitor_reference",
+      "trust_level": "medium",
+      "allowed_uses": [
+        "topic_discovery",
+        "cross_validation"
+      ],
+      "disallowed_uses": [
+        "copy_visible_text",
+        "single_source_fact_claims",
+        "autonomous_content_edits"
+      ],
+      "crawl_policy": "explicit_url_only",
+      "freshness_window_days": 90,
+      "notes": "Previously used as a research-reference source. Keep proposed until the owner explicitly approves it for automated external discovery.",
+      "discovery_queries": [],
+      "topic_seeds": []
+    }
+  ]
+}

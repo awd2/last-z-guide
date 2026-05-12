@@ -225,6 +225,7 @@ def blocked_summary(output_dir: Path, basename: str, errors: list[str]) -> dict[
 
 def run_auto_review_queue(
     signal_paths: list[Path],
+    external_proposal_paths: list[Path],
     output_dir: Path,
     basename: str,
     provider: str,
@@ -237,13 +238,14 @@ def run_auto_review_queue(
     include_existing: bool,
 ) -> tuple[int, dict[str, Any]]:
     output_dir.mkdir(parents=True, exist_ok=True)
-    if not signal_paths:
-        summary = blocked_summary(output_dir, basename, ["No Scout signal files were found."])
+    if not signal_paths and not external_proposal_paths:
+        summary = blocked_summary(output_dir, basename, ["No Scout signal files or external proposal files were found."])
         write_queue(summary)
         return 1, summary
 
     refresh_code, refresh_payload = llm_candidate_refresh.run_candidate_refresh(
         signal_paths=signal_paths,
+        external_proposal_paths=external_proposal_paths,
         output_dir=output_dir,
         basename="llm-auto-review-candidate-refresh",
         scout_basename="llm-auto-review-scout",
@@ -329,6 +331,7 @@ def run_auto_review_queue(
         "state": state,
         "provider": provider,
         "source_signal_files": [rel(path) for path in signal_paths],
+        "external_proposal_files": [rel(path) for path in external_proposal_paths],
         "candidate_refresh_path": refresh_payload.get("output_path", ""),
         "candidate_refresh_markdown": refresh_payload.get("markdown_path", ""),
         "topic_discovery_path": refresh_payload.get("topic_discovery_path", ""),
@@ -440,6 +443,11 @@ def main() -> int:
         action="append",
         help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once. Defaults to latest GSC and Bing when present.",
     )
+    parser.add_argument(
+        "--external-proposals",
+        action="append",
+        help="Path to an External Scout JSON artifact with candidate_proposals. Can be supplied more than once.",
+    )
     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR), help="Directory for auto-review queue artifacts.")
     parser.add_argument("--basename", default="llm-auto-review-queue", help="Queue summary basename.")
     parser.add_argument(
@@ -459,8 +467,10 @@ def main() -> int:
     args = parser.parse_args()
 
     signal_paths = [resolve_path(value) for value in args.signals] if args.signals else llm_scout.default_signal_paths()
+    external_proposal_paths = [resolve_path(value) for value in args.external_proposals or []]
     code, summary = run_auto_review_queue(
         signal_paths=signal_paths,
+        external_proposal_paths=external_proposal_paths,
         output_dir=resolve_path(args.output_dir),
         basename=args.basename,
         provider=args.provider,
@@ -501,4 +511,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

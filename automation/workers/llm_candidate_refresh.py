@@ -68,6 +68,7 @@ def blocked_payload(
         "state": "blocked",
         "provider": "",
         "source_signal_files": [],
+        "external_proposal_files": [],
         "candidate_topic_count": 0,
         "monitor_topic_count": 0,
         "candidate_topic_ids": [],
@@ -90,6 +91,7 @@ def blocked_payload(
 def build_payload(
     provider: str,
     signal_paths: list[Path],
+    external_proposal_paths: list[Path],
     output_dir: Path,
     basename: str,
     scout_payload: dict[str, Any],
@@ -124,6 +126,7 @@ def build_payload(
         "state": state,
         "provider": provider,
         "source_signal_files": [rel(path) for path in signal_paths],
+        "external_proposal_files": [rel(path) for path in external_proposal_paths],
         "source_proposal_count": scout_payload.get("source_proposal_count", 0),
         "candidate_topic_count": len(candidates),
         "monitor_topic_count": len(monitors),
@@ -200,6 +203,7 @@ def write_refresh(payload: dict[str, Any]) -> tuple[Path, Path]:
 
 def run_candidate_refresh(
     signal_paths: list[Path],
+    external_proposal_paths: list[Path],
     output_dir: Path,
     basename: str,
     scout_basename: str,
@@ -210,13 +214,14 @@ def run_candidate_refresh(
     min_impressions: int,
 ) -> tuple[int, dict[str, Any]]:
     output_dir.mkdir(parents=True, exist_ok=True)
-    if not signal_paths:
-        payload = blocked_payload(output_dir, basename, ["No Scout signal files were found."])
+    if not signal_paths and not external_proposal_paths:
+        payload = blocked_payload(output_dir, basename, ["No Scout signal files or external proposal files were found."])
         write_refresh(payload)
         return 1, payload
 
     scout_code, scout_payload = llm_scout.run_llm_scout(
         signal_paths=signal_paths,
+        external_proposal_paths=external_proposal_paths,
         output_dir=output_dir,
         basename=scout_basename,
         provider=provider,
@@ -237,6 +242,7 @@ def run_candidate_refresh(
     payload = build_payload(
         provider=provider,
         signal_paths=signal_paths,
+        external_proposal_paths=external_proposal_paths,
         output_dir=output_dir,
         basename=basename,
         scout_payload=scout_payload,
@@ -254,6 +260,11 @@ def main() -> int:
         "--signals",
         action="append",
         help="Path to a GSC/Bing agent signals JSON file. Can be supplied more than once. Defaults to latest GSC and Bing when present.",
+    )
+    parser.add_argument(
+        "--external-proposals",
+        action="append",
+        help="Path to an External Scout JSON artifact with candidate_proposals. Can be supplied more than once.",
     )
     parser.add_argument("--output-dir", default=str(REPORTS_DIR), help="Directory for candidate refresh artifacts.")
     parser.add_argument("--basename", default="llm-candidate-refresh", help="Refresh summary basename without extension.")
@@ -276,9 +287,11 @@ def main() -> int:
     args = parser.parse_args()
 
     signal_paths = [resolve_path(value) for value in args.signals] if args.signals else llm_scout.default_signal_paths()
+    external_proposal_paths = [resolve_path(value) for value in args.external_proposals or []]
     fixture_path = resolve_path(args.fixture) if args.fixture else None
     code, payload = run_candidate_refresh(
         signal_paths=signal_paths,
+        external_proposal_paths=external_proposal_paths,
         output_dir=resolve_path(args.output_dir),
         basename=args.basename,
         scout_basename=args.scout_basename,
