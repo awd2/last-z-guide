@@ -627,10 +627,11 @@ LLM candidate refresh workflow:
 LLM auto review queue workflow:
 
 - `.github/workflows/llm-auto-review-queue.yml` -> run the consolidated no-write queue in GitHub Actions
-- trigger modes: daily schedule, manual dispatch, signal-file push, or path-limited LLM worker infrastructure push
+- trigger modes: daily schedule, manual dispatch, signal-file push, source-registry push, External Scout worker push, or path-limited LLM worker infrastructure push
 - required secret: `OPENAI_API_KEY`
 - optional manual inputs: `model`, `max_chains`, `include_existing`
 - output is an uploaded workflow artifact named `llm-auto-review-queue-<run_number>`
+- before queueing, the workflow runs `external-scout` into `automation/reports/llm-auto-review-queue/external-scout.json` and passes it through `--external-proposals`
 - it may commit only `automation/reports/llm-auto-review-queue/` report artifacts
 - this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 

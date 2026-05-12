@@ -23,7 +23,9 @@ on:
       - main
     paths:
       - ".github/workflows/llm-auto-review-queue.yml"
+      - "automation/memory/source_registry.json"
       - "automation/pipeline.py"
+      - "automation/workers/external_scout.py"
       - "automation/workers/llm_*.py"
       - "automation/reports/llm_*.py"
       - "content/gsc/latest-gsc-agent-signals.json"
@@ -59,9 +61,14 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p automation/reports/llm-auto-review-queue
+          python3 automation/pipeline.py external-scout \
+            --output-dir automation/reports/llm-auto-review-queue \
+            --basename external-scout \
+            --json | tee automation/reports/llm-auto-review-queue/external-scout-run-summary.json
           cmd=(
             python3 automation/pipeline.py llm-auto-review-queue
             --provider openai
+            --external-proposals automation/reports/llm-auto-review-queue/external-scout.json
             --output-dir automation/reports/llm-auto-review-queue
             --max-chains "$MAX_CHAINS"
             --json
@@ -79,6 +86,7 @@ jobs:
             echo
             echo "- Mode: no-write"
             echo "- Output directory: \`automation/reports/llm-auto-review-queue\`"
+            echo "- External Scout proposals: \`automation/reports/llm-auto-review-queue/external-scout.json\`"
             echo "- Content/backlog/manifests/PRs modified: \`false\`"
             echo
           } >> "$GITHUB_STEP_SUMMARY"

@@ -225,6 +225,12 @@ is supplied. This reduces owner involvement to reviewing ready queue packages,
 but it still does not approve public copy, mutate backlog, create manifests,
 edit content, open PRs, or deploy.
 
+In GitHub Actions, `.github/workflows/llm-auto-review-queue.yml` runs
+`external-scout` first and passes the generated
+`automation/reports/llm-auto-review-queue/external-scout.json` artifact into
+`llm-auto-review-queue --external-proposals`. The workflow may commit only
+queue report artifacts and must not edit public content or production state.
+
 `llm-editor` is the second live LLM worker wrapper. It reads one selected LLM Scout opportunity, combines it with deterministic Editor context, sends a JSON-only planning request through `llm_adapter`, and writes:
 
 - `automation/reports/llm-editor-brief-<topic_id>-request.json`

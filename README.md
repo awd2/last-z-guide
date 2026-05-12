@@ -360,7 +360,8 @@ The consolidated no-write queue is available in GitHub Actions:
 - Workflow: `.github/workflows/llm-auto-review-queue.yml`
 - Schedule: daily
 - Manual dispatch: optional `model`, `max_chains`, and `include_existing` inputs
-- Push trigger: signal files and LLM worker infrastructure
+- Push trigger: signal files, source registry, External Scout worker, and LLM worker infrastructure
+- External discovery: runs `external-scout` first and passes its generated artifact into `llm-auto-review-queue --external-proposals`
 - Output: uploaded artifact plus committed `automation/reports/llm-auto-review-queue/` report artifacts only
 - Content/backlog/manifests/PRs/deploy modified: `false`
 

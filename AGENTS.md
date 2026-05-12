@@ -508,7 +508,7 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 GitHub workflow `.github/workflows/llm-candidate-refresh.yml` runs weekly and by manual dispatch to refresh no-write candidate topic artifacts from GSC/Bing signals. It uploads artifacts only and must not commit reports, record owner decisions, edit content, open PRs, or deploy.
 
-GitHub workflow `.github/workflows/llm-auto-review-queue.yml` runs daily, after signal-file pushes, and by manual dispatch. It runs no-write candidate refresh plus top-candidate Editor/Reviewer queueing, uploads artifacts, and may commit only `automation/reports/llm-auto-review-queue/` report artifacts. It must not edit content, backlog, manifests, PRs, or production state.
+GitHub workflow `.github/workflows/llm-auto-review-queue.yml` runs daily, after signal-file or external-source infrastructure pushes, and by manual dispatch. It runs `external-scout` first, passes the generated `automation/reports/llm-auto-review-queue/external-scout.json` artifact into `llm-auto-review-queue --external-proposals`, uploads artifacts, and may commit only `automation/reports/llm-auto-review-queue/` report artifacts. It must not edit content, backlog, manifests, PRs, or production state.
 
 GitHub workflow `.github/workflows/llm-worker-chain.yml` runs pending owner-approved handoffs after committed `llm-topic-decision-*.json` pushes and can manually replay one approved decision path. It is not scheduled, to avoid rerunning the same approved decision every week without committing generated reports. It uploads artifacts only and must not commit reports, edit content, open PRs, or deploy.
 
