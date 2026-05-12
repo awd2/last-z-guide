@@ -530,7 +530,7 @@ LLM Editor planning brief:
 - output lives in `automation/reports/llm-editor-brief-<topic_id>-request.json`, `automation/reports/llm-editor-brief-<topic_id>-result.json`, and `automation/reports/llm-editor-brief-<topic_id>.md`
 - this must not generate final public page copy or patch specs; it only prepares planning context for deterministic Reviewer and later owner-approved proposals
 - optional `exact_replacements` are draft proposal data only; every item must set `owner_approval_required: true` and still needs the later proposal/approval/apply lifecycle
-- for safer exact proposals, the deterministic Editor context includes limited raw target-page snippets under `current_page_snapshot.source_snippets`; `exact_old` must be copied literally from current HTML and must match the target page exactly once or the LLM Editor result is blocked
+- for safer exact proposals, the deterministic Editor context includes limited raw target-page snippets under `current_page_snapshot.source_snippets`; this covers common guide-page snippets and home-hub hero/header snippets; `exact_old` must be copied literally from current HTML and must match the target page exactly once or the LLM Editor result is blocked
 
 LLM Reviewer gate:
 

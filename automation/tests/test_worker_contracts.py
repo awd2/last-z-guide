@@ -1759,6 +1759,12 @@ class WorkerContractTests(unittest.TestCase):
             self.assertIn("title_tag", snippets)
             self.assertTrue(snippets["title_tag"].startswith("<title>"))
 
+            index_context = editor.html_context("index.html")
+            index_snippets = index_context["source_snippets"]
+            self.assertIn("home_hero_block", index_snippets)
+            self.assertIn('<header class="hero">', index_snippets["home_hero_block"])
+            self.assertIn("home_featured_header", index_snippets)
+
             editor_json, _ = editor.write_outputs(brief, tmp_path, None)
             review = reviewer.build_review(brief, proposal, editor_json, scout_json)
             self.assertEqual(review["report_type"], "worker_review")

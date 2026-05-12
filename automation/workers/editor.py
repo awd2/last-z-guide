@@ -134,6 +134,9 @@ def html_source_snippets(text: str) -> dict[str, str]:
         "guide_verified": r'<p class="guide-verified">.*?</p>',
         "quick_answer_lede": r'<p class="qa-lede">.*?</p>',
         "data_lede": r'<p class="data-lede">.*?</p>',
+        "home_hero_block": r'<header class="hero">.*?</header>',
+        "home_featured_header": r'<div class="home-featured-header">\s*<h2 id="featured-guides">.*?</div>',
+        "home_paths_header": r'<div class="home-featured-header">\s*<h2 id="starting-paths">.*?</div>',
     }
     snippets = {
         label: extract_raw_first(pattern, text)
