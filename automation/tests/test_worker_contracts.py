@@ -10,9 +10,9 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from automation.io import load_json, write_json
+from automation.io import load_json, load_run_manifest, write_json, write_run_manifest
 from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
-from automation import apply_approved, apply_preview, close_run, patch_planner, proposal_renderer
+from automation import apply_approved, apply_preview, approval, close_run, patch_planner, proposal_renderer
 from automation.source_resolver import SourceResolution
 from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
@@ -345,6 +345,132 @@ class WorkerContractTests(unittest.TestCase):
         exact = proposal["proposed_manifest"]["plan"]["exact_replacements"]
         self.assertEqual(len(exact), 1)
         self.assertEqual(exact[0]["exact_new"], "<p>New owner-approved copy.</p>")
+
+    def test_llm_exact_replacement_full_lifecycle_on_temp_fixture(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            reports_dir = tmp_path / "reports"
+            page_path = tmp_path / "sample.html"
+            page_path.write_text(
+                "<html><head><title>Old exact title</title></head><body><p class=\"guide-verified\">Old exact copy.</p></body></html>",
+                encoding="utf-8",
+            )
+            intake = {
+                "state": "approved_for_intake",
+                "source_topic_id": "sample-topic",
+                "target_page_or_slug": "sample.html",
+                "risk_level": "medium",
+                "approved_by": "fixture",
+                "approval_note": "Approved for run-plan only.",
+                "proposed_backlog_item": {
+                    "topic_id": "sample-topic",
+                    "title": "Sample exact lifecycle proposal",
+                    "cluster": "Site",
+                    "recommended_action": "update_existing",
+                    "archetype_suggestion": "support-guide",
+                    "target_page_or_slug": "sample.html",
+                    "source_type": "fixture",
+                    "source_reference": "fixture",
+                    "confidence": "high",
+                    "priority": "medium",
+                    "status": "candidate",
+                    "notes": "Fixture exact replacement.",
+                },
+                "exact_replacements": [
+                    {
+                        "file": "sample.html",
+                        "change_type": "meta_refresh",
+                        "selector_or_anchor": "<title>",
+                        "exact_old": "<title>Old exact title</title>",
+                        "exact_new": "<title>New exact title</title>",
+                        "reason": "Fixture exact lifecycle title replacement.",
+                        "owner_approval_required": True,
+                    },
+                    {
+                        "file": "sample.html",
+                        "change_type": "first_screen_update",
+                        "selector_or_anchor": ".guide-verified",
+                        "exact_old": '<p class="guide-verified">Old exact copy.</p>',
+                        "exact_new": '<p class="guide-verified">New exact copy.</p>',
+                        "reason": "Fixture exact lifecycle replacement.",
+                        "owner_approval_required": True,
+                    }
+                ],
+            }
+            run_plan = intake_to_run.build_proposal(intake, tmp_path / "llm-intake.json")
+            manifest_payload = run_plan["proposed_manifest"]
+            manifest_path = tmp_path / "manifest.json"
+            write_json(manifest_path, manifest_payload)
+
+            source = SourceResolution(
+                target_file="sample.html",
+                source_of_truth_file="sample.html",
+                output_file="sample.html",
+                source_type="html_file",
+                is_generated=False,
+                generator_command=None,
+                edit_policy="Edit the target file directly.",
+            )
+            with patch.object(patch_planner, "resolve_source", return_value=source):
+                manifest = load_run_manifest(manifest_path)
+                manifest.status = "draft_brief_ready"
+                patch_plan, markdown = patch_planner.build_patch_plan(manifest)
+                patch_report = reports_dir / f"{manifest.run_id}.patch.md"
+                reports_dir.mkdir(parents=True, exist_ok=True)
+                patch_report.write_text(markdown, encoding="utf-8")
+                manifest.status = "patch_plan_ready"
+                manifest.artifacts.setdefault("patch_plan", {})
+                manifest.artifacts["patch_plan"] = patch_plan
+                manifest.artifacts["patch_plan"]["report_path"] = str(patch_report)
+                manifest.changed_files = list(patch_plan["changed_files"])
+                write_run_manifest(manifest_path, manifest)
+
+            proposal_path, rendered_specs = proposal_renderer.render_proposal(manifest_path, reports_dir)
+            self.assertEqual(len(rendered_specs), 2)
+            self.assertTrue(all(spec["operation_type"] == "safe_exact_replace" for spec in rendered_specs))
+            self.assertIn("New exact copy", proposal_path.read_text(encoding="utf-8"))
+
+            with patch.object(
+                approval,
+                "render_proposal",
+                lambda path: proposal_renderer.render_proposal(path, reports_dir),
+            ), patch.object(approval, "ROOT", tmp_path):
+                code = approval.cmd_approval(
+                    argparse.Namespace(
+                        run_id=str(manifest_path),
+                        state="approved",
+                        source=None,
+                        target=None,
+                        operation=None,
+                        all=True,
+                        note="Owner approved temp fixture exact replacement.",
+                        dry_run=False,
+                    )
+                )
+            self.assertEqual(code, 0)
+            self.assertEqual(load_json(manifest_path)["status"], "approved_for_apply")
+
+            with patch.object(apply_preview, "ROOT", tmp_path), patch.object(apply_preview, "REPORTS_DIR", reports_dir):
+                preview_path, preview_items = apply_preview.render_apply_preview(manifest_path)
+            self.assertTrue(preview_path.exists())
+            self.assertEqual(preview_items[0]["preview_action"], "safe_exact_replace")
+            self.assertEqual(preview_items[0]["warnings"], [])
+
+            with patch.object(apply_approved, "ROOT", tmp_path), patch.object(apply_approved, "REPORTS_DIR", reports_dir):
+                result_path, applied, skipped, generators = apply_approved.apply_approved(manifest_path)
+            self.assertTrue(result_path.exists())
+            self.assertEqual(
+                applied,
+                [
+                    "sample.html:safe_exact_replace:<title>",
+                    "sample.html:safe_exact_replace:.guide-verified",
+                ],
+            )
+            self.assertEqual(skipped, [])
+            self.assertEqual(generators, [])
+            self.assertIn("New exact title", page_path.read_text(encoding="utf-8"))
+            self.assertIn("New exact copy", page_path.read_text(encoding="utf-8"))
+            self.assertEqual(load_json(manifest_path)["status"], "applied_pending_qa")
 
     def test_proposal_renderer_shows_exact_replace_candidate(self) -> None:
         manifest = type(

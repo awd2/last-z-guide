@@ -22,11 +22,12 @@ ALLOWED_STATES = {"proposed", "approved", "rejected"}
 TERMINAL_STATES = {"approved", "rejected"}
 
 
-def spec_key(spec: dict[str, Any]) -> tuple[str, str, str]:
+def spec_key(spec: dict[str, Any]) -> tuple[str, str, str, str]:
     return (
         str(spec.get("source_of_truth_file", "")),
         str(spec.get("output_file", "")),
         str(spec.get("operation_type", "")),
+        str(spec.get("selector_or_anchor", "")),
     )
 
 
@@ -84,7 +85,7 @@ def cmd_approval(args: argparse.Namespace) -> int:
         print("No rendered proposal specs found. Run `python3 automation/pipeline.py propose <run_id>` first.")
         return 1
 
-    matched_keys: set[tuple[str, str, str]] = set()
+    matched_keys: set[tuple[str, str, str, str]] = set()
     timestamp = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
     for spec in rendered_specs:
