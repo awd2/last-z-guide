@@ -1,21 +1,84 @@
 {
   "schema_version": 1,
   "report_type": "external_scout",
-  "generated_at": "2026-05-12T19:12:08Z",
+  "generated_at": "2026-05-12T19:22:15Z",
   "state": "source_approval_needed",
   "registry_path": "automation/memory/source_registry.json",
   "include_proposed": false,
   "approved_or_included_source_count": 0,
   "candidate_proposal_count": 0,
-  "source_review_count": 1,
+  "source_review_count": 10,
   "candidate_proposals": [],
   "source_review_queue": [
+    {
+      "source_id": "official-google-play",
+      "name": "Last Z: Survival Shooter on Google Play",
+      "base_url": "https://play.google.com",
+      "trust_level": "high",
+      "notes": "Official app-store listing. Good for official description, developer identity, app availability, update cadence, and broad feature framing; not enough for detailed mechanics or costs."
+    },
+    {
+      "source_id": "official-apple-app-store",
+      "name": "Last Z: Survival Shooter on Apple App Store",
+      "base_url": "https://apps.apple.com",
+      "trust_level": "high",
+      "notes": "Official iOS listing. Useful for official metadata, version/update context, app category, and broad game framing; not enough for detailed mechanics or costs."
+    },
+    {
+      "source_id": "official-functap-store",
+      "name": "FunTap Last Z store and Gift Center",
+      "base_url": "https://www.last-z.com",
+      "trust_level": "high",
+      "notes": "Official-looking Last Z service domain used for Gift Center and store flow validation. Use only to verify official redeem/store routing, not game mechanics."
+    },
     {
       "source_id": "stresswar-lastz-reference",
       "name": "StressWar Last Z reference pages",
       "base_url": "https://lastz.stresswar.com",
       "trust_level": "medium",
       "notes": "Previously used as a research-reference source. Keep proposed until the owner explicitly approves it for automated external discovery."
+    },
+    {
+      "source_id": "fandom-last-z-wiki",
+      "name": "Last Z: Survival Shooter Wiki on Fandom",
+      "base_url": "https://last-z-survival-shooter.fandom.com",
+      "trust_level": "medium",
+      "notes": "Community wiki. Useful for entity/topic discovery and rough cross-checking. Public claims must be verified elsewhere because wiki pages can be incomplete, outdated, or user-edited."
+    },
+    {
+      "source_id": "lastzwiki-reference",
+      "name": "LastZWiki.com reference pages",
+      "base_url": "https://lastzwiki.com",
+      "trust_level": "medium",
+      "notes": "Unofficial reference/wiki-style site. Useful for topic and entity discovery; every mechanic/cost claim needs independent verification."
+    },
+    {
+      "source_id": "last-z-wiki-reference",
+      "name": "last-z.wiki reference pages",
+      "base_url": "https://www.last-z.wiki",
+      "trust_level": "medium",
+      "notes": "Unofficial wiki/reference site with apparent data-oriented pages. Use as a discovery and second-source candidate only; verify exact mechanics before public copy."
+    },
+    {
+      "source_id": "lastzsurvivalshooter-guides",
+      "name": "LastZSurvivalShooter.com player guides",
+      "base_url": "https://lastzsurvivalshooter.com",
+      "trust_level": "low",
+      "notes": "Unofficial player-guide site. Useful for seeing what players write guides about, but not trusted enough for mechanic claims without stronger verification."
+    },
+    {
+      "source_id": "gamestratwiki-last-z-guides",
+      "name": "GameStratWiki Last Z guides",
+      "base_url": "https://www.gamestratwiki.com",
+      "trust_level": "low",
+      "notes": "General guide site. Useful for topic discovery and SERP landscape only; claims need stronger cross-validation."
+    },
+    {
+      "source_id": "earnne-last-z-codes",
+      "name": "Earnne Last Z codes tracker",
+      "base_url": "https://earnne.com",
+      "trust_level": "low",
+      "notes": "Codes tracker. Potentially useful for discovering code-related search competition, but redemption-flow claims may conflict with this site's canonical Gift Center guidance."
     }
   ],
   "errors": [],
