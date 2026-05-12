@@ -21,6 +21,10 @@ from scripts import bing_weekly
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def fixture_codes_guide_verified_snippet() -> str:
+    return editor.html_context("codes.html")["source_snippets"]["guide_verified"]
+
+
 def fixture_signals() -> dict:
     return {
         "report_type": "gsc_weekly_agent_signals",
@@ -1156,7 +1160,7 @@ class WorkerContractTests(unittest.TestCase):
                     "file": "codes.html",
                     "change_type": "first_screen_update",
                     "selector_or_anchor": ".guide-verified",
-                    "exact_old": "<p>Old current copy.</p>",
+                    "exact_old": fixture_codes_guide_verified_snippet(),
                     "exact_new": "<p>Draft replacement copy.</p>",
                     "reason": "Test proposal-only exact replacement.",
                     "owner_approval_required": False,
@@ -1192,6 +1196,25 @@ class WorkerContractTests(unittest.TestCase):
                 any("owner_approval_required" in error for error in editor_payload["adapter_result"]["errors"])
             )
 
+    def test_llm_editor_rejects_nonliteral_exact_old_candidate(self) -> None:
+        response = {
+            "exact_replacements": [
+                {
+                    "file": "codes.html",
+                    "change_type": "first_screen_update",
+                    "selector_or_anchor": ".guide-verified",
+                    "exact_old": "<p>This text is not in the current target file.</p>",
+                    "exact_new": "<p>Draft replacement copy.</p>",
+                    "reason": "Test nonliteral exact replacement.",
+                    "owner_approval_required": True,
+                }
+            ]
+        }
+
+        errors = llm_editor.validate_exact_replacements(response, "codes.html")
+
+        self.assertTrue(any("exactly once" in error for error in errors))
+
     def test_llm_exact_replacements_reach_intake_as_proposal_only(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
@@ -1205,7 +1228,7 @@ class WorkerContractTests(unittest.TestCase):
                     "file": "codes.html",
                     "change_type": "first_screen_update",
                     "selector_or_anchor": ".guide-verified",
-                    "exact_old": "<p>Old current copy.</p>",
+                    "exact_old": fixture_codes_guide_verified_snippet(),
                     "exact_new": "<p>Draft replacement copy.</p>",
                     "reason": "Test proposal-only exact replacement.",
                     "owner_approval_required": True,
@@ -1604,6 +1627,11 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(brief["template_reference"], "codes.html")
             self.assertIn("AGENTS.md", brief["required_context_before_patch"])
             self.assertIn("python3 scripts/prepublish_check.py", brief["acceptance_checks"])
+            snippets = brief["current_page_snapshot"]["source_snippets"]
+            self.assertIn("guide_verified", snippets)
+            self.assertIn('class="guide-verified"', snippets["guide_verified"])
+            self.assertIn("title_tag", snippets)
+            self.assertTrue(snippets["title_tag"].startswith("<title>"))
 
             editor_json, _ = editor.write_outputs(brief, tmp_path, None)
             review = reviewer.build_review(brief, proposal, editor_json, scout_json)

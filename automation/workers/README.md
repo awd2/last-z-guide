@@ -204,7 +204,7 @@ content edits or mutate backlog, manifests, PRs, or production state.
 
 It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state. It is planning context only until deterministic review and owner approval.
 
-The Editor schema may include `exact_replacements`, but only as draft proposal data. Each item must be target-only, include literal `exact_old` and `exact_new` strings, and set `owner_approval_required: true`. These candidates do not approve copy, create Patch Specs, edit files, or skip the later `propose -> approval -> apply-preview -> apply-approved -> strict QA` flow.
+The Editor schema may include `exact_replacements`, but only as draft proposal data. Each item must be target-only, include literal `exact_old` and `exact_new` strings, and set `owner_approval_required: true`. The deterministic Editor context exposes limited raw target-page snippets under `current_page_snapshot.source_snippets` so `exact_old` can be copied literally. The LLM Editor wrapper blocks any exact replacement whose `exact_old` does not match the current target HTML exactly once. These candidates do not approve copy, create Patch Specs, edit files, or skip the later `propose -> approval -> apply-preview -> apply-approved -> strict QA` flow.
 
 `llm-reviewer` is the third live LLM worker wrapper. It reads one LLM Editor planning brief, sends a JSON-only review-gate request through `llm_adapter`, and writes:
 
@@ -292,6 +292,10 @@ All workers must follow these rules:
 - If a future worker proposes exact public copy, it may pass exact
   `exact_old` and `exact_new` strings into Patch Spec v1. That still creates
   only a proposal; owner approval is required before `apply-approved`.
+- LLM-originated `exact_old` values must be copied from deterministic
+  `current_page_snapshot.source_snippets` or otherwise match the current target
+  HTML exactly once; nonliteral or ambiguous candidates are blocked before
+  intake.
 - Approved intake/run-plan artifacts may carry exact snippets as
   `plan.exact_replacements`. This is a handoff format, not content approval.
 - No live LLM provider calls unless they go through the fail-closed adapter and have explicit configuration.

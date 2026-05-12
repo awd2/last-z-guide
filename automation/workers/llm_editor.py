@@ -195,6 +195,7 @@ def compact_page_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
         "meta_description": snapshot.get("meta_description", ""),
         "quick_answer": snapshot.get("quick_answer", ""),
         "data_lede": snapshot.get("data_lede", ""),
+        "source_snippets": snapshot.get("source_snippets", {}),
         "h2_headings": snapshot.get("h2_headings", [])[:8],
         "internal_links": snapshot.get("internal_links", [])[:20],
     }
@@ -246,6 +247,8 @@ def build_request(
                 "No content files may be edited by this worker.",
                 "Do not generate final user-visible page copy.",
                 "Do not create a patch plan or Patch Spec.",
+                "Use current_page_snapshot.source_snippets as the preferred source for exact_old values.",
+                "exact_old must copy a current target-file snippet literally and must match the target file exactly once.",
                 "exact_replacements, when present, are proposal-only candidates that still require propose + owner approval + apply-approved.",
                 "Every exact_replacements item must set owner_approval_required to true.",
                 "Do not mutate backlog, manifests, PRs, or production state.",
@@ -297,6 +300,12 @@ def validate_exact_replacements(response: dict[str, Any], target: str) -> list[s
     replacements = response.get("exact_replacements")
     if not isinstance(replacements, list):
         return ["LLM Editor exact_replacements must be a list."]
+    target_path = ROOT / target if target else None
+    target_text = ""
+    if replacements and (not target_path or not target_path.exists() or target_path.suffix != ".html"):
+        errors.append(f"LLM Editor exact_replacements require an existing HTML target file `{target}`.")
+    elif replacements and target_path:
+        target_text = target_path.read_text(encoding="utf-8")
     for index, item in enumerate(replacements, start=1):
         label = f"exact_replacements[{index}]"
         if not isinstance(item, dict):
@@ -311,8 +320,18 @@ def validate_exact_replacements(response: dict[str, Any], target: str) -> list[s
         for key in ["selector_or_anchor", "exact_old", "exact_new", "reason"]:
             if not str(item.get(key, "")).strip():
                 errors.append(f"LLM Editor {label}.{key} must be non-empty.")
-        if str(item.get("exact_old", "")).strip() == str(item.get("exact_new", "")).strip():
+        exact_old = str(item.get("exact_old", ""))
+        exact_new = str(item.get("exact_new", ""))
+        if exact_old.strip() == exact_new.strip():
             errors.append(f"LLM Editor {label}.exact_new must differ from exact_old.")
+        if target_text and exact_old:
+            old_count = target_text.count(exact_old)
+            if old_count != 1:
+                errors.append(
+                    f"LLM Editor {label}.exact_old must match `{target}` exactly once; found {old_count} matches."
+                )
+            if exact_new and exact_new in target_text and exact_old not in target_text:
+                errors.append(f"LLM Editor {label}.exact_new already appears in `{target}` while exact_old is absent.")
     return errors
 
 

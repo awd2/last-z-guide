@@ -61,6 +61,11 @@ Run manifests may carry proposal-only exact snippets in
 `safe_exact_replace` Patch Spec v1 entries, while preserving the normal human
 approval and apply-preview gates.
 
+When `plan.exact_replacements` comes from the LLM Editor chain, `exact_old`
+should be copied from deterministic `current_page_snapshot.source_snippets` and
+must match the current target HTML exactly once before the LLM Editor result can
+advance. This keeps the run-plan handoff literal and fail-closed.
+
 `proposal_ready` is the current stop point. It means the run has proposed edits
 and now needs human review before any site files are edited.
 

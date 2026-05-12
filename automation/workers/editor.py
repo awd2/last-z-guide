@@ -113,6 +113,35 @@ def extract_first(pattern: str, text: str) -> str:
     return strip_tags(match.group(1)) if match else ""
 
 
+def extract_raw_first(pattern: str, text: str, max_length: int = 1600) -> str:
+    match = re.search(pattern, text, flags=re.I | re.S)
+    if not match:
+        return ""
+    value = match.group(0).strip()
+    return value if len(value) <= max_length else ""
+
+
+def html_source_snippets(text: str) -> dict[str, str]:
+    candidates = {
+        "title_tag": r"<title>.*?</title>",
+        "meta_description_tag": r'<meta\s+name="description"\s+content="[^"]*"\s*/?>',
+        "og_title_tag": r'<meta\s+property="og:title"\s+content="[^"]*"\s*/?>',
+        "og_description_tag": r'<meta\s+property="og:description"\s+content="[^"]*"\s*/?>',
+        "twitter_title_tag": r'<meta\s+name="twitter:title"\s+content="[^"]*"\s*/?>',
+        "twitter_description_tag": r'<meta\s+name="twitter:description"\s+content="[^"]*"\s*/?>',
+        "h1_tag": r"<h1[^>]*>.*?</h1>",
+        "guide_meta": r'<p class="guide-meta">.*?</p>',
+        "guide_verified": r'<p class="guide-verified">.*?</p>',
+        "quick_answer_lede": r'<p class="qa-lede">.*?</p>',
+        "data_lede": r'<p class="data-lede">.*?</p>',
+    }
+    snippets = {
+        label: extract_raw_first(pattern, text)
+        for label, pattern in candidates.items()
+    }
+    return {label: snippet for label, snippet in snippets.items() if snippet}
+
+
 def html_context(filename: str) -> dict[str, Any]:
     path = ROOT / filename
     if not path.exists() or path.suffix != ".html":
@@ -126,6 +155,7 @@ def html_context(filename: str) -> dict[str, Any]:
         "meta_description": extract_first(r'<meta\s+name="description"\s+content="([^"]*)"', text),
         "quick_answer": extract_first(r'<p class="qa-lede">(.*?)</p>', text),
         "data_lede": extract_first(r'<p class="data-lede">(.*?)</p>', text),
+        "source_snippets": html_source_snippets(text),
         "h2_headings": [
             strip_tags(match)
             for match in re.findall(r"<h2[^>]*>(.*?)</h2>", text, flags=re.I | re.S)
