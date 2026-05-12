@@ -122,6 +122,7 @@ python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state 
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
 python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-approved-handoffs --json
+python3 automation/pipeline.py llm-run-approved-handoffs --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -276,6 +277,14 @@ python3 automation/pipeline.py llm-approved-handoffs --json
 
 This is read-only and prints ready-to-run `llm-worker-chain --from-decision ...` commands.
 
+To run pending approved handoffs without live Scout reranking, run:
+
+```bash
+python3 automation/pipeline.py llm-run-approved-handoffs --provider openai --json
+```
+
+This reads committed `approved_for_chain` decision artifacts, skips already-current completed chain summaries by default, and writes no-write owner-review artifacts only.
+
 For a no-write LLM Editor planning brief from one selected Scout opportunity, run:
 
 ```bash
@@ -323,12 +332,12 @@ The same no-write chain is available in GitHub Actions:
 - Manual dispatch: optional `model` input
 - Output: uploaded candidate refresh artifact only, no commits, decisions, content edits, or PRs
 
-The full no-write chain is also available in GitHub Actions:
+The owner-approved no-write handoff runner is also available in GitHub Actions:
 
 - Workflow: `.github/workflows/llm-worker-chain.yml`
-- Schedule: weekly after the GSC/Bing report windows
-- Manual dispatch: optional `topic_id` and `model` inputs
-- Push trigger: path-limited to LLM worker infrastructure
+- Schedule: none; weekly discovery stays in `llm-candidate-refresh.yml`
+- Manual dispatch: optional `decision_path`, `model`, and `include_current` inputs
+- Push trigger: path-limited to LLM worker infrastructure and committed `llm-topic-decision-*.json` artifacts
 - Output: uploaded artifact only, no commits or PRs
 
 ## Notes

@@ -433,6 +433,7 @@ python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state 
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
 python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-approved-handoffs --json
+python3 automation/pipeline.py llm-run-approved-handoffs --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -456,6 +457,7 @@ python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/workers/llm_run_approved_handoffs.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
@@ -480,6 +482,8 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 `llm-approved-handoffs` is a read-only operator view over `approved_for_chain` decisions. It prints ready-to-run deterministic `llm-worker-chain --from-decision ...` commands and must not approve content edits or mutate backlog, manifests, PRs, or production state.
 
+`llm-run-approved-handoffs` runs pending `approved_for_chain` decision artifacts through the no-write `llm-worker-chain --from-decision` path. It skips decisions that already have a current completed chain summary unless `--include-current` is supplied. It must not call live Scout reranking, approve public copy, mutate backlog, create manifests, edit content, open PRs, or deploy.
+
 `llm-editor` is the second live LLM worker wrapper. It creates a planning brief from one selected LLM Scout opportunity and deterministic Editor context. It may include `exact_replacements` only as draft proposal data with `owner_approval_required: true`; this does not approve copy, create Patch Specs, edit files, or bypass the proposal/approval/apply lifecycle. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state.
 
 `llm-reviewer` is the third live LLM worker wrapper. It reviews one LLM Editor planning brief for duplicate intent, cluster role fit, canonical claims, template safety, draft exact replacement safety, owner questions, and readiness. It must not write final public page copy, patch specs, content edits, backlog entries, manifests, PRs, or production state. It cannot advance LLM exact replacements directly to `apply-preview`.
@@ -488,7 +492,7 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 GitHub workflow `.github/workflows/llm-candidate-refresh.yml` runs weekly and by manual dispatch to refresh no-write candidate topic artifacts from GSC/Bing signals. It uploads artifacts only and must not commit reports, record owner decisions, edit content, open PRs, or deploy.
 
-GitHub workflow `.github/workflows/llm-worker-chain.yml` runs the same no-write chain on a schedule and by manual dispatch. It uploads artifacts only and must not commit reports, edit content, open PRs, or deploy.
+GitHub workflow `.github/workflows/llm-worker-chain.yml` runs pending owner-approved handoffs after committed `llm-topic-decision-*.json` pushes and can manually replay one approved decision path. It is not scheduled, to avoid rerunning the same approved decision every week without committing generated reports. It uploads artifacts only and must not commit reports, edit content, open PRs, or deploy.
 
 `llm-review-latest` reads the latest local LLM worker chain summary and renders a compact owner-review view. It is read-only and must not call an LLM provider, edit content, or mutate repository state.
 

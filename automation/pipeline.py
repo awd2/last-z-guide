@@ -699,6 +699,44 @@ def cmd_llm_approved_handoffs(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_run_approved_handoffs(
+    reports_dir: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    provider: str,
+    max_handoffs: int,
+    include_current: bool,
+    editor_fixture: str | None,
+    reviewer_fixture: str | None,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_run_approved_handoffs.py"),
+        "--provider",
+        provider,
+        "--max-handoffs",
+        str(max_handoffs),
+    ]
+    if reports_dir:
+        command.extend(["--reports-dir", reports_dir])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if include_current:
+        command.append("--include-current")
+    if editor_fixture:
+        command.extend(["--editor-fixture", editor_fixture])
+    if reviewer_fixture:
+        command.extend(["--reviewer-fixture", reviewer_fixture])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Run Approved Handoffs ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_content_seo_opportunities(
     json_output: str | None,
     markdown_output: str | None,
@@ -2100,6 +2138,29 @@ def build_parser() -> argparse.ArgumentParser:
     )
     llm_approved_handoffs_parser.add_argument("--json", action="store_true", help="Print approved handoffs as JSON.")
 
+    llm_run_approved_handoffs_parser = subparsers.add_parser(
+        "llm-run-approved-handoffs",
+        help="Run pending approved LLM topic decisions through no-write worker-chain replay.",
+    )
+    llm_run_approved_handoffs_parser.add_argument("--reports-dir", help="Directory containing llm-topic-decision-*.json files.")
+    llm_run_approved_handoffs_parser.add_argument("--output-dir", help="Directory for approved-handoff run artifacts.")
+    llm_run_approved_handoffs_parser.add_argument("--basename", help="Aggregate summary basename.")
+    llm_run_approved_handoffs_parser.add_argument(
+        "--provider",
+        default="disabled",
+        choices=["disabled", "fixture", "openai"],
+        help="Provider passed to no-write LLM worker chains. Defaults to disabled/fail-closed.",
+    )
+    llm_run_approved_handoffs_parser.add_argument("--max-handoffs", type=int, default=3, help="Maximum pending handoffs to run.")
+    llm_run_approved_handoffs_parser.add_argument(
+        "--include-current",
+        action="store_true",
+        help="Rerun handoffs even when a current chain summary already exists.",
+    )
+    llm_run_approved_handoffs_parser.add_argument("--editor-fixture", help="Fixture response JSON for offline Editor tests.")
+    llm_run_approved_handoffs_parser.add_argument("--reviewer-fixture", help="Fixture response JSON for offline Reviewer tests.")
+    llm_run_approved_handoffs_parser.add_argument("--json", action="store_true", help="Print approved-handoff run summary as JSON.")
+
     content_seo_parser = subparsers.add_parser(
         "content-seo-opportunities",
         help="Build a no-write SEO/LLM content opportunity report.",
@@ -2312,6 +2373,18 @@ def main() -> int:
         )
     if args.command == "llm-approved-handoffs":
         return cmd_llm_approved_handoffs(args.reports_dir, args.provider, args.json)
+    if args.command == "llm-run-approved-handoffs":
+        return cmd_llm_run_approved_handoffs(
+            args.reports_dir,
+            args.output_dir,
+            args.basename,
+            args.provider,
+            args.max_handoffs,
+            args.include_current,
+            args.editor_fixture,
+            args.reviewer_fixture,
+            args.json,
+        )
     if args.command == "content-seo-opportunities":
         return cmd_content_seo_opportunities(
             args.json_output,

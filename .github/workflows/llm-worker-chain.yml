@@ -3,16 +3,19 @@ name: LLM worker chain
 on:
   workflow_dispatch:
     inputs:
-      topic_id:
-        description: "Optional selected LLM Scout topic_id. Empty means use the first selected opportunity."
+      decision_path:
+        description: "Optional approved llm-topic-decision path. Empty means run pending approved handoffs."
         required: false
         default: ""
       model:
         description: "OpenAI model for the no-write LLM chain."
         required: false
         default: "gpt-5.4-mini"
-  schedule:
-    - cron: "35 7 * * 1"
+      include_current:
+        description: "Rerun even when a current chain summary already exists."
+        required: false
+        type: boolean
+        default: false
   push:
     branches:
       - main
@@ -20,6 +23,8 @@ on:
       - ".github/workflows/llm-worker-chain.yml"
       - "automation/pipeline.py"
       - "automation/workers/llm_*.py"
+      - "automation/reports/llm_*.py"
+      - "automation/reports/llm-topic-decision-*.json"
       - "automation/workers/README.md"
 
 concurrency:
@@ -43,24 +48,33 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run no-write LLM worker chain
+      - name: Run no-write LLM worker chain handoff
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ github.event.inputs.model || 'gpt-5.4-mini' }}
-          TOPIC_ID: ${{ github.event.inputs.topic_id || '' }}
+          DECISION_PATH: ${{ github.event.inputs.decision_path || '' }}
+          INCLUDE_CURRENT: ${{ github.event.inputs.include_current || 'false' }}
         run: |
           set -euo pipefail
           mkdir -p automation/reports/llm-worker-chain-gha
-          cmd=(
-            python3 automation/pipeline.py llm-worker-chain
-            --provider openai
-            --output-dir automation/reports/llm-worker-chain-gha
-            --json
-          )
-          if [[ -n "$TOPIC_ID" ]]; then
-            cmd+=(--topic-id "$TOPIC_ID")
+          if [[ -n "$DECISION_PATH" ]]; then
+            python3 automation/pipeline.py llm-worker-chain \
+              --from-decision "$DECISION_PATH" \
+              --provider openai \
+              --output-dir automation/reports/llm-worker-chain-gha \
+              --json | tee automation/reports/llm-worker-chain-gha/run-summary.json
+          else
+            cmd=(
+              python3 automation/pipeline.py llm-run-approved-handoffs
+              --provider openai
+              --output-dir automation/reports/llm-worker-chain-gha
+              --json
+            )
+            if [[ "$INCLUDE_CURRENT" == "true" ]]; then
+              cmd+=(--include-current)
+            fi
+            "${cmd[@]}" | tee automation/reports/llm-worker-chain-gha/run-summary.json
           fi
-          "${cmd[@]}" | tee automation/reports/llm-worker-chain-gha/run-summary.json
 
       - name: Write job summary
         if: always()
@@ -83,14 +97,24 @@ jobs:
               raise SystemExit(0)
           data = json.loads(summary_path.read_text())
           print(f"- State: `{data.get('state')}`")
-          print(f"- Topic: `{data.get('source_topic_id')}`")
-          print(f"- Target: `{data.get('target_page_or_slug')}`")
-          print(f"- Verdict: `{data.get('review_verdict')}`")
-          print(f"- Risk: `{data.get('risk_level')}`")
-          print(f"- Owner approval required: `{data.get('owner_approval_required')}`")
+          if data.get("source_topic_id"):
+              print(f"- Topic: `{data.get('source_topic_id')}`")
+              print(f"- Target: `{data.get('target_page_or_slug')}`")
+              print(f"- Verdict: `{data.get('review_verdict')}`")
+              print(f"- Risk: `{data.get('risk_level')}`")
+              print(f"- Owner approval required: `{data.get('owner_approval_required')}`")
+          else:
+              print(f"- Approved handoffs: `{data.get('approved_handoff_count')}`")
+              print(f"- Pending handoffs: `{data.get('pending_handoff_count')}`")
+              print(f"- Run count: `{data.get('run_count')}`")
+              print(f"- Success count: `{data.get('success_count')}`")
+              print(f"- Failure count: `{data.get('failure_count')}`")
+              print(f"- Skipped current: `{data.get('skipped_current_count')}`")
           artifacts = data.get("artifacts", {})
           if artifacts.get("chain_markdown"):
               print(f"- Chain markdown: `{artifacts['chain_markdown']}`")
+          if artifacts.get("handoff_run_markdown"):
+              print(f"- Handoff run markdown: `{artifacts['handoff_run_markdown']}`")
           PY
 
       - name: Upload LLM worker chain artifacts

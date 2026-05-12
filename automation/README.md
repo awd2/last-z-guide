@@ -158,6 +158,11 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - prints only `approved_for_chain` decisions with ready deterministic `llm-worker-chain --from-decision ...` commands
   - does not mutate `topic_backlog.csv`, manifests, content, PRs, or production state
 
+- `workers/llm_run_approved_handoffs.py`
+  - runs pending `approved_for_chain` decisions through deterministic no-write worker-chain replay
+  - skips decisions that already have a current completed chain summary unless explicitly told to rerun
+  - does not run live Scout reranking, mutate backlog, create manifests, edit content, open PRs, or deploy
+
 - `workers/llm_editor.py`
   - reads one selected LLM Scout opportunity and deterministic Editor context
   - sends a JSON-only planning brief request through `llm_adapter`
@@ -184,7 +189,7 @@ Hand-curated or generated reference files used by future Scout / Editor / Review
   - does not edit content, backlog, manifests, PRs, or production state
 
 - `.github/workflows/llm-worker-chain.yml`
-  - runs the no-write live LLM worker chain by manual dispatch and weekly schedule
+  - runs pending owner-approved no-write worker-chain handoffs by manual dispatch or committed decision artifact push
   - uploads artifacts from `automation/reports/llm-worker-chain-gha/`
   - does not commit generated reports, edit content, open PRs, or deploy
 
@@ -282,6 +287,7 @@ python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state 
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
 python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-approved-handoffs --json
+python3 automation/pipeline.py llm-run-approved-handoffs --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -405,6 +411,8 @@ Lifecycle shorthand:
 - `llm-candidate-refresh` -> run no-write LLM Scout plus topic discovery and write owner-review candidate artifacts
 - `llm-topic-discovery` -> convert selected LLM Scout opportunities into no-write topic proposals
 - `llm-topic-decision` -> record an owner decision for one discovered topic
+- `llm-approved-handoffs` -> list owner-approved decisions ready for no-write chain replay
+- `llm-run-approved-handoffs` -> run pending owner-approved decisions through no-write chain replay
 - `llm-editor` -> run a no-write LLM planning brief from one selected LLM Scout opportunity
 - `llm-reviewer` -> run a no-write LLM review gate from one LLM Editor planning brief
 - `llm-worker-chain` -> run the no-write live LLM Scout -> Editor -> Reviewer sequence and write one owner-review summary
@@ -523,6 +531,15 @@ LLM approved handoffs:
 - prints ready deterministic `llm-worker-chain --from-decision ...` commands
 - this view is read-only; it does not update `topic_backlog.csv`, manifests, content, PRs, or production state
 
+LLM run approved handoffs:
+
+- `python3 automation/pipeline.py llm-run-approved-handoffs --provider openai --json` -> run pending `approved_for_chain` decisions through no-write worker-chain replay
+- each handoff uses the saved decision artifact, equivalent to `llm-worker-chain --from-decision ...`
+- decisions with a current completed `llm-worker-chain-<topic_id>.json` summary are skipped by default
+- use `--include-current` only when intentionally rerunning an already-current handoff
+- output lives in `automation/reports/llm-approved-handoff-run/` by default, or the supplied `--output-dir`
+- this command does not run live Scout reranking, approve public copy, mutate backlog/manifests, edit content, open PRs, or deploy
+
 LLM Editor planning brief:
 
 - `python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json` -> create a no-write planning brief from one selected LLM Scout opportunity
@@ -554,7 +571,7 @@ LLM worker chain:
 LLM candidate refresh workflow:
 
 - `.github/workflows/llm-candidate-refresh.yml` -> refresh candidate topic artifacts in GitHub Actions
-- trigger modes: weekly schedule, manual dispatch, or path-limited LLM worker infrastructure push
+- trigger modes: weekly schedule, manual dispatch, path-limited LLM worker infrastructure push, or committed `llm-topic-decision-*.json` push
 - required secret: `OPENAI_API_KEY`
 - optional manual input: `model`
 - output is an uploaded workflow artifact named `llm-candidate-refresh-<run_number>`
@@ -562,12 +579,14 @@ LLM candidate refresh workflow:
 
 LLM worker chain workflow:
 
-- `.github/workflows/llm-worker-chain.yml` -> run the same no-write chain in GitHub Actions
-- trigger modes: weekly schedule, manual dispatch, or path-limited LLM worker infrastructure push
+- `.github/workflows/llm-worker-chain.yml` -> run pending owner-approved no-write chain handoffs in GitHub Actions
+- trigger modes: manual dispatch, path-limited LLM worker infrastructure push, or committed `llm-topic-decision-*.json` push
 - required secret: `OPENAI_API_KEY`
-- optional manual inputs: `topic_id`, `model`
+- optional manual inputs: `decision_path`, `model`, `include_current`
 - output is an uploaded workflow artifact named `llm-worker-chain-<run_number>`
 - this workflow intentionally does not commit reports to `main`
+- on decision-artifact pushes, it reads committed `llm-topic-decision-*.json` artifacts and runs only decisions approved for chain replay
+- manual `decision_path` can replay one approved decision artifact directly
 
 LLM latest owner review:
 

@@ -100,6 +100,7 @@ python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state 
 python3 automation/pipeline.py llm-topic-decision --from-decision automation/reports/llm-topic-decision-<topic_id>.json --state approved_for_chain --decided-by <name> --note "<approval note>" --json
 python3 automation/pipeline.py llm-topic-decisions --json
 python3 automation/pipeline.py llm-approved-handoffs --json
+python3 automation/pipeline.py llm-run-approved-handoffs --provider openai --json
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
@@ -120,6 +121,7 @@ python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/workers/llm_run_approved_handoffs.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
@@ -196,6 +198,14 @@ artifacts. It lists only topics currently approved for chain replay and prints
 ready `llm-worker-chain --from-decision ...` commands. It does not approve
 content edits or mutate backlog, manifests, PRs, or production state.
 
+`llm-run-approved-handoffs` is the scheduled owner-handoff runner. It reads the
+same `approved_for_chain` decision artifacts and runs only pending handoffs
+through deterministic `llm-worker-chain --from-decision` replay. If a completed
+current chain summary already exists for the decision, it skips the handoff
+unless `--include-current` is supplied. It does not run live Scout reranking,
+approve public copy, mutate backlog, create manifests, edit content, open PRs,
+or deploy.
+
 `llm-editor` is the second live LLM worker wrapper. It reads one selected LLM Scout opportunity, combines it with deterministic Editor context, sends a JSON-only planning request through `llm_adapter`, and writes:
 
 - `automation/reports/llm-editor-brief-<topic_id>-request.json`
@@ -235,7 +245,7 @@ It writes:
 
 The chain summary references each stage's request/result/markdown artifacts. If any stage fails or is blocked, the chain writes a blocked summary and stops before later stages. Live Scout handoffs advance only `ready_for_chain` opportunities: `update_existing`, `create_new`, or `consolidate` with non-low priority. Monitor-only, reject, or low-priority selected topics are blocked before Editor/Reviewer. It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state.
 
-The GitHub Actions wrapper `.github/workflows/llm-worker-chain.yml` runs this chain on a weekly schedule, by manual dispatch, or after path-limited LLM worker infrastructure pushes. It uploads artifacts only; it must not commit generated reports or mutate content.
+The GitHub Actions wrapper `.github/workflows/llm-worker-chain.yml` runs pending owner-approved handoffs by manual dispatch, after path-limited LLM worker infrastructure pushes, or after committed `llm-topic-decision-*.json` pushes. Decision-triggered runs use `llm-run-approved-handoffs` so they only process committed `approved_for_chain` decision artifacts and skip current completed chain summaries. It is intentionally not scheduled because the workflow uploads artifacts without committing generated reports, so a weekly run could repeatedly process the same approved decision. Manual dispatch can replay one approved `decision_path` directly. It uploads artifacts only; it must not commit generated reports or mutate content.
 
 `llm-review-latest` is a read-only operator view over the latest local `llm-worker-chain-<topic_id>.json` summary. It extracts the Reviewer gate result, owner questions, blocking issues, required checks, and next step without calling an LLM provider.
 

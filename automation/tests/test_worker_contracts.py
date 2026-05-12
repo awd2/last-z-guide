@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, patch_planner, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, intake, intake_to_run, llm_adapter, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -1184,6 +1184,51 @@ class WorkerContractTests(unittest.TestCase):
             markdown = llm_approved_handoffs.render_markdown(view)
             self.assertIn("LLM Approved Handoffs", markdown)
             self.assertIn("llm-worker-chain", markdown)
+
+    def test_llm_run_approved_handoffs_runs_pending_decision_and_skips_current(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            decision_path = tmp_path / "llm-topic-decision-codes-gsc-opportunity.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            write_json(decision_path, fixture_approved_topic_decision())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, fixture_llm_reviewer_response())
+
+            code, summary = llm_run_approved_handoffs.run_approved_handoffs(
+                reports_dir=tmp_path,
+                output_dir=tmp_path,
+                provider="fixture",
+                max_handoffs=3,
+                include_current=False,
+                basename="llm-approved-handoff-run-fixture",
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["state"], "completed")
+            self.assertEqual(summary["approved_handoff_count"], 1)
+            self.assertEqual(summary["run_count"], 1)
+            self.assertEqual(summary["success_count"], 1)
+            self.assertTrue((tmp_path / "llm-worker-chain-codes-gsc-opportunity.json").exists())
+            self.assertTrue((tmp_path / "llm-approved-handoff-run-fixture.json").exists())
+
+            second_code, second_summary = llm_run_approved_handoffs.run_approved_handoffs(
+                reports_dir=tmp_path,
+                output_dir=tmp_path / "second-run",
+                provider="fixture",
+                max_handoffs=3,
+                include_current=False,
+                basename="llm-approved-handoff-run-fixture",
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+            )
+
+            self.assertEqual(second_code, 0)
+            self.assertEqual(second_summary["state"], "current")
+            self.assertEqual(second_summary["run_count"], 0)
+            self.assertEqual(second_summary["skipped_current_count"], 1)
 
     def test_llm_editor_builds_brief_from_llm_scout_fixture(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
