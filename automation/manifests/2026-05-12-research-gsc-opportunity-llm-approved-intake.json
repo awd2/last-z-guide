@@ -2,7 +2,7 @@
   "run_id": "2026-05-12-research-gsc-opportunity-llm-approved-intake",
   "created_at": "2026-05-12T16:52:11Z",
   "run_type": "update_existing",
-  "status": "patch_plan_ready",
+  "status": "proposal_ready",
   "risk_level": "high",
   "summary": "Worker-approved intake for `research.html` from `research-gsc-opportunity`.",
   "inputs": {
@@ -168,6 +168,79 @@
         "python3 automation/pipeline.py checks"
       ],
       "report_path": "automation/reports/2026-05-12-research-gsc-opportunity-llm-approved-intake.patch.md"
+    },
+    "proposal": {
+      "report_path": "automation/reports/2026-05-12-research-gsc-opportunity-llm-approved-intake.proposed.md",
+      "rendered_specs": [
+        {
+          "target_file": "research.html",
+          "source_of_truth_file": "research.html",
+          "output_file": "research.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Research Guide (2026) — Research Tree, Peace Shield, Urgent Rescue, T10 Order | h1: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path | meta: Step-by-step Last Z research tree guide: what to research first, how to unlock Peace Shield and Urgent Rescue, and the best path toward T10. | verified: Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies for efficient combat stats, Peace Shield for Urgent Rescue, then the shortest practical path toward UST and T10.",
+          "desired_after_summary": "Opening answer matches the page role for research.html, gives the exact setup answer quickly, and avoids drifting into a broader hub page.",
+          "suggested_content": "",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "research.html",
+          "source_of_truth_file": "research.html",
+          "output_file": "research.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "hero-training-cockpit-stop",
+            "peace-shield-value",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Research Guide (2026) — Research Tree, Peace Shield, Urgent Rescue, T10 Order | h1: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path | meta: Step-by-step Last Z research tree guide: what to research first, how to unlock Peace Shield and Urgent Rescue, and the best path toward T10. | verified: Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies for efficient combat stats, Peace Shield for Urgent Rescue, then the shortest practical path toward UST and T10.",
+          "desired_after_summary": "Title, H1, and meta description use the same exact intent: research.html.",
+          "suggested_content": "",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        }
+      ]
     }
   },
   "changed_files": [
