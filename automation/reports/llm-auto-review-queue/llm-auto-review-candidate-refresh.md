@@ -1,4 +1,4 @@
-# LLM Candidate Refresh - 2026-05-12T19:14:41Z
+# LLM Candidate Refresh - 2026-05-12T19:43:56Z
 
 ## Overview
 
@@ -27,11 +27,11 @@
 
 - codes-gsc-opportunity
 - research-gsc-opportunity
+- external-gift-center-official-flow-validation
+- external-hq-and-progression-reference-cross-check
+- external-research-costs-external-cross-check
 - vehicle-modification-cost-gsc-opportunity
 - alliance-duel-gsc-opportunity
-- heroes-gsc-opportunity
-- hq-gsc-opportunity
-- power-guide-gsc-opportunity
 
 ## Stages
 

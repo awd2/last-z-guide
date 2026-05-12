@@ -1,14 +1,16 @@
 {
   "schema_version": 1,
   "report_type": "llm_candidate_refresh",
-  "generated_at": "2026-05-12T19:14:41Z",
+  "generated_at": "2026-05-12T19:43:56Z",
   "state": "candidate_refresh_ready",
   "provider": "openai",
   "source_signal_files": [
     "content/gsc/latest-gsc-agent-signals.json",
     "content/bing/latest-bing-agent-signals.json"
   ],
-  "external_proposal_files": [],
+  "external_proposal_files": [
+    "automation/reports/llm-auto-review-queue/external-scout.json"
+  ],
   "source_proposal_count": 8,
   "candidate_topic_count": 1,
   "monitor_topic_count": 7,
@@ -18,11 +20,11 @@
   "monitor_topic_ids": [
     "codes-gsc-opportunity",
     "research-gsc-opportunity",
+    "external-gift-center-official-flow-validation",
+    "external-hq-and-progression-reference-cross-check",
+    "external-research-costs-external-cross-check",
     "vehicle-modification-cost-gsc-opportunity",
-    "alliance-duel-gsc-opportunity",
-    "heroes-gsc-opportunity",
-    "hq-gsc-opportunity",
-    "power-guide-gsc-opportunity"
+    "alliance-duel-gsc-opportunity"
   ],
   "topic_discovery_path": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
   "topic_discovery_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md",

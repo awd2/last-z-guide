@@ -9,7 +9,9 @@
       "content/gsc/latest-gsc-agent-signals.json",
       "content/bing/latest-bing-agent-signals.json"
     ],
-    "external_proposal_files": [],
+    "external_proposal_files": [
+      "automation/reports/llm-auto-review-queue/external-scout.json"
+    ],
     "proposal_count": 8,
     "proposals": [
       {
@@ -51,6 +53,111 @@
           "The query intent is already better served by another canonical page.",
           "The proposed change would blur cluster role separation.",
           "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      },
+      {
+        "topic_id": "external-gift-center-official-flow-validation",
+        "title": "External source opportunity: official Gift Center and store flow validation",
+        "cluster": "Economy",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "support-guide",
+        "target_page_or_slug": "gift-center-uid.html",
+        "source_reference": "official-functap-store: https://www.last-z.com",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "medium",
+        "evidence": [
+          "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation.",
+          "External source URL recorded for later manual verification."
+        ],
+        "site_fit": {
+          "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
+          "cluster_owner": "Economy",
+          "expected_internal_route": [
+            "index.html",
+            "gift-center-uid.html"
+          ],
+          "archetype_reason": "External source indicates a possible player job to validate."
+        },
+        "constraints": [
+          "Do not copy competitor wording.",
+          "Use this as topic discovery and cross-validation context only.",
+          "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+        ],
+        "reject_if": [
+          "The topic duplicates an existing page intent without adding a distinct player job.",
+          "The external claim cannot be verified beyond this source.",
+          "The proposal would blur existing cluster roles."
+        ]
+      },
+      {
+        "topic_id": "external-hq-and-progression-reference-cross-check",
+        "title": "External source opportunity: HQ and progression requirement cross-check",
+        "cluster": "Progression",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "hq.html",
+        "source_reference": "lastzwiki-reference: https://lastzwiki.com",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "Owner-approved wiki/reference source can reveal HQ and progression planning gaps.",
+          "External source URL recorded for later manual verification."
+        ],
+        "site_fit": {
+          "primary_user_job": "Verify HQ requirement planning, construction dependencies, and progression-route coverage against reference data.",
+          "cluster_owner": "Progression",
+          "expected_internal_route": [
+            "index.html",
+            "hq.html"
+          ],
+          "archetype_reason": "External source indicates a possible player job to validate."
+        },
+        "constraints": [
+          "Do not copy competitor wording.",
+          "Use this as topic discovery and cross-validation context only.",
+          "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+        ],
+        "reject_if": [
+          "The topic duplicates an existing page intent without adding a distinct player job.",
+          "The external claim cannot be verified beyond this source.",
+          "The proposal would blur existing cluster roles."
+        ]
+      },
+      {
+        "topic_id": "external-research-costs-external-cross-check",
+        "title": "External source opportunity: research cost and branch coverage cross-check",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "atlas-page",
+        "target_page_or_slug": "research-costs.html",
+        "source_reference": "stresswar-lastz-reference: https://lastz.stresswar.com",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "Owner-approved research reference source can reveal branch coverage gaps and cost/name drift.",
+          "External source URL recorded for later manual verification."
+        ],
+        "site_fit": {
+          "primary_user_job": "Catch missing research branches, cost-table drift, and branch naming conflicts before players rely on outdated planning.",
+          "cluster_owner": "Research",
+          "expected_internal_route": [
+            "index.html",
+            "research-costs.html"
+          ],
+          "archetype_reason": "External source indicates a possible player job to validate."
+        },
+        "constraints": [
+          "Do not copy competitor wording.",
+          "Use this as topic discovery and cross-validation context only.",
+          "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+        ],
+        "reject_if": [
+          "The topic duplicates an existing page intent without adding a distinct player job.",
+          "The external claim cannot be verified beyond this source.",
+          "The proposal would blur existing cluster roles."
         ]
       },
       {
@@ -187,107 +294,6 @@
             "alliance-duel.html"
           ],
           "archetype_reason": "Existing page is `event-guide` in the `Events` cluster; Scout should prefer updating the existing page before proposing new content."
-        },
-        "constraints": [
-          "Use existing page template and navigation patterns.",
-          "Treat GSC data as a signal, not proof that a rewrite is needed."
-        ],
-        "reject_if": [
-          "The query intent is already better served by another canonical page.",
-          "The proposed change would blur cluster role separation.",
-          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
-        ]
-      },
-      {
-        "topic_id": "heroes-gsc-opportunity",
-        "title": "GSC opportunity review: Last Z Best Heroes Tier List — Season 4 Rankings by Faction",
-        "cluster": "Heroes",
-        "recommended_action": "update_existing",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "heroes.html",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
-        "confidence": "medium",
-        "priority": "high",
-        "risk_level": "high",
-        "evidence": [
-          "GSC page signal: heroes.html had 15334 impressions, 343 clicks, 2.24% CTR, avg position 7.93."
-        ],
-        "site_fit": {
-          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z season 4 heroes` searchers.",
-          "cluster_owner": "Heroes",
-          "expected_internal_route": [
-            "index.html",
-            "heroes.html"
-          ],
-          "archetype_reason": "Existing page is `cornerstone-guide` in the `Heroes` cluster; Scout should prefer updating the existing page before proposing new content."
-        },
-        "constraints": [
-          "Use existing page template and navigation patterns.",
-          "Treat GSC data as a signal, not proof that a rewrite is needed."
-        ],
-        "reject_if": [
-          "The query intent is already better served by another canonical page.",
-          "The proposed change would blur cluster role separation.",
-          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
-        ]
-      },
-      {
-        "topic_id": "hq-gsc-opportunity",
-        "title": "GSC opportunity review: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
-        "cluster": "Progression",
-        "recommended_action": "update_existing",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "hq.html",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
-        "confidence": "medium",
-        "priority": "high",
-        "risk_level": "high",
-        "evidence": [
-          "GSC page signal: hq.html had 15316 impressions, 394 clicks, 2.57% CTR, avg position 7.56."
-        ],
-        "site_fit": {
-          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy` searchers.",
-          "cluster_owner": "Progression",
-          "expected_internal_route": [
-            "index.html",
-            "start.html",
-            "hq.html"
-          ],
-          "archetype_reason": "Existing page is `cornerstone-guide` in the `Progression` cluster; Scout should prefer updating the existing page before proposing new content."
-        },
-        "constraints": [
-          "Use existing page template and navigation patterns.",
-          "Treat GSC data as a signal, not proof that a rewrite is needed."
-        ],
-        "reject_if": [
-          "The query intent is already better served by another canonical page.",
-          "The proposed change would blur cluster role separation.",
-          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
-        ]
-      },
-      {
-        "topic_id": "power-guide-gsc-opportunity",
-        "title": "GSC opportunity review: Last Z Power Guide — How to Increase Combat Power Fast",
-        "cluster": "Progression",
-        "recommended_action": "update_existing",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "power-guide.html",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
-        "confidence": "medium",
-        "priority": "high",
-        "risk_level": "high",
-        "evidence": [
-          "GSC page signal: power-guide.html had 9465 impressions, 92 clicks, 0.97% CTR, avg position 7.53."
-        ],
-        "site_fit": {
-          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `Last Z Power Guide — How to Increase Combat Power Fast` searchers.",
-          "cluster_owner": "Progression",
-          "expected_internal_route": [
-            "index.html",
-            "start.html",
-            "power-guide.html"
-          ],
-          "archetype_reason": "Existing page is `cornerstone-guide` in the `Progression` cluster; Scout should prefer updating the existing page before proposing new content."
         },
         "constraints": [
           "Use existing page template and navigation patterns.",
