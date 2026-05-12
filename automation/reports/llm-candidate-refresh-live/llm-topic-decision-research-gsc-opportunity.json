@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_topic_decision",
+  "generated_at": "2026-05-12T16:44:19Z",
+  "state": "decision_recorded",
+  "topic_id": "research-gsc-opportunity",
+  "decision_state": "approved_for_chain",
+  "decided_by": "oleg",
+  "decision_note": "Owner approved no-write LLM worker chain for research opportunity only.",
+  "source_discovery": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-topic-discovery.json",
+  "topic_snapshot": {
+    "topic_id": "research-gsc-opportunity",
+    "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+    "cluster": "Research",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "research.html",
+    "source_type": "llm_scout",
+    "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+    "confidence": "high",
+    "priority": "high",
+    "status": "candidate",
+    "notes": "research.html shows meaningful impressions but middling CTR, plus a rising research priority query. This suggests the page likely needs clearer positioning of order, scope, and progression value rather than new content.",
+    "risk_level": "high",
+    "player_value": "Players get a more useful research path and faster understanding of what to prioritize first.",
+    "duplication_risk": "Medium; must stay distinct from costs, hero training, and peace shield guidance.",
+    "claims_to_verify": [
+      "research-best-mainline",
+      "hero-training-cockpit-stop",
+      "peace-shield-value",
+      "research-atlas-role"
+    ],
+    "next_step": "Route to human review to test whether the page can better answer research priority intent within current structure.",
+    "evidence": [
+      "GSC page signal: research.html had 12710 impressions, 597 clicks, 4.70% CTR, avg position 7.27.",
+      "Rising query: `last z research priority` gained 11 impressions in the last 7-day comparison window."
+    ],
+    "site_fit": {
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z research guide` searchers.",
+      "cluster_owner": "Research",
+      "expected_internal_route": [
+        "index.html",
+        "research.html",
+        "research-costs.html"
+      ],
+      "archetype_reason": "Existing page is `cornerstone-guide` in the `Research` cluster; Scout should prefer updating the existing page before proposing new content."
+    },
+    "constraints": [
+      "Use existing page template and navigation patterns.",
+      "Treat GSC data as a signal, not proof that a rewrite is needed.",
+      "Protect canonical claim `research-best-mainline`.",
+      "Protect canonical claim `hero-training-cockpit-stop`.",
+      "Protect canonical claim `peace-shield-value`.",
+      "Protect canonical claim `research-atlas-role`."
+    ],
+    "reject_if": [
+      "The query intent is already better served by another canonical page.",
+      "The proposed change would blur cluster role separation.",
+      "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+    ],
+    "prior_review": null,
+    "human_approval_required": true,
+    "backlog_row_preview": {
+      "topic_id": "research-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+      "cluster": "Research",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "status": "candidate",
+      "notes": "research.html shows meaningful impressions but middling CTR, plus a rising research priority query. This suggests the page likely needs clearer positioning of order, scope, and progression value rather than new content."
+    }
+  },
+  "allows_worker_chain": true,
+  "allows_content_edit": false,
+  "next_actions": [
+    "Run the no-write LLM worker chain from this saved decision: python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-research-gsc-opportunity.json --provider openai --json",
+    "Review the generated LLM Reviewer gate before any intake, run-plan, or public content proposal.",
+    "Public content still requires exact text/spec proposal, explicit owner approval, and strict checks."
+  ],
+  "errors": [],
+  "output_path": "automation/reports/llm-candidate-refresh-live/llm-topic-decision-research-gsc-opportunity.json",
+  "markdown_path": "automation/reports/llm-candidate-refresh-live/llm-topic-decision-research-gsc-opportunity.md",
+  "safety": "No content, backlog, manifest, PR, or production files were modified. This decision only controls whether a discovered topic may proceed to the next no-write worker stage."
+}

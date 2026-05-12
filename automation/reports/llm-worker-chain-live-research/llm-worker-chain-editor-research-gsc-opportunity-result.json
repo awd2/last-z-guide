@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-12T16:44:46Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-worker-chain-editor-research-gsc-opportunity",
+  "worker_role": "editor",
+  "request_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-editor-research-gsc-opportunity-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "brief_summary": "Tighten the existing research.html opening so it answers research priority intent faster, while keeping the page a cornerstone research guide and preserving protected claims plus cluster separation.",
+    "target_page_or_slug": "research.html",
+    "page_role": "cornerstone-guide",
+    "primary_user_job": "Improve query-to-page match and first-screen usefulness for last z research guide searchers.",
+    "first_screen_plan": "Keep the answer-first structure, but make the opening explicitly orient around best research order and progression. The first screen should state the practical sequence, the main decision criteria, and the reason the page exists without drifting into a costs-only, hero-only, or Peace Shield-only angle. Preserve the current canonical claims and ensure the opening remains consistent with the existing mainline guidance.",
+    "section_plan": [
+      {
+        "section": "Quick Answer",
+        "action": "Tighten the answer so it directly satisfies last z research priority intent and names the practical order at a high level.",
+        "reason": "This is the highest-value fix for query match and CTR without changing the page role."
+      },
+      {
+        "section": "Best overall recommendation",
+        "action": "Make the main recommendation more explicit about the overall path and decision logic.",
+        "reason": "Helps users understand what to do first and keeps the cornerstone framing intact."
+      },
+      {
+        "section": "Decision framework",
+        "action": "Emphasize the criteria for choosing what to research next, including progression and unlock considerations.",
+        "reason": "Supports users who need a reasoned path rather than a flat list."
+      },
+      {
+        "section": "Cluster route block",
+        "action": "Confirm the route from research overview into related research subpages without overpromoting any single downstream topic.",
+        "reason": "Preserves cluster structure and helps avoid duplication with adjacent canonical pages."
+      },
+      {
+        "section": "Related guides / FAQ",
+        "action": "Keep supporting links focused on adjacent research questions and common follow-ups.",
+        "reason": "Maintains internal routing and helps searchers continue from the overview page."
+      }
+    ],
+    "internal_link_plan": [
+      {
+        "page": "index.html",
+        "role": "upstream",
+        "reason": "Main hub route into the Research cluster."
+      },
+      {
+        "page": "research-costs.html",
+        "role": "upstream",
+        "reason": "Cost context supports the research overview without replacing it."
+      },
+      {
+        "page": "hero-training-cost.html",
+        "role": "downstream",
+        "reason": "Related progression topic that can support the recommended early path."
+      },
+      {
+        "page": "military-strategies-cost.html",
+        "role": "downstream",
+        "reason": "Useful follow-on for players comparing early research priorities."
+      },
+      {
+        "page": "hq.html",
+        "role": "downstream",
+        "reason": "Progression context tied to research gating and planning."
+      },
+      {
+        "page": "lucky-discounter.html",
+        "role": "downstream",
+        "reason": "Adjacent optimization topic that can help with progression decisions."
+      },
+      {
+        "page": "alliance-duel.html",
+        "role": "downstream",
+        "reason": "Relevant game mode context for research prioritization."
+      },
+      {
+        "page": "tech.html",
+        "role": "lateral",
+        "reason": "Adjacent systems page that should remain distinct from the main research guide."
+      }
+    ],
+    "protected_claims": [
+      "hero-training-cockpit-stop",
+      "peace-shield-value",
+      "research-atlas-role",
+      "research-best-mainline"
+    ],
+    "do_not_change": [
+      "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+      "Do not create a new page when the Scout proposal recommends updating an existing page.",
+      "Do not contradict canonical claim hero-training-cockpit-stop.",
+      "Do not contradict canonical claim peace-shield-value.",
+      "Do not contradict canonical claim research-atlas-role.",
+      "Do not contradict canonical claim research-best-mainline.",
+      "Do not blur the Research cluster boundary with costs-only or single-topic subguides.",
+      "Do not treat analytics as proof of a rewrite requirement."
+    ],
+    "owner_questions": [
+      "Should the opening line explicitly mention last z research priority, or should that phrase stay implied through the existing quick-answer structure?",
+      "Do you want the related-links block to foreground progression pages or keep the current mixed Research cluster balance?",
+      "Is there any approved wording boundary for emphasizing T10 and Urgent Rescue in the first screen?"
+    ],
+    "required_context_before_patch": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "research.html",
+      "index.html",
+      "research-costs.html",
+      "tech.html",
+      "field-research.html",
+      "alliance-recognition-cost.html"
+    ],
+    "acceptance_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on research.html"
+    ],
+    "exact_replacements": [],
+    "next_step": "Send to human owner review for approval of first-screen emphasis and link emphasis before any content change is prepared."
+  },
+  "usage": {
+    "input_tokens": 2950,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 961,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 3911
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_0292ba650bfd581c006a0358f6e1008194ab4b09ec9e76fc3e",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

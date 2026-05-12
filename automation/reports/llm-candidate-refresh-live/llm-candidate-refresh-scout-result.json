@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-10T09:57:25Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-candidate-refresh-scout",
+  "worker_role": "scout",
+  "request_path": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-scout-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "overview": "The strongest opportunities are all update_existing candidates on established cornerstone or hub pages with clear search signal and low risk of duplication if kept within current templates and cluster roles. Highest value looks concentrated in Progression, Economy, Research, and Home because those pages show broad impressions with weaker CTR and can likely absorb query match improvements without new page creation. The Events and Equipment pages also merit review, but they are somewhat narrower and should be checked against canonical overlap before any action.",
+    "selected_opportunities": [
+      {
+        "topic_id": "codes-gsc-opportunity",
+        "decision": "update_existing",
+        "rationale": "High impression volume plus multiple low-CTR gift center queries make codes.html a strong candidate for human review. The page already has backlog history and clear canonical protections, so the opportunity is to improve query match and first-screen usefulness without altering cluster role separation.",
+        "player_value": "Better match for gift center and redeem-intent searches should reduce friction for players trying to redeem codes or locate the correct flow.",
+        "duplication_risk": "Medium; must avoid overlapping with mailbox or login guidance and keep redeem flow canonical.",
+        "priority": "high",
+        "risk_level": "high",
+        "next_step": "Send to human owner review for a scoped update plan on codes.html, with explicit checks against canonical claim boundaries.",
+        "claims_to_verify": [
+          "gift-center-only-redeem-flow",
+          "gift-rewards-mailbox",
+          "gift-center-cluster-role-separation"
+        ]
+      },
+      {
+        "topic_id": "index-bing-opportunity",
+        "decision": "update_existing",
+        "rationale": "The home page has a broad query footprint and rising generic interest in last z terms. Because it is a hub page, small navigation or intro refinements could improve entry-point relevance without creating new content.",
+        "player_value": "Players searching the brand or broad game term should land faster on the right cluster routes and primary entry points.",
+        "duplication_risk": "Low to medium; the main risk is overloading the home page with topic content instead of hub navigation.",
+        "priority": "high",
+        "risk_level": "high",
+        "next_step": "Have a human review whether index.html can be tuned as a clearer hub for broad discovery queries.",
+        "claims_to_verify": [
+          "research-atlas-home-promotion"
+        ]
+      },
+      {
+        "topic_id": "research-gsc-opportunity",
+        "decision": "update_existing",
+        "rationale": "research.html shows meaningful impressions but middling CTR, plus a rising research priority query. This suggests the page likely needs clearer positioning of order, scope, and progression value rather than new content.",
+        "player_value": "Players get a more useful research path and faster understanding of what to prioritize first.",
+        "duplication_risk": "Medium; must stay distinct from costs, hero training, and peace shield guidance.",
+        "priority": "high",
+        "risk_level": "high",
+        "next_step": "Route to human review to test whether the page can better answer research priority intent within current structure.",
+        "claims_to_verify": [
+          "research-best-mainline",
+          "hero-training-cockpit-stop",
+          "peace-shield-value",
+          "research-atlas-role"
+        ]
+      }
+    ],
+    "rejected_or_monitor": [
+      {
+        "topic_id": "alliance-duel-gsc-opportunity",
+        "reason": "Worth monitoring, but the user job is narrower and the evidence is less broad than the top page opportunities. It should not advance without a careful canonical overlap check against schedule-related pages.",
+        "future_trigger": "Prominent growth in schedule or day-by-day intent queries, or clear evidence that alliance-duel.html is the best canonical route."
+      },
+      {
+        "topic_id": "vehicle-modification-cost-gsc-opportunity",
+        "reason": "Monitor for now. The page has good CTR already, so the case for change is weaker and may not justify human review ahead of higher-impact pages.",
+        "future_trigger": "CTR decline, new high-volume upgrade-cost queries, or stronger evidence of unmet vehicle upgrade intent."
+      },
+      {
+        "topic_id": "heroes-gsc-opportunity",
+        "reason": "Monitor for now because the data supports attention, but the query target is likely to overlap with other hero list or faction pages and needs more intent clarity before review.",
+        "future_trigger": "Stronger season 4 hero ranking demand or clearer evidence that heroes.html is the primary canonical answer."
+      },
+      {
+        "topic_id": "hq-gsc-opportunity",
+        "reason": "Monitor for now. The topic appears valuable but may be too close to other progression and upgrade pages unless query intent is sharply defined.",
+        "future_trigger": "Clearer HQ upgrade demand, especially around specific levels or fast path wording."
+      },
+      {
+        "topic_id": "power-guide-gsc-opportunity",
+        "reason": "Reject for now. The very low CTR suggests a problem, but the proposal is still too analytics-led and may need a deeper intent diagnosis before any human review step.",
+        "future_trigger": "A clearer player job emerges from query clustering or supporting behavior signals."
+      }
+    ],
+    "global_risks": [
+      "Analytics signals may reflect SERP layout, brand effects, or query mix rather than a content defect.",
+      "Several proposals are cornerstone or hub pages, so small changes must not blur cluster role separation.",
+      "Canonical claim boundaries are important; updates must not create overlap with adjacent pages.",
+      "High impression pages can look attractive even when the underlying intent is already served elsewhere.",
+      "No update should be interpreted as permission to change production state or content files without owner approval."
+    ],
+    "next_actions": [
+      "Send the selected update_existing topics to human owner review only.",
+      "For each selected page, confirm canonical claims and cluster boundaries before any proposal step.",
+      "Do not advance monitor or reject topics into editor, reviewer, intake, run-plan, or content proposal workflows.",
+      "Use the source signals only as prioritization context, not as instructions to rewrite pages.",
+      "Keep all actions within existing templates and navigation patterns."
+    ]
+  },
+  "usage": {
+    "input_tokens": 4057,
+    "input_tokens_details": {
+      "cached_tokens": 3840
+    },
+    "output_tokens": 1108,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 5165
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_0802ea7047a8b31b006a00567da2988193931674074f94a617",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

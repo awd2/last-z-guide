@@ -297,6 +297,7 @@ All workers must follow these rules:
 - No live LLM provider calls unless they go through the fail-closed adapter and have explicit configuration.
 - No new page unless the page has a distinct user job and a clear cluster route.
 - No generated research branch edits through generated HTML; use JSON source + generator.
+- Research proposals must not imply that Field Research is required before UST/T10; after Peace Shield/Urgent Rescue, treat the path as a goal-based decision between shortest practical UST/T10 progression and the badge-heavy Siege to Seize/Field Research deep-combat route.
 - No updates to archived Reddit/news experiments unless explicitly requested.
 - No contradiction of canonical claims.
 - No keyword-stuffing or thin intent pages.

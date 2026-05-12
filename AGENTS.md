@@ -257,15 +257,16 @@ Mainline guidance is fixed unless strong evidence says otherwise:
 
 - Hero Training to Cockpit
 - Military Strategies
-- Peace Shield
-- Siege to Seize
-- Field Research
+- Peace Shield / Urgent Rescue
+- then choose by account goal:
+  - shortest practical UST/T10 path for tier progression
+  - Siege to Seize into Field Research only for late-game Recharge Shield / deep combat scaling
 
 Additional rules:
 
 - `Hero Training` is mainly for `Cockpit`
 - `Peace Shield` is high-value because of `Urgent Rescue`
-- `Field Research` follows `100% Siege to Seize`
+- `Field Research` follows `100% Siege to Seize`, but it is badge-heavy and should not be treated as a required step before UST/T10
 - `research-costs.html` is the atlas/hub and should route into exact branch pages, not replace them
 
 ### Seasons

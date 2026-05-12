@@ -1,0 +1,36 @@
+{
+  "state": "completed",
+  "provider": "decision_replay",
+  "request_id": "llm-worker-chain-scout",
+  "response_json": {
+    "overview": "Deterministic replay of owner-approved topic decision `research-gsc-opportunity`.",
+    "selected_opportunities": [
+      {
+        "topic_id": "research-gsc-opportunity",
+        "decision": "update_existing",
+        "rationale": "Owner approved no-write LLM worker chain for research opportunity only.",
+        "player_value": "Players get a more useful research path and faster understanding of what to prioritize first.",
+        "duplication_risk": "Medium; must stay distinct from costs, hero training, and peace shield guidance.",
+        "priority": "high",
+        "risk_level": "high",
+        "next_step": "Run the no-write Editor and Reviewer stages from this approved decision snapshot.",
+        "claims_to_verify": [
+          "research-best-mainline",
+          "hero-training-cockpit-stop",
+          "peace-shield-value",
+          "research-atlas-role"
+        ]
+      }
+    ],
+    "rejected_or_monitor": [],
+    "global_risks": [
+      "This handoff only authorizes the next no-write worker-chain stage.",
+      "It does not authorize content edits or publication."
+    ],
+    "next_actions": [
+      "Run the no-write Editor and Reviewer stages."
+    ]
+  },
+  "raw_response": null,
+  "errors": []
+}

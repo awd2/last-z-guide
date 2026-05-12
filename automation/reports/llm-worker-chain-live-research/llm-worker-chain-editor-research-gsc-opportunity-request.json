@@ -1,0 +1,430 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-worker-chain-editor-research-gsc-opportunity",
+  "worker_role": "editor",
+  "task": "Create a no-write Editor planning brief for one approved Scout opportunity.",
+  "prompt": "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. Do not write final public page copy, HTML, or patch specs. Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, and owner approval gate. Treat analytics as signals, not proof. Normally return exact_replacements as an empty array. Only include exact_replacements when the deterministic context contains enough current source text to copy exact_old literally and the replacement is narrow enough for later owner review. exact_replacements are draft proposal data only, not approval, not a Patch Spec, and not permission to edit files. Use plain ASCII English only. Return JSON only.",
+  "inputs": {
+    "source_llm_scout_result": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-scout-result.json",
+    "source_llm_scout_request": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-scout-request.json",
+    "selected_opportunity": {
+      "topic_id": "research-gsc-opportunity",
+      "decision": "update_existing",
+      "rationale": "Owner approved no-write LLM worker chain for research opportunity only.",
+      "player_value": "Players get a more useful research path and faster understanding of what to prioritize first.",
+      "duplication_risk": "Medium; must stay distinct from costs, hero training, and peace shield guidance.",
+      "priority": "high",
+      "risk_level": "high",
+      "next_step": "Run the no-write Editor and Reviewer stages from this approved decision snapshot.",
+      "claims_to_verify": [
+        "research-best-mainline",
+        "hero-training-cockpit-stop",
+        "peace-shield-value",
+        "research-atlas-role"
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "research-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+      "cluster": "Research",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "high",
+      "status": "candidate",
+      "notes": "research.html shows meaningful impressions but middling CTR, plus a rising research priority query. This suggests the page likely needs clearer positioning of order, scope, and progression value rather than new content.",
+      "risk_level": "high",
+      "player_value": "Players get a more useful research path and faster understanding of what to prioritize first.",
+      "duplication_risk": "Medium; must stay distinct from costs, hero training, and peace shield guidance.",
+      "claims_to_verify": [
+        "research-best-mainline",
+        "hero-training-cockpit-stop",
+        "peace-shield-value",
+        "research-atlas-role"
+      ],
+      "next_step": "Route to human review to test whether the page can better answer research priority intent within current structure.",
+      "evidence": [
+        "GSC page signal: research.html had 12710 impressions, 597 clicks, 4.70% CTR, avg position 7.27.",
+        "Rising query: `last z research priority` gained 11 impressions in the last 7-day comparison window."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z research guide` searchers.",
+        "cluster_owner": "Research",
+        "expected_internal_route": [
+          "index.html",
+          "research.html",
+          "research-costs.html"
+        ],
+        "archetype_reason": "Existing page is `cornerstone-guide` in the `Research` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed.",
+        "Protect canonical claim `research-best-mainline`.",
+        "Protect canonical claim `hero-training-cockpit-stop`.",
+        "Protect canonical claim `peace-shield-value`.",
+        "Protect canonical claim `research-atlas-role`."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ],
+      "prior_review": null,
+      "human_approval_required": true,
+      "backlog_row_preview": {
+        "topic_id": "research-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
+        "source_type": "llm_scout",
+        "source_reference": "GSC weekly 2026-05-03: page opportunity and query-page signals",
+        "confidence": "high",
+        "priority": "high",
+        "status": "candidate",
+        "notes": "research.html shows meaningful impressions but middling CTR, plus a rising research priority query. This suggests the page likely needs clearer positioning of order, scope, and progression value rather than new content."
+      }
+    },
+    "deterministic_editor_brief": {
+      "target_page_or_slug": "research.html",
+      "page_role": "cornerstone-guide",
+      "primary_query_family": "last z research priority",
+      "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z research guide` searchers.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `last z research priority` without changing `research.html` into a different page role.",
+      "template_reference": "research.html",
+      "required_sections": [
+        "Quick Answer",
+        "Best overall recommendation",
+        "Decision framework",
+        "Cluster route block",
+        "Related guides / FAQ"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html",
+          "research-costs.html"
+        ],
+        "downstream": [
+          "alliance-duel.html",
+          "hero-training-cost.html",
+          "hq.html",
+          "lucky-discounter.html",
+          "military-strategies-cost.html"
+        ],
+        "lateral": [
+          "tech.html",
+          "field-research.html",
+          "alliance-recognition-cost.html"
+        ]
+      },
+      "protected_claims": [
+        "hero-training-cockpit-stop",
+        "peace-shield-value",
+        "research-atlas-role",
+        "research-best-mainline"
+      ],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope.",
+        "Do not contradict canonical claim `hero-training-cockpit-stop`.",
+        "Do not contradict canonical claim `peace-shield-value`.",
+        "Do not contradict canonical claim `research-atlas-role`.",
+        "Do not contradict canonical claim `research-best-mainline`."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "research.html",
+        "index.html",
+        "research-costs.html",
+        "tech.html",
+        "field-research.html",
+        "alliance-recognition-cost.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on research.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Research Guide (2026) — Research Tree, Peace Shield, Urgent Rescue, T10 Order",
+        "h1": "Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+        "meta_description": "Step-by-step Last Z research tree guide: what to research first, how to unlock Peace Shield and Urgent Rescue, and the best path toward T10.",
+        "quick_answer": "Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies for efficient troop stats, Peace Shield for Urgent Rescue, then the shortest practical path toward UST and T10.",
+        "data_lede": "",
+        "h2_headings": [
+          "Quick Answer",
+          "Last Z Research Tree: Best Research Order",
+          "T10 Research Path: When to Push UST",
+          "Key Research Nodes (Quick Summary)",
+          "Research Priority Order",
+          "Research Tips from Top Players",
+          "Research Trees Unlock Order",
+          "Frequently Asked Questions"
+        ],
+        "internal_links": [
+          "about.html",
+          "alliance-duel.html",
+          "alliance-recognition-cost.html",
+          "contact.html",
+          "disclosure.html",
+          "field-research.html",
+          "hero-training-cost.html",
+          "hq.html",
+          "https://lastzguides.com/research.html",
+          "lucky-discounter.html",
+          "military-strategies-cost.html",
+          "peace-shield-cost.html",
+          "power-guide.html",
+          "privacy.html",
+          "pvp.html",
+          "research-costs.html",
+          "siege-to-seize-cost.html",
+          "steel.html",
+          "tech.html",
+          "terms.html"
+        ]
+      }
+    },
+    "guardrails": [
+      "No content files may be edited by this worker.",
+      "Do not generate final user-visible page copy.",
+      "Do not create a patch plan or Patch Spec.",
+      "exact_replacements, when present, are proposal-only candidates that still require propose + owner approval + apply-approved.",
+      "Every exact_replacements item must set owner_approval_required to true.",
+      "Do not mutate backlog, manifests, PRs, or production state.",
+      "Owner approval is required before any user-visible content change.",
+      "Use plain ASCII English only in every string field."
+    ]
+  },
+  "expected_response_keys": [
+    "brief_summary",
+    "target_page_or_slug",
+    "page_role",
+    "primary_user_job",
+    "first_screen_plan",
+    "section_plan",
+    "internal_link_plan",
+    "protected_claims",
+    "do_not_change",
+    "owner_questions",
+    "required_context_before_patch",
+    "acceptance_checks",
+    "exact_replacements",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "brief_summary": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Short no-write summary of the recommended content planning direction."
+      },
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "primary_user_job": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "first_screen_plan": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Planning guidance for the first screen. Do not write final public copy."
+      },
+      "section_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "section": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "action": {
+              "type": "string",
+              "maxLength": 350
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 350
+            }
+          },
+          "required": [
+            "section",
+            "action",
+            "reason"
+          ]
+        }
+      },
+      "internal_link_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "page": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "upstream",
+                "downstream",
+                "lateral"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 300
+            }
+          },
+          "required": [
+            "page",
+            "role",
+            "reason"
+          ]
+        }
+      },
+      "protected_claims": {
+        "type": "array",
+        "maxItems": 12,
+        "items": {
+          "type": "string",
+          "maxLength": 160
+        }
+      },
+      "do_not_change": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_patch": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "acceptance_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "exact_replacements": {
+        "type": "array",
+        "maxItems": 6,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "file": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "change_type": {
+              "type": "string",
+              "enum": [
+                "safe_exact_replace",
+                "first_screen_update",
+                "meta_refresh"
+              ]
+            },
+            "selector_or_anchor": {
+              "type": "string",
+              "maxLength": 180
+            },
+            "exact_old": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "exact_new": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 400
+            },
+            "owner_approval_required": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "change_type",
+            "selector_or_anchor",
+            "exact_old",
+            "exact_new",
+            "reason",
+            "owner_approval_required"
+          ]
+        },
+        "description": "Optional draft exact replacement candidates. These are proposal-only and still require owner approval."
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 350
+      }
+    },
+    "required": [
+      "brief_summary",
+      "target_page_or_slug",
+      "page_role",
+      "primary_user_job",
+      "first_screen_plan",
+      "section_plan",
+      "internal_link_plan",
+      "protected_claims",
+      "do_not_change",
+      "owner_questions",
+      "required_context_before_patch",
+      "acceptance_checks",
+      "exact_replacements",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}

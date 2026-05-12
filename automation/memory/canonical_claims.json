@@ -85,10 +85,11 @@
       "category": "research",
       "status": "active",
       "confidence": "high",
-      "summary": "The main research route for most players is Hero Training to Cockpit, then Military Strategies, then Peace Shield, then Siege to Seize, then Field Research.",
+      "summary": "The main research route for most players is Hero Training to Cockpit, then Military Strategies, then Peace Shield/Urgent Rescue. After that, players should choose by goal: use the shortest practical UST/T10 path for tier progression, or push Siege to Seize into Field Research only for late-game Recharge Shield/deep combat scaling.",
       "implications": [
-        "New research content should not recommend expensive late branches before the core path without strong context.",
-        "Atlas and branch pages should keep the mainline path consistent."
+        "New research content must not imply that Field Research is required before pursuing UST/T10.",
+        "Field Research should be framed as a badge-heavy late branch, not the default end of the mainline for every account.",
+        "Atlas and branch pages should keep the post-Peace Shield decision point clear: UST/T10 progression path versus Siege to Seize/Field Research deep combat scaling."
       ],
       "related_pages": [
         "research.html",
@@ -141,7 +142,7 @@
       "confidence": "high",
       "summary": "Field Research follows 100% Siege to Seize and contains the final Recharge Shield path and major late badge pressure.",
       "implications": [
-        "Field Research should be framed as a late follow-up, not an early branch.",
+        "Field Research should be framed as an optional late follow-up for accounts choosing the Siege to Seize/Recharge Shield path, not as a required UST/T10 prerequisite.",
         "Siege to Seize pages should route into Field Research."
       ],
       "related_pages": [

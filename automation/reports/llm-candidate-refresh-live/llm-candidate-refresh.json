@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_candidate_refresh",
+  "generated_at": "2026-05-10T09:57:25Z",
+  "state": "candidate_refresh_ready",
+  "provider": "openai",
+  "source_signal_files": [
+    "content/gsc/latest-gsc-agent-signals.json",
+    "content/bing/latest-bing-agent-signals.json"
+  ],
+  "source_proposal_count": 8,
+  "candidate_topic_count": 2,
+  "monitor_topic_count": 6,
+  "candidate_topic_ids": [
+    "index-bing-opportunity",
+    "research-gsc-opportunity"
+  ],
+  "monitor_topic_ids": [
+    "codes-gsc-opportunity",
+    "alliance-duel-gsc-opportunity",
+    "vehicle-modification-cost-gsc-opportunity",
+    "heroes-gsc-opportunity",
+    "hq-gsc-opportunity",
+    "power-guide-gsc-opportunity"
+  ],
+  "topic_discovery_path": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-topic-discovery.json",
+  "topic_discovery_markdown": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-topic-discovery.md",
+  "stages": [
+    {
+      "stage": "llm_scout",
+      "state": "completed",
+      "returncode": 0,
+      "request_path": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-scout-request.json",
+      "result_path": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-scout-result.json",
+      "output_path": null,
+      "markdown_path": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-scout.md",
+      "errors": []
+    },
+    {
+      "stage": "llm_topic_discovery",
+      "state": "topic_discovery_ready",
+      "returncode": 0,
+      "request_path": null,
+      "result_path": null,
+      "output_path": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-topic-discovery.json",
+      "markdown_path": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-topic-discovery.md",
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "output_path": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh.json",
+  "markdown_path": "automation/reports/llm-candidate-refresh-live/llm-candidate-refresh.md",
+  "allows_content_edit": false,
+  "allows_backlog_mutation": false,
+  "allows_manifest_mutation": false,
+  "allows_pr_or_deploy": false,
+  "next_actions": [
+    "Review `automation/reports/llm-candidate-refresh-live/llm-candidate-refresh-topic-discovery.md` before approving any topic.",
+    "Record owner decisions with `python3 automation/pipeline.py llm-topic-decision --topic-id <topic_id> --state monitor|approved_for_chain|rejected --decided-by <name> --json`.",
+    "Only `approved_for_chain` topics may move to the no-write llm-worker-chain stage.",
+    "Public content edits still require exact proposed text, explicit owner approval, apply-preview, apply-approved, and strict QA."
+  ],
+  "safety": "No content, backlog, manifest, PR, or production files were modified by LLM candidate refresh."
+}

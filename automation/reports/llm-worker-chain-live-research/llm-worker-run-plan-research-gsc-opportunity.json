@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "report_type": "worker_intake_run_plan",
+  "generated_at": "2026-05-12T16:52:11Z",
+  "source_intake_file": "automation/reports/llm-worker-chain-live-research/llm-intake-research-gsc-opportunity.json",
+  "source_topic_id": "research-gsc-opportunity",
+  "target_page_or_slug": "research.html",
+  "state": "run_plan_ready",
+  "blockers": [],
+  "warnings": [
+    "Approved intake is high risk; later patch planning must stay narrow and human-reviewed."
+  ],
+  "proposed_backlog_item": {
+    "topic_id": "research-gsc-opportunity-llm-approved-intake",
+    "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+    "cluster": "Research",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "research.html",
+    "source_type": "llm_scout",
+    "source_reference": "LLM worker chain review: research-gsc-opportunity",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review."
+  },
+  "proposed_manifest": {
+    "run_id": "2026-05-12-research-gsc-opportunity-llm-approved-intake",
+    "created_at": "2026-05-12T16:52:11Z",
+    "run_type": "update_existing",
+    "status": "planned",
+    "risk_level": "high",
+    "summary": "Worker-approved intake for `research.html` from `research-gsc-opportunity`.",
+    "inputs": {
+      "topic_id": "research-gsc-opportunity-llm-approved-intake",
+      "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+      "cluster": "Research",
+      "source_type": "llm_scout",
+      "source_reference": "LLM worker chain review: research-gsc-opportunity",
+      "confidence": "high",
+      "priority": "high",
+      "status": "backlog",
+      "approved_by": "oleg",
+      "approval_note": "Owner-approved research guidance for intake only: the first screen may mention T10/UST, but must not imply Field Research is required before pursuing T10. Canonical priority is Hero Training to Cockpit, Military Strategies, Peace Shield/Urgent Rescue, then a goal-based decision: shortest practical UST/T10 path for tier progression, or Siege to Seize into Field Research only for late-game Recharge Shield/deep combat scaling."
+    },
+    "plan": {
+      "topic_id": "research-gsc-opportunity-llm-approved-intake",
+      "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+      "cluster": "Research",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
+      "source_type": "llm_scout",
+      "source_reference": "LLM worker chain review: research-gsc-opportunity",
+      "confidence": "high",
+      "priority": "high",
+      "status": "backlog",
+      "risk_level": "high",
+      "plan_summary": "Prepare a controlled content run for `research.html` from an approved Worker intake artifact.",
+      "memory_files": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md"
+      ],
+      "related_pages": [
+        "research.html"
+      ],
+      "deterministic_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict"
+      ],
+      "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review."
+    },
+    "artifacts": {
+      "worker_intake": "automation/reports/llm-worker-chain-live-research/llm-intake-research-gsc-opportunity.json",
+      "source_chain": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-research-gsc-opportunity.json"
+    },
+    "changed_files": [],
+    "checks": {},
+    "review": null
+  },
+  "next_actions": [
+    "Review proposed_manifest before creating any actual manifest file.",
+    "If accepted, create `automation/manifests/2026-05-12-research-gsc-opportunity-llm-approved-intake.json` from proposed_manifest.",
+    "Then continue with: python3 automation/pipeline.py review 2026-05-12-research-gsc-opportunity-llm-approved-intake"
+  ],
+  "safety": "No content, backlog, or manifest files were modified by this run-plan proposal."
+}

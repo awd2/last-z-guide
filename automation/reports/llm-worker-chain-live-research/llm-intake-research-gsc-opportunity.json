@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_worker_proposal_intake",
+  "generated_at": "2026-05-12T16:52:03Z",
+  "source_chain_file": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-research-gsc-opportunity.json",
+  "source_topic_id": "research-gsc-opportunity",
+  "target_page_or_slug": "research.html",
+  "state": "approved_for_intake",
+  "approved_by": "oleg",
+  "approval_note": "Owner-approved research guidance for intake only: the first screen may mention T10/UST, but must not imply Field Research is required before pursuing T10. Canonical priority is Hero Training to Cockpit, Military Strategies, Peace Shield/Urgent Rescue, then a goal-based decision: shortest practical UST/T10 path for tier progression, or Siege to Seize into Field Research only for late-game Recharge Shield/deep combat scaling.",
+  "approval_scope": "intake_only_no_content_edits",
+  "content_edit_approved": false,
+  "public_content_change_allowed": false,
+  "requires_owner_answers": true,
+  "owner_answers_recorded": true,
+  "reviewer_blockers_resolved_by_owner": true,
+  "approval_guardrails": [
+    "Approval is intake-only: it allows conversion into the existing run-plan/proposal flow.",
+    "Approval does not approve public page copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing.",
+    "Any carried exact_replacements are proposal-only data and still require propose, owner approval, apply-preview, apply-approved, and strict QA.",
+    "Any future public content change still requires exact proposed text/diff and explicit owner approval.",
+    "Future content proposals must still pass deterministic checks before closeout."
+  ],
+  "review_verdict": "needs_human_review",
+  "risk_level": "high",
+  "approved_next_stage": "brief",
+  "blockers": [],
+  "warnings": [
+    "LLM Reviewer blocking issues were owner-resolved for intake only; public content is still not approved.",
+    "High-risk opportunity; keep the future proposal narrow and owner-reviewed.",
+    "Owner questions must be answered before any public content proposal is written."
+  ],
+  "owner_questions": [
+    "Should the opening line explicitly mention last z research priority, or should the intent stay implied through the existing quick-answer structure?",
+    "Do you want the related-links block to foreground progression pages or keep the current mixed Research cluster balance?",
+    "Is there any approved wording boundary for emphasizing T10 and Urgent Rescue in the first screen?"
+  ],
+  "reviewer_blocking_issues": [
+    "high: The page is a cornerstone guide and the request touches first-screen positioning for a protected query family. That raises cluster-role and canonical-claim risk even without copy changes. Required fix: Require human owner review before any drafting or content adjustment. Confirm the opening can be tightened without changing page role or contradicting protected claims.",
+    "high: Duplicate intent risk remains medium because the opportunity must stay distinct from costs, hero training, Peace Shield, and other adjacent research pages. Required fix: Verify the page can satisfy last z research priority intent while preserving separation from research-costs.html, hero-training-cost pages, and peace-shield guidance.",
+    "medium: No exact replacements are provided, so there is no narrow literal candidate set to review for safe replacement behavior. Required fix: If an Editor follow-up introduces exact replacements, require literal exact_old/exact_new scope, target-only edits, and owner approval before any apply_preview path."
+  ],
+  "reviewer_warnings": [
+    "Analytics signals support the opportunity, but they do not prove a rewrite is required.",
+    "The brief asks for stronger first-screen intent match, which may affect cornerstone framing if handled too aggressively.",
+    "The required checks include manual first-screen and internal-link review, so readiness depends on human validation after any drafting."
+  ],
+  "required_checks": [
+    "python3 scripts/prepublish_check.py",
+    "python3 automation/pipeline.py checks --strict",
+    "manual review: first-screen answer and internal links on research.html"
+  ],
+  "editor_brief_summary": "Tighten the existing research.html opening so it answers research priority intent faster, while keeping the page a cornerstone research guide and preserving protected claims plus cluster separation.",
+  "first_screen_plan": "Keep the answer-first structure, but make the opening explicitly orient around best research order and progression. The first screen should state the practical sequence, the main decision criteria, and the reason the page exists without drifting into a costs-only, hero-only, or Peace Shield-only angle. Preserve the current canonical claims and ensure the opening remains consistent with the existing mainline guidance.",
+  "exact_replacements": [],
+  "exact_replacements_count": 0,
+  "proposed_backlog_item": {
+    "topic_id": "research-gsc-opportunity-llm-approved-intake",
+    "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+    "cluster": "Research",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "research.html",
+    "source_type": "llm_scout",
+    "source_reference": "LLM worker chain review: research-gsc-opportunity",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review."
+  },
+  "source_artifacts": {
+    "llm_review_latest": {
+      "schema_version": 1,
+      "report_type": "llm_latest_owner_review",
+      "source_chain_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-research-gsc-opportunity.json",
+      "source_topic_id": "research-gsc-opportunity",
+      "target_page_or_slug": "research.html",
+      "page_role": "cornerstone-guide",
+      "state": "completed",
+      "provider": "openai",
+      "review_verdict": "needs_human_review",
+      "risk_level": "high",
+      "approved_next_stage": "brief",
+      "owner_approval_required": true,
+      "recommended_operator_action": "owner_review_required",
+      "brief_summary": "Tighten the existing research.html opening so it answers research priority intent faster, while keeping the page a cornerstone research guide and preserving protected claims plus cluster separation.",
+      "first_screen_plan": "Keep the answer-first structure, but make the opening explicitly orient around best research order and progression. The first screen should state the practical sequence, the main decision criteria, and the reason the page exists without drifting into a costs-only, hero-only, or Peace Shield-only angle. Preserve the current canonical claims and ensure the opening remains consistent with the existing mainline guidance.",
+      "exact_replacements_count": 0,
+      "exact_replacement_review": "No exact replacements were provided. No candidate replacements to review. If later supplied, they must remain narrow, literal, and target-only, and they still cannot bypass owner approval or advance directly to apply_preview.",
+      "blocking_issues": [
+        {
+          "severity": "high",
+          "issue": "The page is a cornerstone guide and the request touches first-screen positioning for a protected query family. That raises cluster-role and canonical-claim risk even without copy changes.",
+          "required_fix": "Require human owner review before any drafting or content adjustment. Confirm the opening can be tightened without changing page role or contradicting protected claims."
+        },
+        {
+          "severity": "high",
+          "issue": "Duplicate intent risk remains medium because the opportunity must stay distinct from costs, hero training, Peace Shield, and other adjacent research pages.",
+          "required_fix": "Verify the page can satisfy last z research priority intent while preserving separation from research-costs.html, hero-training-cost pages, and peace-shield guidance."
+        },
+        {
+          "severity": "medium",
+          "issue": "No exact replacements are provided, so there is no narrow literal candidate set to review for safe replacement behavior.",
+          "required_fix": "If an Editor follow-up introduces exact replacements, require literal exact_old/exact_new scope, target-only edits, and owner approval before any apply_preview path."
+        }
+      ],
+      "warnings": [
+        "Analytics signals support the opportunity, but they do not prove a rewrite is required.",
+        "The brief asks for stronger first-screen intent match, which may affect cornerstone framing if handled too aggressively.",
+        "The required checks include manual first-screen and internal-link review, so readiness depends on human validation after any drafting."
+      ],
+      "owner_questions": [
+        "Should the opening line explicitly mention last z research priority, or should the intent stay implied through the existing quick-answer structure?",
+        "Do you want the related-links block to foreground progression pages or keep the current mixed Research cluster balance?",
+        "Is there any approved wording boundary for emphasizing T10 and Urgent Rescue in the first screen?"
+      ],
+      "required_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on research.html"
+      ],
+      "next_step": "Route to human owner review. If approved, proceed with a brief-level planning pass only, then validate against the required checks before any edit draft is prepared.",
+      "stage_artifacts": {
+        "llm_scout": {
+          "state": "completed",
+          "provider": "decision_replay",
+          "request_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-scout-request.json",
+          "result_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-scout-result.json",
+          "markdown_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-scout.md",
+          "errors": []
+        },
+        "llm_editor": {
+          "state": "completed",
+          "provider": "openai",
+          "request_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-editor-research-gsc-opportunity-request.json",
+          "result_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-editor-research-gsc-opportunity-result.json",
+          "markdown_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-editor-research-gsc-opportunity.md",
+          "errors": []
+        },
+        "llm_reviewer": {
+          "state": "completed",
+          "provider": "openai",
+          "request_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-reviewer-research-gsc-opportunity-request.json",
+          "result_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-reviewer-research-gsc-opportunity-result.json",
+          "markdown_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-reviewer-research-gsc-opportunity.md",
+          "errors": []
+        }
+      },
+      "chain_artifacts": {
+        "chain_json": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-research-gsc-opportunity.json",
+        "chain_markdown": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-research-gsc-opportunity.md"
+      },
+      "errors": [],
+      "safety": "Read-only owner review. No content, backlog, manifest, PR, or production files were modified."
+    },
+    "stage_artifacts": {
+      "llm_scout": {
+        "state": "completed",
+        "provider": "decision_replay",
+        "request_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-scout-request.json",
+        "result_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-scout-result.json",
+        "markdown_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-scout.md",
+        "errors": []
+      },
+      "llm_editor": {
+        "state": "completed",
+        "provider": "openai",
+        "request_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-editor-research-gsc-opportunity-request.json",
+        "result_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-editor-research-gsc-opportunity-result.json",
+        "markdown_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-editor-research-gsc-opportunity.md",
+        "errors": []
+      },
+      "llm_reviewer": {
+        "state": "completed",
+        "provider": "openai",
+        "request_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-reviewer-research-gsc-opportunity-request.json",
+        "result_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-reviewer-research-gsc-opportunity-result.json",
+        "markdown_path": "automation/reports/llm-worker-chain-live-research/llm-worker-chain-reviewer-research-gsc-opportunity.md",
+        "errors": []
+      }
+    }
+  },
+  "next_actions": [
+    "Review this intake artifact before converting it into a run-plan proposal.",
+    "Run: python3 automation/pipeline.py worker-run-plan --intake automation/reports/llm-worker-chain-live-research/llm-intake-research-gsc-opportunity.json --json",
+    "Do not write public content until a later proposal artifact receives explicit owner approval."
+  ],
+  "safety": "No content, backlog, manifest, PR, or production files were modified by this LLM intake bridge."
+}
