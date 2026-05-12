@@ -610,8 +610,8 @@ F2P_GUIDE_BLOCK = """        <section class="verification-note" aria-label="Veri
 RESEARCH_GUIDE_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
             <p class="verification-note-title">Verification &amp; Review</p>
             <ul>
-                <li><strong>Last reviewed for research order and T10 planning:</strong> March 2026.</li>
-                <li><strong>Checked against:</strong> the canonical route from Hero Training to Cockpit, Military Strategies, Peace Shield, Siege to Seize, Field Research, linked branch cost pages, and UST planning context.</li>
+                <li><strong>Last reviewed for research order and T10 planning:</strong> May 2026.</li>
+                <li><strong>Checked against:</strong> the canonical route from Hero Training to Cockpit, Military Strategies, Peace Shield/Urgent Rescue, the optional Siege to Seize -> Field Research route, linked branch cost pages, and UST/T10 planning context.</li>
                 <li><strong>Changes to watch:</strong> badge costs, branch prerequisites, node names, unlock requirements, and late-game research value can change after research updates.</li>
             </ul>
         </section>

@@ -2,7 +2,7 @@
   "run_id": "2026-05-12-research-gsc-opportunity-llm-approved-intake",
   "created_at": "2026-05-12T16:52:11Z",
   "run_type": "update_existing",
-  "status": "proposal_ready",
+  "status": "closed",
   "risk_level": "high",
   "summary": "Worker-approved intake for `research.html` from `research-gsc-opportunity`.",
   "inputs": {
@@ -117,7 +117,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-12T17:20:23Z",
+          "approval_note": "Owner approved exact proposal; applied manually from exact-proposal artifact."
         },
         {
           "target_file": "research.html",
@@ -146,7 +149,10 @@
             "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
             "python3 automation/pipeline.py checks"
           ],
-          "human_approval_required": true
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-12T17:20:23Z",
+          "approval_note": "Owner approved exact proposal; applied manually from exact-proposal artifact."
         }
       ],
       "changed_files": [
@@ -200,11 +206,13 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
-          "before_summary": "title: Last Z Research Guide (2026) — Research Tree, Peace Shield, Urgent Rescue, T10 Order | h1: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path | meta: Step-by-step Last Z research tree guide: what to research first, how to unlock Peace Shield and Urgent Rescue, and the best path toward T10. | verified: Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies for efficient combat stats, Peace Shield for Urgent Rescue, then the shortest practical path toward UST and T10.",
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-12T17:20:23Z",
+          "approval_note": "Owner approved exact proposal; applied manually from exact-proposal artifact.",
+          "before_summary": "title: Last Z Research Guide (2026) - Best Research Order, Peace Shield, UST/T10 Path | h1: Last Z Research Guide - Best Research Order, Peace Shield, and UST/T10 Path | meta: Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies, Peace Shield for Urgent Rescue, then choose UST/T10 or late Field Research by goal. | verified: Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies for efficient combat stats, Peace Shield for Urgent Rescue, then choose between the shortest practical UST/T10 path or late Field Research based on your account goal.",
           "desired_after_summary": "Opening answer matches the page role for research.html, gives the exact setup answer quickly, and avoids drifting into a broader hub page.",
           "suggested_content": "",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         },
         {
           "target_file": "research.html",
@@ -234,19 +242,58 @@
             "python3 automation/pipeline.py checks"
           ],
           "human_approval_required": true,
-          "before_summary": "title: Last Z Research Guide (2026) — Research Tree, Peace Shield, Urgent Rescue, T10 Order | h1: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path | meta: Step-by-step Last Z research tree guide: what to research first, how to unlock Peace Shield and Urgent Rescue, and the best path toward T10. | verified: Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies for efficient combat stats, Peace Shield for Urgent Rescue, then the shortest practical path toward UST and T10.",
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-12T17:20:23Z",
+          "approval_note": "Owner approved exact proposal; applied manually from exact-proposal artifact.",
+          "before_summary": "title: Last Z Research Guide (2026) - Best Research Order, Peace Shield, UST/T10 Path | h1: Last Z Research Guide - Best Research Order, Peace Shield, and UST/T10 Path | meta: Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies, Peace Shield for Urgent Rescue, then choose UST/T10 or late Field Research by goal. | verified: Best Last Z research order for most players: Hero Training to Cockpit, Military Strategies for efficient combat stats, Peace Shield for Urgent Rescue, then choose between the shortest practical UST/T10 path or late Field Research based on your account goal.",
           "desired_after_summary": "Title, H1, and meta description use the same exact intent: research.html.",
           "suggested_content": "",
-          "risk_level": "medium",
-          "approval_state": "proposed"
+          "risk_level": "medium"
         }
       ]
+    },
+    "exact_proposal": {
+      "report_path": "automation/reports/2026-05-12-research-gsc-opportunity-llm-approved-intake.exact-proposal.md"
+    },
+    "apply_result": {
+      "report_path": "automation/reports/2026-05-12-research-gsc-opportunity-llm-approved-intake.manual-apply.md",
+      "applied_at": "2026-05-12T17:21:27Z",
+      "applied_operations": [
+        "research.html:title_meta_social_schema",
+        "research.html:first_screen_research_route",
+        "research.html:howto_steps_4_5",
+        "research.html:visible_step_4_goal_split",
+        "research.html:visible_faq_best_order",
+        "research.html:verification_note",
+        "scripts/sync_verification_blocks.py:research_guide_block",
+        "search-index.json:research_description_sync",
+        "sitemap.xml:research_lastmod_sync",
+        "manifest:strict_check_result"
+      ],
+      "generator_commands": [
+        "python3 scripts/prepublish_check.py --fix"
+      ],
+      "apply_mode": "manual_exact_proposal_apply"
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-05-12-research-gsc-opportunity-llm-approved-intake.closed.md",
+      "closed_at": "2026-05-12T17:21:41Z",
+      "note": "Owner approved exact research.html proposal; applied manually; strict checks passed."
     }
   },
   "changed_files": [
     "research.html"
   ],
-  "checks": {},
+  "checks": {
+    "automation_checks_strict": {
+      "status": "pass",
+      "notes": "Search visibility check passed. | Checked content consistency on 56 public pages: 0 failure(s), 0 warning(s), 7 allowed context(s). | Content consistency check passed. | Checked SEO/LLM alignment on 63 memory pages: 0 alignment warning(s), 0 cannibalization warning(s). | SEO/LLM alignment check passed. | Automation checks passed."
+    },
+    "changed_pages_report": {
+      "status": "pass",
+      "notes": "same-cluster inbound links: 11 | expected hubs: index.html, research.html, research-costs.html | linked from hubs: index.html, research-costs.html"
+    }
+  },
   "review": {
     "verdict": "needs_human_review",
     "open_questions": [
