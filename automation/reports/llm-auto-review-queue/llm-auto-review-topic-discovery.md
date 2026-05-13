@@ -1,4 +1,4 @@
-# LLM Topic Discovery - 2026-05-12T19:43:56Z
+# LLM Topic Discovery - 2026-05-13T10:44:49Z
 
 ## Overview
 
@@ -25,15 +25,15 @@
 
 Player value:
 
-Helps players reach the correct redeem path faster and reduces confusion around login, UID, and gift-center entry points.
+Better answer for players searching gift center, login, and redeem code flow terms; faster path to the right page from search.
 
 Rationale:
 
-This is a strong existing-page opportunity. The query cluster shows repeated interest in Gift Center and redeem code intent, and the page already has a defined cornerstone role in Economy. The improvement likely belongs on codes.html, but only within the approved scope and without weakening cluster separation or protected claims. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
+Strong GSC signal for an existing cornerstone page with relevant low-CTR and mid-position queries. The topic matches the current page intent and can likely improve query-to-page fit without changing cluster roles. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
 
 Duplication risk:
 
-Medium. The query intent may overlap with other Economy pages, so the page role must stay sharply defined.
+Medium, because gift center intent may overlap with other economy pages and must preserve canonical claim boundaries.
 
 Expected route:
 
@@ -42,9 +42,8 @@ Expected route:
 
 Claims to verify:
 
-- gift-center-only-redeem-flow
-- gift-rewards-mailbox
-- gift-center-cluster-role-separation
+- The page can address the target queries without introducing new mechanics claims.
+- The protected canonical claims remain intact: gift-center-only-redeem-flow, gift-rewards-mailbox, gift-center-cluster-role-separation.
 
 Evidence:
 
@@ -69,13 +68,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "This is a strong existing-page opportunity. The query cluster shows repeated interest in Gift Center and redeem code intent, and the page already has a defined cornerstone role in Economy. The improvement likely belongs on codes.html, but only within the approved scope and without weakening cluster separation or protected claims. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+  "notes": "Strong GSC signal for an existing cornerstone page with relevant low-CTR and mid-position queries. The topic matches the current page intent and can likely improve query-to-page fit without changing cluster roles. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
 }
 ```
 
 Next step:
 
-Send to human review for a scoped update_existing proposal on codes.html with claim protection checks.
+Human review should confirm whether codes.html can be improved within current scope while preserving the protected canonical claims and cluster separation.
 
 ### index-gsc-opportunity
 
@@ -92,15 +91,15 @@ Send to human review for a scoped update_existing proposal on codes.html with cl
 
 Player value:
 
-Improves the landing experience for players looking for the main guide hub and helps route them to the right cluster pages.
+Improves discoverability of the main guide hub and helps players reach research, events, HQ, heroes, and F2P strategy faster.
 
 Rationale:
 
-Home page has meaningful traffic and rising branded/research-guide signals, which suggests an opportunity to improve first-screen routing and query match. This is appropriate as an existing-page optimization, not a new page.
+Strong home-page GSC signal with a clear need to improve first-screen usefulness for guide-oriented searches. The page already serves as the main entry point, so updating it is the lowest-risk path.
 
 Duplication risk:
 
-Low to medium. The home page must not start acting like a duplicate of cluster pages.
+Low to medium, since home hub changes can accidentally overlap with cluster landing pages if scope is not controlled.
 
 Expected route:
 
@@ -108,7 +107,8 @@ Expected route:
 
 Claims to verify:
 
-- None
+- The homepage change can stay within existing template and navigation patterns.
+- The page can support guide intent without collapsing into a duplicate of cluster pages.
 
 Evidence:
 
@@ -131,13 +131,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "high",
   "status": "candidate",
-  "notes": "Home page has meaningful traffic and rising branded/research-guide signals, which suggests an opportunity to improve first-screen routing and query match. This is appropriate as an existing-page optimization, not a new page."
+  "notes": "Strong home-page GSC signal with a clear need to improve first-screen usefulness for guide-oriented searches. The page already serves as the main entry point, so updating it is the lowest-risk path."
 }
 ```
 
 Next step:
 
-Route to human review for a constrained homepage update plan that preserves navigation patterns and cluster separation.
+Human review should check whether the home page can better route searchers without weakening cluster navigation or duplicating topical hub content.
 
 ### research-gsc-opportunity
 
@@ -154,15 +154,15 @@ Route to human review for a constrained homepage update plan that preserves navi
 
 Player value:
 
-Gives players a clearer path for research order, rescue timing, and progression planning.
+Helps players choose the best research path, understand peace shield value, and find urgent rescue guidance sooner.
 
 Rationale:
 
-This is one of the strongest opportunities. Research.html has broad interest, rising research-guide queries, and additional urgent-rescue signals that suggest a real content alignment gap. It is already a cornerstone page, so the appropriate action is a controlled update, not a new article. Prior run `2026-05-12-research-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
+This is a strong cornerstone-page opportunity with multiple rising queries and a clear user job around research order and urgent rescue intent. It also has explicit protected claims, which makes a careful update worthwhile for review. Prior run `2026-05-12-research-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
 
 Duplication risk:
 
-Medium. It could overlap with other Research pages if the role is not kept focused.
+Medium, because research intent can overlap with costs, HQ, and progression pages if role boundaries are loosened.
 
 Expected route:
 
@@ -172,10 +172,8 @@ Expected route:
 
 Claims to verify:
 
-- research-best-mainline
-- hero-training-cockpit-stop
-- peace-shield-value
-- research-atlas-role
+- The target queries really belong on research.html rather than another canonical page.
+- The protected canonical claims remain valid and do not conflict with adjacent pages: research-best-mainline, hero-training-cockpit-stop, peace-shield-value, research-atlas-role.
 
 Evidence:
 
@@ -199,13 +197,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "This is one of the strongest opportunities. Research.html has broad interest, rising research-guide queries, and additional urgent-rescue signals that suggest a real content alignment gap. It is already a cornerstone page, so the appropriate action is a controlled update, not a new article. Prior run `2026-05-12-research-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+  "notes": "This is a strong cornerstone-page opportunity with multiple rising queries and a clear user job around research order and urgent rescue intent. It also has explicit protected claims, which makes a careful update worthwhile for review. Prior run `2026-05-12-research-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
 }
 ```
 
 Next step:
 
-Move to human review for a scoped update_existing proposal on research.html with explicit claim protection and internal-route alignment.
+Human review should verify that the page can cover the target queries while preserving the protected claims and not duplicating research-costs.html or HQ content.
 
 ### external-gift-center-official-flow-validation
 
@@ -226,7 +224,7 @@ Player value:
 
 Rationale:
 
-Useful as discovery, but it depends on a single external source and cannot yet verify public claims. It also risks duplicating the existing Economy intent without a clearly distinct player job. Future trigger: Reconsider only after verification from canonical site memory plus at least one additional reliable source or owner confirmation.
+Monitor only. It is based on a single external source and needs independent verification before any content workflow. It also risks duplicating existing gift center intent. Future trigger: Move forward only if the official flow and UID claims are confirmed by canonical site memory plus another reliable source or owner confirmation.
 
 Duplication risk:
 
@@ -261,13 +259,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "Useful as discovery, but it depends on a single external source and cannot yet verify public claims. It also risks duplicating the existing Economy intent without a clearly distinct player job. Future trigger: Reconsider only after verification from canonical site memory plus at least one additional reliable source or owner confirmation."
+  "notes": "Monitor only. It is based on a single external source and needs independent verification before any content workflow. It also risks duplicating existing gift center intent. Future trigger: Move forward only if the official flow and UID claims are confirmed by canonical site memory plus another reliable source or owner confirmation."
 }
 ```
 
 Next step:
 
-Reconsider only after verification from canonical site memory plus at least one additional reliable source or owner confirmation.
+Move forward only if the official flow and UID claims are confirmed by canonical site memory plus another reliable source or owner confirmation.
 
 ### external-hq-and-progression-reference-cross-check
 
@@ -288,7 +286,7 @@ Player value:
 
 Rationale:
 
-This is a cross-validation lead, not a content-ready opportunity. The proposal is too dependent on an external reference and lacks enough verified scope for human content review. Future trigger: Reconsider if HQ requirement data is confirmed by owner review or another reliable source and a distinct player job is identified.
+Monitor only. The proposal depends on an external reference source and does not yet demonstrate a distinct player job that justifies a page update. Future trigger: Reconsider if HQ dependency data is verified from at least one additional reliable source and the topic can be framed as a distinct player need.
 
 Duplication risk:
 
@@ -323,13 +321,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "This is a cross-validation lead, not a content-ready opportunity. The proposal is too dependent on an external reference and lacks enough verified scope for human content review. Future trigger: Reconsider if HQ requirement data is confirmed by owner review or another reliable source and a distinct player job is identified."
+  "notes": "Monitor only. The proposal depends on an external reference source and does not yet demonstrate a distinct player job that justifies a page update. Future trigger: Reconsider if HQ dependency data is verified from at least one additional reliable source and the topic can be framed as a distinct player need."
 }
 ```
 
 Next step:
 
-Reconsider if HQ requirement data is confirmed by owner review or another reliable source and a distinct player job is identified.
+Reconsider if HQ dependency data is verified from at least one additional reliable source and the topic can be framed as a distinct player need.
 
 ### external-research-costs-external-cross-check
 
@@ -350,7 +348,7 @@ Player value:
 
 Rationale:
 
-Discovery-only signal. The proposed topic is speculative without verification and could duplicate existing Research intent without a distinct player need. Future trigger: Reconsider if branch and cost claims are confirmed by at least one additional reliable source and a clear coverage gap remains.
+Monitor only. It is research discovery, not a verified content need, and it risks importing source-specific wording or unsupported claims. Future trigger: Reconsider if cost and branch coverage gaps are confirmed by an additional source and map cleanly to an existing page role.
 
 Duplication risk:
 
@@ -385,13 +383,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "Discovery-only signal. The proposed topic is speculative without verification and could duplicate existing Research intent without a distinct player need. Future trigger: Reconsider if branch and cost claims are confirmed by at least one additional reliable source and a clear coverage gap remains."
+  "notes": "Monitor only. It is research discovery, not a verified content need, and it risks importing source-specific wording or unsupported claims. Future trigger: Reconsider if cost and branch coverage gaps are confirmed by an additional source and map cleanly to an existing page role."
 }
 ```
 
 Next step:
 
-Reconsider if branch and cost claims are confirmed by at least one additional reliable source and a clear coverage gap remains.
+Reconsider if cost and branch coverage gaps are confirmed by an additional source and map cleanly to an existing page role.
 
 ### vehicle-modification-cost-gsc-opportunity
 
@@ -412,7 +410,7 @@ Player value:
 
 Rationale:
 
-A valid existing-page signal, but weaker than the selected Research, Home, and Economy items. It is better treated as lower-priority monitoring until stronger intent evidence appears. Future trigger: Reconsider if query volume, click trends, or support tickets show a more specific vehicle-upgrade intent gap.
+Monitor only for now. The GSC signal is useful, but the topic appears to be a standard update to an existing cost page with no clear evidence of a distinct new player job beyond current coverage. Future trigger: Reconsider if query analysis shows a specific unmet intent that vehicle-modification-cost.html does not already cover.
 
 Duplication risk:
 
@@ -447,13 +445,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "A valid existing-page signal, but weaker than the selected Research, Home, and Economy items. It is better treated as lower-priority monitoring until stronger intent evidence appears. Future trigger: Reconsider if query volume, click trends, or support tickets show a more specific vehicle-upgrade intent gap."
+  "notes": "Monitor only for now. The GSC signal is useful, but the topic appears to be a standard update to an existing cost page with no clear evidence of a distinct new player job beyond current coverage. Future trigger: Reconsider if query analysis shows a specific unmet intent that vehicle-modification-cost.html does not already cover."
 }
 ```
 
 Next step:
 
-Reconsider if query volume, click trends, or support tickets show a more specific vehicle-upgrade intent gap.
+Reconsider if query analysis shows a specific unmet intent that vehicle-modification-cost.html does not already cover.
 
 ### alliance-duel-gsc-opportunity
 
@@ -474,7 +472,7 @@ Player value:
 
 Rationale:
 
-A reasonable existing-page signal, but the evidence is only moderate and the query intent is less distinct than the selected opportunities. It does not need immediate human review ahead of higher-value items. Future trigger: Reconsider if event-season or schedule-related queries rise materially or if support data shows confusion around alliance duel timing. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
+Monitor only for now. This is a routine event-page optimization with a weaker signal than the higher-priority cornerstone pages, and no new distinct player job is demonstrated. Future trigger: Reconsider if query patterns show a clear gap in event scheduling or VS strategy coverage that cannot be met by the current page. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
 
 Duplication risk:
 
@@ -509,10 +507,10 @@ Backlog Row Preview:
   "confidence": "medium",
   "priority": "low",
   "status": "monitor",
-  "notes": "A reasonable existing-page signal, but the evidence is only moderate and the query intent is less distinct than the selected opportunities. It does not need immediate human review ahead of higher-value items. Future trigger: Reconsider if event-season or schedule-related queries rise materially or if support data shows confusion around alliance duel timing. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+  "notes": "Monitor only for now. This is a routine event-page optimization with a weaker signal than the higher-priority cornerstone pages, and no new distinct player job is demonstrated. Future trigger: Reconsider if query patterns show a clear gap in event scheduling or VS strategy coverage that cannot be met by the current page. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
 }
 ```
 
 Next step:
 
-Reconsider if event-season or schedule-related queries rise materially or if support data shows confusion around alliance duel timing.
+Reconsider if query patterns show a clear gap in event scheduling or VS strategy coverage that cannot be met by the current page.
