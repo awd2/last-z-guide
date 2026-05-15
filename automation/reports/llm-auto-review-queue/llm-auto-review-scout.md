@@ -1,4 +1,4 @@
-# LLM Scout Review - 2026-05-14T10:36:12Z
+# LLM Scout Review - 2026-05-15T10:39:24Z
 
 ## Overview
 
@@ -13,28 +13,9 @@
 
 ## LLM Summary
 
-The strongest opportunities are existing-page updates driven by site-search and GSC signals, especially for codes.html, research.html, and index.html. These are high-value because they align user intent with established canonical pages without requiring new content structures. The external-source items should be treated cautiously: they may be useful for manual verification, but they are not yet strong enough to advance without cross-validation. One equipment opportunity appears viable as an update_existing review, but it is lower risk than the cornerstone pages because the signal is narrower.
+The strongest opportunities are existing-page updates driven by repeat query and page signals in Home, Research, and Economy, plus one Equipment and one Events page. The external-source proposals should stay in monitor or reject because they need stronger verification and carry duplication and copy-risk. The best human-review candidates are the GSC-backed updates to index.html, research.html, codes.html, vehicle-modification-cost.html, and alliance-duel.html, with careful protection of canonical claims and cluster separation.
 
 ## Selected Opportunities
-
-### codes-gsc-opportunity
-
-- Decision: `update_existing`
-- Ready for chain: `true`
-- Priority: `high`
-- Risk: `high`
-- Player value: Better matches the main gift center and redeem-code intent, improving first-screen usefulness for searchers trying to find codes, login, UID, and redemption flow information.
-- Duplication risk: Medium. Similar intent may already be partially served by index.html or a related gift-center page, so role separation must be checked carefully.
-- Next step: Send to human review to validate query intent, confirm canonical claim protection, and decide whether a scoped update to codes.html is justified.
-
-Rationale:
-
-This is a strong existing-page opportunity with clear query-page mismatch signals, high impressions, and an established canonical target page. It is also explicitly within a cornerstone page pattern, so the right action is to review an existing page rather than create new content.
-
-Claims to verify:
-- Whether codes.html remains the best canonical page for these queries
-- Whether the proposed changes preserve gift-center-only-redeem-flow
-- Whether gift-rewards-mailbox and gift-center-cluster-role-separation stay intact
 
 ### index-gsc-opportunity
 
@@ -42,18 +23,17 @@ Claims to verify:
 - Ready for chain: `true`
 - Priority: `high`
 - Risk: `high`
-- Player value: Improves the landing experience for users who arrive with broad Last Z guides intent and may need a clearer path to research, events, HQ, heroes, or F2P strategy content.
-- Duplication risk: Medium. The home hub must not absorb topic-specific content that belongs in cluster pages.
-- Next step: Human review should confirm whether the home page can surface navigation and intent cues more effectively without blurring cluster roles.
+- Player value: Faster entry to the site and better routing for players searching for the main guide hub.
+- Duplication risk: Low if kept as a home-hub refinement; medium if it starts absorbing cluster-specific intent.
+- Next step: Send to human review for an existing-page optimization brief focused on home-hub clarity and navigation.
 
 Rationale:
 
-The home page has strong impressions and some rising branded/research queries, which makes it a good candidate for a focused existing-page review. The evidence supports query-to-page alignment work, not a new page.
+This is a clear existing-page update candidate. The home page already captures broad navigation intent, and the GSC signals show meaningful impressions with a rising research-related query. The opportunity is to improve first-screen usefulness and query-to-page match without changing the page role.
 
 Claims to verify:
-- Whether the rising queries represent durable intent
-- Whether index.html can be improved without duplicating cluster pages
-- Whether prior home-promotion work already covers the same need
+- Whether the rising query truly reflects guide-hub intent rather than a specific cluster page.
+- Whether any home-page claim changes would weaken cluster role separation.
 
 ### research-gsc-opportunity
 
@@ -61,39 +41,56 @@ Claims to verify:
 - Ready for chain: `true`
 - Priority: `high`
 - Risk: `high`
-- Player value: Helps players find the correct research order, emergency coverage, Peace Shield context, and path guidance more quickly.
-- Duplication risk: High. Research content can easily overlap with HQ, costs, and the home hub, so the scope needs tight role separation.
-- Next step: Route to human review to validate intent splits and confirm that the page can be updated within the approved cornerstone scope.
+- Player value: Better answer coverage for research-order, urgent-rescue, and progression planning searches.
+- Duplication risk: Medium, because some intent may overlap with other Research or Progression pages.
+- Next step: Route to human review with a scope check against existing Research and Progression pages.
 
 Rationale:
 
-This is a high-value cornerstone-page review because the research page has meaningful traffic and query growth around research guide and urgent rescue terms. The page should be reviewed for query coverage and first-screen usefulness rather than replaced.
+This is a strong cornerstone-page refresh candidate because the Research page has high impressions, relevant rising queries, and protected canonical claims. The proposed work fits an existing guide update, but only if it preserves the Research cluster role and does not overreach into other pages.
 
 Claims to verify:
-- Whether research.html is still the best canonical destination for the reported queries
-- Whether urgent rescue intent belongs here or on another page
-- Whether the protected canonical claims remain accurate
+- That the research-order intent is not already better served by another canonical page.
+- That protected claims such as research-best-mainline and peace-shield-value remain accurate.
+
+### codes-gsc-opportunity
+
+- Decision: `update_existing`
+- Ready for chain: `true`
+- Priority: `high`
+- Risk: `high`
+- Player value: More direct help for players looking for redeem codes, Gift Center login, and UID-related entry points.
+- Duplication risk: Medium, because Gift Center and UID intent can overlap with adjacent support content.
+- Next step: Have a human reviewer confirm that the intended update stays inside the current codes page scope.
+
+Rationale:
+
+The codes page has strong volume and the listed queries show a focused Gift Center login and redeem-flow intent. This is a sensible update-existing candidate, but it must preserve canonical claims and avoid blurring the role with the UID support page.
+
+Claims to verify:
+- That gift-center-only-redeem-flow and gift-rewards-mailbox remain correct and unchanged.
+- That the query intent is not better handled by gift-center-uid.html or another support page.
 
 ## Rejected Or Monitor
 
-- external-gift-center-official-flow-validation: Monitor only for now. The proposal depends on a single external source and is framed as cross-validation, not proof. It could be useful, but it does not yet meet the verification threshold for human content review. Future trigger: Reconsider if the official domain and at least one additional reliable source or owner confirmation validate the routing and UID claims.
-- external-hq-and-progression-reference-cross-check: Monitor only for now. The topic may be useful for verification, but it is still source-dependent and could duplicate existing HQ intent. It should not advance without stronger evidence. Future trigger: Reconsider after independent verification of HQ requirements and progression dependencies from another reliable source or owner confirmation.
-- external-research-costs-external-cross-check: Monitor only for now. The item is discovery-only and risks copying or overfitting to an external reference without enough validation. Future trigger: Reconsider if branch coverage and cost-table drift are confirmed by canonical site memory plus another reliable source.
-- vehicle-modification-cost-gsc-opportunity: Monitor for now. The GSC signal is useful, but the proposal is narrower than the strongest cornerstone opportunities and may already be covered by an existing equipment page without a distinct new player job. Future trigger: Reconsider if query analysis shows a persistent mismatch for vehicle upgrade intent that cannot be handled by another canonical page.
-- alliance-duel-gsc-opportunity: Monitor for now. This is a standard event-guide update candidate, but it is less compelling than the top cornerstone opportunities and currently lacks distinct evidence beyond page-level GSC signals. Future trigger: Reconsider if additional query data or owner feedback shows a clear schedule or VS-strategy gap on alliance-duel.html.
+- external-gift-center-official-flow-validation: Monitor only. The proposal is based on a single external source and cannot be treated as proof for public routing or flow claims. It also risks duplication with existing Gift Center support intent. Future trigger: Move to review only if the official service flow is verified by another reliable source or owner confirmation.
+- external-hq-and-progression-reference-cross-check: Monitor only. This is discovery input, not enough to justify a page change. The source may help validate planning gaps later, but it does not yet support a content decision. Future trigger: Reconsider if HQ requirement details are verified against canonical site memory and another reliable source.
+- external-research-costs-external-cross-check: Reject for now. The proposal depends on one external reference and could copy or mirror competitor wording if advanced too early. It is not ready for human content review. Future trigger: Only revisit if branch coverage, cost names, and claim accuracy are confirmed by independent sources or owner review.
+- vehicle-modification-cost-gsc-opportunity: Reject for now. The page signal is real, but the proposal text is too generic and the target intent is not yet specific enough to prove a distinct player job beyond an existing cost-page update. Future trigger: Reconsider if query analysis shows a specific vehicle upgrade task that is not already covered by the current Equipment page set.
+- alliance-duel-gsc-opportunity: Reject for now. The signal supports monitoring, but the proposed event framing is still broad and may not justify a human-review slot until the exact player job is clearer. Future trigger: Reconsider if season, schedule, or VS intent becomes more distinct and can be validated without changing scope.
 
 ## Global Risks
 
-- Analytics signals are not proof of page rewrite needs, so all GSC-driven ideas need human validation before any downstream workflow.
-- External sources may reflect competitor wording or incomplete facts, so they must not be used as copy sources.
-- Several proposals touch protected canonical claims and cluster role boundaries, so scope creep is a real risk.
-- Home and cornerstone pages can absorb too much intent if role separation is not checked carefully.
-- Monitor-only items must not move into editor, reviewer, intake, run-plan, or proposal workflows without a new human-reviewed trigger.
+- Several proposals rely on analytics signals that are helpful but not proof of content need.
+- External-source ideas carry duplication and competitor-copy risk unless independently verified.
+- There is repeated risk of cluster-role drift between Economy support pages and adjacent UID or login intent.
+- Canonical claims must be protected, especially where gift, research, and progression pages overlap.
+- Some GSC opportunities may already be better served by other pages, so query intent mapping needs human validation.
 
 ## Next Actions
 
-- Route the selected opportunities to human review for scope validation and intent split checks.
-- Verify protected canonical claims before any content proposal is prepared.
-- Cross-check external-source ideas against canonical site memory and at least one additional reliable source or owner confirmation.
-- Confirm that any update_existing plan preserves current templates and cluster roles.
-- Keep monitor-only items inactive until stronger evidence appears.
+- Send the three selected existing-page updates to human review only, with strict scope checks.
+- Require verification of protected canonical claims before any later proposal workflow.
+- Keep all external-source topics in monitor or reject until independently validated.
+- Do not route monitor or reject topics to Editor, Reviewer, intake, run-plan, or content proposal.
+- Use existing templates and navigation patterns only, with no cluster role changes.
