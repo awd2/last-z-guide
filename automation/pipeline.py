@@ -531,6 +531,41 @@ def cmd_external_evidence_refresh(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_external_evidence_collect(
+    evidence_refresh: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    provider: str,
+    limit: int,
+    timeout: float,
+    max_bytes: int,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "external_evidence_collect.py"),
+        "--provider",
+        provider,
+        "--limit",
+        str(limit),
+        "--timeout",
+        str(timeout),
+        "--max-bytes",
+        str(max_bytes),
+    ]
+    if evidence_refresh:
+        command.extend(["--evidence-refresh", evidence_refresh])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== External Evidence Collect ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_editor(
     scout_result: str | None,
     scout_request: str | None,
@@ -2174,6 +2209,24 @@ def build_parser() -> argparse.ArgumentParser:
     external_evidence_refresh_parser.add_argument("--limit", type=int, default=20, help="Maximum query tasks and URL leads to include.")
     external_evidence_refresh_parser.add_argument("--json", action="store_true", help="Print the External Evidence Refresh summary as JSON.")
 
+    external_evidence_collect_parser = subparsers.add_parser(
+        "external-evidence-collect",
+        help="Collect no-write evidence from explicit URL leads.",
+    )
+    external_evidence_collect_parser.add_argument("--evidence-refresh", help="Path to external-evidence-refresh.json.")
+    external_evidence_collect_parser.add_argument("--output-dir", help="Directory for External Evidence Collect artifacts.")
+    external_evidence_collect_parser.add_argument("--basename", help="Output basename without extension.")
+    external_evidence_collect_parser.add_argument(
+        "--provider",
+        default="disabled",
+        choices=["disabled", "fixture", "fetch"],
+        help="Evidence provider. `fetch` reads only explicit URL leads. Defaults to disabled/fail-closed.",
+    )
+    external_evidence_collect_parser.add_argument("--limit", type=int, default=20, help="Maximum explicit URL leads to collect.")
+    external_evidence_collect_parser.add_argument("--timeout", type=float, default=10.0, help="Per-URL fetch timeout in seconds.")
+    external_evidence_collect_parser.add_argument("--max-bytes", type=int, default=750000, help="Maximum bytes to read per URL.")
+    external_evidence_collect_parser.add_argument("--json", action="store_true", help="Print the External Evidence Collect summary as JSON.")
+
     llm_editor_parser = subparsers.add_parser(
         "llm-editor",
         help="Run a no-write LLM Editor planning brief from one selected LLM Scout opportunity.",
@@ -2504,6 +2557,17 @@ def main() -> int:
             args.output_dir,
             args.basename,
             args.limit,
+            args.json,
+        )
+    if args.command == "external-evidence-collect":
+        return cmd_external_evidence_collect(
+            args.evidence_refresh,
+            args.output_dir,
+            args.basename,
+            args.provider,
+            args.limit,
+            args.timeout,
+            args.max_bytes,
             args.json,
         )
     if args.command == "llm-editor":

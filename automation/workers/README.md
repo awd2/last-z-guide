@@ -95,6 +95,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider f
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py external-scout --json
 python3 automation/pipeline.py external-evidence-refresh --external-scout automation/reports/external-scout.json --json
+python3 automation/pipeline.py external-evidence-collect --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
@@ -141,6 +142,8 @@ python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner ans
 `external-scout` is the no-write external source discovery layer. It reads `automation/memory/source_registry.json`, emits candidate proposals from approved source/topic seeds, and records proposed sources that still need owner approval. It must not crawl broadly, copy competitor wording, use one external source as proof for public claims, mutate backlog/manifests, edit content, open PRs, or deploy. External claims are discovery and cross-validation signals only.
 
 `external-evidence-refresh` is the no-write evidence queue layer. It reads an External Scout artifact and converts approved source queries plus explicit source URLs into provider-ready query tasks, URL evidence leads, and claim review groups. It does not fetch live web content yet, prove claims, approve public copy, mutate backlog/manifests, edit content, open PRs, or deploy.
+
+`external-evidence-collect` is the no-write external fetch layer. With `--provider fetch`, it fetches only explicit HTTPS URL leads from `external-evidence-refresh`, stores limited metadata and short snippets for review, and leaves search query tasks deferred for a future search provider. It must not broadly crawl, prove public claims, approve public copy, mutate backlog/manifests, edit content, open PRs, or deploy.
 
 `llm-scout` is the first live LLM worker wrapper. It builds deterministic Scout proposals from the latest GSC/Bing agent signals and optional External Scout proposal artifacts, sends a compact JSON-only review request through `llm_adapter`, and writes:
 
@@ -230,6 +233,7 @@ edit content, open PRs, or deploy.
 
 In GitHub Actions, `.github/workflows/llm-auto-review-queue.yml` runs
 `external-scout` first, builds an `external-evidence-refresh` queue artifact,
+collects explicit URL evidence with `external-evidence-collect --provider fetch`,
 and passes the generated
 `automation/reports/llm-auto-review-queue/external-scout.json` artifact into
 `llm-auto-review-queue --external-proposals`. The workflow may commit only

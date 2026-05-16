@@ -25,6 +25,7 @@ on:
       - ".github/workflows/llm-auto-review-queue.yml"
       - "automation/memory/source_registry.json"
       - "automation/pipeline.py"
+      - "automation/workers/external_evidence_collect.py"
       - "automation/workers/external_evidence_refresh.py"
       - "automation/workers/external_scout.py"
       - "automation/workers/llm_*.py"
@@ -71,6 +72,12 @@ jobs:
             --output-dir automation/reports/llm-auto-review-queue \
             --basename external-evidence-refresh \
             --json | tee automation/reports/llm-auto-review-queue/external-evidence-refresh-run-summary.json
+          python3 automation/pipeline.py external-evidence-collect \
+            --provider fetch \
+            --evidence-refresh automation/reports/llm-auto-review-queue/external-evidence-refresh.json \
+            --output-dir automation/reports/llm-auto-review-queue \
+            --basename external-evidence-collect \
+            --json | tee automation/reports/llm-auto-review-queue/external-evidence-collect-run-summary.json
           cmd=(
             python3 automation/pipeline.py llm-auto-review-queue
             --provider openai
@@ -94,6 +101,7 @@ jobs:
             echo "- Output directory: \`automation/reports/llm-auto-review-queue\`"
             echo "- External Scout proposals: \`automation/reports/llm-auto-review-queue/external-scout.json\`"
             echo "- External evidence queue: \`automation/reports/llm-auto-review-queue/external-evidence-refresh.json\`"
+            echo "- External evidence collection: \`automation/reports/llm-auto-review-queue/external-evidence-collect.json\`"
             echo "- Content/backlog/manifests/PRs modified: \`false\`"
             echo
           } >> "$GITHUB_STEP_SUMMARY"

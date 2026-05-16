@@ -117,6 +117,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider f
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py external-scout --json
 python3 automation/pipeline.py external-evidence-refresh --external-scout automation/reports/external-scout.json --json
+python3 automation/pipeline.py external-evidence-collect --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
@@ -151,6 +152,7 @@ python3 automation/workers/llm_adapter.py --request <request.json> --provider fi
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 automation/workers/external_scout.py --json
 python3 automation/workers/external_evidence_refresh.py --external-scout automation/reports/external-scout.json --json
+python3 automation/workers/external_evidence_collect.py --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json
 python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_scout.py --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
@@ -262,6 +264,14 @@ python3 automation/pipeline.py external-evidence-refresh --external-scout automa
 
 This writes `automation/reports/external-evidence-refresh.json` / `.md` with approved source queries, explicit URL leads, and claim review groups. It does not fetch live web content yet, prove claims, approve public copy, edit content, mutate backlog/manifests, open PRs, or deploy.
 
+To collect limited metadata/snippets from explicit URL leads:
+
+```bash
+python3 automation/pipeline.py external-evidence-collect --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json
+```
+
+This writes `automation/reports/external-evidence-collect.json` / `.md`. The fetch provider reads only explicit HTTPS URL leads, stores short metadata/snippet evidence, defers search query tasks, and never marks public claims as ready.
+
 For scheduled-style candidate generation from current GSC/Bing signals:
 
 ```bash
@@ -371,7 +381,7 @@ The consolidated no-write queue is available in GitHub Actions:
 - Schedule: daily
 - Manual dispatch: optional `model`, `max_chains`, and `include_existing` inputs
 - Push trigger: signal files, source registry, External Scout / Evidence workers, and LLM worker infrastructure
-- External discovery: runs `external-scout`, builds `external-evidence-refresh`, and passes the generated External Scout artifact into `llm-auto-review-queue --external-proposals`
+- External discovery: runs `external-scout`, builds `external-evidence-refresh`, collects explicit URL evidence with `external-evidence-collect --provider fetch`, and passes the generated External Scout artifact into `llm-auto-review-queue --external-proposals`
 - Output: uploaded artifact plus committed `automation/reports/llm-auto-review-queue/` report artifacts only
 - Content/backlog/manifests/PRs/deploy modified: `false`
 

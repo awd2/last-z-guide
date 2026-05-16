@@ -307,6 +307,7 @@ python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-b
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json>
 python3 automation/pipeline.py external-scout --json
 python3 automation/pipeline.py external-evidence-refresh --external-scout automation/reports/external-scout.json --json
+python3 automation/pipeline.py external-evidence-collect --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
@@ -344,6 +345,7 @@ python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by 
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/external_scout.py --json
 python3 automation/workers/external_evidence_refresh.py --external-scout automation/reports/external-scout.json --json
+python3 automation/workers/external_evidence_collect.py --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json
 python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_scout.py --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
@@ -526,6 +528,7 @@ LLM Scout review:
 - `python3 automation/pipeline.py llm-scout --provider openai --json` -> review deterministic GSC/Bing Scout proposals with the live OpenAI provider
 - `python3 automation/pipeline.py external-scout --json` -> create a no-write external source report from `automation/memory/source_registry.json`
 - `python3 automation/pipeline.py external-evidence-refresh --external-scout automation/reports/external-scout.json --json` -> create a no-write evidence queue from External Scout source queries and explicit URLs
+- `python3 automation/pipeline.py external-evidence-collect --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json` -> collect limited metadata/snippets from explicit HTTPS URL leads only
 - `python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json` -> merge External Scout proposals into LLM Scout review
 - default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
 - output lives in `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`
@@ -634,7 +637,7 @@ LLM auto review queue workflow:
 - required secret: `OPENAI_API_KEY`
 - optional manual inputs: `model`, `max_chains`, `include_existing`
 - output is an uploaded workflow artifact named `llm-auto-review-queue-<run_number>`
-- before queueing, the workflow runs `external-scout`, builds `external-evidence-refresh`, and passes `automation/reports/llm-auto-review-queue/external-scout.json` through `--external-proposals`
+- before queueing, the workflow runs `external-scout`, builds `external-evidence-refresh`, collects explicit URL evidence with `external-evidence-collect --provider fetch`, and passes `automation/reports/llm-auto-review-queue/external-scout.json` through `--external-proposals`
 - it may commit only `automation/reports/llm-auto-review-queue/` report artifacts
 - this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 
