@@ -1,0 +1,285 @@
+{
+  "run_id": "2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake",
+  "created_at": "2026-05-16T18:23:45Z",
+  "run_type": "update_existing",
+  "status": "closed",
+  "risk_level": "high",
+  "summary": "Worker-approved intake for `hq.html` from `external-hq-and-progression-reference-cross-check`.",
+  "inputs": {
+    "topic_id": "external-hq-and-progression-reference-cross-check-llm-approved-intake",
+    "title": "External source opportunity: HQ and progression requirement cross-check",
+    "cluster": "Progression",
+    "source_type": "analytics",
+    "source_reference": "LLM worker chain review: external-hq-and-progression-reference-cross-check",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "approved_by": "Oleg",
+    "approval_note": "Approved exact replacement only for hq.html p.qa-lede: clarify required buildings as buildings required for the next HQ checkpoint. No template, route, metadata, or additional claim changes approved."
+  },
+  "plan": {
+    "topic_id": "external-hq-and-progression-reference-cross-check-llm-approved-intake",
+    "title": "External source opportunity: HQ and progression requirement cross-check",
+    "cluster": "Progression",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "hq.html",
+    "source_type": "analytics",
+    "source_reference": "LLM worker chain review: external-hq-and-progression-reference-cross-check",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "risk_level": "high",
+    "plan_summary": "Prepare a controlled content run for `hq.html` from an approved Worker intake artifact.",
+    "memory_files": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md"
+    ],
+    "related_pages": [
+      "hq.html"
+    ],
+    "deterministic_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict"
+    ],
+    "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review.",
+    "exact_replacements": [
+      {
+        "file": "hq.html",
+        "change_type": "first_screen_update",
+        "selector_or_anchor": "p.qa-lede",
+        "exact_old": "<p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only required buildings, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>",
+        "exact_new": "<p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only the buildings required for the next HQ checkpoint, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>",
+        "reason": "This is a narrow first-screen refinement that preserves the current structure while improving requirement clarity.",
+        "owner_approval_required": true
+      }
+    ]
+  },
+  "artifacts": {
+    "worker_intake": "automation/reports/llm-intake-external-hq-and-progression-reference-cross-check.json",
+    "source_chain": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-hq-and-progression-reference-cross-check.json",
+    "worker_run_plan": "automation/reports/worker-run-plan-external-hq-and-progression-reference-cross-check.json",
+    "worker_manifest_writer": {
+      "created_at": "2026-05-16T18:23:53Z",
+      "created_by": "Oleg",
+      "safety": "Created planned run manifest only; no content files were modified."
+    },
+    "patch_plan": {
+      "target_page_or_slug": "hq.html",
+      "archetype_suggestion": "cornerstone-guide",
+      "recommended_action": "update_existing",
+      "proposed_changes": [
+        {
+          "file": "hq.html",
+          "change_type": "first_screen_update",
+          "reason": "This is a narrow first-screen refinement that preserves the current structure while improving requirement clarity.",
+          "selector_or_anchor": "p.qa-lede",
+          "exact_old": "<p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only required buildings, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>",
+          "exact_new": "<p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only the buildings required for the next HQ checkpoint, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>"
+        },
+        {
+          "file": "hq.html",
+          "change_type": "meta_refresh",
+          "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent."
+        }
+      ],
+      "patch_specs": [
+        {
+          "target_file": "hq.html",
+          "source_of_truth_file": "hq.html",
+          "output_file": "hq.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "safe_exact_replace",
+          "selector_or_anchor": "p.qa-lede",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec.",
+            "Show exact_old and exact_new to the owner before approval."
+          ],
+          "proposed_change_summary": "This is a narrow first-screen refinement that preserves the current structure while improving requirement clarity.",
+          "canonical_claims_to_protect": [],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "exact_old": "<p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only required buildings, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>",
+          "exact_new": "<p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only the buildings required for the next HQ checkpoint, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>",
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-16T18:24:45Z",
+          "approval_note": "Owner approved exact hq.html p.qa-lede replacement only. Meta/title/H1 changes are not approved."
+        },
+        {
+          "target_file": "hq.html",
+          "source_of_truth_file": "hq.html",
+          "output_file": "hq.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        }
+      ],
+      "changed_files": [
+        "hq.html"
+      ],
+      "source_files": [
+        "hq.html"
+      ],
+      "canonical_claim_ids": [],
+      "deterministic_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+        "python3 automation/pipeline.py checks"
+      ],
+      "report_path": "automation/reports/2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake.patch.md"
+    },
+    "proposal": {
+      "report_path": "automation/reports/2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake.proposed.md",
+      "rendered_specs": [
+        {
+          "target_file": "hq.html",
+          "source_of_truth_file": "hq.html",
+          "output_file": "hq.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "safe_exact_replace",
+          "selector_or_anchor": "p.qa-lede",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec.",
+            "Show exact_old and exact_new to the owner before approval."
+          ],
+          "proposed_change_summary": "This is a narrow first-screen refinement that preserves the current structure while improving requirement clarity.",
+          "canonical_claims_to_protect": [],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "exact_old": "<p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only required buildings, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>",
+          "exact_new": "<p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only the buildings required for the next HQ checkpoint, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>",
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-16T18:24:45Z",
+          "approval_note": "Owner approved exact hq.html p.qa-lede replacement only. Meta/title/H1 changes are not approved.",
+          "before_summary": "title: Last Z HQ Upgrade Guide (2026) — Requirements, Fast Path to HQ 30/35 | h1: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy | meta: Best HQ strategy for Last Z: rush early levels, upgrade required buildings only, push efficiently to HQ30, and prepare steel for HQ31-35. | verified: Best HQ strategy for most players: rush early levels, upgrade only the buildings required for the next HQ checkpoint, push efficiently to HQ30, and prepare for steel and long timers before starting the HQ31-35 journey.",
+          "desired_after_summary": "Replace the exact old snippet with the exact new snippet only after owner approval. The apply step must fail closed if the source text has drifted or appears more than once.",
+          "suggested_content": "Exact approved replacement candidate:\n\n```diff\n- <p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only required buildings, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>\n+ <p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only the buildings required for the next HQ checkpoint, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>\n```",
+          "risk_level": "medium"
+        },
+        {
+          "target_file": "hq.html",
+          "source_of_truth_file": "hq.html",
+          "output_file": "hq.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z HQ Upgrade Guide (2026) — Requirements, Fast Path to HQ 30/35 | h1: Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy | meta: Best HQ strategy for Last Z: rush early levels, upgrade required buildings only, push efficiently to HQ30, and prepare steel for HQ31-35. | verified: Best HQ strategy for most players: rush early levels, upgrade only the buildings required for the next HQ checkpoint, push efficiently to HQ30, and prepare for steel and long timers before starting the HQ31-35 journey.",
+          "desired_after_summary": "Title, H1, and meta description use the same exact intent: hq.html.",
+          "suggested_content": "",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        }
+      ]
+    },
+    "apply_preview": {
+      "report_path": "automation/reports/2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake.apply-preview.md",
+      "generated_at": "2026-05-16T18:24:51Z",
+      "approved_specs_count": 1,
+      "preview_items": [
+        {
+          "source_of_truth_file": "hq.html",
+          "output_file": "hq.html",
+          "operation_type": "safe_exact_replace",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "safe_exact_replace",
+          "warnings": [],
+          "preview": "```diff\n# p.qa-lede\n- <p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only required buildings, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>\n+ <p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only the buildings required for the next HQ checkpoint, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>\n```",
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "target_page": "hq.html"
+        }
+      ]
+    },
+    "apply_result": {
+      "report_path": "automation/reports/2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake.apply-result.md",
+      "applied_at": "2026-05-16T18:25:09Z",
+      "applied_operations": [
+        "hq.html:safe_exact_replace:p.qa-lede"
+      ],
+      "skipped_operations": [],
+      "generator_commands": []
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake.closed.md",
+      "closed_at": "2026-05-16T18:25:41Z",
+      "note": "Closed after owner-approved exact hq.html p.qa-lede replacement, prepublish checks, strict automation checks, and changed-pages report passed."
+    }
+  },
+  "changed_files": [
+    "hq.html"
+  ],
+  "checks": {
+    "automation_checks_strict": {
+      "status": "pass",
+      "notes": "Search visibility check passed. | Checked content consistency on 56 public pages: 0 failure(s), 0 warning(s), 7 allowed context(s). | Content consistency check passed. | Checked SEO/LLM alignment on 63 memory pages: 0 alignment warning(s), 0 cannibalization warning(s). | SEO/LLM alignment check passed. | Automation checks passed."
+    },
+    "changed_pages_report": {
+      "status": "pass",
+      "notes": "same-cluster inbound links: 8 | expected hubs: index.html, start.html | linked from hubs: index.html, start.html"
+    }
+  }
+}
