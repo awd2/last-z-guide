@@ -1,0 +1,10 @@
+{
+  "state": "evidence_queue_ready",
+  "source_query_task_count": 10,
+  "url_evidence_lead_count": 10,
+  "claim_review_count": 25,
+  "output_path": "automation/reports/llm-auto-review-queue/external-evidence-refresh.json",
+  "markdown_path": "automation/reports/llm-auto-review-queue/external-evidence-refresh.md",
+  "errors": [],
+  "safety": "No content, backlog, manifest, PR, or production files were modified by External Evidence Refresh."
+}

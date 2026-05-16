@@ -1,90 +1,12 @@
 {
   "schema_version": 1,
   "report_type": "llm_topic_discovery",
-  "generated_at": "2026-05-16T09:51:56Z",
+  "generated_at": "2026-05-16T16:21:14Z",
   "state": "topic_discovery_ready",
   "source_llm_scout_result": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json",
   "source_llm_scout_request": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
   "topic_count": 8,
   "topics": [
-    {
-      "topic_id": "codes-gsc-opportunity",
-      "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
-      "cluster": "Economy",
-      "recommended_action": "monitor",
-      "archetype_suggestion": "cornerstone-guide",
-      "target_page_or_slug": "codes.html",
-      "source_type": "llm_scout",
-      "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
-      "confidence": "high",
-      "priority": "low",
-      "status": "monitor",
-      "notes": "Strong GSC signal on an existing cornerstone page with clear low-CTR queries tied to the same user job. This is a good human-review candidate because it can likely improve query-to-page match without changing cluster boundaries. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
-      "risk_level": "high",
-      "player_value": "Helps searchers reach the right redeem codes and gift center entry point faster, especially for login and gift center queries.",
-      "duplication_risk": "Medium. The topic may overlap with other redeem or gift-center intents, but the canonical claim protections suggest a defined scope.",
-      "claims_to_verify": [
-        "Whether the first-screen framing can improve gift-center relevance without altering approved canonical claims.",
-        "Whether another page already serves the login or UID intent more precisely.",
-        "Whether any wording changes would blur the codes page and gift-center page roles."
-      ],
-      "next_step": "Human review should confirm whether the existing page can absorb the intent without weakening gift-center role separation.",
-      "evidence": [
-        "GSC page signal: codes.html had 33220 impressions, 586 clicks, 1.76% CTR, avg position 6.11.",
-        "Low CTR query: `last z gift center` had 3075 impressions, 113 clicks, 3.67% CTR, position 6.83.",
-        "Low CTR query: `last z gift center login` had 943 impressions, 43 clicks, 4.56% CTR, position 5.41.",
-        "Low CTR query: `lastz gift center` had 555 impressions, 23 clicks, 4.14% CTR, position 6.37.",
-        "Low CTR query: `last-z.com gift center` had 479 impressions, 22 clicks, 4.59% CTR, position 6.00."
-      ],
-      "site_fit": {
-        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
-        "cluster_owner": "Economy",
-        "expected_internal_route": [
-          "index.html",
-          "codes.html"
-        ],
-        "archetype_reason": "Existing page is `cornerstone-guide` in the `Economy` cluster; Scout should prefer updating the existing page before proposing new content."
-      },
-      "constraints": [
-        "Use existing page template and navigation patterns.",
-        "Treat GSC data as a signal, not proof that a rewrite is needed.",
-        "Protect canonical claim `gift-center-only-redeem-flow`.",
-        "Protect canonical claim `gift-rewards-mailbox`.",
-        "Protect canonical claim `gift-center-cluster-role-separation`.",
-        "Existing backlog history for this page: gift-center-ctr-pass:done."
-      ],
-      "reject_if": [
-        "The query intent is already better served by another canonical page.",
-        "The proposed change would blur cluster role separation.",
-        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
-      ],
-      "prior_review": {
-        "run_id": "2026-05-05-codes-gsc-opportunity-llm-approved-intake",
-        "status": "closed",
-        "risk_level": "high",
-        "summary": "Worker-approved intake for `codes.html` from `codes-gsc-opportunity`.",
-        "closeout": {
-          "report_path": "automation/reports/2026-05-05-codes-gsc-opportunity-llm-approved-intake.closed.md",
-          "closed_at": "2026-05-05T18:40:33Z",
-          "note": "Owner-reviewed no-op proposal. Current codes.html first-screen and metadata already match the intended codes hub role; no content change applied."
-        }
-      },
-      "human_approval_required": false,
-      "backlog_row_preview": {
-        "topic_id": "codes-gsc-opportunity",
-        "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
-        "cluster": "Economy",
-        "recommended_action": "monitor",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "codes.html",
-        "source_type": "llm_scout",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
-        "confidence": "high",
-        "priority": "low",
-        "status": "monitor",
-        "notes": "Strong GSC signal on an existing cornerstone page with clear low-CTR queries tied to the same user job. This is a good human-review candidate because it can likely improve query-to-page match without changing cluster boundaries. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
-      }
-    },
     {
       "topic_id": "index-gsc-opportunity",
       "title": "GSC opportunity review: Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy",
@@ -97,16 +19,15 @@
       "confidence": "high",
       "priority": "high",
       "status": "candidate",
-      "notes": "The home page has strong traffic and rising research-related query signals. Updating the existing hub page is consistent with the site structure and likely improves navigation and query matching without creating a duplicate destination.",
+      "notes": "High-impression home page with rising branded and research-related queries suggests a real navigation and query-match opportunity. The page already serves as the main hub, so an existing-page update is the correct path for human review.",
       "risk_level": "high",
-      "player_value": "Improves first-screen usefulness for broader guide searches and helps route users into the correct cluster page faster.",
-      "duplication_risk": "Low to medium. The home hub can support broad discovery, but it must stay distinct from topic-specific guides.",
+      "player_value": "Better first-screen usefulness and faster routing for players searching for the main guide hub.",
+      "duplication_risk": "Low, because this is a hub page update rather than a new intent target.",
       "claims_to_verify": [
-        "Whether the home hub can better support research-guide discovery without competing with topic pages.",
-        "Whether the rising query signals are durable enough to justify a scoped update.",
-        "Whether any change would weaken the home page's role as a hub rather than a content destination."
+        "Whether the rising queries represent durable demand rather than short-term noise.",
+        "Whether the current home page already covers the strongest hub intent better than any other canonical page."
       ],
-      "next_step": "Human review should validate whether the home page should surface more cluster entry points or adjust its summary copy and navigation emphasis.",
+      "next_step": "Review the current home template against the query set and confirm whether a limited homepage refinement can improve routing without changing cluster roles.",
       "evidence": [
         "GSC page signal: index.html had 10947 impressions, 823 clicks, 7.52% CTR, avg position 6.64.",
         "Rising query: `last z research guide` gained 11 impressions in the last 7-day comparison window.",
@@ -144,7 +65,7 @@
         "confidence": "high",
         "priority": "high",
         "status": "candidate",
-        "notes": "The home page has strong traffic and rising research-related query signals. Updating the existing hub page is consistent with the site structure and likely improves navigation and query matching without creating a duplicate destination."
+        "notes": "High-impression home page with rising branded and research-related queries suggests a real navigation and query-match opportunity. The page already serves as the main hub, so an existing-page update is the correct path for human review."
       }
     },
     {
@@ -159,16 +80,16 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "This is a high-value existing-page opportunity with clear signals around research guide intent and related rescue/peace-shield queries. The page already owns the cluster and should be refined rather than replaced. Prior run `2026-05-12-research-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "notes": "The Research cornerstone has strong impressions, moderate CTR, and rising research-guide and urgent-rescue queries. This is a high-value cornerstone update opportunity, but it must preserve protected claims and cluster role boundaries. Prior run `2026-05-12-research-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
       "risk_level": "high",
-      "player_value": "Helps players find the best research order, related survival choices, and progression guidance from a single authoritative page.",
-      "duplication_risk": "Medium. There is overlap with costs, HQ, and rescue guidance, so role boundaries must be preserved.",
+      "player_value": "Improved guidance for research order, peace shield value, and urgent rescue planning.",
+      "duplication_risk": "Medium, because adjacent research and progression topics can overlap if scope is not controlled.",
       "claims_to_verify": [
-        "Whether 'urgent rescue' belongs on the research page or another canonical page.",
-        "Whether the approved canonical claims still match current site memory and game state.",
-        "Whether research guidance can be expanded without diluting the page's primary job."
+        "Whether urgent rescue belongs on the Research page or another canonical page.",
+        "Whether the protected canonical claims remain accurate and in scope.",
+        "Whether the current content already satisfies the strongest research-guide intent."
       ],
-      "next_step": "Human review should check whether the page can cover the rising queries without drifting into other canonical pages' territory.",
+      "next_step": "Human review should check whether the existing Research page can absorb the new query intent through targeted refinement without reassigning intent to other pages.",
       "evidence": [
         "GSC page signal: research.html had 13619 impressions, 670 clicks, 4.92% CTR, avg position 7.16.",
         "Rising query: `last z research guide` gained 11 impressions in the last 7-day comparison window.",
@@ -222,7 +143,84 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "This is a high-value existing-page opportunity with clear signals around research guide intent and related rescue/peace-shield queries. The page already owns the cluster and should be refined rather than replaced. Prior run `2026-05-12-research-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "The Research cornerstone has strong impressions, moderate CTR, and rising research-guide and urgent-rescue queries. This is a high-value cornerstone update opportunity, but it must preserve protected claims and cluster role boundaries. Prior run `2026-05-12-research-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+      }
+    },
+    {
+      "topic_id": "codes-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+      "cluster": "Economy",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "codes.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "low",
+      "status": "monitor",
+      "notes": "The Codes page shows strong visibility and a clear login-related query cluster. This is a credible existing-page refinement opportunity, especially for gift center and redeem flow intent, but it must not blur canonical role separation. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "risk_level": "high",
+      "player_value": "Cleaner access to redeem codes, gift center login help, and UID routing.",
+      "duplication_risk": "Medium, because Gift Center and redeem-flow topics can overlap with related economy pages.",
+      "claims_to_verify": [
+        "Whether the query set is better served by codes.html or gift-center-uid.html.",
+        "Whether canonical claims about redeem flow and mailbox behavior still hold exactly as protected."
+      ],
+      "next_step": "Review whether the page can better answer login and gift center queries without expanding beyond the approved cornerstone scope.",
+      "evidence": [
+        "GSC page signal: codes.html had 33220 impressions, 586 clicks, 1.76% CTR, avg position 6.11.",
+        "Low CTR query: `last z gift center` had 3075 impressions, 113 clicks, 3.67% CTR, position 6.83.",
+        "Low CTR query: `last z gift center login` had 943 impressions, 43 clicks, 4.56% CTR, position 5.41.",
+        "Low CTR query: `lastz gift center` had 555 impressions, 23 clicks, 4.14% CTR, position 6.37.",
+        "Low CTR query: `last-z.com gift center` had 479 impressions, 22 clicks, 4.59% CTR, position 6.00."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
+        "cluster_owner": "Economy",
+        "expected_internal_route": [
+          "index.html",
+          "codes.html"
+        ],
+        "archetype_reason": "Existing page is `cornerstone-guide` in the `Economy` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed.",
+        "Protect canonical claim `gift-center-only-redeem-flow`.",
+        "Protect canonical claim `gift-rewards-mailbox`.",
+        "Protect canonical claim `gift-center-cluster-role-separation`.",
+        "Existing backlog history for this page: gift-center-ctr-pass:done."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ],
+      "prior_review": {
+        "run_id": "2026-05-05-codes-gsc-opportunity-llm-approved-intake",
+        "status": "closed",
+        "risk_level": "high",
+        "summary": "Worker-approved intake for `codes.html` from `codes-gsc-opportunity`.",
+        "closeout": {
+          "report_path": "automation/reports/2026-05-05-codes-gsc-opportunity-llm-approved-intake.closed.md",
+          "closed_at": "2026-05-05T18:40:33Z",
+          "note": "Owner-reviewed no-op proposal. Current codes.html first-screen and metadata already match the intended codes hub role; no content change applied."
+        }
+      },
+      "human_approval_required": false,
+      "backlog_row_preview": {
+        "topic_id": "codes-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
+        "cluster": "Economy",
+        "recommended_action": "monitor",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "codes.html",
+        "source_type": "llm_scout",
+        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
+        "confidence": "high",
+        "priority": "low",
+        "status": "monitor",
+        "notes": "The Codes page shows strong visibility and a clear login-related query cluster. This is a credible existing-page refinement opportunity, especially for gift center and redeem flow intent, but it must not blur canonical role separation. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     },
     {
@@ -237,12 +235,12 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Monitor only until the external source is cross-validated. It is discovery-grade, depends on a single external reference, and could easily duplicate existing gift center intents or copy competitor wording. Future trigger: Move forward only if an additional reliable source or owner confirmation verifies the public routing and flow claims.",
+      "notes": "Useful as discovery, but it depends on a single external source and still needs verification against canonical memory plus another reliable source or owner confirmation. Do not advance as-is. Future trigger: Move forward only after independent verification of the official routing and UID claims.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Move forward only if an additional reliable source or owner confirmation verifies the public routing and flow claims.",
+      "next_step": "Move forward only after independent verification of the official routing and UID claims.",
       "evidence": [
         "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation.",
         "External source URL recorded for later manual verification."
@@ -280,7 +278,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Monitor only until the external source is cross-validated. It is discovery-grade, depends on a single external reference, and could easily duplicate existing gift center intents or copy competitor wording. Future trigger: Move forward only if an additional reliable source or owner confirmation verifies the public routing and flow claims."
+        "notes": "Useful as discovery, but it depends on a single external source and still needs verification against canonical memory plus another reliable source or owner confirmation. Do not advance as-is. Future trigger: Move forward only after independent verification of the official routing and UID claims."
       }
     },
     {
@@ -295,12 +293,12 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Monitor only. The proposal is based on one external wiki-style source and needs verification before it can be treated as a content opportunity. It also risks duplicating existing HQ or progression coverage. Future trigger: Reconsider if the HQ requirement and dependency claims are confirmed by another reliable source or canonical site memory.",
+      "notes": "Single-source external reference only. The HQ and progression claim set is too sensitive to accept without additional verification and could easily duplicate existing progression intent. Future trigger: Revisit if owner confirmation or a second reliable source validates the progression requirements and dependency chain.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Reconsider if the HQ requirement and dependency claims are confirmed by another reliable source or canonical site memory.",
+      "next_step": "Revisit if owner confirmation or a second reliable source validates the progression requirements and dependency chain.",
       "evidence": [
         "Owner-approved wiki/reference source can reveal HQ and progression planning gaps.",
         "External source URL recorded for later manual verification."
@@ -338,7 +336,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Monitor only. The proposal is based on one external wiki-style source and needs verification before it can be treated as a content opportunity. It also risks duplicating existing HQ or progression coverage. Future trigger: Reconsider if the HQ requirement and dependency claims are confirmed by another reliable source or canonical site memory."
+        "notes": "Single-source external reference only. The HQ and progression claim set is too sensitive to accept without additional verification and could easily duplicate existing progression intent. Future trigger: Revisit if owner confirmation or a second reliable source validates the progression requirements and dependency chain."
       }
     },
     {
@@ -353,12 +351,12 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Monitor only. The source is external discovery, not proof, and the topic could overlap with existing research-cost content without a distinct player job. Future trigger: Reconsider if branch coverage gaps or cost-name drift are verified by another trusted source or owner confirmation.",
+      "notes": "Single-source external research reference is not enough to prove cost-table drift or branch coverage issues, and it risks copying competitor framing. Future trigger: Revisit if multiple reliable sources confirm a real branch or cost mismatch.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Reconsider if branch coverage gaps or cost-name drift are verified by another trusted source or owner confirmation.",
+      "next_step": "Revisit if multiple reliable sources confirm a real branch or cost mismatch.",
       "evidence": [
         "Owner-approved research reference source can reveal branch coverage gaps and cost/name drift.",
         "External source URL recorded for later manual verification."
@@ -396,7 +394,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Monitor only. The source is external discovery, not proof, and the topic could overlap with existing research-cost content without a distinct player job. Future trigger: Reconsider if branch coverage gaps or cost-name drift are verified by another trusted source or owner confirmation."
+        "notes": "Single-source external research reference is not enough to prove cost-table drift or branch coverage issues, and it risks copying competitor framing. Future trigger: Revisit if multiple reliable sources confirm a real branch or cost mismatch."
       }
     },
     {
@@ -411,12 +409,12 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Potentially useful, but it is lower certainty than the strongest research and home opportunities. It should be monitored for whether the vehicle upgrade intent is materially distinct from existing equipment or gear pages. Future trigger: Promote if query patterns show a stable, distinct vehicle-upgrade job that is not already served elsewhere.",
+      "notes": "Worth monitoring, but lower priority than the strongest hub and cornerstone updates. The signal is not strong enough to justify selection over higher-value pages. Future trigger: Revisit if CTR or query demand worsens, or if related vehicle upgrade queries grow materially.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Promote if query patterns show a stable, distinct vehicle-upgrade job that is not already served elsewhere.",
+      "next_step": "Revisit if CTR or query demand worsens, or if related vehicle upgrade queries grow materially.",
       "evidence": [
         "GSC page signal: vehicle-modification-cost.html had 7319 impressions, 480 clicks, 6.56% CTR, avg position 5.82."
       ],
@@ -454,7 +452,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Potentially useful, but it is lower certainty than the strongest research and home opportunities. It should be monitored for whether the vehicle upgrade intent is materially distinct from existing equipment or gear pages. Future trigger: Promote if query patterns show a stable, distinct vehicle-upgrade job that is not already served elsewhere."
+        "notes": "Worth monitoring, but lower priority than the strongest hub and cornerstone updates. The signal is not strong enough to justify selection over higher-value pages. Future trigger: Revisit if CTR or query demand worsens, or if related vehicle upgrade queries grow materially."
       }
     },
     {
@@ -469,12 +467,12 @@
       "confidence": "medium",
       "priority": "low",
       "status": "monitor",
-      "notes": "Potentially valid, but not as strong as the top research, home, and economy opportunities. The event intent may already be served by the current event page and needs human verification before review advances. Future trigger: Promote if the schedule and VS strategy intent is confirmed as distinct and not already covered by the event hub or another event page. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "notes": "Worth monitoring, but not selected because the current evidence is limited to a page signal and the opportunity is weaker than the highest-value hub and cornerstone updates. Future trigger: Revisit if event-schedule queries expand or if the duel page starts underperforming more sharply. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Promote if the schedule and VS strategy intent is confirmed as distinct and not already covered by the event hub or another event page.",
+      "next_step": "Revisit if event-schedule queries expand or if the duel page starts underperforming more sharply.",
       "evidence": [
         "GSC page signal: alliance-duel.html had 8965 impressions, 407 clicks, 4.54% CTR, avg position 6.19."
       ],
@@ -521,7 +519,7 @@
         "confidence": "medium",
         "priority": "low",
         "status": "monitor",
-        "notes": "Potentially valid, but not as strong as the top research, home, and economy opportunities. The event intent may already be served by the current event page and needs human verification before review advances. Future trigger: Promote if the schedule and VS strategy intent is confirmed as distinct and not already covered by the event hub or another event page. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "Worth monitoring, but not selected because the current evidence is limited to a page signal and the opportunity is weaker than the highest-value hub and cornerstone updates. Future trigger: Revisit if event-schedule queries expand or if the duel page starts underperforming more sharply. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     }
   ],
