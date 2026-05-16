@@ -3,7 +3,7 @@
   "report_type": "llm_worker_chain_summary",
   "worker_chain_contract_version": 2,
   "worker_chain_contract_label": "exact-editor-proposals-v2",
-  "generated_at": "2026-05-16T18:50:53Z",
+  "generated_at": "2026-05-16T19:02:32Z",
   "state": "blocked",
   "provider": "openai",
   "handoff_source": "live_scout",
@@ -35,9 +35,7 @@
       "result_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation-result.json",
       "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation.md",
       "errors": [
-        "Response field `response_json.do_not_change[9]` must use plain ASCII English only.",
-        "Response field `response_json.exact_replacements[0].exact_old` must use plain ASCII English only.",
-        "Response field `response_json.exact_replacements[0].exact_new` must use plain ASCII English only."
+        "LLM Editor exact_replacements[1].exact_old must match `gift-center-uid.html` exactly once; found 0 matches."
       ]
     },
     "llm_reviewer": {

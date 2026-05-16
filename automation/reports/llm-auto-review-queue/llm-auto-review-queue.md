@@ -1,4 +1,4 @@
-# LLM Auto Review Queue - 2026-05-16T18:50:53Z
+# LLM Auto Review Queue - 2026-05-16T19:02:32Z
 
 ## Outcome
 
@@ -9,7 +9,7 @@
 - Completed items: `0`
 - Failed items: `1`
 - Skipped existing: `0`
-- Stale existing reruns: `1`
+- Stale existing reruns: `0`
 - Required chain contract: `2` `exact-editor-proposals-v2`
 - Deferred by limit: `0`
 - Candidate refresh: `automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.md`
@@ -29,24 +29,23 @@
 ### external-gift-center-official-flow-validation
 
 - Status: `failed`
-- Score: `71`
+- Score: `91`
 - Target: `gift-center-uid.html`
 - Cluster: `Economy`
-- Priority: `medium`
+- Priority: `high`
 - Risk: `medium`
 - Verdict: `None`
 - Owner approval required: `none`
 - Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.md`
-- Existing chain rerun: `true`
+- Existing chain rerun: `false`
 
 Score reasons:
 
-- priority:medium=25
+- priority:high=45
 - confidence:high=20
 - risk:medium=8
 - action:update_existing=8
 - candidate_status=10
-- stale_existing_chain_contract=0<2
 
 ## Next Actions
 

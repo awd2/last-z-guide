@@ -10,16 +10,16 @@
     "selected_opportunity": {
       "topic_id": "external-gift-center-official-flow-validation",
       "decision": "update_existing",
-      "rationale": "The official service domain is a useful cross-validation signal for Gift Center routing and store flow, but it is not proof on its own. The topic could support a useful update to an existing page if claims are verified and scoped narrowly.",
-      "player_value": "Helps players confirm official routing, UID usage, and setup steps without relying on stale or confusing guidance.",
-      "duplication_risk": "Medium. It appears adjacent to an existing Gift Center page intent and could duplicate or blur the same user job if not handled carefully.",
-      "priority": "medium",
+      "rationale": "This is a strong cross-validation topic because official routing and store flow accuracy matter to the economy cluster. It is still only an external-source signal, so it needs verification before any content work.",
+      "player_value": "Helps players confirm official Gift Center setup, UID usage, and routing so they can redeem rewards correctly.",
+      "duplication_risk": "Medium. The topic may overlap with codes.html unless the intended job is specifically UID and routing validation.",
+      "priority": "high",
       "risk_level": "medium",
-      "next_step": "Hold for verification against canonical site memory plus one additional reliable source or owner confirmation before any content proposal.",
+      "next_step": "Verify the official service claims against canonical site memory plus another reliable source or owner confirmation before deciding whether this belongs on gift-center-uid.html or remains part of codes.html.",
       "claims_to_verify": [
-        "Official Gift Center routing and whether it is still current.",
-        "UID usage steps and whether they remain valid.",
-        "Whether this topic adds a distinct player job beyond the existing Gift Center page."
+        "Whether last-z.com is the authoritative route for the Gift Center or store flow.",
+        "Whether the UID guidance adds a distinct user job from the main redeem codes page.",
+        "Whether any public mechanic or routing detail can be confirmed by a second reliable source."
       ]
     },
     "deterministic_proposal": {

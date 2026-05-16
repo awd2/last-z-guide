@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-16T18:50:33Z
+# External Search Collect - 2026-05-16T19:02:14Z
 
 ## Outcome
 
@@ -20,7 +20,7 @@
 ### external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1
 
 - Title: External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026
-- Action: `create_new`
+- Action: `update_existing`
 - Target: `heroes.html`
 - Cluster: `Heroes`
 - Score: `82`
@@ -32,7 +32,7 @@
 ### external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2
 
 - Title: External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki
-- Action: `create_new`
+- Action: `update_existing`
 - Target: `research.html`
 - Cluster: `Research`
 - Score: `82`
@@ -45,8 +45,8 @@
 
 - Title: External search opportunity: Last Z Wiki - Complete English Guide | Strategies, Tier List & Tips 2026
 - Action: `monitor`
-- Target: `index.html`
-- Cluster: `Home`
+- Target: `heroes.html`
+- Cluster: `Heroes`
 - Score: `19`
 - Source: `External search: site:lastzwiki.com/en Last Z guide heroes research`
 - URL: `https://lastzwiki.com/en/index.html`
@@ -83,7 +83,7 @@
 - Action: `update_existing`
 - Target: `research.html`
 - Cluster: `Research`
-- Score: `82`
+- Score: `64`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
 - URL: `https://lastz.fandom.com/wiki/Event_Center`
 - Mapping: `content_index_token_match`

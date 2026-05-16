@@ -24,6 +24,4 @@
 ## Errors
 
 - LLM Editor stage failed; Reviewer was not run.
-- llm_editor: Response field `response_json.do_not_change[9]` must use plain ASCII English only.
-- llm_editor: Response field `response_json.exact_replacements[0].exact_old` must use plain ASCII English only.
-- llm_editor: Response field `response_json.exact_replacements[0].exact_new` must use plain ASCII English only.
+- llm_editor: LLM Editor exact_replacements[1].exact_old must match `gift-center-uid.html` exactly once; found 0 matches.
