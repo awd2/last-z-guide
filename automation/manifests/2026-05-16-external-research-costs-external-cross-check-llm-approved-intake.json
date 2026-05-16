@@ -2,7 +2,7 @@
   "run_id": "2026-05-16-external-research-costs-external-cross-check-llm-approved-intake",
   "created_at": "2026-05-16T17:38:52Z",
   "run_type": "update_existing",
-  "status": "proposal_ready",
+  "status": "closed",
   "risk_level": "high",
   "summary": "Worker-approved intake for `research-costs.html` from `external-research-costs-external-cross-check`.",
   "inputs": {
@@ -301,12 +301,43 @@
           "approval_state": "proposed"
         }
       ]
+    },
+    "manual_apply": {
+      "applied_by": "Codex",
+      "approved_by": "Oleg",
+      "approval_scope": "Exact owner-approved route-clarity replacements only.",
+      "content_edit_approved": true,
+      "public_content_change_allowed": true,
+      "changed_files": [
+        "research-costs.html",
+        "sitemap.xml"
+      ],
+      "summary": "Applied four owner-approved narrow route-clarity replacements in research-costs.html, refreshed structured-data modified dates, and regenerated sitemap lastmod via prepublish_check --fix.",
+      "protected_claims": [
+        "field-research-follows-siege",
+        "research-atlas-role",
+        "research-best-mainline"
+      ]
+    },
+    "closeout": {
+      "report_path": "automation/reports/2026-05-16-external-research-costs-external-cross-check-llm-approved-intake.closed.md",
+      "closed_at": "2026-05-16T17:45:39Z",
+      "note": "Closed after owner-approved narrow research-costs route-clarity update. Public edit was limited to first-screen and route wording; no title/meta/H1/cards were changed. Strict automation checks and changed-page report passed."
     }
   },
   "changed_files": [
     "research-costs.html"
   ],
-  "checks": {},
+  "checks": {
+    "automation_checks_strict": {
+      "status": "pass",
+      "notes": "Search visibility check passed. | Checked content consistency on 56 public pages: 0 failure(s), 0 warning(s), 7 allowed context(s). | Content consistency check passed. | Checked SEO/LLM alignment on 63 memory pages: 0 alignment warning(s), 0 cannibalization warning(s). | SEO/LLM alignment check passed. | Automation checks passed."
+    },
+    "changed_pages_report": {
+      "status": "pass",
+      "notes": "same-cluster inbound links: 5 | expected hubs: index.html, research.html, research-costs.html | linked from hubs: index.html, research.html"
+    }
+  },
   "review": {
     "verdict": "needs_human_review",
     "open_questions": [
