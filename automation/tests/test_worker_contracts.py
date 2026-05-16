@@ -414,6 +414,45 @@ class WorkerContractTests(unittest.TestCase):
         self.assertEqual(len(exact), 1)
         self.assertEqual(exact[0]["exact_new"], "<p>New owner-approved copy.</p>")
 
+    def test_llm_editor_request_prefers_exact_replacements_for_existing_html(self) -> None:
+        proposal = {
+            "topic_id": "research-route-clarity",
+            "title": "Research route clarity",
+            "cluster": "Research",
+            "recommended_action": "update_existing",
+            "archetype_suggestion": "atlas-page",
+            "target_page_or_slug": "research-costs.html",
+            "site_fit": {
+                "primary_user_job": "Clarify the post-Peace Shield route choice without broadening the atlas page.",
+                "expected_internal_route": ["research.html", "research-costs.html"],
+            },
+            "constraints": ["Protect `research-best-mainline`."],
+            "evidence": ["query: `last z research costs`"],
+        }
+        selected = {
+            "topic_id": "research-route-clarity",
+            "decision": "update_existing",
+            "priority": "high",
+            "risk_level": "high",
+        }
+
+        brief = editor.build_editor_brief(proposal, Path("automation/reports/fixture-scout.json"))
+        request = llm_editor.build_request(
+            selected=selected,
+            proposal=proposal,
+            deterministic_brief=brief,
+            request_id="llm-editor-request-fixture",
+            scout_result_path=Path("automation/reports/fixture-scout-result.json"),
+            scout_request_path=Path("automation/reports/fixture-scout-request.json"),
+        )
+
+        snippets = request["inputs"]["deterministic_editor_brief"]["current_page_snapshot"]["source_snippets"]
+        guardrails = " ".join(request["inputs"]["guardrails"])
+        self.assertIn("recommended_route_section", snippets)
+        self.assertIn("quick_answer_section", snippets)
+        self.assertIn("prefer narrow exact_replacements", request["prompt"])
+        self.assertIn("recommended_route_section", guardrails)
+
     def test_llm_exact_replacement_full_lifecycle_on_temp_fixture(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

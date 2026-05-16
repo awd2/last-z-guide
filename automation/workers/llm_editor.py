@@ -218,10 +218,12 @@ def build_request(
             "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. "
             "Do not write final public page copy, HTML, or patch specs. "
             "Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, "
-            "and owner approval gate. Treat analytics as signals, not proof. Normally return exact_replacements as an empty array. "
-            "Only include exact_replacements when the deterministic context contains enough current source text to copy exact_old literally "
-            "and the replacement is narrow enough for later owner review. exact_replacements are draft proposal data only, not approval, "
-            "not a Patch Spec, and not permission to edit files. Use plain ASCII English only. Return JSON only."
+            "and owner approval gate. Treat analytics as signals, not proof. For update_existing opportunities on an existing HTML target, "
+            "prefer narrow exact_replacements when current_page_snapshot.source_snippets contains enough current source text to copy exact_old literally. "
+            "Use exact_replacements for small first-screen, route-clarity, or metadata candidates that can be reviewed as exact before/after text. "
+            "Return an empty exact_replacements array only when no narrow exact replacement can be safely proposed; explain that limitation in owner_questions "
+            "or next_step. exact_replacements are draft proposal data only, not approval, not a Patch Spec, and not permission to edit files. "
+            "Use plain ASCII English only. Return JSON only."
         ),
         "inputs": {
             "source_llm_scout_result": rel(scout_result_path),
@@ -248,7 +250,10 @@ def build_request(
                 "Do not generate final user-visible page copy.",
                 "Do not create a patch plan or Patch Spec.",
                 "Use current_page_snapshot.source_snippets as the preferred source for exact_old values.",
+                "If current_page_snapshot.source_snippets includes data_lede, quick_answer_lede, quick_answer_section, recommended_route_section, or how_to_use_section, use those snippets before inventing a broad manual-review proposal.",
                 "exact_old must copy a current target-file snippet literally and must match the target file exactly once.",
+                "exact_new must preserve the existing HTML wrapper and template class names unless the owner explicitly requested a template change.",
+                "Prefer at most 1-3 exact_replacements; each should solve a concrete player job and avoid unrelated rewrite.",
                 "exact_replacements, when present, are proposal-only candidates that still require propose + owner approval + apply-approved.",
                 "Every exact_replacements item must set owner_approval_required to true.",
                 "Do not mutate backlog, manifests, PRs, or production state.",

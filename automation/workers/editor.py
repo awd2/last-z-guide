@@ -113,7 +113,7 @@ def extract_first(pattern: str, text: str) -> str:
     return strip_tags(match.group(1)) if match else ""
 
 
-def extract_raw_first(pattern: str, text: str, max_length: int = 1600) -> str:
+def extract_raw_first(pattern: str, text: str, max_length: int = 4000) -> str:
     match = re.search(pattern, text, flags=re.I | re.S)
     if not match:
         return ""
@@ -134,6 +134,9 @@ def html_source_snippets(text: str) -> dict[str, str]:
         "guide_verified": r'<p class="guide-verified">.*?</p>',
         "quick_answer_lede": r'<p class="qa-lede">.*?</p>',
         "data_lede": r'<p class="data-lede">.*?</p>',
+        "quick_answer_section": r'<section class="quick-answer[^"]*"[^>]*>.*?</section>',
+        "recommended_route_section": r'<section class="guide-content">\s*<h2>Recommended .*?</h2>.*?</section>',
+        "how_to_use_section": r'<section class="guide-content">\s*<h2>How to Use .*?</h2>.*?</section>',
         "home_hero_block": r'<header class="hero">.*?</header>',
         "home_featured_header": r'<div class="home-featured-header">\s*<h2 id="featured-guides">.*?</div>',
         "home_paths_header": r'<div class="home-featured-header">\s*<h2 id="starting-paths">.*?</div>',
