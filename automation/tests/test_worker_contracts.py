@@ -11,7 +11,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from automation.io import load_json, load_run_manifest, write_json, write_run_manifest
-from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
+from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, patch_planner, proposal_renderer
 from automation.source_resolver import SourceResolution
 from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
@@ -1484,6 +1484,106 @@ class WorkerContractTests(unittest.TestCase):
             markdown = llm_approved_handoffs.render_markdown(view)
             self.assertIn("LLM Approved Handoffs", markdown)
             self.assertIn("llm-worker-chain", markdown)
+
+    def test_llm_auto_review_latest_builds_owner_decision_view(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            editor_result = tmp_path / "editor-result.json"
+            reviewer_result = tmp_path / "reviewer-result.json"
+            chain_path = tmp_path / "llm-worker-chain-fixture-topic.json"
+            queue_path = tmp_path / "llm-auto-review-queue.json"
+            write_json(
+                editor_result,
+                {
+                    "response_json": {
+                        "brief_summary": "Keep the target page narrow and useful.",
+                        "primary_user_job": "Help players validate a specific task.",
+                        "first_screen_plan": "Answer the player job immediately.",
+                        "exact_replacements": [],
+                    }
+                },
+            )
+            write_json(
+                reviewer_result,
+                {
+                    "response_json": {
+                        "verdict": "needs_human_review",
+                        "approved_next_stage": "brief",
+                        "owner_approval_required": True,
+                        "blocking_issues": [
+                            {
+                                "severity": "medium",
+                                "issue": "Owner must confirm the player job.",
+                                "required_fix": "Confirm the scope before intake.",
+                            }
+                        ],
+                        "warnings": ["No public copy is approved."],
+                        "owner_questions": ["Is this useful enough for players?"],
+                        "required_checks": ["python3 automation/pipeline.py checks --strict"],
+                    }
+                },
+            )
+            write_json(
+                chain_path,
+                {
+                    "state": "completed",
+                    "provider": "fixture",
+                    "source_topic_id": "fixture-topic",
+                    "target_page_or_slug": "gift-center-uid.html",
+                    "page_role": "support-guide",
+                    "review_verdict": "needs_human_review",
+                    "risk_level": "medium",
+                    "approved_next_stage": "brief",
+                    "owner_approval_required": True,
+                    "errors": [],
+                    "stages": {
+                        "llm_editor": {"result_path": str(editor_result)},
+                        "llm_reviewer": {"result_path": str(reviewer_result)},
+                    },
+                    "artifacts": {
+                        "chain_json": str(chain_path),
+                        "chain_markdown": str(tmp_path / "chain.md"),
+                    },
+                },
+            )
+            write_json(
+                queue_path,
+                {
+                    "state": "queue_ready",
+                    "provider": "fixture",
+                    "candidate_topic_count": 1,
+                    "queued_topic_count": 1,
+                    "completed_item_count": 1,
+                    "failed_item_count": 0,
+                    "skipped_existing_count": 0,
+                    "queue_items": [
+                        {
+                            "topic_id": "fixture-topic",
+                            "target_page_or_slug": "gift-center-uid.html",
+                            "cluster": "Economy",
+                            "priority": "high",
+                            "risk_level": "medium",
+                            "score": 91,
+                            "status": "completed",
+                            "review_verdict": "needs_human_review",
+                            "approved_next_stage": "brief",
+                            "owner_approval_required": True,
+                            "chain_json": str(chain_path),
+                            "chain_markdown": str(tmp_path / "chain.md"),
+                            "errors": [],
+                        }
+                    ],
+                },
+            )
+
+            view = llm_auto_review_latest.build_view(queue_path)
+            markdown = llm_auto_review_latest.render_markdown(view)
+
+            self.assertEqual(view["needs_owner_decision_count"], 1)
+            self.assertEqual(view["items"][0]["topic_id"], "fixture-topic")
+            self.assertEqual(view["items"][0]["recommended_owner_action"], "answer_owner_questions_before_intake")
+            self.assertIn("llm-intake-latest", view["items"][0]["approve_for_intake_command"])
+            self.assertIn("LLM Auto Review Latest", markdown)
 
     def test_llm_run_approved_handoffs_runs_pending_decision_and_skips_current(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

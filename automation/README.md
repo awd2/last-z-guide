@@ -326,6 +326,7 @@ python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider ope
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
+python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities
@@ -458,6 +459,7 @@ Lifecycle shorthand:
 - `llm-reviewer` -> run a no-write LLM review gate from one LLM Editor planning brief
 - `llm-worker-chain` -> run the no-write live LLM Scout -> Editor -> Reviewer sequence and write one owner-review summary
 - `llm-review-latest` -> read the latest local LLM worker chain summary without calling an LLM provider
+- `llm-auto-review-latest` -> read the latest consolidated auto-review queue as one owner decision view
 - `llm-intake-latest` -> bridge the latest LLM worker chain summary into a no-write, owner-gated intake artifact
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
@@ -663,6 +665,14 @@ LLM latest owner review:
 - `--chain <path>` can read a specific `llm-worker-chain-<topic_id>.json`
 - output includes target page, verdict, risk, blocking issues, warnings, owner questions, required checks, and next step
 - this is read-only and does not call OpenAI or mutate files
+
+LLM auto-review owner queue:
+
+- `python3 automation/pipeline.py llm-auto-review-latest` -> print the latest consolidated auto-review queue as an owner decision screen
+- `python3 automation/pipeline.py llm-auto-review-latest --json` -> print the same view as JSON
+- `--queue <path>` can read a specific `llm-auto-review-queue.json`
+- output includes queued topics, player-value checks, blocking issues, owner questions, and intake commands
+- this is read-only and does not call OpenAI, approve public copy, or mutate files
 
 LLM intake latest:
 

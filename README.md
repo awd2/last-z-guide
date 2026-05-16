@@ -136,6 +136,7 @@ python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider ope
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
+python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answers>" --resolve-reviewer-blockers --json
@@ -163,6 +164,7 @@ python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider open
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/reports/llm_review_latest.py --json
+python3 automation/reports/llm_auto_review_latest.py --json
 python3 -m unittest discover -s automation/tests -p 'test_*.py'
 ```
 
@@ -377,6 +379,14 @@ python3 automation/pipeline.py llm-review-latest
 ```
 
 This prints the target page, verdict, risk, owner questions, blocking issues, required checks, and next step. Use `--json` for machine-readable output.
+
+To read the latest consolidated auto-review queue as one owner decision screen, run:
+
+```bash
+python3 automation/pipeline.py llm-auto-review-latest
+```
+
+This prints queued topics, player-value checks, blocking issues, owner questions, and ready-to-run intake commands. It is read-only and does not approve public copy.
 
 The same no-write chain is available in GitHub Actions:
 

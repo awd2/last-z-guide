@@ -744,6 +744,20 @@ def cmd_llm_review_latest(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_auto_review_latest(
+    queue: str | None,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "reports" / "llm_auto_review_latest.py")]
+    if queue:
+        command.extend(["--queue", queue])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Auto Review Latest ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_intake_latest(
     chain: str | None,
     reports_dir: str | None,
@@ -2356,6 +2370,13 @@ def build_parser() -> argparse.ArgumentParser:
     llm_review_latest_parser.add_argument("--reports-dir", help="Directory to search for LLM worker chain summaries.")
     llm_review_latest_parser.add_argument("--json", action="store_true", help="Print the owner-review summary as JSON.")
 
+    llm_auto_review_latest_parser = subparsers.add_parser(
+        "llm-auto-review-latest",
+        help="Read the latest LLM auto-review queue as an owner decision view.",
+    )
+    llm_auto_review_latest_parser.add_argument("--queue", help="Path to llm-auto-review-queue.json.")
+    llm_auto_review_latest_parser.add_argument("--json", action="store_true", help="Print the auto-review owner decision view as JSON.")
+
     llm_intake_latest_parser = subparsers.add_parser(
         "llm-intake-latest",
         help="Generate a no-write intake artifact from the latest LLM worker chain.",
@@ -2676,6 +2697,8 @@ def main() -> int:
         )
     if args.command == "llm-review-latest":
         return cmd_llm_review_latest(args.chain, args.reports_dir, args.json)
+    if args.command == "llm-auto-review-latest":
+        return cmd_llm_auto_review_latest(args.queue, args.json)
     if args.command == "llm-intake-latest":
         return cmd_llm_intake_latest(
             args.chain,

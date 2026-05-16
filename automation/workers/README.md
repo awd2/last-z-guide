@@ -114,6 +114,7 @@ python3 automation/pipeline.py llm-reviewer --topic-id <topic_id> --provider ope
 python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider openai --json
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
+python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
@@ -216,6 +217,11 @@ or mutate backlog, manifests, PRs, or production state.
 artifacts. It lists only topics currently approved for chain replay and prints
 ready `llm-worker-chain --from-decision ...` commands. It does not approve
 content edits or mutate backlog, manifests, PRs, or production state.
+
+`llm-auto-review-latest` is a read-only owner decision view for the latest
+consolidated auto-review queue. It lists queued topics, player-value checks,
+blocking issues, owner questions, and intake commands. It does not call OpenAI,
+approve public copy, or mutate backlog, manifests, PRs, or production state.
 
 `llm-run-approved-handoffs` is the scheduled owner-handoff runner. It reads the
 same `approved_for_chain` decision artifacts and runs only pending handoffs
