@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from automation.io import load_json, write_json
+from automation.io import load_content_index, load_json, write_json
 from automation.proposal_renderer import md_list
 from automation.workers.llm_adapter import (
     OPENAI_RESPONSES_ENDPOINT,
@@ -31,6 +31,53 @@ REPORTS_DIR = ROOT / "automation" / "reports"
 DEFAULT_EVIDENCE_REFRESH = REPORTS_DIR / "external-evidence-refresh.json"
 DEFAULT_MODEL = "gpt-5.4-mini"
 READY_ACTIONS = {"update_existing", "create_new", "consolidate", "monitor", "reject"}
+READY_CHAIN_ACTIONS = {"update_existing", "create_new", "consolidate"}
+CLUSTER_ALIASES = {
+    "base": "Progression",
+    "base-development": "Progression",
+    "base development": "Progression",
+    "building": "Progression",
+    "codes": "Economy",
+    "daily": "Routine",
+    "events_daily_cycle": "Events",
+    "events hub": "Events",
+    "events_hub": "Events",
+    "gear": "Equipment",
+    "hero": "Heroes",
+    "heroes_core": "Heroes",
+    "home": "Home",
+    "laboratory": "Research",
+    "research-and-tech": "Research",
+    "research and tech": "Research",
+    "store": "Site",
+    "tech": "Research",
+}
+CLUSTER_DEFAULT_TARGETS = {
+    "Economy": "resources.html",
+    "Equipment": "gear.html",
+    "Events": "events.html",
+    "Heroes": "heroes.html",
+    "Home": "index.html",
+    "Progression": "hq.html",
+    "PvP": "pvp.html",
+    "Research": "research.html",
+    "Routine": "daily.html",
+    "Seasons": "season-2-winter.html",
+    "Site": "about.html",
+    "Strategy": "tips.html",
+}
+NOISE_TITLE_PATTERNS = {
+    "home",
+    "index",
+    "android apps on google play",
+    "last z: survival shooter",
+}
+NOISE_URL_PARTS = {
+    "/main/",
+    "/main/vn/",
+    "/en/index.html",
+    "/store/apps/collection/",
+}
 
 
 def now_utc() -> str:
@@ -80,6 +127,178 @@ def normalize_ascii(value: Any) -> Any:
 def domain_from_url(value: str) -> str:
     parsed = urlparse(value)
     return parsed.netloc.lower().strip()
+
+
+def token_set(value: str) -> set[str]:
+    value = value.lower()
+    value = re.sub(r"[^a-z0-9]+", " ", value)
+    stop = {"and", "for", "the", "last", "with", "guide", "guides", "wiki", "html", "survival", "shooter"}
+    return {part for part in value.split() if len(part) > 2 and part not in stop}
+
+
+def canonical_cluster(value: str, known_clusters: set[str]) -> str:
+    raw = value.strip()
+    if raw in known_clusters:
+        return raw
+    normalized = raw.lower().replace("_", " ").replace("-", " ")
+    if normalized.title() in known_clusters:
+        return normalized.title()
+    if raw.lower() in CLUSTER_ALIASES:
+        return CLUSTER_ALIASES[raw.lower()]
+    if normalized in CLUSTER_ALIASES:
+        return CLUSTER_ALIASES[normalized]
+    for cluster in known_clusters:
+        cluster_l = cluster.lower()
+        if cluster_l in normalized or normalized in cluster_l:
+            return cluster
+    return ""
+
+
+def page_lookup() -> tuple[dict[str, Any], set[str]]:
+    pages = {page.filename: page for page in load_content_index()}
+    clusters = {page.cluster for page in pages.values()}
+    return pages, clusters
+
+
+def score_page_match(result: dict[str, Any], task_record: dict[str, Any], page: Any) -> int:
+    haystack = " ".join(
+        [
+            str(result.get("title", "")),
+            str(result.get("url", "")),
+            str(result.get("evidence_summary", "")),
+            str(result.get("primary_user_job", "")),
+            str(task_record.get("query", "")),
+        ]
+    )
+    page_text = " ".join([page.filename, page.cluster, page.archetype, page.title_hint or ""])
+    overlap = token_set(haystack) & token_set(page_text)
+    score = len(overlap) * 6
+    filename_stem = page.filename.removesuffix(".html").replace("-", " ")
+    if filename_stem and filename_stem in haystack.lower():
+        score += 24
+    if page.cluster.lower() in haystack.lower():
+        score += 10
+    if page.archetype in {"cornerstone-guide", "atlas-page"}:
+        score += 3
+    return score
+
+
+def infer_page_from_index(result: dict[str, Any], task_record: dict[str, Any], pages: dict[str, Any]) -> tuple[str, int, str]:
+    target = safe_target_page(str(result.get("target_page_or_slug", "")).strip())
+    if target in pages:
+        return target, 100, "search_target_exact_content_index_match"
+
+    best_page = ""
+    best_score = 0
+    for page in pages.values():
+        if page.cluster == "News" or page.status != "published":
+            continue
+        score = score_page_match(result, task_record, page)
+        if score > best_score:
+            best_page = page.filename
+            best_score = score
+    reason = "content_index_token_match" if best_score >= 18 else "no_strong_page_match"
+    return (best_page if best_score >= 18 else "", best_score, reason)
+
+
+def is_noise_result(result: dict[str, Any]) -> tuple[bool, str]:
+    title = str(result.get("title", "")).strip().lower()
+    url = str(result.get("url", "")).strip().lower()
+    if title in NOISE_TITLE_PATTERNS:
+        return True, "generic_title"
+    if any(part in url for part in NOISE_URL_PARTS):
+        return True, "generic_or_locale_url"
+    return False, ""
+
+
+def trust_score(value: str) -> int:
+    return {"high": 15, "medium": 8, "low": 0}.get(value.strip().lower(), 0)
+
+
+def normalized_search_result(
+    task_record: dict[str, Any],
+    result: dict[str, Any],
+    pages: dict[str, Any],
+    known_clusters: set[str],
+) -> dict[str, Any]:
+    noise, noise_reason = is_noise_result(result)
+    inferred_page, page_score, page_reason = infer_page_from_index(result, task_record, pages)
+    explicit_target = safe_target_page(str(result.get("target_page_or_slug", "")).strip())
+    target = inferred_page or explicit_target
+    target_page = pages.get(target)
+    raw_cluster = str(result.get("suggested_cluster", "")).strip()
+    cluster = target_page.cluster if target_page else canonical_cluster(raw_cluster, known_clusters)
+    if not cluster and target_page:
+        cluster = target_page.cluster
+    if not cluster:
+        cluster = "Site"
+
+    if not target and cluster in CLUSTER_DEFAULT_TARGETS:
+        default_target = CLUSTER_DEFAULT_TARGETS[cluster]
+        if default_target in pages:
+            target = default_target
+            page_reason = "cluster_default_target"
+            page_score = max(page_score, 12)
+
+    topic_fit = str(result.get("topic_fit", "low")).lower()
+    action = str(result.get("recommended_action", "monitor")).strip()
+    if action not in READY_ACTIONS:
+        action = "monitor"
+    score = {
+        "high": 40,
+        "medium": 22,
+        "low": 0,
+    }.get(topic_fit, 0)
+    score += trust_score(str(task_record.get("trust_level", "")))
+    if action in READY_CHAIN_ACTIONS:
+        score += 10
+    if cluster in known_clusters:
+        score += 12
+    if target in pages:
+        score += 12
+    if page_score >= 24:
+        score += 8
+    if noise:
+        score -= 35
+        action = "monitor"
+    if not target:
+        score -= 15
+        action = "monitor"
+
+    if score >= 62 and action in READY_CHAIN_ACTIONS:
+        priority = "high"
+        status = "candidate"
+        confidence = "high" if topic_fit == "high" else "medium"
+    elif score >= 42 and action in READY_CHAIN_ACTIONS:
+        priority = "medium"
+        status = "candidate"
+        confidence = "medium"
+    else:
+        priority = "low" if score < 35 else "medium"
+        status = "monitor"
+        if action in READY_CHAIN_ACTIONS:
+            action = "monitor"
+        confidence = "low" if score < 35 else "medium"
+
+    return {
+        "cluster": cluster,
+        "target_page_or_slug": target,
+        "recommended_action": action,
+        "priority": priority,
+        "confidence": confidence,
+        "status": status,
+        "score": score,
+        "mapping": {
+            "raw_suggested_cluster": raw_cluster,
+            "canonical_cluster": cluster,
+            "raw_target_page_or_slug": result.get("target_page_or_slug", ""),
+            "canonical_target_page_or_slug": target,
+            "page_match_score": page_score,
+            "page_match_reason": page_reason,
+            "noise_result": noise,
+            "noise_reason": noise_reason,
+        },
+    }
 
 
 def load_evidence_refresh(path: Path) -> tuple[list[str], dict[str, Any]]:
@@ -360,30 +579,33 @@ def run_search_task(task: dict[str, Any], provider: str, per_query_results: int)
     }
 
 
-def proposal_from_result(task_record: dict[str, Any], result: dict[str, Any], index: int) -> dict[str, Any]:
+def proposal_from_result(
+    task_record: dict[str, Any],
+    result: dict[str, Any],
+    index: int,
+    pages: dict[str, Any],
+    known_clusters: set[str],
+) -> dict[str, Any]:
     source_id = str(task_record.get("source_id", "external-source"))
     title = str(result.get("title", "External search result")).strip() or "External search result"
-    action = str(result.get("recommended_action", "monitor")).strip()
-    if action not in READY_ACTIONS:
-        action = "monitor"
-    topic_fit = str(result.get("topic_fit", "low")).strip()
-    priority = "medium" if topic_fit == "high" and action != "monitor" else "low" if topic_fit == "low" else "medium"
-    target = safe_target_page(str(result.get("target_page_or_slug", "")).strip())
+    normalized = normalized_search_result(task_record, result, pages, known_clusters)
+    action = normalized["recommended_action"]
+    target = normalized["target_page_or_slug"]
     return {
         "topic_id": f"external-search-{slugify(source_id)}-{slugify(title)[:42]}-{index}",
         "title": f"External search opportunity: {title}",
-        "cluster": result.get("suggested_cluster", "Site"),
+        "cluster": normalized["cluster"],
         "recommended_action": action,
-        "archetype_suggestion": "support-guide" if action == "create_new" else "cornerstone-guide",
+        "archetype_suggestion": pages[target].archetype if target in pages else "support-guide",
         "target_page_or_slug": target,
         "source_type": "external_search",
         "source_id": source_id,
         "source_name": task_record.get("source_name", ""),
         "source_reference": f"External search: {task_record.get('query', '')}",
-        "confidence": "medium" if topic_fit in {"high", "medium"} else "low",
-        "priority": priority,
+        "confidence": normalized["confidence"],
+        "priority": normalized["priority"],
         "risk_level": "high",
-        "status": "candidate" if action in {"update_existing", "create_new", "consolidate"} and priority != "low" else "monitor",
+        "status": normalized["status"],
         "primary_user_job": result.get("primary_user_job", ""),
         "source_urls": [result.get("url", "")],
         "evidence": [result.get("evidence_summary", "")],
@@ -402,6 +624,8 @@ def proposal_from_result(task_record: dict[str, Any], result: dict[str, Any], in
             "The result is off-topic or duplicates an existing page job.",
             "The claim cannot be validated against reliable sources or owner-confirmed game knowledge.",
         ],
+        "deterministic_mapping": normalized["mapping"],
+        "opportunity_score": normalized["score"],
     }
 
 
@@ -416,6 +640,7 @@ def safe_target_page(value: str) -> str:
 def build_candidate_proposals(search_records: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
     proposals: list[dict[str, Any]] = []
     seen_urls: set[str] = set()
+    pages, known_clusters = page_lookup()
     for record in search_records:
         if record.get("search_status") != "searched":
             continue
@@ -424,7 +649,7 @@ def build_candidate_proposals(search_records: list[dict[str, Any]], limit: int) 
             if not url or url in seen_urls or result.get("topic_fit") == "low":
                 continue
             seen_urls.add(url)
-            proposals.append(proposal_from_result(record, result, len(proposals) + 1))
+            proposals.append(proposal_from_result(record, result, len(proposals) + 1, pages, known_clusters))
             if len(proposals) >= limit:
                 return proposals
     return proposals
@@ -586,8 +811,11 @@ def render_markdown(payload: dict[str, Any]) -> str:
                     f"- Title: {proposal.get('title', '')}",
                     f"- Action: `{proposal.get('recommended_action', '')}`",
                     f"- Target: `{proposal.get('target_page_or_slug', '')}`",
+                    f"- Cluster: `{proposal.get('cluster', '')}`",
+                    f"- Score: `{proposal.get('opportunity_score', '')}`",
                     f"- Source: `{proposal.get('source_reference', '')}`",
                     f"- URL: `{(proposal.get('source_urls') or [''])[0]}`",
+                    f"- Mapping: `{proposal.get('deterministic_mapping', {}).get('page_match_reason', '')}`",
                     "- Public claim ready: `false`",
                     "",
                 ]

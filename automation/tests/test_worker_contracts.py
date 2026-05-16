@@ -1025,6 +1025,56 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "external-search-collect-fixture.json").exists())
             self.assertTrue((tmp_path / "external-search-collect-fixture.md").exists())
 
+    def test_external_search_collect_normalizes_clusters_and_targets(self) -> None:
+        records = [
+            {
+                "search_status": "searched",
+                "source_id": "fixture-source",
+                "source_name": "Fixture Source",
+                "trust_level": "high",
+                "query": "site:fixture.example Last Z heroes",
+                "results": [
+                    {
+                        "url": "https://fixture.example/en/heroes.html",
+                        "title": "Heroes - Last Z Wiki | Tier List and Character Guide",
+                        "evidence_summary": "Hero roster and tier-list page useful for entity coverage checks.",
+                        "topic_fit": "high",
+                        "suggested_cluster": "heroes_core",
+                        "recommended_action": "update_existing",
+                        "target_page_or_slug": "/en/heroes.html",
+                        "primary_user_job": "Check hero roster and naming coverage.",
+                        "claims_to_verify": ["hero_names"],
+                        "public_claim_ready": False,
+                    },
+                    {
+                        "url": "https://fixture.example/en/index.html",
+                        "title": "Home",
+                        "evidence_summary": "Generic homepage.",
+                        "topic_fit": "high",
+                        "suggested_cluster": "home",
+                        "recommended_action": "update_existing",
+                        "target_page_or_slug": "/en/index.html",
+                        "primary_user_job": "Generic homepage.",
+                        "claims_to_verify": [],
+                        "public_claim_ready": False,
+                    },
+                ],
+            }
+        ]
+
+        proposals = external_search_collect.build_candidate_proposals(records, limit=4)
+
+        self.assertEqual(len(proposals), 2)
+        self.assertEqual(proposals[0]["cluster"], "Heroes")
+        self.assertEqual(proposals[0]["target_page_or_slug"], "heroes.html")
+        self.assertEqual(proposals[0]["recommended_action"], "update_existing")
+        self.assertEqual(proposals[0]["status"], "candidate")
+        self.assertEqual(proposals[0]["deterministic_mapping"]["raw_suggested_cluster"], "heroes_core")
+        self.assertEqual(proposals[1]["cluster"], "Home")
+        self.assertEqual(proposals[1]["target_page_or_slug"], "index.html")
+        self.assertEqual(proposals[1]["recommended_action"], "monitor")
+        self.assertTrue(proposals[1]["deterministic_mapping"]["noise_result"])
+
     def test_llm_scout_accepts_external_scout_proposals(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

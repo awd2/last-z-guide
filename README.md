@@ -280,7 +280,7 @@ To collect search-backed discovery leads from approved source queries:
 python3 automation/pipeline.py external-search-collect --provider openai --evidence-refresh automation/reports/external-evidence-refresh.json --json
 ```
 
-This writes `automation/reports/external-search-collect.json` / `.md`. The OpenAI provider uses Responses API `web_search` over approved source-query tasks, applies source-domain filters when possible, emits proposal-shaped discovery leads for Scout, and never marks public claims as ready.
+This writes `automation/reports/external-search-collect.json` / `.md`. The OpenAI provider uses Responses API `web_search` over approved source-query tasks, applies source-domain filters when possible, normalizes raw clusters/targets against `content_index.json`, emits proposal-shaped discovery leads for Scout, and never marks public claims as ready.
 
 For scheduled-style candidate generation from current GSC/Bing signals:
 

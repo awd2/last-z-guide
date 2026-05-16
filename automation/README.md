@@ -532,7 +532,7 @@ LLM Scout review:
 - `python3 automation/pipeline.py external-scout --json` -> create a no-write external source report from `automation/memory/source_registry.json`
 - `python3 automation/pipeline.py external-evidence-refresh --external-scout automation/reports/external-scout.json --json` -> create a no-write evidence queue from External Scout source queries and explicit URLs
 - `python3 automation/pipeline.py external-evidence-collect --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json` -> collect limited metadata/snippets from explicit HTTPS URL leads only
-- `python3 automation/pipeline.py external-search-collect --provider openai --evidence-refresh automation/reports/external-evidence-refresh.json --json` -> collect no-write search evidence and proposal-shaped discovery leads from approved source queries
+- `python3 automation/pipeline.py external-search-collect --provider openai --evidence-refresh automation/reports/external-evidence-refresh.json --json` -> collect no-write search evidence, normalize clusters/targets against `content_index.json`, and emit proposal-shaped discovery leads from approved source queries
 - `python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json` -> merge External Scout proposals into LLM Scout review
 - default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
 - output lives in `automation/reports/llm-scout-review-request.json`, `automation/reports/llm-scout-review-result.json`, and `automation/reports/llm-scout-review.md`

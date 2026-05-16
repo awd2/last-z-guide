@@ -146,7 +146,7 @@ python3 automation/workers/llm_intake.py --approved-by <name> --note "<owner ans
 
 `external-evidence-collect` is the no-write external fetch layer. With `--provider fetch`, it fetches only explicit HTTPS URL leads from `external-evidence-refresh`, stores limited metadata and short snippets for review, and leaves search query tasks deferred for a future search provider. It must not broadly crawl, prove public claims, approve public copy, mutate backlog/manifests, edit content, open PRs, or deploy.
 
-`external-search-collect` is the no-write external search layer. With `--provider openai`, it uses the OpenAI Responses API `web_search` tool over approved source-query tasks, applies source-domain filters when possible, and emits proposal-shaped discovery leads for LLM Scout. Search evidence is discovery context only; it must not prove public claims, approve public copy, mutate backlog/manifests, edit content, open PRs, or deploy.
+`external-search-collect` is the no-write external search layer. With `--provider openai`, it uses the OpenAI Responses API `web_search` tool over approved source-query tasks, applies source-domain filters when possible, normalizes raw clusters/targets against `content_index.json`, and emits proposal-shaped discovery leads for LLM Scout. Search evidence is discovery context only; it must not prove public claims, approve public copy, mutate backlog/manifests, edit content, open PRs, or deploy.
 
 `llm-scout` is the first live LLM worker wrapper. It builds deterministic Scout proposals from the latest GSC/Bing agent signals and optional External Scout proposal artifacts, sends a compact JSON-only review request through `llm_adapter`, and writes:
 
