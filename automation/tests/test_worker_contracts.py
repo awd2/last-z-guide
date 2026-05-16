@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, patch_planner, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -980,6 +980,50 @@ class WorkerContractTests(unittest.TestCase):
             self.assertFalse(payload["allows_content_edit"])
             self.assertTrue((tmp_path / "external-evidence-collect-fixture.json").exists())
             self.assertTrue((tmp_path / "external-evidence-collect-fixture.md").exists())
+
+    def test_external_search_collect_fixture_emits_no_write_candidate_proposals(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            registry_path = tmp_path / "source-registry.json"
+            external_path = tmp_path / "external-scout-fixture.json"
+            refresh_path = tmp_path / "external-evidence-fixture.json"
+            write_json(registry_path, fixture_external_source_registry())
+            external_scout.build_external_scout(
+                registry_path=registry_path,
+                output_dir=tmp_path,
+                basename="external-scout-fixture",
+                include_proposed=False,
+                limit=4,
+            )
+            external_evidence_refresh.build_external_evidence_refresh(
+                external_scout_path=external_path,
+                output_dir=tmp_path,
+                basename="external-evidence-fixture",
+                limit=4,
+            )
+
+            code, payload = external_search_collect.build_external_search_collect(
+                evidence_refresh_path=refresh_path,
+                output_dir=tmp_path,
+                basename="external-search-collect-fixture",
+                provider="fixture",
+                limit=4,
+                per_query_results=2,
+                proposal_limit=4,
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(payload["report_type"], "external_search_collect")
+            self.assertEqual(payload["state"], "search_collected")
+            self.assertEqual(payload["provider"], "fixture")
+            self.assertEqual(payload["search_task_count"], 1)
+            self.assertEqual(payload["searched_count"], 1)
+            self.assertEqual(payload["failed_count"], 0)
+            self.assertEqual(payload["candidate_proposal_count"], 1)
+            self.assertEqual(payload["candidate_proposals"][0]["source_type"], "external_search")
+            self.assertFalse(payload["allows_content_edit"])
+            self.assertTrue((tmp_path / "external-search-collect-fixture.json").exists())
+            self.assertTrue((tmp_path / "external-search-collect-fixture.md").exists())
 
     def test_llm_scout_accepts_external_scout_proposals(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

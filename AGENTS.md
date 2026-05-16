@@ -433,6 +433,7 @@ python3 automation/pipeline.py llm-adapter --request <request.json> --provider o
 python3 automation/pipeline.py external-scout --json
 python3 automation/pipeline.py external-evidence-refresh --external-scout automation/reports/external-scout.json --json
 python3 automation/pipeline.py external-evidence-collect --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json
+python3 automation/pipeline.py external-search-collect --provider openai --evidence-refresh automation/reports/external-evidence-refresh.json --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
@@ -467,6 +468,7 @@ python3 automation/workers/llm_adapter.py --request <request.json> --provider op
 python3 automation/workers/external_scout.py --json
 python3 automation/workers/external_evidence_refresh.py --external-scout automation/reports/external-scout.json --json
 python3 automation/workers/external_evidence_collect.py --provider fetch --evidence-refresh automation/reports/external-evidence-refresh.json --json
+python3 automation/workers/external_search_collect.py --provider openai --evidence-refresh automation/reports/external-evidence-refresh.json --json
 python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_scout.py --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
@@ -492,6 +494,8 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 `external-evidence-collect` is the no-write external fetch layer. With `--provider fetch`, it fetches only explicit HTTPS URL leads from `external-evidence-refresh`, stores limited metadata and short snippets for review, and leaves search query tasks deferred for a future search provider. It must not broadly crawl, prove public claims, approve public copy, mutate backlog/manifests, edit content, open PRs, or deploy.
 
+`external-search-collect` is the no-write external search layer. With `--provider openai`, it uses the OpenAI Responses API `web_search` tool over approved `source_query_tasks`, constrained by source-domain filters when available, and emits proposal-shaped discovery leads for LLM Scout. Search evidence is discovery context only: it must not prove public claims, approve public copy, mutate backlog/manifests, edit content, open PRs, or deploy.
+
 `llm-scout` is the first live LLM worker wrapper. It reviews deterministic Scout proposals from GSC/Bing agent signals and optional External Scout proposals through `llm_adapter`, writes request/result/markdown artifacts, and must not edit content, backlog, manifests, PRs, or production state. Monitor-only and reject decisions belong in `rejected_or_monitor`, not selected handoffs.
 
 `llm-candidate-refresh` is the scheduled no-write candidate generation step. It runs LLM Scout, converts the result into topic discovery proposals, and writes a compact owner-review summary. It may accept External Scout proposal artifacts through `--external-proposals`. It must not record owner decisions, edit content, mutate `topic_backlog.csv`, create manifests, open PRs, or deploy.
@@ -516,7 +520,7 @@ The `openai` LLM adapter provider is live but still no-write and fail-closed. It
 
 GitHub workflow `.github/workflows/llm-candidate-refresh.yml` runs weekly and by manual dispatch to refresh no-write candidate topic artifacts from GSC/Bing signals. It uploads artifacts only and must not commit reports, record owner decisions, edit content, open PRs, or deploy.
 
-GitHub workflow `.github/workflows/llm-auto-review-queue.yml` runs daily, after signal-file or external-source infrastructure pushes, and by manual dispatch. It runs `external-scout` first, runs `external-evidence-refresh`, runs `external-evidence-collect --provider fetch` for explicit URL leads, passes `automation/reports/llm-auto-review-queue/external-scout.json` into `llm-auto-review-queue --external-proposals`, uploads artifacts, and may commit only `automation/reports/llm-auto-review-queue/` report artifacts. It must not edit content, backlog, manifests, PRs, or production state.
+GitHub workflow `.github/workflows/llm-auto-review-queue.yml` runs daily, after signal-file or external-source infrastructure pushes, and by manual dispatch. It runs `external-scout` first, runs `external-evidence-refresh`, runs `external-evidence-collect --provider fetch` for explicit URL leads, runs `external-search-collect --provider openai` for approved source queries, passes both External Scout and External Search proposal artifacts into `llm-auto-review-queue --external-proposals`, uploads artifacts, and may commit only `automation/reports/llm-auto-review-queue/` report artifacts. It must not edit content, backlog, manifests, PRs, or production state.
 
 GitHub workflow `.github/workflows/llm-worker-chain.yml` runs pending owner-approved handoffs after committed `llm-topic-decision-*.json` pushes and can manually replay one approved decision path. It is not scheduled, to avoid rerunning the same approved decision every week without committing generated reports. It uploads artifacts only and must not commit reports, edit content, open PRs, or deploy.
 

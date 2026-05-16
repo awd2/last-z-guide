@@ -566,6 +566,41 @@ def cmd_external_evidence_collect(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_external_search_collect(
+    evidence_refresh: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    provider: str,
+    limit: int,
+    per_query_results: int,
+    proposal_limit: int,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "external_search_collect.py"),
+        "--provider",
+        provider,
+        "--limit",
+        str(limit),
+        "--per-query-results",
+        str(per_query_results),
+        "--proposal-limit",
+        str(proposal_limit),
+    ]
+    if evidence_refresh:
+        command.extend(["--evidence-refresh", evidence_refresh])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== External Search Collect ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_editor(
     scout_result: str | None,
     scout_request: str | None,
@@ -2227,6 +2262,24 @@ def build_parser() -> argparse.ArgumentParser:
     external_evidence_collect_parser.add_argument("--max-bytes", type=int, default=750000, help="Maximum bytes to read per URL.")
     external_evidence_collect_parser.add_argument("--json", action="store_true", help="Print the External Evidence Collect summary as JSON.")
 
+    external_search_collect_parser = subparsers.add_parser(
+        "external-search-collect",
+        help="Collect no-write search evidence from approved source query tasks.",
+    )
+    external_search_collect_parser.add_argument("--evidence-refresh", help="Path to external-evidence-refresh.json.")
+    external_search_collect_parser.add_argument("--output-dir", help="Directory for External Search Collect artifacts.")
+    external_search_collect_parser.add_argument("--basename", help="Output basename without extension.")
+    external_search_collect_parser.add_argument(
+        "--provider",
+        default="disabled",
+        choices=["disabled", "fixture", "openai"],
+        help="Search provider. `openai` uses Responses API web_search. Defaults to disabled/fail-closed.",
+    )
+    external_search_collect_parser.add_argument("--limit", type=int, default=6, help="Maximum query tasks to search.")
+    external_search_collect_parser.add_argument("--per-query-results", type=int, default=3, help="Maximum results per query task.")
+    external_search_collect_parser.add_argument("--proposal-limit", type=int, default=10, help="Maximum search candidate proposals.")
+    external_search_collect_parser.add_argument("--json", action="store_true", help="Print the External Search Collect summary as JSON.")
+
     llm_editor_parser = subparsers.add_parser(
         "llm-editor",
         help="Run a no-write LLM Editor planning brief from one selected LLM Scout opportunity.",
@@ -2568,6 +2621,17 @@ def main() -> int:
             args.limit,
             args.timeout,
             args.max_bytes,
+            args.json,
+        )
+    if args.command == "external-search-collect":
+        return cmd_external_search_collect(
+            args.evidence_refresh,
+            args.output_dir,
+            args.basename,
+            args.provider,
+            args.limit,
+            args.per_query_results,
+            args.proposal_limit,
             args.json,
         )
     if args.command == "llm-editor":

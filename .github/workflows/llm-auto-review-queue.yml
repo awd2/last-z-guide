@@ -27,6 +27,7 @@ on:
       - "automation/pipeline.py"
       - "automation/workers/external_evidence_collect.py"
       - "automation/workers/external_evidence_refresh.py"
+      - "automation/workers/external_search_collect.py"
       - "automation/workers/external_scout.py"
       - "automation/workers/llm_*.py"
       - "automation/reports/llm_*.py"
@@ -78,10 +79,20 @@ jobs:
             --output-dir automation/reports/llm-auto-review-queue \
             --basename external-evidence-collect \
             --json | tee automation/reports/llm-auto-review-queue/external-evidence-collect-run-summary.json
+          python3 automation/pipeline.py external-search-collect \
+            --provider openai \
+            --evidence-refresh automation/reports/llm-auto-review-queue/external-evidence-refresh.json \
+            --output-dir automation/reports/llm-auto-review-queue \
+            --basename external-search-collect \
+            --limit 6 \
+            --per-query-results 3 \
+            --proposal-limit 10 \
+            --json | tee automation/reports/llm-auto-review-queue/external-search-collect-run-summary.json
           cmd=(
             python3 automation/pipeline.py llm-auto-review-queue
             --provider openai
             --external-proposals automation/reports/llm-auto-review-queue/external-scout.json
+            --external-proposals automation/reports/llm-auto-review-queue/external-search-collect.json
             --output-dir automation/reports/llm-auto-review-queue
             --max-chains "$MAX_CHAINS"
             --json
@@ -102,6 +113,7 @@ jobs:
             echo "- External Scout proposals: \`automation/reports/llm-auto-review-queue/external-scout.json\`"
             echo "- External evidence queue: \`automation/reports/llm-auto-review-queue/external-evidence-refresh.json\`"
             echo "- External evidence collection: \`automation/reports/llm-auto-review-queue/external-evidence-collect.json\`"
+            echo "- External search collection: \`automation/reports/llm-auto-review-queue/external-search-collect.json\`"
             echo "- Content/backlog/manifests/PRs modified: \`false\`"
             echo
           } >> "$GITHUB_STEP_SUMMARY"

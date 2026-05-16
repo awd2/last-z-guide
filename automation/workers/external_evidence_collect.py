@@ -7,6 +7,7 @@ import argparse
 import html
 import json
 import re
+import ssl
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -104,7 +105,14 @@ def extract_html_summary(body: bytes, content_type: str) -> dict[str, Any]:
 
 def fetch_url(url: str, timeout: float, max_bytes: int) -> dict[str, Any]:
     request = Request(url, headers={"User-Agent": USER_AGENT})
-    with urlopen(request, timeout=timeout) as response:
+    context = None
+    try:
+        import certifi  # type: ignore
+
+        context = ssl.create_default_context(cafile=certifi.where())
+    except ImportError:
+        context = None
+    with urlopen(request, timeout=timeout, context=context) as response:
         body = response.read(max_bytes + 1)
         truncated = len(body) > max_bytes
         if truncated:

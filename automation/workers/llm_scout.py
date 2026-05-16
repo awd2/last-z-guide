@@ -154,9 +154,10 @@ def build_source_proposals(signal_paths: list[Path], limit: int, min_impressions
 
 def load_external_proposals(paths: list[Path]) -> list[dict[str, Any]]:
     proposals: list[dict[str, Any]] = []
+    supported_report_types = {"external_scout", "external_search_collect"}
     for path in paths:
         payload = load_json(path)
-        if payload.get("report_type") != "external_scout":
+        if payload.get("report_type") not in supported_report_types:
             raise ValueError(f"Unsupported external proposals report type in {rel(path)}: {payload.get('report_type')}")
         for proposal in payload.get("candidate_proposals", []):
             if not isinstance(proposal, dict):

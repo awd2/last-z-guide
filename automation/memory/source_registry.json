@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-05-12",
+  "updated_at": "2026-05-16",
   "policy": {
     "purpose": "Approved and proposed external sources for no-write topic discovery and claim cross-validation.",
     "default_allowed_uses": [
@@ -39,10 +39,8 @@
       ],
       "crawl_policy": "explicit_url_only",
       "freshness_window_days": 30,
-      "notes": "Official app-store listing. Good for official description, developer identity, app availability, update cadence, and broad feature framing; not enough for detailed mechanics or costs.",
-      "discovery_queries": [
-        "site:play.google.com/store/apps/details Last Z Survival Shooter"
-      ],
+      "notes": "Official app-store listing. Good for official description, developer identity, app availability, update cadence, and broad feature framing; not enough for detailed mechanics or costs. Live source triage on 2026-05-16 found the current Google Play package at com.readygo.barrel.gp; the older com.global.lastz URL returned 404.",
+      "discovery_queries": [],
       "topic_seeds": [
         {
           "topic_id": "official-store-metadata-cross-check",
@@ -56,7 +54,7 @@
           "risk_level": "medium",
           "primary_user_job": "Keep official app identity, platform availability, and broad game framing aligned with store listings.",
           "source_urls": [
-            "https://play.google.com/store/apps/details?id=com.global.lastz"
+            "https://play.google.com/store/apps/details?id=com.readygo.barrel.gp"
           ],
           "evidence": [
             "Official store listings can validate app identity, broad feature framing, and update cadence but not detailed mechanics."
@@ -90,15 +88,38 @@
       "crawl_policy": "explicit_url_only",
       "freshness_window_days": 30,
       "notes": "Official iOS listing. Useful for official metadata, version/update context, app category, and broad game framing; not enough for detailed mechanics or costs.",
-      "discovery_queries": [
-        "site:apps.apple.com Last Z Survival Shooter"
-      ],
-      "topic_seeds": []
+      "discovery_queries": [],
+      "topic_seeds": [
+        {
+          "topic_id": "official-ios-store-metadata-cross-check",
+          "title": "External source opportunity: official iOS app metadata and update-cadence cross-check",
+          "cluster": "Site",
+          "recommended_action": "monitor",
+          "archetype_suggestion": "site-page",
+          "target_page_or_slug": "about.html",
+          "priority": "medium",
+          "confidence": "medium",
+          "risk_level": "medium",
+          "primary_user_job": "Keep official iOS app identity, platform availability, and broad game framing aligned with the App Store listing.",
+          "source_urls": [
+            "https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652"
+          ],
+          "evidence": [
+            "Official iOS store listing can validate app identity, broad feature framing, and update cadence but not detailed mechanics."
+          ],
+          "claims_to_verify": [
+            "official_app_identity",
+            "store_listing_metadata"
+          ],
+          "cross_validation_status": "needs_second_source",
+          "notes": "Monitor-only metadata validation. Do not turn store copy into guide copy."
+        }
+      ]
     },
     {
       "id": "official-functap-store",
-      "name": "FunTap Last Z store and Gift Center",
-      "base_url": "https://www.last-z.com",
+      "name": "Last Z official Gift Center and store",
+      "base_url": "https://last-z.com",
       "status": "approved",
       "source_type": "official_service",
       "trust_level": "high",
@@ -112,10 +133,8 @@
       ],
       "crawl_policy": "explicit_url_only",
       "freshness_window_days": 30,
-      "notes": "Official-looking Last Z service domain used for Gift Center and store flow validation. Use only to verify official redeem/store routing, not game mechanics.",
-      "discovery_queries": [
-        "site:last-z.com giftCenter Last Z"
-      ],
+      "notes": "Official-looking Last Z service domain used for Gift Center and store flow validation. Use only to verify official redeem/store routing, not game mechanics. Live source triage on 2026-05-16 confirmed https://last-z.com/giftCenter/#/login and https://store.last-z.com/#/order respond; https://www.last-z.com did not resolve.",
+      "discovery_queries": [],
       "topic_seeds": [
         {
           "topic_id": "gift-center-official-flow-validation",
@@ -129,7 +148,8 @@
           "risk_level": "medium",
           "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
           "source_urls": [
-            "https://www.last-z.com"
+            "https://last-z.com/giftCenter/#/login",
+            "https://store.last-z.com/#/order"
           ],
           "evidence": [
             "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation."
@@ -195,22 +215,21 @@
       "id": "fandom-last-z-wiki",
       "name": "Last Z: Survival Shooter Wiki on Fandom",
       "base_url": "https://last-z-survival-shooter.fandom.com",
-      "status": "approved",
+      "status": "blocked",
       "source_type": "community_wiki",
-      "trust_level": "medium",
-      "allowed_uses": [
+      "trust_level": "low",
+      "allowed_uses": [],
+      "disallowed_uses": [
         "topic_discovery",
         "entity_discovery",
-        "cross_validation"
-      ],
-      "disallowed_uses": [
+        "cross_validation",
         "copy_visible_text",
         "single_source_fact_claims",
         "autonomous_content_edits"
       ],
-      "crawl_policy": "explicit_url_only",
-      "freshness_window_days": 90,
-      "notes": "Community wiki. Useful for entity/topic discovery and rough cross-checking. Public claims must be verified elsewhere because wiki pages can be incomplete, outdated, or user-edited.",
+      "crawl_policy": "blocked",
+      "freshness_window_days": 0,
+      "notes": "Blocked on 2026-05-16 to avoid duplicate Fandom source signals. Use the owner-approved lastz.fandom.com source entry instead; public claims still need stronger validation.",
       "discovery_queries": [
         "site:last-z-survival-shooter.fandom.com Last Z heroes research events"
       ],
@@ -411,7 +430,7 @@
       ],
       "crawl_policy": "explicit_url_only",
       "freshness_window_days": 90,
-      "notes": "Owner-approved high-trust Fandom wiki source. Use for topic/entity discovery and cross-validation; verify mechanics before public copy.",
+      "notes": "Owner-approved high-trust Fandom wiki source. Use for topic/entity discovery and cross-validation; verify mechanics before public copy. Live source triage on 2026-05-16 found direct fetch can return 403, so use the search provider for this source instead of treating fetch failures as source failure.",
       "discovery_queries": [
         "site:lastz.fandom.com Last Z heroes research events"
       ],
@@ -428,7 +447,7 @@
           "risk_level": "high",
           "primary_user_job": "Cross-check hero, event, and entity naming against current site memory before future content expansion.",
           "source_urls": [
-            "https://lastz.fandom.com"
+            "https://lastz.fandom.com/wiki/Event_Center"
           ],
           "evidence": [
             "Owner-approved Fandom source can surface alternate naming or missing entities for review."
@@ -513,7 +532,7 @@
       ],
       "crawl_policy": "explicit_url_only",
       "freshness_window_days": 90,
-      "notes": "Owner-approved medium-trust guide/reference source. Use for topic discovery and cross-validation only; verify specific claims before public copy.",
+      "notes": "Owner-approved medium-trust guide/reference source, but use exact Last Z pages rather than the generic homepage. Live source triage on 2026-05-16 found the root metadata too generic for evidence; keep this source limited to Last Z-specific URLs surfaced by search.",
       "discovery_queries": [
         "site:mmediamreza.com Last Z Survival Shooter"
       ],
@@ -530,7 +549,7 @@
           "risk_level": "medium",
           "primary_user_job": "Identify broad guide-topic gaps from an approved external guide/reference source without creating duplicate intent pages.",
           "source_urls": [
-            "https://mmediamreza.com"
+            "https://mmediamreza.com/en/lastz-news/last_z_survival_shooter_gift_codes_april_2026_always_updated/2026-04-24-19"
           ],
           "evidence": [
             "Owner-approved medium-trust source can be used to discover guide topics that need mapping to existing clusters."
