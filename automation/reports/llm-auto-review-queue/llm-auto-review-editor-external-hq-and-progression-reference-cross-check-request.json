@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-auto-review-editor-external-hq-and-progression-reference-cross-check",
+  "worker_role": "editor",
+  "task": "Create a no-write Editor planning brief for one approved Scout opportunity.",
+  "prompt": "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. Do not write final public page copy, HTML, or patch specs. Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, and owner approval gate. Treat analytics as signals, not proof. Normally return exact_replacements as an empty array. Only include exact_replacements when the deterministic context contains enough current source text to copy exact_old literally and the replacement is narrow enough for later owner review. exact_replacements are draft proposal data only, not approval, not a Patch Spec, and not permission to edit files. Use plain ASCII English only. Return JSON only.",
+  "inputs": {
+    "source_llm_scout_result": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json",
+    "source_llm_scout_request": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
+    "selected_opportunity": {
+      "topic_id": "external-hq-and-progression-reference-cross-check",
+      "decision": "update_existing",
+      "rationale": "This is a credible cross-check topic for progression planning and HQ requirements, but it depends on external validation and owner confirmation. It fits the current HQ page rather than a new page, so it is worth human review as an update_existing candidate.",
+      "player_value": "Help players verify HQ requirement planning and dependency coverage before they invest resources.",
+      "duplication_risk": "Medium, because HQ and progression topics can easily overlap with broader base-building content if scope is not controlled.",
+      "priority": "high",
+      "risk_level": "high",
+      "next_step": "Cross-verify HQ requirement claims against canonical memory and a second reliable source before any content proposal is shaped.",
+      "claims_to_verify": [
+        "HQ requirement and dependency details",
+        "Whether the reference source reflects current game state",
+        "Whether the topic is distinct from existing progression guidance"
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "external-hq-and-progression-reference-cross-check",
+      "title": "External source opportunity: HQ and progression requirement cross-check",
+      "cluster": "Progression",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "hq.html",
+      "source_reference": "lastzwiki-reference: https://lastzwiki.com",
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "high",
+      "evidence": [
+        "Owner-approved wiki/reference source can reveal HQ and progression planning gaps.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Verify HQ requirement planning, construction dependencies, and progression-route coverage against reference data.",
+        "cluster_owner": "Progression",
+        "expected_internal_route": [
+          "index.html",
+          "hq.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ]
+    },
+    "deterministic_editor_brief": {
+      "target_page_or_slug": "hq.html",
+      "page_role": "cornerstone-guide",
+      "primary_query_family": "External source opportunity: HQ and progression requirement cross-check",
+      "primary_user_job": "Verify HQ requirement planning, construction dependencies, and progression-route coverage against reference data.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `External source opportunity: HQ and progression requirement cross-check` without changing `hq.html` into a different page role.",
+      "template_reference": "hq.html",
+      "required_sections": [
+        "Quick Answer",
+        "Best overall recommendation",
+        "Decision framework",
+        "Cluster route block",
+        "Related guides / FAQ"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html"
+        ],
+        "downstream": [
+          "alliance-duel.html",
+          "arena.html",
+          "emergency-hospital-cost.html",
+          "furylord.html",
+          "heroes.html"
+        ],
+        "lateral": [
+          "start.html",
+          "early-game-optimization.html",
+          "base-building-order.html"
+        ]
+      },
+      "protected_claims": [],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "hq.html",
+        "index.html",
+        "start.html",
+        "early-game-optimization.html",
+        "base-building-order.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on hq.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z HQ Upgrade Guide (2026) — Requirements, Fast Path to HQ 30/35",
+        "h1": "Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy",
+        "meta_description": "Best HQ strategy for Last Z: rush early levels, upgrade required buildings only, push efficiently to HQ30, and prepare steel for HQ31-35.",
+        "quick_answer": "Best Last Z HQ upgrade path for most players: rush early levels, upgrade only required buildings, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.",
+        "data_lede": "",
+        "source_snippets": {
+          "title_tag": "<title>Last Z HQ Upgrade Guide (2026) — Requirements, Fast Path to HQ 30/35</title>",
+          "meta_description_tag": "<meta name=\"description\" content=\"Best HQ strategy for Last Z: rush early levels, upgrade required buildings only, push efficiently to HQ30, and prepare steel for HQ31-35.\">",
+          "og_title_tag": "<meta property=\"og:title\" content=\"Last Z HQ Upgrade Guide — Requirements, HQ 30/35 Path\">",
+          "og_description_tag": "<meta property=\"og:description\" content=\"HQ upgrade requirements, fastest path to HQ 30 and 35, steel unlocks, hero level cap, and Sophia strategy in one guide.\">",
+          "twitter_title_tag": "<meta name=\"twitter:title\" content=\"Last Z HQ Upgrade Guide — Requirements, HQ 30/35 Path\">",
+          "twitter_description_tag": "<meta name=\"twitter:description\" content=\"HQ upgrade requirements, fastest path to HQ 30 and 35, steel unlocks, hero level cap, and Sophia strategy in one guide.\">",
+          "h1_tag": "<h1>Last Z HQ Upgrade Guide — Requirements, Fast Path, and HQ 30/35 Strategy</h1>",
+          "guide_meta": "<p class=\"guide-meta\">Building Guide &bull; Updated <time datetime=\"2026-02-01\">February 1, 2026</time> &bull; 15 min read</p>",
+          "guide_verified": "<p class=\"guide-verified\">Best HQ strategy for most players: rush early levels, upgrade only the buildings required for the next HQ checkpoint, push efficiently to HQ30, and prepare for steel and long timers before starting the HQ31-35 journey.</p>",
+          "quick_answer_lede": "<p class=\"qa-lede\"><strong>Best Last Z HQ upgrade path for most players:</strong> rush early levels, upgrade only required buildings, push efficiently to HQ30 first, and treat HQ31-35 as a separate steel-based progression phase with much heavier timers.</p>"
+        },
+        "h2_headings": [
+          "Watch the Full Video",
+          "Why HQ Level Matters: Hero Level Cap and Progression",
+          "Sophia — The Queen of Construction",
+          "Fastest HQ Upgrade Path: Levels 1-35",
+          "Steel — The New Resource",
+          "Alliance Duel Day 2 Strategy",
+          "Construction Speed Setup",
+          "HQ Upgrade Requirements: What Buildings Actually Matter"
+        ],
+        "internal_links": [
+          "about.html",
+          "alliance-duel.html",
+          "arena.html",
+          "contact.html",
+          "disclosure.html",
+          "emergency-hospital-cost.html",
+          "furylord.html",
+          "heroes.html",
+          "hq-construction-cost.html",
+          "https://lastzguides.com/hq.html",
+          "leveling.html",
+          "power-guide.html",
+          "privacy.html",
+          "research.html",
+          "resources.html",
+          "steel.html",
+          "terms.html"
+        ]
+      }
+    },
+    "guardrails": [
+      "No content files may be edited by this worker.",
+      "Do not generate final user-visible page copy.",
+      "Do not create a patch plan or Patch Spec.",
+      "Use current_page_snapshot.source_snippets as the preferred source for exact_old values.",
+      "exact_old must copy a current target-file snippet literally and must match the target file exactly once.",
+      "exact_replacements, when present, are proposal-only candidates that still require propose + owner approval + apply-approved.",
+      "Every exact_replacements item must set owner_approval_required to true.",
+      "Do not mutate backlog, manifests, PRs, or production state.",
+      "Owner approval is required before any user-visible content change.",
+      "Use plain ASCII English only in every string field."
+    ]
+  },
+  "expected_response_keys": [
+    "brief_summary",
+    "target_page_or_slug",
+    "page_role",
+    "primary_user_job",
+    "first_screen_plan",
+    "section_plan",
+    "internal_link_plan",
+    "protected_claims",
+    "do_not_change",
+    "owner_questions",
+    "required_context_before_patch",
+    "acceptance_checks",
+    "exact_replacements",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "brief_summary": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Short no-write summary of the recommended content planning direction."
+      },
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "primary_user_job": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "first_screen_plan": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Planning guidance for the first screen. Do not write final public copy."
+      },
+      "section_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "section": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "action": {
+              "type": "string",
+              "maxLength": 350
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 350
+            }
+          },
+          "required": [
+            "section",
+            "action",
+            "reason"
+          ]
+        }
+      },
+      "internal_link_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "page": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "upstream",
+                "downstream",
+                "lateral"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 300
+            }
+          },
+          "required": [
+            "page",
+            "role",
+            "reason"
+          ]
+        }
+      },
+      "protected_claims": {
+        "type": "array",
+        "maxItems": 12,
+        "items": {
+          "type": "string",
+          "maxLength": 160
+        }
+      },
+      "do_not_change": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_patch": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "acceptance_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "exact_replacements": {
+        "type": "array",
+        "maxItems": 6,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "file": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "change_type": {
+              "type": "string",
+              "enum": [
+                "safe_exact_replace",
+                "first_screen_update",
+                "meta_refresh"
+              ]
+            },
+            "selector_or_anchor": {
+              "type": "string",
+              "maxLength": 180
+            },
+            "exact_old": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "exact_new": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 400
+            },
+            "owner_approval_required": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "change_type",
+            "selector_or_anchor",
+            "exact_old",
+            "exact_new",
+            "reason",
+            "owner_approval_required"
+          ]
+        },
+        "description": "Optional draft exact replacement candidates. These are proposal-only and still require owner approval."
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 350
+      }
+    },
+    "required": [
+      "brief_summary",
+      "target_page_or_slug",
+      "page_role",
+      "primary_user_job",
+      "first_screen_plan",
+      "section_plan",
+      "internal_link_plan",
+      "protected_claims",
+      "do_not_change",
+      "owner_questions",
+      "required_context_before_patch",
+      "acceptance_checks",
+      "exact_replacements",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-16T17:05:32Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-auto-review-reviewer-external-hq-and-progression-reference-cross-check",
+  "worker_role": "reviewer",
+  "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-reviewer-external-hq-and-progression-reference-cross-check-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "target_page_or_slug": "hq.html",
+    "page_role": "cornerstone-guide",
+    "verdict": "needs_human_review",
+    "risk_level": "high",
+    "approved_next_stage": "proposal",
+    "blocking_issues": [
+      {
+        "severity": "high",
+        "issue": "The brief depends on external claim validation and owner confirmation before any content proposal can be shaped.",
+        "required_fix": "Cross-verify HQ requirement claims against canonical site memory and a second reliable source, then obtain owner confirmation for any claim changes."
+      },
+      {
+        "severity": "high",
+        "issue": "The topic overlaps existing HQ, progression, and base-building guidance and could blur cluster roles if scope is expanded.",
+        "required_fix": "Keep the scope limited to the current HQ cornerstone intent and do not convert it into a distinct reference-comparison article or new page intent."
+      },
+      {
+        "severity": "medium",
+        "issue": "No exact replacement candidates are provided, so there is no narrow, literal edit path to review for safe execution.",
+        "required_fix": "If later edits are proposed, provide only target-only exact_old/exact_new candidates with a clear no-template-change boundary."
+      }
+    ],
+    "warnings": [
+      "High-risk cornerstone page: owner approval is required before any user-visible content change.",
+      "Do not use analytics signals as proof that a rewrite is required.",
+      "The opening should remain answer-first and preserve the existing page role."
+    ],
+    "duplicate_intent_review": "The page appears to duplicate existing HQ and progression intent rather than introduce a distinct player job. This supports update_existing only if scope stays tightly constrained.",
+    "cluster_role_review": "Cluster role is acceptable as a Progression cornerstone guide, but the brief warns against blurring into a general reference-comparison article. Supporting routes should stay aligned to HQ, progression, and base-building.",
+    "canonical_claim_review": "Canonical claims about HQ requirements, dependencies, steel timing, and progression thresholds must remain locked to site memory and owner-confirmed references. External source validation is required before any claim-level proposal.",
+    "template_safety_review": "Template safety is acceptable only if the page template, navigation pattern, and schema family remain unchanged. No template changes are approved in this brief.",
+    "exact_replacement_review": "No exact_replacements were provided. That is safe for review, but it also means there is no candidate-level edit to approve or validate for apply_preview.",
+    "owner_approval_required": true,
+    "owner_questions": [
+      "Do you want the first screen to explicitly name the HQ and progression requirement cross-check job, or keep it implicit within the existing answer-first lede?",
+      "Should the cluster route block prioritize base-building support pages, or keep the current mix of progression-adjacent links?",
+      "Are there any HQ requirement claims that must be locked to canonical memory before we touch section wording?"
+    ],
+    "required_context_before_edit": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "hq.html",
+      "index.html",
+      "start.html",
+      "early-game-optimization.html",
+      "base-building-order.html"
+    ],
+    "required_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on hq.html",
+      "Cross-verify HQ requirement claims against canonical memory and a second reliable source",
+      "Confirm the page still reads as a cornerstone guide and not a separate reference-comparison article"
+    ],
+    "next_step": "Run canonical and second-source verification, then move to a proposal only if the scope stays within the existing HQ cornerstone guide."
+  },
+  "usage": {
+    "input_tokens": 4072,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 735,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 4807
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_0c8cab54b8a0fd05006a08a3d7c5488194b48e5313b4107cc7",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-16T17:05:27Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-auto-review-editor-external-hq-and-progression-reference-cross-check",
+  "worker_role": "editor",
+  "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-hq-and-progression-reference-cross-check-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "brief_summary": "Keep hq.html as the cornerstone HQ guide, but tighten the opening to foreground the HQ and progression requirement cross-check job, then validate section order and internal routes without changing page role or template.",
+    "target_page_or_slug": "hq.html",
+    "page_role": "cornerstone-guide",
+    "primary_user_job": "Verify HQ requirement planning, construction dependencies, and progression-route coverage against reference data.",
+    "first_screen_plan": "Preserve the answer-first opening and make sure the first screen immediately states the HQ planning recommendation, the HQ30 to HQ35 split, and the construction requirement cross-check angle. Keep the current page role and do not introduce a new intent or a different content type. The opening should stay concise, direct, and useful for players comparing requirements and progression timing.",
+    "section_plan": [
+      {
+        "section": "Quick Answer",
+        "action": "Keep the answer-first structure and ensure it resolves the cross-check query fast.",
+        "reason": "This is the highest-value matching section for the target job and should remain the primary entry point."
+      },
+      {
+        "section": "Best overall recommendation",
+        "action": "Retain the current recommendation shape, but align wording to HQ requirement verification and progression planning.",
+        "reason": "Supports the same user job without changing the page archetype."
+      },
+      {
+        "section": "Decision framework",
+        "action": "Keep as the place where players compare rush, requirement, and steel-timer tradeoffs.",
+        "reason": "Useful for distinguishing HQ30 from HQ31-35 planning."
+      },
+      {
+        "section": "Cluster route block",
+        "action": "Verify that the route block points users to progression and base-building supporting guides, not unrelated pages.",
+        "reason": "Prevents cluster drift and keeps internal routing aligned with the page role."
+      },
+      {
+        "section": "Related guides / FAQ",
+        "action": "Trim or reorder links so supporting pages reinforce HQ, progression, and construction dependency planning.",
+        "reason": "Helps the page act as a cornerstone within the Progression cluster."
+      }
+    ],
+    "internal_link_plan": [
+      {
+        "page": "index.html",
+        "role": "upstream",
+        "reason": "Keeps the page anchored in the main site hierarchy."
+      },
+      {
+        "page": "start.html",
+        "role": "lateral",
+        "reason": "Supports players who need an early entry point before HQ planning."
+      },
+      {
+        "page": "early-game-optimization.html",
+        "role": "lateral",
+        "reason": "Complements early progression decisions that feed into HQ planning."
+      },
+      {
+        "page": "base-building-order.html",
+        "role": "lateral",
+        "reason": "Directly supports building dependency and construction order planning."
+      },
+      {
+        "page": "alliance-duel.html",
+        "role": "downstream",
+        "reason": "Relevant only as a progression-adjacent support link if the guide already references alliance timing."
+      },
+      {
+        "page": "arena.html",
+        "role": "downstream",
+        "reason": "Optional supporting link for broader progression context if already used in the cluster."
+      },
+      {
+        "page": "emergency-hospital-cost.html",
+        "role": "downstream",
+        "reason": "Useful if the guide discusses build prioritization and upgrade tradeoffs."
+      },
+      {
+        "page": "furylord.html",
+        "role": "downstream",
+        "reason": "Keep only if the current guide already uses it as a related progression reference."
+      }
+    ],
+    "protected_claims": [
+      "HQ requirement and dependency details must remain consistent with canonical site memory and owner-confirmed references.",
+      "Any guidance about HQ30 to HQ35 progression timing should stay aligned with verified steel and construction constraints.",
+      "Do not convert this page into a distinct reference-comparison article or a new page intent."
+    ],
+    "do_not_change": [
+      "Do not publish or apply content changes from this brief automatically.",
+      "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+      "Do not create a new page when the Scout proposal recommends updating an existing page.",
+      "Do not use analytics signals as proof that a rewrite is required.",
+      "The topic duplicates an existing page intent without adding a distinct player job.",
+      "The external claim cannot be verified beyond this source.",
+      "The proposal would blur existing cluster roles."
+    ],
+    "owner_questions": [
+      "Do you want the first screen to explicitly name the HQ and progression requirement cross-check job, or keep it implicit within the existing answer-first lede?",
+      "Should the cluster route block prioritize base-building support pages, or keep the current mix of progression-adjacent links?",
+      "Are there any HQ requirement claims that must be locked to canonical memory before we touch section wording?"
+    ],
+    "required_context_before_patch": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "hq.html",
+      "index.html",
+      "start.html",
+      "early-game-optimization.html",
+      "base-building-order.html"
+    ],
+    "acceptance_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on hq.html"
+    ],
+    "exact_replacements": [],
+    "next_step": "Cross-verify HQ requirement claims against canonical memory and a second reliable source before any content proposal is shaped."
+  },
+  "usage": {
+    "input_tokens": 2895,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 1011,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 3906
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_029c72a4eb7f570e006a08a3d075e0819099d9b521668d54b2",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

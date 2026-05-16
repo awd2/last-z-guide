@@ -1,0 +1,396 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-auto-review-editor-external-gift-center-official-flow-validation",
+  "worker_role": "editor",
+  "task": "Create a no-write Editor planning brief for one approved Scout opportunity.",
+  "prompt": "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. Do not write final public page copy, HTML, or patch specs. Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, and owner approval gate. Treat analytics as signals, not proof. Normally return exact_replacements as an empty array. Only include exact_replacements when the deterministic context contains enough current source text to copy exact_old literally and the replacement is narrow enough for later owner review. exact_replacements are draft proposal data only, not approval, not a Patch Spec, and not permission to edit files. Use plain ASCII English only. Return JSON only.",
+  "inputs": {
+    "source_llm_scout_result": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json",
+    "source_llm_scout_request": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
+    "selected_opportunity": {
+      "topic_id": "external-gift-center-official-flow-validation",
+      "decision": "update_existing",
+      "rationale": "The official service domain is a plausible validation source for routing and flow accuracy, but it is not proof on its own. The topic maps to an existing support-style page and is useful as a cross-check opportunity for human review.",
+      "player_value": "Reduce confusion around Gift Center setup, UID usage, and official routing so players do not get misdirected.",
+      "duplication_risk": "Medium, because it may overlap with other Gift Center or redeem flow pages if the intent is not narrowly defined.",
+      "priority": "high",
+      "risk_level": "medium",
+      "next_step": "Verify the public flow against canonical site memory and one additional reliable source before deciding whether the existing page needs adjustment.",
+      "claims_to_verify": [
+        "Exact Gift Center routing on the official domain",
+        "Whether UID usage is part of the public player flow or a support-specific detail",
+        "Whether this topic adds a distinct player job beyond the existing redeem guidance"
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "external-gift-center-official-flow-validation",
+      "title": "External source opportunity: official Gift Center and store flow validation",
+      "cluster": "Economy",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "support-guide",
+      "target_page_or_slug": "gift-center-uid.html",
+      "source_reference": "official-functap-store: https://last-z.com",
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "medium",
+      "evidence": [
+        "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
+        "cluster_owner": "Economy",
+        "expected_internal_route": [
+          "index.html",
+          "gift-center-uid.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ]
+    },
+    "deterministic_editor_brief": {
+      "target_page_or_slug": "gift-center-uid.html",
+      "page_role": "support-guide",
+      "primary_query_family": "External source opportunity: official Gift Center and store flow validation",
+      "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `External source opportunity: official Gift Center and store flow validation` without changing `gift-center-uid.html` into a different page role.",
+      "template_reference": "gift-center-uid.html",
+      "required_sections": [
+        "Quick Answer",
+        "Exact procedural answer",
+        "Common mistakes or edge cases",
+        "Step-by-step checks",
+        "Related next step"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html"
+        ],
+        "downstream": [
+          "f2p.html",
+          "start.html"
+        ],
+        "lateral": [
+          "codes.html",
+          "redeem-code-not-working.html",
+          "resources.html"
+        ]
+      },
+      "protected_claims": [
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox",
+        "uid-copy-path"
+      ],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles.",
+        "Do not contradict canonical claim `gift-center-cluster-role-separation`.",
+        "Do not contradict canonical claim `gift-center-only-redeem-flow`.",
+        "Do not contradict canonical claim `gift-rewards-mailbox`.",
+        "Do not contradict canonical claim `uid-copy-path`."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "gift-center-uid.html",
+        "index.html",
+        "codes.html",
+        "redeem-code-not-working.html",
+        "resources.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on gift-center-uid.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Gift Center Login and UID Setup (2026) — Official Redeem Page",
+        "h1": "Last Z Gift Center Login and UID Setup — Official Redeem Page",
+        "meta_description": "Official Last Z Gift Center login setup: how to copy your UID from Avatar > Settings > Copy ID, redeem in a browser, and collect rewards from mailbox.",
+        "quick_answer": "Official Last Z Gift Center setup: open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.",
+        "data_lede": "",
+        "source_snippets": {
+          "title_tag": "<title>Last Z Gift Center Login and UID Setup (2026) — Official Redeem Page</title>",
+          "meta_description_tag": "<meta name=\"description\" content=\"Official Last Z Gift Center login setup: how to copy your UID from Avatar > Settings > Copy ID, redeem in a browser, and collect rewards from mailbox.\">",
+          "og_title_tag": "<meta property=\"og:title\" content=\"Last Z Gift Center Login and UID Setup — Official Redeem Page\">",
+          "og_description_tag": "<meta property=\"og:description\" content=\"Official Last Z Gift Center login setup, UID copying path, browser redemption flow, and mailbox reward delivery.\">",
+          "twitter_title_tag": "<meta name=\"twitter:title\" content=\"Last Z Gift Center Login and UID Setup — Official Redeem Page\">",
+          "twitter_description_tag": "<meta name=\"twitter:description\" content=\"Official Last Z Gift Center login setup, UID copying path, browser redemption flow, and mailbox reward delivery.\">",
+          "h1_tag": "<h1>Last Z Gift Center Login and UID Setup — Official Redeem Page</h1>",
+          "guide_meta": "<p class=\"guide-meta\">Support Guide &bull; Updated March 2026 &bull; Checked against the official Gift Center</p>",
+          "guide_verified": "<p class=\"guide-verified\">Use the official Last Z Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, redeem outside the game client, and collect rewards from your in-game mailbox.</p>",
+          "quick_answer_lede": "<p class=\"qa-lede\"><strong>Official Last Z Gift Center setup:</strong> open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.</p>"
+        },
+        "h2_headings": [
+          "Official Gift Center Login",
+          "How to Find and Copy Your UID",
+          "Can I Redeem Last Z Codes on iPhone or Android?",
+          "Can You Redeem Codes Inside the Game?",
+          "Where Do Rewards Go After Redemption?",
+          "Common Gift Center Setup Mistakes",
+          "FAQ",
+          "Related Guides"
+        ],
+        "internal_links": [
+          "about.html",
+          "codes.html",
+          "contact.html",
+          "disclosure.html",
+          "f2p.html",
+          "https://lastzguides.com/gift-center-uid.html",
+          "privacy.html",
+          "redeem-code-not-working.html",
+          "start.html",
+          "terms.html"
+        ]
+      }
+    },
+    "guardrails": [
+      "No content files may be edited by this worker.",
+      "Do not generate final user-visible page copy.",
+      "Do not create a patch plan or Patch Spec.",
+      "Use current_page_snapshot.source_snippets as the preferred source for exact_old values.",
+      "exact_old must copy a current target-file snippet literally and must match the target file exactly once.",
+      "exact_replacements, when present, are proposal-only candidates that still require propose + owner approval + apply-approved.",
+      "Every exact_replacements item must set owner_approval_required to true.",
+      "Do not mutate backlog, manifests, PRs, or production state.",
+      "Owner approval is required before any user-visible content change.",
+      "Use plain ASCII English only in every string field."
+    ]
+  },
+  "expected_response_keys": [
+    "brief_summary",
+    "target_page_or_slug",
+    "page_role",
+    "primary_user_job",
+    "first_screen_plan",
+    "section_plan",
+    "internal_link_plan",
+    "protected_claims",
+    "do_not_change",
+    "owner_questions",
+    "required_context_before_patch",
+    "acceptance_checks",
+    "exact_replacements",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "brief_summary": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Short no-write summary of the recommended content planning direction."
+      },
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "primary_user_job": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "first_screen_plan": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Planning guidance for the first screen. Do not write final public copy."
+      },
+      "section_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "section": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "action": {
+              "type": "string",
+              "maxLength": 350
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 350
+            }
+          },
+          "required": [
+            "section",
+            "action",
+            "reason"
+          ]
+        }
+      },
+      "internal_link_plan": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "page": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "upstream",
+                "downstream",
+                "lateral"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 300
+            }
+          },
+          "required": [
+            "page",
+            "role",
+            "reason"
+          ]
+        }
+      },
+      "protected_claims": {
+        "type": "array",
+        "maxItems": 12,
+        "items": {
+          "type": "string",
+          "maxLength": 160
+        }
+      },
+      "do_not_change": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_patch": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "acceptance_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "exact_replacements": {
+        "type": "array",
+        "maxItems": 6,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "file": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "change_type": {
+              "type": "string",
+              "enum": [
+                "safe_exact_replace",
+                "first_screen_update",
+                "meta_refresh"
+              ]
+            },
+            "selector_or_anchor": {
+              "type": "string",
+              "maxLength": 180
+            },
+            "exact_old": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "exact_new": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "reason": {
+              "type": "string",
+              "maxLength": 400
+            },
+            "owner_approval_required": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "change_type",
+            "selector_or_anchor",
+            "exact_old",
+            "exact_new",
+            "reason",
+            "owner_approval_required"
+          ]
+        },
+        "description": "Optional draft exact replacement candidates. These are proposal-only and still require owner approval."
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 350
+      }
+    },
+    "required": [
+      "brief_summary",
+      "target_page_or_slug",
+      "page_role",
+      "primary_user_job",
+      "first_screen_plan",
+      "section_plan",
+      "internal_link_plan",
+      "protected_claims",
+      "do_not_change",
+      "owner_questions",
+      "required_context_before_patch",
+      "acceptance_checks",
+      "exact_replacements",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}

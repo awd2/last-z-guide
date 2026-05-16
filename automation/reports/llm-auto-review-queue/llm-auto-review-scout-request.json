@@ -162,148 +162,123 @@
         ]
       },
       {
-        "topic_id": "index-gsc-opportunity",
-        "title": "GSC opportunity review: Last Z Guides — Research, Events, HQ, Heroes, and F2P Strategy",
-        "cluster": "Home",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
+        "title": "External search opportunity: Full Preparedness",
+        "cluster": "Events",
         "recommended_action": "update_existing",
-        "archetype_suggestion": "home-hub",
-        "target_page_or_slug": "index.html",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "events.html",
+        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "GSC page signal: index.html had 10947 impressions, 823 clicks, 7.52% CTR, avg position 6.64.",
-          "Rising query: `last z research guide` gained 11 impressions in the last 7-day comparison window.",
-          "Rising query: `lastzguides.com` gained 3 impressions in the last 7-day comparison window."
+          "Daily event with rotating cycles; one theme rewards tech research speed-ups and another rewards hero upgrades/recruitment items."
         ],
         "site_fit": {
-          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z guide` searchers.",
-          "cluster_owner": "Home",
           "expected_internal_route": [
-            "index.html"
+            "events.html"
           ],
-          "archetype_reason": "Existing page is `home-hub` in the `Home` cluster; Scout should prefer updating the existing page before proposing new content."
+          "external_source_id": "lastz-fandom-reference"
         },
         "constraints": [
-          "Use existing page template and navigation patterns.",
-          "Treat GSC data as a signal, not proof that a rewrite is needed.",
-          "Existing backlog history for this page: research-atlas-home-promotion:done."
+          "External search result is discovery evidence only.",
+          "Do not copy source wording.",
+          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
         ],
         "reject_if": [
-          "The query intent is already better served by another canonical page.",
-          "The proposed change would blur cluster role separation.",
-          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+          "The result is off-topic or duplicates an existing page job.",
+          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
         ]
       },
       {
-        "topic_id": "research-gsc-opportunity",
-        "title": "GSC opportunity review: Last Z Research Guide — Best Research Order, Peace Shield, and T10 Path",
+        "topic_id": "external-search-lastz-fandom-reference-heroes-5",
+        "title": "External search opportunity: Heroes",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "tech.html",
+        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "Core hero overview page with hero types and what affects hero power, including tech-related boosts."
+        ],
+        "site_fit": {
+          "expected_internal_route": [
+            "tech.html"
+          ],
+          "external_source_id": "lastz-fandom-reference"
+        },
+        "constraints": [
+          "External search result is discovery evidence only.",
+          "Do not copy source wording.",
+          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
+        ],
+        "reject_if": [
+          "The result is off-topic or duplicates an existing page job.",
+          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
+        ]
+      },
+      {
+        "topic_id": "external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1",
+        "title": "External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026",
+        "cluster": "Heroes",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "heroes.html",
+        "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "Hero roster and equipment page; useful for hero discovery, faction grouping, and gear lookup."
+        ],
+        "site_fit": {
+          "expected_internal_route": [
+            "heroes.html"
+          ],
+          "external_source_id": "lastzwiki-reference"
+        },
+        "constraints": [
+          "External search result is discovery evidence only.",
+          "Do not copy source wording.",
+          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
+        ],
+        "reject_if": [
+          "The result is off-topic or duplicates an existing page job.",
+          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
+        ]
+      },
+      {
+        "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
+        "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
         "target_page_or_slug": "research.html",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
+        "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "GSC page signal: research.html had 13619 impressions, 670 clicks, 4.92% CTR, avg position 7.16.",
-          "Rising query: `last z research guide` gained 11 impressions in the last 7-day comparison window.",
-          "Rising query: `last z urgent rescue` gained 8 impressions in the last 7-day comparison window.",
-          "Rising query: `urgent rescue last z` gained 3 impressions in the last 7-day comparison window."
+          "Research table page with categories, level costs, and badge totals; useful for research discovery and cross-checking."
         ],
         "site_fit": {
-          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z research guide` searchers.",
-          "cluster_owner": "Research",
           "expected_internal_route": [
-            "index.html",
-            "research.html",
-            "research-costs.html"
+            "research.html"
           ],
-          "archetype_reason": "Existing page is `cornerstone-guide` in the `Research` cluster; Scout should prefer updating the existing page before proposing new content."
+          "external_source_id": "lastzwiki-reference"
         },
         "constraints": [
-          "Use existing page template and navigation patterns.",
-          "Treat GSC data as a signal, not proof that a rewrite is needed.",
-          "Protect canonical claim `research-best-mainline`.",
-          "Protect canonical claim `hero-training-cockpit-stop`.",
-          "Protect canonical claim `peace-shield-value`.",
-          "Protect canonical claim `research-atlas-role`."
+          "External search result is discovery evidence only.",
+          "Do not copy source wording.",
+          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
         ],
         "reject_if": [
-          "The query intent is already better served by another canonical page.",
-          "The proposed change would blur cluster role separation.",
-          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
-        ]
-      },
-      {
-        "topic_id": "vehicle-modification-cost-gsc-opportunity",
-        "title": "GSC opportunity review: Last Z Vehicle Modification Costs — Wrenches, Milestones, and Unlock Path",
-        "cluster": "Equipment",
-        "recommended_action": "update_existing",
-        "archetype_suggestion": "cost-page",
-        "target_page_or_slug": "vehicle-modification-cost.html",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
-        "confidence": "high",
-        "priority": "high",
-        "risk_level": "medium",
-        "evidence": [
-          "GSC page signal: vehicle-modification-cost.html had 7319 impressions, 480 clicks, 6.56% CTR, avg position 5.82."
-        ],
-        "site_fit": {
-          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vehicle upgrade` searchers.",
-          "cluster_owner": "Equipment",
-          "expected_internal_route": [
-            "index.html",
-            "gear.html",
-            "vehicle-modification-cost.html"
-          ],
-          "archetype_reason": "Existing page is `cost-page` in the `Equipment` cluster; Scout should prefer updating the existing page before proposing new content."
-        },
-        "constraints": [
-          "Use existing page template and navigation patterns.",
-          "Treat GSC data as a signal, not proof that a rewrite is needed.",
-          "Protect canonical claim `alliance-recognition-utility-page`."
-        ],
-        "reject_if": [
-          "The query intent is already better served by another canonical page.",
-          "The proposed change would blur cluster role separation.",
-          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
-        ]
-      },
-      {
-        "topic_id": "alliance-duel-gsc-opportunity",
-        "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
-        "cluster": "Events",
-        "recommended_action": "update_existing",
-        "archetype_suggestion": "event-guide",
-        "target_page_or_slug": "alliance-duel.html",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
-        "confidence": "medium",
-        "priority": "high",
-        "risk_level": "medium",
-        "evidence": [
-          "GSC page signal: alliance-duel.html had 8965 impressions, 407 clicks, 4.54% CTR, avg position 6.19."
-        ],
-        "site_fit": {
-          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vs schedule` searchers.",
-          "cluster_owner": "Events",
-          "expected_internal_route": [
-            "index.html",
-            "events.html",
-            "alliance-duel.html"
-          ],
-          "archetype_reason": "Existing page is `event-guide` in the `Events` cluster; Scout should prefer updating the existing page before proposing new content."
-        },
-        "constraints": [
-          "Use existing page template and navigation patterns.",
-          "Treat GSC data as a signal, not proof that a rewrite is needed."
-        ],
-        "reject_if": [
-          "The query intent is already better served by another canonical page.",
-          "The proposed change would blur cluster role separation.",
-          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+          "The result is off-topic or duplicates an existing page job.",
+          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
         ]
       }
     ],

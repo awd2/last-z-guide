@@ -1,14 +1,14 @@
-# LLM Auto Review Queue - 2026-05-16T16:56:23Z
+# LLM Auto Review Queue - 2026-05-16T17:05:32Z
 
 ## Outcome
 
-- State: `current`
+- State: `queue_ready`
 - Provider: `openai`
-- Candidate topics: `1`
-- Queued topics: `0`
-- Completed items: `0`
+- Candidate topics: `2`
+- Queued topics: `2`
+- Completed items: `2`
 - Failed items: `0`
-- Skipped existing: `1`
+- Skipped existing: `0`
 - Deferred by limit: `0`
 - Candidate refresh: `automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.md`
 - Topic discovery: `automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md`
@@ -20,11 +20,45 @@
 
 ## Review Queue
 
-- None
+### external-gift-center-official-flow-validation
 
-## Skipped Topics
+- Status: `completed`
+- Score: `91`
+- Target: `gift-center-uid.html`
+- Cluster: `Economy`
+- Priority: `high`
+- Risk: `medium`
+- Verdict: `needs_human_review`
+- Owner approval required: `true`
+- Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.md`
 
-- `index-gsc-opportunity`: `skipped_existing_chain`, score `83`, existing `automation/reports/llm-auto-review-queue/llm-worker-chain-index-gsc-opportunity.json`
+Score reasons:
+
+- priority:high=45
+- confidence:high=20
+- risk:medium=8
+- action:update_existing=8
+- candidate_status=10
+
+### external-hq-and-progression-reference-cross-check
+
+- Status: `completed`
+- Score: `83`
+- Target: `hq.html`
+- Cluster: `Progression`
+- Priority: `high`
+- Risk: `high`
+- Verdict: `needs_human_review`
+- Owner approval required: `true`
+- Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-hq-and-progression-reference-cross-check.md`
+
+Score reasons:
+
+- priority:high=45
+- confidence:high=20
+- risk:high=0
+- action:update_existing=8
+- candidate_status=10
 
 ## Next Actions
 

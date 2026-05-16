@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "external_scout",
-  "generated_at": "2026-05-16T16:55:39Z",
+  "generated_at": "2026-05-16T17:04:32Z",
   "state": "external_scout_ready",
   "registry_path": "automation/memory/source_registry.json",
   "include_proposed": false,

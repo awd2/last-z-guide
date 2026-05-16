@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-16T17:05:20Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-auto-review-reviewer-external-gift-center-official-flow-validation",
+  "worker_role": "reviewer",
+  "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-reviewer-external-gift-center-official-flow-validation-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "target_page_or_slug": "gift-center-uid.html",
+    "page_role": "support-guide",
+    "verdict": "needs_human_review",
+    "risk_level": "medium",
+    "approved_next_stage": "brief",
+    "blocking_issues": [
+      {
+        "severity": "medium",
+        "issue": "The brief points to a possible update_existing action, but the topic appears to overlap an existing Gift Center redeem intent without a clearly distinct player job.",
+        "required_fix": "Require human confirmation that this page keeps a narrow support-guide role and does not duplicate adjacent redeem or store guidance."
+      },
+      {
+        "severity": "medium",
+        "issue": "The official source is only a single external signal and does not prove the routing, UID flow, or page scope changes on its own.",
+        "required_fix": "Verify the public flow against canonical site memory and one additional reliable source or owner confirmation before any copy decision."
+      },
+      {
+        "severity": "medium",
+        "issue": "The brief mentions a store flow validation opportunity, which could blur the protected redeem-only cluster boundaries.",
+        "required_fix": "Confirm that the page remains redeem-only and does not absorb store, account, or broader service routing content."
+      }
+    ],
+    "warnings": [
+      "No exact_replacements were provided, so there is no literal replacement set to validate.",
+      "The page already has answer-first structure and internal links, so changes should be narrowly scoped if approved.",
+      "Resources.html is treated as optional and should be checked for current cluster approval before use."
+    ],
+    "duplicate_intent_review": "Duplicate risk is medium. The topic overlaps existing Gift Center and redeem guidance, and the brief itself says the topic duplicates an existing page intent without adding a distinct player job. This supports review rather than direct advancement.",
+    "cluster_role_review": "Cluster role separation should be preserved. The page is a support-guide for Gift Center routing and UID setup, not a broader store or account help page. Any change must stay within the redeem-only flow and avoid role drift.",
+    "canonical_claim_review": "Protected claims must not be contradicted: gift-center-cluster-role-separation, gift-center-only-redeem-flow, gift-rewards-mailbox, and uid-copy-path. The brief is consistent with them only if it stays focused on browser redemption, UID copy path, and mailbox delivery.",
+    "template_safety_review": "Template safety is acceptable at planning level because no template, navigation pattern, or schema family change is requested. Separate approval is still required for any template or structure change.",
+    "exact_replacement_review": "No exact_replacements were provided. There are no candidate literal replacements to approve or reject at this stage.",
+    "owner_approval_required": true,
+    "owner_questions": [
+      "Is the official routing check meant to validate only the browser redeem flow, or also a store purchase flow on the same domain?",
+      "Should UID setup remain framed as a support detail, or do we want to surface it as part of the main player flow?",
+      "Is resources.html still an approved lateral destination for this cluster?"
+    ],
+    "required_context_before_edit": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "gift-center-uid.html",
+      "index.html",
+      "codes.html",
+      "redeem-code-not-working.html",
+      "resources.html"
+    ],
+    "required_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on gift-center-uid.html"
+    ],
+    "next_step": "Request human review to confirm the page remains a narrow redeem-only support guide, then verify the public flow against canonical site memory plus one additional reliable source before any edit decision."
+  },
+  "usage": {
+    "input_tokens": 4060,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 755,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 4815
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_06ddf51a32dc547d006a08a3cb6e948195a62bae5a226b5704",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

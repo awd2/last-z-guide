@@ -1,0 +1,463 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-auto-review-reviewer-external-gift-center-official-flow-validation",
+  "worker_role": "reviewer",
+  "task": "Review one no-write LLM Editor planning brief for site fit, risk, and readiness.",
+  "prompt": "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. Do not write or rewrite public page copy. Do not create patch specs. Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, draft exact replacement safety, and deterministic QA readiness. Treat analytics as signals, not proof. If the Editor includes exact_replacements, review whether they are narrow, target-only, literal exact_old/exact_new candidates with owner_approval_required=true. Do not approve apply_preview from an LLM-only exact replacement. Use plain ASCII English only. Return JSON only.",
+  "inputs": {
+    "source_llm_editor_result": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation-result.json",
+    "source_llm_editor_request": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation-request.json",
+    "selected_opportunity": {
+      "topic_id": "external-gift-center-official-flow-validation",
+      "decision": "update_existing",
+      "rationale": "The official service domain is a plausible validation source for routing and flow accuracy, but it is not proof on its own. The topic maps to an existing support-style page and is useful as a cross-check opportunity for human review.",
+      "player_value": "Reduce confusion around Gift Center setup, UID usage, and official routing so players do not get misdirected.",
+      "duplication_risk": "Medium, because it may overlap with other Gift Center or redeem flow pages if the intent is not narrowly defined.",
+      "priority": "high",
+      "risk_level": "medium",
+      "next_step": "Verify the public flow against canonical site memory and one additional reliable source before deciding whether the existing page needs adjustment.",
+      "claims_to_verify": [
+        "Exact Gift Center routing on the official domain",
+        "Whether UID usage is part of the public player flow or a support-specific detail",
+        "Whether this topic adds a distinct player job beyond the existing redeem guidance"
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "external-gift-center-official-flow-validation",
+      "title": "External source opportunity: official Gift Center and store flow validation",
+      "cluster": "Economy",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "support-guide",
+      "target_page_or_slug": "gift-center-uid.html",
+      "source_reference": "official-functap-store: https://last-z.com",
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "medium",
+      "evidence": [
+        "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
+        "cluster_owner": "Economy",
+        "expected_internal_route": [
+          "index.html",
+          "gift-center-uid.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ]
+    },
+    "deterministic_editor_context": {
+      "target_page_or_slug": "gift-center-uid.html",
+      "page_role": "support-guide",
+      "primary_query_family": "External source opportunity: official Gift Center and store flow validation",
+      "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `External source opportunity: official Gift Center and store flow validation` without changing `gift-center-uid.html` into a different page role.",
+      "template_reference": "gift-center-uid.html",
+      "required_sections": [
+        "Quick Answer",
+        "Exact procedural answer",
+        "Common mistakes or edge cases",
+        "Step-by-step checks",
+        "Related next step"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html"
+        ],
+        "downstream": [
+          "f2p.html",
+          "start.html"
+        ],
+        "lateral": [
+          "codes.html",
+          "redeem-code-not-working.html",
+          "resources.html"
+        ]
+      },
+      "protected_claims": [
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox",
+        "uid-copy-path"
+      ],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles.",
+        "Do not contradict canonical claim `gift-center-cluster-role-separation`.",
+        "Do not contradict canonical claim `gift-center-only-redeem-flow`.",
+        "Do not contradict canonical claim `gift-rewards-mailbox`.",
+        "Do not contradict canonical claim `uid-copy-path`."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "gift-center-uid.html",
+        "index.html",
+        "codes.html",
+        "redeem-code-not-working.html",
+        "resources.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on gift-center-uid.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Gift Center Login and UID Setup (2026) — Official Redeem Page",
+        "h1": "Last Z Gift Center Login and UID Setup — Official Redeem Page",
+        "meta_description": "Official Last Z Gift Center login setup: how to copy your UID from Avatar > Settings > Copy ID, redeem in a browser, and collect rewards from mailbox.",
+        "quick_answer": "Official Last Z Gift Center setup: open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.",
+        "data_lede": "",
+        "source_snippets": {
+          "title_tag": "<title>Last Z Gift Center Login and UID Setup (2026) — Official Redeem Page</title>",
+          "meta_description_tag": "<meta name=\"description\" content=\"Official Last Z Gift Center login setup: how to copy your UID from Avatar > Settings > Copy ID, redeem in a browser, and collect rewards from mailbox.\">",
+          "og_title_tag": "<meta property=\"og:title\" content=\"Last Z Gift Center Login and UID Setup — Official Redeem Page\">",
+          "og_description_tag": "<meta property=\"og:description\" content=\"Official Last Z Gift Center login setup, UID copying path, browser redemption flow, and mailbox reward delivery.\">",
+          "twitter_title_tag": "<meta name=\"twitter:title\" content=\"Last Z Gift Center Login and UID Setup — Official Redeem Page\">",
+          "twitter_description_tag": "<meta name=\"twitter:description\" content=\"Official Last Z Gift Center login setup, UID copying path, browser redemption flow, and mailbox reward delivery.\">",
+          "h1_tag": "<h1>Last Z Gift Center Login and UID Setup — Official Redeem Page</h1>",
+          "guide_meta": "<p class=\"guide-meta\">Support Guide &bull; Updated March 2026 &bull; Checked against the official Gift Center</p>",
+          "guide_verified": "<p class=\"guide-verified\">Use the official Last Z Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, redeem outside the game client, and collect rewards from your in-game mailbox.</p>",
+          "quick_answer_lede": "<p class=\"qa-lede\"><strong>Official Last Z Gift Center setup:</strong> open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.</p>"
+        },
+        "h2_headings": [
+          "Official Gift Center Login",
+          "How to Find and Copy Your UID",
+          "Can I Redeem Last Z Codes on iPhone or Android?",
+          "Can You Redeem Codes Inside the Game?",
+          "Where Do Rewards Go After Redemption?",
+          "Common Gift Center Setup Mistakes",
+          "FAQ",
+          "Related Guides"
+        ],
+        "internal_links": [
+          "about.html",
+          "codes.html",
+          "contact.html",
+          "disclosure.html",
+          "f2p.html",
+          "https://lastzguides.com/gift-center-uid.html",
+          "privacy.html",
+          "redeem-code-not-working.html",
+          "start.html",
+          "terms.html"
+        ]
+      }
+    },
+    "llm_editor_brief": {
+      "brief_summary": "Keep the page as an answer-first support guide for Gift Center routing and UID setup, but tighten the opening so it clearly validates the official browser redeem flow without shifting page role or cluster boundaries.",
+      "target_page_or_slug": "gift-center-uid.html",
+      "page_role": "support-guide",
+      "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
+      "first_screen_plan": "Preserve the existing answer-first structure. The first screen should immediately state the official flow: open the Gift Center in a browser, copy UID from Avatar -> Settings -> Copy ID, redeem outside the game client, and expect rewards in the in-game mailbox. Keep the framing as verification and setup guidance, not a broader store or account help page. Do not introduce new claims beyond the canonical flow.",
+      "section_plan": [
+        {
+          "section": "Quick Answer",
+          "action": "Keep the answer-first lead and make sure the opening directly resolves the routing and UID setup question.",
+          "reason": "This matches the page job and gives the quickest confirmation for users checking the official redeem flow."
+        },
+        {
+          "section": "Exact procedural answer",
+          "action": "Retain the step sequence for browser redemption and UID copy path, with no expansion into unrelated account topics.",
+          "reason": "The page must preserve the canonical redeem-only flow and avoid cluster drift."
+        },
+        {
+          "section": "Common mistakes or edge cases",
+          "action": "Keep only narrowly relevant mistakes such as using the game client instead of the browser or pasting the wrong UID.",
+          "reason": "Helps users avoid the main failure points without changing the page scope."
+        },
+        {
+          "section": "Step-by-step checks",
+          "action": "Ensure the verification steps map to the official flow and are easy to scan on mobile.",
+          "reason": "Supports the user job of confirming setup accuracy quickly."
+        },
+        {
+          "section": "Related next step",
+          "action": "Point users to downstream or adjacent help pages that solve follow-on issues, not to unrelated store or general support content.",
+          "reason": "Keeps internal routing aligned with the support cluster and avoids role blur."
+        }
+      ],
+      "internal_link_plan": [
+        {
+          "page": "index.html",
+          "role": "upstream",
+          "reason": "Main hub entry point for the site and a logical parent route."
+        },
+        {
+          "page": "f2p.html",
+          "role": "downstream",
+          "reason": "Helpful follow-on for players who want economy or progression context after redeem setup."
+        },
+        {
+          "page": "start.html",
+          "role": "downstream",
+          "reason": "Useful next step for onboarding after confirming the redemption flow."
+        },
+        {
+          "page": "codes.html",
+          "role": "lateral",
+          "reason": "Adjacent page for code discovery and redemption context."
+        },
+        {
+          "page": "redeem-code-not-working.html",
+          "role": "lateral",
+          "reason": "Best troubleshooting companion when the redeem flow fails."
+        },
+        {
+          "page": "resources.html",
+          "role": "lateral",
+          "reason": "Optional reference hub if it exists in the site map and remains relevant to support guidance."
+        }
+      ],
+      "protected_claims": [
+        "gift-center-cluster-role-separation",
+        "gift-center-only-redeem-flow",
+        "gift-rewards-mailbox",
+        "uid-copy-path"
+      ],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles.",
+        "Do not contradict canonical claim `gift-center-cluster-role-separation`.",
+        "Do not contradict canonical claim `gift-center-only-redeem-flow`.",
+        "Do not contradict canonical claim `gift-rewards-mailbox`."
+      ],
+      "owner_questions": [
+        "Is the official routing check meant to validate only the browser redeem flow, or also a store purchase flow on the same domain?",
+        "Should UID setup remain framed as a support detail, or do we want to surface it as part of the main player flow?",
+        "Is `resources.html` still an approved lateral destination for this cluster?"
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "gift-center-uid.html",
+        "index.html",
+        "codes.html",
+        "redeem-code-not-working.html",
+        "resources.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on gift-center-uid.html"
+      ],
+      "exact_replacements": [],
+      "next_step": "Verify the public flow against canonical site memory and one additional reliable source, then decide whether a narrow first-screen adjustment is needed on the existing page."
+    },
+    "guardrails": [
+      "No content files may be edited by Reviewer.",
+      "No final public page copy may be generated.",
+      "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
+      "Editor exact_replacements are proposal-only candidates; they do not approve copy or bypass propose/approval/apply-approved.",
+      "If exact_replacements are present, owner_approval_required must remain true.",
+      "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
+      "Owner approval is required before any user-visible content change.",
+      "Use plain ASCII English only in every string field."
+    ]
+  },
+  "expected_response_keys": [
+    "target_page_or_slug",
+    "page_role",
+    "verdict",
+    "risk_level",
+    "approved_next_stage",
+    "blocking_issues",
+    "warnings",
+    "duplicate_intent_review",
+    "cluster_role_review",
+    "canonical_claim_review",
+    "template_safety_review",
+    "exact_replacement_review",
+    "owner_approval_required",
+    "owner_questions",
+    "required_context_before_edit",
+    "required_checks",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "verdict": {
+        "type": "string",
+        "enum": [
+          "pass",
+          "needs_human_review",
+          "revise",
+          "reject"
+        ]
+      },
+      "risk_level": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "approved_next_stage": {
+        "type": "string",
+        "enum": [
+          "none",
+          "brief",
+          "patch_plan",
+          "proposal",
+          "approval",
+          "apply_preview"
+        ]
+      },
+      "blocking_issues": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "severity": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "issue": {
+              "type": "string",
+              "maxLength": 450
+            },
+            "required_fix": {
+              "type": "string",
+              "maxLength": 450
+            }
+          },
+          "required": [
+            "severity",
+            "issue",
+            "required_fix"
+          ]
+        }
+      },
+      "warnings": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 400
+        }
+      },
+      "duplicate_intent_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "cluster_role_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "canonical_claim_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "template_safety_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "exact_replacement_review": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Review of any Editor exact_replacements. Empty-array Editor briefs still need a short no-candidate note."
+      },
+      "owner_approval_required": {
+        "type": "boolean"
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_edit": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "required_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 450
+      }
+    },
+    "required": [
+      "target_page_or_slug",
+      "page_role",
+      "verdict",
+      "risk_level",
+      "approved_next_stage",
+      "blocking_issues",
+      "warnings",
+      "duplicate_intent_review",
+      "cluster_role_review",
+      "canonical_claim_review",
+      "template_safety_review",
+      "exact_replacement_review",
+      "owner_approval_required",
+      "owner_questions",
+      "required_context_before_edit",
+      "required_checks",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}
