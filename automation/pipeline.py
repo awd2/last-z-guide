@@ -505,6 +505,32 @@ def cmd_external_scout(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_external_evidence_refresh(
+    external_scout: str | None,
+    output_dir: str | None,
+    basename: str | None,
+    limit: int,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "external_evidence_refresh.py"),
+        "--limit",
+        str(limit),
+    ]
+    if external_scout:
+        command.extend(["--external-scout", external_scout])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if basename:
+        command.extend(["--basename", basename])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== External Evidence Refresh ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_editor(
     scout_result: str | None,
     scout_request: str | None,
@@ -2138,6 +2164,16 @@ def build_parser() -> argparse.ArgumentParser:
     external_scout_parser.add_argument("--limit", type=int, default=12, help="Maximum external candidate proposals.")
     external_scout_parser.add_argument("--json", action="store_true", help="Print the External Scout summary as JSON.")
 
+    external_evidence_refresh_parser = subparsers.add_parser(
+        "external-evidence-refresh",
+        help="Build a no-write evidence queue from External Scout artifacts.",
+    )
+    external_evidence_refresh_parser.add_argument("--external-scout", help="Path to an External Scout JSON artifact.")
+    external_evidence_refresh_parser.add_argument("--output-dir", help="Directory for External Evidence Refresh artifacts.")
+    external_evidence_refresh_parser.add_argument("--basename", help="Output basename without extension.")
+    external_evidence_refresh_parser.add_argument("--limit", type=int, default=20, help="Maximum query tasks and URL leads to include.")
+    external_evidence_refresh_parser.add_argument("--json", action="store_true", help="Print the External Evidence Refresh summary as JSON.")
+
     llm_editor_parser = subparsers.add_parser(
         "llm-editor",
         help="Run a no-write LLM Editor planning brief from one selected LLM Scout opportunity.",
@@ -2459,6 +2495,14 @@ def main() -> int:
             args.output_dir,
             args.basename,
             args.include_proposed,
+            args.limit,
+            args.json,
+        )
+    if args.command == "external-evidence-refresh":
+        return cmd_external_evidence_refresh(
+            args.external_scout,
+            args.output_dir,
+            args.basename,
             args.limit,
             args.json,
         )

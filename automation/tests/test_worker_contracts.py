@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, patch_planner, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, external_scout, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, external_evidence_refresh, external_scout, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -904,6 +904,38 @@ class WorkerContractTests(unittest.TestCase):
             self.assertFalse(payload["allows_content_edit"])
             self.assertTrue((tmp_path / "external-scout-fixture.json").exists())
             self.assertTrue((tmp_path / "external-scout-fixture.md").exists())
+
+    def test_external_evidence_refresh_writes_no_write_evidence_queue(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            registry_path = tmp_path / "source-registry.json"
+            external_path = tmp_path / "external-scout-fixture.json"
+            write_json(registry_path, fixture_external_source_registry())
+            external_scout.build_external_scout(
+                registry_path=registry_path,
+                output_dir=tmp_path,
+                basename="external-scout-fixture",
+                include_proposed=False,
+                limit=4,
+            )
+
+            code, payload = external_evidence_refresh.build_external_evidence_refresh(
+                external_scout_path=external_path,
+                output_dir=tmp_path,
+                basename="external-evidence-fixture",
+                limit=4,
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(payload["report_type"], "external_evidence_refresh")
+            self.assertEqual(payload["state"], "evidence_queue_ready")
+            self.assertEqual(payload["source_query_task_count"], 1)
+            self.assertEqual(payload["url_evidence_lead_count"], 1)
+            self.assertEqual(payload["claim_review_count"], 1)
+            self.assertFalse(payload["url_evidence_leads"][0]["public_claim_ready"])
+            self.assertFalse(payload["allows_content_edit"])
+            self.assertTrue((tmp_path / "external-evidence-fixture.json").exists())
+            self.assertTrue((tmp_path / "external-evidence-fixture.md").exists())
 
     def test_llm_scout_accepts_external_scout_proposals(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

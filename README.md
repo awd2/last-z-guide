@@ -116,6 +116,7 @@ python3 automation/pipeline.py worker-manifest --topic-id <topic_id> --created-b
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/pipeline.py llm-adapter --request <request.json> --provider openai --json
 python3 automation/pipeline.py external-scout --json
+python3 automation/pipeline.py external-evidence-refresh --external-scout automation/reports/external-scout.json --json
 python3 automation/pipeline.py llm-scout --provider openai --json
 python3 automation/pipeline.py llm-scout --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/pipeline.py llm-candidate-refresh --provider openai --json
@@ -149,6 +150,7 @@ python3 automation/workers/write_manifest.py --topic-id <topic_id> --created-by 
 python3 automation/workers/llm_adapter.py --request <request.json> --provider fixture --fixture <response.json> --json
 python3 automation/workers/llm_adapter.py --request <request.json> --provider openai --json
 python3 automation/workers/external_scout.py --json
+python3 automation/workers/external_evidence_refresh.py --external-scout automation/reports/external-scout.json --json
 python3 automation/workers/llm_scout.py --provider openai --json
 python3 automation/workers/llm_scout.py --external-proposals automation/reports/external-scout.json --provider openai --json
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
@@ -251,6 +253,14 @@ python3 automation/pipeline.py external-scout --json
 ```
 
 This reads `automation/memory/source_registry.json` and writes `automation/reports/external-scout.json` / `.md`. External sources are topic-discovery and cross-validation signals only; they must not be used to copy competitor wording or prove public claims from one source.
+
+To build a provider-ready no-write evidence queue from External Scout output:
+
+```bash
+python3 automation/pipeline.py external-evidence-refresh --external-scout automation/reports/external-scout.json --json
+```
+
+This writes `automation/reports/external-evidence-refresh.json` / `.md` with approved source queries, explicit URL leads, and claim review groups. It does not fetch live web content yet, prove claims, approve public copy, edit content, mutate backlog/manifests, open PRs, or deploy.
 
 For scheduled-style candidate generation from current GSC/Bing signals:
 
@@ -360,8 +370,8 @@ The consolidated no-write queue is available in GitHub Actions:
 - Workflow: `.github/workflows/llm-auto-review-queue.yml`
 - Schedule: daily
 - Manual dispatch: optional `model`, `max_chains`, and `include_existing` inputs
-- Push trigger: signal files, source registry, External Scout worker, and LLM worker infrastructure
-- External discovery: runs `external-scout` first and passes its generated artifact into `llm-auto-review-queue --external-proposals`
+- Push trigger: signal files, source registry, External Scout / Evidence workers, and LLM worker infrastructure
+- External discovery: runs `external-scout`, builds `external-evidence-refresh`, and passes the generated External Scout artifact into `llm-auto-review-queue --external-proposals`
 - Output: uploaded artifact plus committed `automation/reports/llm-auto-review-queue/` report artifacts only
 - Content/backlog/manifests/PRs/deploy modified: `false`
 
