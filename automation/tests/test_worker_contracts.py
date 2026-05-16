@@ -12,7 +12,7 @@ from unittest.mock import patch
 
 from automation.io import load_json, load_run_manifest, write_json, write_run_manifest
 from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_review_latest, llm_topic_decisions
-from automation import apply_approved, apply_preview, approval, close_run, patch_planner, proposal_renderer
+from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, proposal_renderer
 from automation.source_resolver import SourceResolution
 from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
@@ -619,6 +619,57 @@ class WorkerContractTests(unittest.TestCase):
         self.assertIn("Exact approved replacement candidate", rendered[0]["suggested_content"])
         self.assertIn("<p>Old approved-before copy.</p>", rendered[0]["suggested_content"])
         self.assertIn("<p>New owner-approved copy.</p>", rendered[0]["suggested_content"])
+
+    def test_exact_proposals_render_compact_before_after_only(self) -> None:
+        manifest = type(
+            "ManifestFixture",
+            (),
+            {
+                "run_id": "fixture-exact-review",
+                "status": "proposal_ready",
+                "summary": "Fixture exact owner review.",
+                "risk_level": "medium",
+                "artifacts": {
+                    "proposal": {
+                        "rendered_specs": [
+                            {
+                                "target_file": "sample.html",
+                                "source_of_truth_file": "sample.html",
+                                "output_file": "sample.html",
+                                "operation_type": "safe_exact_replace",
+                                "selector_or_anchor": ".guide-verified",
+                                "risk_level": "medium",
+                                "approval_state": "proposed",
+                                "human_approval_required": True,
+                                "proposed_change_summary": "Apply exact owner-reviewed copy.",
+                                "exact_old": "<p>Old approved-before copy.</p>",
+                                "exact_new": "<p>New owner-approved copy.</p>",
+                                "validation_commands": ["python3 scripts/prepublish_check.py"],
+                            },
+                            {
+                                "target_file": "sample.html",
+                                "source_of_truth_file": "sample.html",
+                                "output_file": "sample.html",
+                                "operation_type": "meta_refresh",
+                                "selector_or_anchor": "<title>",
+                            },
+                        ]
+                    }
+                },
+                "plan": {"target_page_or_slug": "sample.html"},
+            },
+        )()
+
+        review = exact_proposals.build_exact_review(manifest)
+        markdown = exact_proposals.render_markdown(review)
+
+        self.assertEqual(review["exact_proposal_count"], 1)
+        self.assertEqual(review["non_exact_proposal_count"], 1)
+        self.assertIn("Before:", markdown)
+        self.assertIn("After:", markdown)
+        self.assertIn("<p>Old approved-before copy.</p>", markdown)
+        self.assertIn("<p>New owner-approved copy.</p>", markdown)
+        self.assertNotIn("meta_refresh", markdown)
 
     def test_safe_exact_replace_apply_and_preview(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

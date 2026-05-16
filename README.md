@@ -104,6 +104,7 @@ python3 automation/pipeline.py open-topic <topic_id>
 python3 automation/pipeline.py open-run <run_id>
 python3 automation/pipeline.py recent-runs
 python3 automation/pipeline.py propose <run_id>
+python3 automation/pipeline.py exact-proposals <run_id>
 python3 automation/pipeline.py approval <run_id> --state approved --all --dry-run
 python3 automation/pipeline.py apply-preview <run_id>
 python3 automation/pipeline.py apply-approved <run_id>

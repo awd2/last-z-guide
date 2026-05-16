@@ -153,6 +153,23 @@ def cmd_propose(run_id: str, output_dir: str | None) -> int:
     return run_step("Proposal Renderer", command)
 
 
+def cmd_exact_proposals(run_id: str, output_dir: str | None, json_output: bool) -> int:
+    from automation.exact_proposals import render_exact_proposals, resolve_manifest_path, resolve_path
+
+    manifest_path = resolve_manifest_path(run_id)
+    report_dir = resolve_path(output_dir) if output_dir else REPORTS_DIR
+    review = render_exact_proposals(manifest_path, report_dir)
+    if json_output:
+        print(json.dumps(review, indent=2, ensure_ascii=False))
+    else:
+        paths = review["report_paths"]
+        print(f"Exact proposals: {review['exact_proposal_count']}")
+        print(f"Non-exact proposals hidden: {review['non_exact_proposal_count']}")
+        print(f"Markdown: {paths['markdown']}")
+        print(f"JSON: {paths['json']}")
+    return 0
+
+
 def cmd_approval(
     run_id: str,
     state: str,
@@ -2019,6 +2036,14 @@ def build_parser() -> argparse.ArgumentParser:
     propose_parser.add_argument("run_id", help="Run manifest path or basename without .json")
     propose_parser.add_argument("--output-dir", help="Directory for the proposal report.")
 
+    exact_proposals_parser = subparsers.add_parser(
+        "exact-proposals",
+        help="Render compact owner Before/After review for safe exact proposal specs.",
+    )
+    exact_proposals_parser.add_argument("run_id", help="Run manifest path or basename without .json")
+    exact_proposals_parser.add_argument("--output-dir", help="Directory for exact proposal reports.")
+    exact_proposals_parser.add_argument("--json", action="store_true", help="Print a machine-readable summary.")
+
     approval_parser = subparsers.add_parser(
         "approval",
         help="Record human approval decisions for rendered proposal specs.",
@@ -2534,6 +2559,8 @@ def main() -> int:
         return cmd_patch_plan(args.run_id, args.output_dir)
     if args.command == "propose":
         return cmd_propose(args.run_id, args.output_dir)
+    if args.command == "exact-proposals":
+        return cmd_exact_proposals(args.run_id, args.output_dir, args.json)
     if args.command == "approval":
         return cmd_approval(
             args.run_id,
