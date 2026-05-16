@@ -346,7 +346,7 @@ For a no-write LLM Editor planning brief from one selected Scout opportunity, ru
 python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider openai --json
 ```
 
-This writes `automation/reports/llm-editor-brief-<topic_id>-request.json`, `automation/reports/llm-editor-brief-<topic_id>-result.json`, and `automation/reports/llm-editor-brief-<topic_id>.md`. It is a planning brief only; it must not contain final user-visible page copy or applyable patch specs. For existing HTML update opportunities, optional `exact_replacements` are preferred when the deterministic context has safe source snippets, but they remain draft proposal data only and require later owner approval.
+This writes `automation/reports/llm-editor-brief-<topic_id>-request.json`, `automation/reports/llm-editor-brief-<topic_id>-result.json`, and `automation/reports/llm-editor-brief-<topic_id>.md`. It is a planning brief only; it must not contain final user-visible page copy or applyable patch specs. For existing HTML update opportunities, optional `exact_replacements` are preferred when the deterministic context has safe source snippets, but they remain draft proposal data only and require later owner approval. No-op exact candidates are dropped with a warning; unsafe candidates still block the Editor result.
 
 For a no-write LLM Reviewer gate from one LLM Editor brief, run:
 

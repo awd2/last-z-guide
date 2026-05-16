@@ -300,6 +300,33 @@ def validate_editor_response(result: dict[str, Any], topic_id: str, deterministi
     return errors
 
 
+def drop_noop_exact_replacements(result: dict[str, Any]) -> list[str]:
+    response = result.get("response_json")
+    if not isinstance(response, dict):
+        return []
+    replacements = response.get("exact_replacements")
+    if not isinstance(replacements, list):
+        return []
+
+    kept: list[dict[str, Any]] = []
+    warnings: list[str] = []
+    for index, item in enumerate(replacements, start=1):
+        if not isinstance(item, dict):
+            kept.append(item)
+            continue
+        exact_old = str(item.get("exact_old", ""))
+        exact_new = str(item.get("exact_new", ""))
+        if exact_old.strip() and exact_old.strip() == exact_new.strip():
+            warnings.append(f"Dropped no-op LLM Editor exact_replacements[{index}] because exact_new matched exact_old.")
+            continue
+        kept.append(item)
+
+    if len(kept) != len(replacements):
+        response["exact_replacements"] = kept
+        result.setdefault("warnings", []).extend(warnings)
+    return warnings
+
+
 def validate_exact_replacements(response: dict[str, Any], target: str) -> list[str]:
     errors: list[str] = []
     replacements = response.get("exact_replacements")
@@ -359,6 +386,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
     ]
     if result.get("errors"):
         lines.extend(["## Errors", "", md_list(result["errors"]), ""])
+    if result.get("warnings"):
+        lines.extend(["## Warnings", "", md_list(result["warnings"]), ""])
     if response:
         exact_lines = [
             f"{item.get('change_type', '')} `{item.get('file', '')}` at `{item.get('selector_or_anchor', '')}`; owner approval required: `{str(item.get('owner_approval_required')).lower()}`"
@@ -454,6 +483,7 @@ def run_llm_editor(
     )
     write_json(request_path, request)
     code, result = llm_adapter.run_adapter(request_path, provider, fixture_path)
+    drop_noop_exact_replacements(result)
     validation_errors = validate_editor_response(result, source_topic_id, deterministic_brief)
     if validation_errors:
         result = llm_adapter.blocked_result(request, provider, validation_errors, request_path)

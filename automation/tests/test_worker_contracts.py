@@ -1972,6 +1972,58 @@ class WorkerContractTests(unittest.TestCase):
 
         self.assertTrue(any("exactly once" in error for error in errors))
 
+    def test_llm_editor_drops_noop_exact_replacements_without_blocking(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            noop_snippet = fixture_codes_guide_verified_snippet()
+            editor_response = fixture_llm_editor_response()
+            editor_response["response_json"]["exact_replacements"] = [
+                {
+                    "file": "codes.html",
+                    "change_type": "first_screen_update",
+                    "selector_or_anchor": ".guide-verified",
+                    "exact_old": noop_snippet,
+                    "exact_new": noop_snippet,
+                    "reason": "No-op exact replacement should be dropped, not block the planning brief.",
+                    "owner_approval_required": True,
+                }
+            ]
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, editor_response)
+
+            scout_code, scout_payload = llm_scout.run_llm_scout(
+                signal_paths=[signals_path],
+                external_proposal_paths=[],
+                output_dir=tmp_path,
+                basename="llm-scout-fixture",
+                provider="fixture",
+                fixture_path=scout_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(scout_code, 0)
+
+            editor_code, editor_payload = llm_editor.run_llm_editor(
+                scout_result_path=Path(scout_payload["result_path"]),
+                scout_request_path=Path(scout_payload["request_path"]),
+                topic_id="codes-gsc-opportunity",
+                output_dir=tmp_path,
+                basename="llm-editor-fixture",
+                provider="fixture",
+                fixture_path=editor_fixture_path,
+            )
+
+            self.assertEqual(editor_code, 0)
+            self.assertEqual(editor_payload["adapter_result"]["state"], "completed")
+            self.assertEqual(editor_payload["adapter_result"]["response_json"]["exact_replacements"], [])
+            self.assertTrue(
+                any("Dropped no-op" in warning for warning in editor_payload["adapter_result"].get("warnings", []))
+            )
+
     def test_llm_exact_replacements_reach_intake_as_proposal_only(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

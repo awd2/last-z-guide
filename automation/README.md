@@ -609,6 +609,7 @@ LLM Editor planning brief:
 - for `update_existing` opportunities on existing HTML targets, the Editor request tells the model to prefer narrow `exact_replacements` when the deterministic context contains enough source text for an exact before/after proposal
 - for safer exact proposals, the deterministic Editor context includes limited raw target-page snippets under `current_page_snapshot.source_snippets`; this covers common guide-page snippets, quick-answer sections, recommended-route sections, how-to-use sections, and home-hub hero/header snippets; `exact_old` must be copied literally from current HTML and must match the target page exactly once or the LLM Editor result is blocked
 - `exact_new` must preserve existing HTML wrappers and template class names unless the owner explicitly requested a template change
+- no-op candidates where `exact_new` matches `exact_old` are dropped with a warning before strict validation; nonliteral `exact_old`, wrong target files, missing owner approval, and other unsafe candidates still block the Editor result
 
 LLM Reviewer gate:
 
