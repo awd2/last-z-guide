@@ -1,12 +1,12 @@
-# External Scout - 2026-05-16T16:31:19Z
+# External Scout - 2026-05-16T16:55:39Z
 
 ## Outcome
 
 - State: `external_scout_ready`
 - Registry: `automation/memory/source_registry.json`
-- Included sources: `11`
+- Included sources: `10`
 - Candidate proposals: `10`
-- Source query tasks: `10`
+- Source query tasks: `6`
 - Proposed sources awaiting owner review: `3`
 - Allows content edit: `false`
 - Allows backlog mutation: `false`
@@ -42,7 +42,7 @@
 ### external-gift-center-official-flow-validation
 
 - Title: External source opportunity: official Gift Center and store flow validation
-- Source: `official-functap-store: https://www.last-z.com`
+- Source: `official-functap-store: https://last-z.com`
 - Decision hint: `update_existing`
 - Target: `gift-center-uid.html`
 - Priority: `high`
@@ -204,26 +204,25 @@ Claims to verify:
 - hero_names
 - event_names
 
-### external-hero-entity-coverage-cross-check
+### external-official-ios-store-metadata-cross-check
 
-- Title: External source opportunity: hero roster and entity coverage cross-check
-- Source: `fandom-last-z-wiki: https://last-z-survival-shooter.fandom.com`
-- Decision hint: `update_existing`
-- Target: `heroes.html`
+- Title: External source opportunity: official iOS app metadata and update-cadence cross-check
+- Source: `official-apple-app-store: https://apps.apple.com`
+- Decision hint: `monitor`
+- Target: `about.html`
 - Priority: `medium`
-- Risk: `high`
+- Risk: `medium`
 - Cross-validation: `needs_second_source`
 
 Evidence:
 
-- Community wiki can surface hero/entity names that need comparison against entities.json and current hero pages.
+- Official iOS store listing can validate app identity, broad feature framing, and update cadence but not detailed mechanics.
 - External source URL recorded for later manual verification.
 
 Claims to verify:
 
-- hero_entity_names
-- season_hero_mapping
-- hero_tier_claims
+- official_app_identity
+- store_listing_metadata
 
 ### external-official-store-metadata-cross-check
 
@@ -247,10 +246,6 @@ Claims to verify:
 
 ## Source Query Tasks
 
-- `official-google-play-query-1` (high): site:play.google.com/store/apps/details Last Z Survival Shooter
-- `official-apple-app-store-query-1` (high): site:apps.apple.com Last Z Survival Shooter
-- `official-functap-store-query-1` (high): site:last-z.com giftCenter Last Z
-- `fandom-last-z-wiki-query-1` (medium): site:last-z-survival-shooter.fandom.com Last Z heroes research events
 - `lastzwiki-reference-query-1` (high): site:lastzwiki.com/en Last Z guide heroes research
 - `last-z-wiki-reference-query-1` (medium): site:last-z.wiki Last Z heroes events research cost
 - `lastz-command-center-one-query-1` (high): site:lastz-command-center-one.vercel.app Last Z

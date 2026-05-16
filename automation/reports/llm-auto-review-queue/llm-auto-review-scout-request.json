@@ -10,7 +10,8 @@
       "content/bing/latest-bing-agent-signals.json"
     ],
     "external_proposal_files": [
-      "automation/reports/llm-auto-review-queue/external-scout.json"
+      "automation/reports/llm-auto-review-queue/external-scout.json",
+      "automation/reports/llm-auto-review-queue/external-search-collect.json"
     ],
     "proposal_count": 8,
     "proposals": [
@@ -62,7 +63,7 @@
         "recommended_action": "update_existing",
         "archetype_suggestion": "support-guide",
         "target_page_or_slug": "gift-center-uid.html",
-        "source_reference": "official-functap-store: https://www.last-z.com",
+        "source_reference": "official-functap-store: https://last-z.com",
         "confidence": "high",
         "priority": "high",
         "risk_level": "medium",

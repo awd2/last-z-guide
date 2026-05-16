@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_auto_review_queue",
-  "generated_at": "2026-05-16T16:31:33Z",
+  "generated_at": "2026-05-16T16:56:23Z",
   "state": "current",
   "provider": "openai",
   "source_signal_files": [
@@ -9,7 +9,8 @@
     "content/bing/latest-bing-agent-signals.json"
   ],
   "external_proposal_files": [
-    "automation/reports/llm-auto-review-queue/external-scout.json"
+    "automation/reports/llm-auto-review-queue/external-scout.json",
+    "automation/reports/llm-auto-review-queue/external-search-collect.json"
   ],
   "candidate_refresh_path": "automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.json",
   "candidate_refresh_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.md",

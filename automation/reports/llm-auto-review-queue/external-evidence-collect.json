@@ -1,30 +1,68 @@
 {
   "schema_version": 1,
   "report_type": "external_evidence_collect",
-  "generated_at": "2026-05-16T16:31:22Z",
+  "generated_at": "2026-05-16T16:55:45Z",
   "state": "evidence_collection_partial",
   "provider": "fetch",
   "evidence_refresh_path": "automation/reports/llm-auto-review-queue/external-evidence-refresh.json",
-  "url_lead_count": 10,
-  "collected_count": 6,
-  "failed_count": 4,
-  "query_task_count": 10,
+  "url_lead_count": 11,
+  "collected_count": 10,
+  "failed_count": 1,
+  "query_task_count": 6,
   "collected_evidence": [
     {
       "lead_id": "url-external-gift-center-official-flow-validation-1",
       "topic_id": "external-gift-center-official-flow-validation",
       "source_id": "official-functap-store",
-      "source_reference": "official-functap-store: https://www.last-z.com",
+      "source_reference": "official-functap-store: https://last-z.com",
       "target_page_or_slug": "gift-center-uid.html",
-      "url": "https://www.last-z.com",
+      "url": "https://last-z.com/giftCenter/#/login",
       "claims_to_verify": [
         "gift-center-only-redeem-flow",
         "uid-required-for-gift-center"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:20Z",
-      "collection_status": "fetch_failed",
-      "error": "[Errno -2] Name or service not known"
+      "collected_at": "2026-05-16T16:55:39Z",
+      "collection_status": "collected",
+      "evidence_type": "metadata_and_short_snippet",
+      "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
+      "status_code": 200,
+      "final_url": "https://last-z.com/giftCenter/#/login",
+      "content_type": "text/html",
+      "bytes_read": 1179,
+      "truncated": false,
+      "title": "Last Z Code",
+      "meta_description": "",
+      "canonical_url": "",
+      "h1s": [],
+      "short_text_sample": "Last Z Code"
+    },
+    {
+      "lead_id": "url-external-gift-center-official-flow-validation-2",
+      "topic_id": "external-gift-center-official-flow-validation",
+      "source_id": "official-functap-store",
+      "source_reference": "official-functap-store: https://last-z.com",
+      "target_page_or_slug": "gift-center-uid.html",
+      "url": "https://store.last-z.com/#/order",
+      "claims_to_verify": [
+        "gift-center-only-redeem-flow",
+        "uid-required-for-gift-center"
+      ],
+      "public_claim_ready": false,
+      "collected_at": "2026-05-16T16:55:39Z",
+      "collection_status": "collected",
+      "evidence_type": "metadata_and_short_snippet",
+      "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
+      "status_code": 200,
+      "final_url": "https://store.last-z.com/#/order",
+      "content_type": "text/html",
+      "bytes_read": 2384,
+      "truncated": false,
+      "title": "Last Z Store",
+      "meta_description": "",
+      "canonical_url": "",
+      "h1s": [],
+      "short_text_sample": "Last Z Store"
     },
     {
       "lead_id": "url-external-hq-and-progression-reference-cross-check-1",
@@ -39,7 +77,7 @@
         "hq31_35_progression"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:20Z",
+      "collected_at": "2026-05-16T16:55:39Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -69,7 +107,7 @@
         "t10_path_order"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:20Z",
+      "collected_at": "2026-05-16T16:55:40Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -99,7 +137,7 @@
         "gear_materials"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:20Z",
+      "collected_at": "2026-05-16T16:55:40Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -128,7 +166,7 @@
         "calculator_player_job"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:21Z",
+      "collected_at": "2026-05-16T16:55:40Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -156,7 +194,7 @@
         "season_2_winter_vs_desert"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:21Z",
+      "collected_at": "2026-05-16T16:55:40Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -177,28 +215,28 @@
       "source_id": "mmediamreza-last-z-reference",
       "source_reference": "mmediamreza-last-z-reference: https://mmediamreza.com",
       "target_page_or_slug": "index.html",
-      "url": "https://mmediamreza.com",
+      "url": "https://mmediamreza.com/en/lastz-news/last_z_survival_shooter_gift_codes_april_2026_always_updated/2026-04-24-19",
       "claims_to_verify": [
         "new_topic_fit",
         "duplicate_intent_risk"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:21Z",
+      "collected_at": "2026-05-16T16:55:41Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
       "status_code": 200,
-      "final_url": "https://mmediamreza.com",
+      "final_url": "https://mmediamreza.com/en/lastz/gift-codes",
       "content_type": "text/html; charset=UTF-8",
-      "bytes_read": 46120,
+      "bytes_read": 77241,
       "truncated": false,
-      "title": "Mmedia Mreža – Magazin, Radio, Influenseri, Misterije i Zabava",
-      "meta_description": "Mmedia Mreža je portal sa temama iz sveta misterija, magazina, influensera, radio stanica, zabave i zanimljivih priča iz Srbije i regiona.",
-      "canonical_url": "https://mmediamreza.com/",
+      "title": "Gift Codes – Always Updated! (UPDATED: MAY 12, 2026) - | Last Z: Survival Shooter",
+      "meta_description": "Get the latest active gift codes for Last Z: Survival Shooter. This page is updated daily with new rewards. Learn how to redeem and get free diamonds!",
+      "canonical_url": "https://mmediamreza.com/en/lastz/gift-codes",
       "h1s": [
-        "Mmedia Mreža"
+        "Gift Codes – Always Updated! (UPDATED: MAY 12, 2026) | Last Z: Survival Shooter"
       ],
-      "short_text_sample": "Mmedia Mreža – Magazin, Radio, Influenseri, Misterije i Zabava RADIO LIVE Početna Misterije Paranormalno NLO / UFO Legende i mitovi Jeziva mesta Horor priče Creepypasta Svemir Snovi Teorije zavere Pogledaj sve Izdvojeno Najzanimljivije priče iz sveta mister..."
+      "short_text_sample": "Gift Codes – Always Updated! (UPDATED: MAY 12, 2026) - | Last Z: Survival Shooter TRANSLATE SITE: HOME NEWS GUIDES GIFT CODES MIGRATION Apocalyptic CALCULATOR MIGRATION CALCULATOR ABOUT US/CONTACT SERVER TIME 00:00:00 RESET IN 00H 00M >>> NEXT RESET PROTOCO..."
     },
     {
       "lead_id": "url-external-hero-and-event-entity-cross-check-1",
@@ -206,35 +244,48 @@
       "source_id": "lastz-fandom-reference",
       "source_reference": "lastz-fandom-reference: https://lastz.fandom.com",
       "target_page_or_slug": "heroes.html",
-      "url": "https://lastz.fandom.com",
+      "url": "https://lastz.fandom.com/wiki/Event_Center",
       "claims_to_verify": [
         "entity_aliases",
         "hero_names",
         "event_names"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:22Z",
+      "collected_at": "2026-05-16T16:55:43Z",
       "collection_status": "fetch_failed",
       "status_code": 403,
       "error": "HTTP Error 403: Forbidden"
     },
     {
-      "lead_id": "url-external-hero-entity-coverage-cross-check-1",
-      "topic_id": "external-hero-entity-coverage-cross-check",
-      "source_id": "fandom-last-z-wiki",
-      "source_reference": "fandom-last-z-wiki: https://last-z-survival-shooter.fandom.com",
-      "target_page_or_slug": "heroes.html",
-      "url": "https://last-z-survival-shooter.fandom.com",
+      "lead_id": "url-external-official-ios-store-metadata-cross-check-1",
+      "topic_id": "external-official-ios-store-metadata-cross-check",
+      "source_id": "official-apple-app-store",
+      "source_reference": "official-apple-app-store: https://apps.apple.com",
+      "target_page_or_slug": "about.html",
+      "url": "https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652",
       "claims_to_verify": [
-        "hero_entity_names",
-        "season_hero_mapping",
-        "hero_tier_claims"
+        "official_app_identity",
+        "store_listing_metadata"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:22Z",
-      "collection_status": "fetch_failed",
-      "status_code": 403,
-      "error": "HTTP Error 403: Forbidden"
+      "collected_at": "2026-05-16T16:55:43Z",
+      "collection_status": "collected",
+      "evidence_type": "metadata_and_short_snippet",
+      "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
+      "status_code": 200,
+      "final_url": "https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652",
+      "content_type": "text/html",
+      "bytes_read": 644188,
+      "truncated": false,
+      "title": "‎Last Z: Survival Shooter App - App Store",
+      "meta_description": "Download Last Z: Survival Shooter by Omnilojo Pte Ltd on the App Store. See screenshots, ratings and reviews, user tips, and more apps like Last Z: Survival…",
+      "canonical_url": "https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652",
+      "h1s": [
+        "Last Z: Survival Shooter",
+        "An A.I infested game, but addicting",
+        "New ways to make you pay"
+      ],
+      "short_text_sample": "‎Last Z: Survival Shooter App - App Store for iPhone iPhone iPad Mac Vision Watch TV Search Today Games Apps Arcade Platform iPhone iPad Mac Vision Watch TV Last Z: Survival Shooter Strategy Free · In‑App Purchases Share 86K Ratings 4.8 Age Rating 16+ Years..."
     },
     {
       "lead_id": "url-external-official-store-metadata-cross-check-1",
@@ -242,94 +293,29 @@
       "source_id": "official-google-play",
       "source_reference": "official-google-play: https://play.google.com",
       "target_page_or_slug": "about.html",
-      "url": "https://play.google.com/store/apps/details?id=com.global.lastz",
+      "url": "https://play.google.com/store/apps/details?id=com.readygo.barrel.gp",
       "claims_to_verify": [
         "official_app_identity",
         "store_listing_metadata"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-16T16:31:22Z",
-      "collection_status": "fetch_failed",
-      "status_code": 404,
-      "error": "HTTP Error 404: Not Found"
+      "collected_at": "2026-05-16T16:55:43Z",
+      "collection_status": "collected",
+      "evidence_type": "metadata_and_short_snippet",
+      "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
+      "status_code": 200,
+      "final_url": "https://play.google.com/store/apps/details?id=com.readygo.barrel.gp",
+      "content_type": "text/html; charset=utf-8",
+      "bytes_read": 750000,
+      "truncated": true,
+      "title": "",
+      "meta_description": "",
+      "canonical_url": "",
+      "h1s": [],
+      "short_text_sample": "body,html{height:100%;overflow:hidden}body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:rgba(0,0,0,0.87);font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;margin:0;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100..."
     }
   ],
   "query_tasks_deferred": [
-    {
-      "task_id": "official-google-play-query-1",
-      "task_type": "source_query",
-      "source_id": "official-google-play",
-      "source_name": "Last Z: Survival Shooter on Google Play",
-      "base_url": "https://play.google.com",
-      "trust_level": "high",
-      "query": "site:play.google.com/store/apps/details Last Z Survival Shooter",
-      "allowed_uses": [
-        "official_metadata",
-        "topic_discovery",
-        "cross_validation"
-      ],
-      "crawl_policy": "explicit_url_only",
-      "freshness_window_days": 30,
-      "collection_status": "pending_search_provider",
-      "public_claim_ready": false,
-      "notes": "Official app-store listing. Good for official description, developer identity, app availability, update cadence, and broad feature framing; not enough for detailed mechanics or costs."
-    },
-    {
-      "task_id": "official-apple-app-store-query-1",
-      "task_type": "source_query",
-      "source_id": "official-apple-app-store",
-      "source_name": "Last Z: Survival Shooter on Apple App Store",
-      "base_url": "https://apps.apple.com",
-      "trust_level": "high",
-      "query": "site:apps.apple.com Last Z Survival Shooter",
-      "allowed_uses": [
-        "official_metadata",
-        "topic_discovery",
-        "cross_validation"
-      ],
-      "crawl_policy": "explicit_url_only",
-      "freshness_window_days": 30,
-      "collection_status": "pending_search_provider",
-      "public_claim_ready": false,
-      "notes": "Official iOS listing. Useful for official metadata, version/update context, app category, and broad game framing; not enough for detailed mechanics or costs."
-    },
-    {
-      "task_id": "official-functap-store-query-1",
-      "task_type": "source_query",
-      "source_id": "official-functap-store",
-      "source_name": "FunTap Last Z store and Gift Center",
-      "base_url": "https://www.last-z.com",
-      "trust_level": "high",
-      "query": "site:last-z.com giftCenter Last Z",
-      "allowed_uses": [
-        "official_service_validation",
-        "cross_validation"
-      ],
-      "crawl_policy": "explicit_url_only",
-      "freshness_window_days": 30,
-      "collection_status": "pending_search_provider",
-      "public_claim_ready": false,
-      "notes": "Official-looking Last Z service domain used for Gift Center and store flow validation. Use only to verify official redeem/store routing, not game mechanics."
-    },
-    {
-      "task_id": "fandom-last-z-wiki-query-1",
-      "task_type": "source_query",
-      "source_id": "fandom-last-z-wiki",
-      "source_name": "Last Z: Survival Shooter Wiki on Fandom",
-      "base_url": "https://last-z-survival-shooter.fandom.com",
-      "trust_level": "medium",
-      "query": "site:last-z-survival-shooter.fandom.com Last Z heroes research events",
-      "allowed_uses": [
-        "topic_discovery",
-        "entity_discovery",
-        "cross_validation"
-      ],
-      "crawl_policy": "explicit_url_only",
-      "freshness_window_days": 90,
-      "collection_status": "pending_search_provider",
-      "public_claim_ready": false,
-      "notes": "Community wiki. Useful for entity/topic discovery and rough cross-checking. Public claims must be verified elsewhere because wiki pages can be incomplete, outdated, or user-edited."
-    },
     {
       "task_id": "lastzwiki-reference-query-1",
       "task_type": "source_query",
@@ -402,7 +388,7 @@
       "freshness_window_days": 90,
       "collection_status": "pending_search_provider",
       "public_claim_ready": false,
-      "notes": "Owner-approved high-trust Fandom wiki source. Use for topic/entity discovery and cross-validation; verify mechanics before public copy."
+      "notes": "Owner-approved high-trust Fandom wiki source. Use for topic/entity discovery and cross-validation; verify mechanics before public copy. Live source triage on 2026-05-16 found direct fetch can return 403, so use the search provider for this source instead of treating fetch failures as source failure."
     },
     {
       "task_id": "packsify-last-z-gear-guide-query-1",
@@ -440,7 +426,7 @@
       "freshness_window_days": 90,
       "collection_status": "pending_search_provider",
       "public_claim_ready": false,
-      "notes": "Owner-approved medium-trust guide/reference source. Use for topic discovery and cross-validation only; verify specific claims before public copy."
+      "notes": "Owner-approved medium-trust guide/reference source, but use exact Last Z pages rather than the generic homepage. Live source triage on 2026-05-16 found the root metadata too generic for evidence; keep this source limited to Last Z-specific URLs surfaced by search."
     }
   ],
   "claim_collection_summary": [
@@ -461,7 +447,7 @@
         "mmediamreza-last-z-reference"
       ],
       "collected_urls": [
-        "https://mmediamreza.com"
+        "https://mmediamreza.com/en/lastz-news/last_z_survival_shooter_gift_codes_april_2026_always_updated/2026-04-24-19"
       ],
       "review_status": "collected_single_source_needs_cross_validation",
       "public_claim_ready": false
@@ -522,6 +508,18 @@
       "public_claim_ready": false
     },
     {
+      "claim_id": "gift-center-only-redeem-flow",
+      "collected_source_ids": [
+        "official-functap-store"
+      ],
+      "collected_urls": [
+        "https://last-z.com/giftCenter/#/login",
+        "https://store.last-z.com/#/order"
+      ],
+      "review_status": "collected_multiple_sources_needs_human_validation",
+      "public_claim_ready": false
+    },
+    {
       "claim_id": "hq31_35_progression",
       "collected_source_ids": [
         "lastzwiki-reference"
@@ -560,9 +558,22 @@
         "mmediamreza-last-z-reference"
       ],
       "collected_urls": [
-        "https://mmediamreza.com"
+        "https://mmediamreza.com/en/lastz-news/last_z_survival_shooter_gift_codes_april_2026_always_updated/2026-04-24-19"
       ],
       "review_status": "collected_single_source_needs_cross_validation",
+      "public_claim_ready": false
+    },
+    {
+      "claim_id": "official_app_identity",
+      "collected_source_ids": [
+        "official-apple-app-store",
+        "official-google-play"
+      ],
+      "collected_urls": [
+        "https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652",
+        "https://play.google.com/store/apps/details?id=com.readygo.barrel.gp"
+      ],
+      "review_status": "collected_multiple_sources_needs_human_validation",
       "public_claim_ready": false
     },
     {
@@ -599,6 +610,19 @@
       "public_claim_ready": false
     },
     {
+      "claim_id": "store_listing_metadata",
+      "collected_source_ids": [
+        "official-apple-app-store",
+        "official-google-play"
+      ],
+      "collected_urls": [
+        "https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652",
+        "https://play.google.com/store/apps/details?id=com.readygo.barrel.gp"
+      ],
+      "review_status": "collected_multiple_sources_needs_human_validation",
+      "public_claim_ready": false
+    },
+    {
       "claim_id": "t10_path_order",
       "collected_source_ids": [
         "stresswar-lastz-reference"
@@ -618,6 +642,18 @@
         "https://lastz-command-center-one.vercel.app"
       ],
       "review_status": "collected_single_source_needs_cross_validation",
+      "public_claim_ready": false
+    },
+    {
+      "claim_id": "uid-required-for-gift-center",
+      "collected_source_ids": [
+        "official-functap-store"
+      ],
+      "collected_urls": [
+        "https://last-z.com/giftCenter/#/login",
+        "https://store.last-z.com/#/order"
+      ],
+      "review_status": "collected_multiple_sources_needs_human_validation",
       "public_claim_ready": false
     }
   ],

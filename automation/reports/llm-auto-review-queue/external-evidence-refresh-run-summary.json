@@ -1,8 +1,8 @@
 {
   "state": "evidence_queue_ready",
-  "source_query_task_count": 10,
-  "url_evidence_lead_count": 10,
-  "claim_review_count": 25,
+  "source_query_task_count": 6,
+  "url_evidence_lead_count": 11,
+  "claim_review_count": 22,
   "output_path": "automation/reports/llm-auto-review-queue/external-evidence-refresh.json",
   "markdown_path": "automation/reports/llm-auto-review-queue/external-evidence-refresh.md",
   "errors": [],

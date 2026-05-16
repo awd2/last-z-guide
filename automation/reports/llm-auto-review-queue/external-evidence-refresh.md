@@ -1,12 +1,12 @@
-# External Evidence Refresh - 2026-05-16T16:31:20Z
+# External Evidence Refresh - 2026-05-16T16:55:39Z
 
 ## Outcome
 
 - State: `evidence_queue_ready`
 - External Scout: `automation/reports/llm-auto-review-queue/external-scout.json`
-- Source query tasks: `10`
-- URL evidence leads: `10`
-- Claim review groups: `25`
+- Source query tasks: `6`
+- URL evidence leads: `11`
+- Claim review groups: `22`
 - Allows content edit: `false`
 - Allows backlog mutation: `false`
 - Allows manifest mutation: `false`
@@ -15,10 +15,6 @@
 
 ## Source Query Tasks
 
-- `official-google-play-query-1` (high): site:play.google.com/store/apps/details Last Z Survival Shooter
-- `official-apple-app-store-query-1` (high): site:apps.apple.com Last Z Survival Shooter
-- `official-functap-store-query-1` (high): site:last-z.com giftCenter Last Z
-- `fandom-last-z-wiki-query-1` (medium): site:last-z-survival-shooter.fandom.com Last Z heroes research events
 - `lastzwiki-reference-query-1` (high): site:lastzwiki.com/en Last Z guide heroes research
 - `last-z-wiki-reference-query-1` (medium): site:last-z.wiki Last Z heroes events research cost
 - `lastz-command-center-one-query-1` (high): site:lastz-command-center-one.vercel.app Last Z
@@ -31,9 +27,22 @@
 ### url-external-gift-center-official-flow-validation-1
 
 - Topic: `external-gift-center-official-flow-validation`
-- Source: `official-functap-store: https://www.last-z.com`
+- Source: `official-functap-store: https://last-z.com`
 - Target: `gift-center-uid.html`
-- URL: `https://www.last-z.com`
+- URL: `https://last-z.com/giftCenter/#/login`
+- Cross-validation: `owner_approved_source_needs_live_check`
+- Public claim ready: `false`
+
+Claims to verify:
+- gift-center-only-redeem-flow
+- uid-required-for-gift-center
+
+### url-external-gift-center-official-flow-validation-2
+
+- Topic: `external-gift-center-official-flow-validation`
+- Source: `official-functap-store: https://last-z.com`
+- Target: `gift-center-uid.html`
+- URL: `https://store.last-z.com/#/order`
 - Cross-validation: `owner_approved_source_needs_live_check`
 - Public claim ready: `false`
 
@@ -115,7 +124,7 @@ Claims to verify:
 - Topic: `external-general-guide-gap-cross-check`
 - Source: `mmediamreza-last-z-reference: https://mmediamreza.com`
 - Target: `index.html`
-- URL: `https://mmediamreza.com`
+- URL: `https://mmediamreza.com/en/lastz-news/last_z_survival_shooter_gift_codes_april_2026_always_updated/2026-04-24-19`
 - Cross-validation: `needs_source_triage`
 - Public claim ready: `false`
 
@@ -128,7 +137,7 @@ Claims to verify:
 - Topic: `external-hero-and-event-entity-cross-check`
 - Source: `lastz-fandom-reference: https://lastz.fandom.com`
 - Target: `heroes.html`
-- URL: `https://lastz.fandom.com`
+- URL: `https://lastz.fandom.com/wiki/Event_Center`
 - Cross-validation: `needs_second_source`
 - Public claim ready: `false`
 
@@ -137,26 +146,25 @@ Claims to verify:
 - hero_names
 - event_names
 
-### url-external-hero-entity-coverage-cross-check-1
+### url-external-official-ios-store-metadata-cross-check-1
 
-- Topic: `external-hero-entity-coverage-cross-check`
-- Source: `fandom-last-z-wiki: https://last-z-survival-shooter.fandom.com`
-- Target: `heroes.html`
-- URL: `https://last-z-survival-shooter.fandom.com`
+- Topic: `external-official-ios-store-metadata-cross-check`
+- Source: `official-apple-app-store: https://apps.apple.com`
+- Target: `about.html`
+- URL: `https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652`
 - Cross-validation: `needs_second_source`
 - Public claim ready: `false`
 
 Claims to verify:
-- hero_entity_names
-- season_hero_mapping
-- hero_tier_claims
+- official_app_identity
+- store_listing_metadata
 
 ### url-external-official-store-metadata-cross-check-1
 
 - Topic: `external-official-store-metadata-cross-check`
 - Source: `official-google-play: https://play.google.com`
 - Target: `about.html`
-- URL: `https://play.google.com/store/apps/details?id=com.global.lastz`
+- URL: `https://play.google.com/store/apps/details?id=com.readygo.barrel.gp`
 - Cross-validation: `needs_second_source`
 - Public claim ready: `false`
 
@@ -174,23 +182,20 @@ Claims to verify:
 - `event_rotation`: needs_cross_validation; sources=1; public_claim_ready=false
 - `gear_materials`: needs_cross_validation; sources=1; public_claim_ready=false
 - `gear_upgrade_order`: needs_cross_validation; sources=1; public_claim_ready=false
-- `gift-center-only-redeem-flow`: needs_cross_validation; sources=1; public_claim_ready=false
-- `hero_entity_names`: needs_cross_validation; sources=1; public_claim_ready=false
+- `gift-center-only-redeem-flow`: has_multiple_source_leads_needs_human_validation; sources=1; public_claim_ready=false
 - `hero_names`: needs_cross_validation; sources=1; public_claim_ready=false
-- `hero_tier_claims`: needs_cross_validation; sources=1; public_claim_ready=false
 - `hq31_35_progression`: needs_cross_validation; sources=1; public_claim_ready=false
 - `hq_requirements`: needs_cross_validation; sources=1; public_claim_ready=false
 - `hq_resource_costs`: needs_cross_validation; sources=1; public_claim_ready=false
 - `new_topic_fit`: needs_cross_validation; sources=1; public_claim_ready=false
-- `official_app_identity`: needs_cross_validation; sources=1; public_claim_ready=false
+- `official_app_identity`: has_multiple_source_leads_needs_human_validation; sources=2; public_claim_ready=false
 - `research_branch_costs`: needs_cross_validation; sources=1; public_claim_ready=false
 - `research_branch_unlocks`: needs_cross_validation; sources=1; public_claim_ready=false
 - `season_2_winter_vs_desert`: needs_cross_validation; sources=1; public_claim_ready=false
-- `season_hero_mapping`: needs_cross_validation; sources=1; public_claim_ready=false
-- `store_listing_metadata`: needs_cross_validation; sources=1; public_claim_ready=false
+- `store_listing_metadata`: has_multiple_source_leads_needs_human_validation; sources=2; public_claim_ready=false
 - `t10_path_order`: needs_cross_validation; sources=1; public_claim_ready=false
 - `tool_gap`: needs_cross_validation; sources=1; public_claim_ready=false
-- `uid-required-for-gift-center`: needs_cross_validation; sources=1; public_claim_ready=false
+- `uid-required-for-gift-center`: has_multiple_source_leads_needs_human_validation; sources=1; public_claim_ready=false
 
 ## Next Actions
 

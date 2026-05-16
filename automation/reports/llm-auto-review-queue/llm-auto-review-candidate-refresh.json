@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_candidate_refresh",
-  "generated_at": "2026-05-16T16:31:33Z",
+  "generated_at": "2026-05-16T16:56:23Z",
   "state": "candidate_refresh_ready",
   "provider": "openai",
   "source_signal_files": [
@@ -9,7 +9,8 @@
     "content/bing/latest-bing-agent-signals.json"
   ],
   "external_proposal_files": [
-    "automation/reports/llm-auto-review-queue/external-scout.json"
+    "automation/reports/llm-auto-review-queue/external-scout.json",
+    "automation/reports/llm-auto-review-queue/external-search-collect.json"
   ],
   "source_proposal_count": 8,
   "candidate_topic_count": 1,

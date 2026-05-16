@@ -1,0 +1,12 @@
+{
+  "state": "search_collected",
+  "provider": "openai",
+  "search_task_count": 6,
+  "searched_count": 6,
+  "failed_count": 0,
+  "candidate_proposal_count": 9,
+  "output_path": "automation/reports/llm-auto-review-queue/external-search-collect.json",
+  "markdown_path": "automation/reports/llm-auto-review-queue/external-search-collect.md",
+  "errors": [],
+  "safety": "No content, backlog, manifest, PR, or production files were modified by External Search Collect."
+}
