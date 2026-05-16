@@ -150,7 +150,14 @@ def cmd_propose(run_id: str, output_dir: str | None) -> int:
     command = [sys.executable, str(AUTOMATION_DIR / "proposal_renderer.py"), run_id]
     if output_dir:
         command.extend(["--output-dir", output_dir])
-    return run_step("Proposal Renderer", command)
+    code = run_step("Proposal Renderer", command)
+    if code:
+        return code
+
+    exact_command = [sys.executable, str(AUTOMATION_DIR / "exact_proposals.py"), run_id]
+    if output_dir:
+        exact_command.extend(["--output-dir", output_dir])
+    return run_step("Exact Proposal Review", exact_command)
 
 
 def cmd_exact_proposals(run_id: str, output_dir: str | None, json_output: bool) -> int:
@@ -1285,6 +1292,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     patch_path = ROOT / patch_path_value if patch_path_value else None
     proposal_path_value = proposal_context.get("report_path")
     proposal_path = ROOT / proposal_path_value if proposal_path_value else None
+    exact_proposals_path = REPORTS_DIR / f"{manifest.run_id}.exact-proposals.md"
     apply_preview_path_value = apply_preview_context.get("report_path")
     apply_preview_path = ROOT / apply_preview_path_value if apply_preview_path_value else None
     apply_result_path_value = apply_result_context.get("report_path")
@@ -1326,6 +1334,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
             "editor_brief": str(brief_path.relative_to(ROOT)) if brief_path and brief_path.exists() else None,
             "patch_plan": str(patch_path.relative_to(ROOT)) if patch_path and patch_path.exists() else None,
             "proposal": str(proposal_path.relative_to(ROOT)) if proposal_path and proposal_path.exists() else None,
+            "exact_proposals": str(exact_proposals_path.relative_to(ROOT)) if exact_proposals_path.exists() else None,
             "apply_preview": str(apply_preview_path.relative_to(ROOT))
             if apply_preview_path and apply_preview_path.exists()
             else None,
@@ -1425,6 +1434,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
         print(f"- rendered_specs: {len(rendered_specs)}")
         if report_path:
             print(f"- report_path: {report_path}")
+        print(f"- exact_proposals: {exact_proposals_path.relative_to(ROOT) if exact_proposals_path.exists() else 'not generated yet'}")
     if apply_preview_context:
         print("\nApply Preview Context")
         report_path = apply_preview_context.get("report_path")
@@ -1462,6 +1472,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     print(f"- editor brief: {brief_path.relative_to(ROOT) if brief_path and brief_path.exists() else 'not generated yet'}")
     print(f"- patch plan: {patch_path.relative_to(ROOT) if patch_path and patch_path.exists() else 'not generated yet'}")
     print(f"- proposal: {proposal_path.relative_to(ROOT) if proposal_path and proposal_path.exists() else 'not generated yet'}")
+    print(f"- exact proposals: {exact_proposals_path.relative_to(ROOT) if exact_proposals_path.exists() else 'not generated yet'}")
     print(
         f"- apply preview: {apply_preview_path.relative_to(ROOT) if apply_preview_path and apply_preview_path.exists() else 'not generated yet'}"
     )
@@ -1508,14 +1519,14 @@ def cmd_next_step(run_id: str, as_json: bool) -> int:
             "recommended_command": f"python3 automation/pipeline.py propose {run_id}",
             "requires_human_review": False,
             "requires_manual_edit_gate": False,
-            "reason": "The run has Patch Spec v1 metadata and can render a human-reviewable proposal artifact next.",
+            "reason": "The run has Patch Spec v1 metadata and can render the proposal report plus compact exact Before / After owner view next.",
         },
         "proposal_ready": {
             "next_step": f"python3 automation/pipeline.py approval {run_id} --state approved --all",
             "recommended_command": None,
             "requires_human_review": True,
             "requires_manual_edit_gate": True,
-            "reason": "The run has proposed edits and now needs human review. Approve or reject specs before any apply step.",
+            "reason": "The run has proposed edits and now needs human review. Review the compact exact-proposals report when present, then approve or reject specs before any apply step.",
         },
         "partially_approved": {
             "next_step": "review_remaining_proposal_specs",
@@ -1623,6 +1634,7 @@ def cmd_show(run_id: str, as_json: bool) -> int:
     patch_path = ROOT / patch_path_value if patch_path_value else None
     proposal_path_value = proposal_context.get("report_path")
     proposal_path = ROOT / proposal_path_value if proposal_path_value else None
+    exact_proposals_path = REPORTS_DIR / f"{manifest.run_id}.exact-proposals.md"
     apply_preview_path_value = apply_preview_context.get("report_path")
     apply_preview_path = ROOT / apply_preview_path_value if apply_preview_path_value else None
     apply_result_path_value = apply_result_context.get("report_path")
@@ -1647,6 +1659,7 @@ def cmd_show(run_id: str, as_json: bool) -> int:
             "editor_brief": str(brief_path.relative_to(ROOT)) if brief_path and brief_path.exists() else None,
             "patch_plan": str(patch_path.relative_to(ROOT)) if patch_path and patch_path.exists() else None,
             "proposal": str(proposal_path.relative_to(ROOT)) if proposal_path and proposal_path.exists() else None,
+            "exact_proposals": str(exact_proposals_path.relative_to(ROOT)) if exact_proposals_path.exists() else None,
             "apply_preview": str(apply_preview_path.relative_to(ROOT))
             if apply_preview_path and apply_preview_path.exists()
             else None,
@@ -1695,6 +1708,10 @@ def cmd_show(run_id: str, as_json: bool) -> int:
         print(f"Proposal: {proposal_path.relative_to(ROOT)}")
     else:
         print("Proposal: not generated yet")
+    if exact_proposals_path.exists():
+        print(f"Exact proposals: {exact_proposals_path.relative_to(ROOT)}")
+    else:
+        print("Exact proposals: not generated yet")
     if apply_preview_path and apply_preview_path.exists():
         print(f"Apply preview: {apply_preview_path.relative_to(ROOT)}")
     else:

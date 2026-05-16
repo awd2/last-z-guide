@@ -351,7 +351,9 @@ This writes `automation/reports/llm-editor-brief-<topic_id>-request.json`, `auto
 
 When those exact replacements move through intake into `patch-plan`, the
 proposal flow stays exact-only: it does not add broad manual placeholders like
-`meta_refresh` beside the approved before/after candidate.
+`meta_refresh` beside the approved before/after candidate. The `propose` step
+also renders `exact-proposals`, so owner review can focus on the compact
+Before / After text before any approval or apply step.
 
 For a no-write LLM Reviewer gate from one LLM Editor brief, run:
 

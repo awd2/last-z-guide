@@ -309,9 +309,10 @@ If approved intake carries draft `exact_replacements`, the downstream
 adding generic manual-review placeholders. This keeps owner review focused on
 applyable before/after text.
 
-After `propose`, operators can run `exact-proposals` for a compact owner-facing
+`propose` automatically renders `exact-proposals` for a compact owner-facing
 review that shows only `safe_exact_replace` Before / After text, risk, approval
-state, and required checks. This command is still report-only: it does not
+state, and required checks. Operators can rerun `exact-proposals` directly to
+refresh that compact view. This command is still report-only: it does not
 approve, apply, mutate the manifest, edit content, open PRs, or deploy.
 
 An approved LLM intake can be passed to the existing run-plan command with:

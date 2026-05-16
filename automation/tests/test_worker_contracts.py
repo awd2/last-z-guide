@@ -12,7 +12,7 @@ from unittest.mock import patch
 
 from automation.io import load_json, load_run_manifest, write_json, write_run_manifest
 from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_review_latest, llm_topic_decisions
-from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, proposal_renderer
+from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, proposal_renderer
 from automation.source_resolver import SourceResolution
 from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
@@ -670,6 +670,23 @@ class WorkerContractTests(unittest.TestCase):
         self.assertIn("<p>Old approved-before copy.</p>", markdown)
         self.assertIn("<p>New owner-approved copy.</p>", markdown)
         self.assertNotIn("meta_refresh", markdown)
+
+    def test_pipeline_propose_renders_exact_proposals_after_proposal_report(self) -> None:
+        calls: list[tuple[str, list[str]]] = []
+
+        def fake_run_step(name: str, command: list[str]) -> int:
+            calls.append((name, command))
+            return 0
+
+        with patch.object(pipeline, "run_step", fake_run_step):
+            code = pipeline.cmd_propose("fixture-run", "/tmp/proposal-output")
+
+        self.assertEqual(code, 0)
+        self.assertEqual([name for name, _command in calls], ["Proposal Renderer", "Exact Proposal Review"])
+        self.assertIn("proposal_renderer.py", calls[0][1][1])
+        self.assertIn("exact_proposals.py", calls[1][1][1])
+        self.assertEqual(calls[0][1][-2:], ["--output-dir", "/tmp/proposal-output"])
+        self.assertEqual(calls[1][1][-2:], ["--output-dir", "/tmp/proposal-output"])
 
     def test_safe_exact_replace_apply_and_preview(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

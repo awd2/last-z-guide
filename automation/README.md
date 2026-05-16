@@ -435,7 +435,7 @@ Lifecycle shorthand:
 - `review` -> take an existing `planned` manifest to `reviewed`
 - `brief` -> create a brief-only editor artifact and move the run to `draft_brief_ready`
 - `patch-plan` -> create a proposal-only patch artifact and move the run to `patch_plan_ready`
-- `propose` -> render human-reviewable proposed edits and move the run to `proposal_ready`
+- `propose` -> render human-reviewable proposed edits plus the compact exact Before / After owner view, then move the run to `proposal_ready`
 - `exact-proposals` -> render a compact owner-review Before / After report for exact safe replacement specs only; it does not approve or apply anything
 - `brief`, `patch-plan`, `propose`, and `exact-proposals` also accept a manifest path plus `--output-dir <dir>` for staged Worker e2e checks outside `automation/reports`
 - `approval` -> record human approval decisions for proposal specs; still does not edit site content
@@ -1006,24 +1006,22 @@ When these snippets originate from LLM Editor, `exact_old` is validated against
 the current target HTML before the chain can continue.
 
 `propose` reads Patch Spec v1 entries and renders a human-reviewable proposed
-edit report at:
+edit report plus the compact exact Before / After owner view:
 
 - `automation/reports/<run_id>.proposed.md`
+- `automation/reports/<run_id>.exact-proposals.md`
+- `automation/reports/<run_id>.exact-proposals.json`
 
 It does not edit site content. Generated research pages are still routed through
 their JSON source files and generator commands in the report.
 
-`exact-proposals` is an owner-facing short view for exact snippets:
+`exact-proposals` can also be run directly when the compact view needs to be
+refreshed without rerunning the full proposal renderer:
 
 ```bash
 python3 automation/pipeline.py exact-proposals <run_id>
 python3 automation/pipeline.py exact-proposals <run_id> --json
 ```
-
-It writes:
-
-- `automation/reports/<run_id>.exact-proposals.md`
-- `automation/reports/<run_id>.exact-proposals.json`
 
 The report shows only `safe_exact_replace` Before / After text, risk,
 approval state, and required checks. It hides non-exact specs from the review

@@ -563,7 +563,7 @@ Lifecycle currently:
 
 `patch-plan` is still safe/proposal-only. It may populate candidate `changed_files` in the manifest, but it must not edit site content automatically.
 
-`propose` renders human-reviewable proposed edits from Patch Spec v1 entries. It must not edit site content.
+`propose` renders human-reviewable proposed edits from Patch Spec v1 entries and then automatically renders the compact `exact-proposals` owner-review report for `safe_exact_replace` specs. It must not edit site content.
 
 `exact-proposals` renders a compact owner-review Before / After report for `safe_exact_replace` specs only. It may write report artifacts, but it must not edit content, mutate manifests, record approval decisions, commit, push, or deploy.
 
