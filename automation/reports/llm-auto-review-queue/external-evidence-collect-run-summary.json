@@ -1,0 +1,12 @@
+{
+  "state": "evidence_collection_partial",
+  "provider": "fetch",
+  "url_lead_count": 10,
+  "collected_count": 6,
+  "failed_count": 4,
+  "query_task_count": 10,
+  "output_path": "automation/reports/llm-auto-review-queue/external-evidence-collect.json",
+  "markdown_path": "automation/reports/llm-auto-review-queue/external-evidence-collect.md",
+  "errors": [],
+  "safety": "No content, backlog, manifest, PR, or production files were modified by External Evidence Collect."
+}
