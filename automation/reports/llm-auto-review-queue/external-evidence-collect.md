@@ -1,4 +1,4 @@
-# External Evidence Collect - 2026-05-16T17:04:38Z
+# External Evidence Collect - 2026-05-16T17:26:51Z
 
 ## Outcome
 
@@ -6,8 +6,8 @@
 - Provider: `fetch`
 - Evidence Refresh: `automation/reports/llm-auto-review-queue/external-evidence-refresh.json`
 - URL leads: `11`
-- Collected: `9`
-- Failed: `2`
+- Collected: `10`
+- Failed: `1`
 - Deferred query tasks: `6`
 - Allows content edit: `false`
 - Allows backlog mutation: `false`
@@ -131,19 +131,15 @@ Error:
 
 ### url-external-official-ios-store-metadata-cross-check-1
 
-- Status: `fetch_failed`
+- Status: `collected`
 - Topic: `external-official-ios-store-metadata-cross-check`
 - Source: `official-apple-app-store: https://apps.apple.com`
 - URL: `https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652`
-- Final URL: ``
-- HTTP status: `429`
-- Title: 
-- Meta description: 
+- Final URL: `https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652`
+- HTTP status: `200`
+- Title: ‎Last Z: Survival Shooter App - App Store
+- Meta description: Download Last Z: Survival Shooter by Omnilojo Pte Ltd on the App Store. See screenshots, ratings and reviews, user tips, and more apps like Last Z: Survival…
 - Public claim ready: `false`
-
-Error:
-
-- HTTP Error 429: Too Many Requests
 
 ### url-external-official-store-metadata-cross-check-1
 
@@ -171,11 +167,11 @@ Error:
 - `hq_requirements`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `hq_resource_costs`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `new_topic_fit`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
-- `official_app_identity`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
+- `official_app_identity`: collected_multiple_sources_needs_human_validation; collected_sources=2; public_claim_ready=false
 - `research_branch_costs`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `research_branch_unlocks`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `season_2_winter_vs_desert`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
-- `store_listing_metadata`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
+- `store_listing_metadata`: collected_multiple_sources_needs_human_validation; collected_sources=2; public_claim_ready=false
 - `t10_path_order`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `tool_gap`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `uid-required-for-gift-center`: collected_multiple_sources_needs_human_validation; collected_sources=1; public_claim_ready=false

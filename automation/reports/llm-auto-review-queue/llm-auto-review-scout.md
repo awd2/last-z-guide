@@ -1,4 +1,4 @@
-# LLM Scout Review - 2026-05-16T17:05:08Z
+# LLM Scout Review - 2026-05-16T17:27:25Z
 
 ## Overview
 
@@ -13,7 +13,7 @@
 
 ## LLM Summary
 
-The strongest opportunities are the existing-page updates for codes.html, hq.html, research-costs.html, events.html, tech.html, heroes.html, and research.html. Most are discovery or cross-validation signals that fit existing clusters and should stay as update_existing rather than new pages. The highest-value items are the GSC-driven codes page review and the few external-search topics that map to clear player jobs, but all require verification before any later workflow because the inputs are signals, not proof.
+The strongest opportunities are existing-page updates driven by query and cross-validation signals, especially codes.html, hq.html, research-costs.html, events.html, research.html, and heroes.html. These are mostly update_existing candidates because they appear to fit established pages and cluster roles. The only possible create_new is the Assaulter Camp guide, but it has high verification risk and should only move if the underlying mechanic claims can be confirmed from reliable sources and owner-approved knowledge. External-source ideas are useful as discovery signals, but several need manual
 
 ## Selected Opportunities
 
@@ -23,18 +23,18 @@ The strongest opportunities are the existing-page updates for codes.html, hq.htm
 - Ready for chain: `true`
 - Priority: `high`
 - Risk: `high`
-- Player value: Improve the match between search intent and the existing redeem-codes page so players can find gift center, login, and UID help faster.
-- Duplication risk: Medium, because the topic already exists as a cornerstone page and must not drift into a duplicate or role-blurring rewrite.
-- Next step: Have an owner review the query set against the current codes.html scope and confirm whether a scoped update is warranted.
+- Player value: Helps players reach the redeem flow faster and find the correct gift center path, UID usage, and active code context with less friction.
+- Duplication risk: Medium. The topic could overlap with other economy or redeem pages if the scope expands beyond the approved cornerstone role, so role separation must be protected.
+- Next step: Human review should confirm whether the current codes.html can satisfy the search intent with scoped improvements only, and verify that no other canonical page serves the intent better.
 
 Rationale:
 
-This is the clearest on-site signal with strong query and page data, and it aligns to an existing cornerstone guide rather than a new page. The intent is specific enough to justify human review, while still respecting cluster role separation and protected canonical claims.
+This is the clearest high-value opportunity. The page already has strong impressions and mid-page ranking signals, and the query set suggests a query-to-page mismatch problem rather than a need for a new page. The opportunity fits the existing cornerstone-guide role for codes.html and should be reviewed as an update to improve usefulness and CTR without changing cluster boundaries.
 
 Claims to verify:
-- Whether the low CTR queries reflect a true page mismatch or normal SERP noise
-- Whether codes.html can cover gift center and UID intent without violating canonical claim boundaries
-- Whether the existing page already satisfies the current user job better than a broader rewrite
+- The query intent is best served by codes.html and not another canonical page.
+- Any suggested improvement can be made without changing approved canonical claims or blurring cluster role separation.
+- The reported GSC signals are sufficient to justify review but not proof of rewrite need.
 
 ### external-gift-center-official-flow-validation
 
@@ -42,18 +42,18 @@ Claims to verify:
 - Ready for chain: `true`
 - Priority: `high`
 - Risk: `medium`
-- Player value: Reduce confusion around Gift Center setup, UID usage, and official routing so players do not get misdirected.
-- Duplication risk: Medium, because it may overlap with other Gift Center or redeem flow pages if the intent is not narrowly defined.
-- Next step: Verify the public flow against canonical site memory and one additional reliable source before deciding whether the existing page needs adjustment.
+- Player value: Helps players confirm the official gift center route, UID usage, and store flow so they do not waste time on incorrect setup steps.
+- Duplication risk: Medium. This may duplicate existing economy content unless the validation angle creates a distinct player job.
+- Next step: Verify the official routing and gift center behavior against canonical site memory plus at least one additional reliable source or owner confirmation.
 
 Rationale:
 
-The official service domain is a plausible validation source for routing and flow accuracy, but it is not proof on its own. The topic maps to an existing support-style page and is useful as a cross-check opportunity for human review.
+This is a valid cross-validation opportunity because it points to official routing and gift center flow accuracy, which can improve trust and reduce confusion. It is still source-light and must not be treated as proof, but it is aligned with the existing gift-center-uid.html intent and worth human review if the claims can be verified.
 
 Claims to verify:
-- Exact Gift Center routing on the official domain
-- Whether UID usage is part of the public player flow or a support-specific detail
-- Whether this topic adds a distinct player job beyond the existing redeem guidance
+- The official service domain really supports the described Gift Center and store flow.
+- UID handling and routing details match current canonical knowledge.
+- The topic adds a distinct player job beyond existing economy content.
 
 ### external-hq-and-progression-reference-cross-check
 
@@ -61,39 +61,39 @@ Claims to verify:
 - Ready for chain: `true`
 - Priority: `high`
 - Risk: `high`
-- Player value: Help players verify HQ requirement planning and dependency coverage before they invest resources.
-- Duplication risk: Medium, because HQ and progression topics can easily overlap with broader base-building content if scope is not controlled.
-- Next step: Cross-verify HQ requirement claims against canonical memory and a second reliable source before any content proposal is shaped.
+- Player value: Helps players plan HQ upgrades, construction dependencies, and progression order with fewer mistakes.
+- Duplication risk: Medium. The topic could overlap with generic progression or base-building coverage if scope is not tightly defined.
+- Next step: Check whether hq.html already covers the same dependency set and validate any missing claims with reliable sources or owner confirmation.
 
 Rationale:
 
-This is a credible cross-check topic for progression planning and HQ requirements, but it depends on external validation and owner confirmation. It fits the current HQ page rather than a new page, so it is worth human review as an update_existing candidate.
+HQ and progression dependency coverage is a strong fit for the Progression cluster and likely improves planning accuracy for players. It is appropriate as an update_existing candidate only if the claims are confirmed beyond the single external reference and the page can stay within its existing role.
 
 Claims to verify:
-- HQ requirement and dependency details
-- Whether the reference source reflects current game state
-- Whether the topic is distinct from existing progression guidance
+- HQ requirement and dependency details are accurate.
+- The external reference is consistent with canonical game knowledge.
+- The update does not blur progression cluster boundaries.
 
 ## Rejected Or Monitor
 
-- external-research-costs-external-cross-check: Useful as a cross-validation signal, but the topic is too dependent on a single external reference and risks claim drift on costs and branches. Future trigger: Move forward only if a second reliable source or owner confirmation validates the branch and cost data.
-- external-search-lastz-fandom-reference-full-preparedness-4: The search result is discovery-only and references event claims that cannot be trusted without stronger validation. Future trigger: Reconsider if canonical memory plus another reliable source confirms the event mechanics and rotation details.
-- external-search-lastz-fandom-reference-heroes-5: The topic is broadly useful but currently functions as a generic cross-reference rather than a distinct, verified player job. Future trigger: Revisit if there is verified evidence that the existing tech or hero page is missing a specific, user-facing gap.
-- external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1: This is too close to a generic roster/tier-list discovery signal and could duplicate existing hero content intent without a verified gap. Future trigger: Consider only after confirming a unique player task that the current heroes page does not already solve.
-- external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2: The research table topic is likely overlapping with existing research coverage and depends on source validation for costs and badge totals. Future trigger: Promote only if a verified data drift or missing branch coverage issue is confirmed.
+- external-research-costs-external-cross-check: Monitor-only for now. It is a useful validation signal for research cost and branch coverage, but it depends on external information that is not yet verified beyond one source. Future trigger: Move forward only if canonical memory plus another reliable source or owner approval confirms the branch and cost details.
+- external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4: Monitor-only for now. The event claims are discovery signals, but the source is not enough to support public mechanic or cycle claims without additional verification. Future trigger: Advance only after second-source validation and confirmation that the event cycle is current and not outdated or duplicated.
+- external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5: Monitor-only for now. This looks like a broad research cross-check rather than a distinct player job, and it needs stronger validation before review. Future trigger: Proceed only if it exposes a specific gap in research.html that cannot be covered by existing content.
+- external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1: Monitor-only for now. The hero roster and equipment hub may be useful, but it is still an external-search signal and could duplicate existing heroes coverage. Future trigger: Advance if a distinct hero discovery or faction-browsing gap is confirmed by canonical review.
+- external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-8: High verification risk and possible duplicate or speculative mechanic claims. This could be a distinct player job, but the external source alone is not enough to prove the mechanic, cost, reward, or progression details. Future trigger: Reconsider only if the Assaulter Camp claims are verified by canonical memory plus an additional reliable source or owner confirmation.
 
 ## Global Risks
 
-- Several proposals rely on external sources that are discovery signals only and must not be treated as proof.
-- There is a recurring risk of cluster role blur between Economy, Progression, Research, and Heroes pages.
-- Analytics data may indicate opportunity, but it does not by itself justify a rewrite.
-- Protected canonical claims must not be weakened or expanded without owner review.
-- Search-result topics are especially vulnerable to competitor wording leakage and duplicate-intent overlap.
+- Single external sources are present for several topics, which creates a risk of copying competitor wording or importing unverified mechanics.
+- Some proposals may blur cluster boundaries if expanded beyond their current page roles.
+- Analytics signals are helpful, but they do not prove a rewrite is needed or that a given page is the best target.
+- Several topics depend on outdated or thin external references and must not advance without cross-validation.
+- Monitor-only and reject topics should stay out of downstream content workflow until verified.
 
 ## Next Actions
 
-- Send the selected update_existing topics to human review for scope confirmation.
-- Verify each selected claim against canonical site memory and at least one additional reliable source or owner confirmation.
-- Keep monitor/reject topics out of later proposal workflows unless new evidence appears.
-- Check that any future content proposal preserves template patterns, navigation, and protected canonical claims.
-- Do not advance any external-source topic without explicit verification and owner approval.
+- Prioritize human review for codes-gsc-opportunity because it has the strongest signal-to-page fit.
+- Verify gift-center-uid.html, hq.html, research-costs.html, events.html, research.html, and heroes.html against canonical page intent before any downstream proposal work.
+- Require at least one additional reliable source or owner confirmation for all external-source claims before treating them as review-ready.
+- Keep monitor-only items in a holding state and do not route them to Editor, Reviewer, intake, run-plan, or content proposal.
+- If the Assaulter Camp topic is revisited, verify that it is a distinct player job and not a duplicate of existing progression content.
