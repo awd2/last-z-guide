@@ -1,0 +1,318 @@
+{
+  "run_id": "2026-05-16-external-research-costs-external-cross-check-llm-approved-intake",
+  "created_at": "2026-05-16T17:38:52Z",
+  "run_type": "update_existing",
+  "status": "proposal_ready",
+  "risk_level": "high",
+  "summary": "Worker-approved intake for `research-costs.html` from `external-research-costs-external-cross-check`.",
+  "inputs": {
+    "topic_id": "external-research-costs-external-cross-check-llm-approved-intake",
+    "title": "External source opportunity: research cost and branch coverage cross-check",
+    "cluster": "Research",
+    "source_type": "analytics",
+    "source_reference": "LLM worker chain review: external-research-costs-external-cross-check",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "approved_by": "Oleg",
+    "approval_note": "Approved for intake only with narrow route-clarity scope: keep research-costs.html strictly as the Research atlas/router, do not create a new page, do not broaden into a full guide rewrite, preserve branch cards and page template, and align first-screen route wording with canonical research-best-mainline: Hero Training to Cockpit, Military Strategies, Peace Shield/Urgent Rescue, then choose shortest practical UST/T10 path or Siege to Seize into Field Research only for late-game Recharge Shield/deep combat scaling."
+  },
+  "plan": {
+    "topic_id": "external-research-costs-external-cross-check-llm-approved-intake",
+    "title": "External source opportunity: research cost and branch coverage cross-check",
+    "cluster": "Research",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "atlas-page",
+    "target_page_or_slug": "research-costs.html",
+    "source_type": "analytics",
+    "source_reference": "LLM worker chain review: external-research-costs-external-cross-check",
+    "confidence": "high",
+    "priority": "high",
+    "status": "backlog",
+    "risk_level": "high",
+    "plan_summary": "Prepare a controlled content run for `research-costs.html` from an approved Worker intake artifact.",
+    "memory_files": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md"
+    ],
+    "related_pages": [
+      "research-costs.html"
+    ],
+    "deterministic_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict"
+    ],
+    "notes": "Created as a proposed LLM intake record only. Do not add to topic_backlog.csv or create content changes without human review."
+  },
+  "artifacts": {
+    "worker_intake": "automation/reports/llm-intake-external-research-costs-external-cross-check.json",
+    "source_chain": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-research-costs-external-cross-check.json",
+    "worker_run_plan": "automation/reports/worker-run-plan-external-research-costs-external-cross-check.json",
+    "worker_manifest_writer": {
+      "created_at": "2026-05-16T17:39:28Z",
+      "created_by": "Oleg",
+      "safety": "Created planned run manifest only; no content files were modified."
+    },
+    "review_context": {
+      "canonical_claim_ids": [
+        "field-research-follows-siege",
+        "research-atlas-role",
+        "research-best-mainline"
+      ],
+      "related_filenames": [
+        "research-costs.html"
+      ]
+    },
+    "editor": {
+      "brief_path": "automation/reports/2026-05-16-external-research-costs-external-cross-check-llm-approved-intake.brief.md"
+    },
+    "patch_plan": {
+      "target_page_or_slug": "research-costs.html",
+      "archetype_suggestion": "atlas-page",
+      "recommended_action": "update_existing",
+      "proposed_changes": [
+        {
+          "file": "research-costs.html",
+          "change_type": "first_screen_update",
+          "reason": "Align the opening answer with the run summary, target intent, and cluster role."
+        },
+        {
+          "file": "research-costs.html",
+          "change_type": "meta_refresh",
+          "reason": "Tighten title/meta/H1 alignment around the page’s exact search intent."
+        },
+        {
+          "file": "research-costs.html",
+          "change_type": "atlas_card_update",
+          "reason": "Adjust atlas cards or route blocks to improve cluster navigation and page choice."
+        }
+      ],
+      "patch_specs": [
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "field-research-follows-siege",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "field-research-follows-siege",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        },
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "atlas_card_update",
+          "selector_or_anchor": "manual_review_required",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Adjust atlas cards or route blocks to improve cluster navigation and page choice.",
+          "canonical_claims_to_protect": [
+            "field-research-follows-siege",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true
+        }
+      ],
+      "changed_files": [
+        "research-costs.html"
+      ],
+      "source_files": [
+        "research-costs.html"
+      ],
+      "canonical_claim_ids": [
+        "field-research-follows-siege",
+        "research-atlas-role",
+        "research-best-mainline"
+      ],
+      "deterministic_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+        "python3 automation/pipeline.py checks"
+      ],
+      "report_path": "automation/reports/2026-05-16-external-research-costs-external-cross-check-llm-approved-intake.patch.md"
+    },
+    "proposal": {
+      "report_path": "automation/reports/2026-05-16-external-research-costs-external-cross-check-llm-approved-intake.proposed.md",
+      "rendered_specs": [
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "first_screen_update",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Align the opening answer with the run summary, target intent, and cluster role.",
+          "canonical_claims_to_protect": [
+            "field-research-follows-siege",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Research Costs Atlas (2026) — Branch Comparison, Badge Totals, and Unlock Paths | h1: Last Z Research Costs Atlas — Branch Comparison, Badge Totals, and Unlock Paths | meta: Compare Last Z research branches by badge total, unlock path, priority role, and exact node-cost page before spending badges. | verified: This atlas is the branch router for Last Z research costs: compare badge totals and unlock paths here, then open the exact branch page for node-by-node costs before spending badges.",
+          "desired_after_summary": "Opening answer names the atlas role, main research route, and exact branch-page routing without turning the atlas into a giant guide.",
+          "suggested_content": "",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "meta_refresh",
+          "selector_or_anchor": "<title>, meta description, H1, first-screen block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Tighten title/meta/H1 alignment around the page’s exact search intent.",
+          "canonical_claims_to_protect": [
+            "field-research-follows-siege",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Research Costs Atlas (2026) — Branch Comparison, Badge Totals, and Unlock Paths | h1: Last Z Research Costs Atlas — Branch Comparison, Badge Totals, and Unlock Paths | meta: Compare Last Z research branches by badge total, unlock path, priority role, and exact node-cost page before spending badges. | verified: This atlas is the branch router for Last Z research costs: compare badge totals and unlock paths here, then open the exact branch page for node-by-node costs before spending badges.",
+          "desired_after_summary": "Title, H1, and meta description use the same exact intent: research costs atlas, branch comparison, badge totals, and unlock paths.",
+          "suggested_content": "",
+          "risk_level": "medium",
+          "approval_state": "proposed"
+        },
+        {
+          "target_file": "research-costs.html",
+          "source_of_truth_file": "research-costs.html",
+          "output_file": "research-costs.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "atlas_card_update",
+          "selector_or_anchor": "atlas cards / branch comparison route block",
+          "required_preconditions": [
+            "Edit the target file directly.",
+            "Read the target/source file before editing.",
+            "Protect the canonical claims listed on this patch spec."
+          ],
+          "proposed_change_summary": "Adjust atlas cards or route blocks to improve cluster navigation and page choice.",
+          "canonical_claims_to_protect": [
+            "field-research-follows-siege",
+            "research-atlas-role",
+            "research-best-mainline"
+          ],
+          "validation_commands": [
+            "python3 scripts/prepublish_check.py",
+            "python3 automation/pipeline.py checks --strict",
+            "python3 automation/checks/changed_pages_report.py --manifest <run_id>",
+            "python3 automation/pipeline.py checks"
+          ],
+          "human_approval_required": true,
+          "before_summary": "title: Last Z Research Costs Atlas (2026) — Branch Comparison, Badge Totals, and Unlock Paths | h1: Last Z Research Costs Atlas — Branch Comparison, Badge Totals, and Unlock Paths | meta: Compare Last Z research branches by badge total, unlock path, priority role, and exact node-cost page before spending badges. | verified: This atlas is the branch router for Last Z research costs: compare badge totals and unlock paths here, then open the exact branch page for node-by-node costs before spending badges.",
+          "desired_after_summary": "Atlas cards help users choose the correct branch page and keep the core order visible: Hero Training, Military Strategies, Peace Shield, Siege to Seize, Field Research.",
+          "suggested_content": "",
+          "risk_level": "low",
+          "approval_state": "proposed"
+        }
+      ]
+    }
+  },
+  "changed_files": [
+    "research-costs.html"
+  ],
+  "checks": {},
+  "review": {
+    "verdict": "needs_human_review",
+    "open_questions": [
+      "Does this run need human approval before any content drafting or merge?"
+    ],
+    "next_action": "review_human",
+    "reviewer_notes": "Deterministic review scaffold complete. The run should explicitly respect these canonical claims: field-research-follows-siege, research-atlas-role, research-best-mainline."
+  }
+}

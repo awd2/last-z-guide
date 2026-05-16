@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_topic_decision",
+  "generated_at": "2026-05-16T17:41:01Z",
+  "state": "decision_recorded",
+  "topic_id": "external-hq-and-progression-reference-cross-check",
+  "decision_state": "monitor",
+  "decided_by": "Oleg",
+  "decision_note": "Owner decision from auto-review queue: monitor for now. hq.html already covers the core HQ player job, HQ30/HQ31-35 split, steel cautions, Tyrant steel caveat, and construction-cost routing. Do not move to intake unless future evidence shows a concrete mechanics error, missing verified requirement, or exact high-value player need.",
+  "source_discovery": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
+  "topic_snapshot": {
+    "topic_id": "external-hq-and-progression-reference-cross-check",
+    "title": "External source opportunity: HQ and progression requirement cross-check",
+    "cluster": "Progression",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "hq.html",
+    "source_type": "llm_scout",
+    "source_reference": "lastzwiki-reference: https://lastzwiki.com",
+    "confidence": "high",
+    "priority": "high",
+    "status": "candidate",
+    "notes": "This is a useful cross-validation opportunity for HQ progression guidance, but it should only proceed if the external reference can be verified against canonical memory and at least one additional reliable source. The player job is distinct enough to justify human review, and it fits the existing Progression cluster without implying a new page.",
+    "risk_level": "high",
+    "player_value": "Helps players understand HQ requirements, construction dependencies, and progression planning with fewer mistakes.",
+    "duplication_risk": "Medium because it could duplicate existing HQ guidance if the cross-check does not add a distinct planning job.",
+    "claims_to_verify": [
+      "HQ requirement thresholds",
+      "Construction dependency order",
+      "Whether the source adds new information beyond existing canonical coverage"
+    ],
+    "next_step": "Verify the external claims against canonical sources and confirm whether hq.html needs a scoped update or only a note for follow-up.",
+    "evidence": [
+      "Owner-approved wiki/reference source can reveal HQ and progression planning gaps.",
+      "External source URL recorded for later manual verification."
+    ],
+    "site_fit": {
+      "primary_user_job": "Verify HQ requirement planning, construction dependencies, and progression-route coverage against reference data.",
+      "cluster_owner": "Progression",
+      "expected_internal_route": [
+        "index.html",
+        "hq.html"
+      ],
+      "archetype_reason": "External source indicates a possible player job to validate."
+    },
+    "constraints": [
+      "Do not copy competitor wording.",
+      "Use this as topic discovery and cross-validation context only.",
+      "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+    ],
+    "reject_if": [
+      "The topic duplicates an existing page intent without adding a distinct player job.",
+      "The external claim cannot be verified beyond this source.",
+      "The proposal would blur existing cluster roles."
+    ],
+    "prior_review": null,
+    "human_approval_required": true,
+    "backlog_row_preview": {
+      "topic_id": "external-hq-and-progression-reference-cross-check",
+      "title": "External source opportunity: HQ and progression requirement cross-check",
+      "cluster": "Progression",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "hq.html",
+      "source_type": "llm_scout",
+      "source_reference": "lastzwiki-reference: https://lastzwiki.com",
+      "confidence": "high",
+      "priority": "high",
+      "status": "candidate",
+      "notes": "This is a useful cross-validation opportunity for HQ progression guidance, but it should only proceed if the external reference can be verified against canonical memory and at least one additional reliable source. The player job is distinct enough to justify human review, and it fits the existing Progression cluster without implying a new page."
+    }
+  },
+  "allows_worker_chain": false,
+  "allows_content_edit": false,
+  "next_actions": [
+    "Keep this topic out of content intake for now.",
+    "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+    "Do not create public content edits from this topic decision."
+  ],
+  "errors": [],
+  "output_path": "automation/reports/llm-topic-decision-external-hq-and-progression-reference-cross-check.json",
+  "markdown_path": "automation/reports/llm-topic-decision-external-hq-and-progression-reference-cross-check.md",
+  "safety": "No content, backlog, manifest, PR, or production files were modified. This decision only controls whether a discovered topic may proceed to the next no-write worker stage."
+}

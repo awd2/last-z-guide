@@ -1,9 +1,9 @@
-# LLM Topic Decisions - 2026-05-10T09:39:03Z
+# LLM Topic Decisions - 2026-05-16T17:41:13Z
 
 ## Overview
 
-- Decisions: 5
-- Counts by state: `{"monitor": 5}`
+- Decisions: 6
+- Counts by state: `{"monitor": 6}`
 - Topics currently allowed for worker chain: 0
 - Topics currently allowed for content edit: 0
 - Safety: no content, backlog, manifest, PR, or production files were modified.
@@ -24,6 +24,27 @@
 Decision note:
 
 Closed locally through run 2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake. Keep this topic out of approved handoffs unless materially new GSC/Bing/query evidence appears. This does not approve public copy or any new content changes.
+
+Next actions:
+
+- Keep this topic out of content intake for now.
+- Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.
+- Do not create public content edits from this topic decision.
+
+### external-hq-and-progression-reference-cross-check
+
+- Decision: `monitor`
+- Target: `hq.html`
+- Cluster: `Progression`
+- Priority: `high`
+- Risk: `high`
+- Allows worker chain: `false`
+- Allows content edit: `false`
+- Artifact: `automation/reports/llm-topic-decision-external-hq-and-progression-reference-cross-check.json`
+
+Decision note:
+
+Owner decision from auto-review queue: monitor for now. hq.html already covers the core HQ player job, HQ30/HQ31-35 split, steel cautions, Tyrant steel caveat, and construction-cost routing. Do not move to intake unless future evidence shows a concrete mechanics error, missing verified requirement, or exact high-value player need.
 
 Next actions:
 

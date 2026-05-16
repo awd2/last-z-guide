@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "report_type": "llm_topic_decisions_summary",
-  "generated_at": "2026-05-10T09:39:03Z",
-  "decision_count": 5,
+  "generated_at": "2026-05-16T17:41:13Z",
+  "decision_count": 6,
   "counts_by_state": {
-    "monitor": 5
+    "monitor": 6
   },
   "allowed_worker_chain_count": 0,
   "allowed_worker_chain_topics": [],
@@ -30,6 +30,27 @@
       "source_discovery": "automation/reports/llm-topic-discovery.json",
       "artifact_path": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.json",
       "markdown_path": "automation/reports/llm-topic-decision-alliance-duel-gsc-opportunity.md"
+    },
+    {
+      "topic_id": "external-hq-and-progression-reference-cross-check",
+      "decision_state": "monitor",
+      "decided_by": "Oleg",
+      "generated_at": "2026-05-16T17:41:01Z",
+      "target_page_or_slug": "hq.html",
+      "cluster": "Progression",
+      "risk_level": "high",
+      "priority": "high",
+      "allows_worker_chain": false,
+      "allows_content_edit": false,
+      "decision_note": "Owner decision from auto-review queue: monitor for now. hq.html already covers the core HQ player job, HQ30/HQ31-35 split, steel cautions, Tyrant steel caveat, and construction-cost routing. Do not move to intake unless future evidence shows a concrete mechanics error, missing verified requirement, or exact high-value player need.",
+      "next_actions": [
+        "Keep this topic out of content intake for now.",
+        "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+        "Do not create public content edits from this topic decision."
+      ],
+      "source_discovery": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
+      "artifact_path": "automation/reports/llm-topic-decision-external-hq-and-progression-reference-cross-check.json",
+      "markdown_path": "automation/reports/llm-topic-decision-external-hq-and-progression-reference-cross-check.md"
     },
     {
       "topic_id": "heroes-gsc-opportunity",
