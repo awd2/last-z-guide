@@ -85,14 +85,29 @@ def chain_summary_candidates(topic_id: str, search_dirs: list[Path]) -> list[Pat
     return candidates
 
 
-def has_completed_chain(topic_id: str, search_dirs: list[Path]) -> str | None:
+def chain_contract_version(payload: dict[str, Any]) -> int:
+    try:
+        return int(payload.get("worker_chain_contract_version") or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def completed_chain_status(topic_id: str, search_dirs: list[Path]) -> dict[str, Any] | None:
     for path in chain_summary_candidates(topic_id, search_dirs):
         try:
             payload = load_json(path)
         except Exception:
             continue
         if payload.get("state") == "completed":
-            return rel(path)
+            version = chain_contract_version(payload)
+            required = llm_worker_chain.WORKER_CHAIN_CONTRACT_VERSION
+            return {
+                "path": rel(path),
+                "contract_version": version,
+                "required_contract_version": required,
+                "is_current": version >= required,
+                "stale_reason": "" if version >= required else "worker_chain_contract_version is missing or outdated",
+            }
     return None
 
 
@@ -271,7 +286,7 @@ def run_auto_review_queue(
     for topic in candidates:
         score, reasons = score_topic(topic)
         topic_id = str(topic.get("topic_id") or "")
-        existing_chain = has_completed_chain(topic_id, search_dirs)
+        existing_chain = completed_chain_status(topic_id, search_dirs)
         record = {
             "topic_id": topic_id,
             "target_page_or_slug": topic.get("target_page_or_slug", ""),
@@ -281,9 +296,20 @@ def run_auto_review_queue(
             "score": score,
             "score_reasons": reasons,
         }
-        if existing_chain and not include_existing:
+        if existing_chain:
+            record["existing_chain"] = existing_chain["path"]
+            record["existing_chain_contract_version"] = existing_chain["contract_version"]
+            record["required_chain_contract_version"] = existing_chain["required_contract_version"]
+            record["existing_chain_current"] = existing_chain["is_current"]
+            if not existing_chain["is_current"]:
+                record["stale_existing_chain"] = True
+                record["stale_reason"] = existing_chain["stale_reason"]
+                reasons.append(
+                    f"stale_existing_chain_contract={existing_chain['contract_version']}<"
+                    f"{existing_chain['required_contract_version']}"
+                )
+        if existing_chain and existing_chain["is_current"] and not include_existing:
             record["status"] = "skipped_existing_chain"
-            record["existing_chain"] = existing_chain
             skipped.append(record)
             continue
         scored.append({**record, "topic": topic})
@@ -341,9 +367,12 @@ def run_auto_review_queue(
         "completed_item_count": completed,
         "failed_item_count": failed,
         "skipped_existing_count": sum(1 for item in skipped if item.get("status") == "skipped_existing_chain"),
+        "stale_existing_count": sum(1 for item in queue_items if item.get("stale_existing_chain")),
         "deferred_count": sum(1 for item in skipped if item.get("status") == "deferred_by_limit"),
         "max_chains": max_chains,
         "include_existing": include_existing,
+        "required_chain_contract_version": llm_worker_chain.WORKER_CHAIN_CONTRACT_VERSION,
+        "required_chain_contract_label": llm_worker_chain.WORKER_CHAIN_CONTRACT_LABEL,
         "queue_items": queue_items,
         "skipped_topics": skipped,
         "errors": [error for item in queue_items for error in item.get("errors", [])],
@@ -377,6 +406,8 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- Completed items: `{summary.get('completed_item_count', 0)}`",
         f"- Failed items: `{summary.get('failed_item_count', 0)}`",
         f"- Skipped existing: `{summary.get('skipped_existing_count', 0)}`",
+        f"- Stale existing reruns: `{summary.get('stale_existing_count', 0)}`",
+        f"- Required chain contract: `{summary.get('required_chain_contract_version', '')}` `{summary.get('required_chain_contract_label', '')}`",
         f"- Deferred by limit: `{summary.get('deferred_count', 0)}`",
         f"- Candidate refresh: `{summary.get('candidate_refresh_markdown', '')}`",
         f"- Topic discovery: `{summary.get('topic_discovery_markdown', '')}`",
@@ -406,6 +437,7 @@ def render_markdown(summary: dict[str, Any]) -> str:
                 f"- Verdict: `{item.get('review_verdict')}`",
                 f"- Owner approval required: `{str(item.get('owner_approval_required')).lower()}`",
                 f"- Chain: `{item.get('chain_markdown', '')}`",
+                f"- Existing chain rerun: `{str(item.get('stale_existing_chain', False)).lower()}`",
                 "",
                 "Score reasons:",
                 "",
@@ -490,6 +522,7 @@ def main() -> int:
         "completed_item_count": summary.get("completed_item_count", 0),
         "failed_item_count": summary.get("failed_item_count", 0),
         "skipped_existing_count": summary.get("skipped_existing_count", 0),
+        "stale_existing_count": summary.get("stale_existing_count", 0),
         "output_path": summary["output_path"],
         "markdown_path": summary["markdown_path"],
         "errors": summary.get("errors", []),

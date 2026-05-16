@@ -21,6 +21,8 @@ from automation.workers import llm_editor, llm_reviewer, llm_scout
 
 
 REPORTS_DIR = ROOT / "automation" / "reports"
+WORKER_CHAIN_CONTRACT_VERSION = 2
+WORKER_CHAIN_CONTRACT_LABEL = "exact-editor-proposals-v2"
 
 
 def now_utc() -> str:
@@ -264,6 +266,8 @@ def build_summary(
     return {
         "schema_version": 1,
         "report_type": "llm_worker_chain_summary",
+        "worker_chain_contract_version": WORKER_CHAIN_CONTRACT_VERSION,
+        "worker_chain_contract_label": WORKER_CHAIN_CONTRACT_LABEL,
         "generated_at": generated_at,
         "state": chain_state,
         "provider": provider,

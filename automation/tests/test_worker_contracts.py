@@ -1813,6 +1813,62 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(second_summary["queued_topic_count"], 0)
             self.assertEqual(second_summary["skipped_existing_count"], 1)
 
+    def test_llm_auto_review_queue_reruns_stale_existing_chain(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            stale_chain_path = tmp_path / "llm-worker-chain-codes-gsc-opportunity.json"
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, fixture_llm_reviewer_response())
+            write_json(
+                stale_chain_path,
+                {
+                    "schema_version": 1,
+                    "report_type": "llm_worker_chain_summary",
+                    "state": "completed",
+                    "source_topic_id": "codes-gsc-opportunity",
+                    "target_page_or_slug": "codes.html",
+                    "errors": [],
+                },
+            )
+
+            with patch.object(llm_topic_discovery, "existing_topic_review", return_value=None), patch.object(
+                llm_auto_review_queue,
+                "REPORTS_DIR",
+                tmp_path / "global-reports",
+            ):
+                code, summary = llm_auto_review_queue.run_auto_review_queue(
+                    signal_paths=[signals_path],
+                    external_proposal_paths=[],
+                    output_dir=tmp_path,
+                    basename="llm-auto-review-queue-fixture",
+                    provider="fixture",
+                    scout_fixture_path=scout_fixture_path,
+                    editor_fixture_path=editor_fixture_path,
+                    reviewer_fixture_path=reviewer_fixture_path,
+                    limit=4,
+                    min_impressions=200,
+                    max_chains=2,
+                    include_existing=False,
+                )
+
+            refreshed_chain = load_json(stale_chain_path)
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["state"], "queue_ready")
+            self.assertEqual(summary["queued_topic_count"], 1)
+            self.assertEqual(summary["skipped_existing_count"], 0)
+            self.assertEqual(summary["stale_existing_count"], 1)
+            self.assertTrue(summary["queue_items"][0]["stale_existing_chain"])
+            self.assertEqual(
+                refreshed_chain["worker_chain_contract_version"],
+                llm_worker_chain.WORKER_CHAIN_CONTRACT_VERSION,
+            )
+
     def test_llm_editor_builds_brief_from_llm_scout_fixture(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

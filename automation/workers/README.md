@@ -236,10 +236,13 @@ or deploy.
 runs candidate refresh, can merge External Scout proposals through
 `--external-proposals`, scores candidate topics, auto-runs the top candidates
 through Editor and Reviewer, and writes one consolidated owner-review queue. It
-skips topics with existing completed chain summaries unless `--include-existing`
-is supplied. This reduces owner involvement to reviewing ready queue packages,
-but it still does not approve public copy, mutate backlog, create manifests,
-edit content, open PRs, or deploy.
+skips only current completed chain summaries unless `--include-existing` is
+supplied. Completed chain summaries carry `worker_chain_contract_version`; if
+that version is missing or older than the current worker-chain contract, the
+queue treats the summary as stale and reruns it automatically. This reduces
+owner involvement to reviewing ready queue packages, but it still does not
+approve public copy, mutate backlog, create manifests, edit content, open PRs,
+or deploy.
 
 In GitHub Actions, `.github/workflows/llm-auto-review-queue.yml` runs
 `external-scout` first, builds an `external-evidence-refresh` queue artifact,

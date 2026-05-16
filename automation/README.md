@@ -557,7 +557,8 @@ LLM auto review queue:
 - default input uses `content/gsc/latest-gsc-agent-signals.json` and `content/bing/latest-bing-agent-signals.json` when present
 - output lives in `automation/reports/llm-auto-review-queue/`
 - this is the consolidated owner-review layer: it reduces manual step-by-step approval by presenting ready queue items
-- it skips topics with existing completed chain summaries unless `--include-existing` is supplied
+- it skips only current completed chain summaries unless `--include-existing` is supplied
+- stale completed summaries with missing or older `worker_chain_contract_version` are rerun automatically, and the queue records `stale_existing_count`
 - it must not approve public copy, mutate `topic_backlog.csv`, create manifests, edit content, open PRs, or deploy
 
 LLM topic discovery:
@@ -627,6 +628,7 @@ LLM worker chain:
 - live Scout handoffs advance only `ready_for_chain` opportunities; monitor-only, reject, or low-priority selected topics stop before Editor/Reviewer
 - output lives in `automation/reports/llm-worker-chain-<topic_id>.json` and `automation/reports/llm-worker-chain-<topic_id>.md`
 - per-stage request/result/markdown artifacts are also written and referenced from the summary
+- each summary includes `worker_chain_contract_version` and `worker_chain_contract_label`; auto-review queue uses them to rerun stale chain artifacts after worker contract upgrades
 - `--from-decision` skips live Scout rerank and blocks unless the decision artifact is `approved_for_chain`
 - this is an owner-review summary only; it must not write content, backlog entries, manifests, PRs, or production state
 
