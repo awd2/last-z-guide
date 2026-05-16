@@ -1,4 +1,4 @@
-# LLM Candidate Refresh - 2026-05-16T17:54:41Z
+# LLM Candidate Refresh - 2026-05-16T18:04:55Z
 
 ## Overview
 
@@ -6,7 +6,7 @@
 - Provider: `openai`
 - Source proposals: 8
 - Candidate topics: 1
-- Monitor topics: 6
+- Monitor topics: 7
 - Topic discovery: `automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md`
 - Allows content edit: `false`
 - Allows backlog mutation: `false`
@@ -28,8 +28,9 @@
 - codes-gsc-opportunity
 - external-research-costs-external-cross-check
 - external-gift-center-official-flow-validation
-- external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4
-- external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5
+- external-search-lastz-fandom-reference-full-preparedness-4
+- external-search-lastz-fandom-reference-heroes-5
+- external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1
 - external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2
 
 ## Stages

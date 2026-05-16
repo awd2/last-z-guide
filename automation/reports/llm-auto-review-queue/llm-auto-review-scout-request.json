@@ -162,8 +162,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
+        "title": "External search opportunity: Full Preparedness",
         "cluster": "Events",
         "recommended_action": "create_new",
         "archetype_suggestion": "cornerstone-guide",
@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycle page. Includes a research-themed phase ('Age of Science') plus a hero-growth phase ('Hero Initiative') and ranking rewards."
+          "Daily event cycles include a research-focused theme and a hero-upgrade theme, with points tied to research speedups and hero materials."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -192,8 +192,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
-        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-heroes-5",
+        "title": "External search opportunity: Heroes",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -203,7 +203,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page. Lists hero classes and the main power inputs, useful for linking heroes to event goals."
+          "Core hero overview page; identifies hero classes and lists the main power factors, useful for linking hero growth to event objectives."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster page with character listings, levels, and equipment section; useful for hero discovery and build cross-checking."
+          "Dedicated heroes page with roster, hero stats/equipment sections, and character-level guide content."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research guide with category tabs and per-level badge cost tables; useful for locating research mechanics and cost data."
+          "Research table page covering 9 laboratory categories and level-by-level badge costs."
         ],
         "site_fit": {
           "expected_internal_route": [
