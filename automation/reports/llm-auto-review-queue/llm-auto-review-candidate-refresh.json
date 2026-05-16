@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_candidate_refresh",
-  "generated_at": "2026-05-15T10:39:24Z",
+  "generated_at": "2026-05-16T09:51:56Z",
   "state": "candidate_refresh_ready",
   "provider": "openai",
   "source_signal_files": [
@@ -18,8 +18,8 @@
     "index-gsc-opportunity"
   ],
   "monitor_topic_ids": [
-    "research-gsc-opportunity",
     "codes-gsc-opportunity",
+    "research-gsc-opportunity",
     "external-gift-center-official-flow-validation",
     "external-hq-and-progression-reference-cross-check",
     "external-research-costs-external-cross-check",
