@@ -386,7 +386,7 @@ To read the latest consolidated auto-review queue as one owner decision screen, 
 python3 automation/pipeline.py llm-auto-review-latest
 ```
 
-This prints queued topics, player-value checks, blocking issues, owner questions, and ready-to-run intake commands. It is read-only and does not approve public copy.
+This prints queued topics, skipped-existing chain summaries, player-value checks, blocking issues, owner questions, and ready-to-run intake commands. It is read-only and does not approve public copy.
 
 The same no-write chain is available in GitHub Actions:
 

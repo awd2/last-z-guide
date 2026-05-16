@@ -70,7 +70,8 @@ def blocking_issue_lines(reviewer: dict[str, Any]) -> list[str]:
 
 
 def recommended_owner_action(queue_item: dict[str, Any], chain: dict[str, Any], reviewer: dict[str, Any]) -> str:
-    if queue_item.get("status") != "completed" or chain.get("state") != "completed":
+    item_status = queue_item.get("status")
+    if item_status not in {"completed", "skipped_existing_chain"} or chain.get("state") != "completed":
         return "review_failed_chain_before_decision"
     if chain.get("review_verdict") in {"reject", "revise"}:
         return "reject_or_request_revision"
@@ -94,7 +95,7 @@ def intake_command(chain_path: str, topic_id: str) -> str:
 
 
 def compact_queue_item(queue_item: dict[str, Any]) -> dict[str, Any]:
-    chain_path = str(queue_item.get("chain_json", ""))
+    chain_path = str(queue_item.get("chain_json") or queue_item.get("existing_chain") or "")
     chain = load_chain(chain_path)
     editor = load_stage_response(chain, "llm_editor")
     reviewer = load_stage_response(chain, "llm_reviewer")
@@ -111,6 +112,10 @@ def compact_queue_item(queue_item: dict[str, Any]) -> dict[str, Any]:
     exact_replacements = editor.get("exact_replacements", [])
     if not isinstance(exact_replacements, list):
         exact_replacements = []
+    inferred_chain_markdown = ""
+    if chain_path:
+        markdown_path = resolve_path(chain_path).with_suffix(".md")
+        inferred_chain_markdown = rel(markdown_path) if markdown_path.exists() else ""
     return {
         "topic_id": topic_id,
         "target_page_or_slug": queue_item.get("target_page_or_slug") or chain.get("target_page_or_slug", ""),
@@ -134,7 +139,7 @@ def compact_queue_item(queue_item: dict[str, Any]) -> dict[str, Any]:
         "required_checks": required_checks,
         "exact_replacements_count": len(exact_replacements),
         "chain_json": chain_path,
-        "chain_markdown": queue_item.get("chain_markdown", ""),
+        "chain_markdown": queue_item.get("chain_markdown") or inferred_chain_markdown,
         "editor_markdown": chain.get("stages", {}).get("llm_editor", {}).get("markdown_path", ""),
         "reviewer_markdown": chain.get("stages", {}).get("llm_reviewer", {}).get("markdown_path", ""),
         "approve_for_intake_command": intake_command(chain_path, topic_id),
@@ -150,7 +155,16 @@ def build_view(queue_path: Path) -> dict[str, Any]:
     queue_items = queue.get("queue_items", [])
     if not isinstance(queue_items, list):
         queue_items = []
-    items = [compact_queue_item(item) for item in queue_items if isinstance(item, dict)]
+    skipped_topics = queue.get("skipped_topics", [])
+    if not isinstance(skipped_topics, list):
+        skipped_topics = []
+    review_items = list(queue_items)
+    review_items.extend(
+        item
+        for item in skipped_topics
+        if isinstance(item, dict) and item.get("status") == "skipped_existing_chain" and item.get("existing_chain")
+    )
+    items = [compact_queue_item(item) for item in review_items if isinstance(item, dict)]
     needs_owner = [
         item
         for item in items

@@ -1585,6 +1585,84 @@ class WorkerContractTests(unittest.TestCase):
             self.assertIn("llm-intake-latest", view["items"][0]["approve_for_intake_command"])
             self.assertIn("LLM Auto Review Latest", markdown)
 
+    def test_llm_auto_review_latest_includes_skipped_existing_chains(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            editor_result = tmp_path / "editor-result.json"
+            reviewer_result = tmp_path / "reviewer-result.json"
+            chain_path = tmp_path / "llm-worker-chain-fixture-topic.json"
+            queue_path = tmp_path / "llm-auto-review-queue.json"
+            write_json(
+                editor_result,
+                {
+                    "response_json": {
+                        "brief_summary": "Existing chain still needs owner review.",
+                        "primary_user_job": "Validate a skipped existing topic.",
+                        "first_screen_plan": "Keep it narrow.",
+                        "exact_replacements": [],
+                    }
+                },
+            )
+            write_json(
+                reviewer_result,
+                {
+                    "response_json": {
+                        "verdict": "needs_human_review",
+                        "approved_next_stage": "brief",
+                        "owner_approval_required": True,
+                        "blocking_issues": [],
+                        "warnings": [],
+                        "owner_questions": ["Should this existing chain move forward?"],
+                        "required_checks": [],
+                    }
+                },
+            )
+            write_json(
+                chain_path,
+                {
+                    "state": "completed",
+                    "source_topic_id": "fixture-topic",
+                    "review_verdict": "needs_human_review",
+                    "approved_next_stage": "brief",
+                    "owner_approval_required": True,
+                    "stages": {
+                        "llm_editor": {"result_path": str(editor_result)},
+                        "llm_reviewer": {"result_path": str(reviewer_result)},
+                    },
+                },
+            )
+            write_json(
+                queue_path,
+                {
+                    "state": "current",
+                    "provider": "fixture",
+                    "candidate_topic_count": 1,
+                    "queued_topic_count": 0,
+                    "completed_item_count": 0,
+                    "failed_item_count": 0,
+                    "skipped_existing_count": 1,
+                    "queue_items": [],
+                    "skipped_topics": [
+                        {
+                            "topic_id": "fixture-topic",
+                            "target_page_or_slug": "gift-center-uid.html",
+                            "cluster": "Economy",
+                            "priority": "high",
+                            "risk_level": "medium",
+                            "score": 91,
+                            "status": "skipped_existing_chain",
+                            "existing_chain": str(chain_path),
+                        }
+                    ],
+                },
+            )
+
+            view = llm_auto_review_latest.build_view(queue_path)
+
+            self.assertEqual(view["needs_owner_decision_count"], 1)
+            self.assertEqual(view["items"][0]["topic_id"], "fixture-topic")
+            self.assertEqual(view["items"][0]["chain_json"], str(chain_path))
+
     def test_llm_run_approved_handoffs_runs_pending_decision_and_skips_current(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

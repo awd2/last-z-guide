@@ -671,7 +671,7 @@ LLM auto-review owner queue:
 - `python3 automation/pipeline.py llm-auto-review-latest` -> print the latest consolidated auto-review queue as an owner decision screen
 - `python3 automation/pipeline.py llm-auto-review-latest --json` -> print the same view as JSON
 - `--queue <path>` can read a specific `llm-auto-review-queue.json`
-- output includes queued topics, player-value checks, blocking issues, owner questions, and intake commands
+- output includes queued topics, skipped-existing chain summaries, player-value checks, blocking issues, owner questions, and intake commands
 - this is read-only and does not call OpenAI, approve public copy, or mutate files
 
 LLM intake latest:
