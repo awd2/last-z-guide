@@ -121,6 +121,10 @@ def validate_request(request: dict[str, Any]) -> list[str]:
         value = request.get("max_output_tokens")
         if not isinstance(value, int) or value < 1:
             errors.append("Request `max_output_tokens` must be a positive integer when supplied.")
+    if "ascii_validation_exempt_paths" in request:
+        paths = request.get("ascii_validation_exempt_paths")
+        if not isinstance(paths, list) or not all(isinstance(item, str) and item for item in paths):
+            errors.append("Request `ascii_validation_exempt_paths` must be a list of non-empty strings when supplied.")
     return errors
 
 
@@ -134,11 +138,22 @@ def normalize_fixture_response(payload: dict[str, Any]) -> dict[str, Any]:
 def validate_response(request: dict[str, Any], response_json: dict[str, Any]) -> list[str]:
     expected = request.get("expected_response_keys", [])
     errors = [f"Response is missing expected key `{key}`." for key in expected if key not in response_json]
-    errors.extend(non_ascii_response_errors(response_json))
+    errors.extend(non_ascii_response_errors(response_json, exempt_paths=request.get("ascii_validation_exempt_paths", [])))
     return errors
 
 
-def non_ascii_response_errors(value: Any, path: str = "response_json") -> list[str]:
+def is_exempt_path(path: str, exempt_paths: list[str]) -> bool:
+    return any(path == prefix or path.startswith(f"{prefix}.") or path.startswith(f"{prefix}[") for prefix in exempt_paths)
+
+
+def non_ascii_response_errors(
+    value: Any,
+    path: str = "response_json",
+    exempt_paths: list[str] | None = None,
+) -> list[str]:
+    exempt_paths = exempt_paths or []
+    if is_exempt_path(path, exempt_paths):
+        return []
     errors: list[str] = []
     if isinstance(value, str):
         if not value.isascii():
@@ -146,11 +161,11 @@ def non_ascii_response_errors(value: Any, path: str = "response_json") -> list[s
         return errors
     if isinstance(value, list):
         for index, item in enumerate(value):
-            errors.extend(non_ascii_response_errors(item, f"{path}[{index}]"))
+            errors.extend(non_ascii_response_errors(item, f"{path}[{index}]", exempt_paths=exempt_paths))
         return errors
     if isinstance(value, dict):
         for key, item in value.items():
-            errors.extend(non_ascii_response_errors(item, f"{path}.{key}"))
+            errors.extend(non_ascii_response_errors(item, f"{path}.{key}", exempt_paths=exempt_paths))
     return errors
 
 

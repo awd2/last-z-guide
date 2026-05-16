@@ -119,7 +119,7 @@ python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
 
-It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter requires plain ASCII English output and must not edit content, backlog, manifests, or production state.
+It validates structured request/response JSON for future LLM calls. The default provider is `disabled`, which returns a blocked result. `fixture` remains the deterministic offline provider for tests. `openai` calls the OpenAI Responses API and requires `OPENAI_API_KEY`; it uses `OPENAI_MODEL` when set and otherwise defaults to `gpt-5.4-mini`. The adapter requires plain ASCII English output and must not edit content, backlog, manifests, or production state. The only current role-specific ASCII exemption is Editor `response_json.exact_replacements`; the Editor wrapper then drops non-ASCII or otherwise unsafe exact snippets before Reviewer.
 
 The lower-level helper remains available at:
 
@@ -262,7 +262,7 @@ queue report artifacts and must not edit public content or production state.
 
 It must not generate final public page copy, patch specs, backlog entries, manifests, content edits, PRs, or production state. It is planning context only until deterministic review and owner approval.
 
-The Editor schema may include `exact_replacements`, but only as draft proposal data. For `update_existing` opportunities on existing HTML targets, the Editor request should prefer narrow `exact_replacements` when the deterministic context has enough current source text for an exact before/after proposal. Each item must be target-only, include literal `exact_old` and `exact_new` strings, preserve existing wrappers/template classes unless a template change was explicitly requested, and set `owner_approval_required: true`. The deterministic Editor context exposes limited raw target-page snippets under `current_page_snapshot.source_snippets` so `exact_old` can be copied literally; this includes common guide-page snippets, quick-answer sections, recommended-route sections, how-to-use sections, and home-hub hero/header snippets. The LLM Editor wrapper drops no-op candidates where `exact_new` matches `exact_old` with a warning, and blocks any remaining exact replacement whose `exact_old` does not match the current target HTML exactly once. These candidates do not approve copy, create Patch Specs, edit files, or skip the later `propose -> approval -> apply-preview -> apply-approved -> strict QA` flow.
+The Editor schema may include `exact_replacements`, but only as draft proposal data. For `update_existing` opportunities on existing HTML targets, the Editor request should prefer narrow `exact_replacements` when the deterministic context has enough current source text for an exact before/after proposal. Each item must be target-only, include literal `exact_old` and `exact_new` strings, preserve existing wrappers/template classes unless a template change was explicitly requested, and set `owner_approval_required: true`. The deterministic Editor context exposes limited raw target-page snippets under `current_page_snapshot.source_snippets` so `exact_old` can be copied literally; this includes common guide-page snippets, quick-answer sections, recommended-route sections, how-to-use sections, and home-hub hero/header snippets. The LLM Editor wrapper drops no-op, non-ASCII, nonliteral, missing-approval, wrong-target, or otherwise unsafe exact candidates with warnings before Reviewer, so the planning brief can continue with an empty `exact_replacements` list. These candidates do not approve copy, create Patch Specs, edit files, or skip the later `propose -> approval -> apply-preview -> apply-approved -> strict QA` flow.
 
 `llm-reviewer` is the third live LLM worker wrapper. It reads one LLM Editor planning brief, sends a JSON-only review-gate request through `llm_adapter`, and writes:
 
@@ -363,8 +363,8 @@ All workers must follow these rules:
   only a proposal; owner approval is required before `apply-approved`.
 - LLM-originated `exact_old` values must be copied from deterministic
   `current_page_snapshot.source_snippets` or otherwise match the current target
-  HTML exactly once; nonliteral or ambiguous candidates are blocked before
-  intake.
+  HTML exactly once; nonliteral, ambiguous, non-ASCII, or otherwise unsafe
+  candidates are dropped with warnings before intake.
 - Approved intake/run-plan artifacts may carry exact snippets as
   `plan.exact_replacements`. This is a handoff format, not content approval.
 - No live LLM provider calls unless they go through the fail-closed adapter and have explicit configuration.

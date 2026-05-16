@@ -277,6 +277,7 @@ def build_request(
             "exact_replacements",
             "next_step",
         ],
+        "ascii_validation_exempt_paths": ["response_json.exact_replacements"],
         "response_schema": EDITOR_RESPONSE_SCHEMA,
         "max_output_tokens": 4000,
     }
@@ -298,6 +299,77 @@ def validate_editor_response(result: dict[str, Any], topic_id: str, deterministi
             errors.append(f"LLM Editor omitted required context `{path}`.")
     errors.extend(validate_exact_replacements(response, target))
     return errors
+
+
+def exact_replacement_item_errors(
+    item: Any,
+    target: str,
+    target_text: str,
+    index: int,
+) -> list[str]:
+    errors: list[str] = []
+    label = f"exact_replacements[{index}]"
+    if not isinstance(item, dict):
+        return [f"LLM Editor {label} must be an object."]
+    errors.extend(llm_adapter.non_ascii_response_errors(item, path=f"response_json.{label}"))
+    if item.get("file") != target:
+        errors.append(f"LLM Editor {label}.file must match target `{target}`.")
+    if item.get("change_type") not in ALLOWED_EXACT_CHANGE_TYPES:
+        errors.append(f"LLM Editor {label}.change_type is unsupported.")
+    if item.get("owner_approval_required") is not True:
+        errors.append(f"LLM Editor {label} must set owner_approval_required to true.")
+    for key in ["selector_or_anchor", "exact_old", "exact_new", "reason"]:
+        if not str(item.get(key, "")).strip():
+            errors.append(f"LLM Editor {label}.{key} must be non-empty.")
+    exact_old = str(item.get("exact_old", ""))
+    exact_new = str(item.get("exact_new", ""))
+    if exact_old.strip() == exact_new.strip():
+        errors.append(f"LLM Editor {label}.exact_new must differ from exact_old.")
+    if target_text and exact_old:
+        old_count = target_text.count(exact_old)
+        if old_count != 1:
+            errors.append(f"LLM Editor {label}.exact_old must match `{target}` exactly once; found {old_count} matches.")
+        if exact_new and exact_new in target_text and exact_old not in target_text:
+            errors.append(f"LLM Editor {label}.exact_new already appears in `{target}` while exact_old is absent.")
+    return errors
+
+
+def sanitize_exact_replacements(result: dict[str, Any], target: str) -> list[str]:
+    response = result.get("response_json")
+    if not isinstance(response, dict):
+        return []
+    replacements = response.get("exact_replacements")
+    if not isinstance(replacements, list):
+        response["exact_replacements"] = []
+        warning = "Dropped LLM Editor exact_replacements because the field was not a list."
+        result.setdefault("warnings", []).append(warning)
+        return [warning]
+
+    target_path = ROOT / target if target else None
+    target_text = ""
+    missing_target_error = ""
+    if replacements and (not target_path or not target_path.exists() or target_path.suffix != ".html"):
+        missing_target_error = f"LLM Editor exact_replacements require an existing HTML target file `{target}`."
+    elif replacements and target_path:
+        target_text = target_path.read_text(encoding="utf-8")
+
+    kept: list[dict[str, Any]] = []
+    warnings: list[str] = []
+    for index, item in enumerate(replacements, start=1):
+        item_errors = [missing_target_error] if missing_target_error else []
+        item_errors.extend(exact_replacement_item_errors(item, target, target_text, index))
+        if item_errors:
+            warnings.append(
+                f"Dropped unsafe LLM Editor exact_replacements[{index}]: "
+                + "; ".join(error for error in item_errors if error)
+            )
+            continue
+        kept.append(item)
+
+    if len(kept) != len(replacements):
+        response["exact_replacements"] = kept
+        result.setdefault("warnings", []).extend(warnings)
+    return warnings
 
 
 def drop_noop_exact_replacements(result: dict[str, Any]) -> list[str]:
@@ -339,31 +411,7 @@ def validate_exact_replacements(response: dict[str, Any], target: str) -> list[s
     elif replacements and target_path:
         target_text = target_path.read_text(encoding="utf-8")
     for index, item in enumerate(replacements, start=1):
-        label = f"exact_replacements[{index}]"
-        if not isinstance(item, dict):
-            errors.append(f"LLM Editor {label} must be an object.")
-            continue
-        if item.get("file") != target:
-            errors.append(f"LLM Editor {label}.file must match target `{target}`.")
-        if item.get("change_type") not in ALLOWED_EXACT_CHANGE_TYPES:
-            errors.append(f"LLM Editor {label}.change_type is unsupported.")
-        if item.get("owner_approval_required") is not True:
-            errors.append(f"LLM Editor {label} must set owner_approval_required to true.")
-        for key in ["selector_or_anchor", "exact_old", "exact_new", "reason"]:
-            if not str(item.get(key, "")).strip():
-                errors.append(f"LLM Editor {label}.{key} must be non-empty.")
-        exact_old = str(item.get("exact_old", ""))
-        exact_new = str(item.get("exact_new", ""))
-        if exact_old.strip() == exact_new.strip():
-            errors.append(f"LLM Editor {label}.exact_new must differ from exact_old.")
-        if target_text and exact_old:
-            old_count = target_text.count(exact_old)
-            if old_count != 1:
-                errors.append(
-                    f"LLM Editor {label}.exact_old must match `{target}` exactly once; found {old_count} matches."
-                )
-            if exact_new and exact_new in target_text and exact_old not in target_text:
-                errors.append(f"LLM Editor {label}.exact_new already appears in `{target}` while exact_old is absent.")
+        errors.extend(exact_replacement_item_errors(item, target, target_text, index))
     return errors
 
 
@@ -484,6 +532,7 @@ def run_llm_editor(
     write_json(request_path, request)
     code, result = llm_adapter.run_adapter(request_path, provider, fixture_path)
     drop_noop_exact_replacements(result)
+    sanitize_exact_replacements(result, str(deterministic_brief.get("target_page_or_slug", "")))
     validation_errors = validate_editor_response(result, source_topic_id, deterministic_brief)
     if validation_errors:
         result = llm_adapter.blocked_result(request, provider, validation_errors, request_path)

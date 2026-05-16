@@ -862,6 +862,31 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(non_ascii["state"], "blocked")
             self.assertTrue(any("plain ASCII English" in error for error in non_ascii["errors"]))
 
+            exempt_request_path = tmp_path / "exempt-request.json"
+            write_json(
+                exempt_request_path,
+                {
+                    **load_json(request_path),
+                    "ascii_validation_exempt_paths": ["response_json.exact_replacements"],
+                    "expected_response_keys": ["summary", "risk_level", "next_action", "exact_replacements"],
+                },
+            )
+            exempt_fixture_path = tmp_path / "exempt-response.json"
+            write_json(
+                exempt_fixture_path,
+                {
+                    "response_json": {
+                        "summary": "ASCII planning text remains enforced.",
+                        "risk_level": "medium",
+                        "next_action": "review",
+                        "exact_replacements": [{"exact_new": "Unsafe arrow → should be sanitized by caller."}],
+                    }
+                },
+            )
+            code, exempt = llm_adapter.run_adapter(exempt_request_path, "fixture", exempt_fixture_path)
+            self.assertEqual(code, 0)
+            self.assertEqual(exempt["state"], "completed")
+
     def test_llm_adapter_openai_provider_blocks_without_key(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             request_path = Path(tmp) / "request.json"
@@ -2102,7 +2127,7 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue((tmp_path / "llm-reviewer-fixture-result.json").exists())
             self.assertTrue((tmp_path / "llm-reviewer-fixture.md").exists())
 
-    def test_llm_editor_blocks_unapproved_exact_replacement_candidate(self) -> None:
+    def test_llm_editor_drops_unapproved_exact_replacement_candidate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
             signals_path = tmp_path / "signals.json"
@@ -2145,10 +2170,11 @@ class WorkerContractTests(unittest.TestCase):
                 provider="fixture",
                 fixture_path=editor_fixture_path,
             )
-            self.assertEqual(editor_code, 1)
-            self.assertEqual(editor_payload["adapter_result"]["state"], "blocked")
+            self.assertEqual(editor_code, 0)
+            self.assertEqual(editor_payload["adapter_result"]["state"], "completed")
+            self.assertEqual(editor_payload["adapter_result"]["response_json"]["exact_replacements"], [])
             self.assertTrue(
-                any("owner_approval_required" in error for error in editor_payload["adapter_result"]["errors"])
+                any("owner_approval_required" in warning for warning in editor_payload["adapter_result"].get("warnings", []))
             )
 
     def test_llm_editor_rejects_nonliteral_exact_old_candidate(self) -> None:
@@ -2220,6 +2246,57 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(editor_payload["adapter_result"]["response_json"]["exact_replacements"], [])
             self.assertTrue(
                 any("Dropped no-op" in warning for warning in editor_payload["adapter_result"].get("warnings", []))
+            )
+
+    def test_llm_editor_drops_non_ascii_exact_replacements_without_blocking(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            editor_response = fixture_llm_editor_response()
+            editor_response["response_json"]["exact_replacements"] = [
+                {
+                    "file": "codes.html",
+                    "change_type": "first_screen_update",
+                    "selector_or_anchor": ".guide-verified",
+                    "exact_old": fixture_codes_guide_verified_snippet(),
+                    "exact_new": "<p>Draft replacement with an unsafe arrow →.</p>",
+                    "reason": "Non-ASCII exact replacement should be dropped, not block the planning brief.",
+                    "owner_approval_required": True,
+                }
+            ]
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, editor_response)
+
+            scout_code, scout_payload = llm_scout.run_llm_scout(
+                signal_paths=[signals_path],
+                external_proposal_paths=[],
+                output_dir=tmp_path,
+                basename="llm-scout-fixture",
+                provider="fixture",
+                fixture_path=scout_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(scout_code, 0)
+
+            editor_code, editor_payload = llm_editor.run_llm_editor(
+                scout_result_path=Path(scout_payload["result_path"]),
+                scout_request_path=Path(scout_payload["request_path"]),
+                topic_id="codes-gsc-opportunity",
+                output_dir=tmp_path,
+                basename="llm-editor-fixture",
+                provider="fixture",
+                fixture_path=editor_fixture_path,
+            )
+
+            self.assertEqual(editor_code, 0)
+            self.assertEqual(editor_payload["adapter_result"]["state"], "completed")
+            self.assertEqual(editor_payload["adapter_result"]["response_json"]["exact_replacements"], [])
+            self.assertTrue(
+                any("plain ASCII English" in warning for warning in editor_payload["adapter_result"].get("warnings", []))
             )
 
     def test_llm_exact_replacements_reach_intake_as_proposal_only(self) -> None:
