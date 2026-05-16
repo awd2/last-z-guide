@@ -979,6 +979,11 @@ may emit a `safe_exact_replace` Patch Spec instead of a broad
 - `target_file`, `source_of_truth_file`, and `output_file` all match
 - the spec still requires owner approval before apply
 
+When a run-plan carries `plan.exact_replacements`, `patch-plan` treats that as
+an exact-only flow. It emits only those exact replacement specs and does not add
+generic manual-review placeholders such as broad `meta_refresh`,
+`first_screen_update`, or route-link suggestions.
+
 Future Worker run-plan artifacts may pass exact snippets through
 `plan.exact_replacements`:
 

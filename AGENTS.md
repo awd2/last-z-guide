@@ -566,7 +566,7 @@ Lifecycle currently:
 
 `brief`, `patch-plan`, and `propose` may take a manifest path instead of only a run ID, and each supports `--output-dir <dir>` for staged Worker e2e checks that should not write reports into `automation/reports`.
 
-Patch plans may emit `safe_exact_replace` specs only when they contain exact `exact_old` and `exact_new` strings for a non-generated HTML file. These specs are still proposal-only until explicit owner approval.
+Patch plans may emit `safe_exact_replace` specs only when they contain exact `exact_old` and `exact_new` strings for a non-generated HTML file. These specs are still proposal-only until explicit owner approval. When `plan.exact_replacements` is present, `patch-plan` must emit only those exact replacement specs and must not add generic manual-review placeholders such as broad `meta_refresh` or `first_screen_update` suggestions.
 
 Future worker/run-plan artifacts may carry exact snippets through `plan.exact_replacements`. This field is allowed only as proposal data; it does not approve copy or bypass `propose`, `approval`, `apply-preview`, `apply-approved`, or strict QA. LLM Editor receives limited raw target-page snippets in `current_page_snapshot.source_snippets` so `exact_old` can be copied literally; common snippets include first-screen ledes, quick-answer sections, recommended-route sections, how-to-use sections, and home-hub hero/header blocks. Any LLM exact replacement must still match the current target HTML exactly once or the worker fails closed.
 

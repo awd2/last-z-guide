@@ -340,7 +340,7 @@ class WorkerContractTests(unittest.TestCase):
         self.assertEqual(spec["exact_new"], "<p>New owner-approved copy.</p>")
         self.assertTrue(spec["human_approval_required"])
 
-    def test_patch_planner_uses_manifest_exact_replacements_without_generic_duplicate(self) -> None:
+    def test_patch_planner_uses_manifest_exact_replacements_without_generic_noise(self) -> None:
         manifest = type(
             "ManifestFixture",
             (),
@@ -372,7 +372,7 @@ class WorkerContractTests(unittest.TestCase):
         ]
         self.assertEqual(len(matching), 1)
         self.assertEqual(matching[0]["exact_old"], "<p>Old approved-before copy.</p>")
-        self.assertTrue(any(proposal["change_type"] == "meta_refresh" for proposal in proposals))
+        self.assertEqual([proposal["change_type"] for proposal in proposals], ["first_screen_update"])
 
     def test_worker_run_plan_preserves_exact_replacements_from_intake(self) -> None:
         intake = {

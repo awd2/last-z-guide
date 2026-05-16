@@ -348,6 +348,10 @@ python3 automation/pipeline.py llm-editor --topic-id <topic_id> --provider opena
 
 This writes `automation/reports/llm-editor-brief-<topic_id>-request.json`, `automation/reports/llm-editor-brief-<topic_id>-result.json`, and `automation/reports/llm-editor-brief-<topic_id>.md`. It is a planning brief only; it must not contain final user-visible page copy or applyable patch specs. For existing HTML update opportunities, optional `exact_replacements` are preferred when the deterministic context has safe source snippets, but they remain draft proposal data only and require later owner approval. No-op exact candidates are dropped with a warning; unsafe candidates still block the Editor result.
 
+When those exact replacements move through intake into `patch-plan`, the
+proposal flow stays exact-only: it does not add broad manual placeholders like
+`meta_refresh` beside the approved before/after candidate.
+
 For a no-write LLM Reviewer gate from one LLM Editor brief, run:
 
 ```bash

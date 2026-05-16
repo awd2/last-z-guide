@@ -103,6 +103,8 @@ def propose_change_types(manifest) -> list[dict[str, object]]:
     proposals: list[dict[str, object]] = []
     exact_proposals = plan_exact_replacements(plan)
     proposals.extend(exact_proposals)
+    if exact_proposals:
+        return dedupe_proposals(proposals)
     exact_covered_changes = {
         (str(proposal["file"]), str(proposal["change_type"]))
         for proposal in exact_proposals
@@ -157,6 +159,10 @@ def propose_change_types(manifest) -> list[dict[str, object]]:
             }
         )
 
+    return dedupe_proposals(proposals)
+
+
+def dedupe_proposals(proposals: list[dict[str, object]]) -> list[dict[str, object]]:
     unique: list[dict[str, object]] = []
     seen: set[tuple[str, str, str]] = set()
     for proposal in proposals:
