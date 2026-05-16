@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycle with an Age of Science phase tied to technologic research, plus a Hero Initiative phase tied to hero upgrades and recruitment tickets."
+          "Daily event cycle includes an Age of Science theme for technology research and a Hero Initiative theme for hero leveling and recruitment items."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -194,20 +194,20 @@
       {
         "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
         "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Research",
+        "cluster": "Home",
         "recommended_action": "update_existing",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "research.html",
+        "archetype_suggestion": "home-hub",
+        "target_page_or_slug": "index.html",
         "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page with hero classes, power sources, and upgrade-related concepts that can support hero event cross-checking."
+          "Core hero index page; describes hero classes and the main hero power factors used for cross-checking hero growth mechanics."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "research.html"
+            "index.html"
           ],
           "external_source_id": "lastz-fandom-reference"
         },
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster and equipment hub; useful for hero discovery, faction browsing, and character/equipment cross-checks."
+          "Hero roster and equipment page with character list, faction filters, levels, and gear stats; good for hero discovery and cross-checking hero names."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -252,24 +252,24 @@
         ]
       },
       {
-        "topic_id": "external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-8",
-        "title": "External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power - | Last Z: Survival Shooter",
-        "cluster": "Progression",
-        "recommended_action": "create_new",
+        "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
+        "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "power-guide.html",
-        "source_reference": "External search: site:mmediamreza.com Last Z Survival Shooter",
+        "target_page_or_slug": "research.html",
+        "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Guide page for the Assaulter Camp with training cap, speed bonuses, power gains, and progression milestones."
+          "Research table page showing laboratory categories and per-level badge costs; useful for finding research paths and cost tables."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "power-guide.html"
+            "research.html"
           ],
-          "external_source_id": "mmediamreza-last-z-reference"
+          "external_source_id": "lastzwiki-reference"
         },
         "constraints": [
           "External search result is discovery evidence only.",

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "external_evidence_refresh",
-  "generated_at": "2026-05-16T17:26:43Z",
+  "generated_at": "2026-05-16T17:31:33Z",
   "state": "evidence_queue_ready",
   "external_scout_path": "automation/reports/llm-auto-review-queue/external-scout.json",
   "source_query_task_count": 6,

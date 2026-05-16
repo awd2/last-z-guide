@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_adapter_result",
+  "generated_at": "2026-05-16T17:32:15Z",
+  "state": "completed",
+  "provider": "openai",
+  "request_id": "llm-auto-review-editor-external-research-costs-external-cross-check",
+  "worker_role": "editor",
+  "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-research-costs-external-cross-check-request.json",
+  "fixture_path": "",
+  "response_json": {
+    "brief_summary": "Keep research-costs.html as an atlas page and improve only the first-screen answer and route clarity so it better supports branch coverage cross-checking. Maintain the existing Research cluster role, canonical claims, and downstream branch links; do not widen scope into a new page type.",
+    "target_page_or_slug": "research-costs.html",
+    "page_role": "atlas-page",
+    "primary_user_job": "Help players spot missing research branches, cost-table drift, and branch naming conflicts before they spend badges.",
+    "first_screen_plan": "Preserve the answer-first structure. Make the opening paragraph or quick answer clearly state that this page is a branch router and cross-check hub, then point users to the exact branch cost pages for node-by-node totals. Keep the main route guidance intact and do not add new claims that would change the page role. The first screen should immediately answer what the page is for, how to use it, and which route is the default for most players.",
+    "section_plan": [
+      {
+        "section": "Quick Answer",
+        "action": "Keep the answer-first intro, but tighten it so the page purpose, route order, and cross-check function are obvious immediately.",
+        "reason": "The opening must satisfy the cross-check intent without changing the atlas role."
+      },
+      {
+        "section": "Cluster overview",
+        "action": "Ensure the overview frames the page as a Research cluster router, not a standalone cost calculator.",
+        "reason": "This protects the existing page archetype and avoids scope creep."
+      },
+      {
+        "section": "Comparison grid or card list",
+        "action": "Retain the branch comparison layout and confirm it covers the major branches with stable naming.",
+        "reason": "This is the core utility for spotting missing branches and drift."
+      },
+      {
+        "section": "Recommended route",
+        "action": "Keep the current mainline order and reinforce that the route is the default planning path for most players.",
+        "reason": "Must not contradict the canonical mainline claims."
+      },
+      {
+        "section": "Exact page links",
+        "action": "Keep downstream links to the exact branch pages and add no new branch destinations unless verified later.",
+        "reason": "Users need the direct handoff from atlas to detailed cost pages."
+      }
+    ],
+    "internal_link_plan": [
+      {
+        "page": "index.html",
+        "role": "upstream",
+        "reason": "Home entry point for the Research cluster and the natural upstream route."
+      },
+      {
+        "page": "research.html",
+        "role": "lateral",
+        "reason": "Cluster hub that supports navigation and contextual understanding."
+      },
+      {
+        "page": "tech.html",
+        "role": "lateral",
+        "reason": "Related navigation page in the same research and progression area."
+      },
+      {
+        "page": "field-research.html",
+        "role": "lateral",
+        "reason": "Relevant adjacent branch page and a key part of the current route."
+      },
+      {
+        "page": "hero-training-cost.html",
+        "role": "downstream",
+        "reason": "Exact branch cost page for the first step in the recommended route."
+      },
+      {
+        "page": "military-strategies-cost.html",
+        "role": "downstream",
+        "reason": "Exact branch cost page for the next major route step."
+      },
+      {
+        "page": "peace-shield-cost.html",
+        "role": "downstream",
+        "reason": "Important branch page in the main route sequence."
+      },
+      {
+        "page": "siege-to-seize-cost.html",
+        "role": "downstream",
+        "reason": "Route branch page that must remain visible in the mainline chain."
+      }
+    ],
+    "protected_claims": [
+      "field-research-follows-siege",
+      "research-atlas-role",
+      "research-best-mainline"
+    ],
+    "do_not_change": [
+      "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+      "Do not create a new page when the Scout proposal recommends updating an existing page.",
+      "Do not contradict canonical claim field-research-follows-siege.",
+      "Do not contradict canonical claim research-atlas-role.",
+      "Do not contradict canonical claim research-best-mainline.",
+      "Do not broaden the page into a new player job or a general research guide.",
+      "Do not rely on analytics as proof that a rewrite is needed."
+    ],
+    "owner_questions": [
+      "Should the first-screen wording emphasize cross-checking branch coverage more explicitly, or keep it subtle and utility-focused?",
+      "Are there any additional verified branch links that should appear in the comparison grid, or should the current branch set remain unchanged?",
+      "Is the current recommended route still the preferred canonical order for the atlas intro, or should any wording be softened to match future balance changes?"
+    ],
+    "required_context_before_patch": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md",
+      "research-costs.html",
+      "index.html",
+      "research.html",
+      "tech.html",
+      "field-research.html"
+    ],
+    "acceptance_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict",
+      "manual review: first-screen answer and internal links on research-costs.html"
+    ],
+    "exact_replacements": [],
+    "next_step": "Verify the current page content against canonical memory and the secondary source, then decide whether only the opening answer needs a narrow wording update or whether the branch grid also needs a verified maintenance pass."
+  },
+  "usage": {
+    "input_tokens": 3016,
+    "input_tokens_details": {
+      "cached_tokens": 0
+    },
+    "output_tokens": 1024,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 4040
+  },
+  "provider_metadata": {
+    "model": "gpt-5.4-mini-2026-03-17",
+    "response_id": "resp_01aabce334db907d006a08aa1942888190965b7a26b3a3a6e6",
+    "status": "completed",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning_effort": "",
+    "max_output_tokens": 4000
+  },
+  "errors": [],
+  "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
+}

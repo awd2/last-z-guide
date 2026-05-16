@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_candidate_refresh",
-  "generated_at": "2026-05-16T17:27:25Z",
+  "generated_at": "2026-05-16T17:32:09Z",
   "state": "candidate_refresh_ready",
   "provider": "openai",
   "source_signal_files": [
@@ -16,16 +16,16 @@
   "candidate_topic_count": 2,
   "monitor_topic_count": 6,
   "candidate_topic_ids": [
-    "external-gift-center-official-flow-validation",
-    "external-hq-and-progression-reference-cross-check"
+    "external-hq-and-progression-reference-cross-check",
+    "external-research-costs-external-cross-check"
   ],
   "monitor_topic_ids": [
     "codes-gsc-opportunity",
-    "external-research-costs-external-cross-check",
+    "external-gift-center-official-flow-validation",
     "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
     "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
     "external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1",
-    "external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-8"
+    "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2"
   ],
   "topic_discovery_path": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
   "topic_discovery_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md",

@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "request_id": "llm-auto-review-reviewer-external-research-costs-external-cross-check",
+  "worker_role": "reviewer",
+  "task": "Review one no-write LLM Editor planning brief for site fit, risk, and readiness.",
+  "prompt": "Act as the LLM Reviewer gate for lastzguides.com. Review the planning brief only. Do not write or rewrite public page copy. Do not create patch specs. Check duplicate intent, cluster role separation, canonical claim protection, template safety, owner questions, draft exact replacement safety, and deterministic QA readiness. Treat analytics as signals, not proof. If the Editor includes exact_replacements, review whether they are narrow, target-only, literal exact_old/exact_new candidates with owner_approval_required=true. Do not approve apply_preview from an LLM-only exact replacement. Use plain ASCII English only. Return JSON only.",
+  "inputs": {
+    "source_llm_editor_result": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-research-costs-external-cross-check-result.json",
+    "source_llm_editor_request": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-research-costs-external-cross-check-request.json",
+    "selected_opportunity": {
+      "topic_id": "external-research-costs-external-cross-check",
+      "decision": "update_existing",
+      "rationale": "This is a strong candidate for human review because research cost and branch coverage drift are practical player pain points, and the topic aligns with an existing Research page instead of suggesting a new structure. However, the external source is only a discovery signal, so the claims need independent verification before any content work is considered.",
+      "player_value": "Reduces planning errors by helping players avoid outdated research costs, missing branches, and naming conflicts.",
+      "duplication_risk": "Medium because it may overlap with existing research tables or branch coverage pages if the verified scope is narrow.",
+      "priority": "high",
+      "risk_level": "high",
+      "next_step": "Cross-check the research cost and branch data against canonical memory and a second reliable source before deciding whether research-costs.html needs an update.",
+      "claims_to_verify": [
+        "Research cost tables",
+        "Branch coverage completeness",
+        "Branch naming consistency"
+      ]
+    },
+    "deterministic_proposal": {
+      "topic_id": "external-research-costs-external-cross-check",
+      "title": "External source opportunity: research cost and branch coverage cross-check",
+      "cluster": "Research",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "atlas-page",
+      "target_page_or_slug": "research-costs.html",
+      "source_reference": "stresswar-lastz-reference: https://lastz.stresswar.com",
+      "confidence": "high",
+      "priority": "high",
+      "risk_level": "high",
+      "evidence": [
+        "Owner-approved research reference source can reveal branch coverage gaps and cost/name drift.",
+        "External source URL recorded for later manual verification."
+      ],
+      "site_fit": {
+        "primary_user_job": "Catch missing research branches, cost-table drift, and branch naming conflicts before players rely on outdated planning.",
+        "cluster_owner": "Research",
+        "expected_internal_route": [
+          "index.html",
+          "research-costs.html"
+        ],
+        "archetype_reason": "External source indicates a possible player job to validate."
+      },
+      "constraints": [
+        "Do not copy competitor wording.",
+        "Use this as topic discovery and cross-validation context only.",
+        "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+      ],
+      "reject_if": [
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles."
+      ]
+    },
+    "deterministic_editor_context": {
+      "target_page_or_slug": "research-costs.html",
+      "page_role": "atlas-page",
+      "primary_query_family": "External source opportunity: research cost and branch coverage cross-check",
+      "primary_user_job": "Catch missing research branches, cost-table drift, and branch naming conflicts before players rely on outdated planning.",
+      "first_screen_answer": "Preserve the existing answer-first shape, but make the opening answer clearly satisfy `External source opportunity: research cost and branch coverage cross-check` without changing `research-costs.html` into a different page role.",
+      "template_reference": "research-costs.html",
+      "required_sections": [
+        "Quick Answer",
+        "Cluster overview",
+        "Comparison grid or card list",
+        "Recommended route",
+        "Exact page links"
+      ],
+      "internal_links": {
+        "upstream": [
+          "index.html"
+        ],
+        "downstream": [
+          "alliance-recognition-cost.html",
+          "army-building-cost.html",
+          "fully-armed-alliance-cost.html",
+          "hero-training-cost.html",
+          "military-strategies-cost.html"
+        ],
+        "lateral": [
+          "research.html",
+          "tech.html",
+          "field-research.html"
+        ]
+      },
+      "protected_claims": [
+        "field-research-follows-siege",
+        "research-atlas-role",
+        "research-best-mainline"
+      ],
+      "do_not_change": [
+        "Do not publish or apply content changes from this brief automatically.",
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not use analytics signals as proof that a rewrite is required.",
+        "The topic duplicates an existing page intent without adding a distinct player job.",
+        "The external claim cannot be verified beyond this source.",
+        "The proposal would blur existing cluster roles.",
+        "Do not contradict canonical claim `field-research-follows-siege`.",
+        "Do not contradict canonical claim `research-atlas-role`.",
+        "Do not contradict canonical claim `research-best-mainline`."
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "research-costs.html",
+        "index.html",
+        "research.html",
+        "tech.html",
+        "field-research.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on research-costs.html"
+      ],
+      "current_page_snapshot": {
+        "title": "Last Z Research Costs Atlas (2026) — Branch Comparison, Badge Totals, and Unlock Paths",
+        "h1": "Last Z Research Costs Atlas — Branch Comparison, Badge Totals, and Unlock Paths",
+        "meta_description": "Compare Last Z research branches by badge total, unlock path, priority role, and exact node-cost page before spending badges.",
+        "quick_answer": "Best way to use the research atlas: use this page as the branch router, then open the exact cost page for node totals. For most players, the main route is Hero Training to Cockpit, Military Strategies, Peace Shield, Siege to Seize, then Field Research.",
+        "data_lede": "Use this page to compare every major research branch by badge total, unlock path, and priority role. The main route for most players is Hero Training to Cockpit, Military Strategies, Peace Shield, Siege to Seize, then Field Research.",
+        "source_snippets": {
+          "title_tag": "<title>Last Z Research Costs Atlas (2026) — Branch Comparison, Badge Totals, and Unlock Paths</title>",
+          "meta_description_tag": "<meta name=\"description\" content=\"Compare Last Z research branches by badge total, unlock path, priority role, and exact node-cost page before spending badges.\">",
+          "og_title_tag": "<meta property=\"og:title\" content=\"Last Z Research Costs Atlas — Branch Comparison, Badge Totals, and Unlock Paths\">",
+          "og_description_tag": "<meta property=\"og:description\" content=\"Compare Last Z research branches by badge total, unlock path, priority role, and exact node-cost page.\">",
+          "twitter_title_tag": "<meta name=\"twitter:title\" content=\"Last Z Research Costs Atlas — Branch Comparison, Badge Totals, and Unlock Paths\">",
+          "twitter_description_tag": "<meta name=\"twitter:description\" content=\"Compare Last Z research branches by badge total, unlock path, priority role, and exact node-cost page.\">",
+          "h1_tag": "<h1>Last Z Research Costs Atlas — Branch Comparison, Badge Totals, and Unlock Paths</h1>",
+          "guide_verified": "<p class=\"guide-verified\">This atlas is the branch router for Last Z research costs: compare badge totals and unlock paths here, then open the exact branch page for node-by-node costs before spending badges.</p>",
+          "quick_answer_lede": "<p class=\"qa-lede\"><strong>Best way to use the research atlas:</strong> use this page as the branch router, then open the exact cost page for node totals. For most players, the main route is Hero Training to Cockpit, Military Strategies, Peace Shield, Siege to Seize, then Field Research.</p>",
+          "data_lede": "<p class=\"data-lede\">Use this page to compare every major research branch by badge total, unlock path, and priority role. The main route for most players is Hero Training to Cockpit, Military Strategies, Peace Shield, Siege to Seize, then Field Research.</p>"
+        },
+        "h2_headings": [
+          "Recommended Research Route",
+          "All Research Trees",
+          "How to Use This Atlas",
+          "Research Costs Atlas FAQ",
+          "Related Guides"
+        ],
+        "internal_links": [
+          "about.html",
+          "alliance-recognition-cost.html",
+          "army-building-cost.html",
+          "contact.html",
+          "disclosure.html",
+          "field-research.html",
+          "fully-armed-alliance-cost.html",
+          "hero-training-cost.html",
+          "https://lastzguides.com/research-costs.html",
+          "military-strategies-cost.html",
+          "peace-shield-cost.html",
+          "privacy.html",
+          "research.html",
+          "siege-to-seize-cost.html",
+          "tech.html",
+          "terms.html",
+          "unit-special-training-cost.html"
+        ]
+      }
+    },
+    "llm_editor_brief": {
+      "brief_summary": "Keep research-costs.html as an atlas page and improve only the first-screen answer and route clarity so it better supports branch coverage cross-checking. Maintain the existing Research cluster role, canonical claims, and downstream branch links; do not widen scope into a new page type.",
+      "target_page_or_slug": "research-costs.html",
+      "page_role": "atlas-page",
+      "primary_user_job": "Help players spot missing research branches, cost-table drift, and branch naming conflicts before they spend badges.",
+      "first_screen_plan": "Preserve the answer-first structure. Make the opening paragraph or quick answer clearly state that this page is a branch router and cross-check hub, then point users to the exact branch cost pages for node-by-node totals. Keep the main route guidance intact and do not add new claims that would change the page role. The first screen should immediately answer what the page is for, how to use it, and which route is the default for most players.",
+      "section_plan": [
+        {
+          "section": "Quick Answer",
+          "action": "Keep the answer-first intro, but tighten it so the page purpose, route order, and cross-check function are obvious immediately.",
+          "reason": "The opening must satisfy the cross-check intent without changing the atlas role."
+        },
+        {
+          "section": "Cluster overview",
+          "action": "Ensure the overview frames the page as a Research cluster router, not a standalone cost calculator.",
+          "reason": "This protects the existing page archetype and avoids scope creep."
+        },
+        {
+          "section": "Comparison grid or card list",
+          "action": "Retain the branch comparison layout and confirm it covers the major branches with stable naming.",
+          "reason": "This is the core utility for spotting missing branches and drift."
+        },
+        {
+          "section": "Recommended route",
+          "action": "Keep the current mainline order and reinforce that the route is the default planning path for most players.",
+          "reason": "Must not contradict the canonical mainline claims."
+        },
+        {
+          "section": "Exact page links",
+          "action": "Keep downstream links to the exact branch pages and add no new branch destinations unless verified later.",
+          "reason": "Users need the direct handoff from atlas to detailed cost pages."
+        }
+      ],
+      "internal_link_plan": [
+        {
+          "page": "index.html",
+          "role": "upstream",
+          "reason": "Home entry point for the Research cluster and the natural upstream route."
+        },
+        {
+          "page": "research.html",
+          "role": "lateral",
+          "reason": "Cluster hub that supports navigation and contextual understanding."
+        },
+        {
+          "page": "tech.html",
+          "role": "lateral",
+          "reason": "Related navigation page in the same research and progression area."
+        },
+        {
+          "page": "field-research.html",
+          "role": "lateral",
+          "reason": "Relevant adjacent branch page and a key part of the current route."
+        },
+        {
+          "page": "hero-training-cost.html",
+          "role": "downstream",
+          "reason": "Exact branch cost page for the first step in the recommended route."
+        },
+        {
+          "page": "military-strategies-cost.html",
+          "role": "downstream",
+          "reason": "Exact branch cost page for the next major route step."
+        },
+        {
+          "page": "peace-shield-cost.html",
+          "role": "downstream",
+          "reason": "Important branch page in the main route sequence."
+        },
+        {
+          "page": "siege-to-seize-cost.html",
+          "role": "downstream",
+          "reason": "Route branch page that must remain visible in the mainline chain."
+        }
+      ],
+      "protected_claims": [
+        "field-research-follows-siege",
+        "research-atlas-role",
+        "research-best-mainline"
+      ],
+      "do_not_change": [
+        "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
+        "Do not create a new page when the Scout proposal recommends updating an existing page.",
+        "Do not contradict canonical claim field-research-follows-siege.",
+        "Do not contradict canonical claim research-atlas-role.",
+        "Do not contradict canonical claim research-best-mainline.",
+        "Do not broaden the page into a new player job or a general research guide.",
+        "Do not rely on analytics as proof that a rewrite is needed."
+      ],
+      "owner_questions": [
+        "Should the first-screen wording emphasize cross-checking branch coverage more explicitly, or keep it subtle and utility-focused?",
+        "Are there any additional verified branch links that should appear in the comparison grid, or should the current branch set remain unchanged?",
+        "Is the current recommended route still the preferred canonical order for the atlas intro, or should any wording be softened to match future balance changes?"
+      ],
+      "required_context_before_patch": [
+        "AGENTS.md",
+        "automation/memory/site_style_guide.md",
+        "automation/memory/page_archetypes.md",
+        "automation/memory/seo_llm_optimization.md",
+        "automation/memory/canonical_claims.json",
+        "automation/memory/content_index.json",
+        "automation/memory/entities.json",
+        "automation/memory/release_checklist.md",
+        "research-costs.html",
+        "index.html",
+        "research.html",
+        "tech.html",
+        "field-research.html"
+      ],
+      "acceptance_checks": [
+        "python3 scripts/prepublish_check.py",
+        "python3 automation/pipeline.py checks --strict",
+        "manual review: first-screen answer and internal links on research-costs.html"
+      ],
+      "exact_replacements": [],
+      "next_step": "Verify the current page content against canonical memory and the secondary source, then decide whether only the opening answer needs a narrow wording update or whether the branch grid also needs a verified maintenance pass."
+    },
+    "guardrails": [
+      "No content files may be edited by Reviewer.",
+      "No final public page copy may be generated.",
+      "No patch specs, backlog entries, manifests, PRs, or production changes may be created.",
+      "Editor exact_replacements are proposal-only candidates; they do not approve copy or bypass propose/approval/apply-approved.",
+      "If exact_replacements are present, owner_approval_required must remain true.",
+      "High-risk cornerstone/home pages cannot be advanced without explicit owner review.",
+      "Owner approval is required before any user-visible content change.",
+      "Use plain ASCII English only in every string field."
+    ]
+  },
+  "expected_response_keys": [
+    "target_page_or_slug",
+    "page_role",
+    "verdict",
+    "risk_level",
+    "approved_next_stage",
+    "blocking_issues",
+    "warnings",
+    "duplicate_intent_review",
+    "cluster_role_review",
+    "canonical_claim_review",
+    "template_safety_review",
+    "exact_replacement_review",
+    "owner_approval_required",
+    "owner_questions",
+    "required_context_before_edit",
+    "required_checks",
+    "next_step"
+  ],
+  "response_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "target_page_or_slug": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "page_role": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "verdict": {
+        "type": "string",
+        "enum": [
+          "pass",
+          "needs_human_review",
+          "revise",
+          "reject"
+        ]
+      },
+      "risk_level": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "approved_next_stage": {
+        "type": "string",
+        "enum": [
+          "none",
+          "brief",
+          "patch_plan",
+          "proposal",
+          "approval",
+          "apply_preview"
+        ]
+      },
+      "blocking_issues": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "severity": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "issue": {
+              "type": "string",
+              "maxLength": 450
+            },
+            "required_fix": {
+              "type": "string",
+              "maxLength": 450
+            }
+          },
+          "required": [
+            "severity",
+            "issue",
+            "required_fix"
+          ]
+        }
+      },
+      "warnings": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 400
+        }
+      },
+      "duplicate_intent_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "cluster_role_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "canonical_claim_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "template_safety_review": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "exact_replacement_review": {
+        "type": "string",
+        "maxLength": 700,
+        "description": "Review of any Editor exact_replacements. Empty-array Editor briefs still need a short no-candidate note."
+      },
+      "owner_approval_required": {
+        "type": "boolean"
+      },
+      "owner_questions": {
+        "type": "array",
+        "maxItems": 8,
+        "items": {
+          "type": "string",
+          "maxLength": 350
+        }
+      },
+      "required_context_before_edit": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "required_checks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "string",
+          "maxLength": 220
+        }
+      },
+      "next_step": {
+        "type": "string",
+        "maxLength": 450
+      }
+    },
+    "required": [
+      "target_page_or_slug",
+      "page_role",
+      "verdict",
+      "risk_level",
+      "approved_next_stage",
+      "blocking_issues",
+      "warnings",
+      "duplicate_intent_review",
+      "cluster_role_review",
+      "canonical_claim_review",
+      "template_safety_review",
+      "exact_replacement_review",
+      "owner_approval_required",
+      "owner_questions",
+      "required_context_before_edit",
+      "required_checks",
+      "next_step"
+    ]
+  },
+  "max_output_tokens": 4000
+}

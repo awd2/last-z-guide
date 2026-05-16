@@ -1,14 +1,14 @@
-# LLM Auto Review Queue - 2026-05-16T17:27:25Z
+# LLM Auto Review Queue - 2026-05-16T17:32:20Z
 
 ## Outcome
 
-- State: `current`
+- State: `queue_ready`
 - Provider: `openai`
 - Candidate topics: `2`
-- Queued topics: `0`
-- Completed items: `0`
+- Queued topics: `1`
+- Completed items: `1`
 - Failed items: `0`
-- Skipped existing: `2`
+- Skipped existing: `1`
 - Deferred by limit: `0`
 - Candidate refresh: `automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.md`
 - Topic discovery: `automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md`
@@ -20,11 +20,28 @@
 
 ## Review Queue
 
-- None
+### external-research-costs-external-cross-check
+
+- Status: `completed`
+- Score: `83`
+- Target: `research-costs.html`
+- Cluster: `Research`
+- Priority: `high`
+- Risk: `high`
+- Verdict: `needs_human_review`
+- Owner approval required: `true`
+- Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-research-costs-external-cross-check.md`
+
+Score reasons:
+
+- priority:high=45
+- confidence:high=20
+- risk:high=0
+- action:update_existing=8
+- candidate_status=10
 
 ## Skipped Topics
 
-- `external-gift-center-official-flow-validation`: `skipped_existing_chain`, score `91`, existing `automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.json`
 - `external-hq-and-progression-reference-cross-check`: `skipped_existing_chain`, score `83`, existing `automation/reports/llm-auto-review-queue/llm-worker-chain-external-hq-and-progression-reference-cross-check.json`
 
 ## Next Actions
