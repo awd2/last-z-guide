@@ -1,13 +1,13 @@
-# LLM Auto Review Queue - 2026-05-16T18:11:42Z
+# LLM Auto Review Queue - 2026-05-16T18:50:53Z
 
 ## Outcome
 
-- State: `queue_ready`
+- State: `completed_with_failures`
 - Provider: `openai`
 - Candidate topics: `1`
 - Queued topics: `1`
-- Completed items: `1`
-- Failed items: `0`
+- Completed items: `0`
+- Failed items: `1`
 - Skipped existing: `0`
 - Stale existing reruns: `1`
 - Required chain contract: `2` `exact-editor-proposals-v2`
@@ -20,26 +20,30 @@
 - Allows PR/deploy: `false`
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
+## Errors
+
+- LLM Editor stage failed; Reviewer was not run.
+
 ## Review Queue
 
-### external-hq-and-progression-reference-cross-check
+### external-gift-center-official-flow-validation
 
-- Status: `completed`
-- Score: `83`
-- Target: `hq.html`
-- Cluster: `Progression`
-- Priority: `high`
-- Risk: `high`
-- Verdict: `needs_human_review`
-- Owner approval required: `true`
-- Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-hq-and-progression-reference-cross-check.md`
+- Status: `failed`
+- Score: `71`
+- Target: `gift-center-uid.html`
+- Cluster: `Economy`
+- Priority: `medium`
+- Risk: `medium`
+- Verdict: `None`
+- Owner approval required: `none`
+- Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.md`
 - Existing chain rerun: `true`
 
 Score reasons:
 
-- priority:high=45
+- priority:medium=25
 - confidence:high=20
-- risk:high=0
+- risk:medium=8
 - action:update_existing=8
 - candidate_status=10
 - stale_existing_chain_contract=0<2

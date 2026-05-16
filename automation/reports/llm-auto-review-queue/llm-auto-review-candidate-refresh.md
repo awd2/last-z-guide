@@ -1,4 +1,4 @@
-# LLM Candidate Refresh - 2026-05-16T18:11:29Z
+# LLM Candidate Refresh - 2026-05-16T18:50:42Z
 
 ## Overview
 
@@ -21,17 +21,17 @@
 
 ## Candidate Topics
 
-- external-hq-and-progression-reference-cross-check
+- external-gift-center-official-flow-validation
 
 ## Monitor Topics
 
 - codes-gsc-opportunity
+- external-hq-and-progression-reference-cross-check
 - external-research-costs-external-cross-check
-- external-gift-center-official-flow-validation
 - external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4
 - external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5
-- external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1
 - external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2
+- external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1
 
 ## Stages
 

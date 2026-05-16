@@ -1,20 +1,24 @@
 {
   "schema_version": 1,
   "report_type": "llm_worker_chain_summary",
-  "generated_at": "2026-05-16T17:05:20Z",
-  "state": "completed",
+  "worker_chain_contract_version": 2,
+  "worker_chain_contract_label": "exact-editor-proposals-v2",
+  "generated_at": "2026-05-16T18:50:53Z",
+  "state": "blocked",
   "provider": "openai",
   "handoff_source": "live_scout",
   "source_decision": null,
   "source_topic_id": "external-gift-center-official-flow-validation",
   "target_page_or_slug": "gift-center-uid.html",
-  "page_role": "support-guide",
-  "review_verdict": "needs_human_review",
-  "risk_level": "medium",
-  "approved_next_stage": "brief",
-  "owner_approval_required": true,
+  "page_role": "",
+  "review_verdict": null,
+  "risk_level": null,
+  "approved_next_stage": null,
+  "owner_approval_required": null,
   "exact_replacements_count": 0,
-  "errors": [],
+  "errors": [
+    "LLM Editor stage failed; Reviewer was not run."
+  ],
   "stages": {
     "llm_scout": {
       "state": "completed",
@@ -25,19 +29,23 @@
       "errors": []
     },
     "llm_editor": {
-      "state": "completed",
+      "state": "blocked",
       "provider": "openai",
       "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation-request.json",
       "result_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation-result.json",
       "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation.md",
-      "errors": []
+      "errors": [
+        "Response field `response_json.do_not_change[9]` must use plain ASCII English only.",
+        "Response field `response_json.exact_replacements[0].exact_old` must use plain ASCII English only.",
+        "Response field `response_json.exact_replacements[0].exact_new` must use plain ASCII English only."
+      ]
     },
     "llm_reviewer": {
-      "state": "completed",
-      "provider": "openai",
-      "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-reviewer-external-gift-center-official-flow-validation-request.json",
-      "result_path": "automation/reports/llm-auto-review-queue/llm-auto-review-reviewer-external-gift-center-official-flow-validation-result.json",
-      "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-reviewer-external-gift-center-official-flow-validation.md",
+      "state": "not_run",
+      "provider": null,
+      "request_path": null,
+      "result_path": null,
+      "markdown_path": null,
       "errors": []
     }
   },

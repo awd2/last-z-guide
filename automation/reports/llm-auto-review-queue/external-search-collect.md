@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-16T18:11:21Z
+# External Search Collect - 2026-05-16T18:50:33Z
 
 ## Outcome
 
@@ -20,7 +20,7 @@
 ### external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1
 
 - Title: External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `heroes.html`
 - Cluster: `Heroes`
 - Score: `82`
@@ -32,7 +32,7 @@
 ### external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2
 
 - Title: External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `research.html`
 - Cluster: `Research`
 - Score: `82`
@@ -47,7 +47,7 @@
 - Action: `monitor`
 - Target: `index.html`
 - Cluster: `Home`
-- Score: `29`
+- Score: `19`
 - Source: `External search: site:lastzwiki.com/en Last Z guide heroes research`
 - URL: `https://lastzwiki.com/en/index.html`
 - Mapping: `content_index_token_match`
@@ -92,31 +92,31 @@
 ### external-search-mmediamreza-last-z-reference-shooter-camp-guide-last-z-survival-shooter-7
 
 - Title: External search opportunity: Shooter Camp Guide - | Last Z: Survival Shooter
-- Action: `create_new`
+- Action: `update_existing`
 - Target: `about.html`
 - Cluster: `Site`
 - Score: `74`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
 - URL: `https://mmediamreza.com/shooter-camp-guide`
-- Mapping: `content_index_token_match`
+- Mapping: `cluster_default_target`
 - Public claim ready: `false`
 
 ### external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-8
 
 - Title: External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power - | Last Z: Survival Shooter
-- Action: `create_new`
+- Action: `update_existing`
 - Target: `about.html`
 - Cluster: `Site`
 - Score: `74`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
 - URL: `https://mmediamreza.com/en/assaulter-camp-training-guide`
-- Mapping: `content_index_token_match`
+- Mapping: `cluster_default_target`
 - Public claim ready: `false`
 
 ### external-search-mmediamreza-last-z-reference-last-z-laboratory-guide-tech-research-lab--9
 
 - Title: External search opportunity: Last Z Laboratory Guide: Tech Research & Lab No. 2 Unlocking - | Last Z: Survival Shooter
-- Action: `create_new`
+- Action: `update_existing`
 - Target: `tech.html`
 - Cluster: `Research`
 - Score: `82`

@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Regular event with a Hero Initiative theme that uses Heroic Experience and Hero Fragments to improve Heroes and earn points; also includes an Age of Science research theme."
+          "Daily event page with a specific research-themed cycle and hero-related scoring tasks; useful for event mechanics cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -203,7 +203,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page listing hero classes and the main stats/power inputs, useful for linking event tasks to hero progression."
+          "Core hero overview page; useful for hero taxonomy, power factors, and links into hero systems."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -225,7 +225,7 @@
         "topic_id": "external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1",
         "title": "External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026",
         "cluster": "Heroes",
-        "recommended_action": "update_existing",
+        "recommended_action": "create_new",
         "archetype_suggestion": "cornerstone-guide",
         "target_page_or_slug": "heroes.html",
         "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Main hero hub with character listings, levels, and equipment sections; useful for hero discovery and build cross-checks."
+          "Hero hub with character list, equipment section, and likely entry point for hero builds and stats."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -255,7 +255,7 @@
         "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
         "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
         "cluster": "Research",
-        "recommended_action": "update_existing",
+        "recommended_action": "create_new",
         "archetype_suggestion": "cornerstone-guide",
         "target_page_or_slug": "research.html",
         "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page with badge costs and category structure; useful for research discovery and cost cross-validation leads."
+          "Research table page covering laboratory categories and badge costs per level, including T10-related research."
         ],
         "site_fit": {
           "expected_internal_route": [

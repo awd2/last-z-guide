@@ -3,23 +3,23 @@
   "request_id": "llm-auto-review-editor-external-gift-center-official-flow-validation",
   "worker_role": "editor",
   "task": "Create a no-write Editor planning brief for one approved Scout opportunity.",
-  "prompt": "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. Do not write final public page copy, HTML, or patch specs. Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, and owner approval gate. Treat analytics as signals, not proof. Normally return exact_replacements as an empty array. Only include exact_replacements when the deterministic context contains enough current source text to copy exact_old literally and the replacement is narrow enough for later owner review. exact_replacements are draft proposal data only, not approval, not a Patch Spec, and not permission to edit files. Use plain ASCII English only. Return JSON only.",
+  "prompt": "Act as the LLM Editor planner for lastzguides.com. Return a planning brief only. Do not write final public page copy, HTML, or patch specs. Preserve the existing page template, cluster role, canonical claims, internal routing, SEO/LLM eligibility, and owner approval gate. Treat analytics as signals, not proof. For update_existing opportunities on an existing HTML target, prefer narrow exact_replacements when current_page_snapshot.source_snippets contains enough current source text to copy exact_old literally. Use exact_replacements for small first-screen, route-clarity, or metadata candidates that can be reviewed as exact before/after text. Return an empty exact_replacements array only when no narrow exact replacement can be safely proposed; explain that limitation in owner_questions or next_step. exact_replacements are draft proposal data only, not approval, not a Patch Spec, and not permission to edit files. Use plain ASCII English only. Return JSON only.",
   "inputs": {
     "source_llm_scout_result": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json",
     "source_llm_scout_request": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
     "selected_opportunity": {
       "topic_id": "external-gift-center-official-flow-validation",
       "decision": "update_existing",
-      "rationale": "The official service domain is a plausible validation source for routing and flow accuracy, but it is not proof on its own. The topic maps to an existing support-style page and is useful as a cross-check opportunity for human review.",
-      "player_value": "Reduce confusion around Gift Center setup, UID usage, and official routing so players do not get misdirected.",
-      "duplication_risk": "Medium, because it may overlap with other Gift Center or redeem flow pages if the intent is not narrowly defined.",
-      "priority": "high",
+      "rationale": "The official service domain is a useful cross-validation signal for Gift Center routing and store flow, but it is not proof on its own. The topic could support a useful update to an existing page if claims are verified and scoped narrowly.",
+      "player_value": "Helps players confirm official routing, UID usage, and setup steps without relying on stale or confusing guidance.",
+      "duplication_risk": "Medium. It appears adjacent to an existing Gift Center page intent and could duplicate or blur the same user job if not handled carefully.",
+      "priority": "medium",
       "risk_level": "medium",
-      "next_step": "Verify the public flow against canonical site memory and one additional reliable source before deciding whether the existing page needs adjustment.",
+      "next_step": "Hold for verification against canonical site memory plus one additional reliable source or owner confirmation before any content proposal.",
       "claims_to_verify": [
-        "Exact Gift Center routing on the official domain",
-        "Whether UID usage is part of the public player flow or a support-specific detail",
-        "Whether this topic adds a distinct player job beyond the existing redeem guidance"
+        "Official Gift Center routing and whether it is still current.",
+        "UID usage steps and whether they remain valid.",
+        "Whether this topic adds a distinct player job beyond the existing Gift Center page."
       ]
     },
     "deterministic_proposal": {
@@ -140,7 +140,8 @@
           "h1_tag": "<h1>Last Z Gift Center Login and UID Setup — Official Redeem Page</h1>",
           "guide_meta": "<p class=\"guide-meta\">Support Guide &bull; Updated March 2026 &bull; Checked against the official Gift Center</p>",
           "guide_verified": "<p class=\"guide-verified\">Use the official Last Z Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, redeem outside the game client, and collect rewards from your in-game mailbox.</p>",
-          "quick_answer_lede": "<p class=\"qa-lede\"><strong>Official Last Z Gift Center setup:</strong> open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.</p>"
+          "quick_answer_lede": "<p class=\"qa-lede\"><strong>Official Last Z Gift Center setup:</strong> open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.</p>",
+          "quick_answer_section": "<section class=\"quick-answer quick-answer--modern\" aria-label=\"Quick Answer\">\n            <p class=\"qa-kicker\">Quick Answer</p>\n            <div class=\"qa-body\">\n                <p class=\"qa-lede\"><strong>Official Last Z Gift Center setup:</strong> open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.</p>\n                <ol class=\"qa-list\">\n                    <li class=\"qa-item\">\n                        <span class=\"qa-num\" aria-hidden=\"true\">①</span>\n                        <span class=\"qa-line\">\n                            <strong class=\"qa-title\">Official page</strong>\n                            <span class=\"qa-sep\">·</span>\n                            <span class=\"qa-detail\"><a href=\"https://last-z.com/giftCenter/#/login\" target=\"_blank\" rel=\"noopener\">Gift Center login</a></span>\n                        </span>\n                    </li>\n                    <li class=\"qa-item\">\n                        <span class=\"qa-num\" aria-hidden=\"true\">②</span>\n                        <span class=\"qa-line\">\n                            <strong class=\"qa-title\">Copy UID</strong>\n                            <span class=\"qa-sep\">·</span>\n                            <span class=\"qa-detail\">Avatar → Settings → Copy ID</span>\n                        </span>\n                    </li>\n                    <li class=\"qa-item\">\n                        <span class=\"qa-num\" aria-hidden=\"true\">③</span>\n                        <span class=\"qa-line\">\n                            <strong class=\"qa-title\">Mobile flow</strong>\n                            <span class=\"qa-sep\">·</span>\n                            <span class=\"qa-detail\">browser on iPhone or Android</span>\n                        </span>\n                    </li>\n                    <li class=\"qa-item\">\n                        <span class=\"qa-num\" aria-hidden=\"true\">④</span>\n                        <span class=\"qa-line\">\n                            <strong class=\"qa-title\">Rewards</strong>\n                            <span class=\"qa-sep\">·</span>\n                            <span class=\"qa-detail\">collect from in-game mailbox</span>\n                        </span>\n                    </li>\n                </ol>\n                <div class=\"qa-callouts\" role=\"note\">\n                    <p class=\"qa-callout qa-callout--tip\">\n                        <span class=\"qa-icon\" aria-hidden=\"true\">🔐</span>\n                        <span class=\"qa-callout-text\"><strong>Official only:</strong> codes are redeemed on the Gift Center website, not inside the game app.</span>\n                    </p>\n                    <p class=\"qa-callout qa-callout--tip\">\n                        <span class=\"qa-icon\" aria-hidden=\"true\">🆔</span>\n                        <span class=\"qa-callout-text\"><strong>Safest UID method:</strong> copy your ID directly from Settings instead of typing it manually.</span>\n                    </p>\n                    <p class=\"qa-callout qa-callout--tip\">\n                        <span class=\"qa-icon\" aria-hidden=\"true\">📬</span>\n                        <span class=\"qa-callout-text\"><strong>Mailbox rule:</strong> rewards appear in your in-game mail, not on the Gift Center screen.</span>\n                    </p>\n                </div>\n            </div>\n        </section>"
         },
         "h2_headings": [
           "Official Gift Center Login",
@@ -171,7 +172,10 @@
       "Do not generate final user-visible page copy.",
       "Do not create a patch plan or Patch Spec.",
       "Use current_page_snapshot.source_snippets as the preferred source for exact_old values.",
+      "If current_page_snapshot.source_snippets includes data_lede, quick_answer_lede, quick_answer_section, recommended_route_section, or how_to_use_section, use those snippets before inventing a broad manual-review proposal.",
       "exact_old must copy a current target-file snippet literally and must match the target file exactly once.",
+      "exact_new must preserve the existing HTML wrapper and template class names unless the owner explicitly requested a template change.",
+      "Prefer at most 1-3 exact_replacements; each should solve a concrete player job and avoid unrelated rewrite.",
       "exact_replacements, when present, are proposal-only candidates that still require propose + owner approval + apply-approved.",
       "Every exact_replacements item must set owner_approval_required to true.",
       "Do not mutate backlog, manifests, PRs, or production state.",

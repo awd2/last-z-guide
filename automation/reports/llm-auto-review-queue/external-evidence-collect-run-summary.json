@@ -1,9 +1,9 @@
 {
-  "state": "evidence_collected",
+  "state": "evidence_collection_partial",
   "provider": "fetch",
   "url_lead_count": 11,
-  "collected_count": 11,
-  "failed_count": 0,
+  "collected_count": 10,
+  "failed_count": 1,
   "query_task_count": 6,
   "output_path": "automation/reports/llm-auto-review-queue/external-evidence-collect.json",
   "markdown_path": "automation/reports/llm-auto-review-queue/external-evidence-collect.md",

@@ -1,143 +1,18 @@
 {
   "schema_version": 1,
   "report_type": "llm_adapter_result",
-  "generated_at": "2026-05-16T17:05:15Z",
-  "state": "completed",
+  "generated_at": "2026-05-16T18:50:53Z",
+  "state": "blocked",
   "provider": "openai",
   "request_id": "llm-auto-review-editor-external-gift-center-official-flow-validation",
   "worker_role": "editor",
   "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation-request.json",
-  "fixture_path": "",
-  "response_json": {
-    "brief_summary": "Keep the page as an answer-first support guide for Gift Center routing and UID setup, but tighten the opening so it clearly validates the official browser redeem flow without shifting page role or cluster boundaries.",
-    "target_page_or_slug": "gift-center-uid.html",
-    "page_role": "support-guide",
-    "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
-    "first_screen_plan": "Preserve the existing answer-first structure. The first screen should immediately state the official flow: open the Gift Center in a browser, copy UID from Avatar -> Settings -> Copy ID, redeem outside the game client, and expect rewards in the in-game mailbox. Keep the framing as verification and setup guidance, not a broader store or account help page. Do not introduce new claims beyond the canonical flow.",
-    "section_plan": [
-      {
-        "section": "Quick Answer",
-        "action": "Keep the answer-first lead and make sure the opening directly resolves the routing and UID setup question.",
-        "reason": "This matches the page job and gives the quickest confirmation for users checking the official redeem flow."
-      },
-      {
-        "section": "Exact procedural answer",
-        "action": "Retain the step sequence for browser redemption and UID copy path, with no expansion into unrelated account topics.",
-        "reason": "The page must preserve the canonical redeem-only flow and avoid cluster drift."
-      },
-      {
-        "section": "Common mistakes or edge cases",
-        "action": "Keep only narrowly relevant mistakes such as using the game client instead of the browser or pasting the wrong UID.",
-        "reason": "Helps users avoid the main failure points without changing the page scope."
-      },
-      {
-        "section": "Step-by-step checks",
-        "action": "Ensure the verification steps map to the official flow and are easy to scan on mobile.",
-        "reason": "Supports the user job of confirming setup accuracy quickly."
-      },
-      {
-        "section": "Related next step",
-        "action": "Point users to downstream or adjacent help pages that solve follow-on issues, not to unrelated store or general support content.",
-        "reason": "Keeps internal routing aligned with the support cluster and avoids role blur."
-      }
-    ],
-    "internal_link_plan": [
-      {
-        "page": "index.html",
-        "role": "upstream",
-        "reason": "Main hub entry point for the site and a logical parent route."
-      },
-      {
-        "page": "f2p.html",
-        "role": "downstream",
-        "reason": "Helpful follow-on for players who want economy or progression context after redeem setup."
-      },
-      {
-        "page": "start.html",
-        "role": "downstream",
-        "reason": "Useful next step for onboarding after confirming the redemption flow."
-      },
-      {
-        "page": "codes.html",
-        "role": "lateral",
-        "reason": "Adjacent page for code discovery and redemption context."
-      },
-      {
-        "page": "redeem-code-not-working.html",
-        "role": "lateral",
-        "reason": "Best troubleshooting companion when the redeem flow fails."
-      },
-      {
-        "page": "resources.html",
-        "role": "lateral",
-        "reason": "Optional reference hub if it exists in the site map and remains relevant to support guidance."
-      }
-    ],
-    "protected_claims": [
-      "gift-center-cluster-role-separation",
-      "gift-center-only-redeem-flow",
-      "gift-rewards-mailbox",
-      "uid-copy-path"
-    ],
-    "do_not_change": [
-      "Do not publish or apply content changes from this brief automatically.",
-      "Do not change the existing page template, navigation pattern, or schema family without separate approval.",
-      "Do not create a new page when the Scout proposal recommends updating an existing page.",
-      "Do not use analytics signals as proof that a rewrite is required.",
-      "The topic duplicates an existing page intent without adding a distinct player job.",
-      "The external claim cannot be verified beyond this source.",
-      "The proposal would blur existing cluster roles.",
-      "Do not contradict canonical claim `gift-center-cluster-role-separation`.",
-      "Do not contradict canonical claim `gift-center-only-redeem-flow`.",
-      "Do not contradict canonical claim `gift-rewards-mailbox`."
-    ],
-    "owner_questions": [
-      "Is the official routing check meant to validate only the browser redeem flow, or also a store purchase flow on the same domain?",
-      "Should UID setup remain framed as a support detail, or do we want to surface it as part of the main player flow?",
-      "Is `resources.html` still an approved lateral destination for this cluster?"
-    ],
-    "required_context_before_patch": [
-      "AGENTS.md",
-      "automation/memory/site_style_guide.md",
-      "automation/memory/page_archetypes.md",
-      "automation/memory/seo_llm_optimization.md",
-      "automation/memory/canonical_claims.json",
-      "automation/memory/content_index.json",
-      "automation/memory/entities.json",
-      "automation/memory/release_checklist.md",
-      "gift-center-uid.html",
-      "index.html",
-      "codes.html",
-      "redeem-code-not-working.html",
-      "resources.html"
-    ],
-    "acceptance_checks": [
-      "python3 scripts/prepublish_check.py",
-      "python3 automation/pipeline.py checks --strict",
-      "manual review: first-screen answer and internal links on gift-center-uid.html"
-    ],
-    "exact_replacements": [],
-    "next_step": "Verify the public flow against canonical site memory and one additional reliable source, then decide whether a narrow first-screen adjustment is needed on the existing page."
-  },
-  "usage": {
-    "input_tokens": 2921,
-    "input_tokens_details": {
-      "cached_tokens": 0
-    },
-    "output_tokens": 991,
-    "output_tokens_details": {
-      "reasoning_tokens": 0
-    },
-    "total_tokens": 3912
-  },
-  "provider_metadata": {
-    "model": "gpt-5.4-mini-2026-03-17",
-    "response_id": "resp_0f6d81f358ab4f5e006a08a3c4f1548196bfdc95a3dbacb9da",
-    "status": "completed",
-    "endpoint": "https://api.openai.com/v1/responses",
-    "reasoning_effort": "",
-    "max_output_tokens": 4000
-  },
-  "errors": [],
+  "response_json": null,
+  "usage": null,
+  "errors": [
+    "Response field `response_json.do_not_change[9]` must use plain ASCII English only.",
+    "Response field `response_json.exact_replacements[0].exact_old` must use plain ASCII English only.",
+    "Response field `response_json.exact_replacements[0].exact_new` must use plain ASCII English only."
+  ],
   "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
 }

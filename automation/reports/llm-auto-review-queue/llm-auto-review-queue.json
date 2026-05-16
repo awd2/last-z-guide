@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "report_type": "llm_auto_review_queue",
-  "generated_at": "2026-05-16T18:11:42Z",
-  "state": "queue_ready",
+  "generated_at": "2026-05-16T18:50:53Z",
+  "state": "completed_with_failures",
   "provider": "openai",
   "source_signal_files": [
     "content/gsc/latest-gsc-agent-signals.json",
@@ -18,8 +18,8 @@
   "topic_discovery_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md",
   "candidate_topic_count": 1,
   "queued_topic_count": 1,
-  "completed_item_count": 1,
-  "failed_item_count": 0,
+  "completed_item_count": 0,
+  "failed_item_count": 1,
   "skipped_existing_count": 0,
   "stale_existing_count": 1,
   "deferred_count": 0,
@@ -29,37 +29,41 @@
   "required_chain_contract_label": "exact-editor-proposals-v2",
   "queue_items": [
     {
-      "topic_id": "external-hq-and-progression-reference-cross-check",
-      "target_page_or_slug": "hq.html",
-      "cluster": "Progression",
-      "priority": "high",
-      "risk_level": "high",
-      "score": 83,
+      "topic_id": "external-gift-center-official-flow-validation",
+      "target_page_or_slug": "gift-center-uid.html",
+      "cluster": "Economy",
+      "priority": "medium",
+      "risk_level": "medium",
+      "score": 71,
       "score_reasons": [
-        "priority:high=45",
+        "priority:medium=25",
         "confidence:high=20",
-        "risk:high=0",
+        "risk:medium=8",
         "action:update_existing=8",
         "candidate_status=10",
         "stale_existing_chain_contract=0<2"
       ],
-      "existing_chain": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-hq-and-progression-reference-cross-check.json",
+      "existing_chain": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.json",
       "existing_chain_contract_version": 0,
       "required_chain_contract_version": 2,
       "existing_chain_current": false,
       "stale_existing_chain": true,
       "stale_reason": "worker_chain_contract_version is missing or outdated",
-      "status": "completed",
-      "review_verdict": "needs_human_review",
-      "approved_next_stage": "none",
-      "owner_approval_required": true,
-      "chain_json": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-hq-and-progression-reference-cross-check.json",
-      "chain_markdown": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-hq-and-progression-reference-cross-check.md",
-      "errors": []
+      "status": "failed",
+      "review_verdict": null,
+      "approved_next_stage": null,
+      "owner_approval_required": null,
+      "chain_json": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.json",
+      "chain_markdown": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.md",
+      "errors": [
+        "LLM Editor stage failed; Reviewer was not run."
+      ]
     }
   ],
   "skipped_topics": [],
-  "errors": [],
+  "errors": [
+    "LLM Editor stage failed; Reviewer was not run."
+  ],
   "output_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",
   "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.md",
   "allows_content_edit": false,
