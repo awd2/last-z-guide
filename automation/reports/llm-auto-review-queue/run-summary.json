@@ -1,16 +1,14 @@
 {
-  "state": "completed_with_failures",
+  "state": "queue_ready",
   "provider": "openai",
   "candidate_topic_count": 1,
   "queued_topic_count": 1,
-  "completed_item_count": 0,
-  "failed_item_count": 1,
+  "completed_item_count": 1,
+  "failed_item_count": 0,
   "skipped_existing_count": 0,
   "stale_existing_count": 0,
   "output_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",
   "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.md",
-  "errors": [
-    "LLM Editor stage failed; Reviewer was not run."
-  ],
+  "errors": [],
   "safety": "No content, backlog, manifest, PR, or production files were modified."
 }

@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event with a research-focused cycle; one theme is Age of Science, which awards points for completing and speeding up technologies research."
+          "Daily event cycle page linking research tasks to the Age of Science theme, and hero upgrade tasks to Hero Initiative."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -203,7 +203,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page that defines hero classes and power factors, useful for linking hero upgrade mechanics to event tasks."
+          "Core hero roster and power overview page for hero discovery and cross-linking to hero systems."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero hub with character list, factions, levels, and equipment section; good lead for hero roster discovery and build references."
+          "Core heroes hub with hero list and equipment section; good lead for character discovery and loadout cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research hub with category tabs and level cost tables; useful for locating research categories and badge-cost structure."
+          "Research table hub with category navigation and per-level badge costs; strong lead for research discovery and cost cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [

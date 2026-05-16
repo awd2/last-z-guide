@@ -1,13 +1,13 @@
-# LLM Auto Review Queue - 2026-05-16T19:02:32Z
+# LLM Auto Review Queue - 2026-05-16T19:15:52Z
 
 ## Outcome
 
-- State: `completed_with_failures`
+- State: `queue_ready`
 - Provider: `openai`
 - Candidate topics: `1`
 - Queued topics: `1`
-- Completed items: `0`
-- Failed items: `1`
+- Completed items: `1`
+- Failed items: `0`
 - Skipped existing: `0`
 - Stale existing reruns: `0`
 - Required chain contract: `2` `exact-editor-proposals-v2`
@@ -20,22 +20,18 @@
 - Allows PR/deploy: `false`
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
-## Errors
-
-- LLM Editor stage failed; Reviewer was not run.
-
 ## Review Queue
 
 ### external-gift-center-official-flow-validation
 
-- Status: `failed`
+- Status: `completed`
 - Score: `91`
 - Target: `gift-center-uid.html`
 - Cluster: `Economy`
 - Priority: `high`
 - Risk: `medium`
-- Verdict: `None`
-- Owner approval required: `none`
+- Verdict: `needs_human_review`
+- Owner approval required: `true`
 - Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.md`
 - Existing chain rerun: `false`
 

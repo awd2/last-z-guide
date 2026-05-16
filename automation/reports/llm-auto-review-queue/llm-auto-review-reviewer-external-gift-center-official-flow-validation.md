@@ -14,46 +14,47 @@
 
 - Verdict: `needs_human_review`
 - Risk: `medium`
-- Approved next stage: `brief`
+- Approved next stage: `none`
 - Owner approval required: `true`
 
 ## Blocking Issues
 
-- medium: The brief points to a possible update_existing action, but the topic appears to overlap an existing Gift Center redeem intent without a clearly distinct player job. Required fix: Require human confirmation that this page keeps a narrow support-guide role and does not duplicate adjacent redeem or store guidance.
-- medium: The official source is only a single external signal and does not prove the routing, UID flow, or page scope changes on its own. Required fix: Verify the public flow against canonical site memory and one additional reliable source or owner confirmation before any copy decision.
-- medium: The brief mentions a store flow validation opportunity, which could blur the protected redeem-only cluster boundaries. Required fix: Confirm that the page remains redeem-only and does not absorb store, account, or broader service routing content.
+- medium: The brief still overlaps strongly with existing gift center and redeem guidance, so the topic may not add a distinct player job. Required fix: Confirm with owner review whether this should stay as a narrow support-guide refresh or be left unchanged.
+- medium: The external service claim is not verified beyond the provided source reference and canonical memory. Required fix: Obtain owner confirmation or an additional reliable source before any user-visible change is approved.
+- medium: The exact replacement changes a live meta description and depends on claim alignment rather than a clearly isolated typo fix. Required fix: Review the replacement in context and confirm it does not alter meaning, cluster role, or protected claims.
 
 ## Warnings
 
-- No exact_replacements were provided, so there is no literal replacement set to validate.
-- The page already has answer-first structure and internal links, so changes should be narrowly scoped if approved.
-- Resources.html is treated as optional and should be checked for current cluster approval before use.
+- Do not advance to apply_preview from this brief alone.
+- The page should preserve the existing support-guide role and answer-first structure.
+- Internal links appear broadly consistent, but resources.html should be confirmed as a valid related destination.
+- Acceptance checks are appropriate for deterministic QA, but they do not remove the need for owner approval.
 
 ## Duplicate Intent Review
 
-Duplicate risk is medium. The topic overlaps existing Gift Center and redeem guidance, and the brief itself says the topic duplicates an existing page intent without adding a distinct player job. This supports review rather than direct advancement.
+High duplicate-intent pressure. The brief fits existing gift center login and UID setup intent and does not clearly define a new player job.
 
 ## Cluster Role Review
 
-Cluster role separation should be preserved. The page is a support-guide for Gift Center routing and UID setup, not a broader store or account help page. Any change must stay within the redeem-only flow and avoid role drift.
+Cluster role separation is preserved only if the page remains a narrow support guide. Any shift toward general redeem or store guidance would blur roles.
 
 ## Canonical Claim Review
 
-Protected claims must not be contradicted: gift-center-cluster-role-separation, gift-center-only-redeem-flow, gift-rewards-mailbox, and uid-copy-path. The brief is consistent with them only if it stays focused on browser redemption, UID copy path, and mailbox delivery.
+Protected claims are respected in the brief, but the proposed clarification must not weaken gift-center-only-redeem-flow, gift-rewards-mailbox, or uid-copy-path.
 
 ## Template Safety Review
 
-Template safety is acceptable at planning level because no template, navigation pattern, or schema family change is requested. Separate approval is still required for any template or structure change.
+Template safety is acceptable. The brief explicitly keeps the same page template, navigation pattern, and schema family, which is low risk.
 
 ## Exact Replacement Review
 
-No exact_replacements were provided. There are no candidate literal replacements to approve or reject at this stage.
+One exact replacement candidate is present. It is narrow, target-only, and literal, with matching exact_old and exact_new strings. However, it remains proposal-only and requires owner_approval_required=true. Do not treat it as approved or ready for apply_preview from the LLM brief alone.
 
 ## Owner Questions
 
-- Is the official routing check meant to validate only the browser redeem flow, or also a store purchase flow on the same domain?
-- Should UID setup remain framed as a support detail, or do we want to surface it as part of the main player flow?
-- Is resources.html still an approved lateral destination for this cluster?
+- Should the first screen emphasize official routing verification more strongly, or remain nearly unchanged?
+- Is resources.html still a valid related destination for this cluster?
+- Should the page title stay purely login/setup framed, or can the first-screen heading receive a minor clarity tweak?
 
 ## Required Context Before Edit
 
@@ -79,4 +80,4 @@ No exact_replacements were provided. There are no candidate literal replacements
 
 ## Next Step
 
-Request human review to confirm the page remains a narrow redeem-only support guide, then verify the public flow against canonical site memory plus one additional reliable source before any edit decision.
+Escalate for owner review and verify the topic against canonical claims plus adjacent cluster pages before any edit is approved.

@@ -3,22 +3,20 @@
   "report_type": "llm_worker_chain_summary",
   "worker_chain_contract_version": 2,
   "worker_chain_contract_label": "exact-editor-proposals-v2",
-  "generated_at": "2026-05-16T19:02:32Z",
-  "state": "blocked",
+  "generated_at": "2026-05-16T19:15:52Z",
+  "state": "completed",
   "provider": "openai",
   "handoff_source": "live_scout",
   "source_decision": null,
   "source_topic_id": "external-gift-center-official-flow-validation",
   "target_page_or_slug": "gift-center-uid.html",
-  "page_role": "",
-  "review_verdict": null,
-  "risk_level": null,
-  "approved_next_stage": null,
-  "owner_approval_required": null,
-  "exact_replacements_count": 0,
-  "errors": [
-    "LLM Editor stage failed; Reviewer was not run."
-  ],
+  "page_role": "support-guide",
+  "review_verdict": "needs_human_review",
+  "risk_level": "medium",
+  "approved_next_stage": "none",
+  "owner_approval_required": true,
+  "exact_replacements_count": 1,
+  "errors": [],
   "stages": {
     "llm_scout": {
       "state": "completed",
@@ -29,21 +27,19 @@
       "errors": []
     },
     "llm_editor": {
-      "state": "blocked",
+      "state": "completed",
       "provider": "openai",
       "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation-request.json",
       "result_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation-result.json",
       "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-editor-external-gift-center-official-flow-validation.md",
-      "errors": [
-        "LLM Editor exact_replacements[1].exact_old must match `gift-center-uid.html` exactly once; found 0 matches."
-      ]
+      "errors": []
     },
     "llm_reviewer": {
-      "state": "not_run",
-      "provider": null,
-      "request_path": null,
-      "result_path": null,
-      "markdown_path": null,
+      "state": "completed",
+      "provider": "openai",
+      "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-reviewer-external-gift-center-official-flow-validation-request.json",
+      "result_path": "automation/reports/llm-auto-review-queue/llm-auto-review-reviewer-external-gift-center-official-flow-validation-result.json",
+      "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-reviewer-external-gift-center-official-flow-validation.md",
       "errors": []
     }
   },

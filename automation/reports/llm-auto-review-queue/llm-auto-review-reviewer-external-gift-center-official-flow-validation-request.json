@@ -10,16 +10,16 @@
     "selected_opportunity": {
       "topic_id": "external-gift-center-official-flow-validation",
       "decision": "update_existing",
-      "rationale": "The official service domain is a plausible validation source for routing and flow accuracy, but it is not proof on its own. The topic maps to an existing support-style page and is useful as a cross-check opportunity for human review.",
-      "player_value": "Reduce confusion around Gift Center setup, UID usage, and official routing so players do not get misdirected.",
-      "duplication_risk": "Medium, because it may overlap with other Gift Center or redeem flow pages if the intent is not narrowly defined.",
+      "rationale": "This topic is worth review because official routing and Gift Center flow accuracy are important to player trust, but the proposal is discovery only and must be verified against additional sources or owner confirmation. It may justify an existing-page refresh if the current page leaves routing unclear.",
+      "player_value": "Improves confidence that players are using the official Gift Center path and correct UID-related flow.",
+      "duplication_risk": "Medium duplication risk because it may overlap with existing gift center and redeem guidance unless a distinct validation gap is found.",
       "priority": "high",
       "risk_level": "medium",
-      "next_step": "Verify the public flow against canonical site memory and one additional reliable source before deciding whether the existing page needs adjustment.",
+      "next_step": "Verify against canonical site memory and at least one other reliable source before deciding whether the page needs a targeted update.",
       "claims_to_verify": [
-        "Exact Gift Center routing on the official domain",
-        "Whether UID usage is part of the public player flow or a support-specific detail",
-        "Whether this topic adds a distinct player job beyond the existing redeem guidance"
+        "Official Gift Center routing and store flow details.",
+        "Whether UID usage is described accurately and is still current.",
+        "Whether this topic adds a distinct player job beyond existing gift center guidance."
       ]
     },
     "deterministic_proposal": {
@@ -140,7 +140,8 @@
           "h1_tag": "<h1>Last Z Gift Center Login and UID Setup — Official Redeem Page</h1>",
           "guide_meta": "<p class=\"guide-meta\">Support Guide &bull; Updated March 2026 &bull; Checked against the official Gift Center</p>",
           "guide_verified": "<p class=\"guide-verified\">Use the official Last Z Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, redeem outside the game client, and collect rewards from your in-game mailbox.</p>",
-          "quick_answer_lede": "<p class=\"qa-lede\"><strong>Official Last Z Gift Center setup:</strong> open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.</p>"
+          "quick_answer_lede": "<p class=\"qa-lede\"><strong>Official Last Z Gift Center setup:</strong> open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.</p>",
+          "quick_answer_section": "<section class=\"quick-answer quick-answer--modern\" aria-label=\"Quick Answer\">\n            <p class=\"qa-kicker\">Quick Answer</p>\n            <div class=\"qa-body\">\n                <p class=\"qa-lede\"><strong>Official Last Z Gift Center setup:</strong> open the Gift Center in a browser, copy your UID from Avatar → Settings → Copy ID, paste the code outside the game, and collect rewards from your in-game mailbox.</p>\n                <ol class=\"qa-list\">\n                    <li class=\"qa-item\">\n                        <span class=\"qa-num\" aria-hidden=\"true\">①</span>\n                        <span class=\"qa-line\">\n                            <strong class=\"qa-title\">Official page</strong>\n                            <span class=\"qa-sep\">·</span>\n                            <span class=\"qa-detail\"><a href=\"https://last-z.com/giftCenter/#/login\" target=\"_blank\" rel=\"noopener\">Gift Center login</a></span>\n                        </span>\n                    </li>\n                    <li class=\"qa-item\">\n                        <span class=\"qa-num\" aria-hidden=\"true\">②</span>\n                        <span class=\"qa-line\">\n                            <strong class=\"qa-title\">Copy UID</strong>\n                            <span class=\"qa-sep\">·</span>\n                            <span class=\"qa-detail\">Avatar → Settings → Copy ID</span>\n                        </span>\n                    </li>\n                    <li class=\"qa-item\">\n                        <span class=\"qa-num\" aria-hidden=\"true\">③</span>\n                        <span class=\"qa-line\">\n                            <strong class=\"qa-title\">Mobile flow</strong>\n                            <span class=\"qa-sep\">·</span>\n                            <span class=\"qa-detail\">browser on iPhone or Android</span>\n                        </span>\n                    </li>\n                    <li class=\"qa-item\">\n                        <span class=\"qa-num\" aria-hidden=\"true\">④</span>\n                        <span class=\"qa-line\">\n                            <strong class=\"qa-title\">Rewards</strong>\n                            <span class=\"qa-sep\">·</span>\n                            <span class=\"qa-detail\">collect from in-game mailbox</span>\n                        </span>\n                    </li>\n                </ol>\n                <div class=\"qa-callouts\" role=\"note\">\n                    <p class=\"qa-callout qa-callout--tip\">\n                        <span class=\"qa-icon\" aria-hidden=\"true\">🔐</span>\n                        <span class=\"qa-callout-text\"><strong>Official only:</strong> codes are redeemed on the Gift Center website, not inside the game app.</span>\n                    </p>\n                    <p class=\"qa-callout qa-callout--tip\">\n                        <span class=\"qa-icon\" aria-hidden=\"true\">🆔</span>\n                        <span class=\"qa-callout-text\"><strong>Safest UID method:</strong> copy your ID directly from Settings instead of typing it manually.</span>\n                    </p>\n                    <p class=\"qa-callout qa-callout--tip\">\n                        <span class=\"qa-icon\" aria-hidden=\"true\">📬</span>\n                        <span class=\"qa-callout-text\"><strong>Mailbox rule:</strong> rewards appear in your in-game mail, not on the Gift Center screen.</span>\n                    </p>\n                </div>\n            </div>\n        </section>"
         },
         "h2_headings": [
           "Official Gift Center Login",
@@ -167,68 +168,68 @@
       }
     },
     "llm_editor_brief": {
-      "brief_summary": "Keep the page as an answer-first support guide for Gift Center routing and UID setup, but tighten the opening so it clearly validates the official browser redeem flow without shifting page role or cluster boundaries.",
+      "brief_summary": "Keep the page as a support guide on official Gift Center login and UID setup, with a narrow first-screen clarification that strengthens route validation without changing cluster role or adding a new player job.",
       "target_page_or_slug": "gift-center-uid.html",
       "page_role": "support-guide",
       "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
-      "first_screen_plan": "Preserve the existing answer-first structure. The first screen should immediately state the official flow: open the Gift Center in a browser, copy UID from Avatar -> Settings -> Copy ID, redeem outside the game client, and expect rewards in the in-game mailbox. Keep the framing as verification and setup guidance, not a broader store or account help page. Do not introduce new claims beyond the canonical flow.",
+      "first_screen_plan": "Preserve the answer-first layout. Make the opening answer explicitly validate the official browser-based Gift Center flow, UID copy path, and mailbox reward delivery in a way that reinforces the existing support-guide role. Keep the same template wrapper, class names, and route labels. Do not broaden into a general redemption or store-guide page.",
       "section_plan": [
         {
           "section": "Quick Answer",
-          "action": "Keep the answer-first lead and make sure the opening directly resolves the routing and UID setup question.",
-          "reason": "This matches the page job and gives the quickest confirmation for users checking the official redeem flow."
+          "action": "Tighten the lead so the first screen clearly states the official browser flow, UID copy path, and mailbox outcome.",
+          "reason": "This is the highest-value place to answer the user job quickly while staying within the existing page role."
         },
         {
           "section": "Exact procedural answer",
-          "action": "Retain the step sequence for browser redemption and UID copy path, with no expansion into unrelated account topics.",
-          "reason": "The page must preserve the canonical redeem-only flow and avoid cluster drift."
+          "action": "Keep the step order focused on official login, UID copy, browser redemption, and reward delivery.",
+          "reason": "The user needs a precise validation flow, not a new topic or a generic help article."
         },
         {
           "section": "Common mistakes or edge cases",
-          "action": "Keep only narrowly relevant mistakes such as using the game client instead of the browser or pasting the wrong UID.",
-          "reason": "Helps users avoid the main failure points without changing the page scope."
+          "action": "Retain and, if needed, slightly sharpen the warnings about wrong UID entry, in-app redemption, and checking the mailbox.",
+          "reason": "These are the main failure points for the existing user job."
         },
         {
           "section": "Step-by-step checks",
-          "action": "Ensure the verification steps map to the official flow and are easy to scan on mobile.",
-          "reason": "Supports the user job of confirming setup accuracy quickly."
+          "action": "Ensure the checks map directly to the official flow and can be scanned quickly on mobile.",
+          "reason": "Supports fast validation without altering the page structure."
         },
         {
           "section": "Related next step",
-          "action": "Point users to downstream or adjacent help pages that solve follow-on issues, not to unrelated store or general support content.",
-          "reason": "Keeps internal routing aligned with the support cluster and avoids role blur."
+          "action": "Keep internal routing toward start, f2p, codes, and redeem-code-not-working as the next logical paths.",
+          "reason": "Preserves cluster separation and helps users branch to adjacent intent pages."
         }
       ],
       "internal_link_plan": [
         {
           "page": "index.html",
           "role": "upstream",
-          "reason": "Main hub entry point for the site and a logical parent route."
-        },
-        {
-          "page": "f2p.html",
-          "role": "downstream",
-          "reason": "Helpful follow-on for players who want economy or progression context after redeem setup."
+          "reason": "Keeps the page anchored in the main site hub and preserves existing information architecture."
         },
         {
           "page": "start.html",
           "role": "downstream",
-          "reason": "Useful next step for onboarding after confirming the redemption flow."
+          "reason": "Useful for players who need onboarding after confirming the Gift Center flow."
+        },
+        {
+          "page": "f2p.html",
+          "role": "downstream",
+          "reason": "Relevant follow-on guidance for players evaluating progression and economy context."
         },
         {
           "page": "codes.html",
           "role": "lateral",
-          "reason": "Adjacent page for code discovery and redemption context."
+          "reason": "Adjacent but distinct intent for players looking for code lists rather than setup validation."
         },
         {
           "page": "redeem-code-not-working.html",
           "role": "lateral",
-          "reason": "Best troubleshooting companion when the redeem flow fails."
+          "reason": "Useful fallback when the official flow does not work as expected."
         },
         {
           "page": "resources.html",
           "role": "lateral",
-          "reason": "Optional reference hub if it exists in the site map and remains relevant to support guidance."
+          "reason": "Potential supporting guide destination if the site uses it for related help content."
         }
       ],
       "protected_claims": [
@@ -250,9 +251,9 @@
         "Do not contradict canonical claim `gift-rewards-mailbox`."
       ],
       "owner_questions": [
-        "Is the official routing check meant to validate only the browser redeem flow, or also a store purchase flow on the same domain?",
-        "Should UID setup remain framed as a support detail, or do we want to surface it as part of the main player flow?",
-        "Is `resources.html` still an approved lateral destination for this cluster?"
+        "Do you want the first screen to emphasize official routing verification more strongly, or should it stay almost unchanged aside from minor clarity edits?",
+        "Is `resources.html` still a valid related destination for this cluster, or should it be removed from the internal link plan?",
+        "Should we keep the page title as a pure setup/login framing, or is a subtle clarity tweak approved for the first-screen heading only?"
       ],
       "required_context_before_patch": [
         "AGENTS.md",
@@ -274,8 +275,18 @@
         "python3 automation/pipeline.py checks --strict",
         "manual review: first-screen answer and internal links on gift-center-uid.html"
       ],
-      "exact_replacements": [],
-      "next_step": "Verify the public flow against canonical site memory and one additional reliable source, then decide whether a narrow first-screen adjustment is needed on the existing page."
+      "exact_replacements": [
+        {
+          "file": "gift-center-uid.html",
+          "change_type": "safe_exact_replace",
+          "selector_or_anchor": "meta[name=\"description\"]",
+          "exact_old": "<meta name=\"description\" content=\"Official Last Z Gift Center login setup: how to copy your UID from Avatar > Settings > Copy ID, redeem in a browser, and collect rewards from mailbox.\">",
+          "exact_new": "<meta name=\"description\" content=\"Official Last Z Gift Center login setup: how to copy your UID from Avatar > Settings > Copy ID, redeem in a browser, and collect rewards from your in-game mailbox.\">",
+          "reason": "Aligns the meta description with the mailbox claim already used on-page and improves route clarity without changing page role.",
+          "owner_approval_required": true
+        }
+      ],
+      "next_step": "Verify the current file against canonical claims and nearby cluster pages, then decide whether only the first-screen and meta description need narrow approval-ready edits or whether the page should stay unchanged."
     },
     "guardrails": [
       "No content files may be edited by Reviewer.",

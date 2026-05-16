@@ -10,16 +10,16 @@
     "selected_opportunity": {
       "topic_id": "external-gift-center-official-flow-validation",
       "decision": "update_existing",
-      "rationale": "This is a strong cross-validation topic because official routing and store flow accuracy matter to the economy cluster. It is still only an external-source signal, so it needs verification before any content work.",
-      "player_value": "Helps players confirm official Gift Center setup, UID usage, and routing so they can redeem rewards correctly.",
-      "duplication_risk": "Medium. The topic may overlap with codes.html unless the intended job is specifically UID and routing validation.",
+      "rationale": "This topic is worth review because official routing and Gift Center flow accuracy are important to player trust, but the proposal is discovery only and must be verified against additional sources or owner confirmation. It may justify an existing-page refresh if the current page leaves routing unclear.",
+      "player_value": "Improves confidence that players are using the official Gift Center path and correct UID-related flow.",
+      "duplication_risk": "Medium duplication risk because it may overlap with existing gift center and redeem guidance unless a distinct validation gap is found.",
       "priority": "high",
       "risk_level": "medium",
-      "next_step": "Verify the official service claims against canonical site memory plus another reliable source or owner confirmation before deciding whether this belongs on gift-center-uid.html or remains part of codes.html.",
+      "next_step": "Verify against canonical site memory and at least one other reliable source before deciding whether the page needs a targeted update.",
       "claims_to_verify": [
-        "Whether last-z.com is the authoritative route for the Gift Center or store flow.",
-        "Whether the UID guidance adds a distinct user job from the main redeem codes page.",
-        "Whether any public mechanic or routing detail can be confirmed by a second reliable source."
+        "Official Gift Center routing and store flow details.",
+        "Whether UID usage is described accurately and is still current.",
+        "Whether this topic adds a distinct player job beyond existing gift center guidance."
       ]
     },
     "deterministic_proposal": {
@@ -198,6 +198,9 @@
     "acceptance_checks",
     "exact_replacements",
     "next_step"
+  ],
+  "ascii_validation_exempt_paths": [
+    "response_json.exact_replacements"
   ],
   "response_schema": {
     "type": "object",
