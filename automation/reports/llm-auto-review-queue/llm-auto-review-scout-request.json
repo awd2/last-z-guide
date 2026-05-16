@@ -162,10 +162,10 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
-        "title": "External search opportunity: Full Preparedness",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
+        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Events",
-        "recommended_action": "create_new",
+        "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
         "target_page_or_slug": "events.html",
         "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycles include a research-focused theme and a hero-upgrade theme, with points tied to research speedups and hero materials."
+          "Regular event with a Hero Initiative theme that uses Heroic Experience and Hero Fragments to improve Heroes and earn points; also includes an Age of Science research theme."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -192,8 +192,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-heroes-5",
-        "title": "External search opportunity: Heroes",
+        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
+        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -203,7 +203,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page; identifies hero classes and lists the main power factors, useful for linking hero growth to event objectives."
+          "Core hero overview page listing hero classes and the main stats/power inputs, useful for linking event tasks to hero progression."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Dedicated heroes page with roster, hero stats/equipment sections, and character-level guide content."
+          "Main hero hub with character listings, levels, and equipment sections; useful for hero discovery and build cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page covering 9 laboratory categories and level-by-level badge costs."
+          "Research table page with badge costs and category structure; useful for research discovery and cost cross-validation leads."
         ],
         "site_fit": {
           "expected_internal_route": [

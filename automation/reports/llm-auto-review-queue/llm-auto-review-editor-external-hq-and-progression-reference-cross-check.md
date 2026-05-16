@@ -12,52 +12,48 @@
 
 ## Brief Summary
 
-Keep hq.html as the cornerstone HQ guide, but tighten the opening to foreground the HQ and progression requirement cross-check job, then validate section order and internal routes without changing page role or template.
+Keep hq.html as a cornerstone progression guide, but tighten the first-screen answer so it explicitly cross-checks HQ requirements and dependency planning without changing page role or cluster fit.
 
 ## First-Screen Plan
 
-Preserve the answer-first opening and make sure the first screen immediately states the HQ planning recommendation, the HQ30 to HQ35 split, and the construction requirement cross-check angle. Keep the current page role and do not introduce a new intent or a different content type. The opening should stay concise, direct, and useful for players comparing requirements and progression timing.
+Preserve the answer-first structure. Keep the opening focused on the best HQ path for most players, but make the first visible answer clearly state the requirement cross-check angle: early rush, required-buildings-only upgrades, HQ30 target, then a separate HQ31-35 steel phase. Avoid adding a new intent or expanding into a different guide type. Keep the short supporting line immediately after the answer so users can confirm this is a planning guide, not a full route map.
 
 ## Section Plan
 
-- Quick Answer: Keep the answer-first structure and ensure it resolves the cross-check query fast. Reason: This is the highest-value matching section for the target job and should remain the primary entry point.
-- Best overall recommendation: Retain the current recommendation shape, but align wording to HQ requirement verification and progression planning. Reason: Supports the same user job without changing the page archetype.
-- Decision framework: Keep as the place where players compare rush, requirement, and steel-timer tradeoffs. Reason: Useful for distinguishing HQ30 from HQ31-35 planning.
-- Cluster route block: Verify that the route block points users to progression and base-building supporting guides, not unrelated pages. Reason: Prevents cluster drift and keeps internal routing aligned with the page role.
-- Related guides / FAQ: Trim or reorder links so supporting pages reinforce HQ, progression, and construction dependency planning. Reason: Helps the page act as a cornerstone within the Progression cluster.
+- Quick Answer: Keep the existing answer-first block, but make the promise more explicit about HQ requirement verification and progression planning. Reason: This is the highest-value first-screen area and should immediately satisfy the cross-check intent.
+- Best overall recommendation: Add or refine the summary logic around when to rush, when to stop for required buildings, and when HQ30 becomes the main checkpoint. Reason: Users need a simple decision rule, not just a level list.
+- Decision framework: Clarify the difference between normal early progression and the heavier HQ31-35 phase, including why steel changes the plan. Reason: This keeps the guide useful for planning and reduces confusion about the late-game jump.
+- Cluster route block: Keep the route block limited to the existing progression cluster and make the internal route order explicit. Reason: The page should reinforce the existing cluster role and avoid drifting into unrelated topics.
+- Related guides / FAQ: Retain related links, but prioritize pages that support progression, leveling, building order, and resource planning. Reason: This helps users move to adjacent planning pages without broadening the page intent.
 
 ## Internal Link Plan
 
-- upstream `index.html`: Keeps the page anchored in the main site hierarchy.
-- lateral `start.html`: Supports players who need an early entry point before HQ planning.
-- lateral `early-game-optimization.html`: Complements early progression decisions that feed into HQ planning.
-- lateral `base-building-order.html`: Directly supports building dependency and construction order planning.
-- downstream `alliance-duel.html`: Relevant only as a progression-adjacent support link if the guide already references alliance timing.
-- downstream `arena.html`: Optional supporting link for broader progression context if already used in the cluster.
-- downstream `emergency-hospital-cost.html`: Useful if the guide discusses build prioritization and upgrade tradeoffs.
-- downstream `furylord.html`: Keep only if the current guide already uses it as a related progression reference.
+- upstream `index.html`: Keep the main hub link as the top-level route into the progression cluster.
+- lateral `start.html`: Supports new players who need the earliest progression context before HQ planning.
+- lateral `early-game-optimization.html`: Helps users optimize the pre-HQ30 phase without duplicating HQ-specific coverage.
+- lateral `base-building-order.html`: Directly supports dependency and building-priority planning.
+- downstream `hq-construction-cost.html`: Useful follow-up for users who want detailed HQ cost and requirement data.
+- downstream `resources.html`: Supports resource planning around upgrade timing and bottlenecks.
+- downstream `steel.html`: Relevant for the HQ31-35 progression phase where steel becomes the limiter.
 
 ## Protected Claims
 
-- `HQ requirement and dependency details must remain consistent with canonical site memory and owner-confirmed references.`
-- `Any guidance about HQ30 to HQ35 progression timing should stay aligned with verified steel and construction constraints.`
-- `Do not convert this page into a distinct reference-comparison article or a new page intent.`
+- None
 
 ## Do Not Change
 
-- Do not publish or apply content changes from this brief automatically.
-- Do not change the existing page template, navigation pattern, or schema family without separate approval.
-- Do not create a new page when the Scout proposal recommends updating an existing page.
-- Do not use analytics signals as proof that a rewrite is required.
-- The topic duplicates an existing page intent without adding a distinct player job.
-- The external claim cannot be verified beyond this source.
-- The proposal would blur existing cluster roles.
+- Do not change the existing page template, navigation pattern, or schema family.
+- Do not turn hq.html into a different page role or a new intent.
+- Do not add unsupported external game claims beyond the current canonical framing.
+- Do not use analytics as proof of a rewrite need.
+- Do not broaden the page into a competitor-style reference dump.
+- Do not create a new page for this opportunity.
 
 ## Owner Questions
 
-- Do you want the first screen to explicitly name the HQ and progression requirement cross-check job, or keep it implicit within the existing answer-first lede?
-- Should the cluster route block prioritize base-building support pages, or keep the current mix of progression-adjacent links?
-- Are there any HQ requirement claims that must be locked to canonical memory before we touch section wording?
+- Can the external HQ and progression reference be confirmed against canonical site memory or owner-approved reference data before any user-visible wording is finalized?
+- Do you want the first-screen answer to mention HQ30 and HQ31-35 explicitly, or keep the current phrasing and only sharpen the supporting sentence?
+- Should the cluster route block stay exactly as-is structurally, with only wording tightened for route clarity?
 
 ## Required Context Before Patch
 
@@ -85,8 +81,8 @@ Preserve the answer-first opening and make sure the first screen immediately sta
 
 Proposal-only candidates. They do not approve copy, create Patch Specs, edit files, or bypass owner review.
 
-- None
+- first_screen_update `hq.html` at `p.qa-lede`; owner approval required: `true`
 
 ## Next Step
 
-Cross-verify HQ requirement claims against canonical memory and a second reliable source before any content proposal is shaped.
+Have an owner verify the external reference against canonical knowledge, then decide whether this can be applied as a narrow first-screen clarification with no page-role change.

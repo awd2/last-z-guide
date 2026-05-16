@@ -1,14 +1,16 @@
-# LLM Auto Review Queue - 2026-05-16T18:04:55Z
+# LLM Auto Review Queue - 2026-05-16T18:11:42Z
 
 ## Outcome
 
-- State: `current`
+- State: `queue_ready`
 - Provider: `openai`
 - Candidate topics: `1`
-- Queued topics: `0`
-- Completed items: `0`
+- Queued topics: `1`
+- Completed items: `1`
 - Failed items: `0`
-- Skipped existing: `1`
+- Skipped existing: `0`
+- Stale existing reruns: `1`
+- Required chain contract: `2` `exact-editor-proposals-v2`
 - Deferred by limit: `0`
 - Candidate refresh: `automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.md`
 - Topic discovery: `automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md`
@@ -20,11 +22,27 @@
 
 ## Review Queue
 
-- None
+### external-hq-and-progression-reference-cross-check
 
-## Skipped Topics
+- Status: `completed`
+- Score: `83`
+- Target: `hq.html`
+- Cluster: `Progression`
+- Priority: `high`
+- Risk: `high`
+- Verdict: `needs_human_review`
+- Owner approval required: `true`
+- Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-hq-and-progression-reference-cross-check.md`
+- Existing chain rerun: `true`
 
-- `external-hq-and-progression-reference-cross-check`: `skipped_existing_chain`, score `83`, existing `automation/reports/llm-auto-review-queue/llm-worker-chain-external-hq-and-progression-reference-cross-check.json`
+Score reasons:
+
+- priority:high=45
+- confidence:high=20
+- risk:high=0
+- action:update_existing=8
+- candidate_status=10
+- stale_existing_chain_contract=0<2
 
 ## Next Actions
 

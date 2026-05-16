@@ -10,9 +10,9 @@
 - Page role: `cornerstone-guide`
 - Review verdict: `needs_human_review`
 - Risk: `high`
-- Approved next stage: `proposal`
+- Approved next stage: `none`
 - Owner approval required: `true`
-- Draft exact replacements: `0`
+- Draft exact replacements: `1`
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
 ## Stage Artifacts
@@ -23,42 +23,40 @@
 
 ## Editor Brief Summary
 
-Keep hq.html as the cornerstone HQ guide, but tighten the opening to foreground the HQ and progression requirement cross-check job, then validate section order and internal routes without changing page role or template.
+Keep hq.html as a cornerstone progression guide, but tighten the first-screen answer so it explicitly cross-checks HQ requirements and dependency planning without changing page role or cluster fit.
 
 ## First-Screen Plan
 
-Preserve the answer-first opening and make sure the first screen immediately states the HQ planning recommendation, the HQ30 to HQ35 split, and the construction requirement cross-check angle. Keep the current page role and do not introduce a new intent or a different content type. The opening should stay concise, direct, and useful for players comparing requirements and progression timing.
+Preserve the answer-first structure. Keep the opening focused on the best HQ path for most players, but make the first visible answer clearly state the requirement cross-check angle: early rush, required-buildings-only upgrades, HQ30 target, then a separate HQ31-35 steel phase. Avoid adding a new intent or expanding into a different guide type. Keep the short supporting line immediately after the answer so users can confirm this is a planning guide, not a full route map.
 
 ## Draft Exact Replacements
 
-Count: `0`
+Count: `1`
 
 ## Reviewer Blocking Issues
 
-- high: The brief depends on external claim validation and owner confirmation before any content proposal can be shaped. Required fix: Cross-verify HQ requirement claims against canonical site memory and a second reliable source, then obtain owner confirmation for any claim changes.
-- high: The topic overlaps existing HQ, progression, and base-building guidance and could blur cluster roles if scope is expanded. Required fix: Keep the scope limited to the current HQ cornerstone intent and do not convert it into a distinct reference-comparison article or new page intent.
-- medium: No exact replacement candidates are provided, so there is no narrow, literal edit path to review for safe execution. Required fix: If later edits are proposed, provide only target-only exact_old/exact_new candidates with a clear no-template-change boundary.
+- high: High-risk cornerstone page with an external claim that is explicitly not verified beyond the provided source. Required fix: Obtain owner confirmation or a second reliable reference before any user-visible wording is approved.
+- high: The brief indicates the topic duplicates an existing page intent and may blur cluster roles. Required fix: Confirm that hq.html has a distinct planning job and that no separate page or broader reference-dump scope is being introduced.
+- high: Exact replacement candidate is proposal-only and cannot be approved from this review. Required fix: Keep the replacement as a candidate only and route it through owner review before any apply step.
 
 ## Reviewer Warnings
 
-- High-risk cornerstone page: owner approval is required before any user-visible content change.
-- Do not use analytics signals as proof that a rewrite is required.
-- The opening should remain answer-first and preserve the existing page role.
+- The current page already appears to have an answer-first structure, so changes should remain narrow and scope-safe.
+- Internal link changes should preserve the existing progression cluster route and avoid role drift.
+- Analytics should not be used as evidence that copy changes are required.
 
 ## Owner Questions
 
-- Do you want the first screen to explicitly name the HQ and progression requirement cross-check job, or keep it implicit within the existing answer-first lede?
-- Should the cluster route block prioritize base-building support pages, or keep the current mix of progression-adjacent links?
-- Are there any HQ requirement claims that must be locked to canonical memory before we touch section wording?
+- Can the external HQ and progression reference be confirmed against canonical site memory or another owner-approved source?
+- Should the first-screen answer explicitly name HQ30 and HQ31-35, or should the current phrasing be kept and only the supporting sentence clarified?
+- Do you want to keep the cluster route block unchanged structurally and only tighten the wording?
 
 ## Required Checks
 
 - `python3 scripts/prepublish_check.py`
 - `python3 automation/pipeline.py checks --strict`
 - `manual review: first-screen answer and internal links on hq.html`
-- `Cross-verify HQ requirement claims against canonical memory and a second reliable source`
-- `Confirm the page still reads as a cornerstone guide and not a separate reference-comparison article`
 
 ## Next Step
 
-Run canonical and second-source verification, then move to a proposal only if the scope stays within the existing HQ cornerstone guide.
+Request owner verification of the external claim and scope confirmation, then return for a narrow approval review before any apply step.

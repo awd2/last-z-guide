@@ -1,13 +1,13 @@
-# External Evidence Collect - 2026-05-16T18:04:25Z
+# External Evidence Collect - 2026-05-16T18:10:57Z
 
 ## Outcome
 
-- State: `evidence_collection_partial`
+- State: `evidence_collected`
 - Provider: `fetch`
 - Evidence Refresh: `automation/reports/llm-auto-review-queue/external-evidence-refresh.json`
 - URL leads: `11`
-- Collected: `10`
-- Failed: `1`
+- Collected: `11`
+- Failed: `0`
 - Deferred query tasks: `6`
 - Allows content edit: `false`
 - Allows backlog mutation: `false`
@@ -115,19 +115,15 @@
 
 ### url-external-hero-and-event-entity-cross-check-1
 
-- Status: `fetch_failed`
+- Status: `collected`
 - Topic: `external-hero-and-event-entity-cross-check`
 - Source: `lastz-fandom-reference: https://lastz.fandom.com`
 - URL: `https://lastz.fandom.com/wiki/Event_Center`
-- Final URL: ``
-- HTTP status: `403`
-- Title: 
-- Meta description: 
+- Final URL: `https://lastz.fandom.com/wiki/Event_Center`
+- HTTP status: `200`
+- Title: Event Center | Last Z: Survival Shooter Wiki | Fandom
+- Meta description: The Event Center is a hub for all world events, allowing players to access each of them easily. There are two categories of events: Regular Events and Special Events. Each event has its own tab in the Event Center with details on how the event works, what are the goals and the rewardsreceived...
 - Public claim ready: `false`
-
-Error:
-
-- HTTP Error 403: Forbidden
 
 ### url-external-official-ios-store-metadata-cross-check-1
 
@@ -157,12 +153,14 @@ Error:
 
 - `calculator_player_job`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `duplicate_intent_risk`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
+- `entity_aliases`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `equipment_terms`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
-- `event_names`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
+- `event_names`: collected_multiple_sources_needs_human_validation; collected_sources=2; public_claim_ready=false
 - `event_rotation`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `gear_materials`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `gear_upgrade_order`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `gift-center-only-redeem-flow`: collected_multiple_sources_needs_human_validation; collected_sources=1; public_claim_ready=false
+- `hero_names`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `hq31_35_progression`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `hq_requirements`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false
 - `hq_resource_costs`: collected_single_source_needs_cross_validation; collected_sources=1; public_claim_ready=false

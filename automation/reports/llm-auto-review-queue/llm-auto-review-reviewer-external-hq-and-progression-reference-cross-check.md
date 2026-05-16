@@ -14,46 +14,46 @@
 
 - Verdict: `needs_human_review`
 - Risk: `high`
-- Approved next stage: `proposal`
+- Approved next stage: `none`
 - Owner approval required: `true`
 
 ## Blocking Issues
 
-- high: The brief depends on external claim validation and owner confirmation before any content proposal can be shaped. Required fix: Cross-verify HQ requirement claims against canonical site memory and a second reliable source, then obtain owner confirmation for any claim changes.
-- high: The topic overlaps existing HQ, progression, and base-building guidance and could blur cluster roles if scope is expanded. Required fix: Keep the scope limited to the current HQ cornerstone intent and do not convert it into a distinct reference-comparison article or new page intent.
-- medium: No exact replacement candidates are provided, so there is no narrow, literal edit path to review for safe execution. Required fix: If later edits are proposed, provide only target-only exact_old/exact_new candidates with a clear no-template-change boundary.
+- high: High-risk cornerstone page with an external claim that is explicitly not verified beyond the provided source. Required fix: Obtain owner confirmation or a second reliable reference before any user-visible wording is approved.
+- high: The brief indicates the topic duplicates an existing page intent and may blur cluster roles. Required fix: Confirm that hq.html has a distinct planning job and that no separate page or broader reference-dump scope is being introduced.
+- high: Exact replacement candidate is proposal-only and cannot be approved from this review. Required fix: Keep the replacement as a candidate only and route it through owner review before any apply step.
 
 ## Warnings
 
-- High-risk cornerstone page: owner approval is required before any user-visible content change.
-- Do not use analytics signals as proof that a rewrite is required.
-- The opening should remain answer-first and preserve the existing page role.
+- The current page already appears to have an answer-first structure, so changes should remain narrow and scope-safe.
+- Internal link changes should preserve the existing progression cluster route and avoid role drift.
+- Analytics should not be used as evidence that copy changes are required.
 
 ## Duplicate Intent Review
 
-The page appears to duplicate existing HQ and progression intent rather than introduce a distinct player job. This supports update_existing only if scope stays tightly constrained.
+Medium to high duplication risk. The page intent appears to overlap with existing HQ and progression planning coverage, so the update must stay as a narrow clarification rather than a new intent.
 
 ## Cluster Role Review
 
-Cluster role is acceptable as a Progression cornerstone guide, but the brief warns against blurring into a general reference-comparison article. Supporting routes should stay aligned to HQ, progression, and base-building.
+The page fits the Progression cluster as a cornerstone guide, but it must not expand into a generic reference hub or competitor-style dump.
 
 ## Canonical Claim Review
 
-Canonical claims about HQ requirements, dependencies, steel timing, and progression thresholds must remain locked to site memory and owner-confirmed references. External source validation is required before any claim-level proposal.
+The external HQ requirement and dependency claims are unverified beyond the supplied source. Canonical protection requires owner confirmation or another reliable source before approval.
 
 ## Template Safety Review
 
-Template safety is acceptable only if the page template, navigation pattern, and schema family remain unchanged. No template changes are approved in this brief.
+Template and schema changes are not requested. Keeping the existing page template, navigation pattern, and schema family is safe, but must be enforced.
 
 ## Exact Replacement Review
 
-No exact_replacements were provided. That is safe for review, but it also means there is no candidate-level edit to approve or validate for apply_preview.
+One exact replacement candidate is present. It is narrow and target-only in form, but it remains proposal-only and owner approval is required. Do not approve apply_preview from this review.
 
 ## Owner Questions
 
-- Do you want the first screen to explicitly name the HQ and progression requirement cross-check job, or keep it implicit within the existing answer-first lede?
-- Should the cluster route block prioritize base-building support pages, or keep the current mix of progression-adjacent links?
-- Are there any HQ requirement claims that must be locked to canonical memory before we touch section wording?
+- Can the external HQ and progression reference be confirmed against canonical site memory or another owner-approved source?
+- Should the first-screen answer explicitly name HQ30 and HQ31-35, or should the current phrasing be kept and only the supporting sentence clarified?
+- Do you want to keep the cluster route block unchanged structurally and only tighten the wording?
 
 ## Required Context Before Edit
 
@@ -76,9 +76,7 @@ No exact_replacements were provided. That is safe for review, but it also means 
 - `python3 scripts/prepublish_check.py`
 - `python3 automation/pipeline.py checks --strict`
 - `manual review: first-screen answer and internal links on hq.html`
-- `Cross-verify HQ requirement claims against canonical memory and a second reliable source`
-- `Confirm the page still reads as a cornerstone guide and not a separate reference-comparison article`
 
 ## Next Step
 
-Run canonical and second-source verification, then move to a proposal only if the scope stays within the existing HQ cornerstone guide.
+Request owner verification of the external claim and scope confirmation, then return for a narrow approval review before any apply step.
