@@ -561,6 +561,7 @@ LLM auto review queue:
 - this is the consolidated owner-review layer: it reduces manual step-by-step approval by presenting ready queue items
 - it skips only current completed chain summaries unless `--include-existing` is supplied
 - stale completed summaries with missing or older `worker_chain_contract_version` are rerun automatically, and the queue records `stale_existing_count`
+- per-topic LLM stage failures are recorded as `completed_with_failures` artifacts but do not make the command exit non-zero, so scheduled workflows can still upload and commit no-write reports
 - it must not approve public copy, mutate `topic_backlog.csv`, create manifests, edit content, open PRs, or deploy
 
 LLM topic discovery:

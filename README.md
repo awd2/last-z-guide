@@ -299,7 +299,7 @@ For a consolidated no-write queue that automatically reviews the strongest candi
 python3 automation/pipeline.py llm-auto-review-queue --provider openai --json
 ```
 
-This runs candidate refresh, scores candidate topics, auto-runs the top Editor/Reviewer chains, and writes `automation/reports/llm-auto-review-queue/llm-auto-review-queue.md`. Use `--external-proposals automation/reports/external-scout.json` to include approved External Scout proposals. It skips only current completed chain summaries; stale summaries with missing or old `worker_chain_contract_version` are rerun automatically. It still does not approve public copy, edit content, mutate backlog/manifests, open PRs, or deploy.
+This runs candidate refresh, scores candidate topics, auto-runs the top Editor/Reviewer chains, and writes `automation/reports/llm-auto-review-queue/llm-auto-review-queue.md`. Use `--external-proposals automation/reports/external-scout.json` to include approved External Scout proposals. It skips only current completed chain summaries; stale summaries with missing or old `worker_chain_contract_version` are rerun automatically. Per-topic LLM failures are captured in `completed_with_failures` reports without failing the scheduled command. It still does not approve public copy, edit content, mutate backlog/manifests, open PRs, or deploy.
 
 For a durable no-write owner decision on one discovered topic, run:
 

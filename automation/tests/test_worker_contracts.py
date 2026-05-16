@@ -1920,6 +1920,80 @@ class WorkerContractTests(unittest.TestCase):
                 llm_worker_chain.WORKER_CHAIN_CONTRACT_VERSION,
             )
 
+    def test_llm_auto_review_queue_keeps_success_exit_for_item_failures(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            discovery_path = tmp_path / "discovery.json"
+            write_json(signals_path, fixture_signals())
+            write_json(
+                discovery_path,
+                {
+                    "topics": [
+                        {
+                            "topic_id": "fixture-topic",
+                            "target_page_or_slug": "gift-center-uid.html",
+                            "cluster": "Economy",
+                            "priority": "high",
+                            "confidence": "medium",
+                            "risk_level": "medium",
+                            "recommended_action": "update_existing",
+                            "status": "candidate",
+                        }
+                    ]
+                },
+            )
+            refresh_payload = {
+                "output_path": str(tmp_path / "refresh.json"),
+                "markdown_path": str(tmp_path / "refresh.md"),
+                "topic_discovery_path": str(discovery_path),
+                "topic_discovery_markdown": str(tmp_path / "discovery.md"),
+                "stages": [
+                    {
+                        "stage": "llm_scout",
+                        "request_path": str(tmp_path / "scout-request.json"),
+                        "result_path": str(tmp_path / "scout-result.json"),
+                        "markdown_path": str(tmp_path / "scout.md"),
+                    }
+                ],
+            }
+            failed_item = {
+                "topic_id": "fixture-topic",
+                "target_page_or_slug": "gift-center-uid.html",
+                "cluster": "Economy",
+                "priority": "high",
+                "risk_level": "medium",
+                "status": "failed",
+                "chain_json": str(tmp_path / "llm-worker-chain-fixture-topic.json"),
+                "chain_markdown": str(tmp_path / "llm-worker-chain-fixture-topic.md"),
+                "errors": ["LLM Editor stage failed; Reviewer was not run."],
+            }
+
+            with patch.object(
+                llm_candidate_refresh,
+                "run_candidate_refresh",
+                return_value=(0, refresh_payload),
+            ), patch.object(llm_auto_review_queue, "run_queue_item", return_value=failed_item):
+                code, summary = llm_auto_review_queue.run_auto_review_queue(
+                    signal_paths=[signals_path],
+                    external_proposal_paths=[],
+                    output_dir=tmp_path,
+                    basename="llm-auto-review-queue-fixture",
+                    provider="fixture",
+                    scout_fixture_path=None,
+                    editor_fixture_path=None,
+                    reviewer_fixture_path=None,
+                    limit=4,
+                    min_impressions=200,
+                    max_chains=1,
+                    include_existing=False,
+                )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["state"], "completed_with_failures")
+            self.assertEqual(summary["failed_item_count"], 1)
+            self.assertIn("LLM Editor stage failed", summary["errors"][0])
+
     def test_llm_editor_builds_brief_from_llm_scout_fixture(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
