@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-16T17:32:00Z
+# External Search Collect - 2026-05-16T17:54:32Z
 
 ## Outcome
 
@@ -56,7 +56,7 @@
 ### external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4
 
 - Title: External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `events.html`
 - Cluster: `Events`
 - Score: `82`
@@ -69,8 +69,8 @@
 
 - Title: External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom
 - Action: `update_existing`
-- Target: `index.html`
-- Cluster: `Home`
+- Target: `research.html`
+- Cluster: `Research`
 - Score: `82`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
 - URL: `https://lastz.fandom.com/wiki/Heroes`
@@ -81,47 +81,47 @@
 
 - Title: External search opportunity: Event Center | Last Z: Survival Shooter Wiki | Fandom
 - Action: `update_existing`
-- Target: `research.html`
-- Cluster: `Research`
-- Score: `64`
+- Target: `events.html`
+- Cluster: `Events`
+- Score: `82`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
 - URL: `https://lastz.fandom.com/wiki/Event_Center`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-mmediamreza-last-z-reference-blnw-balkan-network-last-z-survival-shoote-7
-
-- Title: External search opportunity: BLNW (BALKAN NETWORK) - Last Z: Survival Shooter Alliance
-- Action: `update_existing`
-- Target: `index.html`
-- Cluster: `Home`
-- Score: `64`
-- Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/index/blnw/0-90`
-- Mapping: `content_index_token_match`
-- Public claim ready: `false`
-
-### external-search-mmediamreza-last-z-reference-zombie-siege-event-guide-hq-defense-reinfo-8
-
-- Title: External search opportunity: Zombie Siege Event Guide: HQ Defense & Reinforcement Strategy | Last Z
-- Action: `create_new`
-- Target: `zombie-siege.html`
-- Cluster: `Events`
-- Score: `82`
-- Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/zombie-siege`
-- Mapping: `content_index_token_match`
-- Public claim ready: `false`
-
-### external-search-mmediamreza-last-z-reference-shooter-camp-guide-last-z-survival-shooter-9
+### external-search-mmediamreza-last-z-reference-shooter-camp-guide-last-z-survival-shooter-7
 
 - Title: External search opportunity: Shooter Camp Guide - | Last Z: Survival Shooter
-- Action: `create_new`
-- Target: `hq.html`
-- Cluster: `Progression`
+- Action: `update_existing`
+- Target: `terms.html`
+- Cluster: `Site`
 - Score: `82`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
 - URL: `https://mmediamreza.com/shooter-camp-guide`
+- Mapping: `content_index_token_match`
+- Public claim ready: `false`
+
+### external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-8
+
+- Title: External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power - | Last Z: Survival Shooter
+- Action: `update_existing`
+- Target: `about.html`
+- Cluster: `Site`
+- Score: `74`
+- Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
+- URL: `https://mmediamreza.com/en/assaulter-camp-training-guide`
+- Mapping: `content_index_token_match`
+- Public claim ready: `false`
+
+### external-search-mmediamreza-last-z-reference-last-z-laboratory-guide-tech-research-lab--9
+
+- Title: External search opportunity: Last Z Laboratory Guide: Tech Research & Lab No. 2 Unlocking - | Last Z: Survival Shooter
+- Action: `update_existing`
+- Target: `tech.html`
+- Cluster: `Research`
+- Score: `82`
+- Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
+- URL: `https://mmediamreza.com/laboratory`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 

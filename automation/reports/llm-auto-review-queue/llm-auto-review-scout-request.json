@@ -165,7 +165,7 @@
         "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
         "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Events",
-        "recommended_action": "update_existing",
+        "recommended_action": "create_new",
         "archetype_suggestion": "cornerstone-guide",
         "target_page_or_slug": "events.html",
         "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycle includes an Age of Science theme for technology research and a Hero Initiative theme for hero leveling and recruitment items."
+          "Daily event cycle page. Includes a research-themed phase ('Age of Science') plus a hero-growth phase ('Hero Initiative') and ranking rewards."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -194,20 +194,20 @@
       {
         "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
         "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Home",
+        "cluster": "Research",
         "recommended_action": "update_existing",
-        "archetype_suggestion": "home-hub",
-        "target_page_or_slug": "index.html",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
         "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero index page; describes hero classes and the main hero power factors used for cross-checking hero growth mechanics."
+          "Core hero overview page. Lists hero classes and the main power inputs, useful for linking heroes to event goals."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "index.html"
+            "research.html"
           ],
           "external_source_id": "lastz-fandom-reference"
         },
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster and equipment page with character list, faction filters, levels, and gear stats; good for hero discovery and cross-checking hero names."
+          "Hero roster page with character listings, levels, and equipment section; useful for hero discovery and build cross-checking."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page showing laboratory categories and per-level badge costs; useful for finding research paths and cost tables."
+          "Research guide with category tabs and per-level badge cost tables; useful for locating research mechanics and cost data."
         ],
         "site_fit": {
           "expected_internal_route": [

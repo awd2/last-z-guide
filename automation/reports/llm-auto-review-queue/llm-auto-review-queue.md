@@ -1,12 +1,12 @@
-# LLM Auto Review Queue - 2026-05-16T17:32:20Z
+# LLM Auto Review Queue - 2026-05-16T17:54:41Z
 
 ## Outcome
 
-- State: `queue_ready`
+- State: `current`
 - Provider: `openai`
-- Candidate topics: `2`
-- Queued topics: `1`
-- Completed items: `1`
+- Candidate topics: `1`
+- Queued topics: `0`
+- Completed items: `0`
 - Failed items: `0`
 - Skipped existing: `1`
 - Deferred by limit: `0`
@@ -20,25 +20,7 @@
 
 ## Review Queue
 
-### external-research-costs-external-cross-check
-
-- Status: `completed`
-- Score: `83`
-- Target: `research-costs.html`
-- Cluster: `Research`
-- Priority: `high`
-- Risk: `high`
-- Verdict: `needs_human_review`
-- Owner approval required: `true`
-- Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-research-costs-external-cross-check.md`
-
-Score reasons:
-
-- priority:high=45
-- confidence:high=20
-- risk:high=0
-- action:update_existing=8
-- candidate_status=10
+- None
 
 ## Skipped Topics
 
