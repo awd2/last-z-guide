@@ -1,4 +1,4 @@
-# LLM Owner Digest - 2026-05-17T15:21:38Z
+# LLM Owner Digest - 2026-05-17T15:36:01Z
 
 ## Summary
 
@@ -26,7 +26,7 @@
 
 ## Resolved
 
-- `external-gift-center-official-flow-validation`: target `gift-center-uid.html`, priority `high`, risk `medium`, action `decision_recorded_monitor`
+- `external-gift-center-official-flow-validation`: target `gift-center-uid.html`, priority `medium`, risk `medium`, action `decision_recorded_monitor`
   - Decision: `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md`
 
 ## Policy

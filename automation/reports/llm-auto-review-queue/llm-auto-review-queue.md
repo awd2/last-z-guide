@@ -1,4 +1,4 @@
-# LLM Auto Review Queue - 2026-05-17T15:21:37Z
+# LLM Auto Review Queue - 2026-05-17T15:36:01Z
 
 ## Outcome
 
@@ -27,7 +27,7 @@
 
 ## Resolved By Owner Decision
 
-- `external-gift-center-official-flow-validation`: `monitor`, score `91`, decision `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md`
+- `external-gift-center-official-flow-validation`: `monitor`, score `71`, decision `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md`
 
 ## Next Actions
 

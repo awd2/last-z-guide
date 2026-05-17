@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_auto_review_queue",
-  "generated_at": "2026-05-17T15:21:37Z",
+  "generated_at": "2026-05-17T15:36:01Z",
   "state": "current",
   "provider": "openai",
   "source_signal_files": [
@@ -35,11 +35,11 @@
       "topic_id": "external-gift-center-official-flow-validation",
       "target_page_or_slug": "gift-center-uid.html",
       "cluster": "Economy",
-      "priority": "high",
+      "priority": "medium",
       "risk_level": "medium",
-      "score": 91,
+      "score": 71,
       "score_reasons": [
-        "priority:high=45",
+        "priority:medium=25",
         "confidence:high=20",
         "risk:medium=8",
         "action:update_existing=8",

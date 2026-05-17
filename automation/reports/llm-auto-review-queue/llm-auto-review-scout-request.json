@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily world event with a Hero Initiative phase that awards points for hero XP, fragments, and prime recruitment tickets; also includes a research-focused Age of Science phase."
+          "Daily event cycle includes an Age of Science theme for technology research, plus a Hero Initiative theme tied to hero XP, fragments, and recruitment tickets."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -192,8 +192,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
-        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6",
+        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -203,7 +203,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page listing hero classes and power factors; useful for linking hero-event guidance to hero growth systems."
+          "Explains the building used to research technologies and its unlock rules."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Dedicated hero reference page with hero roster, faction filters, levels, and hero equipment listings; useful for hero discovery and cross-checking character data."
+          "Main hero hub with a long roster, faction filters, levels, and hero equipment sections; good for hero discovery and cross-checking character names."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page covering Laboratory categories and per-level badge costs, including a search interface for specific research names."
+          "Research table page with category tabs and level-by-level badge costs; useful for locating research names and checking upgrade costs."
         ],
         "site_fit": {
           "expected_internal_route": [
