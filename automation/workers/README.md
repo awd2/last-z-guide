@@ -117,6 +117,7 @@ python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-owner-issue --json
+python3 automation/pipeline.py llm-issue-decision --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
@@ -239,15 +240,30 @@ state.
 `llm-owner-issue` is the GitHub notification handoff for actionable owner
 digests. It creates or updates one issue only when the digest state is
 `owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`; the issue body
-includes ready-to-copy owner decision commands for `monitor`, `rejected`,
-`approved_for_chain`, and available intake commands. When the latest digest is
-non-actionable, it can close a previous open handoff issue as resolved. It must
-not approve content, mutate site files, create PRs, or deploy.
+includes GitHub comment commands plus ready-to-copy local CLI commands for
+`monitor`, `rejected`, `approved_for_chain`, and available intake commands. When
+the latest digest is non-actionable, it can close a previous open handoff issue
+as resolved. It must not approve content, mutate site files, create PRs, or
+deploy.
 
 Use `automation/reports/example-llm-owner-digest-actionable.json` and
 `automation/reports/example-llm-owner-digest-actionable.md` with
 `llm-owner-issue --dry-run --body-output automation/reports/example-llm-owner-issue.md`
 to preview the exact GitHub Issue body without touching GitHub.
+
+`llm-issue-decision` is the GitHub issue-comment intake for owner decisions. It
+accepts only `/monitor`, `/reject`, or `/approve-chain` comments on the
+`LLM Owner Digest: Action Needed` issue, requires a topic id plus owner note, and
+accepts only `OWNER`, `MEMBER`, or `COLLABORATOR` author associations. It writes
+the same `automation/reports/llm-topic-decision-<topic_id>.json` and `.md`
+artifacts as `llm-topic-decision`. It must not approve public copy, mutate
+backlog/manifests/content, create PRs, or deploy.
+
+GitHub workflow `.github/workflows/llm-owner-decision.yml` runs this command
+from matching issue comments and commits only topic decision artifacts. An
+`/approve-chain` decision can then trigger `.github/workflows/llm-worker-chain.yml`
+through the committed `llm-topic-decision-*.json` path, while `/monitor` and
+`/reject` simply remove the topic from future owner-decision noise.
 
 `llm-run-approved-handoffs` is the scheduled owner-handoff runner. It reads the
 same `approved_for_chain` decision artifacts and runs only pending handoffs

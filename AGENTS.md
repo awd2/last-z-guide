@@ -455,6 +455,7 @@ python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-owner-issue --json
+python3 automation/pipeline.py llm-issue-decision --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities --json
@@ -479,6 +480,7 @@ python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_auto_review_queue.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/workers/llm_issue_decision.py --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_run_approved_handoffs.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
@@ -527,6 +529,8 @@ GitHub workflow `.github/workflows/llm-candidate-refresh.yml` runs weekly and by
 
 GitHub workflow `.github/workflows/llm-auto-review-queue.yml` runs daily, after signal-file or external-source infrastructure pushes, and by manual dispatch. It runs `external-scout` first, runs `external-evidence-refresh`, runs `external-evidence-collect --provider fetch` for explicit URL leads, runs `external-search-collect --provider openai` for approved source queries, passes both External Scout and External Search proposal artifacts into `llm-auto-review-queue --external-proposals`, then runs `llm-owner-digest` over the resulting queue. It also runs `llm-owner-issue`, which creates or updates one GitHub Issue only when the digest state is actionable. It uploads artifacts and may commit only `automation/reports/llm-auto-review-queue/`, `automation/reports/llm-owner-digest.json`, and `automation/reports/llm-owner-digest.md` report artifacts. It must not edit content, backlog, manifests, PRs, or production state.
 
+GitHub workflow `.github/workflows/llm-owner-decision.yml` records owner decisions from comments on the `LLM Owner Digest: Action Needed` issue. It accepts only `/monitor`, `/reject`, and `/approve-chain` comments from `OWNER`, `MEMBER`, or `COLLABORATOR` author associations, uploads a no-write summary artifact, and may commit only `automation/reports/llm-topic-decision-<topic_id>.json` and `.md` decision artifacts. It must not edit content, backlog, manifests, PRs, or production state.
+
 GitHub workflow `.github/workflows/llm-worker-chain.yml` runs pending owner-approved handoffs after committed `llm-topic-decision-*.json` pushes and can manually replay one approved decision path. It is not scheduled, to avoid rerunning the same approved decision every week without committing generated reports. It uploads artifacts only and must not commit reports, edit content, open PRs, or deploy.
 
 `llm-review-latest` reads the latest local LLM worker chain summary and renders a compact owner-review view. It is read-only and must not call an LLM provider, edit content, or mutate repository state.
@@ -535,7 +539,9 @@ GitHub workflow `.github/workflows/llm-worker-chain.yml` runs pending owner-appr
 
 `llm-owner-digest` builds a compact owner-facing digest from the latest LLM auto-review queue. It writes `automation/reports/llm-owner-digest.json` and `.md` by default, groups topics into needs-review, ready-for-intake, blocked/failed, and resolved buckets, and summarizes the recommended next action. It is read-only and must not call an LLM provider, approve content edits, or mutate repository state.
 
-`llm-owner-issue` creates or updates one GitHub owner handoff issue from `llm-owner-digest.json` only when the digest state is `owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`. The issue body includes ready-to-copy owner decision commands for `monitor`, `rejected`, and `approved_for_chain`, plus intake commands when a completed chain is ready. It supports `--dry-run --body-output <path>` for local actionable handoff simulation fixtures. When the latest digest is non-actionable and a previous owner handoff issue is still open, it may close that issue as resolved. If no issue exists, non-actionable states are no-op. It is a notification layer only: it must not approve content edits, mutate backlog/manifests, edit public content, open PRs, or deploy.
+`llm-owner-issue` creates or updates one GitHub owner handoff issue from `llm-owner-digest.json` only when the digest state is `owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`. The issue body includes GitHub comment commands plus ready-to-copy local CLI commands for `monitor`, `rejected`, and `approved_for_chain`, plus intake commands when a completed chain is ready. It supports `--dry-run --body-output <path>` for local actionable handoff simulation fixtures. When the latest digest is non-actionable and a previous owner handoff issue is still open, it may close that issue as resolved. If no issue exists, non-actionable states are no-op. It is a notification layer only: it must not approve content edits, mutate backlog/manifests, edit public content, open PRs, or deploy.
+
+`llm-issue-decision` records one owner decision from a GitHub owner handoff issue comment. It accepts only `/monitor`, `/reject`, or `/approve-chain` commands posted on `LLM Owner Digest: Action Needed`, requires a topic id and real owner note, accepts only `OWNER`, `MEMBER`, or `COLLABORATOR` author associations, and writes only `llm-topic-decision-<topic_id>` artifacts. It must not approve public copy, patch specs, backlog edits, manifests, public content, PRs, or production state.
 
 `llm-intake-latest` bridges a latest or specified LLM worker chain summary into a no-write, owner-gated intake artifact. It may carry draft `exact_replacements` into intake as proposal-only data, but it may record `--approved-by <name>` only as intake approval. Approval is intake-only and does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing. If the LLM Reviewer left owner questions, `--note` is required before intake can become `approved_for_intake`. If the Reviewer used `blocking_issues` for owner-confirmation items, `--resolve-reviewer-blockers` may downgrade them to intake warnings only when `--approved-by` and `--note` are both present. Approved LLM intake must still move through the existing run-plan/proposal lifecycle before any public content edit.
 

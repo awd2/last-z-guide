@@ -330,6 +330,7 @@ python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-owner-issue --json
+python3 automation/pipeline.py llm-issue-decision --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities
@@ -466,6 +467,7 @@ Lifecycle shorthand:
 - `llm-auto-review-latest` -> read the latest consolidated auto-review queue as one owner decision view, including recorded topic decisions
 - `llm-owner-digest` -> write the shortest owner-facing daily digest from the latest auto-review queue
 - `llm-owner-issue` -> create or update one GitHub owner handoff issue for actionable digest states
+- `llm-issue-decision` -> record one owner topic decision from a GitHub handoff issue comment
 - `llm-intake-latest` -> bridge the latest LLM worker chain summary into a no-write, owner-gated intake artifact
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
@@ -664,6 +666,16 @@ LLM auto review queue workflow:
 - it may commit only `automation/reports/llm-auto-review-queue/`, `automation/reports/llm-owner-digest.json`, and `automation/reports/llm-owner-digest.md` report artifacts
 - this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 
+LLM owner decision workflow:
+
+- `.github/workflows/llm-owner-decision.yml` -> record owner decisions from comments on the GitHub handoff issue
+- trigger mode: new issue comment on `LLM Owner Digest: Action Needed`
+- supported commands: `/monitor`, `/reject`, and `/approve-chain`
+- accepted author associations: `OWNER`, `MEMBER`, and `COLLABORATOR`
+- output is an uploaded workflow artifact named `llm-owner-decision-<run_number>`
+- it may commit only `automation/reports/llm-topic-decision-<topic_id>.json` and `.md` decision artifacts
+- this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
+
 LLM worker chain workflow:
 
 - `.github/workflows/llm-worker-chain.yml` -> run pending owner-approved no-write chain handoffs in GitHub Actions
@@ -704,10 +716,20 @@ LLM owner issue:
 
 - `python3 automation/pipeline.py llm-owner-issue --json` -> create/update one GitHub owner handoff issue only when the latest digest is actionable, or close the previous handoff issue when the latest digest is non-actionable
 - actionable states are `owner_review_needed`, `ready_for_intake`, and `blocked_or_failed`
-- actionable issue bodies include ready-to-copy `monitor`, `rejected`, `approved_for_chain`, and available intake commands
+- actionable issue bodies include GitHub comment commands plus ready-to-copy local CLI commands for `monitor`, `rejected`, `approved_for_chain`, and available intake commands
 - `no_candidates` and `no_action_needed` are no-op when no handoff issue is open
 - `python3 automation/pipeline.py llm-owner-issue --digest automation/reports/example-llm-owner-digest-actionable.json --markdown automation/reports/example-llm-owner-digest-actionable.md --repository awd2/last-z-guide --run-url https://github.com/awd2/last-z-guide/actions/runs/example --dry-run --body-output automation/reports/example-llm-owner-issue.md --json` -> render the actionable handoff fixture locally without touching GitHub
 - this is a notification layer only and does not approve content, mutate site files, create PRs, or deploy
+
+LLM issue decision:
+
+- `python3 automation/pipeline.py llm-issue-decision --comment-body "/monitor <topic_id> <why>" --comment-author <github_login> --author-association OWNER --json` -> parse one owner handoff issue comment and record a no-write topic decision
+- supported commands are `/monitor`, `/reject`, and `/approve-chain`
+- each command requires a topic id and a real owner note
+- accepted author associations are `OWNER`, `MEMBER`, and `COLLABORATOR`
+- output lives in `automation/reports/llm-topic-decision-<topic_id>.json` and `.md`
+- `.github/workflows/llm-owner-decision.yml` runs this command from comments on the `LLM Owner Digest: Action Needed` issue and commits only topic decision artifacts
+- this does not approve public copy, mutate backlog/manifests/content, create PRs, or deploy
 
 LLM intake latest:
 

@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_owner_digest, llm_owner_issue, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -3310,6 +3310,84 @@ class WorkerContractTests(unittest.TestCase):
             report = report_path.read_text(encoding="utf-8")
             self.assertIn("Closeout type: `rejected_no_content_change`", report)
             self.assertIn("No site files were edited by this run.", report)
+
+    def test_issue_decision_records_approved_chain_comment(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            discovery_path = tmp_path / "llm-topic-discovery.json"
+            write_json(
+                discovery_path,
+                {
+                    "schema_version": 1,
+                    "report_type": "llm_topic_discovery",
+                    "topics": [
+                        {
+                            "topic_id": "codes-gsc-opportunity",
+                            "title": "Codes opportunity",
+                            "target_page_or_slug": "codes.html",
+                            "cluster": "Economy",
+                            "recommended_action": "update_existing",
+                            "priority": "high",
+                            "risk_level": "high",
+                            "status": "needs_owner_decision",
+                            "notes": "Fixture topic.",
+                        }
+                    ],
+                },
+            )
+
+            code, summary = llm_issue_decision.run_issue_decision(
+                comment_body="/approve-chain codes-gsc-opportunity Owner validates player value and scope.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                discovery_path=discovery_path,
+                output_dir=tmp_path,
+                summary_output=tmp_path / "issue-decision.json",
+                markdown_output=tmp_path / "issue-decision.md",
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["state"], "decision_recorded")
+            self.assertEqual(summary["decision_state"], "approved_for_chain")
+            self.assertTrue(summary["allows_worker_chain"])
+            self.assertTrue((tmp_path / "llm-topic-decision-codes-gsc-opportunity.json").exists())
+            decision = load_json(tmp_path / "llm-topic-decision-codes-gsc-opportunity.json")
+            self.assertFalse(decision["allows_content_edit"])
+            self.assertEqual(decision["decided_by"], "fixture-owner")
+
+    def test_issue_decision_blocks_untrusted_or_incomplete_comment(self) -> None:
+        code, summary = llm_issue_decision.run_issue_decision(
+            comment_body="/monitor codes-gsc-opportunity",
+            comment_author="fixture-user",
+            author_association="CONTRIBUTOR",
+            issue_title="LLM Owner Digest: Action Needed",
+            discovery_path=Path("/tmp/missing-discovery.json"),
+            output_dir=Path("/tmp"),
+            summary_output=None,
+            markdown_output=None,
+        )
+
+        self.assertEqual(code, 1)
+        self.assertEqual(summary["state"], "blocked")
+        self.assertIn("Unsupported comment author association", " ".join(summary["errors"]))
+        self.assertIn("Decision note is required", " ".join(summary["errors"]))
+
+    def test_issue_decision_blocks_wrong_issue_title(self) -> None:
+        code, summary = llm_issue_decision.run_issue_decision(
+            comment_body="/reject codes-gsc-opportunity Not useful enough.",
+            comment_author="fixture-owner",
+            author_association="OWNER",
+            issue_title="Unrelated issue",
+            discovery_path=Path("/tmp/missing-discovery.json"),
+            output_dir=Path("/tmp"),
+            summary_output=None,
+            markdown_output=None,
+        )
+
+        self.assertEqual(code, 1)
+        self.assertEqual(summary["state"], "blocked")
+        self.assertIn("Unsupported issue title", " ".join(summary["errors"]))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,118 @@
+name: LLM owner decision
+
+on:
+  issue_comment:
+    types: [created]
+
+concurrency:
+  group: llm-owner-decision-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  decision:
+    if: >
+      github.event.issue.pull_request == null &&
+      github.event.issue.title == 'LLM Owner Digest: Action Needed' &&
+      (
+        github.event.comment.author_association == 'OWNER' ||
+        github.event.comment.author_association == 'MEMBER' ||
+        github.event.comment.author_association == 'COLLABORATOR'
+      ) &&
+      (
+        startsWith(github.event.comment.body, '/monitor ') ||
+        startsWith(github.event.comment.body, '/reject ') ||
+        startsWith(github.event.comment.body, '/approve-chain ')
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Record owner decision from issue comment
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+          mkdir -p automation/reports/llm-owner-decision-gha
+          python3 automation/pipeline.py llm-issue-decision \
+            --comment-body "$COMMENT_BODY" \
+            --comment-author "$COMMENT_AUTHOR" \
+            --author-association "$AUTHOR_ASSOCIATION" \
+            --issue-title "$ISSUE_TITLE" \
+            --discovery automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json \
+            --summary-output automation/reports/llm-owner-decision-gha/decision-summary.json \
+            --markdown-output automation/reports/llm-owner-decision-gha/decision-summary.md \
+            --json | tee automation/reports/llm-owner-decision-gha/run-summary.json
+
+      - name: Write job summary
+        if: always()
+        run: |
+          {
+            echo "## LLM Owner Decision"
+            echo
+            echo "- Mode: no-write"
+            echo "- Trigger: owner issue comment"
+            echo "- Content/backlog/manifests/PRs modified: \`false\`"
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+
+          path = Path("automation/reports/llm-owner-decision-gha/decision-summary.json")
+          if not path.exists():
+              print("No decision summary was written.")
+              raise SystemExit(0)
+          data = json.loads(path.read_text())
+          print(f"- State: `{data.get('state')}`")
+          print(f"- Topic: `{data.get('topic_id')}`")
+          print(f"- Decision: `{data.get('decision_state')}`")
+          print(f"- Allows worker chain: `{data.get('allows_worker_chain')}`")
+          print(f"- Decision artifact: `{data.get('decision_output_path')}`")
+          if data.get("errors"):
+              print("- Errors:")
+              for error in data["errors"]:
+                  print(f"  - {error}")
+          PY
+
+      - name: Upload owner decision artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-owner-decision-${{ github.run_number }}
+          path: automation/reports/llm-owner-decision-gha/
+          if-no-files-found: ignore
+
+      - name: Commit topic decision artifacts
+        if: success()
+        run: |
+          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md
+            git commit -m "chore(llm): record owner topic decision"
+            for i in 1 2 3; do
+              git pull --rebase origin main
+              if git push; then
+                exit 0
+              fi
+              sleep 2
+            done
+            exit 1
+          else
+            echo "No topic decision artifact changes."
+          fi

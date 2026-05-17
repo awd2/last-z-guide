@@ -140,6 +140,7 @@ python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-owner-issue --json
+python3 automation/pipeline.py llm-issue-decision --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answers>" --resolve-reviewer-blockers --json
@@ -413,6 +414,16 @@ python3 automation/pipeline.py llm-owner-issue --json
 
 This is a notification layer only. It creates or updates one issue for actionable states, includes ready-to-copy owner decision commands, closes a previously open handoff issue when the digest becomes non-actionable again, and does not approve content or mutate site files.
 
+The preferred GitHub owner handoff is to comment on that issue with one command:
+
+```text
+/monitor <topic_id> <why this should wait>
+/reject <topic_id> <why this should not proceed>
+/approve-chain <topic_id> <validated player value and claim scope>
+```
+
+`.github/workflows/llm-owner-decision.yml` records those commands as `llm-topic-decision-<topic_id>` artifacts for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It commits only decision artifacts and still does not approve public copy, content edits, PRs, or deployment.
+
 To preview the full actionable Issue body locally without touching GitHub, run:
 
 ```bash
@@ -436,6 +447,15 @@ The consolidated no-write queue is available in GitHub Actions:
 - Output: uploaded artifact plus committed `automation/reports/llm-auto-review-queue/`, `automation/reports/llm-owner-digest.json`, and `automation/reports/llm-owner-digest.md` report artifacts only
 - Owner digest: generated automatically after the queue run, so the daily report has one compact action summary
 - Owner issue: created or updated only when the digest state is actionable; closed automatically when the latest digest no longer needs owner action
+- Content/backlog/manifests/PRs/deploy modified: `false`
+
+Owner decisions from that issue are handled by a separate no-write workflow:
+
+- Workflow: `.github/workflows/llm-owner-decision.yml`
+- Trigger: new comment on `LLM Owner Digest: Action Needed`
+- Supported commands: `/monitor`, `/reject`, `/approve-chain`
+- Author gate: `OWNER`, `MEMBER`, or `COLLABORATOR`
+- Output: committed `automation/reports/llm-topic-decision-<topic_id>.json` and `.md` artifacts only
 - Content/backlog/manifests/PRs/deploy modified: `false`
 
 The owner-approved no-write handoff runner is also available in GitHub Actions:

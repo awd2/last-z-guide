@@ -108,7 +108,7 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
     lines = [
         "## Owner Commands",
         "",
-        "Choose at most one decision command per topic. These commands only record owner decisions or intake scope; they do not approve public copy, patch specs, PRs, or deployment.",
+        "Choose at most one decision command per topic. GitHub comment commands are preferred; local CLI commands are included as a fallback. These commands only record owner decisions or intake scope; they do not approve public copy, patch specs, PRs, or deployment.",
         "",
     ]
     for item in items:
@@ -123,6 +123,14 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
                 f"- Target: `{target}`",
                 f"- Priority: `{priority}`",
                 f"- Risk: `{risk}`",
+                "",
+                "GitHub issue comment commands:",
+                "",
+                "```text",
+                f"/monitor {topic_id} Monitor {topic_id}: <why this should wait>",
+                f"/reject {topic_id} Reject {topic_id}: <why this should not proceed>",
+                f"/approve-chain {topic_id} Approve {topic_id} for no-write chain: <validated player value and claim scope>",
+                "```",
                 "",
                 "Monitor:",
                 "",
