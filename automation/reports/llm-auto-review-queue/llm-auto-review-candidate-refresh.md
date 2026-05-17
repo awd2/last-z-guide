@@ -1,4 +1,4 @@
-# LLM Candidate Refresh - 2026-05-17T08:51:53Z
+# LLM Candidate Refresh - 2026-05-17T09:03:01Z
 
 ## Overview
 
@@ -29,7 +29,7 @@
 - external-hq-and-progression-reference-cross-check
 - external-research-costs-external-cross-check
 - external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4
-- external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5
+- external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5
 - external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1
 - external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2
 

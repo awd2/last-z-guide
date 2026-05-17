@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-17T08:51:44Z
+# External Search Collect - 2026-05-17T09:02:51Z
 
 ## Outcome
 
@@ -41,15 +41,15 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastzwiki-reference-beginner-s-guide-last-z-wiki-how-to-start--3
+### external-search-lastzwiki-reference-last-z-wiki-complete-english-guide-strateg-3
 
-- Title: External search opportunity: Beginner's Guide - Last Z Wiki | How to Start & Essential Tips 2026
+- Title: External search opportunity: Last Z Wiki - Complete English Guide | Strategies, Tier List & Tips 2026
 - Action: `monitor`
-- Target: `start.html`
-- Cluster: `Progression`
-- Score: `54`
+- Target: `heroes.html`
+- Cluster: `Heroes`
+- Score: `19`
 - Source: `External search: site:lastzwiki.com/en Last Z guide heroes research`
-- URL: `https://lastzwiki.com/en/beginner-guide.html`
+- URL: `https://lastzwiki.com/en/index.html`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
@@ -65,7 +65,19 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5
+### external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5
+
+- Title: External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom
+- Action: `update_existing`
+- Target: `research.html`
+- Cluster: `Research`
+- Score: `82`
+- Source: `External search: site:lastz.fandom.com Last Z heroes research events`
+- URL: `https://lastz.fandom.com/wiki/Laboratory`
+- Mapping: `content_index_token_match`
+- Public claim ready: `false`
+
+### external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-6
 
 - Title: External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom
 - Action: `update_existing`
@@ -74,18 +86,6 @@
 - Score: `82`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
 - URL: `https://lastz.fandom.com/wiki/Heroes`
-- Mapping: `content_index_token_match`
-- Public claim ready: `false`
-
-### external-search-lastz-fandom-reference-event-center-last-z-survival-shooter-wiki--6
-
-- Title: External search opportunity: Event Center | Last Z: Survival Shooter Wiki | Fandom
-- Action: `update_existing`
-- Target: `research.html`
-- Cluster: `Research`
-- Score: `64`
-- Source: `External search: site:lastz.fandom.com Last Z heroes research events`
-- URL: `https://lastz.fandom.com/wiki/Event_Center`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
@@ -101,19 +101,7 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-8
-
-- Title: External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power - | Last Z: Survival Shooter
-- Action: `update_existing`
-- Target: `about.html`
-- Cluster: `Site`
-- Score: `74`
-- Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/en/assaulter-camp-training-guide`
-- Mapping: `content_index_token_match`
-- Public claim ready: `false`
-
-### external-search-mmediamreza-last-z-reference-last-z-laboratory-guide-tech-research-lab--9
+### external-search-mmediamreza-last-z-reference-last-z-laboratory-guide-tech-research-lab--8
 
 - Title: External search opportunity: Last Z Laboratory Guide: Tech Research & Lab No. 2 Unlocking - | Last Z: Survival Shooter
 - Action: `update_existing`
@@ -122,6 +110,18 @@
 - Score: `82`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
 - URL: `https://mmediamreza.com/laboratory`
+- Mapping: `content_index_token_match`
+- Public claim ready: `false`
+
+### external-search-mmediamreza-last-z-reference-last-z-formations-guide-troop-capacity-buf-9
+
+- Title: External search opportunity: Last Z Formations Guide: Troop Capacity, Buffs & Levels - | Last Z: Survival Shooter
+- Action: `update_existing`
+- Target: `formations.html`
+- Cluster: `Strategy`
+- Score: `82`
+- Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
+- URL: `https://mmediamreza.com/formations`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 

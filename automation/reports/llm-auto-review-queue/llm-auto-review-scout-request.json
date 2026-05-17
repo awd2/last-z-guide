@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event with a research-focused cycle and hero-use cycle; useful for linking research, heroes, and reward timing."
+          "Daily event cycle; includes Age of Science for tech research and Hero Initiative for hero upgrades and tickets."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -192,8 +192,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
-        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
+        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -203,7 +203,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page listing hero classes and the main stat systems that can tie into event scoring or upgrade planning."
+          "Research building page; shows Laboratory unlock and that it is used to research Technologies."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Detailed hero roster page with hero lists, levels, and equipment sections; useful for hero discovery and faction checks."
+          "Hero roster page with character list, levels, and hero equipment sections. Good for hero discovery and equipment cross-checking."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page with category breakdowns and level-by-level badge costs; useful for research discovery and cost cross-checks."
+          "Research table page covering badge costs by level across laboratory categories. Useful for research discovery and cost cross-checking."
         ],
         "site_fit": {
           "expected_internal_route": [
