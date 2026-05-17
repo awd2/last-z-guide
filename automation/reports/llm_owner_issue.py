@@ -51,6 +51,108 @@ def read_markdown(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def shell_safe(value: Any) -> str:
+    return str(value or "").replace('"', "'")
+
+
+def discovery_path_for(digest: dict[str, Any]) -> str:
+    queue_path = str(digest.get("queue_path") or "")
+    if not queue_path:
+        return "automation/reports/llm-topic-discovery.json"
+    path = Path(queue_path)
+    if path.parent.name == "llm-auto-review-queue":
+        return str(path.parent / "llm-auto-review-topic-discovery.json")
+    return str(path.parent / "llm-topic-discovery.json")
+
+
+def unique_action_items(digest: dict[str, Any]) -> list[dict[str, Any]]:
+    seen: set[str] = set()
+    items: list[dict[str, Any]] = []
+    for bucket in ("blocked_or_failed", "ready_for_intake", "needs_review"):
+        bucket_items = digest.get(bucket, [])
+        if not isinstance(bucket_items, list):
+            continue
+        for item in bucket_items:
+            if not isinstance(item, dict):
+                continue
+            topic_id = str(item.get("topic_id") or "")
+            if not topic_id or topic_id in seen:
+                continue
+            seen.add(topic_id)
+            items.append(item)
+    return items
+
+
+def topic_decision_command(discovery_path: str, topic_id: str, state: str, note: str) -> str:
+    return (
+        "python3 automation/pipeline.py llm-topic-decision "
+        f"--discovery {discovery_path} "
+        f"--topic-id {topic_id} "
+        f"--state {state} "
+        "--decided-by <owner> "
+        f"--note \"{shell_safe(note)}\" "
+        "--json"
+    )
+
+
+def render_owner_commands(digest: dict[str, Any]) -> list[str]:
+    items = unique_action_items(digest)
+    if not items:
+        return []
+    discovery_path = discovery_path_for(digest)
+    lines = [
+        "## Owner Commands",
+        "",
+        "Choose at most one decision command per topic. These commands only record owner decisions or intake scope; they do not approve public copy, patch specs, PRs, or deployment.",
+        "",
+    ]
+    for item in items:
+        topic_id = str(item.get("topic_id") or "")
+        target = str(item.get("target_page_or_slug") or "")
+        priority = str(item.get("priority") or "")
+        risk = str(item.get("risk_level") or "")
+        lines.extend(
+            [
+                f"### `{topic_id}`",
+                "",
+                f"- Target: `{target}`",
+                f"- Priority: `{priority}`",
+                f"- Risk: `{risk}`",
+                "",
+                "Monitor:",
+                "",
+                "```bash",
+                topic_decision_command(discovery_path, topic_id, "monitor", f"Monitor {topic_id}: <why this should wait>"),
+                "```",
+                "",
+                "Reject:",
+                "",
+                "```bash",
+                topic_decision_command(discovery_path, topic_id, "rejected", f"Reject {topic_id}: <why this should not proceed>"),
+                "```",
+                "",
+                "Approve for no-write worker chain:",
+                "",
+                "```bash",
+                topic_decision_command(
+                    discovery_path,
+                    topic_id,
+                    "approved_for_chain",
+                    f"Approve {topic_id} for no-write chain: <validated player value and claim scope>",
+                ),
+                "```",
+                "",
+            ]
+        )
+        intake = str(item.get("approve_for_intake_command") or "")
+        if intake:
+            lines.extend(["Approve intake from completed chain:", "", "```bash", intake, "```", ""])
+        chain_markdown = str(item.get("chain_markdown") or "")
+        if chain_markdown:
+            lines.extend([f"- Review artifact: `{chain_markdown}`", ""])
+    return lines
+
+
 def render_issue_body(digest: dict[str, Any], markdown: str, workflow_url: str) -> str:
     counts = digest.get("counts", {}) if isinstance(digest.get("counts"), dict) else {}
     lines = [
@@ -82,6 +184,7 @@ def render_issue_body(digest: dict[str, Any], markdown: str, workflow_url: str) 
             "- Public content still requires exact proposed text, owner approval, apply-preview, apply-approved, and strict QA.",
         ]
     )
+    lines.extend(["", *render_owner_commands(digest)])
     if markdown:
         lines.extend(["", "## Digest", "", markdown])
     return "\n".join(lines)

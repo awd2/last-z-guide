@@ -2005,6 +2005,22 @@ class WorkerContractTests(unittest.TestCase):
                         "digest_failed": 0,
                         "resolved_by_owner_decision": 0,
                     },
+                    "queue_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",
+                    "needs_review": [
+                        {
+                            "topic_id": "fixture-topic",
+                            "target_page_or_slug": "codes.html",
+                            "priority": "high",
+                            "risk_level": "medium",
+                            "chain_markdown": "automation/reports/llm-worker-chain-fixture-topic.md",
+                        }
+                    ],
+                    "ready_for_intake": [
+                        {
+                            "topic_id": "fixture-topic",
+                            "approve_for_intake_command": "python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-fixture-topic.json --approved-by <owner> --note \"Approved scope\" --json",
+                        }
+                    ],
                 },
             )
             markdown_path.write_text("# Digest\n\n- `fixture-topic`\n", encoding="utf-8")
@@ -2026,6 +2042,12 @@ class WorkerContractTests(unittest.TestCase):
             self.assertIn("LLM Owner Digest: Action Needed", summary["issue_body"])
             self.assertIn("owner_review_needed", summary["issue_body"])
             self.assertIn("https://github.com/awd2/last-z-guide/actions/runs/1", summary["issue_body"])
+            self.assertIn("## Owner Commands", summary["issue_body"])
+            self.assertIn("--state monitor", summary["issue_body"])
+            self.assertIn("--state rejected", summary["issue_body"])
+            self.assertIn("--state approved_for_chain", summary["issue_body"])
+            self.assertIn("--discovery automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json", summary["issue_body"])
+            self.assertIn("llm-intake-latest", summary["issue_body"])
 
     def test_llm_owner_issue_closes_existing_issue_when_digest_resolved(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

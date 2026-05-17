@@ -238,9 +238,11 @@ state.
 
 `llm-owner-issue` is the GitHub notification handoff for actionable owner
 digests. It creates or updates one issue only when the digest state is
-`owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`; when the
-latest digest is non-actionable, it can close a previous open handoff issue as
-resolved. It must not approve content, mutate site files, create PRs, or deploy.
+`owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`; the issue body
+includes ready-to-copy owner decision commands for `monitor`, `rejected`,
+`approved_for_chain`, and available intake commands. When the latest digest is
+non-actionable, it can close a previous open handoff issue as resolved. It must
+not approve content, mutate site files, create PRs, or deploy.
 
 `llm-run-approved-handoffs` is the scheduled owner-handoff runner. It reads the
 same `approved_for_chain` decision artifacts and runs only pending handoffs

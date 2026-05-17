@@ -704,6 +704,7 @@ LLM owner issue:
 
 - `python3 automation/pipeline.py llm-owner-issue --json` -> create/update one GitHub owner handoff issue only when the latest digest is actionable, or close the previous handoff issue when the latest digest is non-actionable
 - actionable states are `owner_review_needed`, `ready_for_intake`, and `blocked_or_failed`
+- actionable issue bodies include ready-to-copy `monitor`, `rejected`, `approved_for_chain`, and available intake commands
 - `no_candidates` and `no_action_needed` are no-op when no handoff issue is open
 - this is a notification layer only and does not approve content, mutate site files, create PRs, or deploy
 

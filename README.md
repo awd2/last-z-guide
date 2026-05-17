@@ -411,7 +411,7 @@ To create or update the single GitHub owner handoff issue for actionable digest 
 python3 automation/pipeline.py llm-owner-issue --json
 ```
 
-This is a notification layer only. It creates or updates one issue for actionable states, closes a previously open handoff issue when the digest becomes non-actionable again, and does not approve content or mutate site files.
+This is a notification layer only. It creates or updates one issue for actionable states, includes ready-to-copy owner decision commands, closes a previously open handoff issue when the digest becomes non-actionable again, and does not approve content or mutate site files.
 
 The same no-write chain is available in GitHub Actions:
 
