@@ -244,6 +244,11 @@ includes ready-to-copy owner decision commands for `monitor`, `rejected`,
 non-actionable, it can close a previous open handoff issue as resolved. It must
 not approve content, mutate site files, create PRs, or deploy.
 
+Use `automation/reports/example-llm-owner-digest-actionable.json` and
+`automation/reports/example-llm-owner-digest-actionable.md` with
+`llm-owner-issue --dry-run --body-output automation/reports/example-llm-owner-issue.md`
+to preview the exact GitHub Issue body without touching GitHub.
+
 `llm-run-approved-handoffs` is the scheduled owner-handoff runner. It reads the
 same `approved_for_chain` decision artifacts and runs only pending handoffs
 through deterministic `llm-worker-chain --from-decision` replay. If a completed

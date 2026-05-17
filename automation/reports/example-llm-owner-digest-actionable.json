@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_owner_digest",
+  "generated_at": "2026-05-17T00:00:00Z",
+  "state": "owner_review_needed",
+  "recommended_next_action": "Review the listed topics and approve only if the player value and claims are valid.",
+  "queue_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",
+  "queue_state": "current",
+  "queue_provider": "fixture",
+  "counts": {
+    "candidate_topics": 2,
+    "queued_topics": 2,
+    "failed_items": 0,
+    "needs_owner_decision": 2,
+    "resolved_by_owner_decision": 0,
+    "digest_needs_review": 2,
+    "digest_failed": 0,
+    "digest_ready_for_intake": 1
+  },
+  "needs_review": [
+    {
+      "topic_id": "fixture-codes-first-screen-review",
+      "target_page_or_slug": "codes.html",
+      "cluster": "Economy",
+      "priority": "high",
+      "risk_level": "medium",
+      "score": 91,
+      "status": "completed",
+      "recommended_owner_action": "approve_for_intake_if_player_value_and_claims_are_valid",
+      "owner_decision_state": "",
+      "owner_decision_note": "",
+      "chain_markdown": "automation/reports/llm-worker-chain-fixture-codes-first-screen-review.md",
+      "owner_decision_markdown": "",
+      "approve_for_intake_command": "python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-fixture-codes-first-screen-review.json --approved-by OWNER_NAME --note \"Approved owner scope for fixture-codes-first-screen-review: validate Gift Center route clarity only\" --resolve-reviewer-blockers --json",
+      "blocking_issue_count": 0,
+      "owner_question_count": 0
+    },
+    {
+      "topic_id": "fixture-research-cross-check",
+      "target_page_or_slug": "research.html",
+      "cluster": "Research",
+      "priority": "medium",
+      "risk_level": "high",
+      "score": 78,
+      "status": "completed",
+      "recommended_owner_action": "answer_owner_questions_before_intake",
+      "owner_decision_state": "",
+      "owner_decision_note": "",
+      "chain_markdown": "automation/reports/llm-worker-chain-fixture-research-cross-check.md",
+      "owner_decision_markdown": "",
+      "approve_for_intake_command": "",
+      "blocking_issue_count": 1,
+      "owner_question_count": 2
+    }
+  ],
+  "ready_for_intake": [
+    {
+      "topic_id": "fixture-codes-first-screen-review",
+      "target_page_or_slug": "codes.html",
+      "cluster": "Economy",
+      "priority": "high",
+      "risk_level": "medium",
+      "score": 91,
+      "status": "completed",
+      "recommended_owner_action": "approve_for_intake_if_player_value_and_claims_are_valid",
+      "owner_decision_state": "",
+      "owner_decision_note": "",
+      "chain_markdown": "automation/reports/llm-worker-chain-fixture-codes-first-screen-review.md",
+      "owner_decision_markdown": "",
+      "approve_for_intake_command": "python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-fixture-codes-first-screen-review.json --approved-by OWNER_NAME --note \"Approved owner scope for fixture-codes-first-screen-review: validate Gift Center route clarity only\" --resolve-reviewer-blockers --json",
+      "blocking_issue_count": 0,
+      "owner_question_count": 0
+    }
+  ],
+  "blocked_or_failed": [],
+  "resolved": [],
+  "safety": "Read-only owner digest fixture. No LLM calls, content edits, backlog changes, manifests, PRs, or production changes were made."
+}

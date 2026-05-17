@@ -36,6 +36,11 @@ def resolve_path(value: str) -> Path:
     return path if path.is_absolute() else ROOT / path
 
 
+def write_text(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+
+
 def run_url(repository: str, server_url: str, explicit_url: str | None = None) -> str:
     if explicit_url:
         return explicit_url
@@ -89,7 +94,7 @@ def topic_decision_command(discovery_path: str, topic_id: str, state: str, note:
         f"--discovery {discovery_path} "
         f"--topic-id {topic_id} "
         f"--state {state} "
-        "--decided-by <owner> "
+        "--decided-by OWNER_NAME "
         f"--note \"{shell_safe(note)}\" "
         "--json"
     )
@@ -146,6 +151,7 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
         )
         intake = str(item.get("approve_for_intake_command") or "")
         if intake:
+            intake = intake.replace("--approved-by <owner>", "--approved-by OWNER_NAME")
             lines.extend(["Approve intake from completed chain:", "", "```bash", intake, "```", ""])
         chain_markdown = str(item.get("chain_markdown") or "")
         if chain_markdown:
@@ -390,6 +396,7 @@ def main() -> int:
     parser.add_argument("--title", default=DEFAULT_TITLE, help="GitHub issue title to create/update.")
     parser.add_argument("--token-env", default="GITHUB_TOKEN", help="Environment variable containing the GitHub token.")
     parser.add_argument("--dry-run", action="store_true", help="Render the handoff without calling the GitHub API.")
+    parser.add_argument("--body-output", help="Optional path to write the rendered dry-run issue body.")
     parser.add_argument("--json", action="store_true", help="Print a machine-readable summary.")
     args = parser.parse_args()
 
@@ -411,6 +418,12 @@ def main() -> int:
         else:
             print(f"LLM owner issue handoff failed: {exc}")
         return 1
+    if args.body_output:
+        body = summary.get("issue_body") or summary.get("resolved_issue_body") or ""
+        if body:
+            body_path = resolve_path(args.body_output)
+            write_text(body_path, body)
+            summary["body_output"] = rel(body_path)
     if args.json:
         print(json.dumps(summary, indent=2))
     else:

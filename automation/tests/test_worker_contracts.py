@@ -2018,7 +2018,7 @@ class WorkerContractTests(unittest.TestCase):
                     "ready_for_intake": [
                         {
                             "topic_id": "fixture-topic",
-                            "approve_for_intake_command": "python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-fixture-topic.json --approved-by <owner> --note \"Approved scope\" --json",
+                            "approve_for_intake_command": "python3 automation/pipeline.py llm-intake-latest --chain automation/reports/llm-worker-chain-fixture-topic.json --approved-by OWNER_NAME --note \"Approved scope\" --json",
                         }
                     ],
                 },
@@ -2046,6 +2046,7 @@ class WorkerContractTests(unittest.TestCase):
             self.assertIn("--state monitor", summary["issue_body"])
             self.assertIn("--state rejected", summary["issue_body"])
             self.assertIn("--state approved_for_chain", summary["issue_body"])
+            self.assertIn("--decided-by OWNER_NAME", summary["issue_body"])
             self.assertIn("--discovery automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json", summary["issue_body"])
             self.assertIn("llm-intake-latest", summary["issue_body"])
 
@@ -2097,6 +2098,31 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(payload["state"], "closed")
             self.assertEqual(payload["state_reason"], "completed")
             self.assertIn("LLM Owner Digest: Resolved", payload["body"])
+
+    def test_llm_owner_issue_actionable_fixture_renders_full_handoff(self) -> None:
+        digest_path = ROOT / "automation" / "reports" / "example-llm-owner-digest-actionable.json"
+        markdown_path = ROOT / "automation" / "reports" / "example-llm-owner-digest-actionable.md"
+
+        summary = llm_owner_issue.build_summary(
+            digest_path=digest_path,
+            markdown_path=markdown_path,
+            repository="awd2/last-z-guide",
+            token="",
+            api_url="https://api.github.com",
+            server_url="https://github.com",
+            title="LLM Owner Digest: Action Needed",
+            explicit_run_url="https://github.com/awd2/last-z-guide/actions/runs/example",
+            dry_run=True,
+        )
+
+        self.assertTrue(summary["actionable"])
+        self.assertEqual(summary["action"], "dry_run")
+        self.assertIn("fixture-codes-first-screen-review", summary["issue_body"])
+        self.assertIn("fixture-research-cross-check", summary["issue_body"])
+        self.assertIn("--state monitor", summary["issue_body"])
+        self.assertIn("--state rejected", summary["issue_body"])
+        self.assertIn("--state approved_for_chain", summary["issue_body"])
+        self.assertIn("llm-intake-latest", summary["issue_body"])
 
     def test_llm_run_approved_handoffs_runs_pending_decision_and_skips_current(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

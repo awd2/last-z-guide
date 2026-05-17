@@ -810,6 +810,8 @@ def cmd_llm_owner_issue(
     markdown: str | None,
     repository: str | None,
     title: str | None,
+    run_url: str | None,
+    body_output: str | None,
     dry_run: bool,
     as_json: bool,
 ) -> int:
@@ -822,6 +824,10 @@ def cmd_llm_owner_issue(
         command.extend(["--repository", repository])
     if title:
         command.extend(["--title", title])
+    if run_url:
+        command.extend(["--run-url", run_url])
+    if body_output:
+        command.extend(["--body-output", body_output])
     if dry_run:
         command.append("--dry-run")
     if as_json:
@@ -2486,6 +2492,8 @@ def build_parser() -> argparse.ArgumentParser:
     llm_owner_issue_parser.add_argument("--markdown", help="Path to llm-owner-digest.md.")
     llm_owner_issue_parser.add_argument("--repository", help="Repository in owner/name form. Defaults to GITHUB_REPOSITORY.")
     llm_owner_issue_parser.add_argument("--title", help="GitHub issue title to create/update.")
+    llm_owner_issue_parser.add_argument("--run-url", help="Explicit workflow run URL to include in the rendered issue body.")
+    llm_owner_issue_parser.add_argument("--body-output", help="Optional path to write the rendered dry-run issue body.")
     llm_owner_issue_parser.add_argument("--dry-run", action="store_true", help="Render the handoff without calling the GitHub API.")
     llm_owner_issue_parser.add_argument("--json", action="store_true", help="Print the owner issue handoff summary as JSON.")
 
@@ -2827,6 +2835,8 @@ def main() -> int:
             args.markdown,
             args.repository,
             args.title,
+            args.run_url,
+            args.body_output,
             args.dry_run,
             args.json,
         )

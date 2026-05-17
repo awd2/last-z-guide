@@ -706,6 +706,7 @@ LLM owner issue:
 - actionable states are `owner_review_needed`, `ready_for_intake`, and `blocked_or_failed`
 - actionable issue bodies include ready-to-copy `monitor`, `rejected`, `approved_for_chain`, and available intake commands
 - `no_candidates` and `no_action_needed` are no-op when no handoff issue is open
+- `python3 automation/pipeline.py llm-owner-issue --digest automation/reports/example-llm-owner-digest-actionable.json --markdown automation/reports/example-llm-owner-digest-actionable.md --repository awd2/last-z-guide --run-url https://github.com/awd2/last-z-guide/actions/runs/example --dry-run --body-output automation/reports/example-llm-owner-issue.md --json` -> render the actionable handoff fixture locally without touching GitHub
 - this is a notification layer only and does not approve content, mutate site files, create PRs, or deploy
 
 LLM intake latest:

@@ -413,6 +413,12 @@ python3 automation/pipeline.py llm-owner-issue --json
 
 This is a notification layer only. It creates or updates one issue for actionable states, includes ready-to-copy owner decision commands, closes a previously open handoff issue when the digest becomes non-actionable again, and does not approve content or mutate site files.
 
+To preview the full actionable Issue body locally without touching GitHub, run:
+
+```bash
+python3 automation/pipeline.py llm-owner-issue --digest automation/reports/example-llm-owner-digest-actionable.json --markdown automation/reports/example-llm-owner-digest-actionable.md --repository awd2/last-z-guide --run-url https://github.com/awd2/last-z-guide/actions/runs/example --dry-run --body-output automation/reports/example-llm-owner-issue.md --json
+```
+
 The same no-write chain is available in GitHub Actions:
 
 - Workflow: `.github/workflows/llm-candidate-refresh.yml`
