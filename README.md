@@ -422,7 +422,7 @@ The preferred GitHub owner handoff is to comment on that issue with one command:
 /approve-chain <topic_id> <validated player value and claim scope>
 ```
 
-`.github/workflows/llm-owner-decision.yml` records those commands as `llm-topic-decision-<topic_id>` artifacts for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. For `/approve-chain`, it also runs the no-write worker chain in the same job. It commits only decision artifacts and still does not approve public copy, content edits, PRs, or deployment.
+`.github/workflows/llm-owner-decision.yml` records those commands as `llm-topic-decision-<topic_id>` artifacts for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It replies in the same issue with the recorded decision, workflow link, and worker-chain result when applicable. For `/approve-chain`, it also runs the no-write worker chain in the same job. It commits only decision artifacts and still does not approve public copy, content edits, PRs, or deployment.
 
 To preview the full actionable Issue body locally without touching GitHub, run:
 
@@ -457,6 +457,7 @@ Owner decisions from that issue are handled by a separate no-write workflow:
 - Author gate: `OWNER`, `MEMBER`, or `COLLABORATOR`
 - Output: committed `automation/reports/llm-topic-decision-<topic_id>.json` and `.md` artifacts only
 - `/approve-chain`: runs the no-write worker chain in the same workflow job
+- Issue reply: posts the decision result and worker-chain summary back into the handoff issue
 - Content/backlog/manifests/PRs/deploy modified: `false`
 
 The owner-approved no-write handoff runner is also available in GitHub Actions:
