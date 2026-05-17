@@ -173,11 +173,41 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event with an Age of Science research theme and a Hero Initiative hero-upgrade theme, plus reward tiers and ranking payouts."
+          "Daily event with a Hero Initiative phase that uses Hero XP, fragments, and recruitment tickets; also includes Age of Science for research speed-ups."
         ],
         "site_fit": {
           "expected_internal_route": [
             "events.html"
+          ],
+          "external_source_id": "lastz-fandom-reference"
+        },
+        "constraints": [
+          "External search result is discovery evidence only.",
+          "Do not copy source wording.",
+          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
+        ],
+        "reject_if": [
+          "The result is off-topic or duplicates an existing page job.",
+          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
+        ]
+      },
+      {
+        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
+        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
+        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "Core hero overview page covering hero classes, power factors, and hero-related progression."
+        ],
+        "site_fit": {
+          "expected_internal_route": [
+            "research.html"
           ],
           "external_source_id": "lastz-fandom-reference"
         },
@@ -203,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero index page with roster, faction filters, levels, and equipment entries; good lead for hero discovery and character cross-checking."
+          "Hero roster page with hero lists, levels, and equipment sections; useful for hero discovery and cross-checking character names or gear categories."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -226,50 +256,20 @@
         "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
         "cluster": "Research",
         "recommended_action": "update_existing",
-        "archetype_suggestion": "atlas-page",
-        "target_page_or_slug": "research-costs.html",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
         "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page with category tabs and per-level badge cost tables; useful for locating research names and cost patterns."
+          "Research table page showing badge costs by level and category structure; good for research topic discovery and cost cross-checking."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "research-costs.html"
+            "research.html"
           ],
           "external_source_id": "lastzwiki-reference"
-        },
-        "constraints": [
-          "External search result is discovery evidence only.",
-          "Do not copy source wording.",
-          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
-        ],
-        "reject_if": [
-          "The result is off-topic or duplicates an existing page job.",
-          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
-        ]
-      },
-      {
-        "topic_id": "external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-8",
-        "title": "External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power - | Last Z: Survival Shooter",
-        "cluster": "Site",
-        "recommended_action": "update_existing",
-        "archetype_suggestion": "site-page",
-        "target_page_or_slug": "about.html",
-        "source_reference": "External search: site:mmediamreza.com Last Z Survival Shooter",
-        "confidence": "high",
-        "priority": "high",
-        "risk_level": "high",
-        "evidence": [
-          "Dedicated guide for Assaulter Camp training, cap, speed bonuses, and power growth; good compare point for troop-building pages."
-        ],
-        "site_fit": {
-          "expected_internal_route": [
-            "about.html"
-          ],
-          "external_source_id": "mmediamreza-last-z-reference"
         },
         "constraints": [
           "External search result is discovery evidence only.",
