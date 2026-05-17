@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "report_type": "llm_auto_review_queue",
-  "generated_at": "2026-05-17T10:01:15Z",
-  "state": "no_candidates",
+  "generated_at": "2026-05-17T15:21:37Z",
+  "state": "current",
   "provider": "openai",
   "source_signal_files": [
     "content/gsc/latest-gsc-agent-signals.json",
@@ -16,12 +16,12 @@
   "candidate_refresh_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.md",
   "topic_discovery_path": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
   "topic_discovery_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md",
-  "candidate_topic_count": 0,
+  "candidate_topic_count": 1,
   "queued_topic_count": 0,
   "completed_item_count": 0,
   "failed_item_count": 0,
   "skipped_existing_count": 0,
-  "resolved_by_decision_count": 0,
+  "resolved_by_decision_count": 1,
   "stale_existing_count": 0,
   "deferred_count": 0,
   "max_chains": 3,
@@ -30,7 +30,30 @@
   "required_chain_contract_label": "exact-editor-proposals-v2",
   "queue_items": [],
   "skipped_topics": [],
-  "resolved_by_decision": [],
+  "resolved_by_decision": [
+    {
+      "topic_id": "external-gift-center-official-flow-validation",
+      "target_page_or_slug": "gift-center-uid.html",
+      "cluster": "Economy",
+      "priority": "high",
+      "risk_level": "medium",
+      "score": 91,
+      "score_reasons": [
+        "priority:high=45",
+        "confidence:high=20",
+        "risk:medium=8",
+        "action:update_existing=8",
+        "candidate_status=10"
+      ],
+      "status": "resolved_by_decision_monitor",
+      "decision_state": "monitor",
+      "decision_note": "Resolved by approved micro meta cleanup in commit 55af72c; keep monitoring official Gift Center route, no further intake for this queue item.",
+      "decision_artifact": "automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.json",
+      "decision_markdown": "automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md",
+      "allows_worker_chain": false,
+      "allows_content_edit": false
+    }
+  ],
   "errors": [],
   "output_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",
   "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.md",
@@ -39,8 +62,9 @@
   "allows_manifest_mutation": false,
   "allows_pr_or_deploy": false,
   "next_actions": [
-    "No candidate topics are ready for owner review.",
-    "Wait for new GSC/Bing/external-source signals or adjust Scout thresholds if the queue stays empty."
+    "No owner action needed for this queue run.",
+    "All current candidate topics are already covered by recorded owner decisions.",
+    "Wait for new GSC/Bing/external-source signals or explicitly reopen a topic decision if needed."
   ],
   "safety": "No content, backlog, manifest, PR, or production files were modified."
 }

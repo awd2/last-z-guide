@@ -162,36 +162,6 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-bookstore-last-z-survival-shooter-wiki-fan-6",
-        "title": "External search opportunity: Bookstore | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Research",
-        "recommended_action": "update_existing",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "research.html",
-        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-        "confidence": "high",
-        "priority": "high",
-        "risk_level": "high",
-        "evidence": [
-          "Bonus building that increases research speed and has upgrade data."
-        ],
-        "site_fit": {
-          "expected_internal_route": [
-            "research.html"
-          ],
-          "external_source_id": "lastz-fandom-reference"
-        },
-        "constraints": [
-          "External search result is discovery evidence only.",
-          "Do not copy source wording.",
-          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
-        ],
-        "reject_if": [
-          "The result is off-topic or duplicates an existing page job.",
-          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
-        ]
-      },
-      {
         "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
         "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Events",
@@ -203,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event overview with a research-themed round and a hero-upgrade round, plus reward tables and cycle timing."
+          "Daily world event with a Hero Initiative phase that awards points for hero XP, fragments, and prime recruitment tickets; also includes a research-focused Age of Science phase."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -222,22 +192,22 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
-        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
+        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "tech.html",
+        "target_page_or_slug": "research.html",
         "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core building page for unlocking and upgrading tech research."
+          "Core hero overview page listing hero classes and power factors; useful for linking hero-event guidance to hero growth systems."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "tech.html"
+            "research.html"
           ],
           "external_source_id": "lastz-fandom-reference"
         },
@@ -263,11 +233,41 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster page with character list, hero equipment, and faction/filter views. Good lead for hero discovery and equipment cross-checks."
+          "Dedicated hero reference page with hero roster, faction filters, levels, and hero equipment listings; useful for hero discovery and cross-checking character data."
         ],
         "site_fit": {
           "expected_internal_route": [
             "heroes.html"
+          ],
+          "external_source_id": "lastzwiki-reference"
+        },
+        "constraints": [
+          "External search result is discovery evidence only.",
+          "Do not copy source wording.",
+          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
+        ],
+        "reject_if": [
+          "The result is off-topic or duplicates an existing page job.",
+          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
+        ]
+      },
+      {
+        "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
+        "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
+        "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "Research table page covering Laboratory categories and per-level badge costs, including a search interface for specific research names."
+        ],
+        "site_fit": {
+          "expected_internal_route": [
+            "research.html"
           ],
           "external_source_id": "lastzwiki-reference"
         },

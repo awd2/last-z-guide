@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "external_evidence_collect",
-  "generated_at": "2026-05-17T10:00:39Z",
+  "generated_at": "2026-05-17T15:21:05Z",
   "state": "evidence_collection_partial",
   "provider": "fetch",
   "evidence_refresh_path": "automation/reports/llm-auto-review-queue/external-evidence-refresh.json",
@@ -22,7 +22,7 @@
         "uid-required-for-gift-center"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:33Z",
+      "collected_at": "2026-05-17T15:20:58Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -49,7 +49,7 @@
         "uid-required-for-gift-center"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:33Z",
+      "collected_at": "2026-05-17T15:20:58Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -77,7 +77,7 @@
         "hq31_35_progression"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:33Z",
+      "collected_at": "2026-05-17T15:20:58Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -107,7 +107,7 @@
         "t10_path_order"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:34Z",
+      "collected_at": "2026-05-17T15:20:58Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -137,7 +137,7 @@
         "gear_materials"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:34Z",
+      "collected_at": "2026-05-17T15:20:58Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -166,7 +166,7 @@
         "calculator_player_job"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:34Z",
+      "collected_at": "2026-05-17T15:20:59Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -194,7 +194,7 @@
         "season_2_winter_vs_desert"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:34Z",
+      "collected_at": "2026-05-17T15:20:59Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
@@ -221,14 +221,14 @@
         "duplicate_intent_risk"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:35Z",
+      "collected_at": "2026-05-17T15:21:02Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
       "status_code": 200,
       "final_url": "https://mmediamreza.com/en/lastz/gift-codes",
       "content_type": "text/html; charset=UTF-8",
-      "bytes_read": 77237,
+      "bytes_read": 77246,
       "truncated": false,
       "title": "Gift Codes – Always Updated! (UPDATED: MAY 12, 2026) - | Last Z: Survival Shooter",
       "meta_description": "Get the latest active gift codes for Last Z: Survival Shooter. This page is updated daily with new rewards. Learn how to redeem and get free diamonds!",
@@ -251,7 +251,7 @@
         "event_names"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:36Z",
+      "collected_at": "2026-05-17T15:21:03Z",
       "collection_status": "fetch_failed",
       "status_code": 403,
       "error": "HTTP Error 403: Forbidden"
@@ -268,14 +268,14 @@
         "store_listing_metadata"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:36Z",
+      "collected_at": "2026-05-17T15:21:03Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",
       "status_code": 200,
       "final_url": "https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652",
       "content_type": "text/html",
-      "bytes_read": 644216,
+      "bytes_read": 644188,
       "truncated": false,
       "title": "‎Last Z: Survival Shooter App - App Store",
       "meta_description": "Download Last Z: Survival Shooter by Omnilojo Pte Ltd on the App Store. See screenshots, ratings and reviews, user tips, and more apps like Last Z: Survival…",
@@ -299,7 +299,7 @@
         "store_listing_metadata"
       ],
       "public_claim_ready": false,
-      "collected_at": "2026-05-17T10:00:37Z",
+      "collected_at": "2026-05-17T15:21:03Z",
       "collection_status": "collected",
       "evidence_type": "metadata_and_short_snippet",
       "copyright_policy": "Short metadata/snippet only. Do not copy source wording into public content.",

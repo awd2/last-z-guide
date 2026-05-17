@@ -1,12 +1,12 @@
-# LLM Candidate Refresh - 2026-05-17T10:01:15Z
+# LLM Candidate Refresh - 2026-05-17T15:21:37Z
 
 ## Overview
 
 - State: `candidate_refresh_ready`
 - Provider: `openai`
 - Source proposals: 8
-- Candidate topics: 0
-- Monitor topics: 8
+- Candidate topics: 1
+- Monitor topics: 7
 - Topic discovery: `automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md`
 - Allows content edit: `false`
 - Allows backlog mutation: `false`
@@ -19,16 +19,19 @@
 - content/gsc/latest-gsc-agent-signals.json
 - content/bing/latest-bing-agent-signals.json
 
+## Candidate Topics
+
+- external-gift-center-official-flow-validation
+
 ## Monitor Topics
 
 - codes-gsc-opportunity
 - external-hq-and-progression-reference-cross-check
 - external-research-costs-external-cross-check
-- external-gift-center-official-flow-validation
-- external-search-lastz-fandom-reference-bookstore-last-z-survival-shooter-wiki-fan-6
 - external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4
-- external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5
+- external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5
 - external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1
+- external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2
 
 ## Stages
 
