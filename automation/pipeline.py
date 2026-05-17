@@ -805,6 +805,32 @@ def cmd_llm_owner_digest(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_owner_issue(
+    digest: str | None,
+    markdown: str | None,
+    repository: str | None,
+    title: str | None,
+    dry_run: bool,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "reports" / "llm_owner_issue.py")]
+    if digest:
+        command.extend(["--digest", digest])
+    if markdown:
+        command.extend(["--markdown", markdown])
+    if repository:
+        command.extend(["--repository", repository])
+    if title:
+        command.extend(["--title", title])
+    if dry_run:
+        command.append("--dry-run")
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Owner Issue ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_intake_latest(
     chain: str | None,
     reports_dir: str | None,
@@ -2452,6 +2478,17 @@ def build_parser() -> argparse.ArgumentParser:
     llm_owner_digest_parser.add_argument("--no-write", action="store_true", help="Build and print only; do not write digest artifacts.")
     llm_owner_digest_parser.add_argument("--json", action="store_true", help="Print the owner digest summary as JSON.")
 
+    llm_owner_issue_parser = subparsers.add_parser(
+        "llm-owner-issue",
+        help="Create or update one GitHub issue for actionable LLM owner digests.",
+    )
+    llm_owner_issue_parser.add_argument("--digest", help="Path to llm-owner-digest.json.")
+    llm_owner_issue_parser.add_argument("--markdown", help="Path to llm-owner-digest.md.")
+    llm_owner_issue_parser.add_argument("--repository", help="Repository in owner/name form. Defaults to GITHUB_REPOSITORY.")
+    llm_owner_issue_parser.add_argument("--title", help="GitHub issue title to create/update.")
+    llm_owner_issue_parser.add_argument("--dry-run", action="store_true", help="Render the handoff without calling the GitHub API.")
+    llm_owner_issue_parser.add_argument("--json", action="store_true", help="Print the owner issue handoff summary as JSON.")
+
     llm_intake_latest_parser = subparsers.add_parser(
         "llm-intake-latest",
         help="Generate a no-write intake artifact from the latest LLM worker chain.",
@@ -2782,6 +2819,15 @@ def main() -> int:
             args.json_output,
             args.markdown_output,
             args.no_write,
+            args.json,
+        )
+    if args.command == "llm-owner-issue":
+        return cmd_llm_owner_issue(
+            args.digest,
+            args.markdown,
+            args.repository,
+            args.title,
+            args.dry_run,
             args.json,
         )
     if args.command == "llm-intake-latest":

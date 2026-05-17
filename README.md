@@ -139,6 +139,7 @@ python3 automation/pipeline.py llm-worker-chain --from-decision automation/repor
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-owner-digest --json
+python3 automation/pipeline.py llm-owner-issue --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answers>" --resolve-reviewer-blockers --json
@@ -404,6 +405,14 @@ python3 automation/pipeline.py llm-owner-digest
 
 This writes `automation/reports/llm-owner-digest.md` and `.json`, grouped into needs-review, ready-for-intake, blocked/failed, and resolved buckets. Use `--no-write` for a read-only print-only run.
 
+To create or update the single GitHub owner handoff issue for actionable digest states, run:
+
+```bash
+python3 automation/pipeline.py llm-owner-issue --json
+```
+
+This is a notification layer only. It no-ops for `no_candidates` and `no_action_needed`, and it does not approve content or mutate site files.
+
 The same no-write chain is available in GitHub Actions:
 
 - Workflow: `.github/workflows/llm-candidate-refresh.yml`
@@ -420,6 +429,7 @@ The consolidated no-write queue is available in GitHub Actions:
 - External discovery: runs `external-scout`, builds `external-evidence-refresh`, collects explicit URL evidence with `external-evidence-collect --provider fetch`, collects approved source-query leads with `external-search-collect --provider openai`, and passes External Scout plus External Search proposal artifacts into `llm-auto-review-queue --external-proposals`
 - Output: uploaded artifact plus committed `automation/reports/llm-auto-review-queue/`, `automation/reports/llm-owner-digest.json`, and `automation/reports/llm-owner-digest.md` report artifacts only
 - Owner digest: generated automatically after the queue run, so the daily report has one compact action summary
+- Owner issue: created or updated only when the digest state is actionable
 - Content/backlog/manifests/PRs/deploy modified: `false`
 
 The owner-approved no-write handoff runner is also available in GitHub Actions:

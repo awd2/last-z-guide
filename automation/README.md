@@ -329,6 +329,7 @@ python3 automation/pipeline.py llm-worker-chain --from-decision automation/repor
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-owner-digest --json
+python3 automation/pipeline.py llm-owner-issue --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities
@@ -464,6 +465,7 @@ Lifecycle shorthand:
 - `llm-review-latest` -> read the latest local LLM worker chain summary without calling an LLM provider
 - `llm-auto-review-latest` -> read the latest consolidated auto-review queue as one owner decision view, including recorded topic decisions
 - `llm-owner-digest` -> write the shortest owner-facing daily digest from the latest auto-review queue
+- `llm-owner-issue` -> create or update one GitHub owner handoff issue for actionable digest states
 - `llm-intake-latest` -> bridge the latest LLM worker chain summary into a no-write, owner-gated intake artifact
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
@@ -658,6 +660,7 @@ LLM auto review queue workflow:
 - output is an uploaded workflow artifact named `llm-auto-review-queue-<run_number>`
 - before queueing, the workflow runs `external-scout`, builds `external-evidence-refresh`, collects explicit URL evidence with `external-evidence-collect --provider fetch`, collects approved source-query evidence with `external-search-collect --provider openai`, and passes both External Scout and External Search proposal artifacts through `--external-proposals`
 - after queueing, the workflow runs `llm-owner-digest` and includes `automation/reports/llm-owner-digest.md` / `.json` in the uploaded and committed report artifacts
+- after digest generation, the workflow runs `llm-owner-issue` to create or update one GitHub Issue only for actionable digest states
 - it may commit only `automation/reports/llm-auto-review-queue/`, `automation/reports/llm-owner-digest.json`, and `automation/reports/llm-owner-digest.md` report artifacts
 - this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 
@@ -696,6 +699,13 @@ LLM owner digest:
 - `python3 automation/pipeline.py llm-owner-digest --no-write` -> print the digest without writing artifacts
 - output groups topics into needs-review, ready-for-intake, blocked/failed, and resolved buckets
 - this is read-only and does not call OpenAI, approve public copy, or mutate content/backlog/manifests
+
+LLM owner issue:
+
+- `python3 automation/pipeline.py llm-owner-issue --json` -> create or update one GitHub owner handoff issue only when the latest digest is actionable
+- actionable states are `owner_review_needed`, `ready_for_intake`, and `blocked_or_failed`
+- `no_candidates` and `no_action_needed` are no-op to avoid daily issue noise
+- this is a notification layer only and does not approve content, mutate site files, create PRs, or deploy
 
 LLM intake latest:
 
