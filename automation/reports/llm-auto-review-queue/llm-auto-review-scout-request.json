@@ -162,8 +162,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
+        "title": "External search opportunity: Full Preparedness",
         "cluster": "Events",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycle; includes Age of Science for tech research and Hero Initiative for hero upgrades and tickets."
+          "Daily event cycles include an Age of Science theme for research actions and a Hero Initiative theme for hero upgrades."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -192,8 +192,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
-        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-heroes-5",
+        "title": "External search opportunity: Heroes",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -203,7 +203,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research building page; shows Laboratory unlock and that it is used to research Technologies."
+          "Main hero roster page with hero classes and power factors; useful for linking hero upgrade mechanics to event scoring."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster page with character list, levels, and hero equipment sections. Good for hero discovery and equipment cross-checking."
+          "Hero roster and equipment catalog; useful for hero discovery, faction filtering, and gear cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page covering badge costs by level across laboratory categories. Useful for research discovery and cost cross-checking."
+          "Research tables by category with badge costs per level; useful for research discovery and cost cross-checking."
         ],
         "site_fit": {
           "expected_internal_route": [

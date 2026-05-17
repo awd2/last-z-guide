@@ -1,12 +1,6 @@
 {
-  "schema_version": 1,
-  "report_type": "llm_owner_digest",
-  "generated_at": "2026-05-17T09:25:27Z",
   "state": "no_candidates",
   "recommended_next_action": "No candidate topics are ready; wait for new signals.",
-  "queue_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",
-  "queue_state": "no_candidates",
-  "queue_provider": "openai",
   "counts": {
     "candidate_topics": 0,
     "queued_topics": 0,
@@ -17,9 +11,7 @@
     "digest_failed": 0,
     "digest_ready_for_intake": 0
   },
-  "needs_review": [],
-  "ready_for_intake": [],
-  "blocked_or_failed": [],
-  "resolved": [],
+  "json_output": "automation/reports/llm-owner-digest.json",
+  "markdown_output": "automation/reports/llm-owner-digest.md",
   "safety": "Read-only owner digest. No LLM calls, content edits, backlog changes, manifests, PRs, or production changes were made."
 }

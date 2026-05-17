@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_adapter_result",
-  "generated_at": "2026-05-17T09:03:01Z",
+  "generated_at": "2026-05-17T09:25:27Z",
   "state": "completed",
   "provider": "openai",
   "request_id": "llm-auto-review-scout",
@@ -9,110 +9,109 @@
   "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
   "fixture_path": "",
   "response_json": {
-    "overview": "The strongest opportunities are existing-page updates driven by search and external discovery signals, not new pages. Highest value is in the Economy, Research, and Heroes clusters where there is clear query or reference coverage pressure, but every external-source topic needs verification before any public claim. The Events topic is the weakest because it relies on a single search result and is too easy to duplicate or overstate.",
+    "overview": "The strongest opportunities are existing-page updates where search or external signals suggest a real user job, but all public claims still need verification. The highest value items are the Gift Center codes page, HQ progression cross-check, research cost cross-check, and the Events page, because they map to clear user intent and existing page routes. Several external-search ideas are useful as discovery only, but they are too source-dependent or duplicative to advance without cross-validation.",
     "selected_opportunities": [
       {
         "topic_id": "codes-gsc-opportunity",
         "decision": "update_existing",
-        "rationale": "This is the clearest high-signal opportunity. The page already exists, the cluster role is defined, and GSC shows meaningful impressions with low CTR on gift-center queries. That supports a human review for first-screen and query-match improvements without changing the page into a different intent.",
-        "player_value": "Better answer matching for players searching gift center login, redeem flow, and code access. Could reduce friction for users who need the official path quickly.",
-        "duplication_risk": "Low if scope stays on the existing cornerstone guide and does not blur into UID or support intents that belong elsewhere.",
+        "rationale": "This is a strong existing-page opportunity with clear GSC signals and an existing cornerstone route. The query set suggests mismatch between search intent and current snippet or first-screen utility, but the change should stay within the approved template and preserve cluster separation.",
+        "player_value": "Players searching for Gift Center and redeem-code help should get a faster path to the correct flow, with less confusion around login, UID, and redeem steps.",
+        "duplication_risk": "Medium. The topic is close to current codes coverage, so scope must avoid overlapping with other canonical economy pages.",
         "priority": "high",
         "risk_level": "high",
-        "next_step": "Send to human review for scoped update analysis against the current codes.html outline and canonical claim set.",
+        "next_step": "Have an owner review the current codes page intent, confirm the exact query segments worth addressing, and define a narrow update scope that keeps canonical claims intact.",
         "claims_to_verify": [
-          "Whether the current intro and headings already cover gift center login intent sufficiently",
-          "Whether any proposed additions would conflict with gift-center-only-redeem-flow",
-          "Whether UID and mailbox references remain accurate and within approved scope"
-        ]
-      },
-      {
-        "topic_id": "external-gift-center-official-flow-validation",
-        "decision": "update_existing",
-        "rationale": "The official domain is a plausible cross-validation source for routing and flow accuracy, but it is not proof by itself. The topic is worth human review because it may help validate official service paths and reduce drift on the Gift Center page.",
-        "player_value": "Improved trust and route clarity for players using the official Gift Center and store flow.",
-        "duplication_risk": "Medium because it could overlap with the existing codes page unless the job is narrowly defined around routing and validation only.",
-        "priority": "high",
-        "risk_level": "medium",
-        "next_step": "Verify the official routing claims against canonical site memory and at least one additional reliable source before any content proposal.",
-        "claims_to_verify": [
-          "Exact official Gift Center routing and setup flow",
-          "Whether UID usage is still current",
-          "Whether this topic adds a distinct job beyond the existing codes page"
+          "Whether the current page already fully serves the Gift Center login intent",
+          "Whether any snippet or heading changes would blur role separation",
+          "Whether the protected canonical claims remain accurate and unchanged"
         ]
       },
       {
         "topic_id": "external-hq-and-progression-reference-cross-check",
         "decision": "update_existing",
-        "rationale": "HQ and progression dependency coverage is a distinct user job and may expose planning gaps. The topic is worthwhile because it can improve accuracy on progression requirements, but only after verification beyond the single external reference.",
-        "player_value": "Helps players plan HQ upgrades and dependencies without relying on stale or incomplete advice.",
-        "duplication_risk": "Medium to high if the existing HQ page already covers the same dependency path. Scope must remain on verification and gap filling, not rewriting the whole page.",
+        "rationale": "This is a useful cross-check opportunity for an existing progression page. The proposal points to verification of HQ requirements and dependency planning, which can help fill coverage gaps, but all claims are external-source driven and need independent confirmation.",
+        "player_value": "Players get more reliable HQ planning, fewer dependency mistakes, and better progression guidance.",
+        "duplication_risk": "Medium. It may overlap with other progression guidance unless the distinct player job is kept narrow.",
         "priority": "high",
         "risk_level": "high",
-        "next_step": "Have a human confirm whether hq.html has a coverage gap and validate any requirement claims from at least one more reliable source.",
+        "next_step": "Verify HQ requirement data against canonical memory and at least one additional reliable source before deciding whether a focused update is warranted.",
         "claims_to_verify": [
-          "HQ construction dependencies",
-          "Requirement thresholds and progression order",
-          "Whether the source adds anything beyond existing page intent"
+          "HQ requirement thresholds",
+          "Construction dependency order",
+          "Any route or progression claims implied by the source"
+        ]
+      },
+      {
+        "topic_id": "external-research-costs-external-cross-check",
+        "decision": "update_existing",
+        "rationale": "This is a strong research-coverage verification task for an existing page. It appears valuable for catching branch coverage and cost drift, but the external source is only a discovery signal, not proof.",
+        "player_value": "Players and planners get more dependable research cost references and fewer outdated branch assumptions.",
+        "duplication_risk": "Medium. It could overlap with existing research tables unless scoped to a clear gap or drift fix.",
+        "priority": "high",
+        "risk_level": "high",
+        "next_step": "Cross-validate branch names and cost tables against canonical site memory and another reliable source before any content proposal is drafted.",
+        "claims_to_verify": [
+          "Research branch names",
+          "Research cost values",
+          "Coverage gaps in the current table"
         ]
       }
     ],
     "rejected_or_monitor": [
       {
-        "topic_id": "external-research-costs-external-cross-check",
-        "reason": "Useful as a research validation signal, but too dependent on a single external source and too likely to overlap with existing research-cost coverage.",
-        "future_trigger": "Revisit if an owner confirms a concrete branch-name or cost-table gap on research-costs.html."
+        "topic_id": "external-gift-center-official-flow-validation",
+        "reason": "Monitor only until the official-domain claims are verified by a second reliable source or owner confirmation. As written, it is too dependent on a single external source and could duplicate existing economy coverage.",
+        "future_trigger": "Move forward only if independent verification confirms a distinct player job for Gift Center routing or UID flow."
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "reason": "Search-result discovery only, with high duplication risk against an existing events guide and no verified claim set.",
-        "future_trigger": "Revisit if multiple reliable sources confirm a distinct event mechanic or schedule gap."
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
+        "reason": "Monitor only. The event reference is too source-dependent and may duplicate an existing events page job. It cannot advance without verification of the event theme and relevance.",
+        "future_trigger": "Consider again if canonical memory and a second source confirm a distinct Events coverage gap."
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
-        "reason": "Likely duplicates existing research coverage and depends on a single external search result rather than verified mechanics.",
-        "future_trigger": "Revisit if research.html is missing the Laboratory overview or if owner review identifies a specific gap."
+        "topic_id": "external-search-lastz-fandom-reference-heroes-5",
+        "reason": "Monitor only. The page appears broad and potentially duplicative of existing research or hero coverage, and the source is not enough to justify a new or updated page yet.",
+        "future_trigger": "Reassess if a distinct player job emerges, such as event scoring linkage or roster comparison, backed by verification."
       },
       {
         "topic_id": "external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1",
-        "reason": "Potentially useful, but the topic title signals competitor-style tier-list framing and could copy or overextend existing heroes coverage.",
-        "future_trigger": "Revisit if a distinct player job emerges, such as equipment or roster explanation not already covered by heroes.html."
+        "reason": "Reject for now. The proposal is too close to generic hero roster content and risks copying competitor framing. The source is not sufficient proof for a public-facing guide.",
+        "future_trigger": "Only revisit if owner-approved cross-validation reveals a unique hero-use case not already covered elsewhere."
       },
       {
         "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
-        "reason": "Research cost cross-check idea is plausible but too thin and too dependent on a competitor source without verification.",
-        "future_trigger": "Revisit if multiple sources or owner confirmation validate a specific badge-cost discrepancy."
+        "reason": "Monitor only. It may be useful for research discovery, but the claim set is entirely external-source based and needs stronger validation before any review workflow advances.",
+        "future_trigger": "Reassess if badge costs and research tables are confirmed by canonical memory or another reliable source."
       }
     ],
     "global_risks": [
-      "External sources are discovery signals only and cannot support public claims without additional validation.",
-      "Several proposals risk duplicating existing cornerstone intents unless scope is kept narrowly on one player job.",
-      "Analytics data can suggest attention problems, but it does not prove that a rewrite is needed.",
-      "Canonical claim protection is important for the Economy pages, especially around gift center flow and redeem behavior.",
-      "Competitor-style reference titles increase the risk of copying wording or importing unsupported mechanics claims."
+      "Several proposals are based on external search or external reference signals that are not proof and could drift into competitor wording if not tightly controlled.",
+      "There is repeated risk of cluster overlap, especially across Economy and Research topics, which could blur canonical page roles.",
+      "Some topics may be thin variants of existing pages rather than distinct player jobs, so human review must keep scope narrow.",
+      "Analytics signals like GSC CTR and impressions are useful indicators, but they do not prove a rewrite is needed or justify changing protected claims."
     ],
     "next_actions": [
-      "Route the selected existing-page opportunities to human review with scope limits.",
-      "Validate each selected topic against canonical site memory plus at least one additional reliable source or owner confirmation.",
-      "Keep monitor topics out of Editor, Reviewer, intake, run-plan, and content proposal flows unless revalidated.",
-      "Check for duplicate intent before any update_existing proposal is drafted.",
-      "Preserve canonical claims and cluster role separation during any later review."
+      "Send the selected existing-page opportunities to human review with a narrow verification brief.",
+      "Require second-source validation or owner confirmation for every external-claim topic before any proposal-only workflow.",
+      "Check for duplicate intent across Economy, Progression, Research, and Events before allowing any page-level scope definition.",
+      "Preserve all canonical claims and cluster boundaries when evaluating the codes page opportunity.",
+      "Keep monitor-only items out of Editor, Reviewer, intake, run-plan, and content proposal stages until verified."
     ]
   },
   "usage": {
-    "input_tokens": 3528,
+    "input_tokens": 3492,
     "input_tokens_details": {
-      "cached_tokens": 1792
+      "cached_tokens": 0
     },
-    "output_tokens": 1187,
+    "output_tokens": 1228,
     "output_tokens_details": {
       "reasoning_tokens": 0
     },
-    "total_tokens": 4715
+    "total_tokens": 4720
   },
   "provider_metadata": {
     "model": "gpt-5.4-mini-2026-03-17",
-    "response_id": "resp_0812c930a32d07b2006a09843c32f081908c7c10b921e4787c",
+    "response_id": "resp_093f915f0cc370fa006a09897e78988194b43e33ef8f22bde6",
     "status": "completed",
     "endpoint": "https://api.openai.com/v1/responses",
     "reasoning_effort": "",

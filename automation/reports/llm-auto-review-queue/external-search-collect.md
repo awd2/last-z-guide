@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-17T09:02:51Z
+# External Search Collect - 2026-05-17T09:25:18Z
 
 ## Outcome
 
@@ -47,15 +47,15 @@
 - Action: `monitor`
 - Target: `heroes.html`
 - Cluster: `Heroes`
-- Score: `19`
+- Score: `47`
 - Source: `External search: site:lastzwiki.com/en Last Z guide heroes research`
 - URL: `https://lastzwiki.com/en/index.html`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4
+### external-search-lastz-fandom-reference-full-preparedness-4
 
-- Title: External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Full Preparedness
 - Action: `update_existing`
 - Target: `events.html`
 - Cluster: `Events`
@@ -65,21 +65,9 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5
+### external-search-lastz-fandom-reference-heroes-5
 
-- Title: External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom
-- Action: `update_existing`
-- Target: `research.html`
-- Cluster: `Research`
-- Score: `82`
-- Source: `External search: site:lastz.fandom.com Last Z heroes research events`
-- URL: `https://lastz.fandom.com/wiki/Laboratory`
-- Mapping: `content_index_token_match`
-- Public claim ready: `false`
-
-### external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-6
-
-- Title: External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Heroes
 - Action: `update_existing`
 - Target: `research.html`
 - Cluster: `Research`
@@ -89,12 +77,24 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
+### external-search-lastz-fandom-reference-event-center-6
+
+- Title: External search opportunity: Event Center
+- Action: `update_existing`
+- Target: `research.html`
+- Cluster: `Research`
+- Score: `64`
+- Source: `External search: site:lastz.fandom.com Last Z heroes research events`
+- URL: `https://lastz.fandom.com/wiki/Event_Center`
+- Mapping: `content_index_token_match`
+- Public claim ready: `false`
+
 ### external-search-mmediamreza-last-z-reference-shooter-camp-guide-last-z-survival-shooter-7
 
 - Title: External search opportunity: Shooter Camp Guide - | Last Z: Survival Shooter
 - Action: `update_existing`
-- Target: `about.html`
-- Cluster: `Site`
+- Target: `base-building-order.html`
+- Cluster: `Progression`
 - Score: `74`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
 - URL: `https://mmediamreza.com/shooter-camp-guide`
