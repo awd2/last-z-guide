@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_topic_decision",
+  "generated_at": "2026-05-17T17:05:41Z",
+  "state": "decision_recorded",
+  "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6",
+  "decision_state": "monitor",
+  "decided_by": "awd2",
+  "decision_note": "Monitor this low-priority external-search topic after workflow comment ingestion test; do not move it into content intake yet.",
+  "source_discovery": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
+  "topic_snapshot": {
+    "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6",
+    "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
+    "cluster": "Research",
+    "recommended_action": "monitor",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "research.html",
+    "source_type": "llm_scout",
+    "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
+    "confidence": "high",
+    "priority": "low",
+    "status": "monitor",
+    "notes": "The topic is a source-led validation idea for Research, not a ready content opportunity. It needs verification before it can be advanced. Future trigger: Revisit if a verified gap in research unlock rules or badge costs is identified.",
+    "risk_level": "",
+    "player_value": "",
+    "duplication_risk": "",
+    "claims_to_verify": [],
+    "next_step": "Revisit if a verified gap in research unlock rules or badge costs is identified.",
+    "evidence": [
+      "Explains the building used to research technologies and its unlock rules."
+    ],
+    "site_fit": {
+      "expected_internal_route": [
+        "research.html"
+      ],
+      "external_source_id": "lastz-fandom-reference"
+    },
+    "constraints": [
+      "External search result is discovery evidence only.",
+      "Do not copy source wording.",
+      "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
+    ],
+    "reject_if": [
+      "The result is off-topic or duplicates an existing page job.",
+      "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
+    ],
+    "prior_review": null,
+    "human_approval_required": false,
+    "backlog_row_preview": {
+      "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6",
+      "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
+      "cluster": "Research",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
+      "source_type": "llm_scout",
+      "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
+      "confidence": "high",
+      "priority": "low",
+      "status": "monitor",
+      "notes": "The topic is a source-led validation idea for Research, not a ready content opportunity. It needs verification before it can be advanced. Future trigger: Revisit if a verified gap in research unlock rules or badge costs is identified."
+    }
+  },
+  "allows_worker_chain": false,
+  "allows_content_edit": false,
+  "next_actions": [
+    "Keep this topic out of content intake for now.",
+    "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+    "Do not create public content edits from this topic decision."
+  ],
+  "errors": [],
+  "output_path": "automation/reports/llm-topic-decision-external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6.json",
+  "markdown_path": "automation/reports/llm-topic-decision-external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6.md",
+  "safety": "No content, backlog, manifest, PR, or production files were modified. This decision only controls whether a discovered topic may proceed to the next no-write worker stage."
+}
