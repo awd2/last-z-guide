@@ -87,6 +87,39 @@ def render_issue_body(digest: dict[str, Any], markdown: str, workflow_url: str) 
     return "\n".join(lines)
 
 
+def render_resolved_issue_body(digest: dict[str, Any], workflow_url: str) -> str:
+    counts = digest.get("counts", {}) if isinstance(digest.get("counts"), dict) else {}
+    lines = [
+        "<!-- llm-owner-digest-handoff -->",
+        "# LLM Owner Digest: Resolved",
+        "",
+        "The latest no-write LLM owner digest no longer needs owner action, so this handoff issue was closed automatically.",
+        "",
+        "## Latest Digest",
+        "",
+        f"- State: `{digest.get('state', '')}`",
+        f"- Recommended next action: {digest.get('recommended_next_action', '')}",
+        f"- Generated at: `{digest.get('generated_at', '')}`",
+        f"- Candidate topics: `{counts.get('candidate_topics', 0)}`",
+        f"- Needs owner review: `{counts.get('digest_needs_review', 0)}`",
+        f"- Ready for intake: `{counts.get('digest_ready_for_intake', 0)}`",
+        f"- Blocked or failed: `{counts.get('digest_failed', 0)}`",
+        f"- Resolved by decision: `{counts.get('resolved_by_owner_decision', 0)}`",
+    ]
+    if workflow_url:
+        lines.append(f"- Workflow run: {workflow_url}")
+    lines.extend(
+        [
+            "",
+            "## Safety",
+            "",
+            "- This closure does not approve public copy.",
+            "- The underlying automation did not edit content, backlog, manifests, PRs, or production state.",
+        ]
+    )
+    return "\n".join(lines)
+
+
 def github_request(
     api_url: str,
     token: str,
@@ -158,6 +191,34 @@ def upsert_issue(
     return {"action": "created", "issue_number": issue.get("number"), "issue_url": issue.get("html_url")}
 
 
+def close_resolved_issue(
+    digest: dict[str, Any],
+    repository: str,
+    token: str,
+    api_url: str,
+    server_url: str,
+    title: str,
+    explicit_run_url: str | None,
+) -> dict[str, Any]:
+    existing = find_open_issue(api_url, token, repository, title)
+    if not existing:
+        return {"action": "skipped_non_actionable", "issue_number": None, "issue_url": None}
+    body = render_resolved_issue_body(digest, run_url(repository, server_url, explicit_run_url))
+    issue = github_request(
+        api_url,
+        token,
+        "PATCH",
+        f"/repos/{repository}/issues/{existing['number']}",
+        {
+            "title": title,
+            "body": body,
+            "state": "closed",
+            "state_reason": "completed",
+        },
+    )
+    return {"action": "closed_resolved", "issue_number": issue.get("number"), "issue_url": issue.get("html_url")}
+
+
 def build_summary(
     digest_path: Path,
     markdown_path: Path,
@@ -184,6 +245,19 @@ def build_summary(
         "safety": "Owner issue handoff only. No content, backlog, manifest, PR, or production files were modified.",
     }
     if not actionable:
+        if dry_run:
+            summary.update(
+                {
+                    "action": "dry_run_non_actionable",
+                    "resolved_issue_body": render_resolved_issue_body(
+                        digest,
+                        run_url(repository, server_url, explicit_run_url),
+                    ),
+                }
+            )
+            return summary
+        if repository and token:
+            summary.update(close_resolved_issue(digest, repository, token, api_url, server_url, title, explicit_run_url))
         return summary
     markdown = read_markdown(markdown_path)
     if dry_run:

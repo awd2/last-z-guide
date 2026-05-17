@@ -238,9 +238,9 @@ state.
 
 `llm-owner-issue` is the GitHub notification handoff for actionable owner
 digests. It creates or updates one issue only when the digest state is
-`owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`; `no_candidates`
-and `no_action_needed` are no-op. It must not approve content, mutate site
-files, create PRs, or deploy.
+`owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`; when the
+latest digest is non-actionable, it can close a previous open handoff issue as
+resolved. It must not approve content, mutate site files, create PRs, or deploy.
 
 `llm-run-approved-handoffs` is the scheduled owner-handoff runner. It reads the
 same `approved_for_chain` decision artifacts and runs only pending handoffs
@@ -277,8 +277,9 @@ collects source-query evidence with `external-search-collect --provider openai`,
 and passes the generated External Scout and External Search artifacts into
 `llm-auto-review-queue --external-proposals`. It then runs `llm-owner-digest`
 over the queue so the daily workflow produces one compact owner action summary.
-If the digest is actionable, the workflow also runs `llm-owner-issue` to create
-or update one GitHub handoff issue.
+The workflow also runs `llm-owner-issue` to create/update one GitHub handoff
+issue for actionable states, or close the previous handoff when the digest is
+resolved.
 The workflow may commit only queue and owner-digest report artifacts and must
 not edit public content or production state.
 

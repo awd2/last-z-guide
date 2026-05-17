@@ -660,7 +660,7 @@ LLM auto review queue workflow:
 - output is an uploaded workflow artifact named `llm-auto-review-queue-<run_number>`
 - before queueing, the workflow runs `external-scout`, builds `external-evidence-refresh`, collects explicit URL evidence with `external-evidence-collect --provider fetch`, collects approved source-query evidence with `external-search-collect --provider openai`, and passes both External Scout and External Search proposal artifacts through `--external-proposals`
 - after queueing, the workflow runs `llm-owner-digest` and includes `automation/reports/llm-owner-digest.md` / `.json` in the uploaded and committed report artifacts
-- after digest generation, the workflow runs `llm-owner-issue` to create or update one GitHub Issue only for actionable digest states
+- after digest generation, the workflow runs `llm-owner-issue` to create/update one GitHub Issue for actionable digest states, or close the previous handoff issue when the latest digest is non-actionable
 - it may commit only `automation/reports/llm-auto-review-queue/`, `automation/reports/llm-owner-digest.json`, and `automation/reports/llm-owner-digest.md` report artifacts
 - this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 
@@ -702,9 +702,9 @@ LLM owner digest:
 
 LLM owner issue:
 
-- `python3 automation/pipeline.py llm-owner-issue --json` -> create or update one GitHub owner handoff issue only when the latest digest is actionable
+- `python3 automation/pipeline.py llm-owner-issue --json` -> create/update one GitHub owner handoff issue only when the latest digest is actionable, or close the previous handoff issue when the latest digest is non-actionable
 - actionable states are `owner_review_needed`, `ready_for_intake`, and `blocked_or_failed`
-- `no_candidates` and `no_action_needed` are no-op to avoid daily issue noise
+- `no_candidates` and `no_action_needed` are no-op when no handoff issue is open
 - this is a notification layer only and does not approve content, mutate site files, create PRs, or deploy
 
 LLM intake latest:

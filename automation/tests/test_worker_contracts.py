@@ -2027,6 +2027,55 @@ class WorkerContractTests(unittest.TestCase):
             self.assertIn("owner_review_needed", summary["issue_body"])
             self.assertIn("https://github.com/awd2/last-z-guide/actions/runs/1", summary["issue_body"])
 
+    def test_llm_owner_issue_closes_existing_issue_when_digest_resolved(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            digest_path = tmp_path / "llm-owner-digest.json"
+            markdown_path = tmp_path / "llm-owner-digest.md"
+            write_json(
+                digest_path,
+                {
+                    "state": "no_action_needed",
+                    "generated_at": "2026-05-17T00:00:00Z",
+                    "recommended_next_action": "No owner action needed; wait for new GSC/Bing/external-source signals.",
+                    "counts": {
+                        "candidate_topics": 1,
+                        "digest_needs_review": 0,
+                        "digest_ready_for_intake": 0,
+                        "digest_failed": 0,
+                        "resolved_by_owner_decision": 1,
+                    },
+                },
+            )
+            markdown_path.write_text("# Digest\n\nResolved.\n", encoding="utf-8")
+
+            with patch(
+                "automation.reports.llm_owner_issue.find_open_issue",
+                return_value={"number": 42, "html_url": "https://github.com/awd2/last-z-guide/issues/42"},
+            ), patch(
+                "automation.reports.llm_owner_issue.github_request",
+                return_value={"number": 42, "html_url": "https://github.com/awd2/last-z-guide/issues/42"},
+            ) as request:
+                summary = llm_owner_issue.build_summary(
+                    digest_path=digest_path,
+                    markdown_path=markdown_path,
+                    repository="awd2/last-z-guide",
+                    token="token",
+                    api_url="https://api.github.com",
+                    server_url="https://github.com",
+                    title="LLM Owner Digest: Action Needed",
+                    explicit_run_url="https://github.com/awd2/last-z-guide/actions/runs/1",
+                    dry_run=False,
+                )
+
+            self.assertFalse(summary["actionable"])
+            self.assertEqual(summary["action"], "closed_resolved")
+            self.assertEqual(summary["issue_number"], 42)
+            payload = request.call_args.args[4]
+            self.assertEqual(payload["state"], "closed")
+            self.assertEqual(payload["state_reason"], "completed")
+            self.assertIn("LLM Owner Digest: Resolved", payload["body"])
+
     def test_llm_run_approved_handoffs_runs_pending_decision_and_skips_current(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
