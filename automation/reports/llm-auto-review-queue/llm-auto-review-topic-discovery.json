@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_topic_discovery",
-  "generated_at": "2026-05-17T08:44:29Z",
+  "generated_at": "2026-05-17T08:46:59Z",
   "state": "topic_discovery_ready",
   "source_llm_scout_result": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json",
   "source_llm_scout_request": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
@@ -19,16 +19,16 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "This has the clearest first-party signal: strong impressions on codes.html plus multiple low-CTR gift center queries. It fits the existing cornerstone guide and can likely improve query-to-page match without creating a new page, as long as cluster boundaries stay intact. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "notes": "This is the clearest high-value opportunity because it is backed by page-level and query-level search signals and maps to an existing cornerstone page. The proposal fits the current Economy cluster and can likely improve query-to-page match without creating a new content surface. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
       "risk_level": "high",
-      "player_value": "Helps players quickly find redeem code and Gift Center login guidance from the page they are already reaching.",
-      "duplication_risk": "Medium. The topic could overlap with a dedicated Gift Center page if scope is not tightly controlled.",
+      "player_value": "Better first-screen help for players searching for redeem codes, Gift Center login, and UID flow.",
+      "duplication_risk": "Medium, because the query intent could overlap with other Economy pages if scope is not kept tight.",
       "claims_to_verify": [
-        "Whether the current codes page already covers the gift center intent adequately",
-        "Which query intent belongs on codes.html versus a separate Gift Center page",
-        "Whether any wording change can be done without expanding beyond approved cornerstone scope"
+        "The search query patterns still justify a codes-page update.",
+        "Any rewrite can be done without changing the protected canonical claims or cluster role separation.",
+        "The target page is still the best canonical home for this intent."
       ],
-      "next_step": "Send to human review for scoped update planning against codes.html, with explicit protection of canonical claims and role separation.",
+      "next_step": "Send to human review to confirm the exact scope for an existing-page update and check that the canonical claims remain protected.",
       "evidence": [
         "GSC page signal: codes.html had 33220 impressions, 586 clicks, 1.76% CTR, avg position 6.11.",
         "Low CTR query: `last z gift center` had 3075 impressions, 113 clicks, 3.67% CTR, position 6.83.",
@@ -82,7 +82,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "This has the clearest first-party signal: strong impressions on codes.html plus multiple low-CTR gift center queries. It fits the existing cornerstone guide and can likely improve query-to-page match without creating a new page, as long as cluster boundaries stay intact. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "This is the clearest high-value opportunity because it is backed by page-level and query-level search signals and maps to an existing cornerstone page. The proposal fits the current Economy cluster and can likely improve query-to-page match without creating a new content surface. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     },
     {
@@ -95,18 +95,18 @@
       "source_type": "llm_scout",
       "source_reference": "official-functap-store: https://last-z.com",
       "confidence": "high",
-      "priority": "high",
+      "priority": "medium",
       "status": "candidate",
-      "notes": "The official domain is a plausible validation source for Gift Center routing and store flow. This is worth human review because it may confirm or refine the existing Gift Center page intent, but it must not rely on the external source alone.",
+      "notes": "This is a useful verification opportunity because the official service domain may help validate Gift Center routing and store flow details. It is worth review only as cross-validation, not as a source of copy or a reason to create new content.",
       "risk_level": "medium",
-      "player_value": "Reduces confusion around Gift Center setup, UID use, and official routing.",
-      "duplication_risk": "Medium. It may duplicate an existing Gift Center or redeem flow page unless a distinct user job is confirmed.",
+      "player_value": "Clearer guidance for players on Gift Center setup and official routing.",
+      "duplication_risk": "High, because it may duplicate existing Gift Center intent unless a distinct user job is proven.",
       "claims_to_verify": [
-        "Exact official routing for Gift Center and store flow",
-        "Whether UID usage guidance is current and accurate",
-        "Whether this topic is distinct from existing redeem or login coverage"
+        "The official domain confirms current Gift Center routing.",
+        "The topic adds a distinct player job beyond existing Gift Center coverage.",
+        "No competitor wording would be copied."
       ],
-      "next_step": "Verify against canonical site memory and one additional reliable source before any content proposal is made.",
+      "next_step": "Have a human verify the external source against canonical site memory and a second reliable source before any proposal is made.",
       "evidence": [
         "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation.",
         "External source URL recorded for later manual verification."
@@ -142,9 +142,9 @@
         "source_type": "llm_scout",
         "source_reference": "official-functap-store: https://last-z.com",
         "confidence": "high",
-        "priority": "high",
+        "priority": "medium",
         "status": "candidate",
-        "notes": "The official domain is a plausible validation source for Gift Center routing and store flow. This is worth human review because it may confirm or refine the existing Gift Center page intent, but it must not rely on the external source alone."
+        "notes": "This is a useful verification opportunity because the official service domain may help validate Gift Center routing and store flow details. It is worth review only as cross-validation, not as a source of copy or a reason to create new content."
       }
     },
     {
@@ -159,16 +159,16 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "HQ and progression dependency checks are valuable and potentially high impact, but the topic is only a discovery signal right now. It merits human review because it could close a real coverage gap in progression planning if verified. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "notes": "This topic could help validate HQ requirement planning and progression dependencies, but the source is only a discovery signal. It is worth human review because progression accuracy matters and the expected page fit is plausible. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
       "risk_level": "high",
-      "player_value": "Helps players plan HQ upgrades, dependencies, and progression order more reliably.",
-      "duplication_risk": "Low to medium. It likely fits an existing HQ page unless another progression page already owns the same intent.",
+      "player_value": "More reliable HQ planning and dependency guidance for players.",
+      "duplication_risk": "Medium, because HQ intent may already be covered elsewhere in the Progression cluster.",
       "claims_to_verify": [
-        "HQ requirement and dependency details",
-        "Whether the progression coverage already exists elsewhere",
-        "Any terminology or ordering differences that would affect the page structure"
+        "HQ requirements and dependencies match current game knowledge.",
+        "The page remains the right canonical home for this progression topic.",
+        "The source does not conflict with existing cluster boundaries."
       ],
-      "next_step": "Verify the external reference against canonical memory and at least one second source before deciding scope.",
+      "next_step": "Verify the claims against canonical memory and a second reliable source before deciding whether this belongs on the HQ page.",
       "evidence": [
         "Owner-approved wiki/reference source can reveal HQ and progression planning gaps.",
         "External source URL recorded for later manual verification."
@@ -216,7 +216,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "HQ and progression dependency checks are valuable and potentially high impact, but the topic is only a discovery signal right now. It merits human review because it could close a real coverage gap in progression planning if verified. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "This topic could help validate HQ requirement planning and progression dependencies, but the source is only a discovery signal. It is worth human review because progression accuracy matters and the expected page fit is plausible. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     },
     {
@@ -231,12 +231,12 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Useful as a cross-check signal, but still dependent on a single external source and may duplicate existing research-cost coverage. Future trigger: Monitor until another reliable source or owner confirmation validates cost, branch, or naming claims. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "notes": "Useful as a verification signal, but the claim set is too dependent on a single external source and may overlap with existing Research coverage. It should not advance until validated. Future trigger: Reconsider if a second reliable source or owner confirmation verifies the research cost and branch coverage gaps. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Monitor until another reliable source or owner confirmation validates cost, branch, or naming claims.",
+      "next_step": "Reconsider if a second reliable source or owner confirmation verifies the research cost and branch coverage gaps.",
       "evidence": [
         "Owner-approved research reference source can reveal branch coverage gaps and cost/name drift.",
         "External source URL recorded for later manual verification."
@@ -284,7 +284,60 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Useful as a cross-check signal, but still dependent on a single external source and may duplicate existing research-cost coverage. Future trigger: Monitor until another reliable source or owner confirmation validates cost, branch, or naming claims. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "Useful as a verification signal, but the claim set is too dependent on a single external source and may overlap with existing Research coverage. It should not advance until validated. Future trigger: Reconsider if a second reliable source or owner confirmation verifies the research cost and branch coverage gaps. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+      }
+    },
+    {
+      "topic_id": "external-search-lastz-fandom-reference-bookstore-last-z-survival-shooter-wiki-fan-5",
+      "title": "External search opportunity: Bookstore | Last Z: Survival Shooter Wiki | Fandom",
+      "cluster": "Research",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
+      "source_type": "llm_scout",
+      "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
+      "confidence": "high",
+      "priority": "low",
+      "status": "monitor",
+      "notes": "Search result discovery only; not enough proof for a public claim, and the topic title suggests possible mismatch or duplication risk. Future trigger: Reconsider only if the external page clearly maps to a distinct player job and is validated by canonical memory plus another source.",
+      "risk_level": "",
+      "player_value": "",
+      "duplication_risk": "",
+      "claims_to_verify": [],
+      "next_step": "Reconsider only if the external page clearly maps to a distinct player job and is validated by canonical memory plus another source.",
+      "evidence": [
+        "Bonus building tied to faster research; useful for cross-checking research-speed mechanics."
+      ],
+      "site_fit": {
+        "expected_internal_route": [
+          "research.html"
+        ],
+        "external_source_id": "lastz-fandom-reference"
+      },
+      "constraints": [
+        "External search result is discovery evidence only.",
+        "Do not copy source wording.",
+        "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
+      ],
+      "reject_if": [
+        "The result is off-topic or duplicates an existing page job.",
+        "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
+      ],
+      "prior_review": null,
+      "human_approval_required": false,
+      "backlog_row_preview": {
+        "topic_id": "external-search-lastz-fandom-reference-bookstore-last-z-survival-shooter-wiki-fan-5",
+        "title": "External search opportunity: Bookstore | Last Z: Survival Shooter Wiki | Fandom",
+        "cluster": "Research",
+        "recommended_action": "monitor",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
+        "source_type": "llm_scout",
+        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
+        "confidence": "high",
+        "priority": "low",
+        "status": "monitor",
+        "notes": "Search result discovery only; not enough proof for a public claim, and the topic title suggests possible mismatch or duplication risk. Future trigger: Reconsider only if the external page clearly maps to a distinct player job and is validated by canonical memory plus another source."
       }
     },
     {
@@ -299,14 +352,14 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "External search result only; too thin and too tied to search discovery to advance now. It may also blur events and hero/research roles. Future trigger: Revisit only if canonical memory and a second source confirm a distinct event-related player job.",
+      "notes": "Discovery-only event topic with high duplication and verification risk. It must not advance from monitor status based on search snippets alone. Future trigger: Reconsider if the event structure is confirmed by owner-approved memory and a second source. ",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Revisit only if canonical memory and a second source confirm a distinct event-related player job.",
+      "next_step": "Reconsider if the event structure is confirmed by owner-approved memory and a second source.",
       "evidence": [
-        "Daily event cycle includes a research-focused theme and a hero-focused theme; useful for linking research and hero upgrade mechanics to event scoring."
+        "Daily rotating event with an Age of Science theme for research speed-ups and a Hero Initiative theme for hero upgrades."
       ],
       "site_fit": {
         "expected_internal_route": [
@@ -337,113 +390,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "External search result only; too thin and too tied to search discovery to advance now. It may also blur events and hero/research roles. Future trigger: Revisit only if canonical memory and a second source confirm a distinct event-related player job."
-      }
-    },
-    {
-      "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
-      "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
-      "cluster": "Research",
-      "recommended_action": "monitor",
-      "archetype_suggestion": "cornerstone-guide",
-      "target_page_or_slug": "tech.html",
-      "source_type": "llm_scout",
-      "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-      "confidence": "high",
-      "priority": "low",
-      "status": "monitor",
-      "notes": "Search discovery only, with high duplication risk against existing research tech coverage. Future trigger: Reconsider if the Laboratory page is confirmed to own a unique research mechanic not covered elsewhere.",
-      "risk_level": "",
-      "player_value": "",
-      "duplication_risk": "",
-      "claims_to_verify": [],
-      "next_step": "Reconsider if the Laboratory page is confirmed to own a unique research mechanic not covered elsewhere.",
-      "evidence": [
-        "Core building for technology research; good cross-check for research-related event tasks."
-      ],
-      "site_fit": {
-        "expected_internal_route": [
-          "tech.html"
-        ],
-        "external_source_id": "lastz-fandom-reference"
-      },
-      "constraints": [
-        "External search result is discovery evidence only.",
-        "Do not copy source wording.",
-        "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
-      ],
-      "reject_if": [
-        "The result is off-topic or duplicates an existing page job.",
-        "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
-      ],
-      "prior_review": null,
-      "human_approval_required": false,
-      "backlog_row_preview": {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
-        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Research",
-        "recommended_action": "monitor",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "tech.html",
-        "source_type": "llm_scout",
-        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-        "confidence": "high",
-        "priority": "low",
-        "status": "monitor",
-        "notes": "Search discovery only, with high duplication risk against existing research tech coverage. Future trigger: Reconsider if the Laboratory page is confirmed to own a unique research mechanic not covered elsewhere."
-      }
-    },
-    {
-      "topic_id": "external-search-lastz-fandom-reference-technologies-last-z-survival-shooter-wiki--6",
-      "title": "External search opportunity: Technologies | Last Z: Survival Shooter Wiki | Fandom",
-      "cluster": "Research",
-      "recommended_action": "monitor",
-      "archetype_suggestion": "atlas-page",
-      "target_page_or_slug": "research-costs.html",
-      "source_type": "llm_scout",
-      "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-      "confidence": "high",
-      "priority": "low",
-      "status": "monitor",
-      "notes": "Search discovery only and likely duplicates research-costs.html intent. Future trigger: Reopen if a verified gap appears in tech-tree coverage or branch naming changes.",
-      "risk_level": "",
-      "player_value": "",
-      "duplication_risk": "",
-      "claims_to_verify": [],
-      "next_step": "Reopen if a verified gap appears in tech-tree coverage or branch naming changes.",
-      "evidence": [
-        "Main tech tree page showing research costs and research-speed techs; useful for identifying research mechanics touched by events."
-      ],
-      "site_fit": {
-        "expected_internal_route": [
-          "research-costs.html"
-        ],
-        "external_source_id": "lastz-fandom-reference"
-      },
-      "constraints": [
-        "External search result is discovery evidence only.",
-        "Do not copy source wording.",
-        "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
-      ],
-      "reject_if": [
-        "The result is off-topic or duplicates an existing page job.",
-        "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
-      ],
-      "prior_review": null,
-      "human_approval_required": false,
-      "backlog_row_preview": {
-        "topic_id": "external-search-lastz-fandom-reference-technologies-last-z-survival-shooter-wiki--6",
-        "title": "External search opportunity: Technologies | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Research",
-        "recommended_action": "monitor",
-        "archetype_suggestion": "atlas-page",
-        "target_page_or_slug": "research-costs.html",
-        "source_type": "llm_scout",
-        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-        "confidence": "high",
-        "priority": "low",
-        "status": "monitor",
-        "notes": "Search discovery only and likely duplicates research-costs.html intent. Future trigger: Reopen if a verified gap appears in tech-tree coverage or branch naming changes."
+        "notes": "Discovery-only event topic with high duplication and verification risk. It must not advance from monitor status based on search snippets alone. Future trigger: Reconsider if the event structure is confirmed by owner-approved memory and a second source. "
       }
     },
     {
@@ -458,14 +405,14 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Hero hub discovery is not enough by itself, and the topic risks collapsing into existing hero hub or roster coverage. Future trigger: Monitor for a verified roster coverage gap or owner-confirmed need for a consolidated hero hub update.",
+      "notes": "Hero index content is broad and likely overlaps existing Heroes coverage. The external search result is not enough to justify a new or expanded proposal without verification. Future trigger: Reconsider if there is a clearly distinct hero job, such as roster discovery or stat comparison, that is missing from current coverage.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Monitor for a verified roster coverage gap or owner-confirmed need for a consolidated hero hub update.",
+      "next_step": "Reconsider if there is a clearly distinct hero job, such as roster discovery or stat comparison, that is missing from current coverage.",
       "evidence": [
-        "Hero hub with tier list, stats, factions, and hero equipment sections; useful for hero roster discovery and cross-checking character pages."
+        "Hero index and equipment page with character roster, faction filters, levels, and gear stats; good for hero discovery and cross-checking hero-related pages."
       ],
       "site_fit": {
         "expected_internal_route": [
@@ -496,7 +443,60 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Hero hub discovery is not enough by itself, and the topic risks collapsing into existing hero hub or roster coverage. Future trigger: Monitor for a verified roster coverage gap or owner-confirmed need for a consolidated hero hub update."
+        "notes": "Hero index content is broad and likely overlaps existing Heroes coverage. The external search result is not enough to justify a new or expanded proposal without verification. Future trigger: Reconsider if there is a clearly distinct hero job, such as roster discovery or stat comparison, that is missing from current coverage."
+      }
+    },
+    {
+      "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
+      "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
+      "cluster": "Research",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
+      "source_type": "llm_scout",
+      "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
+      "confidence": "high",
+      "priority": "low",
+      "status": "monitor",
+      "notes": "Research table and badge cost content is discovery-only and may duplicate current Research pages. The claim set needs stronger validation before any workflow advance. Future trigger: Reconsider if verified costs or table gaps are confirmed by canonical memory and a second source.",
+      "risk_level": "",
+      "player_value": "",
+      "duplication_risk": "",
+      "claims_to_verify": [],
+      "next_step": "Reconsider if verified costs or table gaps are confirmed by canonical memory and a second source.",
+      "evidence": [
+        "Research table page with category navigation and badge costs by level; useful for locating research topics and checking cost structures."
+      ],
+      "site_fit": {
+        "expected_internal_route": [
+          "research.html"
+        ],
+        "external_source_id": "lastzwiki-reference"
+      },
+      "constraints": [
+        "External search result is discovery evidence only.",
+        "Do not copy source wording.",
+        "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
+      ],
+      "reject_if": [
+        "The result is off-topic or duplicates an existing page job.",
+        "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
+      ],
+      "prior_review": null,
+      "human_approval_required": false,
+      "backlog_row_preview": {
+        "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
+        "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
+        "cluster": "Research",
+        "recommended_action": "monitor",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
+        "source_type": "llm_scout",
+        "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
+        "confidence": "high",
+        "priority": "low",
+        "status": "monitor",
+        "notes": "Research table and badge cost content is discovery-only and may duplicate current Research pages. The claim set needs stronger validation before any workflow advance. Future trigger: Reconsider if verified costs or table gaps are confirmed by canonical memory and a second source."
       }
     }
   ],
