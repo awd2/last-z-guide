@@ -1,9 +1,9 @@
-# LLM Topic Decisions - 2026-05-16T17:41:13Z
+# LLM Topic Decisions - 2026-05-17T08:31:41Z
 
 ## Overview
 
-- Decisions: 6
-- Counts by state: `{"monitor": 6}`
+- Decisions: 7
+- Counts by state: `{"monitor": 7}`
 - Topics currently allowed for worker chain: 0
 - Topics currently allowed for content edit: 0
 - Safety: no content, backlog, manifest, PR, or production files were modified.
@@ -24,6 +24,27 @@
 Decision note:
 
 Closed locally through run 2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake. Keep this topic out of approved handoffs unless materially new GSC/Bing/query evidence appears. This does not approve public copy or any new content changes.
+
+Next actions:
+
+- Keep this topic out of content intake for now.
+- Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.
+- Do not create public content edits from this topic decision.
+
+### external-gift-center-official-flow-validation
+
+- Decision: `monitor`
+- Target: `gift-center-uid.html`
+- Cluster: `Economy`
+- Priority: `high`
+- Risk: `medium`
+- Allows worker chain: `false`
+- Allows content edit: `false`
+- Artifact: `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.json`
+
+Decision note:
+
+Resolved by approved micro meta cleanup in commit 55af72c; keep monitoring official Gift Center route, no further intake for this queue item.
 
 Next actions:
 

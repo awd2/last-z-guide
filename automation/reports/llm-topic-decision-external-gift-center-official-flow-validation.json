@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "report_type": "llm_topic_decision",
+  "generated_at": "2026-05-17T08:31:29Z",
+  "state": "decision_recorded",
+  "topic_id": "external-gift-center-official-flow-validation",
+  "decision_state": "monitor",
+  "decided_by": "Oleg",
+  "decision_note": "Resolved by approved micro meta cleanup in commit 55af72c; keep monitoring official Gift Center route, no further intake for this queue item.",
+  "source_discovery": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
+  "topic_snapshot": {
+    "topic_id": "external-gift-center-official-flow-validation",
+    "title": "External source opportunity: official Gift Center and store flow validation",
+    "cluster": "Economy",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "support-guide",
+    "target_page_or_slug": "gift-center-uid.html",
+    "source_type": "llm_scout",
+    "source_reference": "official-functap-store: https://last-z.com",
+    "confidence": "high",
+    "priority": "high",
+    "status": "candidate",
+    "notes": "This topic is worth review because official routing and Gift Center flow accuracy are important to player trust, but the proposal is discovery only and must be verified against additional sources or owner confirmation. It may justify an existing-page refresh if the current page leaves routing unclear.",
+    "risk_level": "medium",
+    "player_value": "Improves confidence that players are using the official Gift Center path and correct UID-related flow.",
+    "duplication_risk": "Medium duplication risk because it may overlap with existing gift center and redeem guidance unless a distinct validation gap is found.",
+    "claims_to_verify": [
+      "Official Gift Center routing and store flow details.",
+      "Whether UID usage is described accurately and is still current.",
+      "Whether this topic adds a distinct player job beyond existing gift center guidance."
+    ],
+    "next_step": "Verify against canonical site memory and at least one other reliable source before deciding whether the page needs a targeted update.",
+    "evidence": [
+      "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation.",
+      "External source URL recorded for later manual verification."
+    ],
+    "site_fit": {
+      "primary_user_job": "Confirm that Gift Center setup, UID usage, and official service routing stay accurate.",
+      "cluster_owner": "Economy",
+      "expected_internal_route": [
+        "index.html",
+        "gift-center-uid.html"
+      ],
+      "archetype_reason": "External source indicates a possible player job to validate."
+    },
+    "constraints": [
+      "Do not copy competitor wording.",
+      "Use this as topic discovery and cross-validation context only.",
+      "Verify public claims against canonical site memory and at least one additional reliable source or owner confirmation."
+    ],
+    "reject_if": [
+      "The topic duplicates an existing page intent without adding a distinct player job.",
+      "The external claim cannot be verified beyond this source.",
+      "The proposal would blur existing cluster roles."
+    ],
+    "prior_review": null,
+    "human_approval_required": true,
+    "backlog_row_preview": {
+      "topic_id": "external-gift-center-official-flow-validation",
+      "title": "External source opportunity: official Gift Center and store flow validation",
+      "cluster": "Economy",
+      "recommended_action": "update_existing",
+      "archetype_suggestion": "support-guide",
+      "target_page_or_slug": "gift-center-uid.html",
+      "source_type": "llm_scout",
+      "source_reference": "official-functap-store: https://last-z.com",
+      "confidence": "high",
+      "priority": "high",
+      "status": "candidate",
+      "notes": "This topic is worth review because official routing and Gift Center flow accuracy are important to player trust, but the proposal is discovery only and must be verified against additional sources or owner confirmation. It may justify an existing-page refresh if the current page leaves routing unclear."
+    }
+  },
+  "allows_worker_chain": false,
+  "allows_content_edit": false,
+  "next_actions": [
+    "Keep this topic out of content intake for now.",
+    "Reconsider only after materially new GSC/Bing/query evidence or an explicit owner request.",
+    "Do not create public content edits from this topic decision."
+  ],
+  "errors": [],
+  "output_path": "automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.json",
+  "markdown_path": "automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md",
+  "safety": "No content, backlog, manifest, PR, or production files were modified. This decision only controls whether a discovered topic may proceed to the next no-write worker stage."
+}

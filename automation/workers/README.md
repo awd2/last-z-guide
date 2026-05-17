@@ -221,7 +221,10 @@ content edits or mutate backlog, manifests, PRs, or production state.
 `llm-auto-review-latest` is a read-only owner decision view for the latest
 consolidated auto-review queue. It lists queued topics, skipped-existing chain
 summaries, player-value checks, blocking issues, owner questions, and intake
-commands. It does not call OpenAI, approve public copy, or mutate backlog,
+commands. It also reads recorded `llm-topic-decision-*` artifacts and marks
+topics with durable `monitor`, `rejected`, or `approved_for_chain` decisions as
+resolved by owner decision, so reviewed topics stop appearing as fresh owner
+decision work. It does not call OpenAI, approve public copy, or mutate backlog,
 manifests, PRs, or production state.
 
 `llm-run-approved-handoffs` is the scheduled owner-handoff runner. It reads the

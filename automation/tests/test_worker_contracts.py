@@ -1795,6 +1795,106 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(view["items"][0]["topic_id"], "fixture-topic")
             self.assertEqual(view["items"][0]["chain_json"], str(chain_path))
 
+    def test_llm_auto_review_latest_respects_recorded_monitor_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            editor_result = tmp_path / "editor-result.json"
+            reviewer_result = tmp_path / "reviewer-result.json"
+            chain_path = tmp_path / "llm-worker-chain-fixture-topic.json"
+            queue_path = tmp_path / "llm-auto-review-queue.json"
+            decision_path = tmp_path / "llm-topic-decision-fixture-topic.json"
+            write_json(
+                editor_result,
+                {
+                    "response_json": {
+                        "brief_summary": "Existing topic has already been owner-reviewed.",
+                        "primary_user_job": "Validate a narrow support task.",
+                        "first_screen_plan": "Keep the page unchanged.",
+                        "exact_replacements": [],
+                    }
+                },
+            )
+            write_json(
+                reviewer_result,
+                {
+                    "response_json": {
+                        "verdict": "needs_human_review",
+                        "approved_next_stage": "brief",
+                        "owner_approval_required": True,
+                        "blocking_issues": [
+                            {
+                                "severity": "medium",
+                                "issue": "Owner must decide whether the topic is worth intake.",
+                                "required_fix": "Record a topic decision.",
+                            }
+                        ],
+                        "warnings": [],
+                        "owner_questions": ["Should this move forward?"],
+                        "required_checks": [],
+                    }
+                },
+            )
+            write_json(
+                chain_path,
+                {
+                    "state": "completed",
+                    "source_topic_id": "fixture-topic",
+                    "review_verdict": "needs_human_review",
+                    "approved_next_stage": "brief",
+                    "owner_approval_required": True,
+                    "stages": {
+                        "llm_editor": {"result_path": str(editor_result)},
+                        "llm_reviewer": {"result_path": str(reviewer_result)},
+                    },
+                },
+            )
+            write_json(
+                queue_path,
+                {
+                    "state": "queue_ready",
+                    "provider": "fixture",
+                    "candidate_topic_count": 1,
+                    "queued_topic_count": 1,
+                    "completed_item_count": 1,
+                    "failed_item_count": 0,
+                    "skipped_existing_count": 0,
+                    "queue_items": [
+                        {
+                            "topic_id": "fixture-topic",
+                            "target_page_or_slug": "gift-center-uid.html",
+                            "cluster": "Economy",
+                            "priority": "high",
+                            "risk_level": "medium",
+                            "score": 91,
+                            "status": "completed",
+                            "owner_approval_required": True,
+                            "chain_json": str(chain_path),
+                        }
+                    ],
+                },
+            )
+            write_json(
+                decision_path,
+                {
+                    "report_type": "llm_topic_decision",
+                    "topic_id": "fixture-topic",
+                    "decision_state": "monitor",
+                    "decision_note": "Resolved by owner review; keep monitoring only.",
+                    "allows_worker_chain": False,
+                    "allows_content_edit": False,
+                    "markdown_path": str(tmp_path / "llm-topic-decision-fixture-topic.md"),
+                },
+            )
+
+            view = llm_auto_review_latest.build_view(queue_path)
+            markdown = llm_auto_review_latest.render_markdown(view)
+
+            self.assertEqual(view["needs_owner_decision_count"], 0)
+            self.assertEqual(view["resolved_by_owner_decision_count"], 1)
+            self.assertTrue(view["items"][0]["owner_decision_resolved"])
+            self.assertEqual(view["items"][0]["recommended_owner_action"], "decision_recorded_monitor")
+            self.assertIn("Resolved by owner review", markdown)
+
     def test_llm_run_approved_handoffs_runs_pending_decision_and_skips_current(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

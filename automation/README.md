@@ -461,7 +461,7 @@ Lifecycle shorthand:
 - `llm-reviewer` -> run a no-write LLM review gate from one LLM Editor planning brief
 - `llm-worker-chain` -> run the no-write live LLM Scout -> Editor -> Reviewer sequence and write one owner-review summary
 - `llm-review-latest` -> read the latest local LLM worker chain summary without calling an LLM provider
-- `llm-auto-review-latest` -> read the latest consolidated auto-review queue as one owner decision view
+- `llm-auto-review-latest` -> read the latest consolidated auto-review queue as one owner decision view, including recorded topic decisions
 - `llm-intake-latest` -> bridge the latest LLM worker chain summary into a no-write, owner-gated intake artifact
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
@@ -681,6 +681,7 @@ LLM auto-review owner queue:
 - `python3 automation/pipeline.py llm-auto-review-latest --json` -> print the same view as JSON
 - `--queue <path>` can read a specific `llm-auto-review-queue.json`
 - output includes queued topics, skipped-existing chain summaries, player-value checks, blocking issues, owner questions, and intake commands
+- recorded `llm-topic-decision-*` artifacts mark topics as resolved by owner decision and remove them from the fresh owner-decision count
 - this is read-only and does not call OpenAI, approve public copy, or mutate files
 
 LLM intake latest:

@@ -57,6 +57,35 @@ def load_chain(path_value: str) -> dict[str, Any]:
     return load_json(path)
 
 
+def decision_reports_dir(queue_path: Path) -> Path:
+    if queue_path.parent.name == "llm-auto-review-queue":
+        return queue_path.parent.parent
+    return queue_path.parent
+
+
+def load_topic_decisions(queue_path: Path) -> dict[str, dict[str, Any]]:
+    reports_dir = decision_reports_dir(queue_path)
+    decisions: dict[str, dict[str, Any]] = {}
+    for path in sorted(reports_dir.glob("llm-topic-decision-*.json")):
+        if path.name == "llm-topic-decisions.json":
+            continue
+        payload = load_json(path)
+        if payload.get("report_type") != "llm_topic_decision":
+            continue
+        topic_id = str(payload.get("topic_id") or "")
+        if not topic_id:
+            continue
+        decisions[topic_id] = {
+            "decision_state": payload.get("decision_state", ""),
+            "decision_note": payload.get("decision_note", ""),
+            "artifact_path": rel(path),
+            "markdown_path": payload.get("markdown_path", ""),
+            "allows_worker_chain": bool(payload.get("allows_worker_chain", False)),
+            "allows_content_edit": bool(payload.get("allows_content_edit", False)),
+        }
+    return decisions
+
+
 def blocking_issue_lines(reviewer: dict[str, Any]) -> list[str]:
     lines: list[str] = []
     for issue in reviewer.get("blocking_issues", []):
@@ -84,6 +113,19 @@ def recommended_owner_action(queue_item: dict[str, Any], chain: dict[str, Any], 
     return "manual_owner_review"
 
 
+def decision_owner_action(decision: dict[str, Any] | None, fallback_action: str) -> str:
+    if not decision:
+        return fallback_action
+    state = decision.get("decision_state")
+    if state == "monitor":
+        return "decision_recorded_monitor"
+    if state == "rejected":
+        return "decision_recorded_rejected"
+    if state == "approved_for_chain":
+        return "decision_recorded_approved_for_chain"
+    return fallback_action
+
+
 def intake_command(chain_path: str, topic_id: str) -> str:
     return (
         "python3 automation/pipeline.py llm-intake-latest "
@@ -94,7 +136,7 @@ def intake_command(chain_path: str, topic_id: str) -> str:
     )
 
 
-def compact_queue_item(queue_item: dict[str, Any]) -> dict[str, Any]:
+def compact_queue_item(queue_item: dict[str, Any], decisions: dict[str, dict[str, Any]]) -> dict[str, Any]:
     chain_path = str(queue_item.get("chain_json") or queue_item.get("existing_chain") or "")
     chain = load_chain(chain_path)
     editor = load_stage_response(chain, "llm_editor")
@@ -116,6 +158,10 @@ def compact_queue_item(queue_item: dict[str, Any]) -> dict[str, Any]:
     if chain_path:
         markdown_path = resolve_path(chain_path).with_suffix(".md")
         inferred_chain_markdown = rel(markdown_path) if markdown_path.exists() else ""
+    decision = decisions.get(topic_id)
+    fallback_action = recommended_owner_action(queue_item, chain, reviewer)
+    owner_action = decision_owner_action(decision, fallback_action)
+    owner_decision_resolved = bool(decision and decision.get("decision_state") in {"monitor", "rejected", "approved_for_chain"})
     return {
         "topic_id": topic_id,
         "target_page_or_slug": queue_item.get("target_page_or_slug") or chain.get("target_page_or_slug", ""),
@@ -127,7 +173,12 @@ def compact_queue_item(queue_item: dict[str, Any]) -> dict[str, Any]:
         "review_verdict": chain.get("review_verdict") or queue_item.get("review_verdict"),
         "approved_next_stage": chain.get("approved_next_stage") or queue_item.get("approved_next_stage"),
         "owner_approval_required": bool(chain.get("owner_approval_required", queue_item.get("owner_approval_required", False))),
-        "recommended_owner_action": recommended_owner_action(queue_item, chain, reviewer),
+        "recommended_owner_action": owner_action,
+        "owner_decision_resolved": owner_decision_resolved,
+        "owner_decision_state": decision.get("decision_state", "") if decision else "",
+        "owner_decision_note": decision.get("decision_note", "") if decision else "",
+        "owner_decision_artifact": decision.get("artifact_path", "") if decision else "",
+        "owner_decision_markdown": decision.get("markdown_path", "") if decision else "",
         "player_value_check": "Approve only if this solves a real player job and the mechanics/source claims match owner game knowledge.",
         "brief_summary": editor.get("brief_summary", ""),
         "primary_user_job": editor.get("primary_user_job", ""),
@@ -164,12 +215,15 @@ def build_view(queue_path: Path) -> dict[str, Any]:
         for item in skipped_topics
         if isinstance(item, dict) and item.get("status") == "skipped_existing_chain" and item.get("existing_chain")
     )
-    items = [compact_queue_item(item) for item in review_items if isinstance(item, dict)]
+    decisions = load_topic_decisions(queue_path)
+    items = [compact_queue_item(item, decisions) for item in review_items if isinstance(item, dict)]
     needs_owner = [
         item
         for item in items
-        if item.get("owner_approval_required") or item.get("recommended_owner_action") != "manual_owner_review"
+        if not item.get("owner_decision_resolved")
+        and (item.get("owner_approval_required") or item.get("recommended_owner_action") != "manual_owner_review")
     ]
+    resolved_by_decision = [item for item in items if item.get("owner_decision_resolved")]
     return {
         "schema_version": 1,
         "report_type": "llm_auto_review_latest_owner_view",
@@ -183,6 +237,7 @@ def build_view(queue_path: Path) -> dict[str, Any]:
         "failed_item_count": queue.get("failed_item_count", 0),
         "skipped_existing_count": queue.get("skipped_existing_count", 0),
         "needs_owner_decision_count": len(needs_owner),
+        "resolved_by_owner_decision_count": len(resolved_by_decision),
         "items": items,
         "owner_decision_policy": [
             "Approve for intake only after owner validates player value, source fit, and non-misleading claims.",
@@ -206,6 +261,7 @@ def render_markdown(view: dict[str, Any]) -> str:
         f"- Completed items: `{view.get('completed_item_count', 0)}`",
         f"- Failed items: `{view.get('failed_item_count', 0)}`",
         f"- Needs owner decision: `{view.get('needs_owner_decision_count', 0)}`",
+        f"- Resolved by owner decision: `{view.get('resolved_by_owner_decision_count', 0)}`",
         f"- Queue artifact: `{view.get('queue_path', '')}`",
         "- Safety: read-only; no content, backlog, manifest, PR, or production files were modified.",
         "",
@@ -233,6 +289,8 @@ def render_markdown(view: dict[str, Any]) -> str:
                 f"- Verdict: `{item.get('review_verdict')}`",
                 f"- Approved next stage: `{item.get('approved_next_stage')}`",
                 f"- Recommended owner action: `{item.get('recommended_owner_action')}`",
+                f"- Owner decision: `{item.get('owner_decision_state', '')}`",
+                f"- Owner decision artifact: `{item.get('owner_decision_markdown', '')}`",
                 f"- Chain: `{item.get('chain_markdown', '')}`",
                 "",
                 "Player value check:",
@@ -258,6 +316,10 @@ def render_markdown(view: dict[str, Any]) -> str:
                 "Warnings:",
                 "",
                 md_list(item.get("warnings", [])),
+                "",
+                "Owner decision note:",
+                "",
+                item.get("owner_decision_note", ""),
                 "",
                 "Approve for intake command:",
                 "",
