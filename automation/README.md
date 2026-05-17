@@ -657,7 +657,8 @@ LLM auto review queue workflow:
 - optional manual inputs: `model`, `max_chains`, `include_existing`
 - output is an uploaded workflow artifact named `llm-auto-review-queue-<run_number>`
 - before queueing, the workflow runs `external-scout`, builds `external-evidence-refresh`, collects explicit URL evidence with `external-evidence-collect --provider fetch`, collects approved source-query evidence with `external-search-collect --provider openai`, and passes both External Scout and External Search proposal artifacts through `--external-proposals`
-- it may commit only `automation/reports/llm-auto-review-queue/` report artifacts
+- after queueing, the workflow runs `llm-owner-digest` and includes `automation/reports/llm-owner-digest.md` / `.json` in the uploaded and committed report artifacts
+- it may commit only `automation/reports/llm-auto-review-queue/`, `automation/reports/llm-owner-digest.json`, and `automation/reports/llm-owner-digest.md` report artifacts
 - this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 
 LLM worker chain workflow:

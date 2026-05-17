@@ -268,8 +268,10 @@ In GitHub Actions, `.github/workflows/llm-auto-review-queue.yml` runs
 collects explicit URL evidence with `external-evidence-collect --provider fetch`,
 collects source-query evidence with `external-search-collect --provider openai`,
 and passes the generated External Scout and External Search artifacts into
-`llm-auto-review-queue --external-proposals`. The workflow may commit only
-queue report artifacts and must not edit public content or production state.
+`llm-auto-review-queue --external-proposals`. It then runs `llm-owner-digest`
+over the queue so the daily workflow produces one compact owner action summary.
+The workflow may commit only queue and owner-digest report artifacts and must
+not edit public content or production state.
 
 `llm-editor` is the second live LLM worker wrapper. It reads one selected LLM Scout opportunity, combines it with deterministic Editor context, sends a JSON-only planning request through `llm_adapter`, and writes:
 

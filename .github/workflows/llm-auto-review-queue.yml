@@ -101,6 +101,8 @@ jobs:
             cmd+=(--include-existing)
           fi
           "${cmd[@]}" | tee automation/reports/llm-auto-review-queue/run-summary.json
+          python3 automation/pipeline.py llm-owner-digest --json \
+            | tee automation/reports/llm-auto-review-queue/owner-digest-run-summary.json
 
       - name: Write job summary
         if: always()
@@ -114,6 +116,7 @@ jobs:
             echo "- External evidence queue: \`automation/reports/llm-auto-review-queue/external-evidence-refresh.json\`"
             echo "- External evidence collection: \`automation/reports/llm-auto-review-queue/external-evidence-collect.json\`"
             echo "- External search collection: \`automation/reports/llm-auto-review-queue/external-search-collect.json\`"
+            echo "- Owner digest: \`automation/reports/llm-owner-digest.md\`"
             echo "- Content/backlog/manifests/PRs modified: \`false\`"
             echo
           } >> "$GITHUB_STEP_SUMMARY"
@@ -133,6 +136,11 @@ jobs:
           print(f"- Failed items: `{data.get('failed_item_count')}`")
           print(f"- Skipped existing: `{data.get('skipped_existing_count')}`")
           print(f"- Queue markdown: `{data.get('markdown_path')}`")
+          digest_path = Path("automation/reports/llm-owner-digest.json")
+          if digest_path.exists():
+              digest = json.loads(digest_path.read_text())
+              print(f"- Owner digest state: `{digest.get('state')}`")
+              print(f"- Owner digest action: {digest.get('recommended_next_action')}")
           PY
 
       - name: Upload LLM auto review queue artifacts
@@ -140,16 +148,19 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: llm-auto-review-queue-${{ github.run_number }}
-          path: automation/reports/llm-auto-review-queue/
+          path: |
+            automation/reports/llm-auto-review-queue/
+            automation/reports/llm-owner-digest.json
+            automation/reports/llm-owner-digest.md
           if-no-files-found: error
 
       - name: Commit queue artifacts (if changed)
         if: success()
         run: |
-          if [[ -n "$(git status --porcelain automation/reports/llm-auto-review-queue)" ]]; then
+          if [[ -n "$(git status --porcelain automation/reports/llm-auto-review-queue automation/reports/llm-owner-digest.json automation/reports/llm-owner-digest.md)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add automation/reports/llm-auto-review-queue
+            git add automation/reports/llm-auto-review-queue automation/reports/llm-owner-digest.json automation/reports/llm-owner-digest.md
             git commit -m "chore(llm): auto review queue"
             for i in 1 2 3; do
               git pull --rebase origin main
