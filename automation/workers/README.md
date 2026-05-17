@@ -115,6 +115,7 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
+python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
@@ -226,6 +227,13 @@ topics with durable `monitor`, `rejected`, or `approved_for_chain` decisions as
 resolved by owner decision, so reviewed topics stop appearing as fresh owner
 decision work. It does not call OpenAI, approve public copy, or mutate backlog,
 manifests, PRs, or production state.
+
+`llm-owner-digest` is the shortest owner-facing daily view over the latest
+auto-review queue. It writes `automation/reports/llm-owner-digest.json` and
+`.md`, groups topics into needs-review, ready-for-intake, blocked/failed, and
+resolved buckets, and gives one recommended next action. It does not call
+OpenAI, approve public copy, or mutate backlog, manifests, PRs, or production
+state.
 
 `llm-run-approved-handoffs` is the scheduled owner-handoff runner. It reads the
 same `approved_for_chain` decision artifacts and runs only pending handoffs

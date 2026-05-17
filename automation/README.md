@@ -328,6 +328,7 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
+python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities
@@ -462,6 +463,7 @@ Lifecycle shorthand:
 - `llm-worker-chain` -> run the no-write live LLM Scout -> Editor -> Reviewer sequence and write one owner-review summary
 - `llm-review-latest` -> read the latest local LLM worker chain summary without calling an LLM provider
 - `llm-auto-review-latest` -> read the latest consolidated auto-review queue as one owner decision view, including recorded topic decisions
+- `llm-owner-digest` -> write the shortest owner-facing daily digest from the latest auto-review queue
 - `llm-intake-latest` -> bridge the latest LLM worker chain summary into a no-write, owner-gated intake artifact
 - `content-seo-opportunities` -> build a no-write SEO/LLM opportunity report from GSC signals and page structure
 - `bing-report` -> fetch Bing Webmaster weekly performance artifacts for humans and future agents
@@ -685,6 +687,14 @@ LLM auto-review owner queue:
 - output includes queued topics, skipped-existing chain summaries, resolved-by-decision topics, player-value checks, blocking issues, owner questions, and intake commands
 - recorded `llm-topic-decision-*` artifacts mark topics as resolved by owner decision and remove them from the fresh owner-decision count
 - this is read-only and does not call OpenAI, approve public copy, or mutate files
+
+LLM owner digest:
+
+- `python3 automation/pipeline.py llm-owner-digest` -> write a compact owner digest to `automation/reports/llm-owner-digest.md` and `.json`
+- `python3 automation/pipeline.py llm-owner-digest --json` -> write the artifacts and print a machine-readable summary
+- `python3 automation/pipeline.py llm-owner-digest --no-write` -> print the digest without writing artifacts
+- output groups topics into needs-review, ready-for-intake, blocked/failed, and resolved buckets
+- this is read-only and does not call OpenAI, approve public copy, or mutate content/backlog/manifests
 
 LLM intake latest:
 

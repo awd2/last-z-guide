@@ -11,7 +11,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from automation.io import load_json, load_run_manifest, write_json, write_run_manifest
-from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_review_latest, llm_topic_decisions
+from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_owner_digest, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, proposal_renderer
 from automation.source_resolver import SourceResolution
 from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
@@ -1895,6 +1895,65 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(view["items"][0]["recommended_owner_action"], "decision_recorded_monitor")
             self.assertEqual(view["items"][0]["approve_for_intake_command"], "")
             self.assertIn("Resolved by owner review", markdown)
+
+    def test_llm_owner_digest_summarizes_resolved_only_queue(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            queue_path = tmp_path / "llm-auto-review-queue.json"
+            decision_path = tmp_path / "llm-topic-decision-fixture-topic.json"
+            write_json(
+                queue_path,
+                {
+                    "state": "current",
+                    "provider": "fixture",
+                    "candidate_topic_count": 1,
+                    "queued_topic_count": 0,
+                    "completed_item_count": 0,
+                    "failed_item_count": 0,
+                    "skipped_existing_count": 0,
+                    "queue_items": [],
+                    "skipped_topics": [],
+                    "resolved_by_decision": [
+                        {
+                            "topic_id": "fixture-topic",
+                            "target_page_or_slug": "gift-center-uid.html",
+                            "cluster": "Economy",
+                            "priority": "high",
+                            "risk_level": "medium",
+                            "score": 91,
+                            "status": "resolved_by_decision_monitor",
+                        }
+                    ],
+                },
+            )
+            write_json(
+                decision_path,
+                {
+                    "report_type": "llm_topic_decision",
+                    "topic_id": "fixture-topic",
+                    "decision_state": "monitor",
+                    "decision_note": "Already handled by owner.",
+                    "allows_worker_chain": False,
+                    "allows_content_edit": False,
+                    "markdown_path": str(tmp_path / "llm-topic-decision-fixture-topic.md"),
+                },
+            )
+
+            digest = llm_owner_digest.build_digest(queue_path)
+            markdown = llm_owner_digest.render_markdown(digest)
+            json_path, markdown_path = llm_owner_digest.write_digest(
+                digest,
+                tmp_path / "llm-owner-digest.json",
+                tmp_path / "llm-owner-digest.md",
+            )
+
+            self.assertEqual(digest["state"], "no_action_needed")
+            self.assertEqual(digest["counts"]["digest_needs_review"], 0)
+            self.assertEqual(digest["counts"]["resolved_by_owner_decision"], 1)
+            self.assertEqual(digest["recommended_next_action"], "No owner action needed; wait for new GSC/Bing/external-source signals.")
+            self.assertIn("No owner action needed", markdown)
+            self.assertTrue(json_path.exists())
+            self.assertTrue(markdown_path.exists())
 
     def test_llm_run_approved_handoffs_runs_pending_decision_and_skips_current(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

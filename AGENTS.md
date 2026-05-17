@@ -453,6 +453,7 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
+python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities --json
@@ -530,6 +531,8 @@ GitHub workflow `.github/workflows/llm-worker-chain.yml` runs pending owner-appr
 `llm-review-latest` reads the latest local LLM worker chain summary and renders a compact owner-review view. It is read-only and must not call an LLM provider, edit content, or mutate repository state.
 
 `llm-auto-review-latest` reads the latest consolidated LLM auto-review queue and renders an owner decision view across all queued chains and skipped-existing chain summaries, including player-value checks, owner questions, blocking issues, intake commands, and any recorded `llm-topic-decision-*` owner decisions. Topics with durable `monitor`, `rejected`, or `approved_for_chain` decisions are marked as resolved by owner decision and no longer counted as needing a fresh owner decision. It is read-only and must not call an LLM provider, approve content edits, or mutate repository state.
+
+`llm-owner-digest` builds a compact owner-facing digest from the latest LLM auto-review queue. It writes `automation/reports/llm-owner-digest.json` and `.md` by default, groups topics into needs-review, ready-for-intake, blocked/failed, and resolved buckets, and summarizes the recommended next action. It is read-only and must not call an LLM provider, approve content edits, or mutate repository state.
 
 `llm-intake-latest` bridges a latest or specified LLM worker chain summary into a no-write, owner-gated intake artifact. It may carry draft `exact_replacements` into intake as proposal-only data, but it may record `--approved-by <name>` only as intake approval. Approval is intake-only and does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing. If the LLM Reviewer left owner questions, `--note` is required before intake can become `approved_for_intake`. If the Reviewer used `blocking_issues` for owner-confirmation items, `--resolve-reviewer-blockers` may downgrade them to intake warnings only when `--approved-by` and `--note` are both present. Approved LLM intake must still move through the existing run-plan/proposal lifecycle before any public content edit.
 

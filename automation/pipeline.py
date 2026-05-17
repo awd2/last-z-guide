@@ -782,6 +782,29 @@ def cmd_llm_auto_review_latest(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_owner_digest(
+    queue: str | None,
+    json_output: str | None,
+    markdown_output: str | None,
+    no_write: bool,
+    as_json: bool,
+) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "reports" / "llm_owner_digest.py")]
+    if queue:
+        command.extend(["--queue", queue])
+    if json_output:
+        command.extend(["--json-output", json_output])
+    if markdown_output:
+        command.extend(["--markdown-output", markdown_output])
+    if no_write:
+        command.append("--no-write")
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Owner Digest ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_intake_latest(
     chain: str | None,
     reports_dir: str | None,
@@ -2419,6 +2442,16 @@ def build_parser() -> argparse.ArgumentParser:
     llm_auto_review_latest_parser.add_argument("--queue", help="Path to llm-auto-review-queue.json.")
     llm_auto_review_latest_parser.add_argument("--json", action="store_true", help="Print the auto-review owner decision view as JSON.")
 
+    llm_owner_digest_parser = subparsers.add_parser(
+        "llm-owner-digest",
+        help="Build a compact owner digest from the latest LLM auto-review queue.",
+    )
+    llm_owner_digest_parser.add_argument("--queue", help="Path to llm-auto-review-queue.json.")
+    llm_owner_digest_parser.add_argument("--json-output", help="Path for the digest JSON artifact.")
+    llm_owner_digest_parser.add_argument("--markdown-output", help="Path for the digest markdown artifact.")
+    llm_owner_digest_parser.add_argument("--no-write", action="store_true", help="Build and print only; do not write digest artifacts.")
+    llm_owner_digest_parser.add_argument("--json", action="store_true", help="Print the owner digest summary as JSON.")
+
     llm_intake_latest_parser = subparsers.add_parser(
         "llm-intake-latest",
         help="Generate a no-write intake artifact from the latest LLM worker chain.",
@@ -2743,6 +2776,14 @@ def main() -> int:
         return cmd_llm_review_latest(args.chain, args.reports_dir, args.json)
     if args.command == "llm-auto-review-latest":
         return cmd_llm_auto_review_latest(args.queue, args.json)
+    if args.command == "llm-owner-digest":
+        return cmd_llm_owner_digest(
+            args.queue,
+            args.json_output,
+            args.markdown_output,
+            args.no_write,
+            args.json,
+        )
     if args.command == "llm-intake-latest":
         return cmd_llm_intake_latest(
             args.chain,

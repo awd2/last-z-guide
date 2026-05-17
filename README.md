@@ -138,6 +138,7 @@ python3 automation/pipeline.py llm-worker-chain --topic-id <topic_id> --provider
 python3 automation/pipeline.py llm-worker-chain --from-decision automation/reports/llm-topic-decision-<topic_id>.json --provider openai --json
 python3 automation/pipeline.py llm-review-latest --json
 python3 automation/pipeline.py llm-auto-review-latest --json
+python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answers>" --resolve-reviewer-blockers --json
@@ -394,6 +395,14 @@ python3 automation/pipeline.py llm-auto-review-latest
 ```
 
 This prints queued topics, skipped-existing chain summaries, player-value checks, blocking issues, owner questions, ready-to-run intake commands, and recorded topic decisions. Topics already marked `monitor`, `rejected`, or `approved_for_chain` stop counting as fresh owner-decision work. It is read-only and does not approve public copy.
+
+For the shortest daily owner view, run:
+
+```bash
+python3 automation/pipeline.py llm-owner-digest
+```
+
+This writes `automation/reports/llm-owner-digest.md` and `.json`, grouped into needs-review, ready-for-intake, blocked/failed, and resolved buckets. Use `--no-write` for a read-only print-only run.
 
 The same no-write chain is available in GitHub Actions:
 
