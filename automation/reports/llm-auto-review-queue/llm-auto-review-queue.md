@@ -1,4 +1,4 @@
-# LLM Auto Review Queue - 2026-05-17T08:36:29Z
+# LLM Auto Review Queue - 2026-05-17T08:44:29Z
 
 ## Outcome
 
@@ -8,7 +8,8 @@
 - Queued topics: `0`
 - Completed items: `0`
 - Failed items: `0`
-- Skipped existing: `1`
+- Skipped existing: `0`
+- Resolved by decision: `1`
 - Stale existing reruns: `0`
 - Required chain contract: `2` `exact-editor-proposals-v2`
 - Deferred by limit: `0`
@@ -24,9 +25,9 @@
 
 - None
 
-## Skipped Topics
+## Resolved By Owner Decision
 
-- `external-gift-center-official-flow-validation`: `skipped_existing_chain`, score `91`, existing `automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.json`
+- `external-gift-center-official-flow-validation`: `monitor`, score `91`, decision `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md`
 
 ## Next Actions
 

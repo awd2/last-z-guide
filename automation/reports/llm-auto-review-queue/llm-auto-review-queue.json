@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_auto_review_queue",
-  "generated_at": "2026-05-17T08:36:29Z",
+  "generated_at": "2026-05-17T08:44:29Z",
   "state": "current",
   "provider": "openai",
   "source_signal_files": [
@@ -20,7 +20,8 @@
   "queued_topic_count": 0,
   "completed_item_count": 0,
   "failed_item_count": 0,
-  "skipped_existing_count": 1,
+  "skipped_existing_count": 0,
+  "resolved_by_decision_count": 1,
   "stale_existing_count": 0,
   "deferred_count": 0,
   "max_chains": 3,
@@ -28,7 +29,8 @@
   "required_chain_contract_version": 2,
   "required_chain_contract_label": "exact-editor-proposals-v2",
   "queue_items": [],
-  "skipped_topics": [
+  "skipped_topics": [],
+  "resolved_by_decision": [
     {
       "topic_id": "external-gift-center-official-flow-validation",
       "target_page_or_slug": "gift-center-uid.html",
@@ -43,11 +45,13 @@
         "action:update_existing=8",
         "candidate_status=10"
       ],
-      "existing_chain": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.json",
-      "existing_chain_contract_version": 2,
-      "required_chain_contract_version": 2,
-      "existing_chain_current": true,
-      "status": "skipped_existing_chain"
+      "status": "resolved_by_decision_monitor",
+      "decision_state": "monitor",
+      "decision_note": "Resolved by approved micro meta cleanup in commit 55af72c; keep monitoring official Gift Center route, no further intake for this queue item.",
+      "decision_artifact": "automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.json",
+      "decision_markdown": "automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md",
+      "allows_worker_chain": false,
+      "allows_content_edit": false
     }
   ],
   "errors": [],
