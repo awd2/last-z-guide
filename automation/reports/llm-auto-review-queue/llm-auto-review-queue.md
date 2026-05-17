@@ -1,4 +1,4 @@
-# LLM Auto Review Queue - 2026-05-17T08:46:59Z
+# LLM Auto Review Queue - 2026-05-17T08:51:53Z
 
 ## Outcome
 
@@ -27,10 +27,10 @@
 
 ## Resolved By Owner Decision
 
-- `external-gift-center-official-flow-validation`: `monitor`, score `71`, decision `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md`
+- `external-gift-center-official-flow-validation`: `monitor`, score `91`, decision `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md`
 
 ## Next Actions
 
-- Review queue_items and open the referenced chain markdown for the best candidate.
-- Approve only final public content diffs, not this queue artifact.
-- If a queue item is worth drafting, move it through llm-intake-latest and the existing run-plan/proposal lifecycle.
+- No owner action needed for this queue run.
+- All current candidate topics are already covered by recorded owner decisions.
+- Wait for new GSC/Bing/external-source signals or explicitly reopen a topic decision if needed.

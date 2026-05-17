@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_auto_review_queue",
-  "generated_at": "2026-05-17T08:46:59Z",
+  "generated_at": "2026-05-17T08:51:53Z",
   "state": "current",
   "provider": "openai",
   "source_signal_files": [
@@ -35,11 +35,11 @@
       "topic_id": "external-gift-center-official-flow-validation",
       "target_page_or_slug": "gift-center-uid.html",
       "cluster": "Economy",
-      "priority": "medium",
+      "priority": "high",
       "risk_level": "medium",
-      "score": 71,
+      "score": 91,
       "score_reasons": [
-        "priority:medium=25",
+        "priority:high=45",
         "confidence:high=20",
         "risk:medium=8",
         "action:update_existing=8",
@@ -62,9 +62,9 @@
   "allows_manifest_mutation": false,
   "allows_pr_or_deploy": false,
   "next_actions": [
-    "Review queue_items and open the referenced chain markdown for the best candidate.",
-    "Approve only final public content diffs, not this queue artifact.",
-    "If a queue item is worth drafting, move it through llm-intake-latest and the existing run-plan/proposal lifecycle."
+    "No owner action needed for this queue run.",
+    "All current candidate topics are already covered by recorded owner decisions.",
+    "Wait for new GSC/Bing/external-source signals or explicitly reopen a topic decision if needed."
   ],
   "safety": "No content, backlog, manifest, PR, or production files were modified."
 }

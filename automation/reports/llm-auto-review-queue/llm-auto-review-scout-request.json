@@ -162,22 +162,22 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-bookstore-last-z-survival-shooter-wiki-fan-5",
-        "title": "External search opportunity: Bookstore | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Research",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
+        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
+        "cluster": "Events",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "research.html",
+        "target_page_or_slug": "events.html",
         "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Bonus building tied to faster research; useful for cross-checking research-speed mechanics."
+          "Daily event with a research-focused cycle and hero-use cycle; useful for linking research, heroes, and reward timing."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "research.html"
+            "events.html"
           ],
           "external_source_id": "lastz-fandom-reference"
         },
@@ -192,22 +192,22 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Events",
+        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
+        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
+        "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "events.html",
+        "target_page_or_slug": "research.html",
         "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily rotating event with an Age of Science theme for research speed-ups and a Hero Initiative theme for hero upgrades."
+          "Core hero overview page listing hero classes and the main stat systems that can tie into event scoring or upgrade planning."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "events.html"
+            "research.html"
           ],
           "external_source_id": "lastz-fandom-reference"
         },
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero index and equipment page with character roster, faction filters, levels, and gear stats; good for hero discovery and cross-checking hero-related pages."
+          "Detailed hero roster page with hero lists, levels, and equipment sections; useful for hero discovery and faction checks."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page with category navigation and badge costs by level; useful for locating research topics and checking cost structures."
+          "Research table page with category breakdowns and level-by-level badge costs; useful for research discovery and cost cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [
