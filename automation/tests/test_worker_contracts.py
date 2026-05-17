@@ -2078,6 +2078,8 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(summary["resolved_by_decision_count"], 1)
             self.assertEqual(summary["resolved_by_decision"][0]["topic_id"], "fixture-topic")
             self.assertEqual(summary["resolved_by_decision"][0]["decision_state"], "monitor")
+            self.assertTrue(any("No owner action needed" in action for action in summary["next_actions"]))
+            self.assertTrue(any("recorded owner decisions" in action for action in summary["next_actions"]))
             run_queue_item.assert_not_called()
 
     def test_llm_auto_review_queue_reruns_stale_existing_chain(self) -> None:

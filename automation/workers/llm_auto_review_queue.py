@@ -271,6 +271,43 @@ def blocked_summary(output_dir: Path, basename: str, errors: list[str]) -> dict[
     }
 
 
+def next_actions_for_summary(
+    queue_items: list[dict[str, Any]],
+    skipped: list[dict[str, Any]],
+    resolved_by_decision: list[dict[str, Any]],
+    candidates: list[dict[str, Any]],
+    failed: int,
+) -> list[str]:
+    if failed:
+        return [
+            "Open failed queue_items and inspect their chain markdown plus stage errors.",
+            "Fix the blocked LLM stage or source artifact before approving intake.",
+            "Do not approve public content from failed queue items.",
+        ]
+    if queue_items:
+        return [
+            "Review queue_items and open the referenced chain markdown for the best candidate.",
+            "Approve only final public content diffs, not this queue artifact.",
+            "If a queue item is worth drafting, move it through llm-intake-latest and the existing run-plan/proposal lifecycle.",
+        ]
+    if resolved_by_decision and len(resolved_by_decision) == len(candidates):
+        return [
+            "No owner action needed for this queue run.",
+            "All current candidate topics are already covered by recorded owner decisions.",
+            "Wait for new GSC/Bing/external-source signals or explicitly reopen a topic decision if needed.",
+        ]
+    if skipped:
+        return [
+            "No new queue item was generated.",
+            "Review skipped_topics only if you want to rerun an existing chain with --include-existing.",
+            "Wait for new signals or a stale worker-chain contract before taking action.",
+        ]
+    return [
+        "No candidate topics are ready for owner review.",
+        "Wait for new GSC/Bing/external-source signals or adjust Scout thresholds if the queue stays empty.",
+    ]
+
+
 def run_auto_review_queue(
     signal_paths: list[Path],
     external_proposal_paths: list[Path],
@@ -431,11 +468,7 @@ def run_auto_review_queue(
         "allows_backlog_mutation": False,
         "allows_manifest_mutation": False,
         "allows_pr_or_deploy": False,
-        "next_actions": [
-            "Review queue_items and open the referenced chain markdown for the best candidate.",
-            "Approve only final public content diffs, not this queue artifact.",
-            "If a queue item is worth drafting, move it through llm-intake-latest and the existing run-plan/proposal lifecycle.",
-        ],
+        "next_actions": next_actions_for_summary(queue_items, skipped, resolved_by_decision, candidates, failed),
         "safety": "No content, backlog, manifest, PR, or production files were modified.",
     }
     write_queue(summary)

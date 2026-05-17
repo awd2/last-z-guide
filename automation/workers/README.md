@@ -247,7 +247,9 @@ owner involvement to reviewing ready queue packages. Topics with recorded
 `llm-topic-decision-*` states of `monitor`, `rejected`, or `approved_for_chain`
 are moved to a `resolved_by_decision` section instead of queueing or
 skipped-existing, so already reviewed topics do not keep returning as fresh
-owner work. Per-topic LLM stage failures are recorded as
+owner work. Queue `next_actions` are state-aware: resolved-only queues say no
+owner action is needed, failed queues point to stage errors, and queued items
+point to the intake lifecycle. Per-topic LLM stage failures are recorded as
 `completed_with_failures` artifacts but do not make the command exit non-zero,
 so scheduled workflows can still upload and commit no-write reports. It still
 does not approve public copy, mutate backlog, create manifests, edit content,
