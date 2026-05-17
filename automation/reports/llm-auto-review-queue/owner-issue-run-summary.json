@@ -1,0 +1,11 @@
+{
+  "state": "no_action_needed",
+  "actionable": false,
+  "digest_path": "automation/reports/llm-owner-digest.json",
+  "markdown_path": "automation/reports/llm-owner-digest.md",
+  "issue_title": "LLM Owner Digest: Action Needed",
+  "action": "skipped_non_actionable",
+  "issue_number": null,
+  "issue_url": null,
+  "safety": "Owner issue handoff only. No content, backlog, manifest, PR, or production files were modified."
+}
