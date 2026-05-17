@@ -1893,6 +1893,7 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(view["resolved_by_owner_decision_count"], 1)
             self.assertTrue(view["items"][0]["owner_decision_resolved"])
             self.assertEqual(view["items"][0]["recommended_owner_action"], "decision_recorded_monitor")
+            self.assertEqual(view["items"][0]["approve_for_intake_command"], "")
             self.assertIn("Resolved by owner review", markdown)
 
     def test_llm_run_approved_handoffs_runs_pending_decision_and_skips_current(self) -> None:

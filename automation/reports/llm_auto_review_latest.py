@@ -193,7 +193,7 @@ def compact_queue_item(queue_item: dict[str, Any], decisions: dict[str, dict[str
         "chain_markdown": queue_item.get("chain_markdown") or inferred_chain_markdown,
         "editor_markdown": chain.get("stages", {}).get("llm_editor", {}).get("markdown_path", ""),
         "reviewer_markdown": chain.get("stages", {}).get("llm_reviewer", {}).get("markdown_path", ""),
-        "approve_for_intake_command": intake_command(chain_path, topic_id),
+        "approve_for_intake_command": "" if owner_decision_resolved or not chain_path else intake_command(chain_path, topic_id),
         "monitor_decision_guidance": "Leave this item as monitor-only if the player job is not important enough, overlaps an existing page, or needs better evidence.",
         "reject_decision_guidance": "Reject if the topic would mislead players, blur page roles, or cannot be validated from game knowledge and reliable sources.",
     }
