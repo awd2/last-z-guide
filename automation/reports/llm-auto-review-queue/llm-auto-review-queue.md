@@ -1,14 +1,14 @@
-# LLM Auto Review Queue - 2026-05-16T19:15:52Z
+# LLM Auto Review Queue - 2026-05-17T08:36:29Z
 
 ## Outcome
 
-- State: `queue_ready`
+- State: `current`
 - Provider: `openai`
 - Candidate topics: `1`
-- Queued topics: `1`
-- Completed items: `1`
+- Queued topics: `0`
+- Completed items: `0`
 - Failed items: `0`
-- Skipped existing: `0`
+- Skipped existing: `1`
 - Stale existing reruns: `0`
 - Required chain contract: `2` `exact-editor-proposals-v2`
 - Deferred by limit: `0`
@@ -22,26 +22,11 @@
 
 ## Review Queue
 
-### external-gift-center-official-flow-validation
+- None
 
-- Status: `completed`
-- Score: `91`
-- Target: `gift-center-uid.html`
-- Cluster: `Economy`
-- Priority: `high`
-- Risk: `medium`
-- Verdict: `needs_human_review`
-- Owner approval required: `true`
-- Chain: `automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.md`
-- Existing chain rerun: `false`
+## Skipped Topics
 
-Score reasons:
-
-- priority:high=45
-- confidence:high=20
-- risk:medium=8
-- action:update_existing=8
-- candidate_status=10
+- `external-gift-center-official-flow-validation`: `skipped_existing_chain`, score `91`, existing `automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.json`
 
 ## Next Actions
 

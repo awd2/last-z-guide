@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "report_type": "llm_auto_review_queue",
-  "generated_at": "2026-05-16T19:15:52Z",
-  "state": "queue_ready",
+  "generated_at": "2026-05-17T08:36:29Z",
+  "state": "current",
   "provider": "openai",
   "source_signal_files": [
     "content/gsc/latest-gsc-agent-signals.json",
@@ -17,17 +17,18 @@
   "topic_discovery_path": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
   "topic_discovery_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md",
   "candidate_topic_count": 1,
-  "queued_topic_count": 1,
-  "completed_item_count": 1,
+  "queued_topic_count": 0,
+  "completed_item_count": 0,
   "failed_item_count": 0,
-  "skipped_existing_count": 0,
+  "skipped_existing_count": 1,
   "stale_existing_count": 0,
   "deferred_count": 0,
   "max_chains": 3,
   "include_existing": false,
   "required_chain_contract_version": 2,
   "required_chain_contract_label": "exact-editor-proposals-v2",
-  "queue_items": [
+  "queue_items": [],
+  "skipped_topics": [
     {
       "topic_id": "external-gift-center-official-flow-validation",
       "target_page_or_slug": "gift-center-uid.html",
@@ -42,16 +43,13 @@
         "action:update_existing=8",
         "candidate_status=10"
       ],
-      "status": "completed",
-      "review_verdict": "needs_human_review",
-      "approved_next_stage": "none",
-      "owner_approval_required": true,
-      "chain_json": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.json",
-      "chain_markdown": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.md",
-      "errors": []
+      "existing_chain": "automation/reports/llm-auto-review-queue/llm-worker-chain-external-gift-center-official-flow-validation.json",
+      "existing_chain_contract_version": 2,
+      "required_chain_contract_version": 2,
+      "existing_chain_current": true,
+      "status": "skipped_existing_chain"
     }
   ],
-  "skipped_topics": [],
   "errors": [],
   "output_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",
   "markdown_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.md",

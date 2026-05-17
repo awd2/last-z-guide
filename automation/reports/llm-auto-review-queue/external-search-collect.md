@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-16T19:15:28Z
+# External Search Collect - 2026-05-17T08:36:21Z
 
 ## Outcome
 
@@ -45,8 +45,8 @@
 
 - Title: External search opportunity: Last Z Wiki - Complete English Guide | Strategies, Tier List & Tips 2026
 - Action: `monitor`
-- Target: `index.html`
-- Cluster: `Home`
+- Target: `heroes.html`
+- Cluster: `Heroes`
 - Score: `19`
 - Source: `External search: site:lastzwiki.com/en Last Z guide heroes research`
 - URL: `https://lastzwiki.com/en/index.html`
@@ -81,9 +81,9 @@
 
 - Title: External search opportunity: Event Center | Last Z: Survival Shooter Wiki | Fandom
 - Action: `update_existing`
-- Target: `events.html`
-- Cluster: `Events`
-- Score: `82`
+- Target: `research.html`
+- Cluster: `Research`
+- Score: `64`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
 - URL: `https://lastz.fandom.com/wiki/Event_Center`
 - Mapping: `content_index_token_match`
@@ -105,7 +105,7 @@
 
 - Title: External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power - | Last Z: Survival Shooter
 - Action: `update_existing`
-- Target: `early-game-optimization.html`
+- Target: `power-guide.html`
 - Cluster: `Progression`
 - Score: `82`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
