@@ -209,12 +209,16 @@ def build_view(queue_path: Path) -> dict[str, Any]:
     skipped_topics = queue.get("skipped_topics", [])
     if not isinstance(skipped_topics, list):
         skipped_topics = []
+    resolved_topics = queue.get("resolved_by_decision", [])
+    if not isinstance(resolved_topics, list):
+        resolved_topics = []
     review_items = list(queue_items)
     review_items.extend(
         item
         for item in skipped_topics
         if isinstance(item, dict) and item.get("status") == "skipped_existing_chain" and item.get("existing_chain")
     )
+    review_items.extend(item for item in resolved_topics if isinstance(item, dict))
     decisions = load_topic_decisions(queue_path)
     items = [compact_queue_item(item, decisions) for item in review_items if isinstance(item, dict)]
     needs_owner = [

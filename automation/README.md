@@ -562,6 +562,7 @@ LLM auto review queue:
 - this is the consolidated owner-review layer: it reduces manual step-by-step approval by presenting ready queue items
 - it skips only current completed chain summaries unless `--include-existing` is supplied
 - stale completed summaries with missing or older `worker_chain_contract_version` are rerun automatically, and the queue records `stale_existing_count`
+- topics with recorded `llm-topic-decision-*` states of `monitor`, `rejected`, or `approved_for_chain` are moved to `resolved_by_decision` instead of queueing or skipped-existing
 - per-topic LLM stage failures are recorded as `completed_with_failures` artifacts but do not make the command exit non-zero, so scheduled workflows can still upload and commit no-write reports
 - it must not approve public copy, mutate `topic_backlog.csv`, create manifests, edit content, open PRs, or deploy
 
@@ -680,7 +681,7 @@ LLM auto-review owner queue:
 - `python3 automation/pipeline.py llm-auto-review-latest` -> print the latest consolidated auto-review queue as an owner decision screen
 - `python3 automation/pipeline.py llm-auto-review-latest --json` -> print the same view as JSON
 - `--queue <path>` can read a specific `llm-auto-review-queue.json`
-- output includes queued topics, skipped-existing chain summaries, player-value checks, blocking issues, owner questions, and intake commands
+- output includes queued topics, skipped-existing chain summaries, resolved-by-decision topics, player-value checks, blocking issues, owner questions, and intake commands
 - recorded `llm-topic-decision-*` artifacts mark topics as resolved by owner decision and remove them from the fresh owner-decision count
 - this is read-only and does not call OpenAI, approve public copy, or mutate files
 

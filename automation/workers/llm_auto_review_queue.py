@@ -111,6 +111,39 @@ def completed_chain_status(topic_id: str, search_dirs: list[Path]) -> dict[str, 
     return None
 
 
+def decision_search_dirs(output_dir: Path) -> list[Path]:
+    dirs = [output_dir]
+    if output_dir.parent not in dirs:
+        dirs.append(output_dir.parent)
+    if REPORTS_DIR not in dirs:
+        dirs.append(REPORTS_DIR)
+    return dirs
+
+
+def load_topic_decisions(output_dir: Path) -> dict[str, dict[str, Any]]:
+    decisions: dict[str, dict[str, Any]] = {}
+    for directory in decision_search_dirs(output_dir):
+        for path in sorted(directory.glob("llm-topic-decision-*.json")):
+            if path.name == "llm-topic-decisions.json":
+                continue
+            payload = load_json(path)
+            if payload.get("report_type") != "llm_topic_decision":
+                continue
+            topic_id = str(payload.get("topic_id") or "")
+            state = normalized(payload.get("decision_state"))
+            if not topic_id or state not in {"monitor", "rejected", "approved_for_chain"}:
+                continue
+            decisions[topic_id] = {
+                "decision_state": state,
+                "decision_note": payload.get("decision_note", ""),
+                "decision_artifact": rel(path),
+                "decision_markdown": payload.get("markdown_path", ""),
+                "allows_worker_chain": bool(payload.get("allows_worker_chain", False)),
+                "allows_content_edit": bool(payload.get("allows_content_edit", False)),
+            }
+    return decisions
+
+
 def candidate_topics(discovery_payload: dict[str, Any]) -> list[dict[str, Any]]:
     topics = discovery_payload.get("topics", [])
     if not isinstance(topics, list):
@@ -282,11 +315,12 @@ def run_auto_review_queue(
     candidates = candidate_topics(discovery_payload)
     scored: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
+    resolved_by_decision: list[dict[str, Any]] = []
     search_dirs = [output_dir, REPORTS_DIR]
+    decisions = load_topic_decisions(output_dir)
     for topic in candidates:
         score, reasons = score_topic(topic)
         topic_id = str(topic.get("topic_id") or "")
-        existing_chain = completed_chain_status(topic_id, search_dirs)
         record = {
             "topic_id": topic_id,
             "target_page_or_slug": topic.get("target_page_or_slug", ""),
@@ -296,6 +330,17 @@ def run_auto_review_queue(
             "score": score,
             "score_reasons": reasons,
         }
+        decision = decisions.get(topic_id)
+        if decision:
+            resolved_by_decision.append(
+                {
+                    **record,
+                    "status": f"resolved_by_decision_{decision['decision_state']}",
+                    **decision,
+                }
+            )
+            continue
+        existing_chain = completed_chain_status(topic_id, search_dirs)
         if existing_chain:
             record["existing_chain"] = existing_chain["path"]
             record["existing_chain_contract_version"] = existing_chain["contract_version"]
@@ -347,6 +392,8 @@ def run_auto_review_queue(
         state = "no_candidates"
     elif not queue_items and skipped:
         state = "current"
+    elif not queue_items and resolved_by_decision:
+        state = "current"
 
     json_path = output_dir / f"{basename}.json"
     markdown_path = output_dir / f"{basename}.md"
@@ -367,6 +414,7 @@ def run_auto_review_queue(
         "completed_item_count": completed,
         "failed_item_count": failed,
         "skipped_existing_count": sum(1 for item in skipped if item.get("status") == "skipped_existing_chain"),
+        "resolved_by_decision_count": len(resolved_by_decision),
         "stale_existing_count": sum(1 for item in queue_items if item.get("stale_existing_chain")),
         "deferred_count": sum(1 for item in skipped if item.get("status") == "deferred_by_limit"),
         "max_chains": max_chains,
@@ -375,6 +423,7 @@ def run_auto_review_queue(
         "required_chain_contract_label": llm_worker_chain.WORKER_CHAIN_CONTRACT_LABEL,
         "queue_items": queue_items,
         "skipped_topics": skipped,
+        "resolved_by_decision": resolved_by_decision,
         "errors": [error for item in queue_items for error in item.get("errors", [])],
         "output_path": rel(json_path),
         "markdown_path": rel(markdown_path),
@@ -408,6 +457,7 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- Completed items: `{summary.get('completed_item_count', 0)}`",
         f"- Failed items: `{summary.get('failed_item_count', 0)}`",
         f"- Skipped existing: `{summary.get('skipped_existing_count', 0)}`",
+        f"- Resolved by decision: `{summary.get('resolved_by_decision_count', 0)}`",
         f"- Stale existing reruns: `{summary.get('stale_existing_count', 0)}`",
         f"- Required chain contract: `{summary.get('required_chain_contract_version', '')}` `{summary.get('required_chain_contract_label', '')}`",
         f"- Deferred by limit: `{summary.get('deferred_count', 0)}`",
@@ -454,6 +504,16 @@ def render_markdown(summary: dict[str, Any]) -> str:
                 [
                     f"- `{item.get('topic_id', '')}`: `{item.get('status', '')}`, score `{item.get('score', '')}`"
                     + (f", existing `{item.get('existing_chain')}`" if item.get("existing_chain") else "")
+                ]
+            )
+        lines.append("")
+    if summary.get("resolved_by_decision"):
+        lines.extend(["## Resolved By Owner Decision", ""])
+        for item in summary["resolved_by_decision"]:
+            lines.extend(
+                [
+                    f"- `{item.get('topic_id', '')}`: `{item.get('decision_state', '')}`, score `{item.get('score', '')}`"
+                    + (f", decision `{item.get('decision_markdown')}`" if item.get("decision_markdown") else "")
                 ]
             )
         lines.append("")
@@ -524,6 +584,7 @@ def main() -> int:
         "completed_item_count": summary.get("completed_item_count", 0),
         "failed_item_count": summary.get("failed_item_count", 0),
         "skipped_existing_count": summary.get("skipped_existing_count", 0),
+        "resolved_by_decision_count": summary.get("resolved_by_decision_count", 0),
         "stale_existing_count": summary.get("stale_existing_count", 0),
         "output_path": summary["output_path"],
         "markdown_path": summary["markdown_path"],

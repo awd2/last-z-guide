@@ -243,11 +243,15 @@ skips only current completed chain summaries unless `--include-existing` is
 supplied. Completed chain summaries carry `worker_chain_contract_version`; if
 that version is missing or older than the current worker-chain contract, the
 queue treats the summary as stale and reruns it automatically. This reduces
-owner involvement to reviewing ready queue packages. Per-topic LLM stage
-failures are recorded as `completed_with_failures` artifacts but do not make the
-command exit non-zero, so scheduled workflows can still upload and commit
-no-write reports. It still does not approve public copy, mutate backlog, create
-manifests, edit content, open PRs, or deploy.
+owner involvement to reviewing ready queue packages. Topics with recorded
+`llm-topic-decision-*` states of `monitor`, `rejected`, or `approved_for_chain`
+are moved to a `resolved_by_decision` section instead of queueing or
+skipped-existing, so already reviewed topics do not keep returning as fresh
+owner work. Per-topic LLM stage failures are recorded as
+`completed_with_failures` artifacts but do not make the command exit non-zero,
+so scheduled workflows can still upload and commit no-write reports. It still
+does not approve public copy, mutate backlog, create manifests, edit content,
+open PRs, or deploy.
 
 In GitHub Actions, `.github/workflows/llm-auto-review-queue.yml` runs
 `external-scout` first, builds an `external-evidence-refresh` queue artifact,
