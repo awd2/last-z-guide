@@ -173,7 +173,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event with a Hero Initiative phase that uses Hero XP, fragments, and recruitment tickets; also includes Age of Science for research speed-ups."
+          "Daily event cycle with an 'Age of Science' phase for speeding research and a 'Hero Initiative' phase for hero upgrades; also shows reward tiers."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -203,7 +203,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page covering hero classes, power factors, and hero-related progression."
+          "Core hero overview page listing hero classes and the main hero power components."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -233,7 +233,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster page with hero lists, levels, and equipment sections; useful for hero discovery and cross-checking character names or gear categories."
+          "Dedicated hero roster page with hero list, levels, faction filters, and gear sections. Good lead for hero discovery and hero equipment cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -263,7 +263,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page showing badge costs by level and category structure; good for research topic discovery and cost cross-checking."
+          "Research table page with categories and per-level badge costs. Strong lead for research discovery, especially hero-related research grouping."
         ],
         "site_fit": {
           "expected_internal_route": [

@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "report_type": "llm_topic_discovery",
-  "generated_at": "2026-05-17T09:42:38Z",
+  "generated_at": "2026-05-17T09:49:03Z",
   "state": "topic_discovery_ready",
   "source_llm_scout_result": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json",
   "source_llm_scout_request": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
-  "topic_count": 6,
+  "topic_count": 7,
   "topics": [
     {
       "topic_id": "codes-gsc-opportunity",
@@ -19,16 +19,16 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "This is the highest-confidence opportunity because it is grounded in first-party search signals, maps to an existing cornerstone page, and has clear user intent around gift center and redeem code queries. The page already exists, so the best path is an update rather than a new page, provided the change preserves canonical claims and cluster separation. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "notes": "This is the strongest signal-based opportunity because it targets an existing cornerstone page with measurable query demand and low CTR on related gift center searches. The page already owns this cluster role, so an update review is more appropriate than a new page. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
       "risk_level": "high",
-      "player_value": "Improves the match between a high-demand search query set and the existing redeem codes page, making it easier for players to find the correct flow, login context, and active code information.",
-      "duplication_risk": "Medium. The topic overlaps with other economy pages if scope expands beyond redeem flow, but the existing route and canonical claims reduce the risk.",
+      "player_value": "Better match for users searching redeem codes and gift center login help; likely improves first-screen usefulness and query satisfaction.",
+      "duplication_risk": "Medium because the topic is adjacent to existing gift center and redeem coverage, but the canonical claim protections lower the chance of overlap if scope stays narrow.",
       "claims_to_verify": [
-        "Whether the query intent is best served by codes.html and not another canonical page",
-        "Whether any proposed on-page changes can be made without blurring cluster roles",
-        "Whether current gift center claims remain accurate and unchanged"
+        "Whether the query intent is best served by codes.html rather than another canonical page.",
+        "Whether any suggested revision can stay within existing cornerstone scope.",
+        "Whether protected claims remain intact: gift-center-only-redeem-flow, gift-rewards-mailbox, and gift-center-cluster-role-separation."
       ],
-      "next_step": "Send to human review with a narrow scope focused on query intent alignment, first-screen usefulness, and protection of canonical claims.",
+      "next_step": "Send to human owner review for scope validation against canonical claims and cluster role separation before any proposal drafting.",
       "evidence": [
         "GSC page signal: codes.html had 33220 impressions, 586 clicks, 1.76% CTR, avg position 6.11.",
         "Low CTR query: `last z gift center` had 3075 impressions, 113 clicks, 3.67% CTR, position 6.83.",
@@ -82,27 +82,31 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "This is the highest-confidence opportunity because it is grounded in first-party search signals, maps to an existing cornerstone page, and has clear user intent around gift center and redeem code queries. The page already exists, so the best path is an update rather than a new page, provided the change preserves canonical claims and cluster separation. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "This is the strongest signal-based opportunity because it targets an existing cornerstone page with measurable query demand and low CTR on related gift center searches. The page already owns this cluster role, so an update review is more appropriate than a new page. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     },
     {
       "topic_id": "external-gift-center-official-flow-validation",
       "title": "External source opportunity: official Gift Center and store flow validation",
       "cluster": "Economy",
-      "recommended_action": "monitor",
+      "recommended_action": "update_existing",
       "archetype_suggestion": "support-guide",
       "target_page_or_slug": "gift-center-uid.html",
       "source_type": "llm_scout",
       "source_reference": "official-functap-store: https://last-z.com",
       "confidence": "high",
-      "priority": "low",
-      "status": "monitor",
-      "notes": "Useful as a cross-validation lead, but the proposal depends on external-source verification and should not advance without stronger confirmation. It also overlaps existing economy routing topics. Future trigger: Advance only if the official service flow is verified against canonical memory plus at least one additional reliable source or owner confirmation.",
-      "risk_level": "",
-      "player_value": "",
-      "duplication_risk": "",
-      "claims_to_verify": [],
-      "next_step": "Advance only if the official service flow is verified against canonical memory plus at least one additional reliable source or owner confirmation.",
+      "priority": "high",
+      "status": "candidate",
+      "notes": "The official domain is a strong cross-validation lead for Gift Center routing and redeem/store flow, but it is not proof by itself. This is worth human review because it may confirm user-facing flow details that support an existing page.",
+      "risk_level": "medium",
+      "player_value": "Helps players confirm where to redeem, how UID fits in, and whether the official route remains accurate.",
+      "duplication_risk": "High because it overlaps the existing Gift Center page intent and could easily duplicate or blur current coverage.",
+      "claims_to_verify": [
+        "Official routing for Gift Center and store flow.",
+        "Whether UID guidance belongs on gift-center-uid.html or another existing page.",
+        "Whether the source adds a distinct player job beyond existing Gift Center coverage."
+      ],
+      "next_step": "Verify the claim against canonical site memory and at least one additional reliable source or owner confirmation before any content proposal.",
       "evidence": [
         "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation.",
         "External source URL recorded for later manual verification."
@@ -127,20 +131,20 @@
         "The proposal would blur existing cluster roles."
       ],
       "prior_review": null,
-      "human_approval_required": false,
+      "human_approval_required": true,
       "backlog_row_preview": {
         "topic_id": "external-gift-center-official-flow-validation",
         "title": "External source opportunity: official Gift Center and store flow validation",
         "cluster": "Economy",
-        "recommended_action": "monitor",
+        "recommended_action": "update_existing",
         "archetype_suggestion": "support-guide",
         "target_page_or_slug": "gift-center-uid.html",
         "source_type": "llm_scout",
         "source_reference": "official-functap-store: https://last-z.com",
         "confidence": "high",
-        "priority": "low",
-        "status": "monitor",
-        "notes": "Useful as a cross-validation lead, but the proposal depends on external-source verification and should not advance without stronger confirmation. It also overlaps existing economy routing topics. Future trigger: Advance only if the official service flow is verified against canonical memory plus at least one additional reliable source or owner confirmation."
+        "priority": "high",
+        "status": "candidate",
+        "notes": "The official domain is a strong cross-validation lead for Gift Center routing and redeem/store flow, but it is not proof by itself. This is worth human review because it may confirm user-facing flow details that support an existing page."
       }
     },
     {
@@ -155,12 +159,16 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Potentially useful for verification, but it is external-source driven and high risk for duplication or unverified claims about HQ progression. Future trigger: Revisit if the HQ and dependency model is confirmed from multiple reliable sources or owner knowledge. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
-      "risk_level": "",
-      "player_value": "",
-      "duplication_risk": "",
-      "claims_to_verify": [],
-      "next_step": "Revisit if the HQ and dependency model is confirmed from multiple reliable sources or owner knowledge.",
+      "notes": "HQ and progression requirements are a meaningful player job and fit an existing progression page, but the external source is only discovery input. Human review is justified because dependency and construction-route accuracy matter to progression planning. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "risk_level": "high",
+      "player_value": "Reduces confusion about HQ requirements, prerequisites, and construction order.",
+      "duplication_risk": "Medium because it likely overlaps with existing progression content but may add missing dependency coverage.",
+      "claims_to_verify": [
+        "HQ requirement and dependency details.",
+        "Whether progression route coverage is missing on hq.html.",
+        "Whether the source introduces any duplicate or conflicting naming."
+      ],
+      "next_step": "Cross-check the HQ claims against canonical memory and another reliable source before deciding whether the existing page needs expansion.",
       "evidence": [
         "Owner-approved wiki/reference source can reveal HQ and progression planning gaps.",
         "External source URL recorded for later manual verification."
@@ -208,7 +216,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Potentially useful for verification, but it is external-source driven and high risk for duplication or unverified claims about HQ progression. Future trigger: Revisit if the HQ and dependency model is confirmed from multiple reliable sources or owner knowledge. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "HQ and progression requirements are a meaningful player job and fit an existing progression page, but the external source is only discovery input. Human review is justified because dependency and construction-route accuracy matter to progression planning. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     },
     {
@@ -223,12 +231,12 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Research cost and branch coverage ideas are valuable discovery signals, but they are not yet ready for a human review proposal because they rely on external validation and may duplicate existing research coverage. Future trigger: Revisit when cost and branch drift can be verified against canonical memory and a second reliable source. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "notes": "Useful as discovery signal, but the claim set is too source-dependent and high risk for immediate review without stronger cross-validation. It also appears likely to overlap with existing research coverage. Future trigger: Move to human review only if a second reliable source or owner confirmation verifies the cost and branch coverage claims. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Revisit when cost and branch drift can be verified against canonical memory and a second reliable source.",
+      "next_step": "Move to human review only if a second reliable source or owner confirmation verifies the cost and branch coverage claims.",
       "evidence": [
         "Owner-approved research reference source can reveal branch coverage gaps and cost/name drift.",
         "External source URL recorded for later manual verification."
@@ -276,7 +284,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Research cost and branch coverage ideas are valuable discovery signals, but they are not yet ready for a human review proposal because they rely on external validation and may duplicate existing research coverage. Future trigger: Revisit when cost and branch drift can be verified against canonical memory and a second reliable source. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "Useful as discovery signal, but the claim set is too source-dependent and high risk for immediate review without stronger cross-validation. It also appears likely to overlap with existing research coverage. Future trigger: Move to human review only if a second reliable source or owner confirmation verifies the cost and branch coverage claims. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     },
     {
@@ -291,14 +299,14 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Search result content about events and hero initiative is too thin and source-dependent to move forward now. It needs stronger verification and clearer differentiation from existing events coverage. Future trigger: Revisit if the event mechanics are confirmed by canonical memory and another reliable source.",
+      "notes": "Search result is discovery only and the event claims are not verified. Event mechanics and reward tiers are especially sensitive to single-source drift. Future trigger: Review only after canonical memory and a second reliable source confirm the event cycle and reward structure.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Revisit if the event mechanics are confirmed by canonical memory and another reliable source.",
+      "next_step": "Review only after canonical memory and a second reliable source confirm the event cycle and reward structure.",
       "evidence": [
-        "Daily event with a Hero Initiative phase that uses Hero XP, fragments, and recruitment tickets; also includes Age of Science for research speed-ups."
+        "Daily event cycle with an 'Age of Science' phase for speeding research and a 'Hero Initiative' phase for hero upgrades; also shows reward tiers."
       ],
       "site_fit": {
         "expected_internal_route": [
@@ -329,7 +337,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Search result content about events and hero initiative is too thin and source-dependent to move forward now. It needs stronger verification and clearer differentiation from existing events coverage. Future trigger: Revisit if the event mechanics are confirmed by canonical memory and another reliable source."
+        "notes": "Search result is discovery only and the event claims are not verified. Event mechanics and reward tiers are especially sensitive to single-source drift. Future trigger: Review only after canonical memory and a second reliable source confirm the event cycle and reward structure."
       }
     },
     {
@@ -344,14 +352,14 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "This is a broad hero overview search signal, but it is too close to existing heroes coverage and may duplicate current intent without a clearly distinct player job. Future trigger: Revisit if a specific gap appears, such as an unserved hero naming or gear taxonomy issue.",
+      "notes": "The hero overview appears to be generic roster reference content and may duplicate existing hero/research coverage. External search alone is not enough to justify an immediate review. Future trigger: Reconsider if there is a clearly distinct user job not already covered by research.html or heroes.html.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Revisit if a specific gap appears, such as an unserved hero naming or gear taxonomy issue.",
+      "next_step": "Reconsider if there is a clearly distinct user job not already covered by research.html or heroes.html.",
       "evidence": [
-        "Core hero overview page covering hero classes, power factors, and hero-related progression."
+        "Core hero overview page listing hero classes and the main hero power components."
       ],
       "site_fit": {
         "expected_internal_route": [
@@ -382,7 +390,60 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "This is a broad hero overview search signal, but it is too close to existing heroes coverage and may duplicate current intent without a clearly distinct player job. Future trigger: Revisit if a specific gap appears, such as an unserved hero naming or gear taxonomy issue."
+        "notes": "The hero overview appears to be generic roster reference content and may duplicate existing hero/research coverage. External search alone is not enough to justify an immediate review. Future trigger: Reconsider if there is a clearly distinct user job not already covered by research.html or heroes.html."
+      }
+    },
+    {
+      "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
+      "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
+      "cluster": "Research",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
+      "source_type": "llm_scout",
+      "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
+      "confidence": "high",
+      "priority": "low",
+      "status": "monitor",
+      "notes": "This is highly likely to duplicate existing research coverage and is based on a single external search signal. It also risks copying competitor structure or wording. Future trigger: Promote only if a verified gap in research cost coverage is found and the scope can stay clearly distinct.",
+      "risk_level": "",
+      "player_value": "",
+      "duplication_risk": "",
+      "claims_to_verify": [],
+      "next_step": "Promote only if a verified gap in research cost coverage is found and the scope can stay clearly distinct.",
+      "evidence": [
+        "Research table page with categories and per-level badge costs. Strong lead for research discovery, especially hero-related research grouping."
+      ],
+      "site_fit": {
+        "expected_internal_route": [
+          "research.html"
+        ],
+        "external_source_id": "lastzwiki-reference"
+      },
+      "constraints": [
+        "External search result is discovery evidence only.",
+        "Do not copy source wording.",
+        "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
+      ],
+      "reject_if": [
+        "The result is off-topic or duplicates an existing page job.",
+        "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
+      ],
+      "prior_review": null,
+      "human_approval_required": false,
+      "backlog_row_preview": {
+        "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
+        "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
+        "cluster": "Research",
+        "recommended_action": "monitor",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
+        "source_type": "llm_scout",
+        "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
+        "confidence": "high",
+        "priority": "low",
+        "status": "monitor",
+        "notes": "This is highly likely to duplicate existing research coverage and is based on a single external search signal. It also risks copying competitor structure or wording. Future trigger: Promote only if a verified gap in research cost coverage is found and the scope can stay clearly distinct."
       }
     }
   ],
