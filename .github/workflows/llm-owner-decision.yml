@@ -89,12 +89,61 @@ jobs:
                   print(f"  - {error}")
           PY
 
+      - name: Run approved no-write worker chain
+        if: success()
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.4-mini' }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' > /tmp/decision_path.txt
+          import json
+          from pathlib import Path
+
+          path = Path("automation/reports/llm-owner-decision-gha/decision-summary.json")
+          data = json.loads(path.read_text())
+          if data.get("allows_worker_chain") and data.get("decision_output_path"):
+              print(data["decision_output_path"])
+          PY
+          decision_path="$(cat /tmp/decision_path.txt)"
+          if [[ -z "$decision_path" ]]; then
+            echo "Decision does not allow worker-chain replay; skipping."
+            exit 0
+          fi
+          mkdir -p automation/reports/llm-worker-chain-gha
+          python3 automation/pipeline.py llm-worker-chain \
+            --from-decision "$decision_path" \
+            --provider openai \
+            --output-dir automation/reports/llm-worker-chain-gha \
+            --json | tee automation/reports/llm-worker-chain-gha/run-summary.json
+
+      - name: Write worker-chain summary
+        if: always()
+        run: |
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+
+          path = Path("automation/reports/llm-worker-chain-gha/run-summary.json")
+          if not path.exists():
+              print("- Worker chain: `not run`")
+              raise SystemExit(0)
+          data = json.loads(path.read_text())
+          print(f"- Worker chain state: `{data.get('state')}`")
+          print(f"- Worker chain topic: `{data.get('source_topic_id')}`")
+          print(f"- Worker chain verdict: `{data.get('review_verdict')}`")
+          print(f"- Worker chain risk: `{data.get('risk_level')}`")
+          print(f"- Owner approval required: `{data.get('owner_approval_required')}`")
+          PY
+
       - name: Upload owner decision artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: llm-owner-decision-${{ github.run_number }}
-          path: automation/reports/llm-owner-decision-gha/
+          path: |
+            automation/reports/llm-owner-decision-gha/
+            automation/reports/llm-worker-chain-gha/
           if-no-files-found: ignore
 
       - name: Commit topic decision artifacts

@@ -260,10 +260,11 @@ artifacts as `llm-topic-decision`. It must not approve public copy, mutate
 backlog/manifests/content, create PRs, or deploy.
 
 GitHub workflow `.github/workflows/llm-owner-decision.yml` runs this command
-from matching issue comments and commits only topic decision artifacts. An
-`/approve-chain` decision can then trigger `.github/workflows/llm-worker-chain.yml`
-through the committed `llm-topic-decision-*.json` path, while `/monitor` and
-`/reject` simply remove the topic from future owner-decision noise.
+from matching issue comments and commits only topic decision artifacts. For
+`/approve-chain`, it runs the no-write `llm-worker-chain --from-decision` path
+in the same workflow job and uploads the chain artifacts. This avoids relying on
+downstream push workflows from a `GITHUB_TOKEN` commit. `/monitor` and `/reject`
+simply remove the topic from future owner-decision noise.
 
 `llm-run-approved-handoffs` is the scheduled owner-handoff runner. It reads the
 same `approved_for_chain` decision artifacts and runs only pending handoffs

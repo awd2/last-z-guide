@@ -674,6 +674,7 @@ LLM owner decision workflow:
 - accepted author associations: `OWNER`, `MEMBER`, and `COLLABORATOR`
 - output is an uploaded workflow artifact named `llm-owner-decision-<run_number>`
 - it may commit only `automation/reports/llm-topic-decision-<topic_id>.json` and `.md` decision artifacts
+- for `/approve-chain`, it runs `llm-worker-chain --from-decision` in the same workflow job and uploads the no-write chain artifacts
 - this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 
 LLM worker chain workflow:
@@ -728,7 +729,7 @@ LLM issue decision:
 - each command requires a topic id and a real owner note
 - accepted author associations are `OWNER`, `MEMBER`, and `COLLABORATOR`
 - output lives in `automation/reports/llm-topic-decision-<topic_id>.json` and `.md`
-- `.github/workflows/llm-owner-decision.yml` runs this command from comments on the `LLM Owner Digest: Action Needed` issue and commits only topic decision artifacts
+- `.github/workflows/llm-owner-decision.yml` runs this command from comments on the `LLM Owner Digest: Action Needed` issue, commits only topic decision artifacts, and runs the no-write worker chain in the same job for `/approve-chain`
 - this does not approve public copy, mutate backlog/manifests/content, create PRs, or deploy
 
 LLM intake latest:
