@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-17T09:48:54Z
+# External Search Collect - 2026-05-17T10:01:06Z
 
 ## Outcome
 
@@ -65,34 +65,34 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5
+### external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5
 
-- Title: External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom
+- Action: `update_existing`
+- Target: `tech.html`
+- Cluster: `Research`
+- Score: `82`
+- Source: `External search: site:lastz.fandom.com Last Z heroes research events`
+- URL: `https://lastz.fandom.com/wiki/Laboratory`
+- Mapping: `content_index_token_match`
+- Public claim ready: `false`
+
+### external-search-lastz-fandom-reference-bookstore-last-z-survival-shooter-wiki-fan-6
+
+- Title: External search opportunity: Bookstore | Last Z: Survival Shooter Wiki | Fandom
 - Action: `update_existing`
 - Target: `research.html`
 - Cluster: `Research`
 - Score: `82`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
-- URL: `https://lastz.fandom.com/wiki/Heroes`
-- Mapping: `content_index_token_match`
-- Public claim ready: `false`
-
-### external-search-lastz-fandom-reference-event-center-last-z-survival-shooter-wiki--6
-
-- Title: External search opportunity: Event Center | Last Z: Survival Shooter Wiki | Fandom
-- Action: `update_existing`
-- Target: `events.html`
-- Cluster: `Events`
-- Score: `64`
-- Source: `External search: site:lastz.fandom.com Last Z heroes research events`
-- URL: `https://lastz.fandom.com/wiki/Event_Center`
+- URL: `https://lastz.fandom.com/wiki/Bookstore`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
 ### external-search-mmediamreza-last-z-reference-shooter-camp-guide-last-z-survival-shooter-7
 
 - Title: External search opportunity: Shooter Camp Guide - | Last Z: Survival Shooter
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `hq.html`
 - Cluster: `Progression`
 - Score: `82`
@@ -104,7 +104,7 @@
 ### external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-8
 
 - Title: External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power - | Last Z: Survival Shooter
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `power-guide.html`
 - Cluster: `Progression`
 - Score: `82`
@@ -116,7 +116,7 @@
 ### external-search-mmediamreza-last-z-reference-last-z-laboratory-guide-tech-research-lab--9
 
 - Title: External search opportunity: Last Z Laboratory Guide: Tech Research & Lab No. 2 Unlocking - | Last Z: Survival Shooter
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `tech.html`
 - Cluster: `Research`
 - Score: `82`
