@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "report_type": "exact_proposal_owner_review",
+  "generated_at": "2026-05-18T19:09:22Z",
+  "run_id": "2026-05-18-owner-flow-smoke-2026-05-18",
+  "status": "proposal_ready",
+  "summary": "Worker-approved intake for `codes.html` from `owner-flow-smoke-2026-05-18`.",
+  "risk_level": "medium",
+  "target_page_or_slug": "codes.html",
+  "exact_proposal_count": 0,
+  "non_exact_proposal_count": 2,
+  "items": [],
+  "safety": {
+    "content_edit": false,
+    "manifest_mutation": false,
+    "approval_mutation": false,
+    "purpose": "Owner review only. This report does not approve, apply, commit, push, or deploy changes."
+  },
+  "report_paths": {
+    "json": "automation/reports/2026-05-18-owner-flow-smoke-2026-05-18.exact-proposals.json",
+    "markdown": "automation/reports/2026-05-18-owner-flow-smoke-2026-05-18.exact-proposals.md"
+  }
+}
