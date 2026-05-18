@@ -1,0 +1,65 @@
+{
+  "run_id": "2026-05-18-owner-flow-smoke-2026-05-18",
+  "created_at": "2026-05-18T19:04:20Z",
+  "run_type": "update_existing",
+  "status": "planned",
+  "risk_level": "medium",
+  "summary": "Worker-approved intake for `codes.html` from `owner-flow-smoke-2026-05-18`.",
+  "inputs": {
+    "topic_id": "owner-flow-smoke-2026-05-18",
+    "title": "Owner issue lifecycle smoke test",
+    "cluster": "Site",
+    "source_type": "smoke_test",
+    "source_reference": "owner issue workflow e2e",
+    "confidence": "medium",
+    "priority": "medium",
+    "status": "candidate",
+    "approved_by": "owner-flow-smoke",
+    "approval_note": "Temporary no-write owner issue lifecycle smoke test. This does not approve public content."
+  },
+  "plan": {
+    "topic_id": "owner-flow-smoke-2026-05-18",
+    "title": "Owner issue lifecycle smoke test",
+    "cluster": "Site",
+    "recommended_action": "update_existing",
+    "archetype_suggestion": "cornerstone-guide",
+    "target_page_or_slug": "codes.html",
+    "source_type": "smoke_test",
+    "source_reference": "owner issue workflow e2e",
+    "confidence": "medium",
+    "priority": "medium",
+    "status": "candidate",
+    "risk_level": "medium",
+    "plan_summary": "Prepare a controlled content run for `codes.html` from an approved Worker intake artifact.",
+    "memory_files": [
+      "AGENTS.md",
+      "automation/memory/site_style_guide.md",
+      "automation/memory/page_archetypes.md",
+      "automation/memory/seo_llm_optimization.md",
+      "automation/memory/canonical_claims.json",
+      "automation/memory/content_index.json",
+      "automation/memory/entities.json",
+      "automation/memory/release_checklist.md"
+    ],
+    "related_pages": [
+      "codes.html"
+    ],
+    "deterministic_checks": [
+      "python3 scripts/prepublish_check.py",
+      "python3 automation/pipeline.py checks --strict"
+    ],
+    "notes": "No-write smoke artifact used to verify GitHub owner issue commands through proposal rendering."
+  },
+  "artifacts": {
+    "worker_intake": "automation/reports/worker-intake-owner-flow-smoke-2026-05-18.json",
+    "source_chain": "",
+    "worker_run_plan": "automation/reports/llm-worker-run-plan-owner-flow-smoke-2026-05-18.json",
+    "worker_manifest_writer": {
+      "created_at": "2026-05-18T19:05:40Z",
+      "created_by": "awd2",
+      "safety": "Created planned run manifest only; no content files were modified."
+    }
+  },
+  "changed_files": [],
+  "checks": {}
+}
