@@ -1039,6 +1039,47 @@ def cmd_llm_issue_lifecycle(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_issue_proposal_approval(
+    comment_body: str,
+    comment_author: str | None,
+    author_association: str | None,
+    issue_title: str | None,
+    manifest_dir: str | None,
+    manifest: str | None,
+    output_dir: str | None,
+    summary_output: str | None,
+    markdown_output: str | None,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_issue_proposal_approval.py"),
+        "--comment-body",
+        comment_body,
+    ]
+    if comment_author:
+        command.extend(["--comment-author", comment_author])
+    if author_association:
+        command.extend(["--author-association", author_association])
+    if issue_title:
+        command.extend(["--issue-title", issue_title])
+    if manifest_dir:
+        command.extend(["--manifest-dir", manifest_dir])
+    if manifest:
+        command.extend(["--manifest", manifest])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if summary_output:
+        command.extend(["--summary-output", summary_output])
+    if markdown_output:
+        command.extend(["--markdown-output", markdown_output])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Issue Proposal Approval ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_intake_latest(
     chain: str | None,
     reports_dir: str | None,
@@ -2773,6 +2814,21 @@ def build_parser() -> argparse.ArgumentParser:
     llm_issue_lifecycle_parser.add_argument("--markdown-output", help="Optional markdown summary output path.")
     llm_issue_lifecycle_parser.add_argument("--json", action="store_true", help="Print the issue lifecycle summary as JSON.")
 
+    llm_issue_proposal_approval_parser = subparsers.add_parser(
+        "llm-issue-proposal-approval",
+        help="Record owner approval for rendered proposal specs from a GitHub owner issue comment command.",
+    )
+    llm_issue_proposal_approval_parser.add_argument("--comment-body", required=True, help="Raw GitHub issue comment body.")
+    llm_issue_proposal_approval_parser.add_argument("--comment-author", help="GitHub login for the comment author.")
+    llm_issue_proposal_approval_parser.add_argument("--author-association", help="GitHub author association, such as OWNER or COLLABORATOR.")
+    llm_issue_proposal_approval_parser.add_argument("--issue-title", help="GitHub issue title. Must match the owner digest handoff title.")
+    llm_issue_proposal_approval_parser.add_argument("--manifest-dir", help="Directory where run manifests are stored.")
+    llm_issue_proposal_approval_parser.add_argument("--manifest", help="Optional explicit run manifest path.")
+    llm_issue_proposal_approval_parser.add_argument("--output-dir", help="Directory for refreshed proposal artifacts.")
+    llm_issue_proposal_approval_parser.add_argument("--summary-output", help="Optional JSON summary output path.")
+    llm_issue_proposal_approval_parser.add_argument("--markdown-output", help="Optional markdown summary output path.")
+    llm_issue_proposal_approval_parser.add_argument("--json", action="store_true", help="Print the proposal approval summary as JSON.")
+
     llm_intake_latest_parser = subparsers.add_parser(
         "llm-intake-latest",
         help="Generate a no-write intake artifact from the latest LLM worker chain.",
@@ -3169,6 +3225,19 @@ def main() -> int:
         )
     if args.command == "llm-issue-lifecycle":
         return cmd_llm_issue_lifecycle(
+            args.comment_body,
+            args.comment_author,
+            args.author_association,
+            args.issue_title,
+            args.manifest_dir,
+            args.manifest,
+            args.output_dir,
+            args.summary_output,
+            args.markdown_output,
+            args.json,
+        )
+    if args.command == "llm-issue-proposal-approval":
+        return cmd_llm_issue_proposal_approval(
             args.comment_body,
             args.comment_author,
             args.author_association,

@@ -251,7 +251,7 @@ def next_actions(summary: dict[str, Any]) -> list[str]:
         ]
     if command == "/propose-run":
         return [
-            f"Review proposal artifacts, then record exact proposal approval only if the visible Before/After text is correct: python3 automation/pipeline.py approval {run_id} --state approved --all --note \"<owner approval note>\"",
+            f"Review proposal artifacts, then record exact proposal approval only if the visible Before/After text is correct: /approve-proposal {run_id} <owner approval note>",
             "Public content is still unchanged until apply-preview, apply-approved, and strict QA.",
         ]
     return []

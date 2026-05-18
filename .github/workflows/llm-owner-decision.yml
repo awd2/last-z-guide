@@ -33,7 +33,8 @@ jobs:
         startsWith(github.event.comment.body, '/review-run ') ||
         startsWith(github.event.comment.body, '/brief-run ') ||
         startsWith(github.event.comment.body, '/patch-plan-run ') ||
-        startsWith(github.event.comment.body, '/propose-run ')
+        startsWith(github.event.comment.body, '/propose-run ') ||
+        startsWith(github.event.comment.body, '/approve-proposal ')
       )
     runs-on: ubuntu-latest
     steps:
@@ -158,6 +159,27 @@ jobs:
             --markdown-output automation/reports/llm-owner-lifecycle-gha/lifecycle-summary.md \
             --json | tee automation/reports/llm-owner-lifecycle-gha/run-summary.json
 
+      - name: Record owner proposal approval from issue comment
+        if: startsWith(github.event.comment.body, '/approve-proposal ')
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+          mkdir -p automation/reports/llm-owner-proposal-approval-gha
+          python3 automation/pipeline.py llm-issue-proposal-approval \
+            --comment-body "$COMMENT_BODY" \
+            --comment-author "$COMMENT_AUTHOR" \
+            --author-association "$AUTHOR_ASSOCIATION" \
+            --issue-title "$ISSUE_TITLE" \
+            --manifest-dir automation/manifests \
+            --output-dir automation/reports \
+            --summary-output automation/reports/llm-owner-proposal-approval-gha/proposal-approval-summary.json \
+            --markdown-output automation/reports/llm-owner-proposal-approval-gha/proposal-approval-summary.md \
+            --json | tee automation/reports/llm-owner-proposal-approval-gha/run-summary.json
+
       - name: Write job summary
         if: always()
         run: |
@@ -231,6 +253,20 @@ jobs:
               if lifecycle.get("errors"):
                   print("- Lifecycle errors:")
                   for error in lifecycle["errors"]:
+                      print(f"  - {error}")
+          proposal_approval_path = Path("automation/reports/llm-owner-proposal-approval-gha/proposal-approval-summary.json")
+          if proposal_approval_path.exists():
+              approval = json.loads(proposal_approval_path.read_text())
+              print(f"- Proposal approval state: `{approval.get('state')}`")
+              print(f"- Proposal approval run ID: `{approval.get('run_id')}`")
+              print(f"- Manifest path: `{approval.get('manifest_path')}`")
+              print(f"- Before status: `{approval.get('before_status')}`")
+              print(f"- After status: `{approval.get('after_status')}`")
+              print(f"- Approved specs: `{approval.get('approved_spec_count')}`")
+              print(f"- Allows apply-preview: `{approval.get('allows_apply_preview')}`")
+              if approval.get("errors"):
+                  print("- Proposal approval errors:")
+                  for error in approval["errors"]:
                       print(f"  - {error}")
           PY
 
@@ -319,6 +355,7 @@ jobs:
           run_plan_path = Path("automation/reports/llm-owner-run-plan-gha/run-plan-summary.json")
           manifest_path = Path("automation/reports/llm-owner-manifest-gha/manifest-summary.json")
           lifecycle_path = Path("automation/reports/llm-owner-lifecycle-gha/lifecycle-summary.json")
+          proposal_approval_path = Path("automation/reports/llm-owner-proposal-approval-gha/proposal-approval-summary.json")
           chain_path = Path("automation/reports/llm-worker-chain-gha/run-summary.json")
           lines = [
               "## LLM owner handoff result",
@@ -342,10 +379,18 @@ jobs:
                   for error in decision["errors"]:
                       lines.append(f"  - {error}")
           else:
-              if not intake_path.exists() and not run_plan_path.exists() and not manifest_path.exists() and not lifecycle_path.exists():
+              if (
+                  not intake_path.exists()
+                  and not run_plan_path.exists()
+                  and not manifest_path.exists()
+                  and not lifecycle_path.exists()
+                  and not proposal_approval_path.exists()
+              ):
                   lines.append("- State: `blocked`")
                   lines.append("- Errors:")
-                  lines.append("  - No decision, intake, run-plan, manifest, or lifecycle summary artifact was written.")
+                  lines.append(
+                      "  - No decision, intake, run-plan, manifest, lifecycle, or proposal approval summary artifact was written."
+                  )
 
           if intake_path.exists():
               intake = json.loads(intake_path.read_text())
@@ -430,6 +475,31 @@ jobs:
                   for error in lifecycle["errors"]:
                       lines.append(f"  - {error}")
 
+          if proposal_approval_path.exists():
+              approval = json.loads(proposal_approval_path.read_text())
+              lines.extend(
+                  [
+                      "",
+                      "Proposal approval:",
+                      "",
+                      f"- State: `{approval.get('state', '')}`",
+                      f"- Run ID: `{approval.get('run_id', '')}`",
+                      f"- Manifest path: `{approval.get('manifest_path', '')}`",
+                      f"- Before status: `{approval.get('before_status', '')}`",
+                      f"- After status: `{approval.get('after_status', '')}`",
+                      f"- Approved specs: `{approval.get('approved_spec_count', 0)}`",
+                      f"- Exact specs: `{approval.get('exact_spec_count', 0)}`",
+                      f"- Proposal report: `{approval.get('proposal_markdown', '')}`",
+                      f"- Allows content edit: `{str(approval.get('allows_content_edit', False)).lower()}`",
+                      f"- Allows apply-preview: `{str(approval.get('allows_apply_preview', False)).lower()}`",
+                      f"- Allows apply-approved: `{str(approval.get('allows_apply_approved', False)).lower()}`",
+                  ]
+              )
+              if approval.get("errors"):
+                  lines.append("- Proposal approval errors:")
+                  for error in approval["errors"]:
+                      lines.append(f"  - {error}")
+
           if chain_path.exists():
               chain = json.loads(chain_path.read_text())
               lines.extend(
@@ -452,8 +522,9 @@ jobs:
                   "",
                   "Safety:",
                   "",
-                  "- No public copy was approved.",
+                  "- No public copy was applied.",
                   "- No public content, backlog, PRs, or production state were modified.",
+                  "- /approve-proposal records owner approval for rendered specs only; it does not apply content.",
                   "- Planned manifest creation is allowed only by /approve-manifest.",
                   f"- Workflow run: {workflow_url}",
               ]
@@ -485,6 +556,7 @@ jobs:
             automation/reports/llm-owner-run-plan-gha/
             automation/reports/llm-owner-manifest-gha/
             automation/reports/llm-owner-lifecycle-gha/
+            automation/reports/llm-owner-proposal-approval-gha/
             automation/reports/llm-worker-chain-gha/
             automation/reports/llm-owner-decision-chains/
             automation/reports/*.proposed.md

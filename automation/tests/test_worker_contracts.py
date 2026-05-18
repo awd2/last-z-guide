@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_owner_digest, llm_owner_issue, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_issue_intake, llm_issue_lifecycle, llm_issue_manifest, llm_issue_run_plan, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_issue_intake, llm_issue_lifecycle, llm_issue_manifest, llm_issue_proposal_approval, llm_issue_run_plan, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -3864,6 +3864,43 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(proposed_manifest["status"], "proposal_ready")
             self.assertIn("proposal", proposed_manifest["artifacts"])
 
+            code, approval_summary = llm_issue_proposal_approval.run_issue_proposal_approval(
+                comment_body=f"/approve-proposal {run_id} Owner approves rendered proposal specs only.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=tmp_path / "proposal-approval.json",
+                markdown_output=tmp_path / "proposal-approval.md",
+            )
+            self.assertEqual(code, 0)
+            self.assertEqual(approval_summary["state"], "proposal_approved")
+            self.assertEqual(approval_summary["before_status"], "proposal_ready")
+            self.assertEqual(approval_summary["after_status"], "approved_for_apply")
+            self.assertGreater(approval_summary["approved_spec_count"], 0)
+            self.assertFalse(approval_summary["allows_content_edit"])
+            self.assertTrue(approval_summary["allows_apply_preview"])
+            self.assertFalse(approval_summary["allows_apply_approved"])
+            self.assertTrue((tmp_path / "proposal-approval.json").exists())
+            self.assertTrue((tmp_path / "proposal-approval.md").exists())
+
+            approved_manifest = load_json(manifest_path)
+            self.assertEqual(approved_manifest["status"], "approved_for_apply")
+            self.assertTrue(
+                all(
+                    spec.get("approval_state") == "approved"
+                    for spec in approved_manifest["artifacts"]["proposal"]["rendered_specs"]
+                )
+            )
+            self.assertTrue(
+                all(
+                    spec.get("approval_state") == "approved"
+                    for spec in approved_manifest["artifacts"]["patch_plan"]["patch_specs"]
+                )
+            )
+
     def test_issue_lifecycle_blocks_untrusted_or_wrong_status_comment(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
@@ -3938,6 +3975,37 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(code, 1)
             self.assertEqual(wrong_status_summary["state"], "blocked")
             self.assertIn("Manifest status must be `reviewed`", " ".join(wrong_status_summary["errors"]))
+
+            code, proposal_summary = llm_issue_proposal_approval.run_issue_proposal_approval(
+                comment_body=f"/approve-proposal {run_id}",
+                comment_author="fixture-user",
+                author_association="CONTRIBUTOR",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+            self.assertEqual(code, 1)
+            self.assertEqual(proposal_summary["state"], "blocked")
+            self.assertIn("Unsupported comment author association", " ".join(proposal_summary["errors"]))
+            self.assertIn("Proposal approval note is required", " ".join(proposal_summary["errors"]))
+
+            code, wrong_proposal_status = llm_issue_proposal_approval.run_issue_proposal_approval(
+                comment_body=f"/approve-proposal {run_id} Owner tries to approve before proposal rendering.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+            self.assertEqual(code, 1)
+            self.assertEqual(wrong_proposal_status["state"], "blocked")
+            self.assertIn("Manifest status must be `proposal_ready`", " ".join(wrong_proposal_status["errors"]))
 
 
 if __name__ == "__main__":

@@ -126,6 +126,7 @@ python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/review-run <
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/brief-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/patch-plan-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/propose-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/pipeline.py llm-issue-proposal-approval --comment-body "/approve-proposal <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
@@ -153,6 +154,7 @@ python3 automation/workers/llm_issue_lifecycle.py --comment-body "/review-run <r
 python3 automation/workers/llm_issue_lifecycle.py --comment-body "/brief-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_issue_lifecycle.py --comment-body "/patch-plan-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_issue_lifecycle.py --comment-body "/propose-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/workers/llm_issue_proposal_approval.py --comment-body "/approve-proposal <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_run_approved_handoffs.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
@@ -315,11 +317,20 @@ patch_plan_ready -> proposal_ready`. It may mutate automation manifests and
 generated brief / patch-plan / proposal reports, but it must not approve public
 copy, mutate backlog/content, create PRs, or deploy.
 
+`llm-issue-proposal-approval` is the GitHub issue-comment bridge from rendered
+proposal specs to owner-approved proposal specs. It accepts only
+`/approve-proposal <run_id> <owner note>` on the
+`LLM Owner Digest: Action Needed` issue, requires a matching manifest with
+rendered proposal specs, and may move the manifest to `approved_for_apply` while
+refreshing `.proposed.md` and `.exact-proposals.*` reports. It allows the next
+no-write `apply-preview` step only; it must not run `apply-approved`, edit public
+content, mutate backlog, create PRs, or deploy.
+
 GitHub workflow `.github/workflows/llm-owner-decision.yml` runs this command
 from matching issue comments, replies in the same issue with the result, and may
 commit only owner handoff artifacts: topic decisions, persisted no-write chain
-summaries, intake artifacts, run-plan artifacts, planned manifests, and lifecycle
-brief/patch/proposal reports. For `/approve-chain`, it runs the no-write
+summaries, intake artifacts, run-plan artifacts, automation manifests, and
+lifecycle brief/patch/proposal reports. For `/approve-chain`, it runs the no-write
 `llm-worker-chain --from-decision` path in the same workflow job, uploads the
 chain artifacts, and persists the summary under
 `automation/reports/llm-owner-decision-chains/` for later `/approve-intake`.

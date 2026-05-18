@@ -339,6 +339,7 @@ python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/review-run <
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/brief-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/patch-plan-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/propose-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/pipeline.py llm-issue-proposal-approval --comment-body "/approve-proposal <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities
@@ -366,6 +367,12 @@ python3 automation/workers/llm_scout.py --external-proposals automation/reports/
 python3 automation/workers/llm_candidate_refresh.py --provider openai --json
 python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
+python3 automation/workers/llm_issue_decision.py --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/workers/llm_issue_intake.py --comment-body "/approve-intake <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/workers/llm_issue_run_plan.py --comment-body "/approve-run-plan <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/workers/llm_issue_manifest.py --comment-body "/approve-manifest <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/workers/llm_issue_lifecycle.py --comment-body "/propose-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/workers/llm_issue_proposal_approval.py --comment-body "/approve-proposal <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_worker_chain.py --topic-id <topic_id> --provider openai --json
@@ -679,10 +686,10 @@ LLM owner decision workflow:
 
 - `.github/workflows/llm-owner-decision.yml` -> record owner decisions from comments on the GitHub handoff issue
 - trigger mode: new issue comment on `LLM Owner Digest: Action Needed`
-- supported commands: `/monitor`, `/reject`, `/approve-chain`, `/approve-intake`, `/approve-run-plan`, `/dry-run-manifest`, `/approve-manifest`, `/review-run`, `/brief-run`, `/patch-plan-run`, and `/propose-run`
+- supported commands: `/monitor`, `/reject`, `/approve-chain`, `/approve-intake`, `/approve-run-plan`, `/dry-run-manifest`, `/approve-manifest`, `/review-run`, `/brief-run`, `/patch-plan-run`, `/propose-run`, and `/approve-proposal`
 - accepted author associations: `OWNER`, `MEMBER`, and `COLLABORATOR`
 - output is an uploaded workflow artifact named `llm-owner-decision-<run_number>`
-- it may commit only owner handoff artifacts: `automation/reports/llm-topic-decision-<topic_id>.json` / `.md`, `automation/reports/llm-owner-decision-chains/llm-worker-chain-<topic_id>.json` / `.md`, `automation/reports/llm-intake-<topic_id>.json` / `.md`, `automation/reports/llm-worker-run-plan-<topic_id>.json` / `.md`, planned manifests under `automation/manifests/`, and generated `.brief.md` / `.patch.md` / `.proposed.md` / `.exact-proposals.*` reports
+- it may commit only owner handoff artifacts: `automation/reports/llm-topic-decision-<topic_id>.json` / `.md`, `automation/reports/llm-owner-decision-chains/llm-worker-chain-<topic_id>.json` / `.md`, `automation/reports/llm-intake-<topic_id>.json` / `.md`, `automation/reports/llm-worker-run-plan-<topic_id>.json` / `.md`, automation manifests under `automation/manifests/`, and generated `.brief.md` / `.patch.md` / `.proposed.md` / `.exact-proposals.*` reports
 - for `/approve-chain`, it runs `llm-worker-chain --from-decision` in the same workflow job and uploads the no-write chain artifacts
 - for `/approve-chain`, it also persists the no-write chain summary under `automation/reports/llm-owner-decision-chains/` so a later `/approve-intake` comment has a durable source artifact
 - for `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary; it still does not approve public copy or create a run manifest
@@ -690,6 +697,7 @@ LLM owner decision workflow:
 - for `/dry-run-manifest`, it validates a planned manifest path from a matching run-plan artifact without writing a manifest
 - for `/approve-manifest`, it creates only a `planned` run manifest from a matching run-plan artifact
 - for `/review-run`, `/brief-run`, `/patch-plan-run`, and `/propose-run`, it advances an existing manifest through `planned -> reviewed -> draft_brief_ready -> patch_plan_ready -> proposal_ready`
+- for `/approve-proposal`, it records owner approval on rendered proposal specs and can move the manifest to `approved_for_apply`, but it still does not apply public content
 - it replies to the same GitHub issue with the decision/intake result, workflow link, and worker-chain summary when applicable
 - this workflow intentionally does not edit public content, backlog, PRs, or deploy; lifecycle commands may mutate automation manifests and write review reports only
 
@@ -786,6 +794,14 @@ LLM issue lifecycle:
 - supported commands are `/review-run`, `/brief-run`, `/patch-plan-run`, and `/propose-run`
 - each command requires a run id, a real owner note, an accepted author association, and the exact previous manifest status
 - this may mutate only automation manifests and generated brief/patch/proposal reports; it does not approve public copy, mutate backlog/content, create PRs, or deploy
+
+LLM issue proposal approval:
+
+- `python3 automation/pipeline.py llm-issue-proposal-approval --comment-body "/approve-proposal <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json` -> record owner approval on rendered proposal specs from an existing `proposal_ready` manifest
+- supported command is `/approve-proposal`
+- the command requires a run id, a real owner note, an accepted author association, and previously rendered proposal specs
+- this may move a manifest to `approved_for_apply` and refresh `.proposed.md` / `.exact-proposals.*` reports
+- this allows the next no-write `apply-preview` step only; it does not run `apply-approved`, edit public content, mutate backlog, create PRs, or deploy
 
 LLM intake latest:
 
