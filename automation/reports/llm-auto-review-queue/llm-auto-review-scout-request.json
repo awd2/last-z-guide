@@ -207,7 +207,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycles include a research-focused phase and a hero-upgrade phase, useful for mapping event tasks tied to research and heroes."
+          "Daily event cycles include research-speed tasks and hero upgrade tasks; useful for cross-checking event categories and rewards."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -226,8 +226,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-5",
-        "title": "External search opportunity: Laboratory",
+        "topic_id": "external-search-lastz-fandom-reference-heroes-5",
+        "title": "External search opportunity: Heroes",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -237,7 +237,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Explains the building used for technologies research and unlock conditions, useful for cross-checking research-related event tasks."
+          "Core hero overview page with hero classes and power factors; useful for entity discovery around hero systems."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -267,7 +267,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster and equipment reference page with faction filters, levels, and gear entries; good lead for character discovery and equipment cross-checks."
+          "Core hero index with roster, faction tabs, levels, and equipment; useful for hero discovery and cross-checking character names."
         ],
         "site_fit": {
           "expected_internal_route": [
