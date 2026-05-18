@@ -113,6 +113,21 @@ def approved_intake_path(topic_id: str) -> Path | None:
     return None
 
 
+def ready_run_plan_path(topic_id: str) -> Path | None:
+    path = REPORTS_DIR / f"llm-worker-run-plan-{topic_id}.json"
+    if not path.exists():
+        path = REPORTS_DIR / f"worker-run-plan-{topic_id}.json"
+    if not path.exists():
+        return None
+    try:
+        payload = load_json(path)
+    except Exception:
+        return None
+    if payload.get("state") == "run_plan_ready":
+        return path
+    return None
+
+
 def render_owner_commands(digest: dict[str, Any]) -> list[str]:
     items = unique_action_items(digest)
     if not items:
@@ -121,7 +136,7 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
     lines = [
         "## Owner Commands",
         "",
-        "Choose at most one decision command per topic. GitHub comment commands are preferred; local CLI commands are included as a fallback. These commands only record owner decisions or intake scope; they do not approve public copy, patch specs, PRs, or deployment.",
+        "Choose at most one decision command per topic. GitHub comment commands are preferred; local CLI commands are included as a fallback. These commands only record owner decisions, intake scope, run-plan scope, or planned-manifest scope; they do not approve public copy, patch specs, PRs, or deployment.",
         "",
     ]
     for item in items:
@@ -139,6 +154,9 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
             comment_commands.append(f"/approve-intake {topic_id} Approve {topic_id} for intake only: <owner answers and intake scope>")
         if approved_intake_path(topic_id):
             comment_commands.append(f"/approve-run-plan {topic_id} Approve {topic_id} for no-write run-plan only: <owner confirms run-plan scope>")
+        if ready_run_plan_path(topic_id):
+            comment_commands.append(f"/dry-run-manifest {topic_id} Dry-run planned manifest for {topic_id}: <owner confirms manifest scope>")
+            comment_commands.append(f"/approve-manifest {topic_id} Create planned manifest for {topic_id}: <owner confirms manifest creation>")
         lines.extend(
             [
                 f"### `{topic_id}`",
@@ -191,6 +209,22 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
                     "python3 automation/pipeline.py worker-run-plan "
                     f"--intake {rel(approved_intake)} "
                     f"--basename llm-worker-run-plan-{topic_id} "
+                    "--json",
+                    "```",
+                    "",
+                ]
+            )
+        ready_run_plan = ready_run_plan_path(topic_id)
+        if ready_run_plan:
+            lines.extend(
+                [
+                    "Dry-run planned manifest from run-plan:",
+                    "",
+                    "```bash",
+                    "python3 automation/pipeline.py worker-manifest "
+                    f"--run-plan {rel(ready_run_plan)} "
+                    "--created-by OWNER_NAME "
+                    "--dry-run "
                     "--json",
                     "```",
                     "",

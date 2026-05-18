@@ -333,6 +333,8 @@ python3 automation/pipeline.py llm-owner-issue --json
 python3 automation/pipeline.py llm-issue-decision --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-intake --comment-body "/approve-intake <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-run-plan --comment-body "/approve-run-plan <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/pipeline.py llm-issue-manifest --comment-body "/dry-run-manifest <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/pipeline.py llm-issue-manifest --comment-body "/approve-manifest <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities
@@ -672,14 +674,16 @@ LLM owner decision workflow:
 
 - `.github/workflows/llm-owner-decision.yml` -> record owner decisions from comments on the GitHub handoff issue
 - trigger mode: new issue comment on `LLM Owner Digest: Action Needed`
-- supported commands: `/monitor`, `/reject`, `/approve-chain`, `/approve-intake`, and `/approve-run-plan`
+- supported commands: `/monitor`, `/reject`, `/approve-chain`, `/approve-intake`, `/approve-run-plan`, `/dry-run-manifest`, and `/approve-manifest`
 - accepted author associations: `OWNER`, `MEMBER`, and `COLLABORATOR`
 - output is an uploaded workflow artifact named `llm-owner-decision-<run_number>`
-- it may commit only owner handoff artifacts: `automation/reports/llm-topic-decision-<topic_id>.json` / `.md`, `automation/reports/llm-owner-decision-chains/llm-worker-chain-<topic_id>.json` / `.md`, `automation/reports/llm-intake-<topic_id>.json` / `.md`, and `automation/reports/llm-worker-run-plan-<topic_id>.json` / `.md`
+- it may commit only owner handoff artifacts: `automation/reports/llm-topic-decision-<topic_id>.json` / `.md`, `automation/reports/llm-owner-decision-chains/llm-worker-chain-<topic_id>.json` / `.md`, `automation/reports/llm-intake-<topic_id>.json` / `.md`, `automation/reports/llm-worker-run-plan-<topic_id>.json` / `.md`, and planned manifests under `automation/manifests/`
 - for `/approve-chain`, it runs `llm-worker-chain --from-decision` in the same workflow job and uploads the no-write chain artifacts
 - for `/approve-chain`, it also persists the no-write chain summary under `automation/reports/llm-owner-decision-chains/` so a later `/approve-intake` comment has a durable source artifact
 - for `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary; it still does not approve public copy or create a run manifest
 - for `/approve-run-plan`, it creates a no-write run-plan proposal from a matching approved intake artifact; it still does not create a manifest
+- for `/dry-run-manifest`, it validates a planned manifest path from a matching run-plan artifact without writing a manifest
+- for `/approve-manifest`, it creates only a `planned` run manifest from a matching run-plan artifact
 - it replies to the same GitHub issue with the decision/intake result, workflow link, and worker-chain summary when applicable
 - this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 
@@ -756,6 +760,16 @@ LLM issue run plan:
 - output lives in `automation/reports/llm-worker-run-plan-<topic_id>.json` and `.md`
 - `.github/workflows/llm-owner-decision.yml` runs this command from run-plan comments on the `LLM Owner Digest: Action Needed` issue and may commit only the resulting run-plan artifacts
 - this does not approve public copy, mutate backlog/manifests/content, create PRs, or deploy
+
+LLM issue manifest:
+
+- `python3 automation/pipeline.py llm-issue-manifest --comment-body "/dry-run-manifest <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json` -> validate the planned manifest path from a matching run-plan without writing a manifest
+- `python3 automation/pipeline.py llm-issue-manifest --comment-body "/approve-manifest <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json` -> create one planned manifest from a matching run-plan
+- supported commands are `/dry-run-manifest` and `/approve-manifest`
+- the command requires a topic id, a real owner note, an accepted author association, and a matching `run_plan_ready` `llm-worker-run-plan-<topic_id>.json` or `worker-run-plan-<topic_id>.json` artifact
+- `/dry-run-manifest` writes no manifest and reports the expected path
+- `/approve-manifest` may create only a `planned` run manifest under `automation/manifests/`
+- this does not approve public copy, mutate backlog/content, create PRs, or deploy
 
 LLM intake latest:
 

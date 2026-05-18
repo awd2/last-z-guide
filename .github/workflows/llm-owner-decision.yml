@@ -27,7 +27,9 @@ jobs:
         startsWith(github.event.comment.body, '/reject ') ||
         startsWith(github.event.comment.body, '/approve-chain ') ||
         startsWith(github.event.comment.body, '/approve-intake ') ||
-        startsWith(github.event.comment.body, '/approve-run-plan ')
+        startsWith(github.event.comment.body, '/approve-run-plan ') ||
+        startsWith(github.event.comment.body, '/dry-run-manifest ') ||
+        startsWith(github.event.comment.body, '/approve-manifest ')
       )
     runs-on: ubuntu-latest
     steps:
@@ -104,6 +106,29 @@ jobs:
             --markdown-output automation/reports/llm-owner-run-plan-gha/run-plan-summary.md \
             --json | tee automation/reports/llm-owner-run-plan-gha/run-summary.json
 
+      - name: Record owner manifest from issue comment
+        if: >
+          startsWith(github.event.comment.body, '/dry-run-manifest ') ||
+          startsWith(github.event.comment.body, '/approve-manifest ')
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+          mkdir -p automation/reports/llm-owner-manifest-gha
+          python3 automation/pipeline.py llm-issue-manifest \
+            --comment-body "$COMMENT_BODY" \
+            --comment-author "$COMMENT_AUTHOR" \
+            --author-association "$AUTHOR_ASSOCIATION" \
+            --issue-title "$ISSUE_TITLE" \
+            --reports-dir automation/reports \
+            --manifest-dir automation/manifests \
+            --summary-output automation/reports/llm-owner-manifest-gha/manifest-summary.json \
+            --markdown-output automation/reports/llm-owner-manifest-gha/manifest-summary.md \
+            --json | tee automation/reports/llm-owner-manifest-gha/run-summary.json
+
       - name: Write job summary
         if: always()
         run: |
@@ -112,7 +137,8 @@ jobs:
             echo
             echo "- Mode: no-write"
             echo "- Trigger: owner issue comment"
-            echo "- Content/backlog/manifests/PRs modified: \`false\`"
+            echo "- Public content/backlog/PRs modified: \`false\`"
+            echo "- Planned manifest creation allowed only by \`/approve-manifest\`"
             echo
           } >> "$GITHUB_STEP_SUMMARY"
           python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
@@ -152,6 +178,17 @@ jobs:
               if run_plan.get("errors"):
                   print("- Run-plan errors:")
                   for error in run_plan["errors"]:
+                      print(f"  - {error}")
+          manifest_path = Path("automation/reports/llm-owner-manifest-gha/manifest-summary.json")
+          if manifest_path.exists():
+              manifest = json.loads(manifest_path.read_text())
+              print(f"- Manifest command state: `{manifest.get('state')}`")
+              print(f"- Manifest topic: `{manifest.get('topic_id')}`")
+              print(f"- Manifest path: `{manifest.get('manifest_path')}`")
+              print(f"- Allows manifest creation: `{manifest.get('allows_manifest_creation')}`")
+              if manifest.get("errors"):
+                  print("- Manifest errors:")
+                  for error in manifest["errors"]:
                       print(f"  - {error}")
           PY
 
@@ -238,6 +275,7 @@ jobs:
           decision_path = Path("automation/reports/llm-owner-decision-gha/decision-summary.json")
           intake_path = Path("automation/reports/llm-owner-intake-gha/intake-summary.json")
           run_plan_path = Path("automation/reports/llm-owner-run-plan-gha/run-plan-summary.json")
+          manifest_path = Path("automation/reports/llm-owner-manifest-gha/manifest-summary.json")
           chain_path = Path("automation/reports/llm-worker-chain-gha/run-summary.json")
           lines = [
               "## LLM owner handoff result",
@@ -261,10 +299,10 @@ jobs:
                   for error in decision["errors"]:
                       lines.append(f"  - {error}")
           else:
-              if not intake_path.exists() and not run_plan_path.exists():
+              if not intake_path.exists() and not run_plan_path.exists() and not manifest_path.exists():
                   lines.append("- State: `blocked`")
                   lines.append("- Errors:")
-                  lines.append("  - No decision, intake, or run-plan summary artifact was written.")
+                  lines.append("  - No decision, intake, run-plan, or manifest summary artifact was written.")
 
           if intake_path.exists():
               intake = json.loads(intake_path.read_text())
@@ -305,6 +343,28 @@ jobs:
                   for error in run_plan["errors"]:
                       lines.append(f"  - {error}")
 
+          if manifest_path.exists():
+              manifest = json.loads(manifest_path.read_text())
+              lines.extend(
+                  [
+                      "",
+                      "Manifest:",
+                      "",
+                      f"- State: `{manifest.get('state', '')}`",
+                      f"- Topic: `{manifest.get('topic_id', '')}`",
+                      f"- Source run-plan: `{manifest.get('source_run_plan', '')}`",
+                      f"- Run ID: `{manifest.get('run_id', '')}`",
+                      f"- Manifest path: `{manifest.get('manifest_path', '')}`",
+                      f"- Dry run: `{str(manifest.get('dry_run', False)).lower()}`",
+                      f"- Allows content edit: `{str(manifest.get('allows_content_edit', False)).lower()}`",
+                      f"- Allows manifest creation: `{str(manifest.get('allows_manifest_creation', False)).lower()}`",
+                  ]
+              )
+              if manifest.get("errors"):
+                  lines.append("- Manifest errors:")
+                  for error in manifest["errors"]:
+                      lines.append(f"  - {error}")
+
           if chain_path.exists():
               chain = json.loads(chain_path.read_text())
               lines.extend(
@@ -328,7 +388,8 @@ jobs:
                   "Safety:",
                   "",
                   "- No public copy was approved.",
-                  "- No content, backlog, manifests, PRs, or production state were modified.",
+                  "- No public content, backlog, PRs, or production state were modified.",
+                  "- Planned manifest creation is allowed only by /approve-manifest.",
                   f"- Workflow run: {workflow_url}",
               ]
           )
@@ -357,20 +418,23 @@ jobs:
             automation/reports/llm-owner-decision-gha/
             automation/reports/llm-owner-intake-gha/
             automation/reports/llm-owner-run-plan-gha/
+            automation/reports/llm-owner-manifest-gha/
             automation/reports/llm-worker-chain-gha/
             automation/reports/llm-owner-decision-chains/
+            automation/manifests/
           if-no-files-found: ignore
 
       - name: Commit owner handoff artifacts
         if: success()
         run: |
-          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md automation/reports/llm-owner-decision-chains)" ]]; then
+          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md automation/reports/llm-owner-decision-chains automation/manifests)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md || true
             git add automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md || true
             git add automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md || true
             git add automation/reports/llm-owner-decision-chains || true
+            git add automation/manifests || true
             git commit -m "chore(llm): record owner handoff artifacts"
             for i in 1 2 3; do
               git pull --rebase origin main
