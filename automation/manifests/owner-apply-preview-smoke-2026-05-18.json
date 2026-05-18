@@ -2,7 +2,7 @@
   "run_id": "owner-apply-preview-smoke-2026-05-18",
   "created_at": "2026-05-18T20:05:00Z",
   "run_type": "update_existing",
-  "status": "approved_for_apply",
+  "status": "apply_preview_ready",
   "risk_level": "low",
   "summary": "Temporary smoke fixture for GitHub issue /preview-apply workflow validation.",
   "inputs": {
@@ -72,6 +72,29 @@
           "desired_after_summary": "Replace the exact old snippet with the exact new snippet only after owner approval.",
           "suggested_content": "",
           "risk_level": "medium"
+        }
+      ]
+    },
+    "apply_preview": {
+      "report_path": "automation/reports/owner-apply-preview-smoke-2026-05-18.apply-preview.md",
+      "generated_at": "2026-05-18T19:51:00Z",
+      "approved_specs_count": 1,
+      "preview_items": [
+        {
+          "source_of_truth_file": "automation/reports/owner-apply-preview-smoke-source.txt",
+          "output_file": "automation/reports/owner-apply-preview-smoke-source.txt",
+          "operation_type": "safe_exact_replace",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "safe_exact_replace",
+          "warnings": [],
+          "preview": "```diff\n# #smoke\n- Before owner apply preview smoke fixture.\n+ After owner apply preview smoke fixture.\n```",
+          "validation_commands": [
+            "python3 -m unittest automation.tests.test_worker_contracts.WorkerContractTests.test_issue_lifecycle_runs_review_brief_and_patch_plan_comments"
+          ],
+          "target_page": "automation/reports/owner-apply-preview-smoke-source.txt"
         }
       ]
     }
