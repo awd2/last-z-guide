@@ -196,22 +196,22 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-event-center-last-z-survival-shooter-wiki--5",
-        "title": "External search opportunity: Event Center | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Research",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
+        "title": "External search opportunity: Full Preparedness",
+        "cluster": "Events",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "research.html",
+        "target_page_or_slug": "events.html",
         "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hub page for regular and special events, useful for finding where research-linked events are organized."
+          "Daily event cycle with a research-focused theme called Age of Science and a hero-focused theme called Hero Initiative."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "research.html"
+            "events.html"
           ],
           "external_source_id": "lastz-fandom-reference"
         },
@@ -226,22 +226,22 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Events",
+        "topic_id": "external-search-lastz-fandom-reference-laboratory-5",
+        "title": "External search opportunity: Laboratory",
+        "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "events.html",
+        "target_page_or_slug": "research.html",
         "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event page that includes an Age of Science phase for technology research and a Hero Initiative phase for hero upgrades."
+          "Explains the building used for technologies research and its unlock level."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "events.html"
+            "research.html"
           ],
           "external_source_id": "lastz-fandom-reference"
         },
@@ -267,7 +267,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster page with faction filters, hero levels, and equipment sections; useful for hero discovery and cross-checking character list."
+          "Hero roster and equipment reference page; useful for hero discovery, factions, ranks, and gear categories."
         ],
         "site_fit": {
           "expected_internal_route": [
