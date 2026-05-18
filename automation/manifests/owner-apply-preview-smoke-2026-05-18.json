@@ -1,0 +1,89 @@
+{
+  "run_id": "owner-apply-preview-smoke-2026-05-18",
+  "created_at": "2026-05-18T20:05:00Z",
+  "run_type": "update_existing",
+  "status": "approved_for_apply",
+  "risk_level": "low",
+  "summary": "Temporary smoke fixture for GitHub issue /preview-apply workflow validation.",
+  "inputs": {
+    "topics": [
+      "owner apply preview smoke"
+    ],
+    "target_pages": [
+      "automation/reports/owner-apply-preview-smoke-source.txt"
+    ],
+    "source_references": [
+      "GitHub owner issue smoke test"
+    ]
+  },
+  "plan": {
+    "goal": "Validate that /preview-apply renders a no-write apply preview without applying public content.",
+    "target_page_or_slug": "automation/reports/owner-apply-preview-smoke-source.txt",
+    "archetypes_touched": [
+      "site-page"
+    ],
+    "actions": [
+      "render no-write apply preview from one approved safe_exact_replace proposal"
+    ]
+  },
+  "artifacts": {
+    "patch_plan": {
+      "target_page_or_slug": "automation/reports/owner-apply-preview-smoke-source.txt",
+      "patch_specs": [
+        {
+          "spec_version": 1,
+          "operation_type": "safe_exact_replace",
+          "source_type": "html_file",
+          "target_file": "automation/reports/owner-apply-preview-smoke-source.txt",
+          "source_of_truth_file": "automation/reports/owner-apply-preview-smoke-source.txt",
+          "output_file": "automation/reports/owner-apply-preview-smoke-source.txt",
+          "selector_or_anchor": "#smoke",
+          "exact_old": "Before owner apply preview smoke fixture.",
+          "exact_new": "After owner apply preview smoke fixture.",
+          "proposed_change_summary": "Temporary smoke-only exact replacement preview.",
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "validation_commands": [
+            "python3 -m unittest automation.tests.test_worker_contracts.WorkerContractTests.test_issue_lifecycle_runs_review_brief_and_patch_plan_comments"
+          ]
+        }
+      ]
+    },
+    "proposal": {
+      "report_path": "automation/reports/owner-apply-preview-smoke-2026-05-18.proposed.md",
+      "rendered_specs": [
+        {
+          "spec_version": 1,
+          "operation_type": "safe_exact_replace",
+          "source_type": "html_file",
+          "target_file": "automation/reports/owner-apply-preview-smoke-source.txt",
+          "source_of_truth_file": "automation/reports/owner-apply-preview-smoke-source.txt",
+          "output_file": "automation/reports/owner-apply-preview-smoke-source.txt",
+          "selector_or_anchor": "#smoke",
+          "exact_old": "Before owner apply preview smoke fixture.",
+          "exact_new": "After owner apply preview smoke fixture.",
+          "proposed_change_summary": "Temporary smoke-only exact replacement preview.",
+          "human_approval_required": true,
+          "approval_state": "approved",
+          "validation_commands": [
+            "python3 -m unittest automation.tests.test_worker_contracts.WorkerContractTests.test_issue_lifecycle_runs_review_brief_and_patch_plan_comments"
+          ],
+          "before_summary": "path: automation/reports/owner-apply-preview-smoke-source.txt",
+          "desired_after_summary": "Replace the exact old snippet with the exact new snippet only after owner approval.",
+          "suggested_content": "",
+          "risk_level": "medium"
+        }
+      ]
+    }
+  },
+  "changed_files": [
+    "automation/reports/owner-apply-preview-smoke-source.txt"
+  ],
+  "checks": {},
+  "review": {
+    "verdict": "not_applicable",
+    "open_questions": [],
+    "next_action": "smoke_test_only",
+    "reviewer_notes": "Temporary no-public-content smoke fixture."
+  }
+}
