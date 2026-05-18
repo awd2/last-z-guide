@@ -875,6 +875,47 @@ def cmd_llm_issue_decision(
     return subprocess.run(command, cwd=ROOT).returncode
 
 
+def cmd_llm_issue_intake(
+    comment_body: str,
+    comment_author: str | None,
+    author_association: str | None,
+    issue_title: str | None,
+    reports_dir: str | None,
+    chain: str | None,
+    output_dir: str | None,
+    summary_output: str | None,
+    markdown_output: str | None,
+    as_json: bool,
+) -> int:
+    command = [
+        sys.executable,
+        str(AUTOMATION_DIR / "workers" / "llm_issue_intake.py"),
+        "--comment-body",
+        comment_body,
+    ]
+    if comment_author:
+        command.extend(["--comment-author", comment_author])
+    if author_association:
+        command.extend(["--author-association", author_association])
+    if issue_title:
+        command.extend(["--issue-title", issue_title])
+    if reports_dir:
+        command.extend(["--reports-dir", reports_dir])
+    if chain:
+        command.extend(["--chain", chain])
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    if summary_output:
+        command.extend(["--summary-output", summary_output])
+    if markdown_output:
+        command.extend(["--markdown-output", markdown_output])
+    if as_json:
+        command.append("--json")
+        return subprocess.run(command, cwd=ROOT).returncode
+    print("\n== LLM Issue Intake ==", flush=True)
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
 def cmd_llm_intake_latest(
     chain: str | None,
     reports_dir: str | None,
@@ -2549,6 +2590,21 @@ def build_parser() -> argparse.ArgumentParser:
     llm_issue_decision_parser.add_argument("--markdown-output", help="Optional markdown summary output path.")
     llm_issue_decision_parser.add_argument("--json", action="store_true", help="Print the issue decision summary as JSON.")
 
+    llm_issue_intake_parser = subparsers.add_parser(
+        "llm-issue-intake",
+        help="Record intake-only owner approval from a GitHub owner issue comment command.",
+    )
+    llm_issue_intake_parser.add_argument("--comment-body", required=True, help="Raw GitHub issue comment body.")
+    llm_issue_intake_parser.add_argument("--comment-author", help="GitHub login for the comment author.")
+    llm_issue_intake_parser.add_argument("--author-association", help="GitHub author association, such as OWNER or COLLABORATOR.")
+    llm_issue_intake_parser.add_argument("--issue-title", help="GitHub issue title. Must match the owner digest handoff title.")
+    llm_issue_intake_parser.add_argument("--reports-dir", help="Directory to search for worker-chain summaries.")
+    llm_issue_intake_parser.add_argument("--chain", help="Optional explicit llm-worker-chain-<topic_id>.json path.")
+    llm_issue_intake_parser.add_argument("--output-dir", help="Directory for llm-intake artifacts.")
+    llm_issue_intake_parser.add_argument("--summary-output", help="Optional JSON summary output path.")
+    llm_issue_intake_parser.add_argument("--markdown-output", help="Optional markdown summary output path.")
+    llm_issue_intake_parser.add_argument("--json", action="store_true", help="Print the issue intake summary as JSON.")
+
     llm_intake_latest_parser = subparsers.add_parser(
         "llm-intake-latest",
         help="Generate a no-write intake artifact from the latest LLM worker chain.",
@@ -2899,6 +2955,19 @@ def main() -> int:
             args.author_association,
             args.issue_title,
             args.discovery,
+            args.output_dir,
+            args.summary_output,
+            args.markdown_output,
+            args.json,
+        )
+    if args.command == "llm-issue-intake":
+        return cmd_llm_issue_intake(
+            args.comment_body,
+            args.comment_author,
+            args.author_association,
+            args.issue_title,
+            args.reports_dir,
+            args.chain,
             args.output_dir,
             args.summary_output,
             args.markdown_output,

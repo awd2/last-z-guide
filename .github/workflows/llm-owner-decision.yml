@@ -25,7 +25,8 @@ jobs:
       (
         startsWith(github.event.comment.body, '/monitor ') ||
         startsWith(github.event.comment.body, '/reject ') ||
-        startsWith(github.event.comment.body, '/approve-chain ')
+        startsWith(github.event.comment.body, '/approve-chain ') ||
+        startsWith(github.event.comment.body, '/approve-intake ')
       )
     runs-on: ubuntu-latest
     steps:
@@ -40,6 +41,10 @@ jobs:
           python-version: "3.11"
 
       - name: Record owner decision from issue comment
+        if: >
+          startsWith(github.event.comment.body, '/monitor ') ||
+          startsWith(github.event.comment.body, '/reject ') ||
+          startsWith(github.event.comment.body, '/approve-chain ')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
           COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
@@ -58,11 +63,31 @@ jobs:
             --markdown-output automation/reports/llm-owner-decision-gha/decision-summary.md \
             --json | tee automation/reports/llm-owner-decision-gha/run-summary.json
 
+      - name: Record owner intake from issue comment
+        if: startsWith(github.event.comment.body, '/approve-intake ')
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+          mkdir -p automation/reports/llm-owner-intake-gha
+          python3 automation/pipeline.py llm-issue-intake \
+            --comment-body "$COMMENT_BODY" \
+            --comment-author "$COMMENT_AUTHOR" \
+            --author-association "$AUTHOR_ASSOCIATION" \
+            --issue-title "$ISSUE_TITLE" \
+            --reports-dir automation/reports \
+            --summary-output automation/reports/llm-owner-intake-gha/intake-summary.json \
+            --markdown-output automation/reports/llm-owner-intake-gha/intake-summary.md \
+            --json | tee automation/reports/llm-owner-intake-gha/run-summary.json
+
       - name: Write job summary
         if: always()
         run: |
           {
-            echo "## LLM Owner Decision"
+            echo "## LLM Owner Handoff"
             echo
             echo "- Mode: no-write"
             echo "- Trigger: owner issue comment"
@@ -76,21 +101,31 @@ jobs:
           path = Path("automation/reports/llm-owner-decision-gha/decision-summary.json")
           if not path.exists():
               print("No decision summary was written.")
-              raise SystemExit(0)
-          data = json.loads(path.read_text())
-          print(f"- State: `{data.get('state')}`")
-          print(f"- Topic: `{data.get('topic_id')}`")
-          print(f"- Decision: `{data.get('decision_state')}`")
-          print(f"- Allows worker chain: `{data.get('allows_worker_chain')}`")
-          print(f"- Decision artifact: `{data.get('decision_output_path')}`")
-          if data.get("errors"):
-              print("- Errors:")
-              for error in data["errors"]:
-                  print(f"  - {error}")
+          else:
+              data = json.loads(path.read_text())
+              print(f"- Decision state: `{data.get('state')}`")
+              print(f"- Topic: `{data.get('topic_id')}`")
+              print(f"- Decision: `{data.get('decision_state')}`")
+              print(f"- Allows worker chain: `{data.get('allows_worker_chain')}`")
+              print(f"- Decision artifact: `{data.get('decision_output_path')}`")
+              if data.get("errors"):
+                  print("- Decision errors:")
+                  for error in data["errors"]:
+                      print(f"  - {error}")
+          intake_path = Path("automation/reports/llm-owner-intake-gha/intake-summary.json")
+          if intake_path.exists():
+              intake = json.loads(intake_path.read_text())
+              print(f"- Intake command state: `{intake.get('state')}`")
+              print(f"- Intake topic: `{intake.get('topic_id')}`")
+              print(f"- Intake artifact: `{intake.get('intake_output_path')}`")
+              if intake.get("errors"):
+                  print("- Intake errors:")
+                  for error in intake["errors"]:
+                      print(f"  - {error}")
           PY
 
       - name: Run approved no-write worker chain
-        if: success()
+        if: success() && startsWith(github.event.comment.body, '/approve-chain ')
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.4-mini' }}
@@ -116,6 +151,18 @@ jobs:
             --provider openai \
             --output-dir automation/reports/llm-worker-chain-gha \
             --json | tee automation/reports/llm-worker-chain-gha/run-summary.json
+
+      - name: Persist owner-approved worker chain summary
+        if: success() && startsWith(github.event.comment.body, '/approve-chain ')
+        run: |
+          set -euo pipefail
+          mkdir -p automation/reports/llm-owner-decision-chains
+          if ls automation/reports/llm-worker-chain-gha/llm-worker-chain-*.json >/dev/null 2>&1; then
+            cp automation/reports/llm-worker-chain-gha/llm-worker-chain-*.json automation/reports/llm-owner-decision-chains/
+          fi
+          if ls automation/reports/llm-worker-chain-gha/llm-worker-chain-*.md >/dev/null 2>&1; then
+            cp automation/reports/llm-worker-chain-gha/llm-worker-chain-*.md automation/reports/llm-owner-decision-chains/
+          fi
 
       - name: Write worker-chain summary
         if: always()
@@ -158,9 +205,10 @@ jobs:
           workflow_url = os.environ["WORKFLOW_RUN_URL"]
 
           decision_path = Path("automation/reports/llm-owner-decision-gha/decision-summary.json")
+          intake_path = Path("automation/reports/llm-owner-intake-gha/intake-summary.json")
           chain_path = Path("automation/reports/llm-worker-chain-gha/run-summary.json")
           lines = [
-              "## LLM owner decision result",
+              "## LLM owner handoff result",
               "",
               "Mode: `no-write`",
               "",
@@ -182,8 +230,28 @@ jobs:
                       lines.append(f"  - {error}")
           else:
               lines.append("- State: `blocked`")
-              lines.append("- Errors:")
-              lines.append("  - No decision summary artifact was written.")
+              if not intake_path.exists():
+                  lines.append("- Errors:")
+                  lines.append("  - No decision or intake summary artifact was written.")
+
+          if intake_path.exists():
+              intake = json.loads(intake_path.read_text())
+              lines.extend(
+                  [
+                      "",
+                      "Intake:",
+                      "",
+                      f"- State: `{intake.get('state', '')}`",
+                      f"- Topic: `{intake.get('topic_id', '')}`",
+                      f"- Source chain: `{intake.get('source_chain', '')}`",
+                      f"- Intake artifact: `{intake.get('intake_output_path', '')}`",
+                      f"- Allows content edit: `{str(intake.get('allows_content_edit', False)).lower()}`",
+                  ]
+              )
+              if intake.get("errors"):
+                  lines.append("- Intake errors:")
+                  for error in intake["errors"]:
+                      lines.append(f"  - {error}")
 
           if chain_path.exists():
               chain = json.loads(chain_path.read_text())
@@ -235,17 +303,21 @@ jobs:
           name: llm-owner-decision-${{ github.run_number }}
           path: |
             automation/reports/llm-owner-decision-gha/
+            automation/reports/llm-owner-intake-gha/
             automation/reports/llm-worker-chain-gha/
+            automation/reports/llm-owner-decision-chains/
           if-no-files-found: ignore
 
-      - name: Commit topic decision artifacts
+      - name: Commit owner handoff artifacts
         if: success()
         run: |
-          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md)" ]]; then
+          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-owner-decision-chains)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md
-            git commit -m "chore(llm): record owner topic decision"
+            git add automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md || true
+            git add automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md || true
+            git add automation/reports/llm-owner-decision-chains || true
+            git commit -m "chore(llm): record owner handoff artifacts"
             for i in 1 2 3; do
               git pull --rebase origin main
               if git push; then

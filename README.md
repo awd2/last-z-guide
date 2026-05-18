@@ -141,6 +141,7 @@ python3 automation/pipeline.py llm-auto-review-latest --json
 python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-owner-issue --json
 python3 automation/pipeline.py llm-issue-decision --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/pipeline.py llm-issue-intake --comment-body "/approve-intake <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answers>" --resolve-reviewer-blockers --json
@@ -420,9 +421,10 @@ The preferred GitHub owner handoff is to comment on that issue with one command:
 /monitor <topic_id> <why this should wait>
 /reject <topic_id> <why this should not proceed>
 /approve-chain <topic_id> <validated player value and claim scope>
+/approve-intake <topic_id> <owner answers and intake scope>
 ```
 
-`.github/workflows/llm-owner-decision.yml` records those commands as `llm-topic-decision-<topic_id>` artifacts for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It replies in the same issue with the recorded decision, workflow link, and worker-chain result when applicable. For `/approve-chain`, it also runs the no-write worker chain in the same job. It commits only decision artifacts and still does not approve public copy, content edits, PRs, or deployment.
+`.github/workflows/llm-owner-decision.yml` records those commands for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It replies in the same issue with the recorded decision/intake result, workflow link, and worker-chain result when applicable. For `/approve-chain`, it also runs and persists the no-write worker chain summary. For `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary. It still does not approve public copy, content edits, PRs, or deployment.
 
 To preview the full actionable Issue body locally without touching GitHub, run:
 
@@ -453,11 +455,12 @@ Owner decisions from that issue are handled by a separate no-write workflow:
 
 - Workflow: `.github/workflows/llm-owner-decision.yml`
 - Trigger: new comment on `LLM Owner Digest: Action Needed`
-- Supported commands: `/monitor`, `/reject`, `/approve-chain`
+- Supported commands: `/monitor`, `/reject`, `/approve-chain`, `/approve-intake`
 - Author gate: `OWNER`, `MEMBER`, or `COLLABORATOR`
-- Output: committed `automation/reports/llm-topic-decision-<topic_id>.json` and `.md` artifacts only
-- `/approve-chain`: runs the no-write worker chain in the same workflow job
-- Issue reply: posts the decision result and worker-chain summary back into the handoff issue
+- Output: committed owner handoff artifacts only: topic decisions, persisted no-write chain summaries, and intake artifacts
+- `/approve-chain`: runs the no-write worker chain in the same workflow job and persists its summary for later intake
+- `/approve-intake`: creates `automation/reports/llm-intake-<topic_id>.json` and `.md` from a matching completed chain summary
+- Issue reply: posts the decision/intake result and worker-chain summary back into the handoff issue
 - Content/backlog/manifests/PRs/deploy modified: `false`
 
 The owner-approved no-write handoff runner is also available in GitHub Actions:

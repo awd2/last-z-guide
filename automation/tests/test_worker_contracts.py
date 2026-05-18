@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_owner_digest, llm_owner_issue, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_issue_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -3388,6 +3388,94 @@ class WorkerContractTests(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertEqual(summary["state"], "blocked")
         self.assertIn("Unsupported issue title", " ".join(summary["errors"]))
+
+    def test_issue_intake_records_approved_intake_comment(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            chain_dir = tmp_path / "llm-owner-decision-chains"
+            signals_path = tmp_path / "signals.json"
+            scout_fixture_path = tmp_path / "llm-scout-response.json"
+            editor_fixture_path = tmp_path / "llm-editor-response.json"
+            reviewer_fixture_path = tmp_path / "llm-reviewer-response.json"
+            write_json(signals_path, fixture_signals())
+            write_json(scout_fixture_path, fixture_llm_scout_response())
+            write_json(editor_fixture_path, fixture_llm_editor_response())
+            write_json(reviewer_fixture_path, fixture_llm_reviewer_response())
+            code, chain_summary = llm_worker_chain.run_llm_worker_chain(
+                signal_paths=[signals_path],
+                output_dir=chain_dir,
+                provider="fixture",
+                topic_id="codes-gsc-opportunity",
+                basename="llm-worker-chain-codes-gsc-opportunity",
+                scout_basename="llm-worker-chain-scout-fixture",
+                editor_basename="llm-worker-chain-editor-fixture",
+                reviewer_basename="llm-worker-chain-reviewer-fixture",
+                scout_fixture_path=scout_fixture_path,
+                editor_fixture_path=editor_fixture_path,
+                reviewer_fixture_path=reviewer_fixture_path,
+                limit=4,
+                min_impressions=200,
+            )
+            self.assertEqual(code, 0)
+            self.assertTrue(Path(chain_summary["artifacts"]["chain_json"]).exists())
+
+            code, summary = llm_issue_intake.run_issue_intake(
+                comment_body="/approve-intake codes-gsc-opportunity Owner confirms this is valuable intake only.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                reports_dir=tmp_path,
+                chain_path=None,
+                output_dir=tmp_path,
+                summary_output=tmp_path / "issue-intake.json",
+                markdown_output=tmp_path / "issue-intake.md",
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["state"], "intake_recorded")
+            self.assertEqual(summary["intake_state"], "approved_for_intake")
+            self.assertFalse(summary["allows_content_edit"])
+            self.assertTrue((tmp_path / "llm-intake-codes-gsc-opportunity.json").exists())
+            intake_payload = load_json(tmp_path / "llm-intake-codes-gsc-opportunity.json")
+            self.assertFalse(intake_payload["content_edit_approved"])
+            self.assertFalse(intake_payload["public_content_change_allowed"])
+            self.assertEqual(intake_payload["approved_by"], "fixture-owner")
+
+    def test_issue_intake_blocks_missing_chain_or_untrusted_comment(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            code, summary = llm_issue_intake.run_issue_intake(
+                comment_body="/approve-intake codes-gsc-opportunity",
+                comment_author="fixture-user",
+                author_association="CONTRIBUTOR",
+                issue_title="LLM Owner Digest: Action Needed",
+                reports_dir=tmp_path,
+                chain_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+
+            self.assertEqual(code, 1)
+            self.assertEqual(summary["state"], "blocked")
+            self.assertIn("Unsupported comment author association", " ".join(summary["errors"]))
+            self.assertIn("Intake approval note is required", " ".join(summary["errors"]))
+
+            code, missing_summary = llm_issue_intake.run_issue_intake(
+                comment_body="/approve-intake missing-topic Owner confirms intake only.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                reports_dir=tmp_path,
+                chain_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+
+            self.assertEqual(code, 1)
+            self.assertEqual(missing_summary["state"], "blocked")
+            self.assertIn("No matching LLM worker-chain summary", " ".join(missing_summary["errors"]))
 
 
 if __name__ == "__main__":
