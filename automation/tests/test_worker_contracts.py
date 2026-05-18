@@ -2310,6 +2310,66 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue(any("recorded owner decisions" in action for action in summary["next_actions"]))
             run_queue_item.assert_not_called()
 
+    def test_llm_auto_review_queue_recovers_refresh_block_from_recorded_decision(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            signals_path = tmp_path / "signals.json"
+            decision_path = tmp_path / "llm-topic-decision-external-gift-center-official-flow-validation.json"
+            write_json(signals_path, fixture_signals())
+            write_json(
+                decision_path,
+                {
+                    "report_type": "llm_topic_decision",
+                    "topic_id": "external-gift-center-official-flow-validation",
+                    "decision_state": "monitor",
+                    "decision_note": "Keep this source-validation item monitored for now.",
+                    "allows_worker_chain": False,
+                    "allows_content_edit": False,
+                    "markdown_path": str(tmp_path / "llm-topic-decision-external-gift-center-official-flow-validation.md"),
+                },
+            )
+            refresh_payload = {
+                "output_path": str(tmp_path / "refresh.json"),
+                "markdown_path": str(tmp_path / "refresh.md"),
+                "errors": [
+                    "Selected topic `external-gift-center-official-flow-validation` has monitor/reject decision `monitor`; move it to rejected_or_monitor."
+                ],
+                "stages": [],
+            }
+
+            with patch.object(
+                llm_candidate_refresh,
+                "run_candidate_refresh",
+                return_value=(1, refresh_payload),
+            ), patch.object(llm_auto_review_queue, "run_queue_item") as run_queue_item:
+                code, summary = llm_auto_review_queue.run_auto_review_queue(
+                    signal_paths=[signals_path],
+                    external_proposal_paths=[],
+                    output_dir=tmp_path,
+                    basename="llm-auto-review-queue-fixture",
+                    provider="fixture",
+                    scout_fixture_path=None,
+                    editor_fixture_path=None,
+                    reviewer_fixture_path=None,
+                    limit=4,
+                    min_impressions=200,
+                    max_chains=1,
+                    include_existing=False,
+                )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["state"], "current")
+            self.assertEqual(summary["queued_topic_count"], 0)
+            self.assertEqual(summary["resolved_by_decision_count"], 1)
+            self.assertEqual(summary["errors"], [])
+            self.assertIn("resolved_refresh_errors", summary)
+            self.assertEqual(
+                summary["resolved_by_decision"][0]["topic_id"],
+                "external-gift-center-official-flow-validation",
+            )
+            self.assertTrue(any("recorded owner decisions" in action for action in summary["next_actions"]))
+            run_queue_item.assert_not_called()
+
     def test_llm_auto_review_queue_reruns_stale_existing_chain(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

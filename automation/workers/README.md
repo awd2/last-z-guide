@@ -347,7 +347,9 @@ owner involvement to reviewing ready queue packages. Topics with recorded
 `llm-topic-decision-*` states of `monitor`, `rejected`, or `approved_for_chain`
 are moved to a `resolved_by_decision` section instead of queueing or
 skipped-existing, so already reviewed topics do not keep returning as fresh
-owner work. Queue `next_actions` are state-aware: resolved-only queues say no
+owner work. If candidate refresh blocks only because live Scout selected one of
+those recorded-decision topics, the queue recovers into a green `current`
+report with `resolved_refresh_errors`. Queue `next_actions` are state-aware: resolved-only queues say no
 owner action is needed, failed queues point to stage errors, and queued items
 point to the intake lifecycle. Per-topic LLM stage failures are recorded as
 `completed_with_failures` artifacts but do not make the command exit non-zero,

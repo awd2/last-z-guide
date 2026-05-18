@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -28,6 +29,9 @@ PRIORITY_SCORE = {"high": 45, "medium": 25, "low": 5}
 CONFIDENCE_SCORE = {"high": 20, "medium": 10, "low": 0}
 RISK_SCORE = {"low": 15, "medium": 8, "high": 0}
 ACTION_SCORE = {"create_new": 10, "update_existing": 8, "consolidate": 5, "monitor": -20, "reject": -40}
+RECORDED_DECISION_REFRESH_ERROR = re.compile(
+    r"^Selected topic `([^`]+)` has monitor/reject decision `([^`]+)`; move it to rejected_or_monitor\.$"
+)
 
 
 def now_utc() -> str:
@@ -155,6 +159,126 @@ def candidate_topics(discovery_payload: dict[str, Any]) -> list[dict[str, Any]]:
         and normalized(topic.get("recommended_action")) in llm_scout.READY_DECISIONS
         and normalized(topic.get("priority")) != "low"
     ]
+
+
+def resolved_decision_record(topic: dict[str, Any], decision: dict[str, Any]) -> dict[str, Any]:
+    score, reasons = score_topic(topic)
+    return {
+        "topic_id": str(topic.get("topic_id") or ""),
+        "target_page_or_slug": topic.get("target_page_or_slug", ""),
+        "cluster": topic.get("cluster", ""),
+        "priority": topic.get("priority", ""),
+        "risk_level": topic.get("risk_level", ""),
+        "score": score,
+        "score_reasons": reasons,
+        "status": f"resolved_by_decision_{decision['decision_state']}",
+        **decision,
+    }
+
+
+def decision_resolved_refresh_errors(
+    errors: list[str],
+    decisions: dict[str, dict[str, Any]],
+) -> list[tuple[str, dict[str, Any]]] | None:
+    if not errors:
+        return None
+    resolved: list[tuple[str, dict[str, Any]]] = []
+    for error in errors:
+        match = RECORDED_DECISION_REFRESH_ERROR.match(error)
+        if not match:
+            return None
+        topic_id, decision_state = match.groups()
+        decision = decisions.get(topic_id)
+        if not decision or decision.get("decision_state") != decision_state:
+            return None
+        resolved.append((topic_id, decision))
+    return resolved
+
+
+def load_discovery_payload(refresh_payload: dict[str, Any]) -> dict[str, Any]:
+    discovery_path = str(refresh_payload.get("topic_discovery_path") or "")
+    if not discovery_path:
+        return {}
+    path = resolve_path(discovery_path)
+    if not path.exists():
+        return {}
+    return load_json(path)
+
+
+def recover_decision_resolved_refresh(
+    output_dir: Path,
+    basename: str,
+    provider: str,
+    signal_paths: list[Path],
+    external_proposal_paths: list[Path],
+    refresh_payload: dict[str, Any],
+) -> dict[str, Any] | None:
+    errors = [str(error) for error in refresh_payload.get("errors", []) if error]
+    decisions = load_topic_decisions(output_dir)
+    resolved_errors = decision_resolved_refresh_errors(errors, decisions)
+    if resolved_errors is None:
+        return None
+
+    discovery_payload = load_discovery_payload(refresh_payload)
+    discovered_candidates = candidate_topics(discovery_payload)
+    candidates_by_id = {str(topic.get("topic_id") or ""): topic for topic in discovered_candidates}
+    resolved_by_decision: list[dict[str, Any]] = []
+    fallback_candidates: list[dict[str, Any]] = []
+    for topic_id, decision in resolved_errors:
+        topic = candidates_by_id.get(topic_id) or {
+            "topic_id": topic_id,
+            "target_page_or_slug": "",
+            "cluster": "",
+            "priority": "",
+            "confidence": "",
+            "risk_level": "",
+            "recommended_action": "monitor",
+            "status": "candidate",
+        }
+        fallback_candidates.append(topic)
+        resolved_by_decision.append(resolved_decision_record(topic, decision))
+
+    candidates = discovered_candidates or fallback_candidates
+    json_path = output_dir / f"{basename}.json"
+    markdown_path = output_dir / f"{basename}.md"
+    return {
+        "schema_version": 1,
+        "report_type": "llm_auto_review_queue",
+        "generated_at": now_utc(),
+        "state": "current",
+        "provider": provider,
+        "source_signal_files": [rel(path) for path in signal_paths],
+        "external_proposal_files": [rel(path) for path in external_proposal_paths],
+        "candidate_refresh_path": refresh_payload.get("output_path", ""),
+        "candidate_refresh_markdown": refresh_payload.get("markdown_path", ""),
+        "topic_discovery_path": refresh_payload.get("topic_discovery_path", ""),
+        "topic_discovery_markdown": refresh_payload.get("topic_discovery_markdown", ""),
+        "candidate_topic_count": len(candidates),
+        "queued_topic_count": 0,
+        "completed_item_count": 0,
+        "failed_item_count": 0,
+        "skipped_existing_count": 0,
+        "resolved_by_decision_count": len(resolved_by_decision),
+        "stale_existing_count": 0,
+        "deferred_count": 0,
+        "max_chains": 0,
+        "include_existing": False,
+        "required_chain_contract_version": llm_worker_chain.WORKER_CHAIN_CONTRACT_VERSION,
+        "required_chain_contract_label": llm_worker_chain.WORKER_CHAIN_CONTRACT_LABEL,
+        "queue_items": [],
+        "skipped_topics": [],
+        "resolved_by_decision": resolved_by_decision,
+        "resolved_refresh_errors": errors,
+        "errors": [],
+        "output_path": rel(json_path),
+        "markdown_path": rel(markdown_path),
+        "allows_content_edit": False,
+        "allows_backlog_mutation": False,
+        "allows_manifest_mutation": False,
+        "allows_pr_or_deploy": False,
+        "next_actions": next_actions_for_summary([], [], resolved_by_decision, candidates, 0),
+        "safety": "No content, backlog, manifest, PR, or production files were modified.",
+    }
 
 
 def build_scout_payload(refresh_payload: dict[str, Any]) -> dict[str, Any]:
@@ -341,6 +465,17 @@ def run_auto_review_queue(
         min_impressions=min_impressions,
     )
     if refresh_code:
+        recovered = recover_decision_resolved_refresh(
+            output_dir=output_dir,
+            basename=basename,
+            provider=provider,
+            signal_paths=signal_paths,
+            external_proposal_paths=external_proposal_paths,
+            refresh_payload=refresh_payload,
+        )
+        if recovered is not None:
+            write_queue(recovered)
+            return 0, recovered
         summary = blocked_summary(output_dir, basename, refresh_payload.get("errors", []) or ["Candidate refresh failed."])
         summary["candidate_refresh_path"] = refresh_payload.get("output_path", "")
         summary["candidate_refresh_markdown"] = refresh_payload.get("markdown_path", "")
@@ -369,13 +504,7 @@ def run_auto_review_queue(
         }
         decision = decisions.get(topic_id)
         if decision:
-            resolved_by_decision.append(
-                {
-                    **record,
-                    "status": f"resolved_by_decision_{decision['decision_state']}",
-                    **decision,
-                }
-            )
+            resolved_by_decision.append(resolved_decision_record({**topic, **record}, decision))
             continue
         existing_chain = completed_chain_status(topic_id, search_dirs)
         if existing_chain:
