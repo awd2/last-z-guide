@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-18T18:14:58Z
+# External Search Collect - 2026-05-18T18:29:50Z
 
 ## Outcome
 
@@ -83,46 +83,46 @@
 - Action: `update_existing`
 - Target: `research.html`
 - Cluster: `Research`
-- Score: `64`
+- Score: `82`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
 - URL: `https://lastz.fandom.com/wiki/Heroes`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-mmediamreza-last-z-reference-shooter-camp-guide-last-z-survival-shooter-7
+### external-search-mmediamreza-last-z-reference-military-center-guide-maximize-unit-cap-ba-7
 
-- Title: External search opportunity: Shooter Camp Guide | Last Z: Survival Shooter
+- Title: External search opportunity: Military Center Guide: Maximize Unit Cap & Base Power - | Last Z: Survival Shooter
 - Action: `update_existing`
-- Target: `about.html`
-- Cluster: `Site`
-- Score: `74`
+- Target: `hq.html`
+- Cluster: `Progression`
+- Score: `82`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/en/shooter-camp-guide`
-- Mapping: `cluster_default_target`
+- URL: `https://mmediamreza.com/en/military-center-guide`
+- Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
 ### external-search-mmediamreza-last-z-reference-rider-camp-guide-train-promote-rider-units-8
 
-- Title: External search opportunity: Rider Camp Guide: Train & Promote Rider Units | Last Z: Survival Shooter
+- Title: External search opportunity: Rider Camp Guide: Train & Promote Rider Units - | Last Z: Survival Shooter
 - Action: `update_existing`
-- Target: `about.html`
-- Cluster: `Site`
+- Target: `hero-training-cost.html`
+- Cluster: `Research`
 - Score: `74`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
 - URL: `https://mmediamreza.com/en/rider-camp-upgrade-guide`
-- Mapping: `cluster_default_target`
+- Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-9
+### external-search-mmediamreza-last-z-reference-weekly-lucky-number-research-speed-bonus-m-9
 
-- Title: External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power | Last Z: Survival Shooter
+- Title: External search opportunity: Weekly Lucky Number - Research Speed Bonus (May 18 - May 24) - | Last Z: Survival Shooter
 - Action: `update_existing`
-- Target: `about.html`
-- Cluster: `Site`
-- Score: `74`
+- Target: `research.html`
+- Cluster: `Research`
+- Score: `82`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/en/assaulter-camp-training-guide`
-- Mapping: `cluster_default_target`
+- URL: `https://mmediamreza.com/en/last-z/lucky-yellow-roses-number`
+- Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
 ## Search Records

@@ -207,7 +207,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycle includes a science day for research points and a hero day for leveling heroes."
+          "Daily event cycles include a research-focused phase and a hero-upgrade phase, useful for mapping event tasks tied to research and heroes."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -237,7 +237,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research building page; confirms technologies are unlocked and improved through the lab."
+          "Explains the building used for technologies research and unlock conditions, useful for cross-checking research-related event tasks."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -267,7 +267,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster and equipment reference page with faction filters, level listings, and gear stat examples; useful for hero discovery and cross-checking hero-related entries."
+          "Hero roster and equipment reference page with faction filters, levels, and gear entries; good lead for character discovery and equipment cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "external_search_collect",
-  "generated_at": "2026-05-18T18:14:58Z",
+  "generated_at": "2026-05-18T18:29:50Z",
   "state": "search_collected",
   "provider": "openai",
   "evidence_refresh_path": "automation/reports/llm-auto-review-queue/external-evidence-refresh.json",
@@ -17,58 +17,58 @@
       "base_url": "https://lastzwiki.com",
       "query": "site:lastzwiki.com/en Last Z guide heroes research",
       "public_claim_ready": false,
-      "searched_at": "2026-05-18T18:14:28Z",
+      "searched_at": "2026-05-18T18:29:21Z",
       "search_status": "searched",
       "source_domain": "lastzwiki.com",
       "searched_query": "site:lastzwiki.com/en Last Z guide heroes research",
-      "search_notes": "Kept to lastzwiki.com only. Prioritized concrete wiki/tool pages over home pages. No result was marked ready for public claims.",
+      "search_notes": "Search was restricted to lastzwiki.com. Results favored concrete guide pages over the homepage. No public claims were marked ready.",
       "no_results_reason": "",
       "results": [
         {
           "url": "https://lastzwiki.com/en/heroes.html",
           "title": "Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026",
-          "evidence_summary": "Hero roster and equipment reference page with faction filters, level listings, and gear stat examples; useful for hero discovery and cross-checking hero-related entries.",
+          "evidence_summary": "Hero roster and equipment reference page with faction filters, levels, and gear entries; good lead for character discovery and equipment cross-checks.",
           "topic_fit": "high",
           "suggested_cluster": "heroes",
           "recommended_action": "update_existing",
-          "target_page_or_slug": "/en/heroes.html",
-          "primary_user_job": "Find hero names, factions, levels, and gear entries.",
+          "target_page_or_slug": "heroes",
+          "primary_user_job": "Find hero roster, faction grouping, and equipment reference data.",
           "claims_to_verify": [
-            "Hero roster completeness",
-            "Faction grouping",
-            "Equipment stat entries"
+            "Hero names, factions, and level caps",
+            "Equipment item stats and bonuses",
+            "Hero availability or ranking labels"
           ],
           "public_claim_ready": false
         },
         {
           "url": "https://lastzwiki.com/en/laboratory.html",
           "title": "Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
-          "evidence_summary": "Research guide with category tabs, level cost tables, and search for research names; useful for locating research topics and cost structure leads.",
+          "evidence_summary": "Research table page with nine categories and per-level cost tables; strong discovery lead for research categories and cost structure.",
           "topic_fit": "high",
           "suggested_cluster": "research",
           "recommended_action": "update_existing",
-          "target_page_or_slug": "/en/laboratory.html",
+          "target_page_or_slug": "laboratory",
           "primary_user_job": "Find research categories, names, and badge cost tables.",
           "claims_to_verify": [
-            "Research category coverage",
+            "Research names and category grouping",
             "Per-level badge costs",
-            "Searchable research names"
+            "Total cost totals and unlock paths"
           ],
           "public_claim_ready": false
         },
         {
           "url": "https://lastzwiki.com/en/beginner-guide.html",
           "title": "Beginner's Guide - Last Z Wiki | How to Start & Essential Tips 2026",
-          "evidence_summary": "Starter guide that mentions early heroes, resources, and progression flow; useful as a broad onboarding and hero-adjacent discovery source.",
+          "evidence_summary": "Starter guide with early progression tips, first heroes, and basic systems; useful for discovery of early-game hero progression context.",
           "topic_fit": "medium",
-          "suggested_cluster": "beginner-guide",
+          "suggested_cluster": "guides",
           "recommended_action": "monitor",
-          "target_page_or_slug": "/en/beginner-guide.html",
-          "primary_user_job": "Learn early-game progression and starter hero context.",
+          "target_page_or_slug": "beginner-guide",
+          "primary_user_job": "Find early-game progression and starter hero context.",
           "claims_to_verify": [
-            "Starting hero recommendations",
-            "Early progression steps",
-            "Resource list"
+            "Starting hero list",
+            "Early progression advice",
+            "Tutorial flow and resource names"
           ],
           "public_claim_ready": false
         }
@@ -125,7 +125,7 @@
       ],
       "provider_metadata": {
         "model": "gpt-5.4-mini-2026-03-17",
-        "response_id": "resp_0b5ab65e4e6d7bb5006a0b570510b88196819008b38dbacc82",
+        "response_id": "resp_02dec23ba443715a006a0b5a8202088197a0fc411d8ea5997e",
         "status": "completed",
         "endpoint": "https://api.openai.com/v1/responses"
       }
@@ -137,17 +137,17 @@
       "base_url": "https://www.last-z.wiki",
       "query": "site:last-z.wiki Last Z heroes events research cost",
       "public_claim_ready": false,
-      "searched_at": "2026-05-18T18:14:37Z",
+      "searched_at": "2026-05-18T18:29:27Z",
       "search_status": "searched",
       "source_domain": "www.last-z.wiki",
       "searched_query": "site:last-z.wiki Last Z heroes events research cost",
-      "search_notes": "Search returned no matching pages on the allowed domain. No discovery leads found from last-z.wiki for this query.",
-      "no_results_reason": "No indexed or discoverable pages matched the query within the allowed source domain.",
+      "search_notes": "Search constrained to www.last-z.wiki returned no results for the query. No discovery leads found within the allowed domain.",
+      "no_results_reason": "No indexed pages matched the query on the allowed domain.",
       "results": [],
       "provider_sources": [],
       "provider_metadata": {
         "model": "gpt-5.4-mini-2026-03-17",
-        "response_id": "resp_0f8255a5780b639a006a0b570d8f08819388f9d2c5e46ae1d7",
+        "response_id": "resp_0629e0dd7dca26f9006a0b5a88749c8196b6e56d57edb3352a",
         "status": "completed",
         "endpoint": "https://api.openai.com/v1/responses"
       }
@@ -159,17 +159,17 @@
       "base_url": "https://lastz-command-center-one.vercel.app",
       "query": "site:lastz-command-center-one.vercel.app Last Z",
       "public_claim_ready": false,
-      "searched_at": "2026-05-18T18:14:40Z",
+      "searched_at": "2026-05-18T18:29:31Z",
       "search_status": "searched",
       "source_domain": "lastz-command-center-one.vercel.app",
       "searched_query": "site:lastz-command-center-one.vercel.app Last Z",
-      "search_notes": "Search returned no matching pages within the allowed domain and freshness window.",
-      "no_results_reason": "No indexed or discoverable pages matched the query under the domain restriction.",
+      "search_notes": "Search was limited to the approved domain only. No matching pages were found in the freshness window.",
+      "no_results_reason": "No indexed results returned for the allowed domain and query.",
       "results": [],
       "provider_sources": [],
       "provider_metadata": {
         "model": "gpt-5.4-mini-2026-03-17",
-        "response_id": "resp_0896ce3926b4bab6006a0b571100d88190ae429fc19c19d3df",
+        "response_id": "resp_013b60aaff20aab5006a0b5a8c1064819692b2281be7bb428f",
         "status": "completed",
         "endpoint": "https://api.openai.com/v1/responses"
       }
@@ -181,58 +181,58 @@
       "base_url": "https://lastz.fandom.com",
       "query": "site:lastz.fandom.com Last Z heroes research events",
       "public_claim_ready": false,
-      "searched_at": "2026-05-18T18:14:44Z",
+      "searched_at": "2026-05-18T18:29:35Z",
       "search_status": "searched",
       "source_domain": "lastz.fandom.com",
       "searched_query": "site:lastz.fandom.com Last Z heroes research events",
-      "search_notes": "Search limited to lastz.fandom.com. Results emphasize one event page plus core research and hero system pages. No public-claim validation done; single-page findings should be cross-checked before use.",
+      "search_notes": "Search limited to lastz.fandom.com. Results favor direct wiki pages over generic pages. No single result should be treated as proof for mechanics, costs, or rewards.",
       "no_results_reason": "",
       "results": [
         {
           "url": "https://lastz.fandom.com/wiki/Full_Preparedness",
           "title": "Full Preparedness",
-          "evidence_summary": "Daily event cycle includes a science day for research points and a hero day for leveling heroes.",
+          "evidence_summary": "Daily event cycles include a research-focused phase and a hero-upgrade phase, useful for mapping event tasks tied to research and heroes.",
           "topic_fit": "high",
-          "suggested_cluster": "events_daily_cycle",
+          "suggested_cluster": "events_daily_cycles",
           "recommended_action": "update_existing",
           "target_page_or_slug": "full-preparedness",
-          "primary_user_job": "Find which daily event theme rewards research or hero upgrades.",
+          "primary_user_job": "Find event task rotation and scoring themes",
           "claims_to_verify": [
-            "Which cycle theme covers research",
-            "Which cycle theme covers hero upgrades",
-            "Event rotation timing and rewards"
+            "Which cycle includes research tasks",
+            "Which cycle includes hero upgrade tasks",
+            "How point scoring works across the day"
           ],
           "public_claim_ready": false
         },
         {
           "url": "https://lastz.fandom.com/wiki/Laboratory",
           "title": "Laboratory",
-          "evidence_summary": "Research building page; confirms technologies are unlocked and improved through the lab.",
+          "evidence_summary": "Explains the building used for technologies research and unlock conditions, useful for cross-checking research-related event tasks.",
           "topic_fit": "high",
-          "suggested_cluster": "progression_research",
+          "suggested_cluster": "buildings_research",
           "recommended_action": "update_existing",
           "target_page_or_slug": "laboratory",
-          "primary_user_job": "Confirm where technology research happens and what unlocks it.",
+          "primary_user_job": "Verify where research actions come from",
           "claims_to_verify": [
             "Laboratory unlock level",
-            "Second lab unlock condition",
-            "Research-related building functions"
+            "What technologies research does",
+            "Whether a second lab can be built later"
           ],
           "public_claim_ready": false
         },
         {
           "url": "https://lastz.fandom.com/wiki/Heroes",
           "title": "Heroes",
-          "evidence_summary": "Core hero overview with hero types and power factors, useful for hero upgrade context.",
-          "topic_fit": "medium",
-          "suggested_cluster": "hero_system_overview",
+          "evidence_summary": "Core hero overview page with hero classes and power factors, useful for identifying hero-related systems that events may reference.",
+          "topic_fit": "high",
+          "suggested_cluster": "heroes_core",
           "recommended_action": "update_existing",
           "target_page_or_slug": "heroes",
-          "primary_user_job": "Identify hero categories and how hero power is built.",
+          "primary_user_job": "Cross-check hero system terminology",
           "claims_to_verify": [
-            "Hero type list",
-            "Hero power components",
-            "General hero progression terms"
+            "Hero classes and power tiers",
+            "Which mechanics affect hero power",
+            "Which heroes exist"
           ],
           "public_claim_ready": false
         }
@@ -289,7 +289,7 @@
       ],
       "provider_metadata": {
         "model": "gpt-5.4-mini-2026-03-17",
-        "response_id": "resp_049c13742414af49006a0b571425a081969f2e6cfae5539d79",
+        "response_id": "resp_07531aa8675220ce006a0b5a8f42f4819586fdf07975d369f6",
         "status": "completed",
         "endpoint": "https://api.openai.com/v1/responses"
       }
@@ -301,17 +301,17 @@
       "base_url": "https://www.packsify.com",
       "query": "site:packsify.com/blogs/last-z-gear-guide-how-to-use-and-upgrade-equipment Last Z gear guide",
       "public_claim_ready": false,
-      "searched_at": "2026-05-18T18:14:50Z",
+      "searched_at": "2026-05-18T18:29:41Z",
       "search_status": "searched",
       "source_domain": "www.packsify.com",
       "searched_query": "site:packsify.com/blogs/last-z-gear-guide-how-to-use-and-upgrade-equipment Last Z gear guide",
-      "search_notes": "Search was limited to www.packsify.com as requested. No matching pages were found for the exact query and path pattern within the allowed domain.",
-      "no_results_reason": "No indexed pages matched the approved query on www.packsify.com.",
+      "search_notes": "No matching pages were found on www.packsify.com for the approved query. Search was limited to the allowed domain only. No discovery leads available from the provided query.",
+      "no_results_reason": "Empty result set from domain-restricted search.",
       "results": [],
       "provider_sources": [],
       "provider_metadata": {
         "model": "gpt-5.4-mini-2026-03-17",
-        "response_id": "resp_0b3e948691506004006a0b571a1944819796f4f69715f5acfa",
+        "response_id": "resp_01cb1447af10c7e2006a0b5a9573a081978e9570d0a925e3dc",
         "status": "completed",
         "endpoint": "https://api.openai.com/v1/responses"
       }
@@ -323,61 +323,62 @@
       "base_url": "https://mmediamreza.com",
       "query": "site:mmediamreza.com Last Z Survival Shooter",
       "public_claim_ready": false,
-      "searched_at": "2026-05-18T18:14:53Z",
+      "searched_at": "2026-05-18T18:29:44Z",
       "search_status": "searched",
       "source_domain": "mmediamreza.com",
       "searched_query": "site:mmediamreza.com Last Z Survival Shooter",
-      "search_notes": "Search was restricted to mmediamreza.com and returned several Last Z-specific training-building guides directly relevant to troop progression. These are good discovery leads for cross-validation, but each page should be verified separately before use.",
+      "search_notes": "Returned only mmediamreza.com pages relevant to Last Z. Favor guide and event pages over homepage or generic site sections. One alliance page and several non-matching pages were found in search but not included because they were lower-fit or not direct evidence leads.",
       "no_results_reason": "",
       "results": [
         {
-          "url": "https://mmediamreza.com/en/shooter-camp-guide",
-          "title": "Shooter Camp Guide | Last Z: Survival Shooter",
-          "evidence_summary": "Training building guide with unlock requirements, upgrade table, unit cap, speed, and power stats for Shooter units.",
+          "url": "https://mmediamreza.com/en/military-center-guide",
+          "title": "Military Center Guide: Maximize Unit Cap & Base Power - | Last Z: Survival Shooter",
+          "evidence_summary": "Building guide for Military Center; covers unit cap, base power, unlock at HQ 5, and refugee assignment.",
           "topic_fit": "high",
-          "suggested_cluster": "unit training buildings",
+          "suggested_cluster": "base-buildings",
           "recommended_action": "update_existing",
-          "target_page_or_slug": "shooter-camp-guide",
-          "primary_user_job": "Plan Shooter Camp upgrades and troop training.",
+          "target_page_or_slug": "military-center-guide",
+          "primary_user_job": "Confirm building role, unlock level, and scaling stats.",
           "claims_to_verify": [
-            "HQ unlock level",
-            "training cap by level",
-            "training speed by level",
-            "power scaling by level"
+            "Military Center increases unit cap",
+            "Unlocks at Headquarters level 5",
+            "Officer refugee assignment boosts efficiency",
+            "Contributes to base power",
+            "Upgradable to level 30"
           ],
           "public_claim_ready": false
         },
         {
           "url": "https://mmediamreza.com/en/rider-camp-upgrade-guide",
-          "title": "Rider Camp Guide: Train & Promote Rider Units | Last Z: Survival Shooter",
-          "evidence_summary": "Training building guide with level-by-level costs, cap, speed, and power for Rider units.",
+          "title": "Rider Camp Guide: Train & Promote Rider Units - | Last Z: Survival Shooter",
+          "evidence_summary": "Training building guide for Rider Camp; includes level-by-level cost, cap, speed, and power data.",
           "topic_fit": "high",
-          "suggested_cluster": "unit training buildings",
+          "suggested_cluster": "unit-train-camps",
           "recommended_action": "update_existing",
           "target_page_or_slug": "rider-camp-upgrade-guide",
-          "primary_user_job": "Plan Rider Camp upgrades and troop training.",
+          "primary_user_job": "Cross-check rider training cap, speed, and upgrade costs.",
           "claims_to_verify": [
-            "resource costs by level",
-            "training cap by level",
-            "training speed by level",
-            "power by level"
+            "Rider Camp trains rider units",
+            "Level table shows cost/cap/speed/power",
+            "Upgradeable stats extend across levels",
+            "Training and promotion are tied to camp upgrades"
           ],
           "public_claim_ready": false
         },
         {
-          "url": "https://mmediamreza.com/en/assaulter-camp-training-guide",
-          "title": "Assaulter Camp Guide - Train Faster & Gain Power | Last Z: Survival Shooter",
-          "evidence_summary": "Training guide for Assaulter units, focused on faster training and power gains.",
+          "url": "https://mmediamreza.com/en/last-z/lucky-yellow-roses-number",
+          "title": "Weekly Lucky Number - Research Speed Bonus (May 18 - May 24) - | Last Z: Survival Shooter",
+          "evidence_summary": "Time-limited weekly event page; states lucky number 9 and a research speed boost tied to sending yellow roses.",
           "topic_fit": "high",
-          "suggested_cluster": "unit training buildings",
+          "suggested_cluster": "events-bonuses",
           "recommended_action": "update_existing",
-          "target_page_or_slug": "assaulter-camp-training-guide",
-          "primary_user_job": "Plan Assaulter Camp upgrades and troop training.",
+          "target_page_or_slug": "last-z/lucky-yellow-roses-number",
+          "primary_user_job": "Track weekly bonus conditions and event timing.",
           "claims_to_verify": [
-            "training speed milestones",
-            "upgrade benefits",
-            "power scaling",
-            "unlock or prerequisite details"
+            "Weekly period May 18 to May 24",
+            "Lucky number is 9",
+            "Send exactly 9 yellow roses at once",
+            "Bonus is +20% research speed for 2 hours"
           ],
           "public_claim_ready": false
         }
@@ -434,7 +435,7 @@
       ],
       "provider_metadata": {
         "model": "gpt-5.4-mini-2026-03-17",
-        "response_id": "resp_08148cd3b3b081c7006a0b571d84ec8190a11624d76a959887",
+        "response_id": "resp_0082ffa4d4b2959b006a0b5a9846308197a0e71b482e6c5afc",
         "status": "completed",
         "endpoint": "https://api.openai.com/v1/responses"
       }
@@ -456,17 +457,17 @@
       "priority": "high",
       "risk_level": "high",
       "status": "candidate",
-      "primary_user_job": "Find hero names, factions, levels, and gear entries.",
+      "primary_user_job": "Find hero roster, faction grouping, and equipment reference data.",
       "source_urls": [
         "https://lastzwiki.com/en/heroes.html"
       ],
       "evidence": [
-        "Hero roster and equipment reference page with faction filters, level listings, and gear stat examples; useful for hero discovery and cross-checking hero-related entries."
+        "Hero roster and equipment reference page with faction filters, levels, and gear entries; good lead for character discovery and equipment cross-checks."
       ],
       "claims_to_verify": [
-        "Hero roster completeness",
-        "Faction grouping",
-        "Equipment stat entries"
+        "Hero names, factions, and level caps",
+        "Equipment item stats and bonuses",
+        "Hero availability or ranking labels"
       ],
       "cross_validation_status": "search_result_needs_canonical_and_second_source_validation",
       "site_fit": {
@@ -487,7 +488,7 @@
       "deterministic_mapping": {
         "raw_suggested_cluster": "heroes",
         "canonical_cluster": "Heroes",
-        "raw_target_page_or_slug": "/en/heroes.html",
+        "raw_target_page_or_slug": "heroes",
         "canonical_target_page_or_slug": "heroes.html",
         "page_match_score": 61,
         "page_match_reason": "content_index_token_match",
@@ -516,12 +517,12 @@
         "https://lastzwiki.com/en/laboratory.html"
       ],
       "evidence": [
-        "Research guide with category tabs, level cost tables, and search for research names; useful for locating research topics and cost structure leads."
+        "Research table page with nine categories and per-level cost tables; strong discovery lead for research categories and cost structure."
       ],
       "claims_to_verify": [
-        "Research category coverage",
+        "Research names and category grouping",
         "Per-level badge costs",
-        "Searchable research names"
+        "Total cost totals and unlock paths"
       ],
       "cross_validation_status": "search_result_needs_canonical_and_second_source_validation",
       "site_fit": {
@@ -542,7 +543,7 @@
       "deterministic_mapping": {
         "raw_suggested_cluster": "research",
         "canonical_cluster": "Research",
-        "raw_target_page_or_slug": "/en/laboratory.html",
+        "raw_target_page_or_slug": "laboratory",
         "canonical_target_page_or_slug": "research.html",
         "page_match_score": 43,
         "page_match_reason": "content_index_token_match",
@@ -566,17 +567,17 @@
       "priority": "medium",
       "risk_level": "high",
       "status": "monitor",
-      "primary_user_job": "Learn early-game progression and starter hero context.",
+      "primary_user_job": "Find early-game progression and starter hero context.",
       "source_urls": [
         "https://lastzwiki.com/en/beginner-guide.html"
       ],
       "evidence": [
-        "Starter guide that mentions early heroes, resources, and progression flow; useful as a broad onboarding and hero-adjacent discovery source."
+        "Starter guide with early progression tips, first heroes, and basic systems; useful for discovery of early-game hero progression context."
       ],
       "claims_to_verify": [
-        "Starting hero recommendations",
-        "Early progression steps",
-        "Resource list"
+        "Starting hero list",
+        "Early progression advice",
+        "Tutorial flow and resource names"
       ],
       "cross_validation_status": "search_result_needs_canonical_and_second_source_validation",
       "site_fit": {
@@ -595,9 +596,9 @@
         "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
       ],
       "deterministic_mapping": {
-        "raw_suggested_cluster": "beginner-guide",
+        "raw_suggested_cluster": "guides",
         "canonical_cluster": "Progression",
-        "raw_target_page_or_slug": "/en/beginner-guide.html",
+        "raw_target_page_or_slug": "beginner-guide",
         "canonical_target_page_or_slug": "start.html",
         "page_match_score": 61,
         "page_match_reason": "content_index_token_match",
@@ -621,17 +622,17 @@
       "priority": "high",
       "risk_level": "high",
       "status": "candidate",
-      "primary_user_job": "Find which daily event theme rewards research or hero upgrades.",
+      "primary_user_job": "Find event task rotation and scoring themes",
       "source_urls": [
         "https://lastz.fandom.com/wiki/Full_Preparedness"
       ],
       "evidence": [
-        "Daily event cycle includes a science day for research points and a hero day for leveling heroes."
+        "Daily event cycles include a research-focused phase and a hero-upgrade phase, useful for mapping event tasks tied to research and heroes."
       ],
       "claims_to_verify": [
-        "Which cycle theme covers research",
-        "Which cycle theme covers hero upgrades",
-        "Event rotation timing and rewards"
+        "Which cycle includes research tasks",
+        "Which cycle includes hero upgrade tasks",
+        "How point scoring works across the day"
       ],
       "cross_validation_status": "search_result_needs_canonical_and_second_source_validation",
       "site_fit": {
@@ -650,11 +651,11 @@
         "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
       ],
       "deterministic_mapping": {
-        "raw_suggested_cluster": "events_daily_cycle",
+        "raw_suggested_cluster": "events_daily_cycles",
         "canonical_cluster": "Events",
         "raw_target_page_or_slug": "full-preparedness",
         "canonical_target_page_or_slug": "events.html",
-        "page_match_score": 61,
+        "page_match_score": 67,
         "page_match_reason": "content_index_token_match",
         "noise_result": false,
         "noise_reason": ""
@@ -676,17 +677,17 @@
       "priority": "high",
       "risk_level": "high",
       "status": "candidate",
-      "primary_user_job": "Confirm where technology research happens and what unlocks it.",
+      "primary_user_job": "Verify where research actions come from",
       "source_urls": [
         "https://lastz.fandom.com/wiki/Laboratory"
       ],
       "evidence": [
-        "Research building page; confirms technologies are unlocked and improved through the lab."
+        "Explains the building used for technologies research and unlock conditions, useful for cross-checking research-related event tasks."
       ],
       "claims_to_verify": [
         "Laboratory unlock level",
-        "Second lab unlock condition",
-        "Research-related building functions"
+        "What technologies research does",
+        "Whether a second lab can be built later"
       ],
       "cross_validation_status": "search_result_needs_canonical_and_second_source_validation",
       "site_fit": {
@@ -705,7 +706,7 @@
         "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
       ],
       "deterministic_mapping": {
-        "raw_suggested_cluster": "progression_research",
+        "raw_suggested_cluster": "buildings_research",
         "canonical_cluster": "Research",
         "raw_target_page_or_slug": "laboratory",
         "canonical_target_page_or_slug": "research.html",
@@ -727,21 +728,21 @@
       "source_id": "lastz-fandom-reference",
       "source_name": "Last Z Wiki on Fandom",
       "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-      "confidence": "medium",
+      "confidence": "high",
       "priority": "high",
       "risk_level": "high",
       "status": "candidate",
-      "primary_user_job": "Identify hero categories and how hero power is built.",
+      "primary_user_job": "Cross-check hero system terminology",
       "source_urls": [
         "https://lastz.fandom.com/wiki/Heroes"
       ],
       "evidence": [
-        "Core hero overview with hero types and power factors, useful for hero upgrade context."
+        "Core hero overview page with hero classes and power factors, useful for identifying hero-related systems that events may reference."
       ],
       "claims_to_verify": [
-        "Hero type list",
-        "Hero power components",
-        "General hero progression terms"
+        "Hero classes and power tiers",
+        "Which mechanics affect hero power",
+        "Which heroes exist"
       ],
       "cross_validation_status": "search_result_needs_canonical_and_second_source_validation",
       "site_fit": {
@@ -760,7 +761,7 @@
         "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
       ],
       "deterministic_mapping": {
-        "raw_suggested_cluster": "hero_system_overview",
+        "raw_suggested_cluster": "heroes_core",
         "canonical_cluster": "Research",
         "raw_target_page_or_slug": "heroes",
         "canonical_target_page_or_slug": "research.html",
@@ -769,15 +770,15 @@
         "noise_result": false,
         "noise_reason": ""
       },
-      "opportunity_score": 64
+      "opportunity_score": 82
     },
     {
-      "topic_id": "external-search-mmediamreza-last-z-reference-shooter-camp-guide-last-z-survival-shooter-7",
-      "title": "External search opportunity: Shooter Camp Guide | Last Z: Survival Shooter",
-      "cluster": "Site",
+      "topic_id": "external-search-mmediamreza-last-z-reference-military-center-guide-maximize-unit-cap-ba-7",
+      "title": "External search opportunity: Military Center Guide: Maximize Unit Cap & Base Power - | Last Z: Survival Shooter",
+      "cluster": "Progression",
       "recommended_action": "update_existing",
-      "archetype_suggestion": "site-page",
-      "target_page_or_slug": "about.html",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "hq.html",
       "source_type": "external_search",
       "source_id": "mmediamreza-last-z-reference",
       "source_name": "MMediaMreza Last Z reference pages",
@@ -786,23 +787,24 @@
       "priority": "high",
       "risk_level": "high",
       "status": "candidate",
-      "primary_user_job": "Plan Shooter Camp upgrades and troop training.",
+      "primary_user_job": "Confirm building role, unlock level, and scaling stats.",
       "source_urls": [
-        "https://mmediamreza.com/en/shooter-camp-guide"
+        "https://mmediamreza.com/en/military-center-guide"
       ],
       "evidence": [
-        "Training building guide with unlock requirements, upgrade table, unit cap, speed, and power stats for Shooter units."
+        "Building guide for Military Center; covers unit cap, base power, unlock at HQ 5, and refugee assignment."
       ],
       "claims_to_verify": [
-        "HQ unlock level",
-        "training cap by level",
-        "training speed by level",
-        "power scaling by level"
+        "Military Center increases unit cap",
+        "Unlocks at Headquarters level 5",
+        "Officer refugee assignment boosts efficiency",
+        "Contributes to base power",
+        "Upgradable to level 30"
       ],
       "cross_validation_status": "search_result_needs_canonical_and_second_source_validation",
       "site_fit": {
         "expected_internal_route": [
-          "about.html"
+          "hq.html"
         ],
         "external_source_id": "mmediamreza-last-z-reference"
       },
@@ -816,24 +818,24 @@
         "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
       ],
       "deterministic_mapping": {
-        "raw_suggested_cluster": "unit training buildings",
-        "canonical_cluster": "Site",
-        "raw_target_page_or_slug": "shooter-camp-guide",
-        "canonical_target_page_or_slug": "about.html",
-        "page_match_score": 16,
-        "page_match_reason": "cluster_default_target",
+        "raw_suggested_cluster": "base-buildings",
+        "canonical_cluster": "Progression",
+        "raw_target_page_or_slug": "military-center-guide",
+        "canonical_target_page_or_slug": "hq.html",
+        "page_match_score": 27,
+        "page_match_reason": "content_index_token_match",
         "noise_result": false,
         "noise_reason": ""
       },
-      "opportunity_score": 74
+      "opportunity_score": 82
     },
     {
       "topic_id": "external-search-mmediamreza-last-z-reference-rider-camp-guide-train-promote-rider-units-8",
-      "title": "External search opportunity: Rider Camp Guide: Train & Promote Rider Units | Last Z: Survival Shooter",
-      "cluster": "Site",
+      "title": "External search opportunity: Rider Camp Guide: Train & Promote Rider Units - | Last Z: Survival Shooter",
+      "cluster": "Research",
       "recommended_action": "update_existing",
-      "archetype_suggestion": "site-page",
-      "target_page_or_slug": "about.html",
+      "archetype_suggestion": "cost-page",
+      "target_page_or_slug": "hero-training-cost.html",
       "source_type": "external_search",
       "source_id": "mmediamreza-last-z-reference",
       "source_name": "MMediaMreza Last Z reference pages",
@@ -842,23 +844,23 @@
       "priority": "high",
       "risk_level": "high",
       "status": "candidate",
-      "primary_user_job": "Plan Rider Camp upgrades and troop training.",
+      "primary_user_job": "Cross-check rider training cap, speed, and upgrade costs.",
       "source_urls": [
         "https://mmediamreza.com/en/rider-camp-upgrade-guide"
       ],
       "evidence": [
-        "Training building guide with level-by-level costs, cap, speed, and power for Rider units."
+        "Training building guide for Rider Camp; includes level-by-level cost, cap, speed, and power data."
       ],
       "claims_to_verify": [
-        "resource costs by level",
-        "training cap by level",
-        "training speed by level",
-        "power by level"
+        "Rider Camp trains rider units",
+        "Level table shows cost/cap/speed/power",
+        "Upgradeable stats extend across levels",
+        "Training and promotion are tied to camp upgrades"
       ],
       "cross_validation_status": "search_result_needs_canonical_and_second_source_validation",
       "site_fit": {
         "expected_internal_route": [
-          "about.html"
+          "hero-training-cost.html"
         ],
         "external_source_id": "mmediamreza-last-z-reference"
       },
@@ -872,24 +874,24 @@
         "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
       ],
       "deterministic_mapping": {
-        "raw_suggested_cluster": "unit training buildings",
-        "canonical_cluster": "Site",
+        "raw_suggested_cluster": "unit-train-camps",
+        "canonical_cluster": "Research",
         "raw_target_page_or_slug": "rider-camp-upgrade-guide",
-        "canonical_target_page_or_slug": "about.html",
-        "page_match_score": 16,
-        "page_match_reason": "cluster_default_target",
+        "canonical_target_page_or_slug": "hero-training-cost.html",
+        "page_match_score": 18,
+        "page_match_reason": "content_index_token_match",
         "noise_result": false,
         "noise_reason": ""
       },
       "opportunity_score": 74
     },
     {
-      "topic_id": "external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-9",
-      "title": "External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power | Last Z: Survival Shooter",
-      "cluster": "Site",
+      "topic_id": "external-search-mmediamreza-last-z-reference-weekly-lucky-number-research-speed-bonus-m-9",
+      "title": "External search opportunity: Weekly Lucky Number - Research Speed Bonus (May 18 - May 24) - | Last Z: Survival Shooter",
+      "cluster": "Research",
       "recommended_action": "update_existing",
-      "archetype_suggestion": "site-page",
-      "target_page_or_slug": "about.html",
+      "archetype_suggestion": "cornerstone-guide",
+      "target_page_or_slug": "research.html",
       "source_type": "external_search",
       "source_id": "mmediamreza-last-z-reference",
       "source_name": "MMediaMreza Last Z reference pages",
@@ -898,23 +900,23 @@
       "priority": "high",
       "risk_level": "high",
       "status": "candidate",
-      "primary_user_job": "Plan Assaulter Camp upgrades and troop training.",
+      "primary_user_job": "Track weekly bonus conditions and event timing.",
       "source_urls": [
-        "https://mmediamreza.com/en/assaulter-camp-training-guide"
+        "https://mmediamreza.com/en/last-z/lucky-yellow-roses-number"
       ],
       "evidence": [
-        "Training guide for Assaulter units, focused on faster training and power gains."
+        "Time-limited weekly event page; states lucky number 9 and a research speed boost tied to sending yellow roses."
       ],
       "claims_to_verify": [
-        "training speed milestones",
-        "upgrade benefits",
-        "power scaling",
-        "unlock or prerequisite details"
+        "Weekly period May 18 to May 24",
+        "Lucky number is 9",
+        "Send exactly 9 yellow roses at once",
+        "Bonus is +20% research speed for 2 hours"
       ],
       "cross_validation_status": "search_result_needs_canonical_and_second_source_validation",
       "site_fit": {
         "expected_internal_route": [
-          "about.html"
+          "research.html"
         ],
         "external_source_id": "mmediamreza-last-z-reference"
       },
@@ -928,16 +930,16 @@
         "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
       ],
       "deterministic_mapping": {
-        "raw_suggested_cluster": "unit training buildings",
-        "canonical_cluster": "Site",
-        "raw_target_page_or_slug": "assaulter-camp-training-guide",
-        "canonical_target_page_or_slug": "about.html",
-        "page_match_score": 16,
-        "page_match_reason": "cluster_default_target",
+        "raw_suggested_cluster": "events-bonuses",
+        "canonical_cluster": "Research",
+        "raw_target_page_or_slug": "last-z/lucky-yellow-roses-number",
+        "canonical_target_page_or_slug": "research.html",
+        "page_match_score": 43,
+        "page_match_reason": "content_index_token_match",
         "noise_result": false,
         "noise_reason": ""
       },
-      "opportunity_score": 74
+      "opportunity_score": 82
     }
   ],
   "errors": [],

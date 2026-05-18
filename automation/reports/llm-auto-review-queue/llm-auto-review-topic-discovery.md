@@ -1,11 +1,11 @@
-# LLM Topic Discovery - 2026-05-18T18:15:10Z
+# LLM Topic Discovery - 2026-05-18T18:29:58Z
 
 ## Overview
 
 - State: `topic_discovery_ready`
 - Source Scout result: `automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json`
 - Source Scout request: `automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json`
-- Topics: 8
+- Topics: 7
 - Safety: no content, backlog, manifest, PR, or production files were modified.
 
 ## Topic Proposals
@@ -25,15 +25,15 @@
 
 Player value:
 
-Better match for last z vs schedule intent, faster access to schedule and day-by-day strategy, and improved first-screen usefulness.
+Helps players quickly find the alliance duel schedule, day-by-day plan, and strategy in one canonical place.
 
 Rationale:
 
-This is a strong page-level opportunity because the existing event guide already matches the cluster, the route is clear, and the GSC signal suggests meaningful visibility with moderate CTR room. It is suitable for a scoped update rather than new content. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
+This is a strong existing-page opportunity with direct GSC signal, clear user intent around schedule and strategy, and low template risk. It aligns with the Events cluster and does not require a new content type. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
 
 Duplication risk:
 
-Low, because the proposal targets an existing canonical event page and the cluster role is already established.
+Low if the page remains the canonical event guide and does not overlap another event page's role.
 
 Expected route:
 
@@ -43,9 +43,8 @@ Expected route:
 
 Claims to verify:
 
-- Whether alliance-duel.html is still the best canonical page for the target query set.
-- Whether the proposed schedule and day 1-6 plan fit existing page scope without expanding into a broader events hub.
-- Whether any schedule or strategy claims need fresh owner confirmation before a proposal is drafted.
+- Whether alliance-duel.html is still the best canonical page for last z vs schedule queries.
+- Whether the proposed adjustments can stay within the existing event-guide template and cluster role.
 
 Evidence:
 
@@ -66,13 +65,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "This is a strong page-level opportunity because the existing event guide already matches the cluster, the route is clear, and the GSC signal suggests meaningful visibility with moderate CTR room. It is suitable for a scoped update rather than new content. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+  "notes": "This is a strong existing-page opportunity with direct GSC signal, clear user intent around schedule and strategy, and low template risk. It aligns with the Events cluster and does not require a new content type. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
 }
 ```
 
 Next step:
 
-Have an editor confirm query intent, compare the page against the current canonical event guide, and define a scoped update that preserves cluster separation.
+Send to human review for scope confirmation against the current Events page map and query intent.
 
 ### codes-gsc-opportunity
 
@@ -89,15 +88,15 @@ Have an editor confirm query intent, compare the page against the current canoni
 
 Player value:
 
-Cleaner path to redeem codes, gift center login, and UID guidance with less friction for searchers who need quick action.
+Improves findability for players trying to redeem codes, reach Gift Center, or confirm login and UID steps.
 
 Rationale:
 
-This is the strongest opportunity in the set because the page has large impression volume, low CTR signals on multiple gift center queries, and an existing backlog history that suggests prior optimization work. The page is clearly canonical for redeem codes and gift center intent, but the update must preserve protected claims and cluster separation. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
+This page has the strongest analytics signal in the set and a well-defined search intent around Gift Center login and redeem flow. It is a valuable candidate for review, but it carries higher risk because protected canonical claims must stay intact. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
 
 Duplication risk:
 
-Low to medium, because the topic overlaps the existing cornerstone guide and must avoid creating a competing page intent.
+Medium to high if the page starts overlapping with a separate Gift Center or account-setup page.
 
 Expected route:
 
@@ -106,9 +105,9 @@ Expected route:
 
 Claims to verify:
 
-- Whether the current page still owns the primary redeem and gift center intent.
-- Whether protected canonical claims remain accurate and unchanged.
-- Whether any mention of login, UID, or redeem flow needs direct owner validation before an apply step.
+- That codes.html remains the correct canonical page for redeem-code and Gift Center queries.
+- That any revision preserves gift-center-only-redeem-flow, gift-rewards-mailbox, and gift-center-cluster-role-separation claims.
+- That the improvement can be made without broadening the page beyond approved scope.
 
 Evidence:
 
@@ -133,38 +132,38 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "This is the strongest opportunity in the set because the page has large impression volume, low CTR signals on multiple gift center queries, and an existing backlog history that suggests prior optimization work. The page is clearly canonical for redeem codes and gift center intent, but the update must preserve protected claims and cluster separation. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+  "notes": "This page has the strongest analytics signal in the set and a well-defined search intent around Gift Center login and redeem flow. It is a valuable candidate for review, but it carries higher risk because protected canonical claims must stay intact. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
 }
 ```
 
 Next step:
 
-Have a human reviewer verify that the page can be improved without changing protected claims or blurring roles with any gift center support page.
+Send to human review with explicit checks for cluster separation, protected claims, and whether another canonical page already serves the intent better.
 
 ### external-gift-center-official-flow-validation
 
 - Title: External source opportunity: official Gift Center and store flow validation
 - Target: `gift-center-uid.html`
 - Cluster: `Economy`
-- Action: `update_existing`
+- Action: `monitor`
 - Archetype: `support-guide`
-- Priority: `medium`
-- Risk: `medium`
+- Priority: `low`
+- Risk: ``
 - Confidence: `high`
 - Prior review: `none`
-- Human approval required: `true`
+- Human approval required: `false`
 
 Player value:
 
-More reliable guidance for setup, UID usage, and official service routing, reducing confusion around redeem flow.
+
 
 Rationale:
 
-The official service domain is a potentially strong verification lead for Gift Center routing and redeem flow accuracy, but it is not proof by itself. The opportunity is worth human review only as a validation task for the existing support guide.
+External-source discovery only. It may be useful for later verification, but it is not ready for human review because the claim set is not yet cross-validated and could duplicate existing Gift Center guidance. Future trigger: Move to review only after canonical memory and at least one additional reliable source or owner confirmation verify the routing and redeem flow claims.
 
 Duplication risk:
 
-Medium, because the topic may overlap existing gift center coverage and could duplicate current support intent if not scoped carefully.
+
 
 Expected route:
 
@@ -173,9 +172,7 @@ Expected route:
 
 Claims to verify:
 
-- Whether the official site confirms the same Gift Center routing currently described on the site.
-- Whether UID and store flow instructions align with owner-confirmed knowledge.
-- Whether the topic adds a distinct player job beyond existing gift center coverage.
+- None
 
 Evidence:
 
@@ -189,21 +186,21 @@ Backlog Row Preview:
   "topic_id": "external-gift-center-official-flow-validation",
   "title": "External source opportunity: official Gift Center and store flow validation",
   "cluster": "Economy",
-  "recommended_action": "update_existing",
+  "recommended_action": "monitor",
   "archetype_suggestion": "support-guide",
   "target_page_or_slug": "gift-center-uid.html",
   "source_type": "llm_scout",
   "source_reference": "official-functap-store: https://last-z.com",
   "confidence": "high",
-  "priority": "medium",
-  "status": "candidate",
-  "notes": "The official service domain is a potentially strong verification lead for Gift Center routing and redeem flow accuracy, but it is not proof by itself. The opportunity is worth human review only as a validation task for the existing support guide."
+  "priority": "low",
+  "status": "monitor",
+  "notes": "External-source discovery only. It may be useful for later verification, but it is not ready for human review because the claim set is not yet cross-validated and could duplicate existing Gift Center guidance. Future trigger: Move to review only after canonical memory and at least one additional reliable source or owner confirmation verify the routing and redeem flow claims."
 }
 ```
 
 Next step:
 
-Cross-check the official site against canonical memory and one additional reliable source before deciding whether a scoped update is justified.
+Move to review only after canonical memory and at least one additional reliable source or owner confirmation verify the routing and redeem flow claims.
 
 ### external-hq-and-progression-reference-cross-check
 
@@ -224,7 +221,7 @@ Player value:
 
 Rationale:
 
-This is a verification lead, but the current evidence is too thin and external-source based to move forward without stronger validation. It overlaps existing HQ/progression intent and should not advance to a content workflow yet. Future trigger: Move to review only if canonical memory plus a second reliable source confirm a real dependency or planning gap. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
+External-source discovery only. The topic is plausible but currently lacks independent verification and could blur progression page boundaries. Future trigger: Reconsider if owner confirmation or a second reliable source validates the HQ requirement and dependency claims. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
 
 Duplication risk:
 
@@ -259,13 +256,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "This is a verification lead, but the current evidence is too thin and external-source based to move forward without stronger validation. It overlaps existing HQ/progression intent and should not advance to a content workflow yet. Future trigger: Move to review only if canonical memory plus a second reliable source confirm a real dependency or planning gap. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+  "notes": "External-source discovery only. The topic is plausible but currently lacks independent verification and could blur progression page boundaries. Future trigger: Reconsider if owner confirmation or a second reliable source validates the HQ requirement and dependency claims. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
 }
 ```
 
 Next step:
 
-Move to review only if canonical memory plus a second reliable source confirm a real dependency or planning gap.
+Reconsider if owner confirmation or a second reliable source validates the HQ requirement and dependency claims.
 
 ### external-research-costs-external-cross-check
 
@@ -286,7 +283,7 @@ Player value:
 
 Rationale:
 
-The proposal is useful as a research validation signal, but the current evidence does not justify a content opportunity. It risks duplicating existing research coverage and relies on one external source. Future trigger: Revisit if branch naming, cost-table drift, or missing coverage is confirmed by owner review or a second authoritative source. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
+External-source discovery only. The cost and branch coverage claims are not verified enough for a review step, and the topic risks copying reference framing. Future trigger: Promote only after the underlying cost-table and branch-name facts are confirmed from canonical memory plus another reliable source. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.
 
 Duplication risk:
 
@@ -321,13 +318,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "The proposal is useful as a research validation signal, but the current evidence does not justify a content opportunity. It risks duplicating existing research coverage and relies on one external source. Future trigger: Revisit if branch naming, cost-table drift, or missing coverage is confirmed by owner review or a second authoritative source. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+  "notes": "External-source discovery only. The cost and branch coverage claims are not verified enough for a review step, and the topic risks copying reference framing. Future trigger: Promote only after the underlying cost-table and branch-name facts are confirmed from canonical memory plus another reliable source. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
 }
 ```
 
 Next step:
 
-Revisit if branch naming, cost-table drift, or missing coverage is confirmed by owner review or a second authoritative source.
+Promote only after the underlying cost-table and branch-name facts are confirmed from canonical memory plus another reliable source.
 
 ### external-search-lastz-fandom-reference-full-preparedness-4
 
@@ -348,7 +345,7 @@ Player value:
 
 Rationale:
 
-Search result evidence is too generic and can easily overlap the existing events guide without a distinct player job. It is not ready for human content review beyond monitoring. Future trigger: Reconsider if a specific event mechanic or schedule pattern is verified and clearly distinct from the current events page role.
+Monitor only. The source is a search-result discovery signal and does not yet justify a page change or a new topic without verification. Future trigger: Advance if a verified player job emerges and the event task mapping is confirmed by reliable sources or owner review.
 
 Duplication risk:
 
@@ -364,7 +361,7 @@ Claims to verify:
 
 Evidence:
 
-- Daily event cycle includes a science day for research points and a hero day for leveling heroes.
+- Daily event cycles include a research-focused phase and a hero-upgrade phase, useful for mapping event tasks tied to research and heroes.
 
 Backlog Row Preview:
 
@@ -381,13 +378,13 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "Search result evidence is too generic and can easily overlap the existing events guide without a distinct player job. It is not ready for human content review beyond monitoring. Future trigger: Reconsider if a specific event mechanic or schedule pattern is verified and clearly distinct from the current events page role."
+  "notes": "Monitor only. The source is a search-result discovery signal and does not yet justify a page change or a new topic without verification. Future trigger: Advance if a verified player job emerges and the event task mapping is confirmed by reliable sources or owner review."
 }
 ```
 
 Next step:
 
-Reconsider if a specific event mechanic or schedule pattern is verified and clearly distinct from the current events page role.
+Advance if a verified player job emerges and the event task mapping is confirmed by reliable sources or owner review.
 
 ### external-search-lastz-fandom-reference-laboratory-5
 
@@ -408,7 +405,7 @@ Player value:
 
 Rationale:
 
-The laboratory idea is a broad research topic with high duplication risk and no verified gap. The current signal is not strong enough for a new or updated content opportunity. Future trigger: Revisit if a verified missing mechanic, cost, or lab progression detail emerges from canonical memory plus another source.
+Monitor only. This is a discovery signal for research-related routing, but the claim set is not yet strong enough for a review workflow. Future trigger: Revisit after validation confirms that Laboratory is the right canonical target for the research setup and unlock coverage.
 
 Duplication risk:
 
@@ -424,7 +421,7 @@ Claims to verify:
 
 Evidence:
 
-- Research building page; confirms technologies are unlocked and improved through the lab.
+- Explains the building used for technologies research and unlock conditions, useful for cross-checking research-related event tasks.
 
 Backlog Row Preview:
 
@@ -441,70 +438,10 @@ Backlog Row Preview:
   "confidence": "high",
   "priority": "low",
   "status": "monitor",
-  "notes": "The laboratory idea is a broad research topic with high duplication risk and no verified gap. The current signal is not strong enough for a new or updated content opportunity. Future trigger: Revisit if a verified missing mechanic, cost, or lab progression detail emerges from canonical memory plus another source."
+  "notes": "Monitor only. This is a discovery signal for research-related routing, but the claim set is not yet strong enough for a review workflow. Future trigger: Revisit after validation confirms that Laboratory is the right canonical target for the research setup and unlock coverage."
 }
 ```
 
 Next step:
 
-Revisit if a verified missing mechanic, cost, or lab progression detail emerges from canonical memory plus another source.
-
-### external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1
-
-- Title: External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026
-- Target: `heroes.html`
-- Cluster: `Heroes`
-- Action: `monitor`
-- Archetype: `cornerstone-guide`
-- Priority: `low`
-- Risk: ``
-- Confidence: `high`
-- Prior review: `none`
-- Human approval required: `false`
-
-Player value:
-
-
-
-Rationale:
-
-The hero roster reference is likely to overlap existing heroes coverage and the source is not sufficient to justify a new action. It is better treated as monitor-only until a clear gap is verified. Future trigger: Move forward only if a distinct player job appears, such as a missing hero filter, stats conflict, or roster coverage gap confirmed by owner review.
-
-Duplication risk:
-
-
-
-Expected route:
-
-- heroes.html
-
-Claims to verify:
-
-- None
-
-Evidence:
-
-- Hero roster and equipment reference page with faction filters, level listings, and gear stat examples; useful for hero discovery and cross-checking hero-related entries.
-
-Backlog Row Preview:
-
-```json
-{
-  "topic_id": "external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1",
-  "title": "External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026",
-  "cluster": "Heroes",
-  "recommended_action": "monitor",
-  "archetype_suggestion": "cornerstone-guide",
-  "target_page_or_slug": "heroes.html",
-  "source_type": "llm_scout",
-  "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
-  "confidence": "high",
-  "priority": "low",
-  "status": "monitor",
-  "notes": "The hero roster reference is likely to overlap existing heroes coverage and the source is not sufficient to justify a new action. It is better treated as monitor-only until a clear gap is verified. Future trigger: Move forward only if a distinct player job appears, such as a missing hero filter, stats conflict, or roster coverage gap confirmed by owner review."
-}
-```
-
-Next step:
-
-Move forward only if a distinct player job appears, such as a missing hero filter, stats conflict, or roster coverage gap confirmed by owner review.
+Revisit after validation confirms that Laboratory is the right canonical target for the research setup and unlock coverage.
