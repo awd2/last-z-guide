@@ -100,6 +100,19 @@ def topic_decision_command(discovery_path: str, topic_id: str, state: str, note:
     )
 
 
+def approved_intake_path(topic_id: str) -> Path | None:
+    path = REPORTS_DIR / f"llm-intake-{topic_id}.json"
+    if not path.exists():
+        return None
+    try:
+        payload = load_json(path)
+    except Exception:
+        return None
+    if payload.get("state") == "approved_for_intake":
+        return path
+    return None
+
+
 def render_owner_commands(digest: dict[str, Any]) -> list[str]:
     items = unique_action_items(digest)
     if not items:
@@ -116,6 +129,16 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
         target = str(item.get("target_page_or_slug") or "")
         priority = str(item.get("priority") or "")
         risk = str(item.get("risk_level") or "")
+        comment_commands = [
+            f"/monitor {topic_id} Monitor {topic_id}: <why this should wait>",
+            f"/reject {topic_id} Reject {topic_id}: <why this should not proceed>",
+            f"/approve-chain {topic_id} Approve {topic_id} for no-write chain: <validated player value and claim scope>",
+        ]
+        intake = str(item.get("approve_for_intake_command") or "")
+        if intake:
+            comment_commands.append(f"/approve-intake {topic_id} Approve {topic_id} for intake only: <owner answers and intake scope>")
+        if approved_intake_path(topic_id):
+            comment_commands.append(f"/approve-run-plan {topic_id} Approve {topic_id} for no-write run-plan only: <owner confirms run-plan scope>")
         lines.extend(
             [
                 f"### `{topic_id}`",
@@ -127,9 +150,7 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
                 "GitHub issue comment commands:",
                 "",
                 "```text",
-                f"/monitor {topic_id} Monitor {topic_id}: <why this should wait>",
-                f"/reject {topic_id} Reject {topic_id}: <why this should not proceed>",
-                f"/approve-chain {topic_id} Approve {topic_id} for no-write chain: <validated player value and claim scope>",
+                *comment_commands,
                 "```",
                 "",
                 "Monitor:",
@@ -157,10 +178,24 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
                 "",
             ]
         )
-        intake = str(item.get("approve_for_intake_command") or "")
         if intake:
             intake = intake.replace("--approved-by <owner>", "--approved-by OWNER_NAME")
             lines.extend(["Approve intake from completed chain:", "", "```bash", intake, "```", ""])
+        approved_intake = approved_intake_path(topic_id)
+        if approved_intake:
+            lines.extend(
+                [
+                    "Approve run-plan from committed intake:",
+                    "",
+                    "```bash",
+                    "python3 automation/pipeline.py worker-run-plan "
+                    f"--intake {rel(approved_intake)} "
+                    f"--basename llm-worker-run-plan-{topic_id} "
+                    "--json",
+                    "```",
+                    "",
+                ]
+            )
         chain_markdown = str(item.get("chain_markdown") or "")
         if chain_markdown:
             lines.extend([f"- Review artifact: `{chain_markdown}`", ""])

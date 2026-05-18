@@ -26,7 +26,8 @@ jobs:
         startsWith(github.event.comment.body, '/monitor ') ||
         startsWith(github.event.comment.body, '/reject ') ||
         startsWith(github.event.comment.body, '/approve-chain ') ||
-        startsWith(github.event.comment.body, '/approve-intake ')
+        startsWith(github.event.comment.body, '/approve-intake ') ||
+        startsWith(github.event.comment.body, '/approve-run-plan ')
       )
     runs-on: ubuntu-latest
     steps:
@@ -83,6 +84,26 @@ jobs:
             --markdown-output automation/reports/llm-owner-intake-gha/intake-summary.md \
             --json | tee automation/reports/llm-owner-intake-gha/run-summary.json
 
+      - name: Record owner run-plan from issue comment
+        if: startsWith(github.event.comment.body, '/approve-run-plan ')
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+          mkdir -p automation/reports/llm-owner-run-plan-gha
+          python3 automation/pipeline.py llm-issue-run-plan \
+            --comment-body "$COMMENT_BODY" \
+            --comment-author "$COMMENT_AUTHOR" \
+            --author-association "$AUTHOR_ASSOCIATION" \
+            --issue-title "$ISSUE_TITLE" \
+            --reports-dir automation/reports \
+            --summary-output automation/reports/llm-owner-run-plan-gha/run-plan-summary.json \
+            --markdown-output automation/reports/llm-owner-run-plan-gha/run-plan-summary.md \
+            --json | tee automation/reports/llm-owner-run-plan-gha/run-summary.json
+
       - name: Write job summary
         if: always()
         run: |
@@ -121,6 +142,16 @@ jobs:
               if intake.get("errors"):
                   print("- Intake errors:")
                   for error in intake["errors"]:
+                      print(f"  - {error}")
+          run_plan_path = Path("automation/reports/llm-owner-run-plan-gha/run-plan-summary.json")
+          if run_plan_path.exists():
+              run_plan = json.loads(run_plan_path.read_text())
+              print(f"- Run-plan command state: `{run_plan.get('state')}`")
+              print(f"- Run-plan topic: `{run_plan.get('topic_id')}`")
+              print(f"- Run-plan artifact: `{run_plan.get('run_plan_output_path')}`")
+              if run_plan.get("errors"):
+                  print("- Run-plan errors:")
+                  for error in run_plan["errors"]:
                       print(f"  - {error}")
           PY
 
@@ -206,6 +237,7 @@ jobs:
 
           decision_path = Path("automation/reports/llm-owner-decision-gha/decision-summary.json")
           intake_path = Path("automation/reports/llm-owner-intake-gha/intake-summary.json")
+          run_plan_path = Path("automation/reports/llm-owner-run-plan-gha/run-plan-summary.json")
           chain_path = Path("automation/reports/llm-worker-chain-gha/run-summary.json")
           lines = [
               "## LLM owner handoff result",
@@ -229,10 +261,10 @@ jobs:
                   for error in decision["errors"]:
                       lines.append(f"  - {error}")
           else:
-              lines.append("- State: `blocked`")
-              if not intake_path.exists():
+              if not intake_path.exists() and not run_plan_path.exists():
+                  lines.append("- State: `blocked`")
                   lines.append("- Errors:")
-                  lines.append("  - No decision or intake summary artifact was written.")
+                  lines.append("  - No decision, intake, or run-plan summary artifact was written.")
 
           if intake_path.exists():
               intake = json.loads(intake_path.read_text())
@@ -251,6 +283,26 @@ jobs:
               if intake.get("errors"):
                   lines.append("- Intake errors:")
                   for error in intake["errors"]:
+                      lines.append(f"  - {error}")
+
+          if run_plan_path.exists():
+              run_plan = json.loads(run_plan_path.read_text())
+              lines.extend(
+                  [
+                      "",
+                      "Run plan:",
+                      "",
+                      f"- State: `{run_plan.get('state', '')}`",
+                      f"- Topic: `{run_plan.get('topic_id', '')}`",
+                      f"- Source intake: `{run_plan.get('source_intake', '')}`",
+                      f"- Run-plan artifact: `{run_plan.get('run_plan_output_path', '')}`",
+                      f"- Allows content edit: `{str(run_plan.get('allows_content_edit', False)).lower()}`",
+                      f"- Allows manifest creation: `{str(run_plan.get('allows_manifest_creation', False)).lower()}`",
+                  ]
+              )
+              if run_plan.get("errors"):
+                  lines.append("- Run-plan errors:")
+                  for error in run_plan["errors"]:
                       lines.append(f"  - {error}")
 
           if chain_path.exists():
@@ -304,6 +356,7 @@ jobs:
           path: |
             automation/reports/llm-owner-decision-gha/
             automation/reports/llm-owner-intake-gha/
+            automation/reports/llm-owner-run-plan-gha/
             automation/reports/llm-worker-chain-gha/
             automation/reports/llm-owner-decision-chains/
           if-no-files-found: ignore
@@ -311,11 +364,12 @@ jobs:
       - name: Commit owner handoff artifacts
         if: success()
         run: |
-          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-owner-decision-chains)" ]]; then
+          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md automation/reports/llm-owner-decision-chains)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md || true
             git add automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md || true
+            git add automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md || true
             git add automation/reports/llm-owner-decision-chains || true
             git commit -m "chore(llm): record owner handoff artifacts"
             for i in 1 2 3; do

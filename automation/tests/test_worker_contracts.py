@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_owner_digest, llm_owner_issue, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_issue_intake, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_issue_intake, llm_issue_run_plan, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -3476,6 +3476,101 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(code, 1)
             self.assertEqual(missing_summary["state"], "blocked")
             self.assertIn("No matching LLM worker-chain summary", " ".join(missing_summary["errors"]))
+
+    def test_issue_run_plan_records_approved_run_plan_comment(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            intake_path = tmp_path / "llm-intake-codes-gsc-opportunity.json"
+            write_json(
+                intake_path,
+                {
+                    "schema_version": 1,
+                    "report_type": "llm_worker_proposal_intake",
+                    "state": "approved_for_intake",
+                    "source_topic_id": "codes-gsc-opportunity",
+                    "target_page_or_slug": "codes.html",
+                    "risk_level": "high",
+                    "approved_by": "fixture-owner",
+                    "approval_note": "Approved intake only.",
+                    "source_chain_file": "automation/reports/llm-worker-chain-codes-gsc-opportunity.json",
+                    "blockers": [],
+                    "proposed_backlog_item": {
+                        "topic_id": "codes-gsc-opportunity-llm-approved-intake",
+                        "title": "Codes opportunity",
+                        "cluster": "Economy",
+                        "recommended_action": "update_existing",
+                        "archetype_suggestion": "cornerstone-guide",
+                        "target_page_or_slug": "codes.html",
+                        "source_type": "analytics",
+                        "source_reference": "fixture",
+                        "confidence": "high",
+                        "priority": "high",
+                        "status": "candidate",
+                        "notes": "Fixture intake.",
+                    },
+                    "exact_replacements": [],
+                },
+            )
+
+            code, summary = llm_issue_run_plan.run_issue_run_plan(
+                comment_body="/approve-run-plan codes-gsc-opportunity Owner confirms run-plan only.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                reports_dir=tmp_path,
+                intake_path=None,
+                output_dir=tmp_path,
+                summary_output=tmp_path / "issue-run-plan.json",
+                markdown_output=tmp_path / "issue-run-plan.md",
+            )
+
+            self.assertEqual(code, 0)
+            self.assertEqual(summary["state"], "run_plan_recorded")
+            self.assertEqual(summary["run_plan_state"], "run_plan_ready")
+            self.assertFalse(summary["allows_content_edit"])
+            self.assertFalse(summary["allows_manifest_creation"])
+            run_plan_path = tmp_path / "llm-worker-run-plan-codes-gsc-opportunity.json"
+            self.assertTrue(run_plan_path.exists())
+            run_plan = load_json(run_plan_path)
+            self.assertEqual(run_plan["state"], "run_plan_ready")
+            self.assertFalse(run_plan["owner_run_plan_approval"]["content_edit_approved"])
+            self.assertFalse(run_plan["owner_run_plan_approval"]["manifest_creation_approved"])
+
+    def test_issue_run_plan_blocks_missing_intake_or_untrusted_comment(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            code, summary = llm_issue_run_plan.run_issue_run_plan(
+                comment_body="/approve-run-plan codes-gsc-opportunity",
+                comment_author="fixture-user",
+                author_association="CONTRIBUTOR",
+                issue_title="LLM Owner Digest: Action Needed",
+                reports_dir=tmp_path,
+                intake_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+
+            self.assertEqual(code, 1)
+            self.assertEqual(summary["state"], "blocked")
+            self.assertIn("Unsupported comment author association", " ".join(summary["errors"]))
+            self.assertIn("Run-plan approval note is required", " ".join(summary["errors"]))
+
+            code, missing_summary = llm_issue_run_plan.run_issue_run_plan(
+                comment_body="/approve-run-plan missing-topic Owner confirms run-plan only.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                reports_dir=tmp_path,
+                intake_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+
+            self.assertEqual(code, 1)
+            self.assertEqual(missing_summary["state"], "blocked")
+            self.assertIn("No matching approved LLM intake artifact", " ".join(missing_summary["errors"]))
 
 
 if __name__ == "__main__":

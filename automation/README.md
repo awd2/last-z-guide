@@ -332,6 +332,7 @@ python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-owner-issue --json
 python3 automation/pipeline.py llm-issue-decision --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-intake --comment-body "/approve-intake <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/pipeline.py llm-issue-run-plan --comment-body "/approve-run-plan <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py content-seo-opportunities
@@ -671,13 +672,14 @@ LLM owner decision workflow:
 
 - `.github/workflows/llm-owner-decision.yml` -> record owner decisions from comments on the GitHub handoff issue
 - trigger mode: new issue comment on `LLM Owner Digest: Action Needed`
-- supported commands: `/monitor`, `/reject`, `/approve-chain`, and `/approve-intake`
+- supported commands: `/monitor`, `/reject`, `/approve-chain`, `/approve-intake`, and `/approve-run-plan`
 - accepted author associations: `OWNER`, `MEMBER`, and `COLLABORATOR`
 - output is an uploaded workflow artifact named `llm-owner-decision-<run_number>`
-- it may commit only owner handoff artifacts: `automation/reports/llm-topic-decision-<topic_id>.json` / `.md`, `automation/reports/llm-owner-decision-chains/llm-worker-chain-<topic_id>.json` / `.md`, and `automation/reports/llm-intake-<topic_id>.json` / `.md`
+- it may commit only owner handoff artifacts: `automation/reports/llm-topic-decision-<topic_id>.json` / `.md`, `automation/reports/llm-owner-decision-chains/llm-worker-chain-<topic_id>.json` / `.md`, `automation/reports/llm-intake-<topic_id>.json` / `.md`, and `automation/reports/llm-worker-run-plan-<topic_id>.json` / `.md`
 - for `/approve-chain`, it runs `llm-worker-chain --from-decision` in the same workflow job and uploads the no-write chain artifacts
 - for `/approve-chain`, it also persists the no-write chain summary under `automation/reports/llm-owner-decision-chains/` so a later `/approve-intake` comment has a durable source artifact
 - for `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary; it still does not approve public copy or create a run manifest
+- for `/approve-run-plan`, it creates a no-write run-plan proposal from a matching approved intake artifact; it still does not create a manifest
 - it replies to the same GitHub issue with the decision/intake result, workflow link, and worker-chain summary when applicable
 - this workflow intentionally does not edit content, backlog, manifests, PRs, or deploy
 
@@ -744,6 +746,15 @@ LLM issue intake:
 - chain lookup checks `automation/reports/llm-owner-decision-chains/`, `automation/reports/llm-auto-review-queue/`, and `automation/reports/`
 - output lives in `automation/reports/llm-intake-<topic_id>.json` and `.md`
 - `.github/workflows/llm-owner-decision.yml` runs this command from intake comments on the `LLM Owner Digest: Action Needed` issue and may commit only the resulting intake artifacts
+- this does not approve public copy, mutate backlog/manifests/content, create PRs, or deploy
+
+LLM issue run plan:
+
+- `python3 automation/pipeline.py llm-issue-run-plan --comment-body "/approve-run-plan <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json` -> parse one owner handoff issue comment and create a no-write run-plan proposal from approved intake
+- supported command is `/approve-run-plan`
+- the command requires a topic id, a real owner note, an accepted author association, and a matching approved `llm-intake-<topic_id>.json` or `worker-intake-<topic_id>.json` artifact
+- output lives in `automation/reports/llm-worker-run-plan-<topic_id>.json` and `.md`
+- `.github/workflows/llm-owner-decision.yml` runs this command from run-plan comments on the `LLM Owner Digest: Action Needed` issue and may commit only the resulting run-plan artifacts
 - this does not approve public copy, mutate backlog/manifests/content, create PRs, or deploy
 
 LLM intake latest:

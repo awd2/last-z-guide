@@ -119,6 +119,7 @@ python3 automation/pipeline.py llm-owner-digest --json
 python3 automation/pipeline.py llm-owner-issue --json
 python3 automation/pipeline.py llm-issue-decision --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-intake --comment-body "/approve-intake <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/pipeline.py llm-issue-run-plan --comment-body "/approve-run-plan <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
@@ -139,6 +140,7 @@ python3 automation/workers/llm_topic_discovery.py --json
 python3 automation/workers/llm_topic_decision.py --topic-id <topic_id> --state monitor --decided-by <name> --json
 python3 automation/workers/llm_issue_decision.py --comment-body "/approve-chain <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_issue_intake.py --comment-body "/approve-intake <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/workers/llm_issue_run_plan.py --comment-body "/approve-run-plan <topic_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_run_approved_handoffs.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
@@ -272,10 +274,19 @@ proposal intake. It accepts only `/approve-intake <topic_id> <owner note>` on th
 matching chain. This approval is intake-only and must not approve public copy,
 mutate backlog/manifests/content, create PRs, or deploy.
 
+`llm-issue-run-plan` is the GitHub issue-comment bridge from approved intake to
+no-write run-plan proposal. It accepts only
+`/approve-run-plan <topic_id> <owner note>` on the
+`LLM Owner Digest: Action Needed` issue, requires a matching approved
+`llm-intake-<topic_id>.json` or `worker-intake-<topic_id>.json`, and writes only
+`automation/reports/llm-worker-run-plan-<topic_id>.json` and `.md`. This
+approval is run-plan-only and must not approve public copy, mutate
+backlog/manifests/content, create PRs, or deploy.
+
 GitHub workflow `.github/workflows/llm-owner-decision.yml` runs this command
 from matching issue comments, replies in the same issue with the result, and may
 commit only owner handoff artifacts: topic decisions, persisted no-write chain
-summaries, and intake artifacts. For `/approve-chain`, it runs the no-write
+summaries, intake artifacts, and run-plan artifacts. For `/approve-chain`, it runs the no-write
 `llm-worker-chain --from-decision` path in the same workflow job, uploads the
 chain artifacts, and persists the summary under
 `automation/reports/llm-owner-decision-chains/` for later `/approve-intake`.
