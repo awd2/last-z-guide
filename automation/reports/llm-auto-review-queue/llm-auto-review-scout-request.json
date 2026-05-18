@@ -196,8 +196,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
-        "title": "External search opportunity: Full Preparedness",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
+        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Events",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -207,7 +207,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycles include research-speed tasks and hero upgrade tasks; useful for cross-checking event categories and rewards."
+          "Regular world event that includes research-speed tasks under the Age of Science cycle and hero upgrade tasks under Hero Initiative."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -226,8 +226,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-heroes-5",
-        "title": "External search opportunity: Heroes",
+        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
+        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -237,7 +237,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page with hero classes and power factors; useful for entity discovery around hero systems."
+          "Core hero roster and power overview; useful for linking hero-related event tasks to hero leveling and fragments."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -267,7 +267,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero index with roster, faction tabs, levels, and equipment; useful for hero discovery and cross-checking character names."
+          "Hero roster page with character list, levels, factions, and equipment sections; useful for hero discovery and cross-checking hero-related pages."
         ],
         "site_fit": {
           "expected_internal_route": [
