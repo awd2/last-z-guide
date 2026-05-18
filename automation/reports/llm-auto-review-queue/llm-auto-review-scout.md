@@ -1,11 +1,11 @@
-# LLM Scout Review - 2026-05-18T18:58:28Z
+# LLM Scout Review - 2026-05-18T19:30:53Z
 
 ## Overview
 
 - State: `completed`
 - Provider: `openai`
 - Source proposals: 8
-- Ready for chain: 2
+- Ready for chain: 3
 - Monitor only: 5
 - Request: `automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json`
 - Result: `automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json`
@@ -13,7 +13,7 @@
 
 ## LLM Summary
 
-The strongest opportunities are existing-page updates backed by GSC signals and cluster-fit alignment, especially the Gift Center / codes page and the alliance duel event guide. External-source proposals should be held back unless they can be verified against canonical memory plus an additional reliable source, because they are discovery signals rather than proof. Several search-based ideas are too thin or duplicate-prone for immediate advancement and should remain monitor-only.
+The strongest opportunities are update_existing reviews for pages with clear GSC signal and established canonical roles: codes.html, alliance-duel.html, and several externally sourced pages that can only move forward after verification. The highest value comes from improving query-page match on existing pages rather than creating new pages. External-source topics are useful for discovery, but they carry high duplication and verification risk and should stay in review until claims are confirmed from canonical memory plus a second reliable source or owner approval.
 
 ## Selected Opportunities
 
@@ -23,18 +23,18 @@ The strongest opportunities are existing-page updates backed by GSC signals and 
 - Ready for chain: `true`
 - Priority: `high`
 - Risk: `high`
-- Player value: Helps players find the correct redeem path faster, reduces confusion around Gift Center login and UID, and better matches search intent.
-- Duplication risk: Medium. The page already owns this topic space, so changes must preserve cluster role separation and avoid overlapping with other canonical pages.
-- Next step: Human review should validate which query intents are already covered, confirm the canonical claims to preserve, and define a scoped update brief for the existing page only.
+- Player value: Improves findability for players searching for redeem codes, Gift Center login, and UID guidance without forcing them through a less relevant page.
+- Duplication risk: Medium, because Gift Center intent can overlap with other Economy pages if cluster roles are not protected.
+- Next step: Send to human review to confirm query intent, protect canonical claims, and define the smallest safe update scope for codes.html.
 
 Rationale:
 
-This is a high-signal, high-volume query-page mismatch on an existing cornerstone page with clear intent around redeem codes and Gift Center login. It fits the Economy cluster and can likely improve first-screen usefulness without changing site structure.
+This is a strong existing-page opportunity with substantial impression volume, low CTR, and a clear query cluster around Gift Center intent. The page already has a known backlog history and an established cornerstone role, so an update review is higher value than new content creation.
 
 Claims to verify:
-- Whether codes.html remains the best canonical page for all Gift Center related queries.
-- Whether the existing canonical claims about redeem flow, mailbox rewards, and cluster role separation remain accurate and should be preserved unchanged.
-- Whether any query variants require new first-screen structure rather than broader page rewrites.
+- The page should remain the canonical Gift Center / redeem codes destination.
+- The existing claims about Gift Center login and UID flow match current canonical site memory.
+- The update can be made without blurring Economy cluster role separation.
 
 ### alliance-duel-gsc-opportunity
 
@@ -42,39 +42,58 @@ Claims to verify:
 - Ready for chain: `true`
 - Priority: `high`
 - Risk: `medium`
-- Player value: Improves schedule discovery and day-by-day planning for players searching for alliance duel timing and strategy.
-- Duplication risk: Medium. The topic should not be expanded into a broader events hub if another canonical page already serves that role.
-- Next step: Human review should confirm the target intent, verify whether the page can absorb the missing schedule and strategy context without breaking cluster separation, and define the minimal update scope.
+- Player value: Helps players quickly find event schedule, day-by-day planning, and versus strategy details for the Alliance Duel event.
+- Duplication risk: Medium, because event intent may be shared with other event pages if the scope is not tightly controlled.
+- Next step: Have a human reviewer validate whether alliance-duel.html is the best canonical match for the query set and whether the update stays within template and cluster rules.
 
 Rationale:
 
-This is a strong existing-page opportunity with meaningful impressions and a reasonable CTR gap, pointing to query-to-page refinement rather than new content creation. It fits the Events cluster and appears suitable for a scoped update to the current guide.
+The page has meaningful impressions and clicks with a mid-range CTR, suggesting a practical opportunity to improve the first-screen match for schedule-seeking users. It fits the current event-guide archetype and should be reviewed as an existing-page optimization.
 
 Claims to verify:
-- Whether alliance-duel.html is still the best canonical page for last z vs schedule intent.
-- Whether the proposed schedule and day 1-6 framing is accurate and current.
-- Whether another events page already serves this query better.
+- The query intent is primarily schedule and strategy related.
+- The page is the correct canonical event-guide target.
+- The update will not require scope expansion beyond approved event-guide patterns.
+
+### external-gift-center-official-flow-validation
+
+- Decision: `update_existing`
+- Ready for chain: `true`
+- Priority: `medium`
+- Risk: `medium`
+- Player value: Could improve accuracy for players trying to confirm official Gift Center setup, UID usage, and store flow.
+- Duplication risk: High, because this could duplicate existing Gift Center coverage or copy external wording if not tightly controlled.
+- Next step: Route to human verification only, with explicit requirement for canonical memory plus a second reliable source or owner confirmation before any content proposal.
+
+Rationale:
+
+The external official domain is a useful discovery and cross-validation signal for Gift Center routing, but it is not proof by itself. The topic is worth human review because it may confirm or refine existing Economy guidance, provided claims are verified before any apply step.
+
+Claims to verify:
+- Official service routing details are accurate and current.
+- Gift Center setup and UID usage are still the correct player flow.
+- No canonical claims are being copied from the external source.
 
 ## Rejected Or Monitor
 
-- external-gift-center-official-flow-validation: External source discovery only. The claim set depends on a single outside source and cannot be treated as proof without cross-validation and owner confirmation. Future trigger: Move forward only if canonical site memory plus at least one additional reliable source confirms the Gift Center routing and UID flow.
-- external-hq-and-progression-reference-cross-check: Useful as a validation lead, but it is not yet verified enough for a content proposal. It also risks overlapping with existing HQ coverage. Future trigger: Advance only after the progression requirements and dependencies are confirmed from a second reliable source or owner review.
-- external-research-costs-external-cross-check: Discovery signal only. External reference content about research costs and branch coverage needs verification before any page work. Future trigger: Reconsider if branch naming, costs, or coverage gaps are confirmed by canonical memory plus a reliable second source.
-- external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4: Search-result evidence is too thin and source wording must not be copied. It is also likely to overlap with existing events coverage. Future trigger: Revisit if the event mechanics and hero task linkage are verified through reliable sources and the page gap is clearly distinct.
-- external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5: Discovery-only, with high duplication risk against existing heroes or research pages. Not ready for human review as a proposal. Future trigger: Reconsider if a distinct player job emerges that is not already served by heroes.html or research.html.
+- external-hq-and-progression-reference-cross-check: Useful as discovery, but too dependent on a single external reference and too likely to overlap existing HQ/progression coverage without a distinct player job. Future trigger: Reconsider only if owner-confirmed progression data or a second reliable source exposes a clear gap in hq.html.
+- external-research-costs-external-cross-check: High verification risk and likely overlap with existing Research coverage; the external source is only a cross-check signal, not enough for a content proposal. Future trigger: Revisit if canonical memory plus another reliable source confirms a specific missing branch or cost-table drift in research-costs.html.
+- external-search-lastz-fandom-reference-event-center-last-z-survival-shooter-wiki--5: Search result is discovery only and the title suggests possible duplication with existing Research pages rather than a distinct player job. Future trigger: Monitor for a verified research-events gap that cannot be handled by existing research.html coverage.
+- external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4: The event description is too thin and verification-dependent to move forward now; it remains a discovery signal only. Future trigger: Reassess if the event has verified structure and a clear fit for events.html after cross-validation.
+- external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1: The hero roster search result is likely duplicative of existing Heroes coverage and cannot be trusted without source validation. Future trigger: Reconsider if owner-approved data shows a real roster or stats gap in heroes.html.
 
 ## Global Risks
 
-- External-source topics are especially vulnerable to duplication and unverified public claims.
-- Several proposals rely on analytics signals only, which can indicate opportunity but do not prove content gaps by themselves.
-- Cluster role separation must be protected, especially between Economy, Research, Heroes, and Events pages.
-- Search-based proposals may drift into competitor wording if not constrained carefully.
-- Monitor-only items must not advance into later workflow stages until separately validated.
+- GSC and Bing data are opportunity signals, not proof of rewrite necessity.
+- External sources can easily create duplication or copy-risk if used as copy sources instead of discovery signals.
+- Several proposals share canonical territory with existing cornerstone pages, so role separation must be protected.
+- Single-source claims about mechanics, costs, rewards, seasons, or event structure must not be promoted without verification.
+- Monitor-only and reject topics must not advance into editor, reviewer, intake, run-plan, or content proposal workflows.
 
 ## Next Actions
 
-- Have a human reviewer confirm the two selected existing-page updates and define the minimum safe scope for each.
-- Validate all canonical claims that must be preserved on codes.html and alliance-duel.html before any apply step.
-- Keep all external-source ideas in monitoring until they are cross-validated against canonical memory and at least one reliable secondary source.
-- Check for page ownership and cluster overlap before drafting any follow-on proposal briefs.
-- Do not move rejected or monitor-only topics into editor, reviewer, intake, run-plan, or content proposal workflows.
+- Send the three selected topics to human review with verification gates and scope limits.
+- For codes.html and alliance-duel.html, confirm the query intent, canonical role, and smallest safe update scope before any later workflow.
+- For the external Gift Center topic, require canonical memory plus at least one additional reliable source or owner confirmation.
+- Keep all monitor or reject topics out of downstream content workflows.
+- Do not use any external-source wording as copy; treat all external references only as discovery and cross-validation inputs.

@@ -1,5 +1,5 @@
 {
-  "state": "no_candidates",
+  "state": "no_action_needed",
   "actionable": false,
   "digest_path": "automation/reports/llm-owner-digest.json",
   "markdown_path": "automation/reports/llm-owner-digest.md",

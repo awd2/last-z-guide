@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
   "report_type": "llm_owner_digest",
-  "generated_at": "2026-05-18T18:58:28Z",
-  "state": "no_candidates",
-  "recommended_next_action": "No candidate topics are ready; wait for new signals.",
+  "generated_at": "2026-05-18T19:30:54Z",
+  "state": "no_action_needed",
+  "recommended_next_action": "No owner action needed; wait for new GSC/Bing/external-source signals.",
   "queue_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",
-  "queue_state": "no_candidates",
+  "queue_state": "current",
   "queue_provider": "openai",
   "counts": {
-    "candidate_topics": 0,
+    "candidate_topics": 1,
     "queued_topics": 0,
     "failed_items": 0,
     "needs_owner_decision": 0,
-    "resolved_by_owner_decision": 0,
+    "resolved_by_owner_decision": 1,
     "digest_needs_review": 0,
     "digest_failed": 0,
     "digest_ready_for_intake": 0
@@ -20,6 +20,24 @@
   "needs_review": [],
   "ready_for_intake": [],
   "blocked_or_failed": [],
-  "resolved": [],
+  "resolved": [
+    {
+      "topic_id": "external-gift-center-official-flow-validation",
+      "target_page_or_slug": "gift-center-uid.html",
+      "cluster": "Economy",
+      "priority": "medium",
+      "risk_level": "medium",
+      "score": 71,
+      "status": "resolved_by_decision_monitor",
+      "recommended_owner_action": "decision_recorded_monitor",
+      "owner_decision_state": "monitor",
+      "owner_decision_note": "Resolved by approved micro meta cleanup in commit 55af72c; keep monitoring official Gift Center route, no further intake for this queue item.",
+      "chain_markdown": "",
+      "owner_decision_markdown": "automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md",
+      "approve_for_intake_command": "",
+      "blocking_issue_count": 0,
+      "owner_question_count": 0
+    }
+  ],
   "safety": "Read-only owner digest. No LLM calls, content edits, backlog changes, manifests, PRs, or production changes were made."
 }
