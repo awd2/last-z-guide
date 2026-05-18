@@ -29,7 +29,10 @@ jobs:
         startsWith(github.event.comment.body, '/approve-intake ') ||
         startsWith(github.event.comment.body, '/approve-run-plan ') ||
         startsWith(github.event.comment.body, '/dry-run-manifest ') ||
-        startsWith(github.event.comment.body, '/approve-manifest ')
+        startsWith(github.event.comment.body, '/approve-manifest ') ||
+        startsWith(github.event.comment.body, '/review-run ') ||
+        startsWith(github.event.comment.body, '/brief-run ') ||
+        startsWith(github.event.comment.body, '/patch-plan-run ')
       )
     runs-on: ubuntu-latest
     steps:
@@ -129,6 +132,30 @@ jobs:
             --markdown-output automation/reports/llm-owner-manifest-gha/manifest-summary.md \
             --json | tee automation/reports/llm-owner-manifest-gha/run-summary.json
 
+      - name: Run owner-approved manifest lifecycle from issue comment
+        if: >
+          startsWith(github.event.comment.body, '/review-run ') ||
+          startsWith(github.event.comment.body, '/brief-run ') ||
+          startsWith(github.event.comment.body, '/patch-plan-run ')
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+          mkdir -p automation/reports/llm-owner-lifecycle-gha
+          python3 automation/pipeline.py llm-issue-lifecycle \
+            --comment-body "$COMMENT_BODY" \
+            --comment-author "$COMMENT_AUTHOR" \
+            --author-association "$AUTHOR_ASSOCIATION" \
+            --issue-title "$ISSUE_TITLE" \
+            --manifest-dir automation/manifests \
+            --output-dir automation/reports \
+            --summary-output automation/reports/llm-owner-lifecycle-gha/lifecycle-summary.json \
+            --markdown-output automation/reports/llm-owner-lifecycle-gha/lifecycle-summary.md \
+            --json | tee automation/reports/llm-owner-lifecycle-gha/run-summary.json
+
       - name: Write job summary
         if: always()
         run: |
@@ -189,6 +216,19 @@ jobs:
               if manifest.get("errors"):
                   print("- Manifest errors:")
                   for error in manifest["errors"]:
+                      print(f"  - {error}")
+          lifecycle_path = Path("automation/reports/llm-owner-lifecycle-gha/lifecycle-summary.json")
+          if lifecycle_path.exists():
+              lifecycle = json.loads(lifecycle_path.read_text())
+              print(f"- Lifecycle command state: `{lifecycle.get('state')}`")
+              print(f"- Lifecycle run ID: `{lifecycle.get('run_id')}`")
+              print(f"- Lifecycle command: `{lifecycle.get('command')}`")
+              print(f"- Manifest path: `{lifecycle.get('manifest_path')}`")
+              print(f"- Before status: `{lifecycle.get('before_status')}`")
+              print(f"- After status: `{lifecycle.get('after_status')}`")
+              if lifecycle.get("errors"):
+                  print("- Lifecycle errors:")
+                  for error in lifecycle["errors"]:
                       print(f"  - {error}")
           PY
 
@@ -276,6 +316,7 @@ jobs:
           intake_path = Path("automation/reports/llm-owner-intake-gha/intake-summary.json")
           run_plan_path = Path("automation/reports/llm-owner-run-plan-gha/run-plan-summary.json")
           manifest_path = Path("automation/reports/llm-owner-manifest-gha/manifest-summary.json")
+          lifecycle_path = Path("automation/reports/llm-owner-lifecycle-gha/lifecycle-summary.json")
           chain_path = Path("automation/reports/llm-worker-chain-gha/run-summary.json")
           lines = [
               "## LLM owner handoff result",
@@ -299,10 +340,10 @@ jobs:
                   for error in decision["errors"]:
                       lines.append(f"  - {error}")
           else:
-              if not intake_path.exists() and not run_plan_path.exists() and not manifest_path.exists():
+              if not intake_path.exists() and not run_plan_path.exists() and not manifest_path.exists() and not lifecycle_path.exists():
                   lines.append("- State: `blocked`")
                   lines.append("- Errors:")
-                  lines.append("  - No decision, intake, run-plan, or manifest summary artifact was written.")
+                  lines.append("  - No decision, intake, run-plan, manifest, or lifecycle summary artifact was written.")
 
           if intake_path.exists():
               intake = json.loads(intake_path.read_text())
@@ -365,6 +406,28 @@ jobs:
                   for error in manifest["errors"]:
                       lines.append(f"  - {error}")
 
+          if lifecycle_path.exists():
+              lifecycle = json.loads(lifecycle_path.read_text())
+              lines.extend(
+                  [
+                      "",
+                      "Lifecycle:",
+                      "",
+                      f"- State: `{lifecycle.get('state', '')}`",
+                      f"- Command: `{lifecycle.get('command', '')}`",
+                      f"- Run ID: `{lifecycle.get('run_id', '')}`",
+                      f"- Manifest path: `{lifecycle.get('manifest_path', '')}`",
+                      f"- Before status: `{lifecycle.get('before_status', '')}`",
+                      f"- After status: `{lifecycle.get('after_status', '')}`",
+                      f"- Allows content edit: `{str(lifecycle.get('allows_content_edit', False)).lower()}`",
+                      f"- Allows manifest mutation: `{str(lifecycle.get('allows_manifest_mutation', False)).lower()}`",
+                  ]
+              )
+              if lifecycle.get("errors"):
+                  lines.append("- Lifecycle errors:")
+                  for error in lifecycle["errors"]:
+                      lines.append(f"  - {error}")
+
           if chain_path.exists():
               chain = json.loads(chain_path.read_text())
               lines.extend(
@@ -419,6 +482,7 @@ jobs:
             automation/reports/llm-owner-intake-gha/
             automation/reports/llm-owner-run-plan-gha/
             automation/reports/llm-owner-manifest-gha/
+            automation/reports/llm-owner-lifecycle-gha/
             automation/reports/llm-worker-chain-gha/
             automation/reports/llm-owner-decision-chains/
             automation/manifests/
@@ -427,12 +491,13 @@ jobs:
       - name: Commit owner handoff artifacts
         if: success()
         run: |
-          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md automation/reports/llm-owner-decision-chains automation/manifests)" ]]; then
+          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md automation/reports/*.brief.md automation/reports/*.patch.md automation/reports/llm-owner-decision-chains automation/manifests)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md || true
             git add automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md || true
             git add automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md || true
+            git add automation/reports/*.brief.md automation/reports/*.patch.md || true
             git add automation/reports/llm-owner-decision-chains || true
             git add automation/manifests || true
             git commit -m "chore(llm): record owner handoff artifacts"

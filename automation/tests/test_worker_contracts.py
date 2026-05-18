@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_owner_digest, llm_owner_issue, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_issue_intake, llm_issue_manifest, llm_issue_run_plan, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_issue_intake, llm_issue_lifecycle, llm_issue_manifest, llm_issue_run_plan, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -3682,6 +3682,179 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(code, 1)
             self.assertEqual(missing_summary["state"], "blocked")
             self.assertIn("No matching run-plan artifact", " ".join(missing_summary["errors"]))
+
+    def test_issue_lifecycle_runs_review_brief_and_patch_plan_comments(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            intake = {
+                "schema_version": 1,
+                "report_type": "llm_worker_proposal_intake",
+                "state": "approved_for_intake",
+                "source_topic_id": "codes-gsc-opportunity",
+                "target_page_or_slug": "codes.html",
+                "risk_level": "high",
+                "approved_by": "fixture-owner",
+                "approval_note": "Approved intake only.",
+                "source_chain_file": "automation/reports/llm-worker-chain-codes-gsc-opportunity.json",
+                "blockers": [],
+                "proposed_backlog_item": {
+                    "topic_id": "codes-gsc-opportunity-llm-approved-intake",
+                    "title": "Codes opportunity",
+                    "cluster": "Economy",
+                    "recommended_action": "update_existing",
+                    "archetype_suggestion": "cornerstone-guide",
+                    "target_page_or_slug": "codes.html",
+                    "source_type": "analytics",
+                    "source_reference": "fixture",
+                    "confidence": "high",
+                    "priority": "high",
+                    "status": "candidate",
+                    "notes": "Fixture intake.",
+                },
+                "exact_replacements": [],
+            }
+            run_plan = intake_to_run.build_proposal(intake, tmp_path / "llm-intake-codes-gsc-opportunity.json")
+            run_plan_path = tmp_path / "llm-worker-run-plan-codes-gsc-opportunity.json"
+            write_json(run_plan_path, run_plan)
+            manifest_dir = tmp_path / "manifests"
+            code, manifest_summary = write_manifest.write_manifest(
+                run_plan_path=run_plan_path,
+                manifest_dir=manifest_dir,
+                created_by="fixture-owner",
+                dry_run=False,
+            )
+            self.assertEqual(code, 0)
+            run_id = manifest_summary["run_id"]
+            manifest_path = Path(manifest_summary["manifest_path"])
+
+            code, review_summary = llm_issue_lifecycle.run_issue_lifecycle(
+                comment_body=f"/review-run {run_id} Owner approves deterministic review only.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=tmp_path / "lifecycle-review.json",
+                markdown_output=tmp_path / "lifecycle-review.md",
+            )
+            self.assertEqual(code, 0)
+            self.assertEqual(review_summary["state"], "run_reviewed")
+            self.assertEqual(review_summary["before_status"], "planned")
+            self.assertEqual(review_summary["after_status"], "reviewed")
+            self.assertFalse(review_summary["allows_content_edit"])
+
+            code, brief_summary = llm_issue_lifecycle.run_issue_lifecycle(
+                comment_body=f"/brief-run {run_id} Owner approves brief artifact only.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=tmp_path / "lifecycle-brief.json",
+                markdown_output=tmp_path / "lifecycle-brief.md",
+            )
+            self.assertEqual(code, 0)
+            self.assertEqual(brief_summary["state"], "run_brief_ready")
+            self.assertEqual(brief_summary["before_status"], "reviewed")
+            self.assertEqual(brief_summary["after_status"], "draft_brief_ready")
+            self.assertTrue((tmp_path / f"{run_id}.brief.md").exists())
+
+            code, patch_summary = llm_issue_lifecycle.run_issue_lifecycle(
+                comment_body=f"/patch-plan-run {run_id} Owner approves proposal-only patch planning.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=tmp_path / "lifecycle-patch.json",
+                markdown_output=tmp_path / "lifecycle-patch.md",
+            )
+            self.assertEqual(code, 0)
+            self.assertEqual(patch_summary["state"], "run_patch_plan_ready")
+            self.assertEqual(patch_summary["before_status"], "draft_brief_ready")
+            self.assertEqual(patch_summary["after_status"], "patch_plan_ready")
+            self.assertTrue((tmp_path / f"{run_id}.patch.md").exists())
+            final_manifest = load_json(manifest_path)
+            self.assertEqual(final_manifest["status"], "patch_plan_ready")
+            self.assertGreater(len(final_manifest["artifacts"]["patch_plan"]["patch_specs"]), 0)
+
+    def test_issue_lifecycle_blocks_untrusted_or_wrong_status_comment(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            manifest_dir = tmp_path / "manifests"
+            manifest_dir.mkdir()
+            code, summary = llm_issue_lifecycle.run_issue_lifecycle(
+                comment_body="/review-run missing-run",
+                comment_author="fixture-user",
+                author_association="CONTRIBUTOR",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+            self.assertEqual(code, 1)
+            self.assertEqual(summary["state"], "blocked")
+            self.assertIn("Unsupported comment author association", " ".join(summary["errors"]))
+            self.assertIn("Lifecycle approval note is required", " ".join(summary["errors"]))
+
+            intake = {
+                "schema_version": 1,
+                "report_type": "llm_worker_proposal_intake",
+                "state": "approved_for_intake",
+                "source_topic_id": "codes-gsc-opportunity",
+                "target_page_or_slug": "codes.html",
+                "risk_level": "high",
+                "approved_by": "fixture-owner",
+                "approval_note": "Approved intake only.",
+                "source_chain_file": "automation/reports/llm-worker-chain-codes-gsc-opportunity.json",
+                "blockers": [],
+                "proposed_backlog_item": {
+                    "topic_id": "codes-gsc-opportunity-llm-approved-intake",
+                    "title": "Codes opportunity",
+                    "cluster": "Economy",
+                    "recommended_action": "update_existing",
+                    "archetype_suggestion": "cornerstone-guide",
+                    "target_page_or_slug": "codes.html",
+                    "source_type": "analytics",
+                    "source_reference": "fixture",
+                    "confidence": "high",
+                    "priority": "high",
+                    "status": "candidate",
+                    "notes": "Fixture intake.",
+                },
+                "exact_replacements": [],
+            }
+            run_plan = intake_to_run.build_proposal(intake, tmp_path / "llm-intake-codes-gsc-opportunity.json")
+            run_plan_path = tmp_path / "llm-worker-run-plan-codes-gsc-opportunity.json"
+            write_json(run_plan_path, run_plan)
+            code, manifest_summary = write_manifest.write_manifest(
+                run_plan_path=run_plan_path,
+                manifest_dir=manifest_dir,
+                created_by="fixture-owner",
+                dry_run=False,
+            )
+            self.assertEqual(code, 0)
+            run_id = manifest_summary["run_id"]
+
+            code, wrong_status_summary = llm_issue_lifecycle.run_issue_lifecycle(
+                comment_body=f"/brief-run {run_id} Owner tries to skip review.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+            self.assertEqual(code, 1)
+            self.assertEqual(wrong_status_summary["state"], "blocked")
+            self.assertIn("Manifest status must be `reviewed`", " ".join(wrong_status_summary["errors"]))
 
 
 if __name__ == "__main__":
