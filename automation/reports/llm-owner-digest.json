@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_owner_digest",
-  "generated_at": "2026-05-18T17:25:25Z",
+  "generated_at": "2026-05-18T18:15:10Z",
   "state": "no_action_needed",
   "recommended_next_action": "No owner action needed; wait for new GSC/Bing/external-source signals.",
   "queue_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",

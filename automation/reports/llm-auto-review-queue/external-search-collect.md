@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-18T17:25:16Z
+# External Search Collect - 2026-05-18T18:14:58Z
 
 ## Outcome
 
@@ -53,9 +53,9 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4
+### external-search-lastz-fandom-reference-full-preparedness-4
 
-- Title: External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Full Preparedness
 - Action: `update_existing`
 - Target: `events.html`
 - Cluster: `Events`
@@ -65,9 +65,9 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5
+### external-search-lastz-fandom-reference-laboratory-5
 
-- Title: External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Laboratory
 - Action: `update_existing`
 - Target: `research.html`
 - Cluster: `Research`
@@ -77,33 +77,33 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-6
+### external-search-lastz-fandom-reference-heroes-6
 
-- Title: External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Heroes
 - Action: `update_existing`
 - Target: `research.html`
 - Cluster: `Research`
-- Score: `82`
+- Score: `64`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
 - URL: `https://lastz.fandom.com/wiki/Heroes`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-mmediamreza-last-z-reference-military-center-guide-maximize-unit-cap-ba-7
+### external-search-mmediamreza-last-z-reference-shooter-camp-guide-last-z-survival-shooter-7
 
-- Title: External search opportunity: Military Center Guide: Maximize Unit Cap & Base Power - | Last Z: Survival Shooter
+- Title: External search opportunity: Shooter Camp Guide | Last Z: Survival Shooter
 - Action: `update_existing`
-- Target: `base-building-order.html`
-- Cluster: `Progression`
-- Score: `82`
+- Target: `about.html`
+- Cluster: `Site`
+- Score: `74`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/en/military-center-guide`
-- Mapping: `content_index_token_match`
+- URL: `https://mmediamreza.com/en/shooter-camp-guide`
+- Mapping: `cluster_default_target`
 - Public claim ready: `false`
 
 ### external-search-mmediamreza-last-z-reference-rider-camp-guide-train-promote-rider-units-8
 
-- Title: External search opportunity: Rider Camp Guide: Train & Promote Rider Units - | Last Z: Survival Shooter
+- Title: External search opportunity: Rider Camp Guide: Train & Promote Rider Units | Last Z: Survival Shooter
 - Action: `update_existing`
 - Target: `about.html`
 - Cluster: `Site`
@@ -113,16 +113,16 @@
 - Mapping: `cluster_default_target`
 - Public claim ready: `false`
 
-### external-search-mmediamreza-last-z-reference-weekly-lucky-number-research-speed-bonu-ma-9
+### external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-9
 
-- Title: External search opportunity: Weekly Lucky Number - Research Speed Bonu (May 18 - May 24) - | Last Z: Survival Shooter
+- Title: External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power | Last Z: Survival Shooter
 - Action: `update_existing`
 - Target: `about.html`
 - Cluster: `Site`
-- Score: `82`
+- Score: `74`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/en/last-z/lucky-yellow-roses-number`
-- Mapping: `content_index_token_match`
+- URL: `https://mmediamreza.com/en/assaulter-camp-training-guide`
+- Mapping: `cluster_default_target`
 - Public claim ready: `false`
 
 ## Search Records

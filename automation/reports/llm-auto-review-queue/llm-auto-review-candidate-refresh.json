@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_candidate_refresh",
-  "generated_at": "2026-05-18T17:25:25Z",
+  "generated_at": "2026-05-18T18:15:10Z",
   "state": "candidate_refresh_ready",
   "provider": "openai",
   "source_signal_files": [
@@ -23,8 +23,8 @@
     "codes-gsc-opportunity",
     "external-hq-and-progression-reference-cross-check",
     "external-research-costs-external-cross-check",
-    "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-    "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
+    "external-search-lastz-fandom-reference-full-preparedness-4",
+    "external-search-lastz-fandom-reference-laboratory-5",
     "external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1"
   ],
   "topic_discovery_path": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",

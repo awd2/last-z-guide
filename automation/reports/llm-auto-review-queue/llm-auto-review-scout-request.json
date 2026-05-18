@@ -196,8 +196,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
+        "title": "External search opportunity: Full Preparedness",
         "cluster": "Events",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -207,7 +207,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycle page with a research-focused theme and a hero-focused theme; useful for cross-checking event tasks and rewards structure."
+          "Daily event cycle includes a science day for research points and a hero day for leveling heroes."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -226,8 +226,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
-        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-laboratory-5",
+        "title": "External search opportunity: Laboratory",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -237,7 +237,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research building page; confirms the Lab unlock and that it handles technology research, which fits research-event cross checks."
+          "Research building page; confirms technologies are unlocked and improved through the lab."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -267,7 +267,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster and equipment page; useful for hero discovery, factions, levels, and gear categories."
+          "Hero roster and equipment reference page with faction filters, level listings, and gear stat examples; useful for hero discovery and cross-checking hero-related entries."
         ],
         "site_fit": {
           "expected_internal_route": [
