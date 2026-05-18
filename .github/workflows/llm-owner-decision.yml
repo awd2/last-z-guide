@@ -657,3 +657,22 @@ jobs:
           else
             echo "No topic decision artifact changes."
           fi
+
+      - name: Refresh owner issue lifecycle view
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          WORKFLOW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          if [[ -f automation/reports/llm-owner-digest.json && -f automation/reports/llm-owner-digest.md ]]; then
+            python3 automation/pipeline.py llm-owner-issue \
+              --repository "$GITHUB_REPOSITORY" \
+              --run-url "$WORKFLOW_RUN_URL" \
+              --manifest-dir automation/manifests \
+              --reports-dir automation/reports \
+              --json
+          else
+            echo "No owner digest artifacts found; skipping issue body refresh."
+          fi

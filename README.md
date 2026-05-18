@@ -422,7 +422,7 @@ To create or update the single GitHub owner handoff issue for actionable digest 
 python3 automation/pipeline.py llm-owner-issue --json
 ```
 
-This is a notification layer only. It creates or updates one issue for actionable states, includes ready-to-copy owner decision commands, closes a previously open handoff issue when the digest becomes non-actionable again, and does not approve content or mutate site files.
+This is a notification layer only. It creates or updates one issue for actionable states or active run lifecycle states, includes ready-to-copy owner decision and next-step commands, closes a previously open handoff issue only when the digest is non-actionable and no active run lifecycle remains, and does not approve content or mutate site files.
 
 The preferred GitHub owner handoff is to comment on that issue with one command:
 
@@ -442,7 +442,7 @@ The preferred GitHub owner handoff is to comment on that issue with one command:
 /preview-apply <run_id> <owner requests no-write apply preview only>
 ```
 
-`.github/workflows/llm-owner-decision.yml` records those commands for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It replies in the same issue with the recorded decision/intake/run-plan/manifest/lifecycle/proposal-approval/apply-preview result, workflow link, and worker-chain result when applicable. For `/approve-chain`, it also runs and persists the no-write worker chain summary. For `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary. For `/approve-run-plan`, it creates a no-write run-plan proposal from approved intake. For `/dry-run-manifest`, it validates the manifest path without writing. For `/approve-manifest`, it may create only a planned run manifest. For `/review-run`, `/brief-run`, `/patch-plan-run`, and `/propose-run`, it advances an existing manifest through deterministic review, brief, proposal-only patch planning, and owner-review proposal rendering. For `/approve-proposal`, it records owner approval on rendered proposal specs and can move the manifest to `approved_for_apply`, but it still does not apply content. For `/preview-apply`, it renders no-write apply-preview artifacts and can move the manifest to `apply_preview_ready`, but it still does not apply content, create PRs, or deploy.
+`.github/workflows/llm-owner-decision.yml` records those commands for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It replies in the same issue with the recorded decision/intake/run-plan/manifest/lifecycle/proposal-approval/apply-preview result, refreshes the issue body with the current Active Run Lifecycle next command, workflow link, and worker-chain result when applicable. For `/approve-chain`, it also runs and persists the no-write worker chain summary. For `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary. For `/approve-run-plan`, it creates a no-write run-plan proposal from approved intake. For `/dry-run-manifest`, it validates the manifest path without writing. For `/approve-manifest`, it may create only a planned run manifest. For `/review-run`, `/brief-run`, `/patch-plan-run`, and `/propose-run`, it advances an existing manifest through deterministic review, brief, proposal-only patch planning, and owner-review proposal rendering. For `/approve-proposal`, it records owner approval on rendered proposal specs and can move the manifest to `approved_for_apply`, but it still does not apply content. For `/preview-apply`, it renders no-write apply-preview artifacts and can move the manifest to `apply_preview_ready`, but it still does not apply content, create PRs, or deploy.
 
 To preview the full actionable Issue body locally without touching GitHub, run:
 
@@ -466,7 +466,7 @@ The consolidated no-write queue is available in GitHub Actions:
 - External discovery: runs `external-scout`, builds `external-evidence-refresh`, collects explicit URL evidence with `external-evidence-collect --provider fetch`, collects approved source-query leads with `external-search-collect --provider openai`, and passes External Scout plus External Search proposal artifacts into `llm-auto-review-queue --external-proposals`
 - Output: uploaded artifact plus committed `automation/reports/llm-auto-review-queue/`, `automation/reports/llm-owner-digest.json`, and `automation/reports/llm-owner-digest.md` report artifacts only
 - Owner digest: generated automatically after the queue run, so the daily report has one compact action summary
-- Owner issue: created or updated only when the digest state is actionable; closed automatically when the latest digest no longer needs owner action
+- Owner issue: created or updated when the digest state is actionable or active run lifecycle commands exist; closed automatically only when the latest digest no longer needs owner action and no active run lifecycle remains
 - Content/backlog/manifests/PRs/deploy modified: `false`
 
 Owner decisions from that issue are handled by a separate no-write workflow:
@@ -487,6 +487,7 @@ Owner decisions from that issue are handled by a separate no-write workflow:
 - `/propose-run`: moves a matching `patch_plan_ready` manifest to `proposal_ready` and writes `.proposed.md` plus `.exact-proposals.*`
 - `/approve-proposal`: records owner approval on rendered proposal specs, moves the manifest toward `approved_for_apply`, and refreshes proposal reports; public content is still unchanged
 - `/preview-apply`: renders `<run_id>.apply-preview.md`, moves the manifest toward `apply_preview_ready`, and still leaves public content unchanged
+- Issue body: refreshed after successful owner commands so Active Run Lifecycle shows the current status and next safe command, such as `/preview-apply <run_id>` after `/approve-proposal`
 - Issue reply: posts the decision/intake result and worker-chain summary back into the handoff issue
 - Public content/backlog/PRs/deploy modified: `false`; lifecycle commands may mutate automation manifests and write report artifacts
 

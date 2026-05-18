@@ -811,6 +811,8 @@ def cmd_llm_owner_issue(
     repository: str | None,
     title: str | None,
     run_url: str | None,
+    manifest_dir: str | None,
+    reports_dir: str | None,
     body_output: str | None,
     dry_run: bool,
     as_json: bool,
@@ -826,6 +828,10 @@ def cmd_llm_owner_issue(
         command.extend(["--title", title])
     if run_url:
         command.extend(["--run-url", run_url])
+    if manifest_dir:
+        command.extend(["--manifest-dir", manifest_dir])
+    if reports_dir:
+        command.extend(["--reports-dir", reports_dir])
     if body_output:
         command.extend(["--body-output", body_output])
     if dry_run:
@@ -2777,6 +2783,8 @@ def build_parser() -> argparse.ArgumentParser:
     llm_owner_issue_parser.add_argument("--repository", help="Repository in owner/name form. Defaults to GITHUB_REPOSITORY.")
     llm_owner_issue_parser.add_argument("--title", help="GitHub issue title to create/update.")
     llm_owner_issue_parser.add_argument("--run-url", help="Explicit workflow run URL to include in the rendered issue body.")
+    llm_owner_issue_parser.add_argument("--manifest-dir", help="Directory to scan for active lifecycle manifests.")
+    llm_owner_issue_parser.add_argument("--reports-dir", help="Directory to scan for lifecycle reports.")
     llm_owner_issue_parser.add_argument("--body-output", help="Optional path to write the rendered dry-run issue body.")
     llm_owner_issue_parser.add_argument("--dry-run", action="store_true", help="Render the handoff without calling the GitHub API.")
     llm_owner_issue_parser.add_argument("--json", action="store_true", help="Print the owner issue handoff summary as JSON.")
@@ -3224,6 +3232,8 @@ def main() -> int:
             args.repository,
             args.title,
             args.run_url,
+            args.manifest_dir,
+            args.reports_dir,
             args.body_output,
             args.dry_run,
             args.json,

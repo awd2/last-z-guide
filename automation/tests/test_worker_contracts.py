@@ -1992,6 +1992,10 @@ class WorkerContractTests(unittest.TestCase):
             tmp_path = Path(tmp)
             digest_path = tmp_path / "llm-owner-digest.json"
             markdown_path = tmp_path / "llm-owner-digest.md"
+            manifest_dir = tmp_path / "manifests"
+            reports_dir = tmp_path / "reports"
+            manifest_dir.mkdir()
+            reports_dir.mkdir()
             write_json(
                 digest_path,
                 {
@@ -2024,6 +2028,16 @@ class WorkerContractTests(unittest.TestCase):
                 },
             )
             markdown_path.write_text("# Digest\n\n- `fixture-topic`\n", encoding="utf-8")
+            write_json(
+                manifest_dir / "fixture-run.json",
+                {
+                    "run_id": "fixture-run",
+                    "status": "approved_for_apply",
+                    "changed_files": ["codes.html"],
+                    "artifacts": {"worker_intake": "automation/reports/llm-intake-fixture-topic.json"},
+                },
+            )
+            (reports_dir / "fixture-run.proposed.md").write_text("# Proposal\n", encoding="utf-8")
 
             summary = llm_owner_issue.build_summary(
                 digest_path=digest_path,
@@ -2035,6 +2049,8 @@ class WorkerContractTests(unittest.TestCase):
                 title="LLM Owner Digest: Action Needed",
                 explicit_run_url="https://github.com/awd2/last-z-guide/actions/runs/1",
                 dry_run=True,
+                manifest_dir=manifest_dir,
+                reports_dir=reports_dir,
             )
 
             self.assertTrue(summary["actionable"])
@@ -2049,6 +2065,59 @@ class WorkerContractTests(unittest.TestCase):
             self.assertIn("--decided-by OWNER_NAME", summary["issue_body"])
             self.assertIn("--discovery automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json", summary["issue_body"])
             self.assertIn("llm-intake-latest", summary["issue_body"])
+            self.assertEqual(summary["active_run_count"], 1)
+            self.assertIn("## Active Run Lifecycle", summary["issue_body"])
+            self.assertIn("fixture-run", summary["issue_body"])
+            self.assertIn("/preview-apply fixture-run", summary["issue_body"])
+            self.assertIn("fixture-run.proposed.md", summary["issue_body"])
+
+    def test_llm_owner_issue_keeps_active_lifecycle_open_when_digest_has_no_action(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            digest_path = tmp_path / "llm-owner-digest.json"
+            markdown_path = tmp_path / "llm-owner-digest.md"
+            manifest_dir = tmp_path / "manifests"
+            reports_dir = tmp_path / "reports"
+            manifest_dir.mkdir()
+            reports_dir.mkdir()
+            write_json(
+                digest_path,
+                {
+                    "state": "no_action_needed",
+                    "generated_at": "2026-05-17T00:00:00Z",
+                    "recommended_next_action": "No owner action needed; wait for new GSC/Bing/external-source signals.",
+                    "counts": {},
+                },
+            )
+            markdown_path.write_text("# Digest\n\nNo topic action.\n", encoding="utf-8")
+            write_json(
+                manifest_dir / "fixture-run.json",
+                {
+                    "run_id": "fixture-run",
+                    "status": "proposal_ready",
+                    "changed_files": ["codes.html"],
+                },
+            )
+
+            summary = llm_owner_issue.build_summary(
+                digest_path=digest_path,
+                markdown_path=markdown_path,
+                repository="awd2/last-z-guide",
+                token="",
+                api_url="https://api.github.com",
+                server_url="https://github.com",
+                title="LLM Owner Digest: Action Needed",
+                explicit_run_url="https://github.com/awd2/last-z-guide/actions/runs/1",
+                dry_run=True,
+                manifest_dir=manifest_dir,
+                reports_dir=reports_dir,
+            )
+
+            self.assertTrue(summary["actionable"])
+            self.assertEqual(summary["active_run_count"], 1)
+            self.assertEqual(summary["action"], "dry_run")
+            self.assertIn("## Active Run Lifecycle", summary["issue_body"])
+            self.assertIn("/approve-proposal fixture-run", summary["issue_body"])
 
     def test_llm_owner_issue_closes_existing_issue_when_digest_resolved(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

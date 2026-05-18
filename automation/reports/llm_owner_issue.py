@@ -21,10 +21,22 @@ from automation.io import load_json
 
 
 REPORTS_DIR = ROOT / "automation" / "reports"
+MANIFESTS_DIR = ROOT / "automation" / "manifests"
 DEFAULT_DIGEST_PATH = REPORTS_DIR / "llm-owner-digest.json"
 DEFAULT_MARKDOWN_PATH = REPORTS_DIR / "llm-owner-digest.md"
 DEFAULT_TITLE = "LLM Owner Digest: Action Needed"
 ACTIONABLE_STATES = {"owner_review_needed", "ready_for_intake", "blocked_or_failed"}
+ACTIVE_RUN_STATUSES = {
+    "planned",
+    "reviewed",
+    "draft_brief_ready",
+    "patch_plan_ready",
+    "proposal_ready",
+    "approved_for_apply",
+    "apply_preview_ready",
+    "applied_pending_qa",
+    "qa_passed",
+}
 
 
 def rel(path: Path) -> str:
@@ -54,6 +66,16 @@ def read_markdown(path: Path) -> str:
     if not path.exists():
         return ""
     return path.read_text(encoding="utf-8")
+
+
+def load_json_if_exists(path: Path) -> dict[str, Any] | None:
+    if not path.exists():
+        return None
+    try:
+        payload = load_json(path)
+    except Exception:
+        return None
+    return payload if isinstance(payload, dict) else None
 
 
 def shell_safe(value: Any) -> str:
@@ -126,6 +148,145 @@ def ready_run_plan_path(topic_id: str) -> Path | None:
     if payload.get("state") == "run_plan_ready":
         return path
     return None
+
+
+def run_topic_label(manifest: dict[str, Any]) -> str:
+    topic = manifest.get("topic")
+    if isinstance(topic, dict):
+        return str(topic.get("id") or topic.get("title") or "")
+    artifacts = manifest.get("artifacts")
+    if isinstance(artifacts, dict):
+        for key in ("worker_intake", "source_chain", "worker_run_plan"):
+            value = str(artifacts.get(key) or "")
+            if "llm-intake-" in value:
+                return value.rsplit("llm-intake-", 1)[-1].removesuffix(".json")
+            if "llm-worker-chain-" in value:
+                return value.rsplit("llm-worker-chain-", 1)[-1].removesuffix(".json")
+            if "worker-run-plan-" in value:
+                return value.rsplit("worker-run-plan-", 1)[-1].removesuffix(".json")
+    return ""
+
+
+def run_artifact_path(reports_dir: Path, run_id: str, suffix: str) -> Path | None:
+    path = reports_dir / f"{run_id}{suffix}"
+    return path if path.exists() else None
+
+
+def next_run_command(run_id: str, status: str) -> tuple[str, str]:
+    commands = {
+        "planned": (
+            f"/review-run {run_id} Review planned run only: <owner confirms deterministic review scope>",
+            "Run deterministic review.",
+        ),
+        "reviewed": (
+            f"/brief-run {run_id} Create brief only: <owner confirms brief scope>",
+            "Create the draft brief artifact.",
+        ),
+        "draft_brief_ready": (
+            f"/patch-plan-run {run_id} Create proposal-only patch plan: <owner confirms patch-planning scope>",
+            "Create the proposal-only patch plan.",
+        ),
+        "patch_plan_ready": (
+            f"/propose-run {run_id} Render owner-review proposal: <owner confirms proposal rendering scope>",
+            "Render exact owner-review proposal text.",
+        ),
+        "proposal_ready": (
+            f"/approve-proposal {run_id} Approve rendered proposal specs only: <owner confirms exact before/after text>",
+            "Approve rendered proposal specs only; this still does not apply content.",
+        ),
+        "approved_for_apply": (
+            f"/preview-apply {run_id} Render no-write apply preview only: <owner requests final preview before any apply>",
+            "Render no-write apply preview.",
+        ),
+        "apply_preview_ready": (
+            f"/preview-apply {run_id} Refresh no-write apply preview only: <owner rechecks final preview>",
+            "Review the apply preview; no GitHub content-apply command is available.",
+        ),
+        "applied_pending_qa": (
+            "",
+            "Run strict QA locally before closeout.",
+        ),
+        "qa_passed": (
+            "",
+            "Run closeout locally after final owner review.",
+        ),
+    }
+    return commands.get(status, ("", "No issue-command next step is available for this status."))
+
+
+def active_run_lifecycle(manifest_dir: Path = MANIFESTS_DIR, reports_dir: Path = REPORTS_DIR) -> list[dict[str, Any]]:
+    if not manifest_dir.exists():
+        return []
+    items: list[dict[str, Any]] = []
+    for path in sorted(manifest_dir.glob("*.json")):
+        if path.name == "run_manifest.example.json":
+            continue
+        manifest = load_json_if_exists(path)
+        if not manifest:
+            continue
+        status = str(manifest.get("status") or "")
+        if status not in ACTIVE_RUN_STATUSES:
+            continue
+        run_id = str(manifest.get("run_id") or path.stem)
+        command, next_step = next_run_command(run_id, status)
+        artifact_paths = {
+            "brief_path": run_artifact_path(reports_dir, run_id, ".brief.md"),
+            "patch_path": run_artifact_path(reports_dir, run_id, ".patch.md"),
+            "proposal_path": run_artifact_path(reports_dir, run_id, ".proposed.md"),
+            "apply_preview_path": run_artifact_path(reports_dir, run_id, ".apply-preview.md"),
+        }
+        items.append(
+            {
+                "run_id": run_id,
+                "status": status,
+                "topic": run_topic_label(manifest),
+                "manifest_path": rel(path),
+                "changed_files": manifest.get("changed_files") if isinstance(manifest.get("changed_files"), list) else [],
+                "next_step": next_step,
+                "comment_command": command,
+                **{key: rel(value) if value else "" for key, value in artifact_paths.items()},
+            }
+        )
+    return items
+
+
+def render_run_lifecycle(manifest_dir: Path = MANIFESTS_DIR, reports_dir: Path = REPORTS_DIR) -> list[str]:
+    items = active_run_lifecycle(manifest_dir, reports_dir)
+    if not items:
+        return []
+    lines = [
+        "## Active Run Lifecycle",
+        "",
+        "These are existing automation manifests that still have a safe next owner step. Commands below continue the controlled lifecycle and do not apply public content.",
+        "",
+    ]
+    for item in items:
+        changed = item.get("changed_files") or []
+        artifacts = [
+            item.get("brief_path", ""),
+            item.get("patch_path", ""),
+            item.get("proposal_path", ""),
+            item.get("apply_preview_path", ""),
+        ]
+        artifact_lines = [f"- Artifact: `{artifact}`" for artifact in artifacts if artifact]
+        lines.extend(
+            [
+                f"### `{item['run_id']}`",
+                "",
+                f"- Status: `{item['status']}`",
+                f"- Topic: `{item.get('topic', '')}`",
+                f"- Manifest: `{item['manifest_path']}`",
+                f"- Changed files: `{', '.join(changed) if changed else ''}`",
+                f"- Next step: {item['next_step']}",
+            ]
+        )
+        lines.extend(artifact_lines)
+        if item.get("comment_command"):
+            lines.extend(["", "GitHub issue comment command:", "", "```text", str(item["comment_command"]), "```"])
+        else:
+            lines.append("- GitHub issue comment command: `none`")
+        lines.append("")
+    return lines
 
 
 def render_owner_commands(digest: dict[str, Any]) -> list[str]:
@@ -236,7 +397,13 @@ def render_owner_commands(digest: dict[str, Any]) -> list[str]:
     return lines
 
 
-def render_issue_body(digest: dict[str, Any], markdown: str, workflow_url: str) -> str:
+def render_issue_body(
+    digest: dict[str, Any],
+    markdown: str,
+    workflow_url: str,
+    manifest_dir: Path = MANIFESTS_DIR,
+    reports_dir: Path = REPORTS_DIR,
+) -> str:
     counts = digest.get("counts", {}) if isinstance(digest.get("counts"), dict) else {}
     lines = [
         "<!-- llm-owner-digest-handoff -->",
@@ -268,6 +435,7 @@ def render_issue_body(digest: dict[str, Any], markdown: str, workflow_url: str) 
         ]
     )
     lines.extend(["", *render_owner_commands(digest)])
+    lines.extend(["", *render_run_lifecycle(manifest_dir, reports_dir)])
     if markdown:
         lines.extend(["", "## Digest", "", markdown])
     return "\n".join(lines)
@@ -355,8 +523,10 @@ def upsert_issue(
     server_url: str,
     title: str,
     explicit_run_url: str | None,
+    manifest_dir: Path,
+    reports_dir: Path,
 ) -> dict[str, Any]:
-    body = render_issue_body(digest, markdown, run_url(repository, server_url, explicit_run_url))
+    body = render_issue_body(digest, markdown, run_url(repository, server_url, explicit_run_url), manifest_dir, reports_dir)
     existing = find_open_issue(api_url, token, repository, title)
     if existing:
         issue = github_request(
@@ -415,13 +585,17 @@ def build_summary(
     title: str,
     explicit_run_url: str | None,
     dry_run: bool,
+    manifest_dir: Path = MANIFESTS_DIR,
+    reports_dir: Path = REPORTS_DIR,
 ) -> dict[str, Any]:
     digest = load_json(digest_path)
     state = digest.get("state", "")
-    actionable = state in ACTIONABLE_STATES
+    lifecycle_items = active_run_lifecycle(manifest_dir, reports_dir)
+    actionable = state in ACTIONABLE_STATES or bool(lifecycle_items)
     summary: dict[str, Any] = {
         "state": state,
         "actionable": actionable,
+        "active_run_count": len(lifecycle_items),
         "digest_path": rel(digest_path),
         "markdown_path": rel(markdown_path),
         "issue_title": title,
@@ -450,7 +624,13 @@ def build_summary(
         summary.update(
             {
                 "action": "dry_run",
-                "issue_body": render_issue_body(digest, markdown, run_url(repository, server_url, explicit_run_url)),
+                "issue_body": render_issue_body(
+                    digest,
+                    markdown,
+                    run_url(repository, server_url, explicit_run_url),
+                    manifest_dir,
+                    reports_dir,
+                ),
             }
         )
         return summary
@@ -458,7 +638,7 @@ def build_summary(
         raise RuntimeError("GITHUB_REPOSITORY or --repository is required for actionable owner issue handoff.")
     if not token:
         raise RuntimeError("GITHUB_TOKEN is required for actionable owner issue handoff.")
-    summary.update(upsert_issue(digest, markdown, repository, token, api_url, server_url, title, explicit_run_url))
+    summary.update(upsert_issue(digest, markdown, repository, token, api_url, server_url, title, explicit_run_url, manifest_dir, reports_dir))
     return summary
 
 
@@ -472,6 +652,8 @@ def main() -> int:
     parser.add_argument("--run-url", help="Explicit workflow run URL.")
     parser.add_argument("--title", default=DEFAULT_TITLE, help="GitHub issue title to create/update.")
     parser.add_argument("--token-env", default="GITHUB_TOKEN", help="Environment variable containing the GitHub token.")
+    parser.add_argument("--manifest-dir", default=str(MANIFESTS_DIR), help="Directory to scan for active lifecycle manifests.")
+    parser.add_argument("--reports-dir", default=str(REPORTS_DIR), help="Directory to scan for lifecycle reports.")
     parser.add_argument("--dry-run", action="store_true", help="Render the handoff without calling the GitHub API.")
     parser.add_argument("--body-output", help="Optional path to write the rendered dry-run issue body.")
     parser.add_argument("--json", action="store_true", help="Print a machine-readable summary.")
@@ -488,6 +670,8 @@ def main() -> int:
             args.title,
             args.run_url,
             args.dry_run,
+            resolve_path(args.manifest_dir),
+            resolve_path(args.reports_dir),
         )
     except Exception as exc:
         if args.json:

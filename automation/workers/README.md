@@ -259,13 +259,16 @@ OpenAI, approve public copy, or mutate backlog, manifests, PRs, or production
 state.
 
 `llm-owner-issue` is the GitHub notification handoff for actionable owner
-digests. It creates or updates one issue only when the digest state is
-`owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`; the issue body
-includes GitHub comment commands plus ready-to-copy local CLI commands for
-`monitor`, `rejected`, `approved_for_chain`, and available intake commands. When
-the latest digest is non-actionable, it can close a previous open handoff issue
-as resolved. It must not approve content, mutate site files, create PRs, or
-deploy.
+digests and active run lifecycle states. It creates or updates one issue when
+the digest state is `owner_review_needed`, `ready_for_intake`, or
+`blocked_or_failed`, or when an automation manifest still has a safe owner
+next-step. The issue body includes GitHub comment commands plus ready-to-copy
+local CLI commands for `monitor`, `rejected`, `approved_for_chain`, available
+intake commands, and the current Active Run Lifecycle. After
+`/approve-proposal`, the lifecycle view should show `/preview-apply <run_id>` as
+the next no-write command. When the latest digest is non-actionable and no active
+run lifecycle remains, it can close a previous open handoff issue as resolved. It
+must not approve content, mutate site files, create PRs, or deploy.
 
 Use `automation/reports/example-llm-owner-digest-actionable.json` and
 `automation/reports/example-llm-owner-digest-actionable.md` with
