@@ -1,15 +1,15 @@
-# LLM Auto Review Queue - 2026-05-17T15:36:01Z
+# LLM Auto Review Queue - 2026-05-18T11:54:51Z
 
 ## Outcome
 
-- State: `current`
+- State: `no_candidates`
 - Provider: `openai`
-- Candidate topics: `1`
+- Candidate topics: `0`
 - Queued topics: `0`
 - Completed items: `0`
 - Failed items: `0`
 - Skipped existing: `0`
-- Resolved by decision: `1`
+- Resolved by decision: `0`
 - Stale existing reruns: `0`
 - Required chain contract: `2` `exact-editor-proposals-v2`
 - Deferred by limit: `0`
@@ -25,12 +25,7 @@
 
 - None
 
-## Resolved By Owner Decision
-
-- `external-gift-center-official-flow-validation`: `monitor`, score `71`, decision `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md`
-
 ## Next Actions
 
-- No owner action needed for this queue run.
-- All current candidate topics are already covered by recorded owner decisions.
-- Wait for new GSC/Bing/external-source signals or explicitly reopen a topic decision if needed.
+- No candidate topics are ready for owner review.
+- Wait for new GSC/Bing/external-source signals or adjust Scout thresholds if the queue stays empty.

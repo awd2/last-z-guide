@@ -16,22 +16,56 @@
     "proposal_count": 8,
     "proposals": [
       {
+        "topic_id": "alliance-duel-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+        "cluster": "Events",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "event-guide",
+        "target_page_or_slug": "alliance-duel.html",
+        "source_reference": "GSC weekly 2026-05-17: page opportunity and query-page signals",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "medium",
+        "evidence": [
+          "GSC page signal: alliance-duel.html had 8912 impressions, 434 clicks, 4.87% CTR, avg position 6.10."
+        ],
+        "site_fit": {
+          "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vs schedule` searchers.",
+          "cluster_owner": "Events",
+          "expected_internal_route": [
+            "index.html",
+            "events.html",
+            "alliance-duel.html"
+          ],
+          "archetype_reason": "Existing page is `event-guide` in the `Events` cluster; Scout should prefer updating the existing page before proposing new content."
+        },
+        "constraints": [
+          "Use existing page template and navigation patterns.",
+          "Treat GSC data as a signal, not proof that a rewrite is needed."
+        ],
+        "reject_if": [
+          "The query intent is already better served by another canonical page.",
+          "The proposed change would blur cluster role separation.",
+          "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+        ]
+      },
+      {
         "topic_id": "codes-gsc-opportunity",
         "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
         "cluster": "Economy",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
         "target_page_or_slug": "codes.html",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
+        "source_reference": "GSC weekly 2026-05-17: page opportunity and query-page signals",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "GSC page signal: codes.html had 33220 impressions, 586 clicks, 1.76% CTR, avg position 6.11.",
-          "Low CTR query: `last z gift center` had 3075 impressions, 113 clicks, 3.67% CTR, position 6.83.",
-          "Low CTR query: `last z gift center login` had 943 impressions, 43 clicks, 4.56% CTR, position 5.41.",
-          "Low CTR query: `lastz gift center` had 555 impressions, 23 clicks, 4.14% CTR, position 6.37.",
-          "Low CTR query: `last-z.com gift center` had 479 impressions, 22 clicks, 4.59% CTR, position 6.00."
+          "GSC page signal: codes.html had 40033 impressions, 733 clicks, 1.83% CTR, avg position 6.01.",
+          "Low CTR query: `last z gift center` had 3169 impressions, 121 clicks, 3.82% CTR, position 6.58.",
+          "Low CTR query: `last z gift center login` had 903 impressions, 46 clicks, 5.09% CTR, position 5.14.",
+          "Low CTR query: `lastz gift center` had 683 impressions, 29 clicks, 4.25% CTR, position 5.96.",
+          "Low CTR query: `last-z.com gift center` had 508 impressions, 25 clicks, 4.92% CTR, position 6.00."
         ],
         "site_fit": {
           "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
@@ -162,8 +196,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
+        "title": "External search opportunity: Full Preparedness",
         "cluster": "Events",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -173,7 +207,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycle includes an Age of Science theme for technology research, plus a Hero Initiative theme tied to hero XP, fragments, and recruitment tickets."
+          "Daily event cycles include an Age of Science theme for technology research and a Hero Initiative theme for hero upgrades and recruitment tickets."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -192,40 +226,10 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6",
-        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Research",
-        "recommended_action": "update_existing",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "research.html",
-        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-        "confidence": "high",
-        "priority": "high",
-        "risk_level": "high",
-        "evidence": [
-          "Explains the building used to research technologies and its unlock rules."
-        ],
-        "site_fit": {
-          "expected_internal_route": [
-            "research.html"
-          ],
-          "external_source_id": "lastz-fandom-reference"
-        },
-        "constraints": [
-          "External search result is discovery evidence only.",
-          "Do not copy source wording.",
-          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
-        ],
-        "reject_if": [
-          "The result is off-topic or duplicates an existing page job.",
-          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
-        ]
-      },
-      {
         "topic_id": "external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1",
         "title": "External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026",
         "cluster": "Heroes",
-        "recommended_action": "update_existing",
+        "recommended_action": "create_new",
         "archetype_suggestion": "cornerstone-guide",
         "target_page_or_slug": "heroes.html",
         "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
@@ -233,7 +237,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Main hero hub with a long roster, faction filters, levels, and hero equipment sections; good for hero discovery and cross-checking character names."
+          "Core hero directory with faction filters, hero roster, levels, and equipment details; useful for hero identity and build cross-checking."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -255,7 +259,7 @@
         "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
         "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
         "cluster": "Research",
-        "recommended_action": "update_existing",
+        "recommended_action": "create_new",
         "archetype_suggestion": "cornerstone-guide",
         "target_page_or_slug": "research.html",
         "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
@@ -263,7 +267,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table page with category tabs and level-by-level badge costs; useful for locating research names and checking upgrade costs."
+          "Research table hub with category tabs and per-level badge costs; useful for locating research names and cost progression."
         ],
         "site_fit": {
           "expected_internal_route": [

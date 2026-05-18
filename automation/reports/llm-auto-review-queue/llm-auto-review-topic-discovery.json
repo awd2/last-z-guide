@@ -1,12 +1,83 @@
 {
   "schema_version": 1,
   "report_type": "llm_topic_discovery",
-  "generated_at": "2026-05-17T15:36:01Z",
+  "generated_at": "2026-05-18T11:54:51Z",
   "state": "topic_discovery_ready",
   "source_llm_scout_result": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-result.json",
   "source_llm_scout_request": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
-  "topic_count": 8,
+  "topic_count": 7,
   "topics": [
+    {
+      "topic_id": "alliance-duel-gsc-opportunity",
+      "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+      "cluster": "Events",
+      "recommended_action": "monitor",
+      "archetype_suggestion": "event-guide",
+      "target_page_or_slug": "alliance-duel.html",
+      "source_type": "llm_scout",
+      "source_reference": "GSC weekly 2026-05-17: page opportunity and query-page signals",
+      "confidence": "high",
+      "priority": "low",
+      "status": "monitor",
+      "notes": "This is a strong page-level opportunity with clear GSC signals, a specific target page, and a defined user job. It fits the existing Events cluster and likely improves query-to-page match without needing a new page. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "risk_level": "medium",
+      "player_value": "Better schedule and strategy help for players searching for Last Z Alliance Duel timing and planning guidance.",
+      "duplication_risk": "Medium, because event intent may overlap with other Events pages if cluster separation is not carefully preserved.",
+      "claims_to_verify": [
+        "Whether alliance-duel.html is still the best canonical page for the query set",
+        "Whether the proposed improvements can be made without expanding beyond approved scope",
+        "Whether any competing Events page already covers this intent better"
+      ],
+      "next_step": "Send to human review for scope check against events cluster pages and confirm the update can stay within the current event-guide template.",
+      "evidence": [
+        "GSC page signal: alliance-duel.html had 8912 impressions, 434 clicks, 4.87% CTR, avg position 6.10."
+      ],
+      "site_fit": {
+        "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z vs schedule` searchers.",
+        "cluster_owner": "Events",
+        "expected_internal_route": [
+          "index.html",
+          "events.html",
+          "alliance-duel.html"
+        ],
+        "archetype_reason": "Existing page is `event-guide` in the `Events` cluster; Scout should prefer updating the existing page before proposing new content."
+      },
+      "constraints": [
+        "Use existing page template and navigation patterns.",
+        "Treat GSC data as a signal, not proof that a rewrite is needed."
+      ],
+      "reject_if": [
+        "The query intent is already better served by another canonical page.",
+        "The proposed change would blur cluster role separation.",
+        "The improvement cannot be expressed without changing a cornerstone page beyond the approved scope."
+      ],
+      "prior_review": {
+        "run_id": "2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake",
+        "status": "closed",
+        "risk_level": "medium",
+        "summary": "Worker-approved intake for `alliance-duel.html` from `alliance-duel-gsc-opportunity`.",
+        "closeout": {
+          "report_path": "automation/reports/2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake.closed.md",
+          "closed_at": "2026-05-10T08:27:06Z",
+          "note": "Owner approved exact Alliance Duel schedule/content intent changes. Manual apply was used for first-screen/meta operations, followed by strict QA."
+        }
+      },
+      "human_approval_required": false,
+      "backlog_row_preview": {
+        "topic_id": "alliance-duel-gsc-opportunity",
+        "title": "GSC opportunity review: Last Z Alliance Duel Guide — Schedule, Day 1–6 Plan, and VS Strategy",
+        "cluster": "Events",
+        "recommended_action": "monitor",
+        "archetype_suggestion": "event-guide",
+        "target_page_or_slug": "alliance-duel.html",
+        "source_type": "llm_scout",
+        "source_reference": "GSC weekly 2026-05-17: page opportunity and query-page signals",
+        "confidence": "high",
+        "priority": "low",
+        "status": "monitor",
+        "notes": "This is a strong page-level opportunity with clear GSC signals, a specific target page, and a defined user job. It fits the existing Events cluster and likely improves query-to-page match without needing a new page. Prior run `2026-05-10-alliance-duel-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+      }
+    },
     {
       "topic_id": "codes-gsc-opportunity",
       "title": "GSC opportunity review: Last Z Redeem Codes — Active Codes, Gift Center Login, and UID",
@@ -15,26 +86,26 @@
       "archetype_suggestion": "cornerstone-guide",
       "target_page_or_slug": "codes.html",
       "source_type": "llm_scout",
-      "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
+      "source_reference": "GSC weekly 2026-05-17: page opportunity and query-page signals",
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "This is the clearest high-value opportunity. The GSC signal shows strong impressions and a low CTR on the existing codes page, and the proposal is already aligned to an existing cornerstone page and route. It appears to improve query-page fit without needing a new page or cluster change, as long as the approved scope keeps the cluster role intact. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "notes": "This is the highest-signal opportunity because the page already has substantial impressions and several low-CTR Gift Center queries. The intent is clear, the target page is established, and the page is already known to have prior CTR work history. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
       "risk_level": "high",
-      "player_value": "Helps searchers land faster on the redeem-code and gift-center answer they already want, with better first-screen clarity and less friction from ambiguous query intent.",
-      "duplication_risk": "Low. This is anchored to an existing page and canonical route, with explicit role-separation constraints.",
+      "player_value": "Helps players find the correct redeem path, Gift Center login guidance, and UID details faster.",
+      "duplication_risk": "Medium to high, because the page must preserve cluster role separation and canonical claims around redeem flow and mailbox behavior.",
       "claims_to_verify": [
-        "Whether the query set is best served by codes.html rather than another canonical page",
-        "Whether any proposed copy changes preserve gift-center-only-redeem-flow",
-        "Whether gift-rewards-mailbox and gift-center-cluster-role-separation remain intact"
+        "Whether codes.html remains the correct canonical page for gift center queries",
+        "Whether all proposed changes stay within canonical claims for redeem flow, mailbox, and cluster role separation",
+        "Whether the page already fully serves the intent of login and UID queries or needs only a limited update"
       ],
-      "next_step": "Send to human review for scoped update planning, with explicit checks on canonical claims and no cluster-role drift.",
+      "next_step": "Send to human review with strict verification of canonical claim boundaries and query intent fit before any content proposal is drafted.",
       "evidence": [
-        "GSC page signal: codes.html had 33220 impressions, 586 clicks, 1.76% CTR, avg position 6.11.",
-        "Low CTR query: `last z gift center` had 3075 impressions, 113 clicks, 3.67% CTR, position 6.83.",
-        "Low CTR query: `last z gift center login` had 943 impressions, 43 clicks, 4.56% CTR, position 5.41.",
-        "Low CTR query: `lastz gift center` had 555 impressions, 23 clicks, 4.14% CTR, position 6.37.",
-        "Low CTR query: `last-z.com gift center` had 479 impressions, 22 clicks, 4.59% CTR, position 6.00."
+        "GSC page signal: codes.html had 40033 impressions, 733 clicks, 1.83% CTR, avg position 6.01.",
+        "Low CTR query: `last z gift center` had 3169 impressions, 121 clicks, 3.82% CTR, position 6.58.",
+        "Low CTR query: `last z gift center login` had 903 impressions, 46 clicks, 5.09% CTR, position 5.14.",
+        "Low CTR query: `lastz gift center` had 683 impressions, 29 clicks, 4.25% CTR, position 5.96.",
+        "Low CTR query: `last-z.com gift center` had 508 impressions, 25 clicks, 4.92% CTR, position 6.00."
       ],
       "site_fit": {
         "primary_user_job": "Improve query-to-page match and first-screen usefulness for `last z gift center` searchers.",
@@ -78,35 +149,31 @@
         "archetype_suggestion": "cornerstone-guide",
         "target_page_or_slug": "codes.html",
         "source_type": "llm_scout",
-        "source_reference": "GSC weekly 2026-05-10: page opportunity and query-page signals",
+        "source_reference": "GSC weekly 2026-05-17: page opportunity and query-page signals",
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "This is the clearest high-value opportunity. The GSC signal shows strong impressions and a low CTR on the existing codes page, and the proposal is already aligned to an existing cornerstone page and route. It appears to improve query-page fit without needing a new page or cluster change, as long as the approved scope keeps the cluster role intact. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "This is the highest-signal opportunity because the page already has substantial impressions and several low-CTR Gift Center queries. The intent is clear, the target page is established, and the page is already known to have prior CTR work history. Prior run `2026-05-05-codes-gsc-opportunity-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     },
     {
       "topic_id": "external-gift-center-official-flow-validation",
       "title": "External source opportunity: official Gift Center and store flow validation",
       "cluster": "Economy",
-      "recommended_action": "update_existing",
+      "recommended_action": "monitor",
       "archetype_suggestion": "support-guide",
       "target_page_or_slug": "gift-center-uid.html",
       "source_type": "llm_scout",
       "source_reference": "official-functap-store: https://last-z.com",
       "confidence": "high",
-      "priority": "medium",
-      "status": "candidate",
-      "notes": "The official site reference may help validate routing and flow terminology for the Gift Center, but it is only a discovery signal. It is still worth human review because it can improve accuracy on an existing Economy page if verified against canonical memory and another reliable source.",
-      "risk_level": "medium",
-      "player_value": "Reduces confusion about official routing, UID usage, and where players should complete gift-center actions.",
-      "duplication_risk": "Medium. The topic is close to the existing Gift Center intent and could duplicate current coverage if not narrowed to a distinct verification job.",
-      "claims_to_verify": [
-        "Exact official Gift Center routing and store flow",
-        "Whether UID usage is described accurately on the target page",
-        "Whether the topic adds a distinct player job beyond existing Gift Center coverage"
-      ],
-      "next_step": "Verify the claim set with canonical site memory and at least one additional reliable source or owner confirmation before any content proposal work.",
+      "priority": "low",
+      "status": "monitor",
+      "notes": "Useful discovery signal, but it depends on a single external source and risks copying competitor or service wording. Needs verification before it can become a content opportunity. Future trigger: Move only after owner confirmation plus at least one additional reliable source validates the flow and public claims.",
+      "risk_level": "",
+      "player_value": "",
+      "duplication_risk": "",
+      "claims_to_verify": [],
+      "next_step": "Move only after owner confirmation plus at least one additional reliable source validates the flow and public claims.",
       "evidence": [
         "Official service domain is the strongest source for Gift Center routing and redeem/store flow validation.",
         "External source URL recorded for later manual verification."
@@ -131,20 +198,20 @@
         "The proposal would blur existing cluster roles."
       ],
       "prior_review": null,
-      "human_approval_required": true,
+      "human_approval_required": false,
       "backlog_row_preview": {
         "topic_id": "external-gift-center-official-flow-validation",
         "title": "External source opportunity: official Gift Center and store flow validation",
         "cluster": "Economy",
-        "recommended_action": "update_existing",
+        "recommended_action": "monitor",
         "archetype_suggestion": "support-guide",
         "target_page_or_slug": "gift-center-uid.html",
         "source_type": "llm_scout",
         "source_reference": "official-functap-store: https://last-z.com",
         "confidence": "high",
-        "priority": "medium",
-        "status": "candidate",
-        "notes": "The official site reference may help validate routing and flow terminology for the Gift Center, but it is only a discovery signal. It is still worth human review because it can improve accuracy on an existing Economy page if verified against canonical memory and another reliable source."
+        "priority": "low",
+        "status": "monitor",
+        "notes": "Useful discovery signal, but it depends on a single external source and risks copying competitor or service wording. Needs verification before it can become a content opportunity. Future trigger: Move only after owner confirmation plus at least one additional reliable source validates the flow and public claims."
       }
     },
     {
@@ -159,16 +226,12 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "HQ and progression dependency accuracy is a useful verification task for the Progression cluster, and the page fit is plausible. However, the proposal remains source-dependent and needs validation before it can become a content direction. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
-      "risk_level": "high",
-      "player_value": "Helps players plan headquarters progression, dependencies, and unlock timing more reliably.",
-      "duplication_risk": "Medium. It may overlap with current HQ or progression explanations unless a specific gap is identified.",
-      "claims_to_verify": [
-        "HQ requirement sequence",
-        "Construction dependency ordering",
-        "Whether the external reference exposes a real coverage gap"
-      ],
-      "next_step": "Treat as a verification-only candidate and confirm the specific missing dependency or planning gap before any page-level recommendation.",
+      "notes": "This is external-source discovery only and is not ready for content action without independent verification. Future trigger: Revisit after the HQ and progression claims are checked against canonical memory and a second reliable source. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "risk_level": "",
+      "player_value": "",
+      "duplication_risk": "",
+      "claims_to_verify": [],
+      "next_step": "Revisit after the HQ and progression claims are checked against canonical memory and a second reliable source.",
       "evidence": [
         "Owner-approved wiki/reference source can reveal HQ and progression planning gaps.",
         "External source URL recorded for later manual verification."
@@ -216,7 +279,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "HQ and progression dependency accuracy is a useful verification task for the Progression cluster, and the page fit is plausible. However, the proposal remains source-dependent and needs validation before it can become a content direction. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "This is external-source discovery only and is not ready for content action without independent verification. Future trigger: Revisit after the HQ and progression claims are checked against canonical memory and a second reliable source. Prior run `2026-05-16-external-hq-and-progression-reference-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     },
     {
@@ -231,12 +294,12 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "Useful as a verification signal, but too dependent on a single external reference and too likely to overlap existing Research coverage without a clearly distinct user job. Future trigger: Advance only if a second reliable source or owner confirmation shows a concrete branch, naming, or cost-table gap. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
+      "notes": "Valuable as a research signal, but it is still source-dependent and could drift into copy or unsupported claims. Future trigger: Review again when branch names, costs, and progression data are cross-validated by another reliable source or owner confirmation. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Advance only if a second reliable source or owner confirmation shows a concrete branch, naming, or cost-table gap.",
+      "next_step": "Review again when branch names, costs, and progression data are cross-validated by another reliable source or owner confirmation.",
       "evidence": [
         "Owner-approved research reference source can reveal branch coverage gaps and cost/name drift.",
         "External source URL recorded for later manual verification."
@@ -284,12 +347,12 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "Useful as a verification signal, but too dependent on a single external reference and too likely to overlap existing Research coverage without a clearly distinct user job. Future trigger: Advance only if a second reliable source or owner confirmation shows a concrete branch, naming, or cost-table gap. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
+        "notes": "Valuable as a research signal, but it is still source-dependent and could drift into copy or unsupported claims. Future trigger: Review again when branch names, costs, and progression data are cross-validated by another reliable source or owner confirmation. Prior run `2026-05-16-external-research-costs-external-cross-check-llm-approved-intake` is `closed`; keep this topic in monitoring unless new evidence materially changes the opportunity."
       }
     },
     {
-      "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-      "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
+      "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
+      "title": "External search opportunity: Full Preparedness",
       "cluster": "Events",
       "recommended_action": "monitor",
       "archetype_suggestion": "cornerstone-guide",
@@ -299,14 +362,14 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "External search result only; claims are not verified enough for a page update decision, and the event scope may overlap existing event coverage. Future trigger: Revisit if the event mechanic and date-specific details are confirmed by canonical memory and a second source.",
+      "notes": "The topic is too dependent on an external fandom-style source and the evidence is not enough to support a public content change. Future trigger: Consider only if the event topic is confirmed by canonical game knowledge and a second source, and if no better Events page already covers it.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Revisit if the event mechanic and date-specific details are confirmed by canonical memory and a second source.",
+      "next_step": "Consider only if the event topic is confirmed by canonical game knowledge and a second source, and if no better Events page already covers it.",
       "evidence": [
-        "Daily event cycle includes an Age of Science theme for technology research, plus a Hero Initiative theme tied to hero XP, fragments, and recruitment tickets."
+        "Daily event cycles include an Age of Science theme for technology research and a Hero Initiative theme for hero upgrades and recruitment tickets."
       ],
       "site_fit": {
         "expected_internal_route": [
@@ -326,8 +389,8 @@
       "prior_review": null,
       "human_approval_required": false,
       "backlog_row_preview": {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
+        "title": "External search opportunity: Full Preparedness",
         "cluster": "Events",
         "recommended_action": "monitor",
         "archetype_suggestion": "cornerstone-guide",
@@ -337,60 +400,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "External search result only; claims are not verified enough for a page update decision, and the event scope may overlap existing event coverage. Future trigger: Revisit if the event mechanic and date-specific details are confirmed by canonical memory and a second source."
-      }
-    },
-    {
-      "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6",
-      "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
-      "cluster": "Research",
-      "recommended_action": "monitor",
-      "archetype_suggestion": "cornerstone-guide",
-      "target_page_or_slug": "research.html",
-      "source_type": "llm_scout",
-      "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-      "confidence": "high",
-      "priority": "low",
-      "status": "monitor",
-      "notes": "The topic is a source-led validation idea for Research, not a ready content opportunity. It needs verification before it can be advanced. Future trigger: Revisit if a verified gap in research unlock rules or badge costs is identified.",
-      "risk_level": "",
-      "player_value": "",
-      "duplication_risk": "",
-      "claims_to_verify": [],
-      "next_step": "Revisit if a verified gap in research unlock rules or badge costs is identified.",
-      "evidence": [
-        "Explains the building used to research technologies and its unlock rules."
-      ],
-      "site_fit": {
-        "expected_internal_route": [
-          "research.html"
-        ],
-        "external_source_id": "lastz-fandom-reference"
-      },
-      "constraints": [
-        "External search result is discovery evidence only.",
-        "Do not copy source wording.",
-        "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
-      ],
-      "reject_if": [
-        "The result is off-topic or duplicates an existing page job.",
-        "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
-      ],
-      "prior_review": null,
-      "human_approval_required": false,
-      "backlog_row_preview": {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6",
-        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Research",
-        "recommended_action": "monitor",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "research.html",
-        "source_type": "llm_scout",
-        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-        "confidence": "high",
-        "priority": "low",
-        "status": "monitor",
-        "notes": "The topic is a source-led validation idea for Research, not a ready content opportunity. It needs verification before it can be advanced. Future trigger: Revisit if a verified gap in research unlock rules or badge costs is identified."
+        "notes": "The topic is too dependent on an external fandom-style source and the evidence is not enough to support a public content change. Future trigger: Consider only if the event topic is confirmed by canonical game knowledge and a second source, and if no better Events page already covers it."
       }
     },
     {
@@ -405,14 +415,14 @@
       "confidence": "high",
       "priority": "low",
       "status": "monitor",
-      "notes": "This is too close to a general hero hub and could duplicate existing Heroes coverage without a distinct player job. Future trigger: Monitor for a specific roster, faction, or equipment coverage gap that is not already handled by the hub.",
+      "notes": "This is a source-discovery result that likely duplicates or overlaps with broader hero guide intent, and it is not yet safe for content planning. Future trigger: Reconsider after checking for an existing hero hub or a clearly distinct player job that is not already covered.",
       "risk_level": "",
       "player_value": "",
       "duplication_risk": "",
       "claims_to_verify": [],
-      "next_step": "Monitor for a specific roster, faction, or equipment coverage gap that is not already handled by the hub.",
+      "next_step": "Reconsider after checking for an existing hero hub or a clearly distinct player job that is not already covered.",
       "evidence": [
-        "Main hero hub with a long roster, faction filters, levels, and hero equipment sections; good for hero discovery and cross-checking character names."
+        "Core hero directory with faction filters, hero roster, levels, and equipment details; useful for hero identity and build cross-checking."
       ],
       "site_fit": {
         "expected_internal_route": [
@@ -443,60 +453,7 @@
         "confidence": "high",
         "priority": "low",
         "status": "monitor",
-        "notes": "This is too close to a general hero hub and could duplicate existing Heroes coverage without a distinct player job. Future trigger: Monitor for a specific roster, faction, or equipment coverage gap that is not already handled by the hub."
-      }
-    },
-    {
-      "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
-      "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
-      "cluster": "Research",
-      "recommended_action": "monitor",
-      "archetype_suggestion": "cornerstone-guide",
-      "target_page_or_slug": "research.html",
-      "source_type": "llm_scout",
-      "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
-      "confidence": "high",
-      "priority": "low",
-      "status": "monitor",
-      "notes": "External search evidence is too thin and the likely subject overlaps other Research pages; not ready for human review as a page opportunity. Future trigger: Revisit only if the page reveals a unique badge-cost structure or unlock rule gap that can be verified.",
-      "risk_level": "",
-      "player_value": "",
-      "duplication_risk": "",
-      "claims_to_verify": [],
-      "next_step": "Revisit only if the page reveals a unique badge-cost structure or unlock rule gap that can be verified.",
-      "evidence": [
-        "Research table page with category tabs and level-by-level badge costs; useful for locating research names and checking upgrade costs."
-      ],
-      "site_fit": {
-        "expected_internal_route": [
-          "research.html"
-        ],
-        "external_source_id": "lastzwiki-reference"
-      },
-      "constraints": [
-        "External search result is discovery evidence only.",
-        "Do not copy source wording.",
-        "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
-      ],
-      "reject_if": [
-        "The result is off-topic or duplicates an existing page job.",
-        "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
-      ],
-      "prior_review": null,
-      "human_approval_required": false,
-      "backlog_row_preview": {
-        "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
-        "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
-        "cluster": "Research",
-        "recommended_action": "monitor",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "research.html",
-        "source_type": "llm_scout",
-        "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
-        "confidence": "high",
-        "priority": "low",
-        "status": "monitor",
-        "notes": "External search evidence is too thin and the likely subject overlaps other Research pages; not ready for human review as a page opportunity. Future trigger: Revisit only if the page reveals a unique badge-cost structure or unlock rule gap that can be verified."
+        "notes": "This is a source-discovery result that likely duplicates or overlaps with broader hero guide intent, and it is not yet safe for content planning. Future trigger: Reconsider after checking for an existing hero hub or a clearly distinct player job that is not already covered."
       }
     }
   ],

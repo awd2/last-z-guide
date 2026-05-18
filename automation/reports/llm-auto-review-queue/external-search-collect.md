@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-17T15:35:51Z
+# External Search Collect - 2026-05-18T11:54:42Z
 
 ## Outcome
 
@@ -20,7 +20,7 @@
 ### external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1
 
 - Title: External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `heroes.html`
 - Cluster: `Heroes`
 - Score: `82`
@@ -32,7 +32,7 @@
 ### external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2
 
 - Title: External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `research.html`
 - Cluster: `Research`
 - Score: `82`
@@ -41,21 +41,21 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastzwiki-reference-last-z-wiki-complete-english-guide-strateg-3
+### external-search-lastzwiki-reference-beginner-s-guide-last-z-wiki-how-to-start--3
 
-- Title: External search opportunity: Last Z Wiki - Complete English Guide | Strategies, Tier List & Tips 2026
-- Action: `monitor`
-- Target: `index.html`
-- Cluster: `Home`
-- Score: `19`
+- Title: External search opportunity: Beginner's Guide - Last Z Wiki | How to Start & Essential Tips 2026
+- Action: `create_new`
+- Target: `start.html`
+- Cluster: `Progression`
+- Score: `64`
 - Source: `External search: site:lastzwiki.com/en Last Z guide heroes research`
-- URL: `https://lastzwiki.com/en/index.html`
+- URL: `https://lastzwiki.com/en/beginner-guide.html`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4
+### external-search-lastz-fandom-reference-full-preparedness-4
 
-- Title: External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Full Preparedness
 - Action: `update_existing`
 - Target: `events.html`
 - Cluster: `Events`
@@ -65,21 +65,21 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-apocalypse-time-last-z-survival-shooter-wi-5
+### external-search-lastz-fandom-reference-bookstore-5
 
-- Title: External search opportunity: Apocalypse Time | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Bookstore
 - Action: `update_existing`
-- Target: `events.html`
-- Cluster: `Events`
+- Target: `research.html`
+- Cluster: `Research`
 - Score: `64`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
-- URL: `https://lastz.fandom.com/wiki/Apocalypse_Time`
+- URL: `https://lastz.fandom.com/wiki/Bookstore`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-6
+### external-search-lastz-fandom-reference-laboratory-6
 
-- Title: External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Laboratory
 - Action: `update_existing`
 - Target: `research.html`
 - Cluster: `Research`
@@ -89,40 +89,40 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-mmediamreza-last-z-reference-shooter-camp-guide-last-z-survival-shooter-7
+### external-search-mmediamreza-last-z-reference-military-center-guide-maximize-unit-cap-ba-7
 
-- Title: External search opportunity: Shooter Camp Guide - | Last Z: Survival Shooter
+- Title: External search opportunity: Military Center Guide: Maximize Unit Cap & Base Power - | Last Z: Survival Shooter
 - Action: `update_existing`
-- Target: `hq.html`
+- Target: `about.html`
+- Cluster: `Site`
+- Score: `74`
+- Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
+- URL: `https://mmediamreza.com/en/military-center-guide`
+- Mapping: `cluster_default_target`
+- Public claim ready: `false`
+
+### external-search-mmediamreza-last-z-reference-rider-camp-guide-train-promote-rider-units-8
+
+- Title: External search opportunity: Rider Camp Guide: Train & Promote Rider Units - | Last Z: Survival Shooter
+- Action: `update_existing`
+- Target: `power-guide.html`
 - Cluster: `Progression`
 - Score: `82`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/shooter-camp-guide`
+- URL: `https://mmediamreza.com/en/rider-camp-upgrade-guide`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-mmediamreza-last-z-reference-assaulter-camp-guide-train-faster-gain-pow-8
+### external-search-mmediamreza-last-z-reference-smelting-plant-guide-enhancement-alloy-pro-9
 
-- Title: External search opportunity: Assaulter Camp Guide - Train Faster & Gain Power - | Last Z: Survival Shooter
+- Title: External search opportunity: Smelting Plant Guide: Enhancement Alloy Production - | Last Z: Survival Shooter
 - Action: `update_existing`
-- Target: `hq.html`
-- Cluster: `Progression`
-- Score: `82`
+- Target: `about.html`
+- Cluster: `Site`
+- Score: `74`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/en/assaulter-camp-training-guide`
-- Mapping: `content_index_token_match`
-- Public claim ready: `false`
-
-### external-search-mmediamreza-last-z-reference-last-z-laboratory-guide-tech-research-lab--9
-
-- Title: External search opportunity: Last Z Laboratory Guide: Tech Research & Lab No. 2 Unlocking - | Last Z: Survival Shooter
-- Action: `update_existing`
-- Target: `tech.html`
-- Cluster: `Research`
-- Score: `82`
-- Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
-- URL: `https://mmediamreza.com/laboratory`
-- Mapping: `content_index_token_match`
+- URL: `https://mmediamreza.com/en/smelting-plant-guide`
+- Mapping: `cluster_default_target`
 - Public claim ready: `false`
 
 ## Search Records
