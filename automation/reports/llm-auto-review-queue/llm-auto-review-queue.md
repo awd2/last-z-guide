@@ -1,4 +1,4 @@
-# LLM Auto Review Queue - 2026-05-18T19:47:18Z
+# LLM Auto Review Queue - 2026-05-18T20:19:38Z
 
 ## Outcome
 
@@ -14,7 +14,7 @@
 - Required chain contract: `2` `exact-editor-proposals-v2`
 - Deferred by limit: `0`
 - Candidate refresh: `automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.md`
-- Topic discovery: ``
+- Topic discovery: `automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md`
 - Allows content edit: `false`
 - Allows backlog mutation: `false`
 - Allows manifest mutation: `false`
@@ -27,7 +27,7 @@
 
 ## Resolved By Owner Decision
 
-- `external-hq-and-progression-reference-cross-check`: `monitor`, score `-10`, decision `automation/reports/llm-topic-decision-external-hq-and-progression-reference-cross-check.md`
+- `external-gift-center-official-flow-validation`: `monitor`, score `91`, decision `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md`
 
 ## Next Actions
 

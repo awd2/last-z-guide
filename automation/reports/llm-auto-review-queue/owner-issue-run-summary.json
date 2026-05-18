@@ -1,6 +1,7 @@
 {
   "state": "no_action_needed",
   "actionable": false,
+  "active_run_count": 0,
   "digest_path": "automation/reports/llm-owner-digest.json",
   "markdown_path": "automation/reports/llm-owner-digest.md",
   "issue_title": "LLM Owner Digest: Action Needed",

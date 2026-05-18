@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_auto_review_queue",
-  "generated_at": "2026-05-18T19:47:18Z",
+  "generated_at": "2026-05-18T20:19:38Z",
   "state": "current",
   "provider": "openai",
   "source_signal_files": [
@@ -14,8 +14,8 @@
   ],
   "candidate_refresh_path": "automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.json",
   "candidate_refresh_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-candidate-refresh.md",
-  "topic_discovery_path": "",
-  "topic_discovery_markdown": "",
+  "topic_discovery_path": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.json",
+  "topic_discovery_markdown": "automation/reports/llm-auto-review-queue/llm-auto-review-topic-discovery.md",
   "candidate_topic_count": 1,
   "queued_topic_count": 0,
   "completed_item_count": 0,
@@ -24,7 +24,7 @@
   "resolved_by_decision_count": 1,
   "stale_existing_count": 0,
   "deferred_count": 0,
-  "max_chains": 0,
+  "max_chains": 3,
   "include_existing": false,
   "required_chain_contract_version": 2,
   "required_chain_contract_label": "exact-editor-proposals-v2",
@@ -32,30 +32,27 @@
   "skipped_topics": [],
   "resolved_by_decision": [
     {
-      "topic_id": "external-hq-and-progression-reference-cross-check",
-      "target_page_or_slug": "",
-      "cluster": "",
-      "priority": "",
-      "risk_level": "",
-      "score": -10,
+      "topic_id": "external-gift-center-official-flow-validation",
+      "target_page_or_slug": "gift-center-uid.html",
+      "cluster": "Economy",
+      "priority": "high",
+      "risk_level": "medium",
+      "score": 91,
       "score_reasons": [
-        "priority:unknown=0",
-        "confidence:unknown=0",
-        "risk:unknown=0",
-        "action:monitor=-20",
+        "priority:high=45",
+        "confidence:high=20",
+        "risk:medium=8",
+        "action:update_existing=8",
         "candidate_status=10"
       ],
       "status": "resolved_by_decision_monitor",
       "decision_state": "monitor",
-      "decision_note": "Owner decision from auto-review queue: monitor for now. hq.html already covers the core HQ player job, HQ30/HQ31-35 split, steel cautions, Tyrant steel caveat, and construction-cost routing. Do not move to intake unless future evidence shows a concrete mechanics error, missing verified requirement, or exact high-value player need.",
-      "decision_artifact": "automation/reports/llm-topic-decision-external-hq-and-progression-reference-cross-check.json",
-      "decision_markdown": "automation/reports/llm-topic-decision-external-hq-and-progression-reference-cross-check.md",
+      "decision_note": "Resolved by approved micro meta cleanup in commit 55af72c; keep monitoring official Gift Center route, no further intake for this queue item.",
+      "decision_artifact": "automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.json",
+      "decision_markdown": "automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md",
       "allows_worker_chain": false,
       "allows_content_edit": false
     }
-  ],
-  "resolved_refresh_errors": [
-    "Selected topic `external-hq-and-progression-reference-cross-check` has monitor/reject decision `monitor`; move it to rejected_or_monitor."
   ],
   "errors": [],
   "output_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",

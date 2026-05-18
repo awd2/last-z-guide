@@ -1,4 +1,4 @@
-# LLM Owner Digest - 2026-05-18T19:47:18Z
+# LLM Owner Digest - 2026-05-18T20:19:38Z
 
 ## Summary
 
@@ -26,8 +26,8 @@
 
 ## Resolved
 
-- `external-hq-and-progression-reference-cross-check`: target ``, priority ``, risk `None`, action `decision_recorded_monitor`
-  - Decision: `automation/reports/llm-topic-decision-external-hq-and-progression-reference-cross-check.md`
+- `external-gift-center-official-flow-validation`: target `gift-center-uid.html`, priority `high`, risk `medium`, action `decision_recorded_monitor`
+  - Decision: `automation/reports/llm-topic-decision-external-gift-center-official-flow-validation.md`
 
 ## Policy
 

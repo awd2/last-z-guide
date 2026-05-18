@@ -196,8 +196,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
-        "title": "External search opportunity: Full Preparedness",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
+        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Events",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -207,7 +207,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycle with a research-focused theme called Age of Science and a hero-focused theme called Hero Initiative."
+          "Regular event with a Hero Initiative theme that awards points for using Heroic Experience, Fragments, and Prime Recruitment Tickets; also includes an Age of Science research theme."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -226,8 +226,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-5",
-        "title": "External search opportunity: Laboratory",
+        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
+        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -237,7 +237,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Explains the building used for technologies research and its unlock level."
+          "Core hero overview page listing hero classes and major power components, useful for hero system context and cross-checking hero-related event hooks."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -267,7 +267,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster and equipment reference page; useful for hero discovery, factions, ranks, and gear categories."
+          "Hero roster page with faction filters, hero levels, and equipment listings; useful for hero discovery and cross-checking character pages."
         ],
         "site_fit": {
           "expected_internal_route": [
