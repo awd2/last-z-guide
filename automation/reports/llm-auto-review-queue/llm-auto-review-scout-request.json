@@ -196,8 +196,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-4",
-        "title": "External search opportunity: Full Preparedness",
+        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
+        "title": "External search opportunity: Full Preparedness | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Events",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -207,7 +207,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycles include an Age of Science theme for technology research and a Hero Initiative theme for hero upgrades and recruitment tickets."
+          "Daily event cycle page with a research-focused theme and a hero-focused theme; useful for cross-checking event tasks and rewards structure."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -226,24 +226,24 @@
         ]
       },
       {
-        "topic_id": "external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1",
-        "title": "External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026",
-        "cluster": "Heroes",
-        "recommended_action": "create_new",
+        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
+        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "heroes.html",
-        "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
+        "target_page_or_slug": "research.html",
+        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero directory with faction filters, hero roster, levels, and equipment details; useful for hero identity and build cross-checking."
+          "Research building page; confirms the Lab unlock and that it handles technology research, which fits research-event cross checks."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "heroes.html"
+            "research.html"
           ],
-          "external_source_id": "lastzwiki-reference"
+          "external_source_id": "lastz-fandom-reference"
         },
         "constraints": [
           "External search result is discovery evidence only.",
@@ -256,22 +256,22 @@
         ]
       },
       {
-        "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
-        "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
-        "cluster": "Research",
-        "recommended_action": "create_new",
+        "topic_id": "external-search-lastzwiki-reference-heroes-last-z-wiki-tier-list-stats-complet-1",
+        "title": "External search opportunity: Heroes - Last Z Wiki | Tier List, Stats & Complete Character Guide 2026",
+        "cluster": "Heroes",
+        "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "research.html",
+        "target_page_or_slug": "heroes.html",
         "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
         "confidence": "high",
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Research table hub with category tabs and per-level badge costs; useful for locating research names and cost progression."
+          "Hero roster and equipment page; useful for hero discovery, factions, levels, and gear categories."
         ],
         "site_fit": {
           "expected_internal_route": [
-            "research.html"
+            "heroes.html"
           ],
           "external_source_id": "lastzwiki-reference"
         },
