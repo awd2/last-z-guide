@@ -125,6 +125,7 @@ python3 automation/pipeline.py llm-issue-manifest --comment-body "/approve-manif
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/review-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/brief-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/patch-plan-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/propose-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 ```
@@ -151,6 +152,7 @@ python3 automation/workers/llm_issue_manifest.py --comment-body "/approve-manife
 python3 automation/workers/llm_issue_lifecycle.py --comment-body "/review-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_issue_lifecycle.py --comment-body "/brief-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_issue_lifecycle.py --comment-body "/patch-plan-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/workers/llm_issue_lifecycle.py --comment-body "/propose-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/workers/llm_run_approved_handoffs.py --provider openai --json
 python3 automation/workers/llm_editor.py --topic-id <topic_id> --provider openai --json
 python3 automation/workers/llm_reviewer.py --topic-id <topic_id> --provider openai --json
@@ -305,18 +307,19 @@ approve public copy, mutate backlog/content, create PRs, or deploy.
 `llm-issue-lifecycle` is the GitHub issue-comment bridge for already-created
 planned manifests. It accepts only `/review-run <run_id> <owner note>`,
 `/brief-run <run_id> <owner note>`, or
-`/patch-plan-run <run_id> <owner note>` on the
+`/patch-plan-run <run_id> <owner note>`, or
+`/propose-run <run_id> <owner note>` on the
 `LLM Owner Digest: Action Needed` issue, requires the exact previous manifest
 status, and advances only `planned -> reviewed -> draft_brief_ready ->
-patch_plan_ready`. It may mutate automation manifests and generated brief /
-patch-plan reports, but it must not approve public copy, mutate backlog/content,
-create PRs, or deploy.
+patch_plan_ready -> proposal_ready`. It may mutate automation manifests and
+generated brief / patch-plan / proposal reports, but it must not approve public
+copy, mutate backlog/content, create PRs, or deploy.
 
 GitHub workflow `.github/workflows/llm-owner-decision.yml` runs this command
 from matching issue comments, replies in the same issue with the result, and may
 commit only owner handoff artifacts: topic decisions, persisted no-write chain
 summaries, intake artifacts, run-plan artifacts, planned manifests, and lifecycle
-brief/patch-plan reports. For `/approve-chain`, it runs the no-write
+brief/patch/proposal reports. For `/approve-chain`, it runs the no-write
 `llm-worker-chain --from-decision` path in the same workflow job, uploads the
 chain artifacts, and persists the summary under
 `automation/reports/llm-owner-decision-chains/` for later `/approve-intake`.

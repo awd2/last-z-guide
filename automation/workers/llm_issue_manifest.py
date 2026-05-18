@@ -200,7 +200,7 @@ def next_actions(
         run_id = manifest_summary.get("run_id", "<run_id>")
         return [
             "Review the planned manifest before running review/brief/patch-plan.",
-            f"Run: python3 automation/pipeline.py review {run_id}",
+            f"Use: /review-run {run_id} <owner confirms deterministic review>",
             "Do not write public content until a later proposal artifact receives explicit owner approval.",
         ]
     return []

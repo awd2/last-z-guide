@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,13 +17,12 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from automation import editor as brief_editor
-from automation import patch_planner, reviewer
+from automation import exact_proposals, patch_planner, proposal_renderer, reviewer
 from automation.io import load_run_manifest, write_json, write_run_manifest
 from automation.proposal_renderer import md_list
 from automation.workers.llm_issue_decision import (
     ALLOWED_ASSOCIATIONS,
     DEFAULT_ISSUE_TITLE,
-    TOPIC_ID_PATTERN,
     normalize_association,
     normalize_author,
     rel,
@@ -32,16 +32,19 @@ from automation.workers.llm_issue_decision import (
 
 MANIFESTS_DIR = ROOT / "automation" / "manifests"
 REPORTS_DIR = ROOT / "automation" / "reports"
-COMMANDS = {"/review-run", "/brief-run", "/patch-plan-run"}
+COMMANDS = {"/review-run", "/brief-run", "/patch-plan-run", "/propose-run"}
+RUN_ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,180}$")
 EXPECTED_STATUS = {
     "/review-run": "planned",
     "/brief-run": "reviewed",
     "/patch-plan-run": "draft_brief_ready",
+    "/propose-run": "patch_plan_ready",
 }
 NEXT_STATUS = {
     "/review-run": "reviewed",
     "/brief-run": "draft_brief_ready",
     "/patch-plan-run": "patch_plan_ready",
+    "/propose-run": "proposal_ready",
 }
 
 
@@ -79,7 +82,7 @@ def validate_command(
     if author_association not in ALLOWED_ASSOCIATIONS:
         errors.append(f"Unsupported comment author association: {author_association or 'unknown'}")
     if not parsed:
-        errors.append("No supported owner lifecycle command found. Use /review-run, /brief-run, or /patch-plan-run.")
+        errors.append("No supported owner lifecycle command found. Use /review-run, /brief-run, /patch-plan-run, or /propose-run.")
         return 1, {
             "command": "",
             "run_id": "",
@@ -89,7 +92,7 @@ def validate_command(
         }
 
     command, run_id, note = parsed
-    if not TOPIC_ID_PATTERN.match(run_id):
+    if not RUN_ID_PATTERN.match(run_id):
         errors.append(f"Unsafe or unsupported run id: {run_id}")
     if not note:
         errors.append("Lifecycle approval note is required after the run id.")
@@ -148,6 +151,21 @@ def write_patch_plan_artifact(manifest_path: Path, output_dir: Path) -> dict[str
     }
 
 
+def write_proposal_artifacts(manifest_path: Path, output_dir: Path) -> dict[str, Any]:
+    proposal_path, rendered_specs = proposal_renderer.render_proposal(manifest_path, output_dir)
+    exact_review = exact_proposals.render_exact_proposals(manifest_path, output_dir)
+    manifest = load_run_manifest(manifest_path)
+    return {
+        "artifact_type": "proposal",
+        "path": rel(proposal_path),
+        "status": manifest.status,
+        "rendered_spec_count": len(rendered_specs),
+        "exact_proposal_count": int(exact_review.get("exact_proposal_count", 0)),
+        "exact_proposal_json": exact_review.get("report_paths", {}).get("json", ""),
+        "exact_proposal_markdown": exact_review.get("report_paths", {}).get("markdown", ""),
+    }
+
+
 def run_lifecycle_step(
     validation: dict[str, Any],
     manifest_dir: Path,
@@ -190,6 +208,8 @@ def run_lifecycle_step(
             result = write_brief_artifact(selected_manifest, output_dir)
         elif command == "/patch-plan-run":
             result = write_patch_plan_artifact(selected_manifest, output_dir)
+        elif command == "/propose-run":
+            result = write_proposal_artifacts(selected_manifest, output_dir)
         else:
             return 1, None, [f"Unsupported lifecycle command: {command}"]
     except Exception as exc:
@@ -212,7 +232,7 @@ def next_actions(summary: dict[str, Any]) -> list[str]:
     if errors:
         return [
             "Fix the GitHub issue command, manifest path, or manifest status, then post a new owner command.",
-            "Lifecycle commands must run in order: /review-run -> /brief-run -> /patch-plan-run.",
+            "Lifecycle commands must run in order: /review-run -> /brief-run -> /patch-plan-run -> /propose-run.",
         ]
     if command == "/review-run":
         return [
@@ -226,8 +246,13 @@ def next_actions(summary: dict[str, Any]) -> list[str]:
         ]
     if command == "/patch-plan-run":
         return [
-            f"Render exact owner-review proposals: python3 automation/pipeline.py propose {run_id}",
+            f"Render owner-review proposals: /propose-run {run_id} <owner confirms proposal rendering>",
             "Public content may be changed only after exact proposed text/spec approval, apply-preview, apply-approved, and strict QA.",
+        ]
+    if command == "/propose-run":
+        return [
+            f"Review proposal artifacts, then record exact proposal approval only if the visible Before/After text is correct: python3 automation/pipeline.py approval {run_id} --state approved --all --note \"<owner approval note>\"",
+            "Public content is still unchanged until apply-preview, apply-approved, and strict QA.",
         ]
     return []
 
@@ -249,6 +274,7 @@ def build_summary(
             "/review-run": "run_reviewed",
             "/brief-run": "run_brief_ready",
             "/patch-plan-run": "run_patch_plan_ready",
+            "/propose-run": "run_proposal_ready",
         }.get(command, "blocked")
         run_id = lifecycle_result.get("run_id", run_id)
     summary = {
@@ -296,6 +322,7 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- Before status: `{summary.get('before_status', '')}`",
         f"- After status: `{summary.get('after_status', '')}`",
         f"- Result artifact: `{result.get('path', '')}`",
+        f"- Exact proposal review: `{result.get('exact_proposal_markdown', '')}`",
         f"- Allows content edit: `{str(summary.get('allows_content_edit', False)).lower()}`",
         f"- Allows backlog mutation: `{str(summary.get('allows_backlog_mutation', False)).lower()}`",
         f"- Allows manifest mutation: `{str(summary.get('allows_manifest_mutation', False)).lower()}`",

@@ -3781,6 +3781,29 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(final_manifest["status"], "patch_plan_ready")
             self.assertGreater(len(final_manifest["artifacts"]["patch_plan"]["patch_specs"]), 0)
 
+            code, propose_summary = llm_issue_lifecycle.run_issue_lifecycle(
+                comment_body=f"/propose-run {run_id} Owner approves proposal rendering only.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=tmp_path / "lifecycle-propose.json",
+                markdown_output=tmp_path / "lifecycle-propose.md",
+            )
+            self.assertEqual(code, 0)
+            self.assertEqual(propose_summary["state"], "run_proposal_ready")
+            self.assertEqual(propose_summary["before_status"], "patch_plan_ready")
+            self.assertEqual(propose_summary["after_status"], "proposal_ready")
+            self.assertTrue((tmp_path / f"{run_id}.proposed.md").exists())
+            self.assertTrue((tmp_path / f"{run_id}.exact-proposals.json").exists())
+            self.assertTrue((tmp_path / f"{run_id}.exact-proposals.md").exists())
+            self.assertFalse(propose_summary["allows_content_edit"])
+            proposed_manifest = load_json(manifest_path)
+            self.assertEqual(proposed_manifest["status"], "proposal_ready")
+            self.assertIn("proposal", proposed_manifest["artifacts"])
+
     def test_issue_lifecycle_blocks_untrusted_or_wrong_status_comment(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

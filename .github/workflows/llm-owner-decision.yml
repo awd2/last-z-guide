@@ -32,7 +32,8 @@ jobs:
         startsWith(github.event.comment.body, '/approve-manifest ') ||
         startsWith(github.event.comment.body, '/review-run ') ||
         startsWith(github.event.comment.body, '/brief-run ') ||
-        startsWith(github.event.comment.body, '/patch-plan-run ')
+        startsWith(github.event.comment.body, '/patch-plan-run ') ||
+        startsWith(github.event.comment.body, '/propose-run ')
       )
     runs-on: ubuntu-latest
     steps:
@@ -136,7 +137,8 @@ jobs:
         if: >
           startsWith(github.event.comment.body, '/review-run ') ||
           startsWith(github.event.comment.body, '/brief-run ') ||
-          startsWith(github.event.comment.body, '/patch-plan-run ')
+          startsWith(github.event.comment.body, '/patch-plan-run ') ||
+          startsWith(github.event.comment.body, '/propose-run ')
         env:
           COMMENT_BODY: ${{ github.event.comment.body }}
           COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
@@ -485,19 +487,23 @@ jobs:
             automation/reports/llm-owner-lifecycle-gha/
             automation/reports/llm-worker-chain-gha/
             automation/reports/llm-owner-decision-chains/
+            automation/reports/*.proposed.md
+            automation/reports/*.exact-proposals.json
+            automation/reports/*.exact-proposals.md
             automation/manifests/
           if-no-files-found: ignore
 
       - name: Commit owner handoff artifacts
         if: success()
         run: |
-          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md automation/reports/*.brief.md automation/reports/*.patch.md automation/reports/llm-owner-decision-chains automation/manifests)" ]]; then
+          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md automation/reports/*.brief.md automation/reports/*.patch.md automation/reports/*.proposed.md automation/reports/*.exact-proposals.json automation/reports/*.exact-proposals.md automation/reports/llm-owner-decision-chains automation/manifests)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md || true
             git add automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md || true
             git add automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md || true
             git add automation/reports/*.brief.md automation/reports/*.patch.md || true
+            git add automation/reports/*.proposed.md automation/reports/*.exact-proposals.json automation/reports/*.exact-proposals.md || true
             git add automation/reports/llm-owner-decision-chains || true
             git add automation/manifests || true
             git commit -m "chore(llm): record owner handoff artifacts"
