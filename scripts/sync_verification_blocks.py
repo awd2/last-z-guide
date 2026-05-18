@@ -540,7 +540,7 @@ COMBAT_RALLY_EVENT_DISCLAIMER = """        <section class="disclaimer">
 CODE_HUB_BLOCK = """        <section class="verification-note" aria-label="Verification and review">
             <p class="verification-note-title">Verification &amp; Review</p>
             <ul>
-                <li><strong>Last reviewed for code availability and Gift Center flow:</strong> March 2026.</li>
+                <li><strong>Last reviewed for code availability and Gift Center flow:</strong> May 18, 2026.</li>
                 <li><strong>Checked against:</strong> official Gift Center redemption behavior, UID requirements, mailbox reward delivery, and the linked setup and troubleshooting guides.</li>
                 <li><strong>Changes to watch:</strong> code expiry, already-used status, campaign availability, reward contents, and temporary Gift Center outages can change faster than normal guide mechanics.</li>
             </ul>
