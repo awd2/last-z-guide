@@ -34,7 +34,8 @@ jobs:
         startsWith(github.event.comment.body, '/brief-run ') ||
         startsWith(github.event.comment.body, '/patch-plan-run ') ||
         startsWith(github.event.comment.body, '/propose-run ') ||
-        startsWith(github.event.comment.body, '/approve-proposal ')
+        startsWith(github.event.comment.body, '/approve-proposal ') ||
+        startsWith(github.event.comment.body, '/preview-apply ')
       )
     runs-on: ubuntu-latest
     steps:
@@ -180,6 +181,27 @@ jobs:
             --markdown-output automation/reports/llm-owner-proposal-approval-gha/proposal-approval-summary.md \
             --json | tee automation/reports/llm-owner-proposal-approval-gha/run-summary.json
 
+      - name: Render owner-approved apply preview from issue comment
+        if: startsWith(github.event.comment.body, '/preview-apply ')
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          AUTHOR_ASSOCIATION: ${{ github.event.comment.author_association }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+          mkdir -p automation/reports/llm-owner-apply-preview-gha
+          python3 automation/pipeline.py llm-issue-apply-preview \
+            --comment-body "$COMMENT_BODY" \
+            --comment-author "$COMMENT_AUTHOR" \
+            --author-association "$AUTHOR_ASSOCIATION" \
+            --issue-title "$ISSUE_TITLE" \
+            --manifest-dir automation/manifests \
+            --output-dir automation/reports \
+            --summary-output automation/reports/llm-owner-apply-preview-gha/apply-preview-summary.json \
+            --markdown-output automation/reports/llm-owner-apply-preview-gha/apply-preview-summary.md \
+            --json | tee automation/reports/llm-owner-apply-preview-gha/run-summary.json
+
       - name: Write job summary
         if: always()
         run: |
@@ -267,6 +289,20 @@ jobs:
               if approval.get("errors"):
                   print("- Proposal approval errors:")
                   for error in approval["errors"]:
+                      print(f"  - {error}")
+          apply_preview_path = Path("automation/reports/llm-owner-apply-preview-gha/apply-preview-summary.json")
+          if apply_preview_path.exists():
+              preview = json.loads(apply_preview_path.read_text())
+              print(f"- Apply preview state: `{preview.get('state')}`")
+              print(f"- Apply preview run ID: `{preview.get('run_id')}`")
+              print(f"- Manifest path: `{preview.get('manifest_path')}`")
+              print(f"- Before status: `{preview.get('before_status')}`")
+              print(f"- After status: `{preview.get('after_status')}`")
+              print(f"- Approved specs: `{preview.get('approved_specs_count')}`")
+              print(f"- Preview report: `{preview.get('preview_markdown')}`")
+              if preview.get("errors"):
+                  print("- Apply preview errors:")
+                  for error in preview["errors"]:
                       print(f"  - {error}")
           PY
 
@@ -356,6 +392,7 @@ jobs:
           manifest_path = Path("automation/reports/llm-owner-manifest-gha/manifest-summary.json")
           lifecycle_path = Path("automation/reports/llm-owner-lifecycle-gha/lifecycle-summary.json")
           proposal_approval_path = Path("automation/reports/llm-owner-proposal-approval-gha/proposal-approval-summary.json")
+          apply_preview_path = Path("automation/reports/llm-owner-apply-preview-gha/apply-preview-summary.json")
           chain_path = Path("automation/reports/llm-worker-chain-gha/run-summary.json")
           lines = [
               "## LLM owner handoff result",
@@ -385,11 +422,12 @@ jobs:
                   and not manifest_path.exists()
                   and not lifecycle_path.exists()
                   and not proposal_approval_path.exists()
+                  and not apply_preview_path.exists()
               ):
                   lines.append("- State: `blocked`")
                   lines.append("- Errors:")
                   lines.append(
-                      "  - No decision, intake, run-plan, manifest, lifecycle, or proposal approval summary artifact was written."
+                      "  - No decision, intake, run-plan, manifest, lifecycle, proposal approval, or apply preview summary artifact was written."
                   )
 
           if intake_path.exists():
@@ -500,6 +538,31 @@ jobs:
                   for error in approval["errors"]:
                       lines.append(f"  - {error}")
 
+          if apply_preview_path.exists():
+              preview = json.loads(apply_preview_path.read_text())
+              lines.extend(
+                  [
+                      "",
+                      "Apply preview:",
+                      "",
+                      f"- State: `{preview.get('state', '')}`",
+                      f"- Run ID: `{preview.get('run_id', '')}`",
+                      f"- Manifest path: `{preview.get('manifest_path', '')}`",
+                      f"- Before status: `{preview.get('before_status', '')}`",
+                      f"- After status: `{preview.get('after_status', '')}`",
+                      f"- Preview report: `{preview.get('preview_markdown', '')}`",
+                      f"- Approved specs: `{preview.get('approved_specs_count', 0)}`",
+                      f"- Preview warnings: `{preview.get('preview_warning_count', 0)}`",
+                      f"- Manifest ready for apply-approved: `{str(preview.get('manifest_ready_for_apply_approved', False)).lower()}`",
+                      f"- Allows content edit: `{str(preview.get('allows_content_edit', False)).lower()}`",
+                      f"- Runs apply-approved: `{str(preview.get('runs_apply_approved', False)).lower()}`",
+                  ]
+              )
+              if preview.get("errors"):
+                  lines.append("- Apply preview errors:")
+                  for error in preview["errors"]:
+                      lines.append(f"  - {error}")
+
           if chain_path.exists():
               chain = json.loads(chain_path.read_text())
               lines.extend(
@@ -525,6 +588,7 @@ jobs:
                   "- No public copy was applied.",
                   "- No public content, backlog, PRs, or production state were modified.",
                   "- /approve-proposal records owner approval for rendered specs only; it does not apply content.",
+                  "- /preview-apply renders a no-write preview only; it does not apply content.",
                   "- Planned manifest creation is allowed only by /approve-manifest.",
                   f"- Workflow run: {workflow_url}",
               ]
@@ -557,18 +621,20 @@ jobs:
             automation/reports/llm-owner-manifest-gha/
             automation/reports/llm-owner-lifecycle-gha/
             automation/reports/llm-owner-proposal-approval-gha/
+            automation/reports/llm-owner-apply-preview-gha/
             automation/reports/llm-worker-chain-gha/
             automation/reports/llm-owner-decision-chains/
             automation/reports/*.proposed.md
             automation/reports/*.exact-proposals.json
             automation/reports/*.exact-proposals.md
+            automation/reports/*.apply-preview.md
             automation/manifests/
           if-no-files-found: ignore
 
       - name: Commit owner handoff artifacts
         if: success()
         run: |
-          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md automation/reports/*.brief.md automation/reports/*.patch.md automation/reports/*.proposed.md automation/reports/*.exact-proposals.json automation/reports/*.exact-proposals.md automation/reports/llm-owner-decision-chains automation/manifests)" ]]; then
+          if [[ -n "$(git status --porcelain automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md automation/reports/llm-intake-*.json automation/reports/llm-intake-*.md automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md automation/reports/*.brief.md automation/reports/*.patch.md automation/reports/*.proposed.md automation/reports/*.exact-proposals.json automation/reports/*.exact-proposals.md automation/reports/*.apply-preview.md automation/reports/llm-owner-decision-chains automation/manifests)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add automation/reports/llm-topic-decision-*.json automation/reports/llm-topic-decision-*.md || true
@@ -576,6 +642,7 @@ jobs:
             git add automation/reports/llm-worker-run-plan-*.json automation/reports/llm-worker-run-plan-*.md || true
             git add automation/reports/*.brief.md automation/reports/*.patch.md || true
             git add automation/reports/*.proposed.md automation/reports/*.exact-proposals.json automation/reports/*.exact-proposals.md || true
+            git add automation/reports/*.apply-preview.md || true
             git add automation/reports/llm-owner-decision-chains || true
             git add automation/manifests || true
             git commit -m "chore(llm): record owner handoff artifacts"

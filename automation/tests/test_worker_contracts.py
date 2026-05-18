@@ -14,7 +14,7 @@ from automation.io import load_json, load_run_manifest, write_json, write_run_ma
 from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_owner_digest, llm_owner_issue, llm_review_latest, llm_topic_decisions
 from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, proposal_renderer
 from automation.source_resolver import SourceResolution
-from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_decision, llm_issue_intake, llm_issue_lifecycle, llm_issue_manifest, llm_issue_proposal_approval, llm_issue_run_plan, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
+from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_apply_preview, llm_issue_decision, llm_issue_intake, llm_issue_lifecycle, llm_issue_manifest, llm_issue_proposal_approval, llm_issue_run_plan, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
 
 
@@ -3901,6 +3901,32 @@ class WorkerContractTests(unittest.TestCase):
                 )
             )
 
+            code, preview_summary = llm_issue_apply_preview.run_issue_apply_preview(
+                comment_body=f"/preview-apply {run_id} Owner requests no-write apply preview only.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=tmp_path / "apply-preview-summary.json",
+                markdown_output=tmp_path / "apply-preview-summary.md",
+            )
+            self.assertEqual(code, 0)
+            self.assertEqual(preview_summary["state"], "apply_preview_ready")
+            self.assertEqual(preview_summary["before_status"], "approved_for_apply")
+            self.assertEqual(preview_summary["after_status"], "apply_preview_ready")
+            self.assertGreater(preview_summary["approved_specs_count"], 0)
+            self.assertTrue(preview_summary["manifest_ready_for_apply_approved"])
+            self.assertFalse(preview_summary["allows_content_edit"])
+            self.assertFalse(preview_summary["runs_apply_approved"])
+            self.assertTrue((tmp_path / "apply-preview-summary.json").exists())
+            self.assertTrue((tmp_path / "apply-preview-summary.md").exists())
+            previewed_manifest = load_json(manifest_path)
+            self.assertEqual(previewed_manifest["status"], "apply_preview_ready")
+            self.assertIn("apply_preview", previewed_manifest["artifacts"])
+            self.assertTrue(Path(previewed_manifest["artifacts"]["apply_preview"]["report_path"]).exists())
+
     def test_issue_lifecycle_blocks_untrusted_or_wrong_status_comment(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
@@ -4006,6 +4032,37 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(code, 1)
             self.assertEqual(wrong_proposal_status["state"], "blocked")
             self.assertIn("Manifest status must be `proposal_ready`", " ".join(wrong_proposal_status["errors"]))
+
+            code, preview_summary = llm_issue_apply_preview.run_issue_apply_preview(
+                comment_body=f"/preview-apply {run_id}",
+                comment_author="fixture-user",
+                author_association="CONTRIBUTOR",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+            self.assertEqual(code, 1)
+            self.assertEqual(preview_summary["state"], "blocked")
+            self.assertIn("Unsupported comment author association", " ".join(preview_summary["errors"]))
+            self.assertIn("Apply preview note is required", " ".join(preview_summary["errors"]))
+
+            code, wrong_preview_status = llm_issue_apply_preview.run_issue_apply_preview(
+                comment_body=f"/preview-apply {run_id} Owner tries to preview before proposal approval.",
+                comment_author="fixture-owner",
+                author_association="OWNER",
+                issue_title="LLM Owner Digest: Action Needed",
+                manifest_dir=manifest_dir,
+                manifest_path=None,
+                output_dir=tmp_path,
+                summary_output=None,
+                markdown_output=None,
+            )
+            self.assertEqual(code, 1)
+            self.assertEqual(wrong_preview_status["state"], "blocked")
+            self.assertIn("Manifest status must be `approved_for_apply`", " ".join(wrong_preview_status["errors"]))
 
 
 if __name__ == "__main__":

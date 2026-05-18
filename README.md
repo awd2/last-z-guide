@@ -150,6 +150,7 @@ python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/brief-run <r
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/patch-plan-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-lifecycle --comment-body "/propose-run <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-issue-proposal-approval --comment-body "/approve-proposal <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
+python3 automation/pipeline.py llm-issue-apply-preview --comment-body "/preview-apply <run_id> <owner note>" --comment-author <github_login> --author-association OWNER --json
 python3 automation/pipeline.py llm-intake-latest --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answer / approval scope>" --json
 python3 automation/pipeline.py llm-intake-latest --approved-by <name> --note "<owner answers>" --resolve-reviewer-blockers --json
@@ -438,9 +439,10 @@ The preferred GitHub owner handoff is to comment on that issue with one command:
 /patch-plan-run <run_id> <owner confirms proposal-only patch planning>
 /propose-run <run_id> <owner confirms proposal rendering>
 /approve-proposal <run_id> <owner approves rendered proposal specs only>
+/preview-apply <run_id> <owner requests no-write apply preview only>
 ```
 
-`.github/workflows/llm-owner-decision.yml` records those commands for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It replies in the same issue with the recorded decision/intake/run-plan/manifest/lifecycle/proposal-approval result, workflow link, and worker-chain result when applicable. For `/approve-chain`, it also runs and persists the no-write worker chain summary. For `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary. For `/approve-run-plan`, it creates a no-write run-plan proposal from approved intake. For `/dry-run-manifest`, it validates the manifest path without writing. For `/approve-manifest`, it may create only a planned run manifest. For `/review-run`, `/brief-run`, `/patch-plan-run`, and `/propose-run`, it advances an existing manifest through deterministic review, brief, proposal-only patch planning, and owner-review proposal rendering. For `/approve-proposal`, it records owner approval on rendered proposal specs and can move the manifest to `approved_for_apply`, but it still does not apply content, create PRs, or deploy.
+`.github/workflows/llm-owner-decision.yml` records those commands for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It replies in the same issue with the recorded decision/intake/run-plan/manifest/lifecycle/proposal-approval/apply-preview result, workflow link, and worker-chain result when applicable. For `/approve-chain`, it also runs and persists the no-write worker chain summary. For `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary. For `/approve-run-plan`, it creates a no-write run-plan proposal from approved intake. For `/dry-run-manifest`, it validates the manifest path without writing. For `/approve-manifest`, it may create only a planned run manifest. For `/review-run`, `/brief-run`, `/patch-plan-run`, and `/propose-run`, it advances an existing manifest through deterministic review, brief, proposal-only patch planning, and owner-review proposal rendering. For `/approve-proposal`, it records owner approval on rendered proposal specs and can move the manifest to `approved_for_apply`, but it still does not apply content. For `/preview-apply`, it renders no-write apply-preview artifacts and can move the manifest to `apply_preview_ready`, but it still does not apply content, create PRs, or deploy.
 
 To preview the full actionable Issue body locally without touching GitHub, run:
 
@@ -471,7 +473,7 @@ Owner decisions from that issue are handled by a separate no-write workflow:
 
 - Workflow: `.github/workflows/llm-owner-decision.yml`
 - Trigger: new comment on `LLM Owner Digest: Action Needed`
-- Supported commands: `/monitor`, `/reject`, `/approve-chain`, `/approve-intake`, `/approve-run-plan`, `/dry-run-manifest`, `/approve-manifest`, `/review-run`, `/brief-run`, `/patch-plan-run`, `/propose-run`, `/approve-proposal`
+- Supported commands: `/monitor`, `/reject`, `/approve-chain`, `/approve-intake`, `/approve-run-plan`, `/dry-run-manifest`, `/approve-manifest`, `/review-run`, `/brief-run`, `/patch-plan-run`, `/propose-run`, `/approve-proposal`, `/preview-apply`
 - Author gate: `OWNER`, `MEMBER`, or `COLLABORATOR`
 - Output: committed owner handoff artifacts only: topic decisions, persisted no-write chain summaries, intake artifacts, run-plan artifacts, automation manifests, and generated proposal reports
 - `/approve-chain`: runs the no-write worker chain in the same workflow job and persists its summary for later intake
@@ -484,6 +486,7 @@ Owner decisions from that issue are handled by a separate no-write workflow:
 - `/patch-plan-run`: moves a matching `draft_brief_ready` manifest to `patch_plan_ready` and writes `.patch.md`
 - `/propose-run`: moves a matching `patch_plan_ready` manifest to `proposal_ready` and writes `.proposed.md` plus `.exact-proposals.*`
 - `/approve-proposal`: records owner approval on rendered proposal specs, moves the manifest toward `approved_for_apply`, and refreshes proposal reports; public content is still unchanged
+- `/preview-apply`: renders `<run_id>.apply-preview.md`, moves the manifest toward `apply_preview_ready`, and still leaves public content unchanged
 - Issue reply: posts the decision/intake result and worker-chain summary back into the handoff issue
 - Public content/backlog/PRs/deploy modified: `false`; lifecycle commands may mutate automation manifests and write report artifacts
 

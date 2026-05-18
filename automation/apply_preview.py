@@ -68,6 +68,10 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8") if path.exists() else ""
 
 
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT) if path.is_relative_to(ROOT) else path)
+
+
 def json_has_related_link(path: Path, href: str) -> bool:
     if not path.exists():
         return False
@@ -382,7 +386,7 @@ def render_apply_preview(path: Path):
 
     manifest.artifacts.setdefault("apply_preview", {})
     manifest.artifacts["apply_preview"] = {
-        "report_path": str(out_path.relative_to(ROOT)),
+        "report_path": rel(out_path),
         "generated_at": generated_at,
         "approved_specs_count": len(preview_items),
         "preview_items": preview_items,
@@ -405,7 +409,7 @@ def main() -> int:
         print(str(exc))
         return 1
 
-    print(f"Wrote {out_path.relative_to(ROOT)}")
+    print(f"Wrote {rel(out_path)}")
     print(f"Previewed approved specs: {len(preview_items)}")
     print(f"Updated {manifest_path.relative_to(ROOT)}")
     return 0
