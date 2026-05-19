@@ -2,7 +2,7 @@
   "run_id": "owner-lifecycle-smoke-2026-05-19",
   "created_at": "2026-05-19T00:00:00Z",
   "run_type": "update_existing",
-  "status": "approved_for_apply",
+  "status": "apply_preview_ready",
   "risk_level": "low",
   "summary": "Temporary owner issue lifecycle smoke fixture. This must not touch public site content.",
   "inputs": {
@@ -73,6 +73,29 @@
           "approval_state": "approved",
           "approval_updated_at": "2026-05-19T00:00:00Z",
           "approval_note": "Temporary owner lifecycle smoke approval for no-write apply preview only."
+        }
+      ]
+    },
+    "apply_preview": {
+      "report_path": "automation/reports/owner-lifecycle-smoke-2026-05-19.apply-preview.md",
+      "generated_at": "2026-05-19T07:16:10Z",
+      "approved_specs_count": 1,
+      "preview_items": [
+        {
+          "source_of_truth_file": "automation/reports/owner-lifecycle-smoke-source.html",
+          "output_file": "automation/reports/owner-lifecycle-smoke-source.html",
+          "operation_type": "safe_exact_replace",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "approval_state": "approved",
+          "preview_action": "safe_exact_replace",
+          "warnings": [],
+          "preview": "```diff\n# p\n- <p>Before owner lifecycle smoke fixture.</p>\n+ <p>After owner lifecycle smoke fixture.</p>\n```",
+          "validation_commands": [
+            "python3 automation/pipeline.py checks --strict"
+          ],
+          "target_page": ""
         }
       ]
     }
