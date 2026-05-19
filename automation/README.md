@@ -746,6 +746,7 @@ LLM owner issue:
 - actionable digest states are `owner_review_needed`, `ready_for_intake`, and `blocked_or_failed`; active run lifecycle states also keep the issue open
 - actionable issue bodies include GitHub comment commands plus ready-to-copy local CLI commands for `monitor`, `rejected`, `approved_for_chain`, available intake commands, and the next safe run lifecycle command
 - after `/approve-proposal`, the Active Run Lifecycle section should show `/preview-apply <run_id>` as the next no-write command
+- after `/preview-apply`, the Active Run Lifecycle section should show `apply_preview_ready`, no GitHub issue command, and a local-only final apply review handoff for `apply-approved`, strict manifest QA, and closeout
 - `no_candidates` and `no_action_needed` are no-op when no handoff issue is open and no active run lifecycle exists
 - `python3 automation/pipeline.py llm-owner-issue --digest automation/reports/example-llm-owner-digest-actionable.json --markdown automation/reports/example-llm-owner-digest-actionable.md --repository awd2/last-z-guide --run-url https://github.com/awd2/last-z-guide/actions/runs/example --dry-run --body-output automation/reports/example-llm-owner-issue.md --json` -> render the actionable handoff fixture locally without touching GitHub
 - this is a notification layer only and does not approve content, mutate site files, create PRs, or deploy
@@ -814,6 +815,7 @@ LLM issue apply preview:
 - the command requires a run id, a real owner note, an accepted author association, and approved proposal specs
 - this may move a manifest to `apply_preview_ready` and write `<run_id>.apply-preview.md`
 - this does not run `apply-approved`, edit public content, mutate backlog, create PRs, or deploy
+- once the manifest is `apply_preview_ready`, the owner issue should stop offering GitHub-side lifecycle commands for that run and instead show local-only final apply review commands
 
 LLM intake latest:
 

@@ -199,8 +199,8 @@ def next_run_command(run_id: str, status: str) -> tuple[str, str]:
             "Render no-write apply preview.",
         ),
         "apply_preview_ready": (
-            f"/preview-apply {run_id} Refresh no-write apply preview only: <owner rechecks final preview>",
-            "Review the apply preview; no GitHub content-apply command is available.",
+            "",
+            "Ready for local final apply review; no GitHub content-apply command is available.",
         ),
         "applied_pending_qa": (
             "",
@@ -250,6 +250,37 @@ def active_run_lifecycle(manifest_dir: Path = MANIFESTS_DIR, reports_dir: Path =
     return items
 
 
+def render_local_apply_handoff(item: dict[str, Any]) -> list[str]:
+    if item.get("status") != "apply_preview_ready":
+        return []
+    run_id = str(item.get("run_id") or "")
+    preview_path = str(item.get("apply_preview_path") or "")
+    lines = [
+        "",
+        "Local final apply review:",
+        "",
+        "- GitHub automation has stopped before any content-changing step.",
+        "- Review the apply preview and approved proposal artifacts locally.",
+        "- Continue only after explicit final owner approval for the exact content change.",
+        "- `apply-approved` is intentionally local-only and is not available as a GitHub issue comment command.",
+    ]
+    if preview_path:
+        lines.append(f"- Apply preview: `{preview_path}`")
+    lines.extend(
+        [
+            "",
+            "Local-only commands after final owner approval:",
+            "",
+            "```bash",
+            f"python3 automation/pipeline.py apply-approved {run_id}",
+            f"python3 automation/pipeline.py checks --strict --manifest {run_id}",
+            f"python3 automation/pipeline.py close-run {run_id} --note \"Owner reviewed local output and strict QA passed.\"",
+            "```",
+        ]
+    )
+    return lines
+
+
 def render_run_lifecycle(manifest_dir: Path = MANIFESTS_DIR, reports_dir: Path = REPORTS_DIR) -> list[str]:
     items = active_run_lifecycle(manifest_dir, reports_dir)
     if not items:
@@ -285,6 +316,7 @@ def render_run_lifecycle(manifest_dir: Path = MANIFESTS_DIR, reports_dir: Path =
             lines.extend(["", "GitHub issue comment command:", "", "```text", str(item["comment_command"]), "```"])
         else:
             lines.append("- GitHub issue comment command: `none`")
+        lines.extend(render_local_apply_handoff(item))
         lines.append("")
     return lines
 

@@ -2119,6 +2119,64 @@ class WorkerContractTests(unittest.TestCase):
             self.assertIn("## Active Run Lifecycle", summary["issue_body"])
             self.assertIn("/approve-proposal fixture-run", summary["issue_body"])
 
+    def test_llm_owner_issue_shows_local_final_apply_review_for_preview_ready(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            digest_path = tmp_path / "llm-owner-digest.json"
+            markdown_path = tmp_path / "llm-owner-digest.md"
+            manifest_dir = tmp_path / "manifests"
+            reports_dir = tmp_path / "reports"
+            manifest_dir.mkdir()
+            reports_dir.mkdir()
+            write_json(
+                digest_path,
+                {
+                    "state": "no_action_needed",
+                    "generated_at": "2026-05-17T00:00:00Z",
+                    "recommended_next_action": "No owner action needed; wait for new GSC/Bing/external-source signals.",
+                    "counts": {},
+                },
+            )
+            markdown_path.write_text("# Digest\n\nNo topic action.\n", encoding="utf-8")
+            write_json(
+                manifest_dir / "fixture-run.json",
+                {
+                    "run_id": "fixture-run",
+                    "status": "apply_preview_ready",
+                    "changed_files": ["codes.html"],
+                    "artifacts": {
+                        "apply_preview": {
+                            "report_path": str(reports_dir / "fixture-run.apply-preview.md"),
+                            "approved_specs_count": 1,
+                        }
+                    },
+                },
+            )
+            (reports_dir / "fixture-run.apply-preview.md").write_text("# Apply Preview\n", encoding="utf-8")
+
+            summary = llm_owner_issue.build_summary(
+                digest_path=digest_path,
+                markdown_path=markdown_path,
+                repository="awd2/last-z-guide",
+                token="",
+                api_url="https://api.github.com",
+                server_url="https://github.com",
+                title="LLM Owner Digest: Action Needed",
+                explicit_run_url="https://github.com/awd2/last-z-guide/actions/runs/1",
+                dry_run=True,
+                manifest_dir=manifest_dir,
+                reports_dir=reports_dir,
+            )
+
+            self.assertTrue(summary["actionable"])
+            self.assertEqual(summary["active_run_count"], 1)
+            self.assertIn("Ready for local final apply review", summary["issue_body"])
+            self.assertIn("GitHub issue comment command: `none`", summary["issue_body"])
+            self.assertIn("Local final apply review", summary["issue_body"])
+            self.assertIn("python3 automation/pipeline.py apply-approved fixture-run", summary["issue_body"])
+            self.assertIn("python3 automation/pipeline.py checks --strict --manifest fixture-run", summary["issue_body"])
+            self.assertNotIn("/preview-apply fixture-run", summary["issue_body"])
+
     def test_llm_owner_issue_closes_existing_issue_when_digest_resolved(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

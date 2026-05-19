@@ -266,9 +266,12 @@ next-step. The issue body includes GitHub comment commands plus ready-to-copy
 local CLI commands for `monitor`, `rejected`, `approved_for_chain`, available
 intake commands, and the current Active Run Lifecycle. After
 `/approve-proposal`, the lifecycle view should show `/preview-apply <run_id>` as
-the next no-write command. When the latest digest is non-actionable and no active
-run lifecycle remains, it can close a previous open handoff issue as resolved. It
-must not approve content, mutate site files, create PRs, or deploy.
+the next no-write command. After `/preview-apply`, the lifecycle view should show
+`apply_preview_ready`, no GitHub issue command, and a local-only final apply
+review handoff for `apply-approved`, strict manifest QA, and closeout. When the
+latest digest is non-actionable and no active run lifecycle remains, it can close
+a previous open handoff issue as resolved. It must not approve content, mutate
+site files, create PRs, or deploy.
 
 Use `automation/reports/example-llm-owner-digest-actionable.json` and
 `automation/reports/example-llm-owner-digest-actionable.md` with
@@ -338,6 +341,8 @@ proposal specs to no-write apply preview. It accepts only
 or `apply_preview_ready` manifest, and may write `<run_id>.apply-preview.md`
 while moving the manifest to `apply_preview_ready`. It must not run
 `apply-approved`, edit public content, mutate backlog, create PRs, or deploy.
+Once the run is `apply_preview_ready`, `apply-approved` remains local-only and
+requires final owner review outside the GitHub issue-comment workflow.
 
 GitHub workflow `.github/workflows/llm-owner-decision.yml` runs this command
 from matching issue comments, replies in the same issue with the result, and may
