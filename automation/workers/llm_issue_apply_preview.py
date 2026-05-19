@@ -129,14 +129,10 @@ def render_preview(
             f"before /preview-apply; current status is `{before_status}`."
         ]
 
-    old_reports_dir = apply_preview.REPORTS_DIR
-    apply_preview.REPORTS_DIR = output_dir
     try:
-        preview_path, preview_items = apply_preview.render_apply_preview(selected_manifest)
+        preview_path, preview_items = apply_preview.render_apply_preview(selected_manifest, output_dir)
     except Exception as exc:
         return 1, None, [f"Failed to render apply preview: {exc}"]
-    finally:
-        apply_preview.REPORTS_DIR = old_reports_dir
 
     refreshed_manifest = load_run_manifest(selected_manifest)
     warning_count = sum(len(item.get("warnings", [])) for item in preview_items)

@@ -51,10 +51,24 @@ def summarize_check_output(output: str) -> str:
     return " | ".join(interesting[-6:])[:800]
 
 
-def record_check_result(run_id: str, name: str, returncode: int, output: str) -> None:
-    manifest_path = AUTOMATION_DIR / "manifests" / f"{run_id}.json"
+def manifest_path_for(value: str) -> Path:
+    path = Path(value)
+    if path.is_absolute() or path.suffix == ".json":
+        return path if path.is_absolute() else ROOT / path
+    return AUTOMATION_DIR / "manifests" / f"{value}.json"
+
+
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
+def record_check_result(manifest_ref: str, name: str, returncode: int, output: str) -> None:
+    manifest_path = manifest_path_for(manifest_ref)
     if not manifest_path.exists():
-        print(f"Manifest not found; could not record check result: {manifest_path.relative_to(ROOT)}")
+        print(f"Manifest not found; could not record check result: {display_path(manifest_path)}")
         return
     manifest = load_run_manifest(manifest_path)
     manifest.checks[name] = RunCheckResult(
@@ -62,13 +76,13 @@ def record_check_result(run_id: str, name: str, returncode: int, output: str) ->
         notes=summarize_check_output(output),
     )
     write_run_manifest(manifest_path, manifest)
-    print(f"Recorded `{name}` in {manifest_path.relative_to(ROOT)}")
+    print(f"Recorded `{name}` in {display_path(manifest_path)}")
 
 
-def advance_manifest_after_checks(run_id: str, strict: bool, checks_code: int, report_code: int) -> None:
+def advance_manifest_after_checks(manifest_ref: str, strict: bool, checks_code: int, report_code: int) -> None:
     if not strict or checks_code or report_code:
         return
-    manifest_path = AUTOMATION_DIR / "manifests" / f"{run_id}.json"
+    manifest_path = manifest_path_for(manifest_ref)
     if not manifest_path.exists():
         return
     manifest = load_run_manifest(manifest_path)
@@ -76,7 +90,7 @@ def advance_manifest_after_checks(run_id: str, strict: bool, checks_code: int, r
         return
     manifest.status = "qa_passed"
     write_run_manifest(manifest_path, manifest)
-    print(f"Advanced `{run_id}` to qa_passed.")
+    print(f"Advanced `{manifest.run_id}` to qa_passed.")
 
 
 def cmd_checks(strict: bool, manifest: str | None) -> int:
@@ -209,15 +223,17 @@ def cmd_approval(
     return run_step("Proposal Approval", command)
 
 
-def cmd_apply_preview(run_id: str) -> int:
-    return run_step(
-        "Apply Preview",
-        [sys.executable, str(AUTOMATION_DIR / "apply_preview.py"), run_id],
-    )
+def cmd_apply_preview(run_id: str, output_dir: str | None) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "apply_preview.py"), run_id]
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
+    return run_step("Apply Preview", command)
 
 
-def cmd_pre_apply_review(run_id: str, as_json: bool) -> int:
+def cmd_pre_apply_review(run_id: str, output_dir: str | None, as_json: bool) -> int:
     command = [sys.executable, str(AUTOMATION_DIR / "pre_apply_review.py"), run_id]
+    if output_dir:
+        command.extend(["--output-dir", output_dir])
     if as_json:
         command.append("--json")
     return run_step("Pre-Apply Review", command)
@@ -2441,12 +2457,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="Render a no-write apply preview from approved Patch Spec v1 entries.",
     )
     apply_preview_parser.add_argument("run_id", help="Run manifest basename without .json")
+    apply_preview_parser.add_argument("--output-dir", help="Directory for the apply-preview report.")
 
     pre_apply_review_parser = subparsers.add_parser(
         "pre-apply-review",
         help="Render a local-only final review report before apply-approved.",
     )
     pre_apply_review_parser.add_argument("run_id", help="Run manifest basename without .json")
+    pre_apply_review_parser.add_argument("--output-dir", help="Directory for the pre-apply review reports.")
     pre_apply_review_parser.add_argument("--json", action="store_true", help="Print the review summary as JSON.")
 
     apply_approved_parser = subparsers.add_parser(
@@ -3083,9 +3101,9 @@ def main() -> int:
             args.dry_run,
         )
     if args.command == "apply-preview":
-        return cmd_apply_preview(args.run_id)
+        return cmd_apply_preview(args.run_id, args.output_dir)
     if args.command == "pre-apply-review":
-        return cmd_pre_apply_review(args.run_id, args.json)
+        return cmd_pre_apply_review(args.run_id, args.output_dir, args.json)
     if args.command == "apply-approved":
         return cmd_apply_approved(args.run_id)
     if args.command == "close-run":

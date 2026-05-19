@@ -540,7 +540,7 @@ class WorkerContractTests(unittest.TestCase):
             with patch.object(
                 approval,
                 "render_proposal",
-                lambda path: proposal_renderer.render_proposal(path, reports_dir),
+                lambda path, output_dir=None: proposal_renderer.render_proposal(path, output_dir or reports_dir),
             ), patch.object(approval, "ROOT", tmp_path):
                 code = approval.cmd_approval(
                     argparse.Namespace(
@@ -558,7 +558,7 @@ class WorkerContractTests(unittest.TestCase):
             self.assertEqual(load_json(manifest_path)["status"], "approved_for_apply")
 
             with patch.object(apply_preview, "ROOT", tmp_path), patch.object(apply_preview, "REPORTS_DIR", reports_dir):
-                preview_path, preview_items = apply_preview.render_apply_preview(manifest_path)
+                preview_path, preview_items = apply_preview.render_apply_preview(manifest_path, reports_dir)
             self.assertTrue(preview_path.exists())
             self.assertEqual(preview_items[0]["preview_action"], "safe_exact_replace")
             self.assertEqual(preview_items[0]["warnings"], [])
@@ -696,12 +696,114 @@ class WorkerContractTests(unittest.TestCase):
             return 0
 
         with patch.object(pipeline, "run_step", fake_run_step):
-            code = pipeline.cmd_pre_apply_review("fixture-run", as_json=True)
+            code = pipeline.cmd_pre_apply_review("fixture-run", "/tmp/pre-apply-output", as_json=True)
 
         self.assertEqual(code, 0)
         self.assertEqual(calls[0][0], "Pre-Apply Review")
         self.assertIn("pre_apply_review.py", calls[0][1][1])
-        self.assertEqual(calls[0][1][-2:], ["fixture-run", "--json"])
+        self.assertEqual(calls[0][1][-4:], ["fixture-run", "--output-dir", "/tmp/pre-apply-output", "--json"])
+
+    def test_pipeline_apply_preview_accepts_output_dir(self) -> None:
+        calls: list[tuple[str, list[str]]] = []
+
+        def fake_run_step(name: str, command: list[str]) -> int:
+            calls.append((name, command))
+            return 0
+
+        with patch.object(pipeline, "run_step", fake_run_step):
+            code = pipeline.cmd_apply_preview("fixture-run", "/tmp/apply-preview-output")
+
+        self.assertEqual(code, 0)
+        self.assertEqual(calls[0][0], "Apply Preview")
+        self.assertIn("apply_preview.py", calls[0][1][1])
+        self.assertEqual(calls[0][1][-3:], ["fixture-run", "--output-dir", "/tmp/apply-preview-output"])
+
+    def test_approval_path_manifest_uses_existing_report_dir(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            manifest_path = tmp_path / "manifest.json"
+            reports_dir = tmp_path / "reports"
+            reports_dir.mkdir()
+            write_json(
+                manifest_path,
+                {
+                    "run_id": "fixture-external-manifest-approval",
+                    "created_at": "2026-05-19T00:00:00Z",
+                    "run_type": "update_existing",
+                    "status": "proposal_ready",
+                    "risk_level": "medium",
+                    "summary": "Fixture path manifest approval.",
+                    "inputs": {},
+                    "plan": {"target_page_or_slug": "gift-center-uid.html"},
+                    "artifacts": {
+                        "patch_plan": {
+                            "patch_specs": [
+                                {
+                                    "target_file": "gift-center-uid.html",
+                                    "source_of_truth_file": "gift-center-uid.html",
+                                    "output_file": "gift-center-uid.html",
+                                    "source_type": "html_file",
+                                    "is_generated": False,
+                                    "operation_type": "safe_exact_replace",
+                                    "selector_or_anchor": "meta[name=\"description\"]",
+                                    "approval_state": "proposed",
+                                    "exact_old": "<meta name=\"description\" content=\"Old fixture.\">",
+                                    "exact_new": "<meta name=\"description\" content=\"New fixture.\">",
+                                    "validation_commands": [],
+                                }
+                            ]
+                        },
+                        "proposal": {
+                            "report_path": str(reports_dir / "fixture-external-manifest-approval.proposed.md"),
+                            "rendered_specs": [
+                                {
+                                    "target_file": "gift-center-uid.html",
+                                    "source_of_truth_file": "gift-center-uid.html",
+                                    "output_file": "gift-center-uid.html",
+                                    "source_type": "html_file",
+                                    "is_generated": False,
+                                    "operation_type": "safe_exact_replace",
+                                    "selector_or_anchor": "meta[name=\"description\"]",
+                                    "approval_state": "proposed",
+                                    "exact_old": "<meta name=\"description\" content=\"Old fixture.\">",
+                                    "exact_new": "<meta name=\"description\" content=\"New fixture.\">",
+                                    "validation_commands": [],
+                                }
+                            ],
+                        },
+                    },
+                    "changed_files": ["gift-center-uid.html"],
+                    "checks": {},
+                    "review": {
+                        "verdict": "needs_human_review",
+                        "open_questions": [],
+                        "next_action": "approval",
+                        "reviewer_notes": "",
+                    },
+                },
+            )
+
+            code = approval.cmd_approval(
+                argparse.Namespace(
+                    run_id=str(manifest_path),
+                    state="approved",
+                    source=None,
+                    target=None,
+                    operation=None,
+                    all=True,
+                    note="Path manifest approval fixture.",
+                    dry_run=False,
+                )
+            )
+
+            self.assertEqual(code, 0)
+            manifest = load_json(manifest_path)
+            self.assertEqual(manifest["status"], "approved_for_apply")
+            self.assertEqual(
+                manifest["artifacts"]["proposal"]["report_path"],
+                str(reports_dir / "fixture-external-manifest-approval.proposed.md"),
+            )
+            self.assertTrue((reports_dir / "fixture-external-manifest-approval.proposed.md").exists())
 
     def test_safe_exact_replace_apply_and_preview(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -752,7 +854,7 @@ class WorkerContractTests(unittest.TestCase):
             )
 
             with patch.object(apply_preview, "ROOT", tmp_path), patch.object(apply_preview, "REPORTS_DIR", reports_dir):
-                preview_path, preview_items = apply_preview.render_apply_preview(manifest_path)
+                preview_path, preview_items = apply_preview.render_apply_preview(manifest_path, reports_dir)
             self.assertTrue(preview_path.exists())
             self.assertEqual(preview_items[0]["preview_action"], "safe_exact_replace")
             self.assertEqual(preview_items[0]["warnings"], [])

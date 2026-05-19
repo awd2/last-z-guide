@@ -22,6 +22,21 @@ ALLOWED_STATES = {"proposed", "approved", "rejected"}
 TERMINAL_STATES = {"approved", "rejected"}
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
+def proposal_output_dir(proposal: dict[str, Any]) -> Path:
+    report_path = proposal.get("report_path")
+    if not isinstance(report_path, str) or not report_path:
+        return ROOT / "automation" / "reports"
+    path = Path(report_path)
+    return path.parent if path.is_absolute() else (ROOT / path).parent
+
+
 def spec_key(spec: dict[str, Any]) -> tuple[str, str, str, str]:
     return (
         str(spec.get("source_of_truth_file", "")),
@@ -71,7 +86,7 @@ def cmd_approval(args: argparse.Namespace) -> int:
 
     manifest_path = resolve_manifest_path(args.run_id)
     if not manifest_path.exists():
-        print(f"Run manifest not found: {manifest_path.relative_to(ROOT)}")
+        print(f"Run manifest not found: {display_path(manifest_path)}")
         return 1
 
     manifest = load_run_manifest(manifest_path)
@@ -109,11 +124,11 @@ def cmd_approval(args: argparse.Namespace) -> int:
         artifacts["patch_plan"] = patch_plan
         manifest.artifacts = artifacts
         write_run_manifest(manifest_path, manifest)
-        render_proposal(manifest_path)
+        render_proposal(manifest_path, proposal_output_dir(proposal))
 
     action = "Would update" if args.dry_run else "Updated"
     print(
-        f"{action} {len(matched_keys)} proposal spec(s) in {manifest_path.relative_to(ROOT)} "
+        f"{action} {len(matched_keys)} proposal spec(s) in {display_path(manifest_path)} "
         f"to approval_state={args.state}."
     )
     if args.dry_run:

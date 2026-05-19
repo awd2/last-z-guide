@@ -459,7 +459,7 @@ Lifecycle shorthand:
 - `patch-plan` -> create a proposal-only patch artifact and move the run to `patch_plan_ready`
 - `propose` -> render human-reviewable proposed edits plus the compact exact Before / After owner view, then move the run to `proposal_ready`
 - `exact-proposals` -> render a compact owner-review Before / After report for exact safe replacement specs only; it does not approve or apply anything
-- `brief`, `patch-plan`, `propose`, and `exact-proposals` also accept a manifest path plus `--output-dir <dir>` for staged Worker e2e checks outside `automation/reports`
+- `brief`, `patch-plan`, `propose`, `exact-proposals`, `apply-preview`, and `pre-apply-review` also accept a manifest path plus `--output-dir <dir>` for staged Worker e2e checks outside `automation/reports`
 - `approval` -> record human approval decisions for proposal specs; still does not edit site content
 - `apply-preview` -> render a no-write preview from approved specs and move the run to `apply_preview_ready`
 - `pre-apply-review` -> render a local-only final review report before any content-changing apply step
@@ -1201,6 +1201,7 @@ move forward, use `close-run` to produce a final no-content-change handoff.
 
 ```bash
 python3 automation/pipeline.py apply-preview <run_id>
+python3 automation/pipeline.py apply-preview <manifest.json> --output-dir <dir>
 ```
 
 The output lives at:
@@ -1222,6 +1223,7 @@ The preview is intentionally conservative:
 
 ```bash
 python3 automation/pipeline.py pre-apply-review <run_id>
+python3 automation/pipeline.py pre-apply-review <manifest.json> --output-dir <dir>
 ```
 
 The output lives at:

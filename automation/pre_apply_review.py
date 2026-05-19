@@ -23,7 +23,7 @@ from automation.apply_approved import (  # noqa: E402
     validate_supported_specs,
 )
 from automation.io import load_run_manifest, write_json  # noqa: E402
-from automation.proposal_renderer import REPORTS_DIR, md_list, rel, resolve_manifest_path  # noqa: E402
+from automation.proposal_renderer import REPORTS_DIR, md_list, rel, resolve_manifest_path, resolve_path  # noqa: E402
 
 
 def utc_now() -> str:
@@ -148,10 +148,12 @@ def build_pre_apply_review(manifest_path: Path, root: Path = ROOT, reports_dir: 
 
     state = "blocked" if errors else "ready_for_local_apply_review"
     run_id = manifest.run_id
+    default_manifest_path = root / "automation" / "manifests" / f"{run_id}.json"
+    manifest_ref = run_id if manifest_path.resolve() == default_manifest_path.resolve() else rel(manifest_path)
     local_commands = [
-        f"python3 automation/pipeline.py apply-approved {run_id}",
-        f"python3 automation/pipeline.py checks --strict --manifest {run_id}",
-        f'python3 automation/pipeline.py close-run {run_id} --note "Owner reviewed local output and strict QA passed."',
+        f"python3 automation/pipeline.py apply-approved {manifest_ref}",
+        f"python3 automation/pipeline.py checks --strict --manifest {manifest_ref}",
+        f'python3 automation/pipeline.py close-run {manifest_ref} --note "Owner reviewed local output and strict QA passed."',
     ]
     safety = {
         "allows_content_edit": False,
@@ -256,11 +258,13 @@ def write_pre_apply_review(manifest_path: Path, root: Path = ROOT, reports_dir: 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Render a local-only final review before apply-approved.")
     parser.add_argument("manifest", help="Manifest path or basename without .json")
+    parser.add_argument("--output-dir", help="Directory for the pre-apply review reports.")
     parser.add_argument("--json", action="store_true", help="Print the review summary as JSON.")
     args = parser.parse_args()
 
     manifest_path = resolve_manifest_path(args.manifest)
-    review = write_pre_apply_review(manifest_path)
+    report_dir = resolve_path(args.output_dir) if args.output_dir else REPORTS_DIR
+    review = write_pre_apply_review(manifest_path, reports_dir=report_dir)
     if args.json:
         print(json.dumps(review, indent=2, ensure_ascii=False))
     else:

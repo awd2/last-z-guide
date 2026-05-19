@@ -613,7 +613,7 @@ Lifecycle currently:
 
 `exact-proposals` renders a compact owner-review Before / After report for `safe_exact_replace` specs only. It may write report artifacts, but it must not edit content, mutate manifests, record approval decisions, commit, push, or deploy.
 
-`brief`, `patch-plan`, `propose`, and `exact-proposals` may take a manifest path instead of only a run ID, and each supports `--output-dir <dir>` for staged Worker e2e checks that should not write reports into `automation/reports`.
+`brief`, `patch-plan`, `propose`, `exact-proposals`, `apply-preview`, and `pre-apply-review` may take a manifest path instead of only a run ID, and each supports `--output-dir <dir>` for staged Worker e2e checks that should not write reports into `automation/reports`.
 
 Patch plans may emit `safe_exact_replace` specs only when they contain exact `exact_old` and `exact_new` strings for a non-generated HTML file. These specs are still proposal-only until explicit owner approval. When `plan.exact_replacements` is present, `patch-plan` must emit only those exact replacement specs and must not add generic manual-review placeholders such as broad `meta_refresh` or `first_screen_update` suggestions.
 

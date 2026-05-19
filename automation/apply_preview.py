@@ -18,7 +18,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from automation.io import load_run_manifest, write_run_manifest
-from automation.proposal_renderer import REPORTS_DIR, md_list, resolve_manifest_path
+from automation.proposal_renderer import REPORTS_DIR, md_list, resolve_manifest_path, resolve_path
 
 
 TARGET_LABELS = {
@@ -369,7 +369,7 @@ Validation:
 """
 
 
-def render_apply_preview(path: Path):
+def render_apply_preview(path: Path, reports_dir: Path = REPORTS_DIR):
     manifest = load_run_manifest(path)
     specs = approved_specs(manifest)
     if not specs:
@@ -380,8 +380,8 @@ def render_apply_preview(path: Path):
     preview_items = [preview_for_spec(spec, target_page) for spec in specs]
     markdown = render_markdown(manifest, preview_items, generated_at)
 
-    out_path = REPORTS_DIR / f"{manifest.run_id}.apply-preview.md"
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = reports_dir / f"{manifest.run_id}.apply-preview.md"
+    reports_dir.mkdir(parents=True, exist_ok=True)
     out_path.write_text(markdown, encoding="utf-8")
 
     manifest.artifacts.setdefault("apply_preview", {})
@@ -400,18 +400,20 @@ def render_apply_preview(path: Path):
 def main() -> int:
     parser = argparse.ArgumentParser(description="Render a no-write apply preview for approved proposal specs.")
     parser.add_argument("manifest", help="Manifest path or basename without .json")
+    parser.add_argument("--output-dir", help="Directory for the apply-preview report.")
     args = parser.parse_args()
 
     manifest_path = resolve_manifest_path(args.manifest)
+    report_dir = resolve_path(args.output_dir) if args.output_dir else REPORTS_DIR
     try:
-        out_path, preview_items = render_apply_preview(manifest_path)
+        out_path, preview_items = render_apply_preview(manifest_path, report_dir)
     except ValueError as exc:
         print(str(exc))
         return 1
 
     print(f"Wrote {rel(out_path)}")
     print(f"Previewed approved specs: {len(preview_items)}")
-    print(f"Updated {manifest_path.relative_to(ROOT)}")
+    print(f"Updated {rel(manifest_path)}")
     return 0
 
 
