@@ -422,6 +422,7 @@ python3 automation/pipeline.py propose <run_id>
 python3 automation/pipeline.py exact-proposals <run_id>
 python3 automation/pipeline.py approval <run_id> --state approved --all
 python3 automation/pipeline.py apply-preview <run_id>
+python3 automation/pipeline.py pre-apply-review <run_id>
 python3 automation/pipeline.py apply-approved <run_id>
 python3 automation/pipeline.py close-run <run_id>
 python3 automation/pipeline.py worker-chain --topic-id <topic_id> --json
@@ -559,7 +560,7 @@ GitHub workflow `.github/workflows/llm-worker-chain.yml` runs pending owner-appr
 
 `llm-owner-digest` builds a compact owner-facing digest from the latest LLM auto-review queue. It writes `automation/reports/llm-owner-digest.json` and `.md` by default, groups topics into needs-review, ready-for-intake, blocked/failed, and resolved buckets, and summarizes the recommended next action. It is read-only and must not call an LLM provider, approve content edits, or mutate repository state.
 
-`llm-owner-issue` creates or updates one GitHub owner handoff issue from `llm-owner-digest.json` when the digest state is `owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`, or when active run lifecycle manifests still have a safe next owner step. The issue body includes GitHub comment commands plus ready-to-copy local CLI commands for `monitor`, `rejected`, and `approved_for_chain`, intake commands when a completed chain is ready, and an Active Run Lifecycle section with the next safe command for open manifests. After `/approve-proposal`, the lifecycle view should show `/preview-apply <run_id>` as the next no-write command. After `/preview-apply`, the lifecycle view should show `apply_preview_ready`, no GitHub issue command, and a local-only final apply review handoff for `apply-approved`, strict manifest QA, and closeout. It supports `--dry-run --body-output <path>` for local actionable handoff simulation fixtures. When the latest digest is non-actionable, no active run lifecycle remains, and a previous owner handoff issue is still open, it may close that issue as resolved. If no issue exists, non-actionable states with no active run lifecycle are no-op. It is a notification layer only: it must not approve content edits, mutate backlog/manifests, edit public content, open PRs, or deploy.
+`llm-owner-issue` creates or updates one GitHub owner handoff issue from `llm-owner-digest.json` when the digest state is `owner_review_needed`, `ready_for_intake`, or `blocked_or_failed`, or when active run lifecycle manifests still have a safe next owner step. The issue body includes GitHub comment commands plus ready-to-copy local CLI commands for `monitor`, `rejected`, and `approved_for_chain`, intake commands when a completed chain is ready, and an Active Run Lifecycle section with the next safe command for open manifests. After `/approve-proposal`, the lifecycle view should show `/preview-apply <run_id>` as the next no-write command. After `/preview-apply`, the lifecycle view should show `apply_preview_ready`, no GitHub issue command, and a local-only final apply review handoff for `pre-apply-review`, `apply-approved`, strict manifest QA, and closeout. It supports `--dry-run --body-output <path>` for local actionable handoff simulation fixtures. When the latest digest is non-actionable, no active run lifecycle remains, and a previous owner handoff issue is still open, it may close that issue as resolved. If no issue exists, non-actionable states with no active run lifecycle are no-op. It is a notification layer only: it must not approve content edits, mutate backlog/manifests, edit public content, open PRs, or deploy.
 
 `llm-issue-decision` records one owner decision from a GitHub owner handoff issue comment. It accepts only `/monitor`, `/reject`, or `/approve-chain` commands posted on `LLM Owner Digest: Action Needed`, requires a topic id and real owner note, accepts only `OWNER`, `MEMBER`, or `COLLABORATOR` author associations, and writes only `llm-topic-decision-<topic_id>` artifacts. It must not approve public copy, patch specs, backlog edits, manifests, public content, PRs, or production state.
 
@@ -573,7 +574,7 @@ GitHub workflow `.github/workflows/llm-worker-chain.yml` runs pending owner-appr
 
 `llm-issue-proposal-approval` records owner approval for rendered proposal specs from a GitHub owner handoff issue comment. It accepts only `/approve-proposal <run_id> <owner note>` posted on `LLM Owner Digest: Action Needed`, requires the manifest to already have rendered proposal specs, and may move the manifest to `approved_for_apply` plus refresh `.proposed.md` and `.exact-proposals.*` reports. It allows the next no-write `apply-preview` review step, but it must not run `apply-approved`, edit public content, mutate backlog, create PRs, or deploy.
 
-`llm-issue-apply-preview` renders a no-write apply preview from a GitHub owner handoff issue comment. It accepts only `/preview-apply <run_id> <owner note>` posted on `LLM Owner Digest: Action Needed`, requires the manifest to be `approved_for_apply` or `apply_preview_ready`, and may move the manifest to `apply_preview_ready` plus write `<run_id>.apply-preview.md`. It must not run `apply-approved`, edit public content, mutate backlog, create PRs, or deploy.
+`llm-issue-apply-preview` renders a no-write apply preview from a GitHub owner handoff issue comment. It accepts only `/preview-apply <run_id> <owner note>` posted on `LLM Owner Digest: Action Needed`, requires the manifest to be `approved_for_apply` or `apply_preview_ready`, and may move the manifest to `apply_preview_ready` plus write `<run_id>.apply-preview.md`. It must not run `apply-approved`, edit public content, mutate backlog, create PRs, or deploy. After this step, `pre-apply-review` and `apply-approved` remain local-only.
 
 `llm-intake-latest` bridges a latest or specified LLM worker chain summary into a no-write, owner-gated intake artifact. It may carry draft `exact_replacements` into intake as proposal-only data, but it may record `--approved-by <name>` only as intake approval. Approval is intake-only and does not approve public copy, patch specs, backlog mutation, manifest creation, PR creation, deployment, or production publishing. If the LLM Reviewer left owner questions, `--note` is required before intake can become `approved_for_intake`. If the Reviewer used `blocking_issues` for owner-confirmation items, `--resolve-reviewer-blockers` may downgrade them to intake warnings only when `--approved-by` and `--note` are both present. Approved LLM intake must still move through the existing run-plan/proposal lifecycle before any public content edit.
 
@@ -601,6 +602,7 @@ Lifecycle currently:
 - `propose`
 - `approval`
 - `apply-preview`
+- `pre-apply-review`
 - `apply-approved`
 - `close-run`
 - `bundle-run`
@@ -620,6 +622,8 @@ Future worker/run-plan artifacts may carry exact snippets through `plan.exact_re
 `approval` records human approval decisions for proposal specs. `approved_for_apply` is still not an autonomous publishing state; it only gates a future controlled manual apply or safe apply worker.
 
 `apply-preview` renders a no-write preview from approved specs. It may write manifest/report artifacts, but it must not edit site content.
+
+`pre-apply-review` renders a local-only final review report after `apply-preview` and before `apply-approved`. It validates approved specs against deterministic apply support, checks exact source matches when possible, writes `.pre-apply-review.*` reports, and must not edit content, mutate manifests, create PRs, or deploy.
 
 `apply-approved` may edit source files, but only from approved Patch Spec v1 entries and only through conservative deterministic templates. Unsupported approved operations must fail loudly instead of being silently skipped. Generated research branch pages must still be edited through JSON source files and regenerated.
 

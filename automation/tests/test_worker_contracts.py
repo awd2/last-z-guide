@@ -12,7 +12,7 @@ from unittest.mock import patch
 
 from automation.io import load_json, load_run_manifest, write_json, write_run_manifest
 from automation.reports import llm_approved_handoffs, llm_auto_review_latest, llm_owner_digest, llm_owner_issue, llm_review_latest, llm_topic_decisions
-from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, proposal_renderer
+from automation import apply_approved, apply_preview, approval, close_run, exact_proposals, patch_planner, pipeline, pre_apply_review, proposal_renderer
 from automation.source_resolver import SourceResolution
 from automation.workers import editor, external_evidence_collect, external_evidence_refresh, external_scout, external_search_collect, intake, intake_to_run, llm_adapter, llm_auto_review_queue, llm_candidate_refresh, llm_editor, llm_intake, llm_issue_apply_preview, llm_issue_decision, llm_issue_intake, llm_issue_lifecycle, llm_issue_manifest, llm_issue_proposal_approval, llm_issue_run_plan, llm_reviewer, llm_run_approved_handoffs, llm_scout, llm_topic_decision, llm_topic_discovery, llm_worker_chain, reviewer, run_chain, scout, write_manifest
 from scripts import bing_weekly
@@ -688,6 +688,21 @@ class WorkerContractTests(unittest.TestCase):
         self.assertEqual(calls[0][1][-2:], ["--output-dir", "/tmp/proposal-output"])
         self.assertEqual(calls[1][1][-2:], ["--output-dir", "/tmp/proposal-output"])
 
+    def test_pipeline_pre_apply_review_runs_local_review_command(self) -> None:
+        calls: list[tuple[str, list[str]]] = []
+
+        def fake_run_step(name: str, command: list[str]) -> int:
+            calls.append((name, command))
+            return 0
+
+        with patch.object(pipeline, "run_step", fake_run_step):
+            code = pipeline.cmd_pre_apply_review("fixture-run", as_json=True)
+
+        self.assertEqual(code, 0)
+        self.assertEqual(calls[0][0], "Pre-Apply Review")
+        self.assertIn("pre_apply_review.py", calls[0][1][1])
+        self.assertEqual(calls[0][1][-2:], ["fixture-run", "--json"])
+
     def test_safe_exact_replace_apply_and_preview(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
@@ -741,6 +756,23 @@ class WorkerContractTests(unittest.TestCase):
             self.assertTrue(preview_path.exists())
             self.assertEqual(preview_items[0]["preview_action"], "safe_exact_replace")
             self.assertEqual(preview_items[0]["warnings"], [])
+
+            with patch.object(pre_apply_review, "ROOT", tmp_path), patch.object(
+                pre_apply_review, "REPORTS_DIR", reports_dir
+            ), patch.object(apply_approved, "ROOT", tmp_path):
+                review = pre_apply_review.write_pre_apply_review(
+                    manifest_path,
+                    root=tmp_path,
+                    reports_dir=reports_dir,
+                )
+            self.assertEqual(review["state"], "ready_for_local_apply_review")
+            self.assertEqual(review["approved_specs_count"], 1)
+            self.assertEqual(review["source_checks"][0]["status"], "ready")
+            self.assertEqual(review["source_checks"][0]["old_count"], 1)
+            self.assertFalse(review["safety"]["allows_content_edit"])
+            self.assertFalse(review["safety"]["runs_apply_approved"])
+            self.assertTrue((reports_dir / "fixture-safe-exact-replace.pre-apply-review.md").exists())
+            self.assertIn("<title>Old Title</title>", page_path.read_text(encoding="utf-8"))
 
             with patch.object(apply_approved, "ROOT", tmp_path), patch.object(apply_approved, "REPORTS_DIR", reports_dir):
                 result_path, applied, skipped, generators = apply_approved.apply_approved(manifest_path)

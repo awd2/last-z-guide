@@ -107,6 +107,7 @@ python3 automation/pipeline.py propose <run_id>
 python3 automation/pipeline.py exact-proposals <run_id>
 python3 automation/pipeline.py approval <run_id> --state approved --all --dry-run
 python3 automation/pipeline.py apply-preview <run_id>
+python3 automation/pipeline.py pre-apply-review <run_id>
 python3 automation/pipeline.py apply-approved <run_id>
 python3 automation/pipeline.py close-run <run_id>
 python3 automation/pipeline.py worker-chain --topic-id <topic_id> --json
@@ -205,6 +206,7 @@ Automation artifacts live in:
 - `automation/reports/<run_id>.patch.md`
 - `automation/reports/<run_id>.proposed.md`
 - `automation/reports/<run_id>.apply-preview.md`
+- `automation/reports/<run_id>.pre-apply-review.md`
 - `automation/reports/<run_id>.apply-result.md`
 - `automation/reports/<run_id>.closed.md`
 - `automation/reports/content-seo-opportunities.md`
@@ -442,7 +444,7 @@ The preferred GitHub owner handoff is to comment on that issue with one command:
 /preview-apply <run_id> <owner requests no-write apply preview only>
 ```
 
-`.github/workflows/llm-owner-decision.yml` records those commands for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It replies in the same issue with the recorded decision/intake/run-plan/manifest/lifecycle/proposal-approval/apply-preview result, refreshes the issue body with the current Active Run Lifecycle next command, workflow link, and worker-chain result when applicable. For `/approve-chain`, it also runs and persists the no-write worker chain summary. For `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary. For `/approve-run-plan`, it creates a no-write run-plan proposal from approved intake. For `/dry-run-manifest`, it validates the manifest path without writing. For `/approve-manifest`, it may create only a planned run manifest. For `/review-run`, `/brief-run`, `/patch-plan-run`, and `/propose-run`, it advances an existing manifest through deterministic review, brief, proposal-only patch planning, and owner-review proposal rendering. For `/approve-proposal`, it records owner approval on rendered proposal specs and can move the manifest to `approved_for_apply`, but it still does not apply content. For `/preview-apply`, it renders no-write apply-preview artifacts and can move the manifest to `apply_preview_ready`, but it still does not apply content, create PRs, or deploy. Once a run is `apply_preview_ready`, the issue body shows a local-only final apply review handoff instead of another GitHub issue command; `apply-approved` remains a manual local command after final owner approval.
+`.github/workflows/llm-owner-decision.yml` records those commands for `OWNER`, `MEMBER`, or `COLLABORATOR` comments only. It replies in the same issue with the recorded decision/intake/run-plan/manifest/lifecycle/proposal-approval/apply-preview result, refreshes the issue body with the current Active Run Lifecycle next command, workflow link, and worker-chain result when applicable. For `/approve-chain`, it also runs and persists the no-write worker chain summary. For `/approve-intake`, it creates an intake-only artifact from a matching completed chain summary. For `/approve-run-plan`, it creates a no-write run-plan proposal from approved intake. For `/dry-run-manifest`, it validates the manifest path without writing. For `/approve-manifest`, it may create only a planned run manifest. For `/review-run`, `/brief-run`, `/patch-plan-run`, and `/propose-run`, it advances an existing manifest through deterministic review, brief, proposal-only patch planning, and owner-review proposal rendering. For `/approve-proposal`, it records owner approval on rendered proposal specs and can move the manifest to `approved_for_apply`, but it still does not apply content. For `/preview-apply`, it renders no-write apply-preview artifacts and can move the manifest to `apply_preview_ready`, but it still does not apply content, create PRs, or deploy. Once a run is `apply_preview_ready`, the issue body shows a local-only final apply review handoff instead of another GitHub issue command; `pre-apply-review` should be run locally before `apply-approved`, and `apply-approved` remains a manual local command after final owner approval.
 
 To preview the full actionable Issue body locally without touching GitHub, run:
 
@@ -488,7 +490,7 @@ Owner decisions from that issue are handled by a separate no-write workflow:
 - `/approve-proposal`: records owner approval on rendered proposal specs, moves the manifest toward `approved_for_apply`, and refreshes proposal reports; public content is still unchanged
 - `/preview-apply`: renders `<run_id>.apply-preview.md`, moves the manifest toward `apply_preview_ready`, and still leaves public content unchanged
 - Issue body: refreshed after successful owner commands so Active Run Lifecycle shows the current status and next safe command, such as `/preview-apply <run_id>` after `/approve-proposal`
-- Local final apply review: once status is `apply_preview_ready`, the issue body shows local-only review/apply/QA commands and no GitHub content-apply command
+- Local final apply review: once status is `apply_preview_ready`, the issue body shows local-only `pre-apply-review` / apply / QA commands and no GitHub content-apply command
 - Issue reply: posts the decision/intake result and worker-chain summary back into the handoff issue
 - Public content/backlog/PRs/deploy modified: `false`; lifecycle commands may mutate automation manifests and write report artifacts
 

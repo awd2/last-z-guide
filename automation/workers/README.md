@@ -268,7 +268,8 @@ intake commands, and the current Active Run Lifecycle. After
 `/approve-proposal`, the lifecycle view should show `/preview-apply <run_id>` as
 the next no-write command. After `/preview-apply`, the lifecycle view should show
 `apply_preview_ready`, no GitHub issue command, and a local-only final apply
-review handoff for `apply-approved`, strict manifest QA, and closeout. When the
+review handoff for `pre-apply-review`, `apply-approved`, strict manifest QA,
+and closeout. When the
 latest digest is non-actionable and no active run lifecycle remains, it can close
 a previous open handoff issue as resolved. It must not approve content, mutate
 site files, create PRs, or deploy.
@@ -342,7 +343,8 @@ or `apply_preview_ready` manifest, and may write `<run_id>.apply-preview.md`
 while moving the manifest to `apply_preview_ready`. It must not run
 `apply-approved`, edit public content, mutate backlog, create PRs, or deploy.
 Once the run is `apply_preview_ready`, `apply-approved` remains local-only and
-requires final owner review outside the GitHub issue-comment workflow.
+requires `pre-apply-review` plus final owner review outside the GitHub
+issue-comment workflow.
 
 GitHub workflow `.github/workflows/llm-owner-decision.yml` runs this command
 from matching issue comments, replies in the same issue with the result, and may
@@ -505,7 +507,8 @@ All workers must follow these rules:
   applyable content.
 - If a future worker proposes exact public copy, it may pass exact
   `exact_old` and `exact_new` strings into Patch Spec v1. That still creates
-  only a proposal; owner approval is required before `apply-approved`.
+  only a proposal; owner approval, `apply-preview`, and local `pre-apply-review`
+  are required before `apply-approved`.
 - LLM-originated `exact_old` values must be copied from deterministic
   `current_page_snapshot.source_snippets` or otherwise match the current target
   HTML exactly once; nonliteral, ambiguous, non-ASCII, or otherwise unsafe

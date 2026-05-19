@@ -216,6 +216,13 @@ def cmd_apply_preview(run_id: str) -> int:
     )
 
 
+def cmd_pre_apply_review(run_id: str, as_json: bool) -> int:
+    command = [sys.executable, str(AUTOMATION_DIR / "pre_apply_review.py"), run_id]
+    if as_json:
+        command.append("--json")
+    return run_step("Pre-Apply Review", command)
+
+
 def cmd_apply_approved(run_id: str) -> int:
     return run_step(
         "Apply Approved",
@@ -1640,6 +1647,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
     exact_proposals_path = REPORTS_DIR / f"{manifest.run_id}.exact-proposals.md"
     apply_preview_path_value = apply_preview_context.get("report_path")
     apply_preview_path = ROOT / apply_preview_path_value if apply_preview_path_value else None
+    pre_apply_review_path = REPORTS_DIR / f"{manifest.run_id}.pre-apply-review.md"
     apply_result_path_value = apply_result_context.get("report_path")
     apply_result_path = ROOT / apply_result_path_value if apply_result_path_value else None
     closeout_path_value = closeout_context.get("report_path")
@@ -1683,6 +1691,7 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
             "apply_preview": str(apply_preview_path.relative_to(ROOT))
             if apply_preview_path and apply_preview_path.exists()
             else None,
+            "pre_apply_review": str(pre_apply_review_path.relative_to(ROOT)) if pre_apply_review_path.exists() else None,
             "apply_result": str(apply_result_path.relative_to(ROOT))
             if apply_result_path and apply_result_path.exists()
             else None,
@@ -1822,6 +1831,9 @@ def cmd_open_run(run_id: str, as_json: bool) -> int:
         f"- apply preview: {apply_preview_path.relative_to(ROOT) if apply_preview_path and apply_preview_path.exists() else 'not generated yet'}"
     )
     print(
+        f"- pre-apply review: {pre_apply_review_path.relative_to(ROOT) if pre_apply_review_path.exists() else 'not generated yet'}"
+    )
+    print(
         f"- apply result: {apply_result_path.relative_to(ROOT) if apply_result_path and apply_result_path.exists() else 'not generated yet'}"
     )
     print(f"- closeout: {closeout_path.relative_to(ROOT) if closeout_path and closeout_path.exists() else 'not generated yet'}")
@@ -1888,11 +1900,11 @@ def cmd_next_step(run_id: str, as_json: bool) -> int:
             "reason": "All proposal specs have terminal review decisions and at least one spec is approved. The next safe automation step is a no-write apply preview for approved specs only.",
         },
         "apply_preview_ready": {
-            "next_step": f"python3 automation/pipeline.py apply-approved {run_id}",
-            "recommended_command": f"python3 automation/pipeline.py apply-approved {run_id}",
+            "next_step": f"python3 automation/pipeline.py pre-apply-review {run_id}",
+            "recommended_command": f"python3 automation/pipeline.py pre-apply-review {run_id}",
             "requires_human_review": True,
             "requires_manual_edit_gate": True,
-            "reason": "The run has a no-write apply preview. After review, the controlled apply step may edit approved source files.",
+            "reason": "The run has a no-write apply preview. Render the local final apply review before any content-changing apply-approved step.",
         },
         "applied_pending_qa": {
             "next_step": f"python3 automation/pipeline.py checks --strict --manifest {run_id}",
@@ -2429,6 +2441,13 @@ def build_parser() -> argparse.ArgumentParser:
         help="Render a no-write apply preview from approved Patch Spec v1 entries.",
     )
     apply_preview_parser.add_argument("run_id", help="Run manifest basename without .json")
+
+    pre_apply_review_parser = subparsers.add_parser(
+        "pre-apply-review",
+        help="Render a local-only final review report before apply-approved.",
+    )
+    pre_apply_review_parser.add_argument("run_id", help="Run manifest basename without .json")
+    pre_apply_review_parser.add_argument("--json", action="store_true", help="Print the review summary as JSON.")
 
     apply_approved_parser = subparsers.add_parser(
         "apply-approved",
@@ -3065,6 +3084,8 @@ def main() -> int:
         )
     if args.command == "apply-preview":
         return cmd_apply_preview(args.run_id)
+    if args.command == "pre-apply-review":
+        return cmd_pre_apply_review(args.run_id, args.json)
     if args.command == "apply-approved":
         return cmd_apply_approved(args.run_id)
     if args.command == "close-run":
