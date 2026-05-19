@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_candidate_refresh",
-  "generated_at": "2026-05-19T09:07:49Z",
+  "generated_at": "2026-05-19T09:28:16Z",
   "state": "candidate_refresh_ready",
   "provider": "openai",
   "source_signal_files": [
@@ -17,8 +17,8 @@
   "monitor_topic_count": 7,
   "candidate_topic_ids": [],
   "monitor_topic_ids": [
-    "alliance-duel-gsc-opportunity",
     "codes-gsc-opportunity",
+    "alliance-duel-gsc-opportunity",
     "external-gift-center-official-flow-validation",
     "external-hq-and-progression-reference-cross-check",
     "external-research-costs-external-cross-check",

@@ -1,4 +1,4 @@
-# LLM Candidate Refresh - 2026-05-19T09:07:49Z
+# LLM Candidate Refresh - 2026-05-19T09:28:16Z
 
 ## Overview
 
@@ -21,8 +21,8 @@
 
 ## Monitor Topics
 
-- alliance-duel-gsc-opportunity
 - codes-gsc-opportunity
+- alliance-duel-gsc-opportunity
 - external-gift-center-official-flow-validation
 - external-hq-and-progression-reference-cross-check
 - external-research-costs-external-cross-check

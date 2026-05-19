@@ -1,4 +1,4 @@
-# External Evidence Collect - 2026-05-19T09:07:16Z
+# External Evidence Collect - 2026-05-19T09:27:38Z
 
 ## Outcome
 
@@ -73,8 +73,8 @@
 - URL: `https://www.packsify.com/blogs/last-z-gear-guide-how-to-use-and-upgrade-equipment`
 - Final URL: `https://www.packsify.com/blogs/last-z-gear-guide-how-to-use-and-upgrade-equipment`
 - HTTP status: `200`
-- Title: Last Z Equipment Guide: Orange, Exclusive & Mythic Gear (2026)
-- Meta description: Complete Last Z hero equipment guide for serious spenders — orange gear priority, exclusive equipment fragments, exterior modules, tactical plugins, and mythic forging strategy.
+- Title: Last Z Gear Guide: Orange, Exclusive & Mythic Equipment | Packsify
+- Meta description: Last Z equipment guide: universal exclusive fragments, pulse modules, tactical plugins, orange gear upgrade order, and mythic forging for serious accounts.
 - Public claim ready: `false`
 
 ### url-external-calculator-and-tool-gap-review-1

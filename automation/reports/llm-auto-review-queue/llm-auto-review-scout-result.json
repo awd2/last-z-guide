@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_adapter_result",
-  "generated_at": "2026-05-19T09:07:49Z",
+  "generated_at": "2026-05-19T09:28:16Z",
   "state": "completed",
   "provider": "openai",
   "request_id": "llm-auto-review-scout",
@@ -9,92 +9,93 @@
   "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
   "fixture_path": "",
   "response_json": {
-    "overview": "The strongest opportunities are the two GSC-backed existing-page updates for alliance-duel.html and codes.html, because they combine strong page-level signals with clear query-to-page mismatch potential and fit existing cluster roles. Several external-source ideas are useful for discovery only, but they carry high verification and duplication risk, so they should be monitored or rejected until owner-confirmed validation exists. The search result topics are not ready for selection because they depend on unverified third-party wording and could blur cluster boundaries or copy competitor framing.",
+    "overview": "The strongest opportunities are the two GSC-backed existing-page updates: alliance-duel.html and codes.html. Both have clear query-page mismatch signals and fit the existing page templates without needing new content. The rest are mostly external-source discovery items that need verification, or they duplicate existing hub intents and should stay out of the main review queue for now.",
     "selected_opportunities": [
-      {
-        "topic_id": "alliance-duel-gsc-opportunity",
-        "decision": "update_existing",
-        "rationale": "This is a strong existing-page opportunity with high impressions, decent clicks, and a clear user job around schedule and strategy. The page already exists in the correct cluster, so the best path is to improve query alignment and first-screen usefulness rather than create new content.",
-        "player_value": "Helps players quickly find the event schedule, day-by-day plan, and matchup strategy without forcing them to hunt across the site.",
-        "duplication_risk": "Low, because the page already exists and the topic is narrowly tied to the event-guide role.",
-        "priority": "high",
-        "risk_level": "medium",
-        "next_step": "Have an editor review the current page against the target query set and confirm whether a scoped update can improve intent match without changing cluster role.",
-        "claims_to_verify": [
-          "The search intent behind last z vs schedule is best served by alliance-duel.html.",
-          "The page can be improved within the current template without altering cornerstone scope."
-        ]
-      },
       {
         "topic_id": "codes-gsc-opportunity",
         "decision": "update_existing",
-        "rationale": "This is the highest-signal opportunity in the set: the codes page has very large impressions and multiple low-CTR gift center queries that clearly indicate a query-to-page match issue. It is an existing cornerstone page, so an update review is appropriate if canonical claims remain protected.",
-        "player_value": "Improves access to redeem and gift-center information for players who are searching for login, UID, or codes help.",
-        "duplication_risk": "Low to medium, because the page is canonical but must preserve role separation and avoid overlap with other economy pages.",
+        "rationale": "High volume GSC signals show strong demand around Gift Center and redeem-code intents, and the proposal fits an existing cornerstone page. It is the clearest candidate for improving query-to-page match without changing site structure.",
+        "player_value": "Faster access to redeem-code, Gift Center login, and UID guidance from the canonical codes page.",
+        "duplication_risk": "Medium. Gift Center and redeem flows may overlap with existing economy or UID coverage, so role separation must be checked.",
         "priority": "high",
         "risk_level": "high",
-        "next_step": "Route to human review for a scoped update plan that preserves canonical claims and checks whether the current page already covers the search intent adequately.",
+        "next_step": "Send to human review to confirm canonical claims, preserve cluster separation, and define a narrow update scope for codes.html.",
         "claims_to_verify": [
-          "The query cluster around last z gift center belongs on codes.html.",
-          "The update can preserve gift-center-only-redeem-flow, gift-rewards-mailbox, and gift-center-cluster-role-separation."
+          "Whether codes.html is still the best canonical page for Gift Center and redeem-code intent",
+          "Whether the update can avoid blurring Gift Center routing with mailbox or rewards claims",
+          "Whether any phrasing changes stay within approved scope for a cornerstone page"
+        ]
+      },
+      {
+        "topic_id": "alliance-duel-gsc-opportunity",
+        "decision": "update_existing",
+        "rationale": "This is a strong page-level opportunity because the existing alliance-duel.html already ranks and receives meaningful impressions, but the user intent around schedule and VS strategy can likely be better served on the same page.",
+        "player_value": "Clearer event timing and strategy guidance for players searching for Last Z Alliance Duel scheduling and prep info.",
+        "duplication_risk": "Medium. Event guide coverage could overlap with a broader events hub or another event page if scope is not controlled.",
+        "priority": "high",
+        "risk_level": "medium",
+        "next_step": "Send to human review to validate that the page remains the right canonical destination and that any improvement stays within the event-guide template.",
+        "claims_to_verify": [
+          "Whether alliance-duel.html remains the best canonical page for the query cluster",
+          "Whether the intended update can be expressed without changing a cornerstone page beyond scope",
+          "Whether event role separation with the main events hub stays intact"
         ]
       }
     ],
     "rejected_or_monitor": [
       {
         "topic_id": "external-gift-center-official-flow-validation",
-        "reason": "Useful discovery signal, but it depends on a single external source and could duplicate existing economy coverage. It is not verifiable enough for selection yet.",
-        "future_trigger": "Move forward only after canonical memory plus a second reliable source or owner confirmation validates the public routing and redeem flow claims."
+        "reason": "Useful as a verification lead, but it depends on one external source and does not yet meet the standard for a ready review item. It also risks overlapping with the codes page intent.",
+        "future_trigger": "Move forward only after owner confirmation or a second reliable source verifies the Gift Center routing and redeem flow claims."
       },
       {
         "topic_id": "external-hq-and-progression-reference-cross-check",
-        "reason": "This is external-source discovery only and carries high verification risk. It should not advance without stronger evidence.",
-        "future_trigger": "Reconsider if owner-confirmed progression data or another reliable source confirms the HQ requirement and dependency claims."
+        "reason": "This is a discovery signal only. The claim set is not verified and could duplicate existing progression coverage.",
+        "future_trigger": "Reconsider if canonical HQ requirements or progression dependencies are confirmed by a reliable second source or owner memory."
       },
       {
         "topic_id": "external-research-costs-external-cross-check",
-        "reason": "The proposal is based on one external reference and is not yet safe to turn into an actionable content opportunity.",
-        "future_trigger": "Review again if multiple reliable sources confirm cost, branch coverage, or naming drift issues."
+        "reason": "External reference only, with risk of cost-table drift and branch-name duplication. Not ready for human review as a content opportunity.",
+        "future_trigger": "Promote only after cross-checking against canonical site memory and another reliable source."
       },
       {
         "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "reason": "Search-result evidence is too thin and may duplicate existing events coverage or rely on competitor phrasing. Not ready for human review as a content proposal.",
-        "future_trigger": "Reassess when claims are validated against canonical memory and a second source, and when a distinct player job is identified."
+        "reason": "Search-result discovery only. It is speculative, source wording should not be copied, and the topic may duplicate broader events coverage.",
+        "future_trigger": "Only revisit if the event mechanics and reward claims can be verified and mapped to a distinct player job."
       },
       {
         "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
-        "reason": "This is discovery-only evidence and needs verification before it can become a content proposal. It also risks duplicating existing research coverage.",
-        "future_trigger": "Reconsider if official or owner-confirmed sources validate the lab and technology claims as a distinct update need."
+        "reason": "Search-result discovery only. It is not verified and appears to map to existing research coverage rather than a distinct new need.",
+        "future_trigger": "Revisit only if a verified gap exists in research mechanics or unlock coverage."
       }
     ],
     "global_risks": [
-      "Analytics signals are useful but not proof of rewrite need; they must not override cluster role separation or canonical claims.",
-      "External-source proposals have elevated duplication and wording-copy risk, especially when based on a single source or competitor-style page framing.",
-      "Monitor-only and reject topics must stay out of downstream editorial or intake workflows until validated.",
-      "Some proposals may overlap with existing canonical pages, so any update review must check intent separation before scope is approved."
+      "External-source topics are not verified and should not be treated as public facts.",
+      "Several proposals could blur cluster role separation if expanded too broadly.",
+      "Analytics signals show opportunity, but they do not prove a rewrite is needed.",
+      "Canonical claims around Gift Center, redeem flow, rewards, and event mechanics need careful verification before any human-approved change scope is defined."
     ],
     "next_actions": [
-      "Send the two selected existing-page opportunities to human review for scope validation.",
-      "Verify the targeted query intent and compare it against the current page structure before any update proposal is drafted.",
-      "Keep all external-source ideas in monitor status until at least one additional reliable source or owner confirmation exists.",
-      "Check canonical claim protections for the codes page before any wording changes are considered.",
-      "Do not advance any rejected or monitor topics to editor, reviewer, intake, or run-plan steps."
+      "Route only the two GSC-backed update_existing items to human review.",
+      "Keep all external-source items in monitor state until verified by owner confirmation or a second reliable source.",
+      "Check that codes.html and alliance-duel.html can be improved without violating cluster boundaries or canonical claims.",
+      "Do not advance any monitor or reject topic to editor, reviewer, intake, run-plan, or content proposal workflow."
     ]
   },
   "usage": {
-    "input_tokens": 3629,
+    "input_tokens": 3612,
     "input_tokens_details": {
       "cached_tokens": 0
     },
-    "output_tokens": 1070,
+    "output_tokens": 981,
     "output_tokens_details": {
       "reasoning_tokens": 0
     },
-    "total_tokens": 4699
+    "total_tokens": 4593
   },
   "provider_metadata": {
     "model": "gpt-5.4-mini-2026-03-17",
-    "response_id": "resp_0862293ad04fcd46006a0c285d1b10819483d01f6795ca2b54",
+    "response_id": "resp_0a77da8e99ad50dd006a0c2d2670e881978c6b2123cf6d831a",
     "status": "completed",
     "endpoint": "https://api.openai.com/v1/responses",
     "reasoning_effort": "",

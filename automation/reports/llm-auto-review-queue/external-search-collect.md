@@ -1,4 +1,4 @@
-# External Search Collect - 2026-05-19T09:07:40Z
+# External Search Collect - 2026-05-19T09:28:06Z
 
 ## Outcome
 
@@ -41,15 +41,15 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastzwiki-reference-last-z-wiki-complete-english-guide-strateg-3
+### external-search-lastzwiki-reference-beginner-s-guide-last-z-wiki-how-to-start--3
 
-- Title: External search opportunity: Last Z Wiki - Complete English Guide | Strategies, Tier List & Tips 2026
+- Title: External search opportunity: Beginner's Guide - Last Z Wiki | How to Start & Essential Tips 2026
 - Action: `monitor`
-- Target: `index.html`
-- Cluster: `Home`
-- Score: `19`
+- Target: `start.html`
+- Cluster: `Progression`
+- Score: `54`
 - Source: `External search: site:lastzwiki.com/en Last Z guide heroes research`
-- URL: `https://lastzwiki.com/en/index.html`
+- URL: `https://lastzwiki.com/en/beginner-guide.html`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
@@ -77,22 +77,22 @@
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
-### external-search-lastz-fandom-reference-bookstore-last-z-survival-shooter-wiki-fan-6
+### external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-6
 
-- Title: External search opportunity: Bookstore | Last Z: Survival Shooter Wiki | Fandom
+- Title: External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom
 - Action: `update_existing`
 - Target: `research.html`
 - Cluster: `Research`
 - Score: `82`
 - Source: `External search: site:lastz.fandom.com Last Z heroes research events`
-- URL: `https://lastz.fandom.com/wiki/Bookstore`
+- URL: `https://lastz.fandom.com/wiki/Heroes`
 - Mapping: `content_index_token_match`
 - Public claim ready: `false`
 
 ### external-search-mmediamreza-last-z-reference-military-center-guide-maximize-unit-cap-ba-7
 
 - Title: External search opportunity: Military Center Guide: Maximize Unit Cap & Base Power - | Last Z: Survival Shooter
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `about.html`
 - Cluster: `Site`
 - Score: `74`
@@ -104,19 +104,19 @@
 ### external-search-mmediamreza-last-z-reference-rider-camp-guide-train-promote-rider-units-8
 
 - Title: External search opportunity: Rider Camp Guide: Train & Promote Rider Units - | Last Z: Survival Shooter
-- Action: `update_existing`
-- Target: `unit-special-training-cost.html`
-- Cluster: `Research`
+- Action: `create_new`
+- Target: `about.html`
+- Cluster: `Site`
 - Score: `74`
 - Source: `External search: site:mmediamreza.com Last Z Survival Shooter`
 - URL: `https://mmediamreza.com/en/rider-camp-upgrade-guide`
-- Mapping: `content_index_token_match`
+- Mapping: `cluster_default_target`
 - Public claim ready: `false`
 
 ### external-search-mmediamreza-last-z-reference-how-to-create-farm-accoun-farm-account-gui-9
 
 - Title: External search opportunity: How to create farm accoun (Farm Account Guide) - | Last Z: Survival Shooter
-- Action: `update_existing`
+- Action: `create_new`
 - Target: `farm-account.html`
 - Cluster: `Economy`
 - Score: `82`

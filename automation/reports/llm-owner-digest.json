@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "report_type": "llm_owner_digest",
-  "generated_at": "2026-05-19T09:07:49Z",
+  "generated_at": "2026-05-19T09:28:16Z",
   "state": "no_candidates",
   "recommended_next_action": "No candidate topics are ready; wait for new signals.",
   "queue_path": "automation/reports/llm-auto-review-queue/llm-auto-review-queue.json",

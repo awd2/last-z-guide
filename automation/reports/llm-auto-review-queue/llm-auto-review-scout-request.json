@@ -207,7 +207,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event cycle includes an Age of Science theme for tech research and a Hero Initiative theme for hero upgrades; useful for event discovery and reward cross-checks."
+          "Daily event page with a research-focused cycle called Age of Science, plus hero upgrade and reward details."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -237,7 +237,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core research building page; confirms where technologies are researched and that an extra lab can unlock later."
+          "Core building page for technology research and unlocks; useful for mechanics cross-checking."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -267,7 +267,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero hub page with roster, faction filters, equipment section, and character references; useful for hero discovery and cross-checking names or gear categories."
+          "Main hero hub with character list, equipment section, and faction filters. Good lead for hero discovery and roster cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [
