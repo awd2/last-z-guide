@@ -207,41 +207,11 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Daily event page with a research-focused cycle called Age of Science, plus hero upgrade and reward details."
+          "Event page showing a rotation that includes Age of Science research tasks and Hero Initiative hero-upgrade tasks; useful for event discovery and cross-checking reward themes."
         ],
         "site_fit": {
           "expected_internal_route": [
             "events.html"
-          ],
-          "external_source_id": "lastz-fandom-reference"
-        },
-        "constraints": [
-          "External search result is discovery evidence only.",
-          "Do not copy source wording.",
-          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
-        ],
-        "reject_if": [
-          "The result is off-topic or duplicates an existing page job.",
-          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
-        ]
-      },
-      {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
-        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
-        "cluster": "Research",
-        "recommended_action": "update_existing",
-        "archetype_suggestion": "cornerstone-guide",
-        "target_page_or_slug": "research.html",
-        "source_reference": "External search: site:lastz.fandom.com Last Z heroes research events",
-        "confidence": "high",
-        "priority": "high",
-        "risk_level": "high",
-        "evidence": [
-          "Core building page for technology research and unlocks; useful for mechanics cross-checking."
-        ],
-        "site_fit": {
-          "expected_internal_route": [
-            "research.html"
           ],
           "external_source_id": "lastz-fandom-reference"
         },
@@ -267,11 +237,41 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Main hero hub with character list, equipment section, and faction filters. Good lead for hero discovery and roster cross-checks."
+          "Hero roster page with character list, levels, faction filters, and equipment sections. Good lead for hero discovery and cross-checking hero names, ranks, and gear categories."
         ],
         "site_fit": {
           "expected_internal_route": [
             "heroes.html"
+          ],
+          "external_source_id": "lastzwiki-reference"
+        },
+        "constraints": [
+          "External search result is discovery evidence only.",
+          "Do not copy source wording.",
+          "Do not publish any public claim without canonical memory, second-source validation, and owner approval."
+        ],
+        "reject_if": [
+          "The result is off-topic or duplicates an existing page job.",
+          "The claim cannot be validated against reliable sources or owner-confirmed game knowledge."
+        ]
+      },
+      {
+        "topic_id": "external-search-lastzwiki-reference-laboratory-badges-in-last-z-complete-resea-2",
+        "title": "External search opportunity: Laboratory Badges in Last Z - Complete Research Guide | Last Z Wiki",
+        "cluster": "Research",
+        "recommended_action": "update_existing",
+        "archetype_suggestion": "cornerstone-guide",
+        "target_page_or_slug": "research.html",
+        "source_reference": "External search: site:lastzwiki.com/en Last Z guide heroes research",
+        "confidence": "high",
+        "priority": "high",
+        "risk_level": "high",
+        "evidence": [
+          "Research table page covering laboratory categories, per-level badge costs, and search by research name. Strong lead for research topic mapping and cost cross-validation."
+        ],
+        "site_fit": {
+          "expected_internal_route": [
+            "research.html"
           ],
           "external_source_id": "lastzwiki-reference"
         },

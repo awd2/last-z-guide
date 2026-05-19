@@ -1,106 +1,16 @@
 {
   "schema_version": 1,
   "report_type": "llm_adapter_result",
-  "generated_at": "2026-05-19T09:28:16Z",
-  "state": "completed",
+  "generated_at": "2026-05-19T09:42:28Z",
+  "state": "blocked",
   "provider": "openai",
   "request_id": "llm-auto-review-scout",
   "worker_role": "scout",
   "request_path": "automation/reports/llm-auto-review-queue/llm-auto-review-scout-request.json",
-  "fixture_path": "",
-  "response_json": {
-    "overview": "The strongest opportunities are the two GSC-backed existing-page updates: alliance-duel.html and codes.html. Both have clear query-page mismatch signals and fit the existing page templates without needing new content. The rest are mostly external-source discovery items that need verification, or they duplicate existing hub intents and should stay out of the main review queue for now.",
-    "selected_opportunities": [
-      {
-        "topic_id": "codes-gsc-opportunity",
-        "decision": "update_existing",
-        "rationale": "High volume GSC signals show strong demand around Gift Center and redeem-code intents, and the proposal fits an existing cornerstone page. It is the clearest candidate for improving query-to-page match without changing site structure.",
-        "player_value": "Faster access to redeem-code, Gift Center login, and UID guidance from the canonical codes page.",
-        "duplication_risk": "Medium. Gift Center and redeem flows may overlap with existing economy or UID coverage, so role separation must be checked.",
-        "priority": "high",
-        "risk_level": "high",
-        "next_step": "Send to human review to confirm canonical claims, preserve cluster separation, and define a narrow update scope for codes.html.",
-        "claims_to_verify": [
-          "Whether codes.html is still the best canonical page for Gift Center and redeem-code intent",
-          "Whether the update can avoid blurring Gift Center routing with mailbox or rewards claims",
-          "Whether any phrasing changes stay within approved scope for a cornerstone page"
-        ]
-      },
-      {
-        "topic_id": "alliance-duel-gsc-opportunity",
-        "decision": "update_existing",
-        "rationale": "This is a strong page-level opportunity because the existing alliance-duel.html already ranks and receives meaningful impressions, but the user intent around schedule and VS strategy can likely be better served on the same page.",
-        "player_value": "Clearer event timing and strategy guidance for players searching for Last Z Alliance Duel scheduling and prep info.",
-        "duplication_risk": "Medium. Event guide coverage could overlap with a broader events hub or another event page if scope is not controlled.",
-        "priority": "high",
-        "risk_level": "medium",
-        "next_step": "Send to human review to validate that the page remains the right canonical destination and that any improvement stays within the event-guide template.",
-        "claims_to_verify": [
-          "Whether alliance-duel.html remains the best canonical page for the query cluster",
-          "Whether the intended update can be expressed without changing a cornerstone page beyond scope",
-          "Whether event role separation with the main events hub stays intact"
-        ]
-      }
-    ],
-    "rejected_or_monitor": [
-      {
-        "topic_id": "external-gift-center-official-flow-validation",
-        "reason": "Useful as a verification lead, but it depends on one external source and does not yet meet the standard for a ready review item. It also risks overlapping with the codes page intent.",
-        "future_trigger": "Move forward only after owner confirmation or a second reliable source verifies the Gift Center routing and redeem flow claims."
-      },
-      {
-        "topic_id": "external-hq-and-progression-reference-cross-check",
-        "reason": "This is a discovery signal only. The claim set is not verified and could duplicate existing progression coverage.",
-        "future_trigger": "Reconsider if canonical HQ requirements or progression dependencies are confirmed by a reliable second source or owner memory."
-      },
-      {
-        "topic_id": "external-research-costs-external-cross-check",
-        "reason": "External reference only, with risk of cost-table drift and branch-name duplication. Not ready for human review as a content opportunity.",
-        "future_trigger": "Promote only after cross-checking against canonical site memory and another reliable source."
-      },
-      {
-        "topic_id": "external-search-lastz-fandom-reference-full-preparedness-last-z-survival-shooter--4",
-        "reason": "Search-result discovery only. It is speculative, source wording should not be copied, and the topic may duplicate broader events coverage.",
-        "future_trigger": "Only revisit if the event mechanics and reward claims can be verified and mapped to a distinct player job."
-      },
-      {
-        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
-        "reason": "Search-result discovery only. It is not verified and appears to map to existing research coverage rather than a distinct new need.",
-        "future_trigger": "Revisit only if a verified gap exists in research mechanics or unlock coverage."
-      }
-    ],
-    "global_risks": [
-      "External-source topics are not verified and should not be treated as public facts.",
-      "Several proposals could blur cluster role separation if expanded too broadly.",
-      "Analytics signals show opportunity, but they do not prove a rewrite is needed.",
-      "Canonical claims around Gift Center, redeem flow, rewards, and event mechanics need careful verification before any human-approved change scope is defined."
-    ],
-    "next_actions": [
-      "Route only the two GSC-backed update_existing items to human review.",
-      "Keep all external-source items in monitor state until verified by owner confirmation or a second reliable source.",
-      "Check that codes.html and alliance-duel.html can be improved without violating cluster boundaries or canonical claims.",
-      "Do not advance any monitor or reject topic to editor, reviewer, intake, run-plan, or content proposal workflow."
-    ]
-  },
-  "usage": {
-    "input_tokens": 3612,
-    "input_tokens_details": {
-      "cached_tokens": 0
-    },
-    "output_tokens": 981,
-    "output_tokens_details": {
-      "reasoning_tokens": 0
-    },
-    "total_tokens": 4593
-  },
-  "provider_metadata": {
-    "model": "gpt-5.4-mini-2026-03-17",
-    "response_id": "resp_0a77da8e99ad50dd006a0c2d2670e881978c6b2123cf6d831a",
-    "status": "completed",
-    "endpoint": "https://api.openai.com/v1/responses",
-    "reasoning_effort": "",
-    "max_output_tokens": 4000
-  },
-  "errors": [],
+  "response_json": null,
+  "usage": null,
+  "errors": [
+    "Selected topic `external-gift-center-official-flow-validation` has monitor/reject decision `monitor`; move it to rejected_or_monitor."
+  ],
   "safety": "No content, backlog, manifest, or production files were modified by the LLM adapter."
 }
