@@ -207,7 +207,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Regular event with a Hero Initiative theme that awards points for using Heroic Experience, Fragments, and Prime Recruitment Tickets; also includes an Age of Science research theme."
+          "Daily event cycle includes an Age of Science theme for tech research and a Hero Initiative theme for hero upgrades; useful for event discovery and reward cross-checks."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -226,8 +226,8 @@
         ]
       },
       {
-        "topic_id": "external-search-lastz-fandom-reference-heroes-last-z-survival-shooter-wiki-fandom-5",
-        "title": "External search opportunity: Heroes | Last Z: Survival Shooter Wiki | Fandom",
+        "topic_id": "external-search-lastz-fandom-reference-laboratory-last-z-survival-shooter-wiki-fa-5",
+        "title": "External search opportunity: Laboratory | Last Z: Survival Shooter Wiki | Fandom",
         "cluster": "Research",
         "recommended_action": "update_existing",
         "archetype_suggestion": "cornerstone-guide",
@@ -237,7 +237,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Core hero overview page listing hero classes and major power components, useful for hero system context and cross-checking hero-related event hooks."
+          "Core research building page; confirms where technologies are researched and that an extra lab can unlock later."
         ],
         "site_fit": {
           "expected_internal_route": [
@@ -267,7 +267,7 @@
         "priority": "high",
         "risk_level": "high",
         "evidence": [
-          "Hero roster page with faction filters, hero levels, and equipment listings; useful for hero discovery and cross-checking character pages."
+          "Hero hub page with roster, faction filters, equipment section, and character references; useful for hero discovery and cross-checking names or gear categories."
         ],
         "site_fit": {
           "expected_internal_route": [

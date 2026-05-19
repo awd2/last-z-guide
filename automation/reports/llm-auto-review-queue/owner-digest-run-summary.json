@@ -1,12 +1,12 @@
 {
-  "state": "no_action_needed",
-  "recommended_next_action": "No owner action needed; wait for new GSC/Bing/external-source signals.",
+  "state": "no_candidates",
+  "recommended_next_action": "No candidate topics are ready; wait for new signals.",
   "counts": {
-    "candidate_topics": 1,
+    "candidate_topics": 0,
     "queued_topics": 0,
     "failed_items": 0,
     "needs_owner_decision": 0,
-    "resolved_by_owner_decision": 1,
+    "resolved_by_owner_decision": 0,
     "digest_needs_review": 0,
     "digest_failed": 0,
     "digest_ready_for_intake": 0

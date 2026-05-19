@@ -1,5 +1,5 @@
 {
-  "state": "no_action_needed",
+  "state": "no_candidates",
   "actionable": false,
   "active_run_count": 0,
   "digest_path": "automation/reports/llm-owner-digest.json",
