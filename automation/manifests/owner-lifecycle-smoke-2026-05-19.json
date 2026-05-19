@@ -1,0 +1,90 @@
+{
+  "run_id": "owner-lifecycle-smoke-2026-05-19",
+  "created_at": "2026-05-19T00:00:00Z",
+  "run_type": "update_existing",
+  "status": "approved_for_apply",
+  "risk_level": "low",
+  "summary": "Temporary owner issue lifecycle smoke fixture. This must not touch public site content.",
+  "inputs": {
+    "topics": [
+      "owner issue lifecycle smoke"
+    ],
+    "target_pages": [
+      "automation/reports/owner-lifecycle-smoke-source.html"
+    ],
+    "source_references": [
+      "local smoke fixture"
+    ]
+  },
+  "plan": {
+    "goal": "Validate owner issue lifecycle next-step rendering and refresh after /preview-apply.",
+    "actions": [
+      "render no-write apply preview only"
+    ]
+  },
+  "artifacts": {
+    "patch_plan": {
+      "target_page_or_slug": "automation/reports/owner-lifecycle-smoke-source.html",
+      "archetype_suggestion": "site-page",
+      "recommended_action": "update_existing",
+      "patch_specs": [
+        {
+          "target_file": "automation/reports/owner-lifecycle-smoke-source.html",
+          "source_of_truth_file": "automation/reports/owner-lifecycle-smoke-source.html",
+          "output_file": "automation/reports/owner-lifecycle-smoke-source.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "generator_command": null,
+          "operation_type": "safe_exact_replace",
+          "selector_or_anchor": "p",
+          "required_preconditions": [
+            "Temporary smoke fixture only.",
+            "Do not apply content.",
+            "Render apply-preview only."
+          ],
+          "proposed_change_summary": "Temporary no-write owner lifecycle smoke replacement.",
+          "canonical_claims_to_protect": [],
+          "validation_commands": [
+            "python3 automation/pipeline.py checks --strict"
+          ],
+          "human_approval_required": true,
+          "exact_old": "<p>Before owner lifecycle smoke fixture.</p>",
+          "exact_new": "<p>After owner lifecycle smoke fixture.</p>",
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-19T00:00:00Z",
+          "approval_note": "Temporary owner lifecycle smoke approval for no-write apply preview only."
+        }
+      ]
+    },
+    "proposal": {
+      "rendered_specs": [
+        {
+          "target_file": "automation/reports/owner-lifecycle-smoke-source.html",
+          "source_of_truth_file": "automation/reports/owner-lifecycle-smoke-source.html",
+          "output_file": "automation/reports/owner-lifecycle-smoke-source.html",
+          "source_type": "html_file",
+          "is_generated": false,
+          "operation_type": "safe_exact_replace",
+          "selector_or_anchor": "p",
+          "proposed_change_summary": "Temporary no-write owner lifecycle smoke replacement.",
+          "human_approval_required": true,
+          "exact_old": "<p>Before owner lifecycle smoke fixture.</p>",
+          "exact_new": "<p>After owner lifecycle smoke fixture.</p>",
+          "approval_state": "approved",
+          "approval_updated_at": "2026-05-19T00:00:00Z",
+          "approval_note": "Temporary owner lifecycle smoke approval for no-write apply preview only."
+        }
+      ]
+    }
+  },
+  "changed_files": [
+    "automation/reports/owner-lifecycle-smoke-source.html"
+  ],
+  "checks": {},
+  "review": {
+    "verdict": "pass",
+    "open_questions": [],
+    "next_action": "preview_apply_only",
+    "reviewer_notes": "Temporary no-write smoke fixture."
+  }
+}
